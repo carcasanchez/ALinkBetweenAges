@@ -1,6 +1,7 @@
 #include <iostream> 
 #include <sstream> 
 
+
 #include "p2Defs.h"
 #include "p2Log.h"
 
@@ -23,7 +24,7 @@
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
 
-	name.create("app");
+	name = "app";
 	PERF_START(ptimer);
 
 	input = new j1Input();
@@ -68,21 +69,22 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 j1App::~j1App()
 {
 	// release modules
-	p2List_item<j1Module*>* item = modules.end;
 
-	while(item != NULL)
+	std::list<j1Module*>::iterator item = modules.end();
+	while(item != modules.begin())
 	{
-		RELEASE(item->data);
-		item = item->prev;
+		item--;
+		RELEASE(item._Ptr->_Myval);
+	
 	}
-
+	
 	modules.clear();
 }
 
 void j1App::AddModule(j1Module* module)
 {
 	module->Init();
-	modules.add(module);
+	modules.push_back(module);
 }
 
 // Called before render is available
@@ -102,9 +104,11 @@ bool j1App::Awake()
 	{
 		// self-config
 		ret = true;
+
+		//(app_config.child("title").child_value());
 		app_config = config.child("app");
-		title.create(app_config.child("title").child_value());
-		organization.create(app_config.child("organization").child_value());
+		title = app_config.child("title").child_value();
+		organization = app_config.child("organization").child_value();
 
 		int cap = app_config.attribute("framerate_cap").as_int(-1);
 
@@ -116,16 +120,17 @@ bool j1App::Awake()
 
 	if(ret == true)
 	{
-		p2List_item<j1Module*>* item;
-		item = modules.start;
-
-		while(item != NULL && ret == true)
+		std::list<j1Module*>::const_iterator item;
+		item = modules.begin();
+		
+		while(item != modules.end())
 		{
-			ret = item->data->Awake(config.child(item->data->name.GetString()));
-			item = item->next;
+			ret = item._Ptr->_Myval->Awake(config.child(item._Ptr->_Myval->name.c_str()));
+			item++;
 		}
 	}
 	
+	/*
 	//load config cvars
 	pugi::xml_node start = config.child("app");
 	while (start != NULL)
@@ -175,7 +180,7 @@ bool j1App::Awake()
 		start = start.next_sibling();
 
 	}
-	
+	*/
 
 
 	PERF_PEEK(ptimer);
@@ -188,14 +193,16 @@ bool j1App::Start()
 {
 	PERF_START(ptimer);
 	bool ret = true;
-	p2List_item<j1Module*>* item;
-	item = modules.start;
 
-	while(item != NULL && ret == true)
+	std::list<j1Module*>::iterator item;
+	item = modules.begin();
+
+	while (item != modules.end())
 	{
-		ret = item->data->Start();
-		item = item->next;
+		ret = item._Ptr->_Myval->Start();
+		item++;
 	}
+
 	startup_time.Start();
 
 	PERF_PEEK(ptimer);
@@ -301,19 +308,15 @@ void j1App::FinishUpdate()
 bool j1App::PreUpdate()
 {
 	bool ret = true;
-	p2List_item<j1Module*>* item;
-	item = modules.start;
+
 	j1Module* pModule = NULL;
-
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	
+	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
 	{
-		pModule = item->data;
+		pModule = item._Ptr->_Myval;
+		if (pModule->active == false) { continue; }
 
-		if(pModule->active == false) {
-			continue;
-		}
-
-		ret = item->data->PreUpdate();
+		ret = item._Ptr->_Myval->PreUpdate();
 	}
 
 	return ret;
@@ -323,8 +326,6 @@ bool j1App::PreUpdate()
 bool j1App::DoUpdate()
 {
 	bool ret = true;
-	p2List_item<j1Module*>* item;
-	item = modules.start;
 	j1Module* pModule = NULL;
 
 	if (logic_dt >= LOGICAL_DT)
@@ -333,18 +334,14 @@ bool j1App::DoUpdate()
 		logic_dt = 0.0f;
 	}
 
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
 	{
-		pModule = item->data;
+		pModule = item._Ptr->_Myval;
 
-		if(pModule->active == false) {
-			continue;
-		}
+		if (pModule->active == false) { continue; }
+		if (update_logic) { ret = item._Ptr->_Myval->UpdateTicks(); }
 
-		if (update_logic)
-			ret = item->data->UpdateTicks();
-
-		ret = item->data->Update(dt);
+		ret = item._Ptr->_Myval->Update(dt);
 	}
 
 	if (update_logic)
@@ -357,18 +354,14 @@ bool j1App::DoUpdate()
 bool j1App::PostUpdate()
 {
 	bool ret = true;
-	p2List_item<j1Module*>* item;
 	j1Module* pModule = NULL;
 
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
 	{
-		pModule = item->data;
+		pModule = item._Ptr->_Myval;
+		if (pModule->active == false) { continue; }
 
-		if(pModule->active == false) {
-			continue;
-		}
-
-		ret = item->data->PostUpdate();
+		ret = item._Ptr->_Myval->PostUpdate();
 	}
 
 	ret = update_stop;
@@ -381,14 +374,13 @@ j1Module* j1App::Find_module(const char* mod_name)
 	if (strcmp(mod_name, "app") == 0)
 		return this;
 
-	p2List_item<j1Module*>* ret = modules.start;
-
-	while (ret != nullptr)
+	std::list<j1Module*>::iterator ret = modules.begin();
+	while (ret != modules.end())
 	{
-		if (ret->data->name == mod_name)
-			return ret->data;
+		if (ret._Ptr->_Myval->name == mod_name)
+			return ret._Ptr->_Myval;
 
-		ret = ret->next;
+		++ret;
 	}
 
 	return nullptr;
@@ -399,12 +391,12 @@ bool j1App::On_Console_Callback(command* com, int* argument)
 
 	if (com == quit)
 	{
-		LOG("Quit");
+		//LOG("Quit");
 		update_stop = false;
 	}
 
 	if (com == fps)
-		LOG("Max Fps: %.2f", 1 / dt);
+		//LOG("Max Fps: %.2f", 1 / dt);
 
 	return true;
 }
@@ -426,16 +418,18 @@ bool j1App::CleanUp()
 {
 	PERF_START(ptimer);
 	bool ret = true;
-	p2List_item<j1Module*>* item;
-	item = modules.end;
+	//p2List_item<j1Module*>* item;
+	//item = modules.end;
 
-	while(item != NULL && ret == true)
-	{
-		ret = item->data->CleanUp();
-		item = item->prev;
+	std::list<j1Module*>::iterator item = modules.end();
+	
+	while(item != modules.begin() && ret == true)
+	{	
+		item--;
+		item._Ptr->_Myval->CleanUp();
 	}
 
-	PERF_PEEK(ptimer);
+	//PERF_PEEK(ptimer);
 	return ret;
 }
 
@@ -457,7 +451,7 @@ const char* j1App::GetArgv(int index) const
 // ---------------------------------------
 const char* j1App::GetTitle() const
 {
-	return title.GetString();
+	return title.c_str();
 }
 
 // ---------------------------------------
@@ -469,7 +463,7 @@ float j1App::GetDT() const
 // ---------------------------------------
 const char* j1App::GetOrganization() const
 {
-	return organization.GetString();
+	return organization.c_str();
 }
 
 // Load / Save
@@ -478,7 +472,7 @@ void j1App::LoadGame(const char* file)
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list
 	want_to_load = true;
-	load_game.create("%s%s", fs->GetSaveDirectory(), file);
+	load_game = ("%s%s", fs->GetSaveDirectory(), file);
 }
 
 // ---------------------------------------
@@ -488,11 +482,11 @@ void j1App::SaveGame(const char* file) const
 	// from the "GetSaveGames" list ... should we overwrite ?
 
 	want_to_save = true;
-	save_game.create(file);
+	save_game = file;
 }
 
 // ---------------------------------------
-void j1App::GetSaveGames(p2List<p2SString>& list_to_fill) const
+void j1App::GetSaveGames(list<string>& list_to_fill) const
 {
 	// need to add functionality to file_system module for this to work
 }
@@ -502,7 +496,7 @@ bool j1App::LoadGameNow()
 	bool ret = false;
 
 	char* buffer;
-	uint size = fs->Load(load_game.GetString(), &buffer);
+	uint size = fs->Load(load_game.c_str(), &buffer);
 
 	if(size > 0)
 	{
@@ -514,30 +508,30 @@ bool j1App::LoadGameNow()
 
 		if(result != NULL)
 		{
-			LOG("Loading new Game State from %s...", load_game.GetString());
+			//LOG("Loading new Game State from %s...", load_game.GetString());
 
 			root = data.child("game_state");
 
-			p2List_item<j1Module*>* item = modules.start;
+			std::list<j1Module*>::iterator item = modules.begin();
 			ret = true;
 
-			while(item != NULL && ret == true)
+			while(item != modules.end() && ret == true)
 			{
-				ret = item->data->Load(root.child(item->data->name.GetString()));
-				item = item->next;
+				ret = item._Ptr->_Myval->Load(root.child(item._Ptr->_Myval->name.c_str()));
+				++item;
 			}
 
 			data.reset();
 			if(ret == true)
 				LOG("...finished loading");
-			else
-				LOG("...loading process interrupted with error on module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
+			//else
+				//LOG("...loading process interrupted with error on module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
 		}
-		else
-			LOG("Could not parse game state xml file %s. pugi error: %s", load_game.GetString(), result.description());
+		//else
+			//LOG("Could not parse game state xml file %s. pugi error: %s", load_game.GetString(), result.description());
 	}
 	else
-		LOG("Could not load game state xml file %s", load_game.GetString());
+		//LOG("Could not load game state xml file %s", load_game.GetString());
 
 	want_to_load = false;
 	return ret;
@@ -547,7 +541,7 @@ bool j1App::SavegameNow() const
 {
 	bool ret = true;
 
-	LOG("Saving Game State to %s...", save_game.GetString());
+	//LOG("Saving Game State to %s...", save_game.GetString());
 
 	// xml object were we will store all data
 	pugi::xml_document data;
@@ -555,12 +549,15 @@ bool j1App::SavegameNow() const
 	
 	root = data.append_child("game_state");
 
-	p2List_item<j1Module*>* item = modules.start;
+	//p2List_item<j1Module*>* item = modules.start;
+	std::list<j1Module*>::const_iterator item;
+	item = modules.begin();
 
-	while(item != NULL && ret == true)
+
+	while(item != modules.end() && ret == true)
 	{
-		ret = item->data->Save(root.append_child(item->data->name.GetString()));
-		item = item->next;
+		ret = item._Ptr->_Myval->Save(root.append_child(item._Ptr->_Myval->name.c_str()));
+		++item;
 	}
 
 	if(ret == true)
@@ -569,11 +566,11 @@ bool j1App::SavegameNow() const
 		data.save(stream);
 
 		// we are done, so write data to disk
-		fs->Save(save_game.GetString(), stream.str().c_str(), stream.str().length());
-		LOG("... finished saving", save_game.GetString());
+		fs->Save(save_game.c_str(), stream.str().c_str(), stream.str().length());
+		//LOG("... finished saving", save_game.GetString());
 	}
 	else
-		LOG("Save process halted from an error in module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
+		//LOG("Save process halted from an error in module %s", (item != NULL) ? item->data->name.GetString() : "unknown");
 
 	data.reset();
 	want_to_save = false;

@@ -21,7 +21,7 @@
 
 j1Scene::j1Scene() : j1Module()
 {
-	name.create("scene");
+	name = ("scene");
 
 }
 

@@ -11,7 +11,7 @@
 
 j1EntityManager::j1EntityManager()
 {
-	name.create("entity_manager");
+	name = ("entity_manager");
 }
 
 bool j1EntityManager::Awake(pugi::xml_node & config)

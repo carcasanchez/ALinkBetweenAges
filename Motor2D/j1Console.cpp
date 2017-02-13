@@ -13,7 +13,7 @@
 
 j1Console::j1Console()
 {
-	name.create("console");
+	name = ("console");
 }
 
 bool j1Console::Awake(pugi::xml_node& config)
