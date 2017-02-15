@@ -68,16 +68,10 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 // Destructor
 j1App::~j1App()
 {
-	// release modules
+	// release modules	
+	for (std::list<j1Module*>::reverse_iterator item = modules.rbegin(); item != modules.crend(); item++)
+		RELEASE((*item));
 
-	std::list<j1Module*>::iterator item = modules.end();
-	while(item != modules.begin())
-	{
-		item--;
-		RELEASE(item._Ptr->_Myval);
-	
-	}
-	
 	modules.clear();
 }
 
@@ -120,14 +114,10 @@ bool j1App::Awake()
 
 	if(ret == true)
 	{
-		std::list<j1Module*>::const_iterator item;
-		item = modules.begin();
-		
-		while(item != modules.end())
-		{
-			ret = item._Ptr->_Myval->Awake(config.child(item._Ptr->_Myval->name.c_str()));
-			item++;
-		}
+			
+		for (std::list<j1Module*>::const_iterator item = modules.begin(); item != modules.cend(); item++)
+			ret = (*item)->Awake(config.child((*item)->name.c_str()));
+			
 	}
 	
 	/*
@@ -194,14 +184,10 @@ bool j1App::Start()
 	PERF_START(ptimer);
 	bool ret = true;
 
-	std::list<j1Module*>::iterator item;
-	item = modules.begin();
 
-	while (item != modules.end())
-	{
-		ret = item._Ptr->_Myval->Start();
-		item++;
-	}
+	for (std::list<j1Module*>::const_iterator item = modules.begin(); item != modules.cend(); item++)
+		ret = (*item)->Start();
+
 
 	startup_time.Start();
 
@@ -309,16 +295,15 @@ bool j1App::PreUpdate()
 {
 	bool ret = true;
 
-	j1Module* pModule = NULL;
+	j1Module* pModule = nullptr;
 	
-	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	for (std::list<j1Module*>::const_iterator item = modules.begin(); item != modules.cend(); item++)
 	{
-		pModule = item._Ptr->_Myval;
+		pModule = (*item);
 		if (pModule->active == false) { continue; }
-
-		ret = item._Ptr->_Myval->PreUpdate();
+		ret = (*item)->PreUpdate();
 	}
-
+		
 	return ret;
 }
 
@@ -334,15 +319,14 @@ bool j1App::DoUpdate()
 		logic_dt = 0.0f;
 	}
 
-	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	for (std::list<j1Module*>::const_iterator item = modules.begin(); item != modules.cend(); item++)
 	{
-		pModule = item._Ptr->_Myval;
-
+		pModule = (*item);
 		if (pModule->active == false) { continue; }
-		if (update_logic) { ret = item._Ptr->_Myval->UpdateTicks(); }
-
-		ret = item._Ptr->_Myval->Update(dt);
+		if (update_logic) { ret = (*item)->UpdateTicks(); }
+		ret = (*item)->Update(dt);
 	}
+
 
 	if (update_logic)
 		update_logic = false;
@@ -356,12 +340,11 @@ bool j1App::PostUpdate()
 	bool ret = true;
 	j1Module* pModule = NULL;
 
-	for (std::list<j1Module*>::iterator item = modules.begin(); item != modules.end(); ++item)
+	for (std::list<j1Module*>::const_iterator item = modules.begin(); item != modules.cend(); item++)
 	{
-		pModule = item._Ptr->_Myval;
+		pModule = (*item);
 		if (pModule->active == false) { continue; }
-
-		ret = item._Ptr->_Myval->PostUpdate();
+		ret = (*item)->PostUpdate();
 	}
 
 	ret = update_stop;
@@ -377,8 +360,8 @@ j1Module* j1App::Find_module(const char* mod_name)
 	std::list<j1Module*>::iterator ret = modules.begin();
 	while (ret != modules.end())
 	{
-		if (ret._Ptr->_Myval->name == mod_name)
-			return ret._Ptr->_Myval;
+		if ((*ret)->name == mod_name)
+			return (*ret);
 
 		++ret;
 	}
@@ -421,13 +404,11 @@ bool j1App::CleanUp()
 	//p2List_item<j1Module*>* item;
 	//item = modules.end;
 
-	std::list<j1Module*>::iterator item = modules.end();
+	std::list<j1Module*>::reverse_iterator item = modules.rbegin();
 	
-	while(item != modules.begin() && ret == true)
-	{	
-		item--;
-		item._Ptr->_Myval->CleanUp();
-	}
+	for (std::list<j1Module*>::reverse_iterator item = modules.rbegin(); item != modules.crend() && ret == true; item++)
+		(*item)->CleanUp();
+
 
 	//PERF_PEEK(ptimer);
 	return ret;
