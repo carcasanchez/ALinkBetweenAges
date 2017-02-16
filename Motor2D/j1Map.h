@@ -12,33 +12,28 @@ struct Properties
 {
 	struct Property
 	{
-		p2SString name;
+		string name;
 		int value;
 	};
 
 	~Properties()
 	{
-		p2List_item<Property*>* item;
-		item = list.start;
-
-		while(item != NULL)
-		{
-			RELEASE(item->data);
-			item = item->next;
-		}
+		
+		for (std::list<Property*>::iterator item = list.begin(); item != list.cend(); item++)
+			RELEASE(*item);
 
 		list.clear();
 	}
 
 	int Get(const char* name, int default_value = 0) const;
 
-	p2List<Property*>	list;
+	list<Property*>	list;
 };
 
 // ----------------------------------------------------
 struct MapLayer
 {
-	p2SString	name;
+	string	name;
 	int			width;
 	int			height;
 	uint*		data;
@@ -63,7 +58,7 @@ struct TileSet
 {
 	SDL_Rect GetTileRect(int id) const;
 
-	p2SString			name;
+	string				name;
 	int					firstgid;
 	int					margin;
 	int					spacing;
@@ -94,8 +89,8 @@ struct MapData
 	int					tile_height;
 	SDL_Color			background_color;
 	MapTypes			type;
-	p2List<TileSet*>	tilesets;
-	p2List<MapLayer*>	layers;
+	list<TileSet*>	tilesets;
+	list<MapLayer*>	layers;
 };
 
 // ----------------------------------------------------
@@ -143,7 +138,7 @@ public:
 private:
 
 	pugi::xml_document	map_file;
-	p2SString			folder;
+	string				folder;
 	bool				map_loaded;
 };
 
