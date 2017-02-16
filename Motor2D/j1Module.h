@@ -7,6 +7,7 @@
 #define __j1MODULE_H__
 
 #include <string>
+#include <list>
 using namespace std;
 
 #include"p2SString.h"
