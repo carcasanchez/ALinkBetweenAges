@@ -8,6 +8,7 @@
 
 #include <string>
 #include <list>
+#include <vector>
 using namespace std;
 
 #include"p2SString.h"

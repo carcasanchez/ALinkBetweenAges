@@ -31,10 +31,6 @@ bool j1Console::Awake(pugi::xml_node& config)
 	Background.a = config.child("Color").attribute("a").as_int();
 
 	
-
-	
-
-
 	LOG("Desactivating console");
 	active = false;
 
@@ -100,7 +96,7 @@ bool j1Console::CleanUp()
 	UI_String* result;
 
 	for (; labels_loaded >= 0; labels_loaded--)
-		Labels.Pop(result);
+		Labels.pop_back();
 
 	delete Input_text;
 	return true;
@@ -126,7 +122,7 @@ void j1Console::Add_Label(const char * new_text)
 	UI_String* new_label = new UI_String(UI_TYPE::STRING, { 0,0,0,0 }, (char*)new_text);
 	
 	if (new_label)
-		Labels.PushBack(new_label);
+		Labels.push_back(new_label);
 
 	num_of_labels++;
 }
@@ -136,7 +132,7 @@ command* j1Console::Add_Command(const char * comm, j1Module * callback, uint min
 	command* new_command = new command(comm, callback, min_arg, max_args, type);
 
 	if (new_command)
-		Commands_List.PushBack(new_command);
+		Commands_List.push_back(new_command);
 
 	return new_command;
 }
@@ -146,7 +142,7 @@ CVar * j1Console::Add_CVar(const char* nam, const char* des, const char* default
 	CVar* ret = new CVar(nam, des, default_v, min_v, max_v, cb, cvtype, ro);
 
 	if (ret)
-		CVars_list.PushBack(ret);
+		CVars_list.push_back(ret);
 
 	return ret;
 }
@@ -185,18 +181,17 @@ bool j1Console::On_Console_Callback(command* callback_com, int* arg)
 	if (callback_com == help)
 	{
 		LOG("-List of commands:");
-		int num_comm = Commands_List.Count() - 1;
+		int num_comm = Commands_List.size() - 1;
 
 		for (; num_comm >= 0; num_comm--)
 			LOG("-/%s   %i values", Commands_List[num_comm]->name.GetString(), Commands_List[num_comm]->max_arguments);
-
 
 	}
 
 	if (callback_com == CV_list)
 	{
 		LOG("-List of CVars:");
-		int num_cv = CVars_list.Count() - 1;
+		int num_cv = CVars_list.size() - 1;
 
 		for (; num_cv >= 0; num_cv--)
 			LOG("-%s ", CVars_list[num_cv]->Get_name());
@@ -476,7 +471,7 @@ void j1Console::Value_CV_management(const char* Input_text, int bookmark, CVar* 
 command* j1Console::Command_management(const char* Input_command)
 {
 	
-	int num_of_commands = Commands_List.Count();
+	int num_of_commands = Commands_List.size();
 	for (int i = 0; i < num_of_commands; i++)
 	{
 		if (strcmp(Input_command, Commands_List[i]->name.GetString()) != 0)
@@ -492,7 +487,7 @@ command* j1Console::Command_management(const char* Input_command)
 CVar* j1Console::Cvar_management(const char* input_text)
 {
 	
-	int num_cvars = CVars_list.Count();
+	int num_cvars = CVars_list.size();
 	for (int i = 0; i < num_cvars; i++)
 	{
 		if (strcmp(input_text, CVars_list[i]->Get_name()) != 0)

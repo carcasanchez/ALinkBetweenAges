@@ -53,9 +53,9 @@ public:
 
 	UI_Text_Box* Input_text;
 
-	p2DynArray<UI_String*> Labels;
-	p2DynArray<command*> Commands_List;
-	p2DynArray<CVar*> CVars_list;
+	vector<UI_String*> Labels;
+	vector<command*> Commands_List;
+	vector<CVar*> CVars_list;
 
 private:
 
