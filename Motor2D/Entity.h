@@ -3,7 +3,7 @@
 
 #include "p2Point.h"
 #include "SDL\include\SDL_rect.h"
-#include "Module_entites_manager.h"
+#include "j1EntityManager.h"
 
 class entity
 {

@@ -6,7 +6,7 @@
 #include "p2Log.h"
 
 #include "j1Window.h"
-#include "Module_entites_manager.h"
+#include "j1EntityManager.h"
 #include "j1Input.h"
 #include "j1Render.h"
 #include "j1Textures.h"

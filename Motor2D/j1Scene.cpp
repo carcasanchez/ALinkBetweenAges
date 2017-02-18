@@ -6,7 +6,7 @@
 #include "j1Textures.h"
 #include "j1Audio.h"
 #include "j1Render.h"
-#include "Module_entites_manager.h"
+#include "j1EntityManager.h"
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1PathFinding.h"

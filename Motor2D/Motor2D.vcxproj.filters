@@ -73,14 +73,14 @@
     <ClCompile Include="j1Window.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Module_entities_manager.cpp">
-      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Desenvolupament  ========\Modules\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Desenvolupament  ========\Modules\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="j1EntityManager.cpp">
+      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,9 +174,6 @@
     <ClInclude Include="j1Window.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
-    <ClInclude Include="Module_entites_manager.h">
-      <Filter>Desenvolupament  ========\Modules\H</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Desenvolupament  ========\Modules\Entity</Filter>
     </ClInclude>
@@ -184,6 +181,9 @@
       <Filter>Desenvolupament  ========\Modules\Entity</Filter>
     </ClInclude>
     <ClInclude Include="CVar_Com.h">
+      <Filter>Desenvolupament  ========\Modules\H</Filter>
+    </ClInclude>
+    <ClInclude Include="j1EntityManager.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
   </ItemGroup>

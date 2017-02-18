@@ -2,9 +2,8 @@
 #define __MANAGER_H__
 
 #include "j1Module.h"
-#include "p2List.h"
 #include "p2Point.h"
-#include "p2SString.h"
+
 //#include "Entity.h"
 
 
@@ -31,9 +30,9 @@ public:
 
 	entity* create(p2Point<int> position);
 
-	p2List<entity*> Entities;
+	list<entity*> Entities;
 
-	p2SString		Entity_texture_name;
+	string		Entity_texture_name;
 	SDL_Texture*	Entity_textures;
 
 

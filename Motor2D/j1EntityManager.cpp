@@ -1,4 +1,4 @@
-#include "Module_entites_manager.h"
+#include "j1EntityManager.h"
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1App.h"
@@ -26,11 +26,12 @@ bool j1EntityManager::Awake(pugi::xml_node & config)
 
 bool j1EntityManager::Start()
 {
-	Entity_textures = App->tex->Load(Entity_texture_name.GetString());
+	Entity_textures = App->tex->Load(Entity_texture_name.c_str());
 
-	for (int i = 0; i < Entities.count(); i++)
-		Entities[i]->Start();
+	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
+		(*item)->Start();
 
+	
 	return true;
 }
 
@@ -43,8 +44,8 @@ bool j1EntityManager::PreUpdate()
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_MIDDLE))
 		Entity_disselected();
 
-	for (int i = 0; i < Entities.count(); i++)
-		Entities[i]->PreU();
+	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
+		(*item)->PreU();
 			
 	return true;
 }
@@ -52,9 +53,8 @@ bool j1EntityManager::PreUpdate()
 bool j1EntityManager::Update(float dt)
 {
 	
-
-	for (int i = 0; i < Entities.count(); i++)
-		Entities[i]->U(dt);
+	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
+		(*item)->U(dt);
 		
 	return true;
 }
@@ -62,21 +62,25 @@ bool j1EntityManager::Update(float dt)
 bool j1EntityManager::UpdateTicks()
 {
 	
-	for (int i = 0; i < Entities.count(); i++)
-		Entities[i]->UTicks();
+	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
+		(*item)->UTicks();
 	return true;
 }
 
 bool j1EntityManager::PostUpdate()
 {
-	for (int i = 0; i < Entities.count(); i++)
-		Entities[i]->PostU();
+	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
+		(*item)->PostU();
 
 	return true;
 }
 
 bool j1EntityManager::CleanUp()
 {
+
+	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
+		Entities.erase(item);
+
 	Entities.clear();
 	
 	return true;
@@ -87,7 +91,7 @@ entity* j1EntityManager::create(p2Point<int> position)
 	entity* ent = new Player(position);
 
 	if(ent)
-		Entities.add(ent);
+		Entities.push_back(ent);
 
 	return ent;
 }
@@ -102,13 +106,11 @@ void j1EntityManager::Entity_selected()
 
 	LOG("mouse right %i %i", p.x, p.y);
 	
-	for (int i = 0; i < Entities.count(); i++)
+	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
 	{
-		if (p == App->map->WorldToMap(Entities[i]->position.x, Entities[i]->position.y))
-			Entities[i]->is_Selected();
+		if (p == App->map->WorldToMap((*item)->position.x, (*item)->position.y))
+			(*item)->is_Selected();
 	}
-
-	
 	
 }
 
@@ -121,9 +123,9 @@ void j1EntityManager::Entity_disselected()
 
 	LOG("mouse right %i %i", p.x, p.y);
 
-	for (int i = 0; i < Entities.count(); i++)
+	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
 	{
-		if (p == App->map->WorldToMap(Entities[i]->position.x, Entities[i]->position.y))
-			Entities[i]->not_Selected();
+		if (p == App->map->WorldToMap((*item)->position.x, (*item)->position.y))
+			(*item)->not_Selected();
 	}
 }
