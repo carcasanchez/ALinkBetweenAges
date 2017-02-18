@@ -40,8 +40,8 @@ bool Player::PreU()
 
 			if (path_length > 0)
 			{
-				for (int i = 0; i < App->pathfinding->GetLastPath()->Count(); i++)
-					path.add(*App->pathfinding->GetLastPath()->At(i));
+				for (int i = 0; i < App->pathfinding->GetLastPath()->size(); i++)
+					path.add(App->pathfinding->GetLastPath()->at(i));
 
 				on_path = true;
 			}

@@ -155,7 +155,7 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-
+	
 	// debug pathfing ------------------
 	static iPoint origin;
 	static bool origin_selected = false;
@@ -178,7 +178,7 @@ bool j1Scene::PreUpdate()
 			origin_selected = true;
 		}
 	}
-
+	
 	return true;
 }
 
@@ -208,15 +208,15 @@ bool j1Scene::Update(float dt)
 
 	App->render->Blit(debug_tex, p.x, p.y);
 
-	
-	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 
-	for(uint i = 0; i < path->Count(); ++i)
+	const vector<iPoint>* path = App->pathfinding->GetLastPath();
+
+	for(uint i = 0; i < path->size(); ++i)
 	{
-	iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+	iPoint pos = App->map->MapToWorld(path->at(i).x, path->at(i).y);
 	App->render->Blit(debug_tex, pos.x, pos.y);
 	}
-
+	
 	return true;
 }
 

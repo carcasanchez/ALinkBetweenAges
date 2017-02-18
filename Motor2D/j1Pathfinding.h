@@ -33,7 +33,7 @@ public:
 	int CreatePath(const iPoint& origin, const iPoint& destination);
 
 	// To request all tiles involved in the last generated path
-	const p2DynArray<iPoint>* GetLastPath() const;
+	const vector<iPoint>* GetLastPath() const;
 
 	// Utility: return true if pos is inside the map boundaries
 	bool CheckBoundaries(const iPoint& pos) const;
@@ -52,7 +52,7 @@ private:
 	// all map walkability values [0..255]
 	uchar* map;
 	// we store the created path here
-	p2DynArray<iPoint> last_path;
+	vector<iPoint> last_path;
 };
 
 // forward declaration
@@ -88,14 +88,14 @@ struct PathNode
 struct PathList
 {
 	// Looks for a node in this list and returns it's list node or NULL
-	p2List_item<PathNode>* Find(const iPoint& point) const;
+	list<PathNode>::iterator Find(const iPoint& point);
 
 	// Returns the Pathnode with lowest score in this list or NULL if empty
-	p2List_item<PathNode>* GetNodeLowestScore() const;
+	list<PathNode>::const_iterator GetNodeLowestScore() const;
 
 	// -----------
 	// The list itself, note they are not pointers!
-	p2List<PathNode> list;
+	std::list<PathNode> list;
 };
 
 
