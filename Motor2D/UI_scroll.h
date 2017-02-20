@@ -17,8 +17,8 @@ private:
 	SDL_Rect Camera;
 	SDL_Rect Camera_inner_box;
 
-	p2List<UI_element*> Camera_elements;
-	p2List<iPoint> Camera_element_position;
+	list<UI_element*> Camera_elements;
+	list<iPoint> Camera_element_position;
 
 
 

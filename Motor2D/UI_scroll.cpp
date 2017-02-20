@@ -7,7 +7,6 @@ UI_Scroll::UI_Scroll(UI_TYPE type, j1Module* callback) : UI_element(type, callba
 
 UI_Scroll::UI_Scroll(UI_TYPE type, SDL_Rect detection_box, const UI_Image* slider, const UI_Image* slide_box, bool act, SCROLL_TYPE drag) : UI_element(type, detection_box, act, drag), Slider((UI_Image*)slider), Slide_box((UI_Image*)slide_box)
 {
-
 	Interactive_box.x = slide_box->Interactive_box.x;
 	Interactive_box.y = slide_box->Interactive_box.y;
 }
@@ -20,29 +19,19 @@ UI_Scroll::UI_Scroll(const UI_Scroll* other) : UI_element(other->element_type, o
 
 UI_Scroll::~UI_Scroll()
 {
-	int num = Camera_elements.count();
-	for (int i = 0; i < num; i++)
-		Camera_elements.del(Camera_elements.At(i));
-
+	for (list<UI_element*>::iterator camera_item = Camera_elements.begin(); camera_item != Camera_elements.cend(); camera_item++)
+		Camera_elements.erase(camera_item);
 }
 
 bool UI_Scroll::Update()
 {
 	Handle_input();
 
-
-	//Exercise 2 The scroll slider logic 
-	//[====================================================
 	if (App->gui->element_selected == this && draggable)
 		Drag_element();
 
 	if (App->gui->element_selected == Parent)
 		Move_stop_box();
-
-	
-	//====================================================]
-
-	//Exercise 3 The scroll Camera logic
 
 	if (Mouse_inside_Camera_box())
 		Scroll_Wheel();
@@ -68,13 +57,10 @@ bool UI_Scroll::Update_Draw()
 	
 	//Exercise 3 The scroll Camera view
 	SDL_RenderSetViewport(App->render->renderer, &Camera);
-	p2List_item<UI_element*>* scroll_items = Camera_elements.start;
-	while (scroll_items != nullptr)
-	{
-		scroll_items->data->Update_Draw();
-		scroll_items = scroll_items->next;
-	}
 
+	for (list<UI_element*>::iterator camera_item = Camera_elements.begin(); camera_item != Camera_elements.cend(); camera_item++)
+		(*camera_item)->Update_Draw();
+	
 	SDL_RenderSetViewport(App->render->renderer, nullptr);
 	
 
@@ -174,12 +160,13 @@ void UI_Scroll::Move_elements()
 
 	if (state == CLICK_ELEMENT || state == OVER_ELEMENT)
 	{
-		int num = Camera_elements.count();
-		for (int i = 0; i < num; i++)
+		list<UI_element*>::iterator camera_item = Camera_elements.begin();
+		list<iPoint>::iterator pos = Camera_element_position.begin();
+
+		for (; camera_item != Camera_elements.cend(); camera_item++, pos++)
 		{
-			Camera_elements[i]->Interactive_box.x = -(((Camera_inner_box.w - Camera.w) * percent_x) / 100) + Camera_element_position[i].x;
-			Camera_elements[i]->Interactive_box.y = -(((Camera_inner_box.h - Camera.h) * percent_y) / 100) + Camera_element_position[i].y;
-			
+			(*camera_item)->Interactive_box.x = -(((Camera_inner_box.w - Camera.w) * percent_x) / 100) + (*pos).x;
+			(*camera_item)->Interactive_box.y = -(((Camera_inner_box.h - Camera.h) * percent_y) / 100) + (*pos).y;
 		}
 	}
 }
@@ -232,7 +219,7 @@ void UI_Scroll::Add_Camera_element(UI_element* new_item)
 {
 	if (new_item)
 	{
-		Camera_elements.add(new_item);
+		Camera_elements.push_back(new_item);
 
 		switch (draggable)
 		{
@@ -258,7 +245,7 @@ void UI_Scroll::Add_Camera_element(UI_element* new_item)
 		}
 	
 		iPoint pos = { new_item->Interactive_box.x, new_item->Interactive_box.y };
-		Camera_element_position.add(pos);
+		Camera_element_position.push_back(pos);
 
 	}
 
