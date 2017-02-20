@@ -36,8 +36,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
-	atlas = App->tex->Load(atlas_file_name.GetString());
-	Other_images.add(App->tex->Load("gui/login_background.png"));
+	atlas = App->tex->Load(atlas_file_name.c_str());
+	//Other_images.add(App->tex->Load("gui/login_background.png"));
 
 
 	return true;
@@ -50,15 +50,8 @@ bool j1Gui::PreUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
 		Go_Next_Tab();
 
-	int num_screens = Screen_elements.count();
-	if (num_screens)
-	{
-		for(int i = 0; i < num_screens; i++)
-			Screen_elements[i]->Update();
-		
-		
-	}
-
+	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
+		(*item_screen)->Update();
 	
 	return true;
 }
@@ -74,13 +67,8 @@ bool j1Gui::Update()
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
-	
-	int num_screens = Screen_elements.count();
-	if (num_screens)
-	{
-		for (int i = 0; i < num_screens; i++)
-			Screen_elements[i]->Update_Draw();
-	}
+	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
+		(*item_screen)->Update_Draw();
 
 	return true;
 }
@@ -90,10 +78,11 @@ bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
 
-	for (int i = 0; i < Screen_elements.count(); i++)
-		Screen_elements.del(Screen_elements.At(i));
-	
+	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
+		Screen_elements.erase(item_screen);
+
 	Screen_elements.clear();
+
 
 	return true;
 }
@@ -103,7 +92,7 @@ UI_element * j1Gui::CreateScreen(UI_element * new_element)
 	UI_element* ret = new UI_element(*new_element);
 
 	if (ret)
-		Screen_elements.add(ret);
+		Screen_elements.push_back(ret);
 
 	return ret;
 }
@@ -146,19 +135,19 @@ const SDL_Texture* j1Gui::GetAtlas() const
 
 const SDL_Texture* j1Gui::Get_Other_Textures(uint id) const
 {
-	if(id < Other_images.count())
-		return Other_images[id];
+	if (id < Other_images.size())
+	{
+		list<SDL_Texture*>::const_iterator temp = Other_images.begin();
+		for (int i = 0; i < id; i++)
+			temp++;
+
+		return *temp;
+
+	}
 
 	return nullptr;	
 }
 
-int j1Gui::AddTexture(SDL_Texture * new_text)
-{
-	if(new_text)
-		Other_images.add(new_text);
-
-	return Other_images.find(new_text);
-}
 
 int j1Gui::Get_tabs() const
 {
@@ -174,13 +163,12 @@ void j1Gui::Go_Next_Tab()
 {
 	if (focus_element != nullptr)
 	{
-		p2List_item<UI_element*>* screens = Screen_elements.start;
-		while (screens)
+		list<UI_element*>::iterator item = Screen_elements.begin();
+		while (item != Screen_elements.end())
 		{
-			Look_for(screens->data);
-			screens = screens->next;
+			Look_for(*item);
+			item++;
 		}
-
 	}
 
 }

@@ -57,7 +57,6 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 	const SDL_Texture* Get_Other_Textures(uint id) const;
-	int AddTexture(SDL_Texture* new_text);
 
 	UI_element* element_selected;
 	UI_element* focus_element;
@@ -70,9 +69,9 @@ public:
 private:
 
 	SDL_Texture* atlas;
-	p2SString atlas_file_name;
-	p2List<SDL_Texture*> Other_images;
-	p2List<UI_element*> Screen_elements;
+	string atlas_file_name;
+	list<SDL_Texture*> Other_images;
+	list<UI_element*> Screen_elements;
 	
 	int num_of_tabs = 0;
 
