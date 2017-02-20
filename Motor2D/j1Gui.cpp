@@ -175,41 +175,38 @@ void j1Gui::Go_Next_Tab()
 
 void j1Gui::Look_for(const UI_element* looked_element)
 {
-	int childs_num = looked_element->Childs.count();
-
-	p2List_item<UI_element*>* childs_looker = looked_element->Childs.start;
-
-	while (childs_looker)
+	list<UI_element*>::iterator childs_looker = Screen_elements.begin();
+	for (; childs_looker != Screen_elements.end(); childs_looker++)
 	{
-		if (focus_element->tab_order < num_of_tabs)
+		if (focus_element->tab_order < num_of_tabs)		//Look if the Focus element is the last one
 		{
-			if (childs_looker->data->tab_order == focus_element->tab_order + 1)
+			if ((*childs_looker)->tab_order == focus_element->tab_order + 1)	//Look for the next element in the tab order
 			{
-				element_selected = childs_looker->data;
-				focus_element = childs_looker->data;
-				childs_looker->data->state = INTERACTIVE_STATE::OVER_ELEMENT;
+				element_selected = (*childs_looker);
+				focus_element = (*childs_looker);
+				(*childs_looker)->state = INTERACTIVE_STATE::OVER_ELEMENT;
 				break;
 			}
+
 		}
 		else
 		{
-			if(childs_looker->data->tab_order == 1)
+			if ((*childs_looker)->tab_order == 1)
 			{
-				element_selected = childs_looker->data;
-				focus_element = childs_looker->data;
-				childs_looker->data->state = INTERACTIVE_STATE::OVER_ELEMENT;
+				element_selected = (*childs_looker);
+				focus_element = (*childs_looker);
+				(*childs_looker)->state = INTERACTIVE_STATE::OVER_ELEMENT;
 				break;
 			}
 		}
-
-		childs_looker = childs_looker->next;
 	}
 
-	if (childs_looker == nullptr)
+
+
+	if (childs_looker == Screen_elements.end())
 	{
-		for (int i = 0; i < childs_num; i++)
-			Look_for(looked_element->Childs[i]);
-	
+		for (list<UI_element*>::const_iterator item = looked_element->Childs.begin(); item != looked_element->Childs.cend(); item++)
+			Look_for(*item);
 	}
 
 

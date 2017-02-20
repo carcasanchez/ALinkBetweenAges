@@ -2,7 +2,6 @@
 #define _UI_ELEMENT_H_
 
 #include "p2Point.h"
-#include "p2List.h"
 #include "j1Input.h"
 #include "SDL\include\SDL.h"
 #include "SDL\include\SDL_rect.h"
@@ -44,7 +43,7 @@ public:
 
 	INTERACTIVE_STATE state = INTERACTIVE_STATE::NOTHING;
 
-	p2List<UI_element*> Childs;
+	list<UI_element*> Childs;
 	const UI_element* Parent = nullptr;
 
 	uint layer = 1;

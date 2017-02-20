@@ -15,14 +15,14 @@ UI_element::UI_element(UI_TYPE type, SDL_Rect detection_box, bool act, SCROLL_TY
 
 UI_element::UI_element(const UI_element* other) : element_type(other->element_type), Interactive_box(other->Interactive_box), active(other->active), draggable(other->draggable){}
 
-UI_element* UI_element::AddChild( UI_element* new_child)
+UI_element* UI_element::AddChild(UI_element* new_child)
 {
 	UI_element* ret = new_child;
 
 	ret->Set_Parent(this);
 
 	if (ret != nullptr)
-		Childs.add(ret);
+		Childs.push_back(ret);
 
 	return ret;
 }
@@ -39,11 +39,7 @@ const UI_element* UI_element::Set_Parent(const UI_element* new_Parent)
 
 bool UI_element::Update()
 {
-	int number_of_childs = Childs.count();
-
-	for (int i = 0; i < number_of_childs; i++)
-		Childs[i]->Update();
-
+	Child_Update();
 	Handle_input();
 
 	return true;
@@ -51,10 +47,7 @@ bool UI_element::Update()
 
 bool UI_element::Update_Draw()
 {
-	int number_of_childs = Childs.count();
-
-	for (int i = 0; i < number_of_childs; i++)
-		Childs[i]->Update_Draw();
+	Child_Update_Draw();
 
 	return true;
 }
@@ -66,17 +59,14 @@ bool UI_element::Mouse_is_in(const iPoint& mouse_pos)
 
 void UI_element::Child_Update_Draw()
 {
-	int childs_number = Childs.count();
-	for (int i = 0; i < childs_number; i++)
-		Childs[i]->Update_Draw();
+	for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
+		(*item_child)->Update_Draw();
 }
 
 void UI_element::Child_Update()
 {
-	int childs_number = Childs.count();
-
-	for (int i = 0; i < childs_number; i++)
-		Childs[i]->Update();
+	for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
+		(*item_child)->Update();
 	
 }
 
@@ -93,11 +83,8 @@ void UI_element::Check_state()
 			{
 
 				if (get_higher_child() != nullptr)
-				{
 					state = OVER_ELEMENT;
-				}
-					
-
+				
 				else
 				{
 					App->gui->element_selected = this;
@@ -147,12 +134,9 @@ void UI_element::Drag_element()
 		break;
 	}
 	
+	for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
+		(*item_child)->Drag_element();
 
-	int childs_number = Childs.count();
-
-	for (int i = 0; i < childs_number; i++)
-		Childs[i]->Drag_element();
-	
 	draggable = temp;
 
 }
@@ -163,33 +147,27 @@ void UI_element::Add_to_Tab()
 	App->gui->Actualize_tabs();
 
 	if (App->gui->element_selected == nullptr)
-	{
-		//App->gui->element_selected = this;
 		App->gui->focus_element = this;
-	}
+	
 }
 
 
 UI_element* UI_element::get_higher_child()
 {
 	UI_element* temp = nullptr;
-	int childs_number = Childs.count();
 
-	if (childs_number)
+	if (Childs.size() > 0)
 	{
-
-		for (int i = 0; i < childs_number; i++)
+		for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
 		{
-			if (Childs[i]->state == OVER_ELEMENT && Childs[i]->layer >= this->layer)
+			if ((*item_child)->state == OVER_ELEMENT && (*item_child)->layer >= this->layer)
 			{
-				temp = Childs[i];
+				temp = (*item_child);
 				temp->state = CLICK_ELEMENT;
 				App->gui->element_selected = temp;
 				App->gui->focus_element = temp;
 			}
 		}
-
-		
 	}
 
 	return temp;
