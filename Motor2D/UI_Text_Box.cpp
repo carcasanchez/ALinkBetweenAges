@@ -45,21 +45,38 @@ bool UI_Text_Box::Update_Draw()
 
 const char* UI_Text_Box::get_string_pos(int cursor)
 {
-	return text.text.Get_Char(cursor, cursor);
+	if (cursor >= 0 && cursor < text.text.length())
+	{
+		char* tmp = new char;
+		*tmp = text.text.at(cursor);
+		*(tmp + 1) = '\0';
+
+		return tmp;
+	}
+	return nullptr;
 }
 
 void UI_Text_Box::Insert_Char(int position, const char * new_char)
 {
-	text.text.Insert_Char(position, new_char);
+
+	if(position == text.text.length() - 1)
+		text.text.push_back(*new_char);
+	else text.text.append(new_char, position, 1);
+
+
 	App->tex->UnLoad(text.text_texture);
-	text.text_texture = App->font->Print(text.text.GetString());
+	text.text_texture = App->font->Print(text.text.c_str());
 }
 
 void UI_Text_Box::Delete_Char(int position)
 {
-	text.text.Erase_Char(position);
-	App->tex->UnLoad(text.text_texture);
-	text.text_texture = App->font->Print(text.text.GetString());
+	
+	if (position >= 0 && position < text.text.length())
+	{
+		text.text.erase(position, 1);
+		App->tex->UnLoad(text.text_texture);
+		text.text_texture = App->font->Print(text.text.c_str());
+	}
 }
 
 void UI_Text_Box::Set_Background(UI_Image* back_img)
@@ -93,9 +110,9 @@ bool UI_Text_Box::Handle_input()
 			App->gui->element_selected = this;
 			App->gui->focus_element = this;
 
-			cursor_virtual_pos = text.text.Length() - 1;
+			cursor_virtual_pos = text.text.length() - 1;
 			int width;
-			App->font->CalcSize(text.text.GetString(), width, height);
+			App->font->CalcSize(text.text.c_str(), width, height);
 			cursor_pos = width + Interactive_box.x;
 			SDL_StartTextInput();
 
@@ -161,7 +178,7 @@ void UI_Text_Box::Text_management()
 			{
 				int width;
 				App->font->CalcSize(get_string_pos(cursor_virtual_pos + 1), width, height);
-				if (cursor_virtual_pos < (int)(text.text.Length() - 1))
+				if (cursor_virtual_pos < (int)(text.text.length() - 1))
 				{
 					cursor_pos += width;
 					cursor_virtual_pos++;
@@ -184,9 +201,9 @@ void UI_Text_Box::text_box_state()
 			if (Mouse_is_in({ x, y }))
 			{
 				App->gui->element_selected = this;
-				cursor_virtual_pos = text.text.Length() - 1;
+				cursor_virtual_pos = text.text.length() - 1;
 				int width;
-				App->font->CalcSize(text.text.GetString(), width, height);
+				App->font->CalcSize(text.text.c_str(), width, height);
 				cursor_pos = width + Interactive_box.x;
 				SDL_StartTextInput();
 				state = CLICK_ELEMENT;
@@ -203,9 +220,9 @@ void UI_Text_Box::text_box_state()
 	{
 		if (state == OVER_ELEMENT)
 		{
-			cursor_virtual_pos = text.text.Length() - 1;
+			cursor_virtual_pos = text.text.length() - 1;
 			int width;
-			App->font->CalcSize(text.text.GetString(), width, height);
+			App->font->CalcSize(text.text.c_str(), width, height);
 			cursor_pos = width + Interactive_box.x;
 			SDL_StartTextInput();
 			state = CLICK_ELEMENT;
