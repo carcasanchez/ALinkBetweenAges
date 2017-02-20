@@ -120,7 +120,7 @@ bool j1App::Awake()
 			
 	}
 	
-	/*
+
 	//load config cvars
 	pugi::xml_node start = config.child("app");
 	while (start != NULL)
@@ -130,24 +130,24 @@ bool j1App::Awake()
 		while (cvar != NULL)
 		{
 
-			p2SString name = cvar.attribute("name").as_string();
-			int i = 0;
+			string name = cvar.attribute("name").as_string();
+			/*int i = 0;
 			for (i; i < strlen(start.name()); i++)
 				name.Insert_Char_beggining(i, (start.name() + i));
 
 			name.Insert_Char_beggining(i, ".");
+			*/
+			string description = cvar.attribute("description").as_string();
+			string value = cvar.attribute("value").as_string();
 
-			p2SString description = cvar.attribute("description").as_string();
-			p2SString value = cvar.attribute("value").as_string();
-
-			p2SString cv_module = start.name();
-			j1Module* callback = Find_module(cv_module.GetString());
+			string cv_module = start.name();
+			j1Module* callback = Find_module(cv_module.c_str());
 
 			int min_v = cvar.attribute("min").as_int();
 			int max_v = cvar.attribute("max").as_int();
 
 			ARGUMENTS_TYPE type;
-			p2SString type_v = cvar.attribute("type").as_string();
+			string type_v = cvar.attribute("type").as_string();
 
 			if (type_v == "int")
 				type = INT_VAR;
@@ -160,9 +160,9 @@ bool j1App::Awake()
 
 			bool read_only = cvar.attribute("read_only").as_bool();
 
-			CVar* new_cvar = console->Add_CVar(name.GetString(), description.GetString(), value.GetString(), min_v, max_v, callback, type, read_only);
+			CVar* new_cvar = console->Add_CVar(name.c_str(), description.c_str(), value.c_str(), min_v, max_v, callback, type, read_only);
 
-			LOG("Loaded CVAR: %s, in Module: %s", new_cvar->Get_name(), callback->name.GetString());
+			LOG("Loaded CVAR: %s, in Module: %s", new_cvar->Get_name(), callback->name.c_str());
 
 			cvar = cvar.next_sibling();
 		}
@@ -170,7 +170,7 @@ bool j1App::Awake()
 		start = start.next_sibling();
 
 	}
-	*/
+
 
 
 	PERF_PEEK(ptimer);
