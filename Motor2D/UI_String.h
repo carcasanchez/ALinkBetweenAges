@@ -10,7 +10,7 @@ struct SDL_Texture;
 class UI_String : public UI_element
 {
 public:
-	p2SString text;
+	string text;
 	int text_size;
 	_TTF_Font* text_font = nullptr;
 	SDL_Texture* text_texture;

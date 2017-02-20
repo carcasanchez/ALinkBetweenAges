@@ -12,7 +12,7 @@ UI_String::UI_String(UI_TYPE type, SDL_Rect detection_box, char* new_text, bool 
 
 UI_String::UI_String(const UI_String* other) : UI_element(other->element_type, other->Interactive_box, other->active, other->draggable), text(other->text) 
 {
-	text_texture = App->font->Print(other->text.GetString());
+	text_texture = App->font->Print(other->text.c_str());
 }
 
 
@@ -99,13 +99,13 @@ bool UI_String::Set_String(char* new_text)
 	if(text_texture)
 		App->tex->UnLoad(text_texture);
 
-	text_texture = App->font->Print(text.GetString());
+	text_texture = App->font->Print(text.c_str());
 
-	return (text != nullptr) ? true : false;
+	return (text.c_str() != nullptr) ? true : false;
 }
 
 void UI_String::Load_text_texture()
 {
-	text_texture = App->font->Print(text.GetString());
+	text_texture = App->font->Print(text.c_str());
 }
 
