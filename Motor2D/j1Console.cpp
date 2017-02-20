@@ -49,7 +49,6 @@ bool j1Console::Start()
 	Input_text->Set_Interactive_Box({ console_screen.x, (console_screen.y + console_screen.h), console_screen.w, height });
 	Input_text->Set_Drag_Type(NO_SCROLL);
 
-
 	help = Add_Command("help", this, 0, 0, NONE);
 	CV_list = Add_Command("cv_list", this, 0, 0, NONE);
 
@@ -113,7 +112,7 @@ void j1Console::Active_console()
 	{
 		App->console->active = true;
 		App->gui->element_selected = Input_text;
-		SDL_StartTextInput();
+		
 	}
 }
 
@@ -264,28 +263,28 @@ void j1Console::Camera_management()
 
 void j1Console::Text_management()
 {
-	int len = strlen(Input_text->text.text.GetString()) + 1;
+	int len = strlen(Input_text->text.text.c_str()) + 1;
 	char* temp = new char(len);
 
 	//Check if there are spaces before text
 	int  bookmark = 0;
 	for (; bookmark < len; bookmark++)
 	{
-		if (*(Input_text->text.text.GetString() + bookmark) != ' ')
+		if (*(Input_text->text.text.c_str() + bookmark) != ' ')
 			break;
 
 		else continue;
 	}
 
 	//IT IS COMMAND
-	if (*(Input_text->text.text.GetString() + bookmark) == '/')
+	if (*(Input_text->text.text.c_str() + bookmark) == '/')
 	{
 		
 		for (int i = 0; bookmark < len; bookmark++)
 		{
-			if (*(Input_text->text.text.GetString() + bookmark + 1) != ' ')
+			if (*(Input_text->text.text.c_str() + bookmark + 1) != ' ')
 			{
-				*(temp + i) = *(Input_text->text.text.GetString() + bookmark + 1);
+				*(temp + i) = *(Input_text->text.text.c_str() + bookmark + 1);
 				i++;
 			}
 			else
@@ -300,7 +299,7 @@ void j1Console::Text_management()
 			int argument_start = bookmark + 1;
 
 			for (int i = strlen(temp); i < len; i++)
-				*(temp + i) = *(Input_text->text.text.GetString() + ++bookmark);
+				*(temp + i) = *(Input_text->text.text.c_str() + ++bookmark);
 			
 			Argument_management(temp, argument_start, temp_com);
 			
@@ -312,9 +311,9 @@ void j1Console::Text_management()
 	{
 		for (int i = 0; bookmark < len; bookmark++)
 		{
-			if (*(Input_text->text.text.GetString() + bookmark) != ' ')
+			if (*(Input_text->text.text.c_str() + bookmark) != ' ')
 			{
-				*(temp + i) = *(Input_text->text.text.GetString() + bookmark);
+				*(temp + i) = *(Input_text->text.text.c_str() + bookmark);
 				i++;
 			}
 			else
@@ -330,7 +329,7 @@ void j1Console::Text_management()
 
 			for (int i = strlen(temp); i < len; i++)
 			{
-				*(temp + i) = *(Input_text->text.text.GetString() + bookmark);
+				*(temp + i) = *(Input_text->text.text.c_str() + bookmark);
 				bookmark++;
 			}
 			Value_CV_management(temp, argument_start, input_cvar);
