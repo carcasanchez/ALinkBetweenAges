@@ -76,15 +76,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Desenvolupament  ========\Modules\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Desenvolupament  ========\Modules\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="j1EntityManager.cpp">
-      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="j1GameLayer.cpp">
-      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
-    </ClCompile>
     <ClCompile Include="j1ParticleManager.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
@@ -93,6 +84,15 @@
     </ClCompile>
     <ClCompile Include="j1CollisionManager.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="j1GameLayer.cpp">
+      <Filter>Desenvolupament  ========\Game Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Desenvolupament  ========\Game Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="j1EntityManager.cpp">
+      <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,16 +189,7 @@
     <ClInclude Include="Entity.h">
       <Filter>Desenvolupament  ========\Modules\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Desenvolupament  ========\Modules\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="CVar_Com.h">
-      <Filter>Desenvolupament  ========\Modules\H</Filter>
-    </ClInclude>
-    <ClInclude Include="j1EntityManager.h">
-      <Filter>Desenvolupament  ========\Modules\H</Filter>
-    </ClInclude>
-    <ClInclude Include="j1GameLayer.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
     <ClInclude Include="j1CollisionManager.h">
@@ -209,6 +200,15 @@
     </ClInclude>
     <ClInclude Include="j1ParticleManager.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
+    </ClInclude>
+    <ClInclude Include="j1GameLayer.h">
+      <Filter>Desenvolupament  ========\Game Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Desenvolupament  ========\Game Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="j1EntityManager.h">
+      <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +241,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Modules\Entity">
       <UniqueIdentifier>{c7cde884-cbfc-45ea-b310-1703a2d3f239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Game Layer">
+      <UniqueIdentifier>{4cfcb117-ff6b-49b1-a669-c8b27d81cf35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

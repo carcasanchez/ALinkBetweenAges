@@ -1,33 +1,9 @@
-#ifndef __j1PLAYER_H__
-#define __j1PLAYER_H__
+#ifndef _PLAYER_H_
+#define _PLAYER_H_
 
-#include "j1Module.h"
-#include "Entity.h"
-#include "j1EntityManager.h"
-#include "p2List.h"
-#include "p2Point.h"
-
-class Player : public entity
+class Player
 {
-public:
 
-	Player(p2Point<int> pos);
-	bool Start();
-	bool UTicks();
-	bool PreU();
-	bool U(float dt);
-	bool PostU();
-
-
-private:
-
-	p2List<iPoint>		path;
-	bool				on_path = false;
-	
-
-
-
-	
 };
 
-#endif
+#endif // !_PLAYER_H_
