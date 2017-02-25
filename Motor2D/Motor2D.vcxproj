@@ -76,18 +76,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="j1CollisionManager.cpp" />
     <ClCompile Include="j1Console.cpp" />
     <ClCompile Include="j1FileSystem.cpp" />
     <ClCompile Include="j1Fonts.cpp" />
+    <ClCompile Include="j1GameLayer.cpp" />
     <ClCompile Include="j1Gui.cpp" />
     <ClCompile Include="j1Main.cpp" />
     <ClCompile Include="j1App.cpp" />
     <ClCompile Include="j1Audio.cpp" />
     <ClCompile Include="j1Input.cpp" />
     <ClCompile Include="j1Map.cpp" />
+    <ClCompile Include="j1ParticleManager.cpp" />
     <ClCompile Include="j1Pathfinding.cpp" />
     <ClCompile Include="j1PerfTimer.cpp" />
     <ClCompile Include="j1Scene.cpp" />
+    <ClCompile Include="j1SceneManager.cpp" />
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1EntityManager.cpp" />
     <ClCompile Include="p2Log.cpp" />
@@ -106,14 +110,18 @@
   <ItemGroup>
     <ClInclude Include="CVar_Com.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="j1CollisionManager.h" />
     <ClInclude Include="j1Console.h" />
     <ClInclude Include="j1FileSystem.h" />
     <ClInclude Include="j1Fonts.h" />
+    <ClInclude Include="j1GameLayer.h" />
     <ClInclude Include="j1Gui.h" />
     <ClInclude Include="j1Map.h" />
+    <ClInclude Include="j1ParticleManager.h" />
     <ClInclude Include="j1Pathfinding.h" />
     <ClInclude Include="j1PerfTimer.h" />
     <ClInclude Include="j1Scene.h" />
+    <ClInclude Include="j1SceneManager.h" />
     <ClInclude Include="j1Timer.h" />
     <ClInclude Include="j1EntityManager.h" />
     <ClInclude Include="p2DynArray.h" />
