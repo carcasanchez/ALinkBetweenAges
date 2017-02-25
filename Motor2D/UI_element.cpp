@@ -75,26 +75,33 @@ void UI_element::Check_state()
 	int x, y;
 	App->input->GetMousePosition(x, y);
 
+	//Check if the element selected is this
 	if (App->gui->element_selected == nullptr)
 	{
+		//Check if mouse is inside the interaction box [inside = true]
 		if (Mouse_is_in({ x, y }))
 		{
+			//Check if you Click inside the element
 			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN || App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 			{
 
+				//Check If you click a child which is inside the element box
 				if (get_higher_child() != nullptr)
 					state = OVER_ELEMENT;
 				
 				else
 				{
+					//Here the element will be the selected and will change his state
 					App->gui->element_selected = this;
 					App->gui->focus_element = this;
 					state = CLICK_ELEMENT;
 				}
 
 			}
+			//If you don't click changes his state to over element
 			else state = OVER_ELEMENT;
 		}
+		//If mouse is not In his returns to normal state
 		else state = NOTHING;
 	}
 	else 
@@ -117,7 +124,7 @@ void UI_element::Drag_element()
 	if (Parent)	
 		draggable = Parent->draggable;
 	
-
+	//Looks the argument draggable and moves the element 
 	switch (draggable)
 	{
 	case FREE_SCROLL:
@@ -134,6 +141,7 @@ void UI_element::Drag_element()
 		break;
 	}
 	
+	//Moves the childs
 	for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
 		(*item_child)->Drag_element();
 

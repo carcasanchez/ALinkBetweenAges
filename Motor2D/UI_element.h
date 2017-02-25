@@ -67,23 +67,31 @@ public:
 	virtual bool Handle_input() { return true; };
 
 	//Childs and parents functions
-	UI_element* AddChild(UI_element* new_child);
-	const UI_element* Set_Parent(const UI_element* parent);
-	void Child_Update_Draw();
-	void Child_Update();
-
-	//Check state functions
-	bool Mouse_is_in(const iPoint& mouse_pos);
-	void Check_state();
-	void Drag_element();
+	UI_element* AddChild(UI_element* new_child);				
 	
+	//Adds the element to the tab
 	void Add_to_Tab();
-	UI_element* get_higher_child();
-
+	
+	//Set the elements atributes
 	void Set_Interactive_Box(SDL_Rect);
 	void Set_Active_state(bool);
 	void Set_Drag_Type(SCROLL_TYPE);
 
+	//Childs functions
+	const UI_element* Set_Parent(const UI_element* parent);	//set the parent
+	void Child_Update_Draw();								//Draw all childs
+	void Child_Update();									//Update childs
+
+															//Check state functions
+	bool Mouse_is_in(const iPoint& mouse_pos);				//Check if Mouse is inside the interaction box
+
+
+	UI_element* get_higher_child();							//Returns the child which is higher when you click inside
+
+	
+	void Check_state();										//Changes the state of the element
+	void Drag_element();									//Moves the element
+	
 };
 
 
