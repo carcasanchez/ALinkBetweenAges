@@ -24,8 +24,8 @@
     <atlas file="gui/atlas_lol.png"/>
   </gui>
     
-  <window>
-    <resolution width="1024" height="576" scale="1"/>
+  <window> 
+    <resolution width="256" height="224" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
