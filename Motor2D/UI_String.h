@@ -22,14 +22,14 @@ public:
 	UI_String(const UI_String* other);
 
 	
-	bool Set_String(char* new_text);
-	void Load_text_texture();
+	bool Set_String(char* new_text);				//Changes the string
+	void Load_text_texture();						//Loads the text texture
 	
 	bool Update();
 	bool Update_Draw();
 	bool Handle_input();
 	
-	bool Draw_console(int height);
+	bool Draw_console(int height);					//Blits the string in the console [takes into account the height where it is the string]
 
 
 };

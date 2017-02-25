@@ -21,6 +21,7 @@ bool UI_Text_Box::Update()
 
 	Child_Update();
 
+	Return_state();
 	return true;
 }
 
@@ -35,7 +36,7 @@ bool UI_Text_Box::Update_Draw()
 		App->render->Blit(text.text_texture, (Interactive_box.x - App->render->camera.x), (Interactive_box.y - App->render->camera.y));
 		Child_Update();
 
-		if (SDL_IsTextInputActive())
+		if (SDL_IsTextInputActive()) //This draws a line inside the text box [Cursor]
 			App->render->DrawQuad({ cursor_pos - App->render->camera.x, Interactive_box.y - App->render->camera.y, 1, height }, 255, 255, 255);
 		
 	}
@@ -59,11 +60,13 @@ const char* UI_Text_Box::get_string_pos(int cursor)
 void UI_Text_Box::Insert_Char(int position, const char * new_char)
 {
 
+	//If the position is at the end of the string pushback
 	if(position == text.text.length() - 1)
 		text.text.push_back(*new_char);
-	else text.text.append(new_char, position, 1);
+	//else insert the char inside the string
+	else text.text.append(new_char, position, 1); 
 
-
+	//Unloads the actual text texture and loads the new one
 	App->tex->UnLoad(text.text_texture);
 	text.text_texture = App->font->Print(text.text.c_str());
 }
@@ -73,6 +76,7 @@ void UI_Text_Box::Delete_Char(int position)
 	
 	if (position >= 0 && position < text.text.length())
 	{
+		//Erases the char in the position and unload the actual texture and loads the new one
 		text.text.erase(position, 1);
 		App->tex->UnLoad(text.text_texture);
 		text.text_texture = App->font->Print(text.text.c_str());
@@ -81,6 +85,7 @@ void UI_Text_Box::Delete_Char(int position)
 
 void UI_Text_Box::Set_Background(UI_Image* back_img)
 {
+	//Changes the background of the text box
 	background = back_img;
 }
 
@@ -138,7 +143,7 @@ bool UI_Text_Box::Handle_input()
 	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		my_module->On_GUI_Callback(this, ENTER);
 
-
+	
 	return true;
 }
 
@@ -148,7 +153,7 @@ void UI_Text_Box::Text_management()
 	{
 		if (App->gui->element_selected == this)
 		{
-
+			
 			if (App->input->GetKey(SDL_SCANCODE_BACKSPACE) == KEY_DOWN)
 			{
 				int width;

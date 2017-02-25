@@ -10,7 +10,6 @@ public:
 	SDL_Rect Image;
 	int id = -1;
 	
-
 public:
 
 	UI_Image(UI_TYPE, j1Module*);
@@ -20,9 +19,8 @@ public:
 	bool Update();
 	bool Update_Draw();
 	bool Handle_input();
-	void change_image(SDL_Rect new_image);
 
-	void Set_Image_Texture(SDL_Rect);
+	void Set_Image_Texture(SDL_Rect);	//Changes the image rect, not his interactive box
 
 };
 

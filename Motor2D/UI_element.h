@@ -64,7 +64,7 @@ public:
 	virtual bool Start() { return true; };
 	virtual bool Update();
 	virtual bool Update_Draw();
-	virtual bool Handle_input() { return true; };
+	virtual bool Handle_input() { return true; };		//Calls the UI callbacks 
 
 	//Childs and parents functions
 	UI_element* AddChild(UI_element* new_child);				
@@ -90,6 +90,7 @@ public:
 
 	
 	void Check_state();										//Changes the state of the element
+	void Return_state();									//Returns to state nothing when key up
 	void Drag_element();									//Moves the element
 	
 };

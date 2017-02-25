@@ -43,10 +43,10 @@ public:
 	 void Add_Camera_element(UI_element* new_item);
 	 SDL_Rect Get_Stop_Box() const;
 
-	 void Set_Slider_image(UI_Image*);
-	 void Set_Stop_box_image(UI_Image*);
-	 void Set_Stop_Box(SDL_Rect new_box);
-	 void Set_Camera(SDL_Rect new_box);
+	 void Set_Slider_image(UI_Image*);			//Set a image to the slider
+	 void Set_Stop_box_image(UI_Image*);		//Set a image to the stop box
+	 void Set_Stop_Box(SDL_Rect new_box);		//Set the Box that colides with the slider
+	 void Set_Camera(SDL_Rect new_box);			//Set the viewport
 
 };
 

@@ -24,15 +24,17 @@ public:
 
 	bool Update();
 	bool Handle_input();
-	void Text_management();
 	bool Update_Draw();
 
-	const char* get_string_pos(int cursor_pos);
-	void Insert_Char(int cursor_pos, const char* new_char);
-	void Delete_Char(int cursor_pos);
-
 	void Set_Background(UI_Image*);
+	void Insert_Char(int cursor_pos, const char* new_char);			//Insert a letter in the Cursor position
 	
+private:
+
+	const char* get_string_pos(int cursor_pos);						//Returns the letter which is in the cursor position
+	void Delete_Char(int cursor_pos);								//Deletes a char in the cursor position
+	void Text_management();											//Is responsible of the Cursor and text management inside the textbox
+
 };
 
 

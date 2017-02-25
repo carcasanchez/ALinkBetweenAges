@@ -113,6 +113,19 @@ void UI_element::Check_state()
 
 }
 
+void UI_element::Return_state()
+{
+	if (App->gui->element_selected)
+	{
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP && App->gui->element_selected->element_type != TEXT_BOX)
+		{
+			App->gui->element_selected = nullptr;
+			App->gui->focus_element = nullptr;
+			state = NOTHING;
+		}
+	}
+}
+
 void UI_element::Drag_element()
 {
 

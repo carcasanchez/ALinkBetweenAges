@@ -13,6 +13,7 @@ bool UI_Image::Update_Draw()
 {
 	if (active)
 	{
+		//Looks if is an IMAGE o an IMAGE_NOT_IN_ATLAS and blits the texture needed
 		if (element_type == IMAGE)
 			App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), Interactive_box.x - App->render->camera.x, Interactive_box.y - App->render->camera.y, &Image);
 
@@ -65,13 +66,14 @@ bool UI_Image::Handle_input()
 		}
 	}
 
-	if (App->gui->element_selected == nullptr) return true;
-
+	
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 	{
 		my_module->On_GUI_Callback(this, LEFT_MOUSE_REPEAT);
 		state = CLICK_ELEMENT;
 	}
+
+	
 	return true;
 }
 
@@ -84,12 +86,8 @@ bool UI_Image::Update()
 
 	Child_Update();
 
+	Return_state();
 	return true;
-}
-
-void UI_Image::change_image(SDL_Rect new_image)
-{
-	Image = new_image;
 }
 
 void UI_Image::Set_Image_Texture(SDL_Rect tex)

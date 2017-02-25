@@ -30,15 +30,21 @@ bool UI_Scroll::Update()
 	if (App->gui->element_selected == this && draggable)
 		Drag_element();
 
+	//Moves the Stop box if the Parent if mooving
 	if (App->gui->element_selected == Parent)
 		Move_stop_box();
 
+	//If mouse is insde camera box you can scroll with mouse wheel
 	if (Mouse_inside_Camera_box())
 		Scroll_Wheel();
 
+	//Stops the scroll if collide with the stopbox
 	Stop();
 
+	//Move the camera elements with the scroll
 	Move_elements();
+
+	Return_state();
 	
 	return true;
 }
@@ -55,7 +61,7 @@ bool UI_Scroll::Update_Draw()
 	}
 
 	
-	//Exercise 3 The scroll Camera view
+	//Changes the viewport to the camera box and blits the camera elements
 	SDL_RenderSetViewport(App->render->renderer, &Camera);
 
 	for (list<UI_element*>::iterator camera_item = Camera_elements.begin(); camera_item != Camera_elements.cend(); camera_item++)
@@ -154,7 +160,7 @@ void UI_Scroll::Stop()
 
 void UI_Scroll::Move_elements()
 {
-	
+	//Calculates a percentage that the scroll has moved
 	int percent_y = ((Interactive_box.y - Stop_box.y) * 100) / (Stop_box.h - Interactive_box.h);
 	int percent_x = ((Interactive_box.x - Stop_box.x) * 100) / (Stop_box.w - Interactive_box.w);
 
@@ -163,6 +169,7 @@ void UI_Scroll::Move_elements()
 		list<UI_element*>::iterator camera_item = Camera_elements.begin();
 		list<iPoint>::iterator pos = Camera_element_position.begin();
 
+		//Moves the items the percentage needed plus his original position 
 		for (; camera_item != Camera_elements.cend(); camera_item++, pos++)
 		{
 			(*camera_item)->Interactive_box.x = -(((Camera_inner_box.w - Camera.w) * percent_x) / 100) + (*pos).x;
@@ -221,6 +228,8 @@ void UI_Scroll::Add_Camera_element(UI_element* new_item)
 	{
 		Camera_elements.push_back(new_item);
 
+		//Each state looks the camera inner box, which is a box that has the size of the most far elements
+		//and if the new element is not inside this box, resize it.
 		switch (draggable)
 		{
 		case Y_SCROLL:
@@ -244,6 +253,7 @@ void UI_Scroll::Add_Camera_element(UI_element* new_item)
 			break;
 		}
 	
+		//saves the original position to move the element later
 		iPoint pos = { new_item->Interactive_box.x, new_item->Interactive_box.y };
 		Camera_element_position.push_back(pos);
 

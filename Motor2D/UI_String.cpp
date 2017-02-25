@@ -73,6 +73,8 @@ bool UI_String::Handle_input()
 		my_module->On_GUI_Callback(this, LEFT_MOUSE_REPEAT);
 		state = CLICK_ELEMENT;
 	}
+
+	
 }
 
 bool UI_String::Draw_console(int height)
@@ -80,14 +82,15 @@ bool UI_String::Draw_console(int height)
 	if(active)
 		App->render->Blit(text_texture, Interactive_box.x - App->render->camera.x, Interactive_box.y - App->render->camera.y + height);
 
-
 	return true;
 }
 
 
 bool UI_String::Update()
 {
-	Check_state();
+	Handle_input();
+
+	Return_state();
 
 	return true;
 }
@@ -96,9 +99,11 @@ bool UI_String::Set_String(char* new_text)
 {
 	text = new_text;
 
+	//looks if the text is already loaded and unloads
 	if(text_texture)
 		App->tex->UnLoad(text_texture);
 
+	//loads the new texture
 	text_texture = App->font->Print(text.c_str());
 
 	return (text.c_str() != nullptr) ? true : false;
