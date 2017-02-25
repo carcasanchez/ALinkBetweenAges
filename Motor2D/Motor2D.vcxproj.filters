@@ -52,9 +52,6 @@
     <ClCompile Include="j1Fonts.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
-    <ClCompile Include="j1Gui.cpp">
-      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
-    </ClCompile>
     <ClCompile Include="j1Input.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClCompile>
     <ClCompile Include="j1EntityManager.cpp">
+      <Filter>Desenvolupament  ========\Game Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Gui.cpp">
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -165,9 +165,6 @@
     <ClInclude Include="j1Fonts.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
-    <ClInclude Include="j1Gui.h">
-      <Filter>Desenvolupament  ========\Modules\H</Filter>
-    </ClInclude>
     <ClInclude Include="j1Input.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
@@ -208,6 +205,9 @@
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClInclude>
     <ClInclude Include="j1EntityManager.h">
+      <Filter>Desenvolupament  ========\Game Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Gui.h">
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,12 +21,12 @@
   </fonts>
 
   <gui>
-    <atlas file="gui/atlas_lol.png"/>
+    <atlas file="gui/atlas.png"/>
   </gui>
     
   <window> 
     <resolution width="256" height="224" scale="1"/>
-    <fullscreen value="false"/>
+    <fullscreen value="true"/>
     <borderless value="false"/>
     <resizable value="false"/>
     <fullscreen_window value="false"/>

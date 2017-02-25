@@ -56,7 +56,6 @@ bool j1Scene::Start()
 	//App->gui->CreateElement({ 0, 0 }, UI_TYPE::IMAGE_NOT_IN_ATLAS, { 0, 0, 1920, 1080 }, 0);
 
 
-	/*
 	//Exam
 	
 	//Exercise 1 -> Setting all the elements
@@ -64,8 +63,8 @@ bool j1Scene::Start()
 	Background->Set_Image_Texture({ 0, 1600, 1024, 576 });
 	
 	window = (UI_Image*)App->gui->Add_element(UI_TYPE::IMAGE, this);
-	window->Set_Interactive_Box({ 50, 60, 455, 497 });
-	window->Set_Image_Texture({ 15,512,455,497 });
+	window->Set_Interactive_Box({ 0, 0, 0, 0 });
+	window->Set_Image_Texture({ 3,170,256,224 });
 	
 	title = (UI_String*)App->gui->Add_element(UI_TYPE::STRING, this);
 	title->Set_String("Select Your Character");
@@ -133,6 +132,7 @@ bool j1Scene::Start()
 
 	
 
+	/*
 
 	soldier0 = (Player*)App->entity_manager->create({ 15, 5 });
 	soldier0->Set_texture({ 3, 2, 28, 36 });
