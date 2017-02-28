@@ -97,6 +97,14 @@ public:
 		return(*this);
 	}
 
+	p2Point& Set(TYPE x, TYPE y)
+	{
+		this->x = x;
+		this->y = y;
+
+		return(*this);
+	}
+
 	p2Point& Negate()
 	{
 		x = -x;
