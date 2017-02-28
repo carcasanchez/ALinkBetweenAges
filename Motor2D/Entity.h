@@ -5,12 +5,12 @@
 #include "SDL\include\SDL_rect.h"
 #include "j1EntityManager.h"
 
-class entity
+class Entity
 {
 public:
 
-	entity();
-	entity(p2Point<int> pos);
+	Entity();
+	Entity(p2Point<int> pos);
 
 	virtual bool Start() { return true; };
 	virtual bool PreU() { return true; };

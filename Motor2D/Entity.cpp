@@ -4,21 +4,23 @@
 #include "j1Map.h"
 #include "j1Render.h"
 
-entity::entity(p2Point<int> pos) : position(pos) {};
+Entity::Entity() {};
 
-void entity::is_Selected()
+Entity::Entity(p2Point<int> pos) : position(pos) {};
+
+void Entity::is_Selected()
 {
 	if (selectionable)
 		 selected = true;	
 }
 
-void entity::not_Selected()
+void Entity::not_Selected()
 {
 	if (selected)
 		selected = false;
 }
 
-void entity::Set_texture(SDL_Rect new_img)
+void Entity::Set_texture(SDL_Rect new_img)
 {
 	player_text = new_img;
 }

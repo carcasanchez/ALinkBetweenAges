@@ -1,16 +1,17 @@
 #ifndef __MANAGER_H__
 #define __MANAGER_H__
 
-#include "j1Module.h"
-#include "p2Point.h"
-
-//#include "Entity.h"
-
+#include "Entity.h"
+#include "PugiXml\src\pugixml.hpp"
+#include <list>
+#include <string>
 
 struct SDL_Texture;
-class entity;
+class Entity;
 
-class j1EntityManager : public j1Module
+using namespace std;
+
+class j1EntityManager
 {
 public:
 
@@ -28,14 +29,12 @@ public:
 
 public:
 
-	entity* create(p2Point<int> position);
+	//Entity* Create();
 
-	list<entity*> Entities;
+	//list<Entity*> Entities;
 
-	string		Entity_texture_name;
-	SDL_Texture*	Entity_textures;
-
-
+	//string		Entity_texture_name;
+	//SDL_Texture*	Entity_textures;
 };
 
 #endif

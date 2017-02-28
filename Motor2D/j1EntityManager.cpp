@@ -7,18 +7,16 @@
 #include "j1Render.h"
 
 
-
-
 j1EntityManager::j1EntityManager()
 {
-	name = ("entity_manager");
+	
 }
 
 bool j1EntityManager::Awake(pugi::xml_node & config)
 {
 	LOG("Loading Entity textures");
 
-	Entity_texture_name = config.child("entities_texture").attribute("file").as_string("");
+	//Entity_texture_name = config.child("entities_texture").attribute("file").as_string("");
 
 
 	return true;
@@ -26,7 +24,7 @@ bool j1EntityManager::Awake(pugi::xml_node & config)
 
 bool j1EntityManager::Start()
 {
-	Entity_textures = App->tex->Load(Entity_texture_name.c_str());
+	//Entity_textures = App->tex->Load(Entity_texture_name.c_str());
 	/*
 	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
 		(*item)->Start();
@@ -79,18 +77,12 @@ bool j1EntityManager::PostUpdate()
 
 bool j1EntityManager::CleanUp()
 {
-
-	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
+	/*for (std::list<Entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
 		Entities.erase(item);
 
-	Entities.clear();
+	Entities.clear();*/
 	
 	return true;
-}
-
-entity* j1EntityManager::create(p2Point<int> position)
-{	
-	return nullptr;
 }
 
 void j1EntityManager::Entity_selected()
