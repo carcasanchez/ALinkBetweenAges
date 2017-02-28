@@ -12,19 +12,25 @@
 #define LOGICAL_DT 0.1f
 
 // Modules
-class j1Window;
+class j1FileSystem;
 class j1Input;
-class j1Render;
+class InputManager;
+class j1Fonts;
+class j1Window;
 class j1Textures;
 class j1Audio;
-class j1FileSystem;
-class j1Scene;
 class j1Map;
 class j1PathFinding;
-class j1Fonts;
+class j1ParticleManager;
 class j1Gui;
+class j1SceneManager;
+		class j1Scene;
+class j1CollisionManager;
+class j1GameLayer;
+		class j1EntityManager;
 class j1Console;
-class j1EntityManager;
+class j1Render;
+
 
 class j1App : public j1Module
 {
@@ -98,19 +104,22 @@ private:
 public:
 
 	// Modules
-	j1Window*			win = NULL;
+	j1FileSystem*		fs = NULL;
 	j1Input*			input = NULL;
-	j1Render*			render = NULL;
+	InputManager*		inputM = NULL;
+	j1Fonts*			font = NULL;
+	j1Window*			win = NULL;
 	j1Textures*			tex = NULL;
 	j1Audio*			audio = NULL;
-	j1Scene*			scene = NULL;
-	j1FileSystem*		fs = NULL;
 	j1Map*				map = NULL;
 	j1PathFinding*		pathfinding = NULL;
-	j1Fonts*			font = NULL;
+	j1ParticleManager*	particles = NULL;
 	j1Gui*				gui = NULL;
+	j1SceneManager*		sceneM = NULL;
+	j1CollisionManager*	collisions = NULL;
+	j1GameLayer*		game = NULL;
 	j1Console*			console = NULL;
-	j1EntityManager*	entity_manager = NULL;
+	j1Render*			render = NULL;
 
 private:
 

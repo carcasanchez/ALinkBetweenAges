@@ -18,6 +18,11 @@
 #include "j1Fonts.h"
 #include "j1Gui.h"
 #include "j1Console.h"
+#include "InputManager.h"
+#include "j1ParticleManager.h"
+#include "j1SceneManager.h"
+#include "j1CollisionManager.h"
+#include "j1GameLayer.h"
 #include "j1App.h"
 
 // Constructor
@@ -27,36 +32,41 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	name = "app";
 	PERF_START(ptimer);
 
+	fs = new j1FileSystem();
 	input = new j1Input();
+	inputM = new InputManager();
+	font = new j1Fonts();
 	win = new j1Window();
-	render = new j1Render();
 	tex = new j1Textures();
 	audio = new j1Audio();
-	scene = new j1Scene();
-	fs = new j1FileSystem();
 	map = new j1Map();
 	pathfinding = new j1PathFinding();
-	entity_manager = new j1EntityManager();
-	font = new j1Fonts();
+	particles = new j1ParticleManager();
 	gui = new j1Gui();
+	sceneM = new j1SceneManager();
+	collisions = new j1CollisionManager();
+	game = new j1GameLayer();
 	console = new j1Console();
+	render = new j1Render();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	
 	AddModule(fs);
 	AddModule(input);
+	AddModule(inputM);
 	AddModule(font);
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
 	AddModule(pathfinding);
+	AddModule(particles);
 	AddModule(gui);
+	AddModule(sceneM);
+	AddModule(collisions);
+	AddModule(game);
 
-	// scene last
-	AddModule(scene);
-	AddModule(entity_manager);
 	AddModule(console);
 
 	// render last to swap buffer
