@@ -24,40 +24,68 @@ bool j1Window::Awake(pugi::xml_node& config)
 	LOG("Init SDL window & surface");
 	bool ret = true;
 
+	SDL_DisplayMode mode;
+
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+	else if (SDL_GetNumDisplayModes(0) < 1)
+	{
+		LOG("No available displays found.");
+		ret = false;
+	}
+	else if (SDL_GetDisplayMode(0, 0, &mode) != 0)
+	{
+		LOG("Could not get display information");
+		ret = false;
+	}
 	else
 	{
+		width = config.child("resolution").attribute("width").as_int(256);
+		height = config.child("resolution").attribute("height").as_int(224);
+		scale = config.child("resolution").attribute("scale").as_int(1);
+		int h_margin = config.child("margin ").attribute("horizontal").as_int(0);
+		int v_margin = config.child("margin ").attribute("vertical").as_int(0);
+
+		// check display has minimum dimensions
+		if (mode.w < width || mode.h < height)
+		{
+			LOG("Display too small. Setting scale to 1 (minimum value)");
+			scale = 1;
+		}
+		else
+		{
+			while (width * (scale + 1) + (2 * h_margin) < mode.w && height * (scale + 1) + (2 * v_margin) < mode.h)
+			{
+				scale++;
+			}
+
+			//scale dimensions
+			width *= scale;
+			height *= scale;
+		}
+
 		//Create window
 		Uint32 flags = SDL_WINDOW_SHOWN;
-		bool fullscreen = config.child("fullscreen").attribute("value").as_bool(false);
-		bool borderless = config.child("borderless").attribute("value").as_bool(false);
-		bool resizable = config.child("resizable").attribute("value").as_bool(false);
-		bool fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool(false);
 
-		width = config.child("resolution").attribute("width").as_int(640);
-		height = config.child("resolution").attribute("height").as_int(480);
-		scale = config.child("resolution").attribute("scale").as_int(1);
-
-		if(fullscreen == true)
+		if(config.child("fullscreen").attribute("value").as_bool(false))
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
 
-		if(borderless == true)
+		if(config.child("borderless").attribute("value").as_bool(false))
 		{
 			flags |= SDL_WINDOW_BORDERLESS;
 		}
 
-		if(resizable == true)
+		if(config.child("resizable").attribute("value").as_bool(false) == true)
 		{
 			flags |= SDL_WINDOW_RESIZABLE;
 		}
 
-		if(fullscreen_window == true)
+		if(config.child("fullscreen_window").attribute("value").as_bool(false) == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
