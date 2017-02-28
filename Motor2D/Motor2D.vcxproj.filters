@@ -71,7 +71,7 @@
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Desenvolupament  ========\Modules\Entity</Filter>
+      <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClCompile>
     <ClCompile Include="j1ParticleManager.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
@@ -91,8 +91,14 @@
     <ClCompile Include="j1EntityManager.cpp">
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
+    </ClCompile>
     <ClCompile Include="j1Gui.cpp">
-      <Filter>Desenvolupament  ========\Game Layer</Filter>
+      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,7 +190,7 @@
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Desenvolupament  ========\Modules\Entity</Filter>
+      <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
     <ClInclude Include="CVar_Com.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
@@ -207,8 +213,20 @@
     <ClInclude Include="j1EntityManager.h">
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Desenvolupament  ========\Modules\H</Filter>
+    </ClInclude>
     <ClInclude Include="j1Gui.h">
-      <Filter>Desenvolupament  ========\Game Layer</Filter>
+      <Filter>Desenvolupament  ========\Modules\H</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Desenvolupament  ========</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,11 +257,11 @@
     <Filter Include="Desenvolupament  ========\Modules\H">
       <UniqueIdentifier>{edc5f696-c5f8-4b62-a2d9-712d716eec77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Desenvolupament  ========\Modules\Entity">
-      <UniqueIdentifier>{c7cde884-cbfc-45ea-b310-1703a2d3f239}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Desenvolupament  ========\Game Layer">
       <UniqueIdentifier>{4cfcb117-ff6b-49b1-a669-c8b27d81cf35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Game Layer\Entities">
+      <UniqueIdentifier>{c7cde884-cbfc-45ea-b310-1703a2d3f239}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

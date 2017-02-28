@@ -76,6 +76,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="j1CollisionManager.cpp" />
     <ClCompile Include="j1Console.cpp" />
     <ClCompile Include="j1FileSystem.cpp" />
@@ -100,6 +101,7 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="UI_Button.cpp" />
     <ClCompile Include="UI_element.cpp" />
     <ClCompile Include="UI_Image.cpp" />
@@ -108,8 +110,10 @@
     <ClCompile Include="UI_Text_Box.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="CVar_Com.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="j1CollisionManager.h" />
     <ClInclude Include="j1Console.h" />
     <ClInclude Include="j1FileSystem.h" />
@@ -140,6 +144,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_element.h" />
     <ClInclude Include="UI_Image.h" />
