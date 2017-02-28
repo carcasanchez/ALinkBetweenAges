@@ -8,7 +8,7 @@
 
 Player::Player()
 {
-	worldPosition = iPoint(100, 100);
+	worldPosition = iPoint(150, 150);
 	mapPosition = iPoint(50, 50);
 }
 
@@ -55,12 +55,16 @@ bool Player::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
+		worldPosition.y++;
+
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			current_direction = D_FRONT_LEFT;
+			worldPosition.x--;
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
+			worldPosition.x++;
 			current_direction = D_FRONT_RIGHT;
 		}
 		else
@@ -71,12 +75,16 @@ bool Player::Update(float dt)
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
+		worldPosition.y--;
+
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
+			worldPosition.x--;
 			current_direction = D_BACK_LEFT;
 		}
 		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		{
+			worldPosition.x++;
 			current_direction = D_BACK_RIGHT;
 		}
 		else
@@ -86,10 +94,12 @@ bool Player::Update(float dt)
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
+		worldPosition.x--;
 		current_direction = D_LEFT;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
+		worldPosition.x++;
 		current_direction = D_RIGHT;
 	}
 	else
@@ -107,7 +117,7 @@ bool Player::PostUpdate()
 	// draw
 	current_animation = &playerAnim.find({ current_action, current_direction })->second;
 
-	sprite->updateSprite(iPoint(150,150), current_animation->pivot, current_animation->getCurrentFrame());
+	sprite->updateSprite(worldPosition, current_animation->pivot, current_animation->getCurrentFrame());
 
 	App->render->Draw(sprite);
 
