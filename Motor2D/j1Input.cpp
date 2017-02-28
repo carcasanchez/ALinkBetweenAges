@@ -54,28 +54,38 @@ bool j1Input::Start()
 bool j1Input::PreUpdate()
 {
 	static SDL_Event event;
-	
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
-
-	mouse_motion_x = 0;
-	mouse_motion_y = 0;
-	mouse_wheel = 0;
 
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
+		//Translate key number to scancode enum
+		SDL_Scancode code = (SDL_Scancode)i;
+
 		if(keys[i] == 1)
 		{
 			if(keyboard[i] == KEY_IDLE)
+			{
 				keyboard[i] = KEY_DOWN;
+				down_queue.push(SDL_GetScancodeName(code));
+			}
 			else
+			{
 				keyboard[i] = KEY_REPEAT;
+				repeat_queue.push(SDL_GetScancodeName(code));
+			}
 		}
 		else
 		{
-			if(keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+			{
 				keyboard[i] = KEY_UP;
+				up_queue.push(SDL_GetScancodeName(code));
+			}
+
 			else
+			{
 				keyboard[i] = KEY_IDLE;
+			}
 		}
 	}
 
@@ -88,6 +98,9 @@ bool j1Input::PreUpdate()
 			mouse_buttons[i] = KEY_IDLE;
 	}
 
+	mouse_motion_x = 0;
+	mouse_motion_y = 0;
+	mouse_wheel = 0;
 
 	while(SDL_PollEvent(&event) != 0)
 	{
@@ -119,12 +132,10 @@ bool j1Input::PreUpdate()
 
 			case SDL_MOUSEBUTTONDOWN:
 				mouse_buttons[event.button.button - 1] = KEY_DOWN;
-				//LOG("Mouse button %d down", event.button.button-1);
 			break;
 
 			case SDL_MOUSEBUTTONUP:
 				mouse_buttons[event.button.button - 1] = KEY_UP;
-				//LOG("Mouse button %d up", event.button.button-1);
 			break;
 
 			case SDL_MOUSEMOTION:
@@ -134,7 +145,6 @@ bool j1Input::PreUpdate()
 				mouse_motion_y = event.motion.yrel / scale;
 				mouse_x = event.motion.x / scale;
 				mouse_y = event.motion.y / scale;
-				//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
 
 				break;
 			}
@@ -161,14 +171,9 @@ bool j1Input::PreUpdate()
 						App->font->CalcSize(event.text.text, width, temp->height);
 						temp->cursor_virtual_pos++;
 						temp->cursor_pos += width;
-						
 				}
 				
 				break;
-
-
-			
-
 		}
 	}
 

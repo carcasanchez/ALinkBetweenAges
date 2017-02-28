@@ -2,6 +2,7 @@
 #define __j1INPUT_H__
 
 #include "j1Module.h"
+#include <queue>
 
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
@@ -68,6 +69,12 @@ public:
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
 	void GetMouseWheel(int& y);
+
+public:
+
+	std::queue<const char*>		down_queue;
+	std::queue<const char*>		up_queue;
+	std::queue<const char*>		repeat_queue;
 
 private:
 	bool		windowEvents[WE_COUNT];
