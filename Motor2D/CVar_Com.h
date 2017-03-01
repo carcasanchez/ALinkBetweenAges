@@ -20,7 +20,7 @@ enum ARGUMENTS_TYPE
 
 struct command
 {
-	p2SString name;
+	std::string name;
 	unsigned int min_arguments;
 	unsigned int max_arguments;
 
@@ -35,10 +35,10 @@ struct command
 
 class CVar
 {
-	p2SString name;
-	p2SString description;
+	std::string name;
+	std::string description;
 
-	p2SString value;
+	std::string value;
 
 	int min_value, max_value;
 	
@@ -51,22 +51,22 @@ public:
 
 	const char* Get_name() const
 	{
-		return name.GetString();
+		return name.c_str();
 	}
 
 	const char* Get_Description() const
 	{
-		return description.GetString();
+		return description.c_str();
 	}
 
 	int Get_value_Int() const
 	{
-		return atoi(value.GetString());
+		return atoi(value.c_str());
 	}
 
 	const char* Get_value_Char() const
 	{
-		return value.GetString();
+		return value.c_str();
 	}
 
 	bool Get_value_bool() const
