@@ -183,7 +183,7 @@ bool j1Console::On_Console_Callback(command* callback_com, int* arg)
 		int num_comm = Commands_List.size() - 1;
 
 		for (; num_comm >= 0; num_comm--)
-			LOG("-/%s   %i values", Commands_List[num_comm]->name.GetString(), Commands_List[num_comm]->max_arguments);
+			LOG("-/%s   %i values", Commands_List[num_comm]->name.c_str(), Commands_List[num_comm]->max_arguments);
 
 	}
 
@@ -263,88 +263,26 @@ void j1Console::Camera_management()
 
 void j1Console::Text_management()
 {
-	int len = strlen(Input_text->text.text.c_str()) + 1;
-	char* temp = new char(len);
+	//If there are spaces before the command/cvar they are ignored
+	int first_letter = Input_text->text.text.find_first_not_of(" ");
 
-	//Check if there are spaces before text
-	int  bookmark = 0;
-	for (; bookmark < len; bookmark++)
+	//if is a command:
+	if (Input_text->text.text[first_letter] == '/')
 	{
-		if (*(Input_text->text.text.c_str() + bookmark) != ' ')
-			break;
+		command* tmp = Command_management(Input_text->text.text.substr(first_letter + 1).c_str());
 
-		else continue;
+		if(tmp != nullptr)
+			tmp->my_module->On_Console_Callback(tmp);
 	}
 
-	//IT IS COMMAND
-	if (*(Input_text->text.text.c_str() + bookmark) == '/')
-	{
-		
-		for (int i = 0; bookmark < len; bookmark++)
-		{
-			if (*(Input_text->text.text.c_str() + bookmark + 1) != ' ')
-			{
-				*(temp + i) = *(Input_text->text.text.c_str() + bookmark + 1);
-				i++;
-			}
-			else
-			{
-				*(temp + i) = '\0';
-				break;
-			}
-		}
-
-		if (command* temp_com = Command_management(temp))
-		{
-			int argument_start = bookmark + 1;
-
-			for (int i = strlen(temp); i < len; i++)
-				*(temp + i) = *(Input_text->text.text.c_str() + ++bookmark);
-			
-			Argument_management(temp, argument_start, temp_com);
-			
-		}
-		else return;
-	}
-	//IT IS CVAR
-	else
-	{
-		for (int i = 0; bookmark < len; bookmark++)
-		{
-			if (*(Input_text->text.text.c_str() + bookmark) != ' ')
-			{
-				*(temp + i) = *(Input_text->text.text.c_str() + bookmark);
-				i++;
-			}
-			else
-			{
-				*(temp + i) = '\0';
-				break;
-			}
-		}
-
-		if (CVar* input_cvar = Cvar_management(temp))
-		{
-			int argument_start = bookmark;
-
-			for (int i = strlen(temp); i < len; i++)
-			{
-				*(temp + i) = *(Input_text->text.text.c_str() + bookmark);
-				bookmark++;
-			}
-			Value_CV_management(temp, argument_start, input_cvar);
-		}
-		
-
-	}
-
-		
-
-	delete[] temp;
 }
 
 void j1Console::Argument_management(const char* Input_text, int bookmark, command* this_command)
 {
+
+
+
+	/*
 	int args_count = 0;
 
 	if (this_command->args_type == NONE)
@@ -425,7 +363,7 @@ void j1Console::Argument_management(const char* Input_text, int bookmark, comman
 		}
 		delete[] args_c;
 	}
-
+	*/
 
 		
 }
@@ -473,10 +411,8 @@ command* j1Console::Command_management(const char* Input_command)
 	int num_of_commands = Commands_List.size();
 	for (int i = 0; i < num_of_commands; i++)
 	{
-		if (strcmp(Input_command, Commands_List[i]->name.GetString()) != 0)
-			continue;
-		else return Commands_List[i];
-			
+		if (Commands_List[i]->name == Input_command)
+			return Commands_List[i];		
 	}
 	
 	LOG("ERROR: command does not exist");
