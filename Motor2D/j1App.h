@@ -90,8 +90,9 @@ private:
 
 	j1Module* Find_module(const char*);
 
-	bool On_Console_Callback(command*, int*);
+	//bool On_Console_Callback(command*, int*);
 	bool On_Console_Callback(CVar*);
+	bool On_Console_Callback(command*);
 
 	// Load / Save
 	bool LoadGameNow();

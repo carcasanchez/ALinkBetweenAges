@@ -379,7 +379,7 @@ j1Module* j1App::Find_module(const char* mod_name)
 	return nullptr;
 }
 
-bool j1App::On_Console_Callback(command* com, int* argument)
+bool j1App::On_Console_Callback(command* com)
 {
 
 	if (com == quit)
@@ -388,8 +388,7 @@ bool j1App::On_Console_Callback(command* com, int* argument)
 		update_stop = false;
 	}
 
-	if (com == fps)
-		//LOG("Max Fps: %.2f", 1 / dt);
+
 
 	return true;
 }
