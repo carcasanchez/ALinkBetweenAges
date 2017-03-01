@@ -11,22 +11,14 @@ enum ACTION_STATE
 {
 	IDLE = 0,
 	WALKING,
-	BASIC_ATTACK,
-	DEATH,
-	RUNNING
 };
 
 enum DIRECTION
 {
-	D_BACK,
-	D_BACK_RIGHT,
+	D_UP,
+	D_DOWN,
 	D_RIGHT,
-	D_FRONT_RIGHT,
-	D_FRONT,
-	D_FRONT_LEFT,
-	D_LEFT,
-	D_BACK_LEFT,
-	D_DEFAULT
+	D_LEFT
 };
 
 class Player
@@ -42,9 +34,19 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	//Check different player status
+	
+
 private:
 
 	bool loadAnimations();
+
+	void Change_direction();
+
+	//State Machine
+	bool Idle();
+	bool Walking();
+
 
 private:
 
@@ -58,8 +60,8 @@ private:
 
 	std::map<std::pair<ACTION_STATE, DIRECTION>, Animation>	playerAnim;
 	Animation* current_animation;
-	ACTION_STATE current_action = IDLE;
-	DIRECTION current_direction = D_FRONT;
+	ACTION_STATE player_state = IDLE;
+	DIRECTION current_direction = D_DOWN;
 };
 
 #endif // !_PLAYER_H_

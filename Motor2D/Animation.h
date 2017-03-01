@@ -13,6 +13,7 @@ class Animation
 public:
 	float speed;
 	bool loop;
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
 	vector<SDL_Rect> frames;
 	iPoint pivot;
 
@@ -21,10 +22,10 @@ private:
 	int loops;
 
 public:
-	Animation() : frames(0), speed(1.0f), current_frame(0), loop(true), loops(0)
+	Animation() : frames(0), speed(1.0f), current_frame(0), loop(true), loops(0), flip(SDL_FLIP_NONE)
 	{}
 
-	Animation(const Animation& a) : frames(a.frames), speed(a.speed), current_frame(0), loop(a.loop), loops(0), pivot(a.pivot)
+	Animation(const Animation& a) : frames(a.frames), speed(a.speed), current_frame(0), loop(a.loop), loops(0), pivot(a.pivot), flip(a.flip)
 	{}
 
 	void SetFrames(int x, int y, int sprite_w, int sprite_h, int num_frames, int margin = 0)

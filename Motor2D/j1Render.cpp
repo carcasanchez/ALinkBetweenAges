@@ -461,21 +461,24 @@ Sprite::~Sprite()
 	SDL_DestroyTexture(texture);
 }
 
-void Sprite::updateSprite(SDL_Texture* tex, iPoint& p, iPoint& piv, SDL_Rect& section)
+void Sprite::updateSprite(SDL_Texture* tex, iPoint& p, iPoint& piv, SDL_Rect& section, SDL_RendererFlip flip)
 {
 	texture = tex;
 	position_map = p;
 	section_texture = section;
 	pivot = piv;
 	y = p.y;
+	this->flip = flip;
+
 }
 
-void Sprite::updateSprite(iPoint& p, iPoint& piv, SDL_Rect& section)
+void Sprite::updateSprite(iPoint& p, iPoint& piv, SDL_Rect& section, SDL_RendererFlip flip)
 {
 	position_map = p;
 	section_texture = section;
 	pivot = piv;
 	y = p.y;
+	this->flip = flip;
 }
 
 void Sprite::setAlpha(int alpha)

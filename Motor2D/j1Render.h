@@ -25,8 +25,8 @@ struct Sprite
 		double angle = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	~Sprite();
 
-	void updateSprite(SDL_Texture* tex, iPoint& p, iPoint& piv, SDL_Rect& section);
-	void updateSprite(iPoint& p, iPoint& piv, SDL_Rect& section);
+	void updateSprite(SDL_Texture* tex, iPoint& p, iPoint& piv, SDL_Rect& section, SDL_RendererFlip flip);
+	void updateSprite(iPoint& p, iPoint& piv, SDL_Rect& section, SDL_RendererFlip flip);
 
 	void setAlpha(int alpha);
 
