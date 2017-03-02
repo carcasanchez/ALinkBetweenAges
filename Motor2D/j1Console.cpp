@@ -174,9 +174,8 @@ bool j1Console::On_GUI_Callback(UI_element* ui_element, GUI_INPUT type)
 	return true;
 }
 
-bool j1Console::On_Console_Callback(command* callback_com, int* arg)
+bool j1Console::On_Console_Callback(command* callback_com)
 {
-
 	if (callback_com == help)
 	{
 		LOG("-List of commands:");
@@ -199,14 +198,6 @@ bool j1Console::On_Console_Callback(command* callback_com, int* arg)
 
 
 	return true;
-}
-
-bool j1Console::On_Console_Callback(command* callback_com, char* arg)
-{
-
-	
-
-	return false;
 }
 
 void j1Console::check_state()
@@ -273,6 +264,14 @@ void j1Console::Text_management()
 
 		if(tmp != nullptr)
 			tmp->my_module->On_Console_Callback(tmp);
+	}
+	else
+	{
+		CVar* tmp = Cvar_management(Input_text->text.text.substr(first_letter).c_str());
+
+		if (tmp != nullptr)
+			tmp->Callback->On_Console_Callback(tmp);
+			
 	}
 
 }
@@ -421,17 +420,58 @@ command* j1Console::Command_management(const char* Input_command)
 
 CVar* j1Console::Cvar_management(const char* input_text)
 {
-	
-	int num_cvars = CVars_list.size();
-	for (int i = 0; i < num_cvars; i++)
+	//Find the CVar
+	string input_CVar = input_text;
+	int value_pos = input_CVar.find_first_of(" ", 0);
+	string cvar_name = input_CVar.substr(0, value_pos);
+
+	vector<CVar*>::iterator item = CVars_list.begin();
+	for (; item != CVars_list.end(); item++)
 	{
-		if (strcmp(input_text, CVars_list[i]->Get_name()) != 0)
-			continue;
-		else return CVars_list[i];
+		if ((*item)->Get_name() == cvar_name)
+			break;
 	}
 
-	LOG("ERROR: CVar does not exist");
-	return nullptr;
+	if (item == CVars_list.end())
+	{
+		LOG("ERROR: CVar does not exist");
+		return nullptr;
+	}
+	else
+	{
+		string values;
+		if(value_pos < input_CVar.size())
+			values = input_CVar.substr(value_pos);
+	
+		bool changed_value = CvarValueAssigment((*item), values);
+		return changed_value ? (*item) : nullptr;
+	}
+}
+
+bool j1Console::CvarValueAssigment(CVar* cv, string values)
+{
+	if (values.empty())
+	{
+		string RO;	//Means Read only
+		cv->Get_RO() ? RO = "true" : RO = "false";
+		LOG("Description: %s, Actual value: %s, Min value: %i, Max value: %i, Read only: %s", cv->Get_Description(), cv->Get_value_Char(), cv->Get_min(), cv->Get_max(), RO.c_str());
+		return false;
+	}
+
+	//FOR NOW CVARS ACCEPT 1 VALUE
+	int new_value = atoi(values.c_str());
+	if (new_value <= cv->Get_max() && new_value >= cv->Get_min())
+	{
+		cv->Set_value(values.c_str());
+		return true;
+	}
+	else
+	{
+		LOG("Value is not valid! Values accepted are between [%i-%i]", cv->Get_min(), cv->Get_max());
+		return false;
+	}
+		
+
 }
 
 //---------------COMAND-------------------

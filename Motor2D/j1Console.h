@@ -42,8 +42,10 @@ public:
 
 	bool On_GUI_Callback(UI_element*, GUI_INPUT);
 
-	bool On_Console_Callback(command*, int*);
-	bool On_Console_Callback(command*, char*);
+	//bool On_Console_Callback(command*, int*);
+	//bool On_Console_Callback(command*, char*);
+
+	bool On_Console_Callback(command*);
 
 public:
 
@@ -77,6 +79,7 @@ private:
 
 	command* Command_management(const char*);
 	CVar* Cvar_management(const char*);
+	bool CvarValueAssigment(CVar*, string);
 
 	command* help;
 	command* CV_list;
