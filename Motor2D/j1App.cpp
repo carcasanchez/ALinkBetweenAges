@@ -141,12 +141,9 @@ bool j1App::Awake()
 		{
 
 			string name = cvar.attribute("name").as_string();
-			/*int i = 0;
-			for (i; i < strlen(start.name()); i++)
-				name.Insert_Char_beggining(i, (start.name() + i));
+			name.insert(0, ".");
+			name.insert(0, start.name());
 
-			name.Insert_Char_beggining(i, ".");
-			*/
 			string description = cvar.attribute("description").as_string();
 			string value = cvar.attribute("value").as_string();
 
@@ -204,7 +201,6 @@ bool j1App::Start()
 	PERF_PEEK(ptimer);
 
 	quit = console->Add_Command("quit", this, 0, 0, ARGUMENTS_TYPE::NONE);
-	fps = console->Add_Command("fps", this, 0, 0, ARGUMENTS_TYPE::NONE);
 
 
 	return ret;
@@ -388,7 +384,7 @@ bool j1App::On_Console_Callback(command* com)
 		update_stop = false;
 	}
 
-
+	
 
 	return true;
 }
