@@ -64,7 +64,7 @@ void UI_Text_Box::Insert_Char(int position, const char * new_char)
 	if(position == text.text.length() - 1)
 		text.text.push_back(*new_char);
 	//else insert the char inside the string
-	else text.text.append(new_char, position, 1); 
+	else text.text.insert(position + 1, new_char); 
 
 	//Unloads the actual text texture and loads the new one
 	App->tex->UnLoad(text.text_texture);
