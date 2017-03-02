@@ -276,134 +276,6 @@ void j1Console::Text_management()
 
 }
 
-void j1Console::Argument_management(const char* Input_text, int bookmark, command* this_command)
-{
-
-
-
-	/*
-	int args_count = 0;
-
-	if (this_command->args_type == NONE)
-	{
-		int* temp = nullptr;
-		this_command->my_module->On_Console_Callback(this_command, temp);
-		return;
-	}
-
-	if (this_command->args_type == INT_VAR)
-	{
-		int* args = new int(this_command->max_arguments);
-
-		for (args_count; bookmark < strlen(Input_text); bookmark++)
-		{
-			if (*(Input_text + bookmark) == ' ')
-				continue;
-			else
-			{
-				if (args_count <= this_command->max_arguments)
-				{
-					*(args + args_count) = atoi((Input_text + bookmark));
-					args_count++;
-				}
-				else
-				{
-					LOG("ERROR: Too much arguments");
-					return;
-				}
-			}
-		}
-
-		if (args_count < this_command->min_arguments)
-			LOG("ERROR: More arguments needed");
-		else
-		{
-			this_command->my_module->On_Console_Callback(this_command, args);
-		}
-		delete[] args;
-	}
-
-	if (this_command->args_type == CHAR_VAR)
-	{
-		int l = (strlen(Input_text) + 1) - bookmark;
-		char* args_c = new char(l);
-
-		for (int i = 0; bookmark < strlen(Input_text) + 1; bookmark++)
-		{
-			if (*(Input_text + bookmark) == ' ')
-			{
-				CVar* temp = Cvar_management(args_c);
-				if (temp)
-					temp->Set_value((Input_text + bookmark + 1));
-
-				args_count++;
-
-			}
-			else
-			{
-				if (args_count <= this_command->max_arguments)
-				{
-					*(args_c + i) = *(Input_text + bookmark);
-					i++;
-				}
-				else
-				{
-					LOG("ERROR: Too much arguments");
-					return;
-				}
-			}
-		}
-		args_count++;
-		if (args_count < this_command->min_arguments)
-			LOG("ERROR: More arguments needed");
-		else
-		{
-			this_command->my_module->On_Console_Callback(this_command, args_c);
-		}
-		delete[] args_c;
-	}
-	*/
-
-		
-}
-
-void j1Console::Value_CV_management(const char* Input_text, int bookmark, CVar* this_cv)
-{
-	int l = strlen(Input_text) + 1;
-
-	if (bookmark != l  && this_cv->Get_RO())
-	{
-		LOG("ERROR: This CVar is for Read Only");
-		return;
-	}
-
-	if (bookmark == l)
-	{
-		const char* ro;
-		if (this_cv->Get_RO())
-			ro = "true";
-		else ro = "false";
-
-		LOG("CVar: %s, Description: %s, Value: %i, Min/Max value: %i/%i, Read Only: %s", this_cv->Get_name(), this_cv->Get_Description(), this_cv->Get_value_Int(), this_cv->Get_min(), this_cv->Get_max(), ro);
-		return;
-	}
-
-	p2SString temp;
-	for (int i = 1; bookmark < l; bookmark++)
-	{
-		temp.Insert_Char(i, Input_text + bookmark);
-		i++;
-	}
-	this_cv->Set_value(temp.GetString());
-
-	if(this_cv->Get_value_Int() >= this_cv->Get_min() && this_cv->Get_value_Int() <= this_cv->Get_max())
-	{
-		this_cv->Callback->On_Console_Callback(this_cv);
-	}
-
-
-}
-
 command* j1Console::Command_management(const char* Input_command)
 {
 	
@@ -432,11 +304,13 @@ CVar* j1Console::Cvar_management(const char* input_text)
 			break;
 	}
 
+	//if does not exists return nullptr
 	if (item == CVars_list.end())
 	{
 		LOG("ERROR: CVar does not exist");
 		return nullptr;
 	}
+	//if it does change the cvar value for the new one
 	else
 	{
 		string values;

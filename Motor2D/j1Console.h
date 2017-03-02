@@ -42,9 +42,6 @@ public:
 
 	bool On_GUI_Callback(UI_element*, GUI_INPUT);
 
-	//bool On_Console_Callback(command*, int*);
-	//bool On_Console_Callback(command*, char*);
-
 	bool On_Console_Callback(command*);
 
 public:
@@ -73,9 +70,6 @@ private:
 	void Camera_management();
 
 	void Text_management();
-
-	void Argument_management(const char*, int, command*);
-	void Value_CV_management(const char*, int, CVar*);
 
 	command* Command_management(const char*);
 	CVar* Cvar_management(const char*);
