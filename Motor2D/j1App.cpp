@@ -395,7 +395,7 @@ bool j1App::On_Console_Callback(CVar* cvar)
 	if (strcmp(cvar->Get_name(), "app.max_fps") == 0)
 	{
 		if (cvar->Cvar_type == INT_VAR)
-			capped_ms = cvar->Get_value_Int();
+			capped_ms = 1000 / cvar->Get_value_Int();
 	}
 
 	return true;
