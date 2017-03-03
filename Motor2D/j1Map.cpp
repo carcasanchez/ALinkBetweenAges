@@ -384,6 +384,7 @@ bool j1Map::LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set)
 bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 {
 	bool ret = true;
+	pugi::xml_node tmp = tileset_node;
 	pugi::xml_node image = tileset_node.child("image");
 
 	if(image == NULL)
@@ -438,12 +439,25 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		layer->data = new uint[layer->width*layer->height];
 		memset(layer->data, 0, layer->width*layer->height);
 
+		string lol = layer_data.first_child().value();
+
+		int bookmark = 1;
+		for (int i = 0; i < (layer->width * layer->height); i++)
+		{
+			int coma = lol.find_first_of(",", bookmark);
+			string temp = lol.substr(bookmark, (coma-bookmark)).c_str();
+			layer->data[i] = atoi(temp.c_str());
+			bookmark = coma + 1;
+		}
+
 		int i = 0;
 		for(pugi::xml_node tile = layer_data.child("tile"); tile; tile = tile.next_sibling("tile"))
 		{
 			layer->data[i++] = tile.attribute("gid").as_int(0);
 		}
 	}
+
+
 
 	return ret;
 }
