@@ -122,6 +122,8 @@ public:
 	j1Console*			console = NULL;
 	j1Render*			render = NULL;
 
+	j1Scene*			tmp = NULL;
+
 private:
 
 	list<j1Module*>	modules;

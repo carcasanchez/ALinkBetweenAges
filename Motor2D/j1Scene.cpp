@@ -40,7 +40,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	if (App->map->Load("iso_walk.tmx") == true)
+	if (App->map->Load("map_testing.tmx") == true)
 	{
 		int w, h;
 		uchar* data = NULL;
@@ -57,7 +57,7 @@ bool j1Scene::Start()
 
 
 	//Exam
-	
+	/*
 	//Exercise 1 -> Setting all the elements
 	Background = (UI_Image*)App->gui->Add_element(UI_TYPE::IMAGE, this);
 	Background->Set_Image_Texture({ 0, 1600, 1024, 576 });

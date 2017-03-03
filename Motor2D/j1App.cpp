@@ -48,6 +48,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	game = new j1GameLayer();
 	console = new j1Console();
 	render = new j1Render();
+	tmp = new j1Scene();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -65,8 +66,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(gui);
 	AddModule(sceneM);
 	AddModule(collisions);
+	AddModule(tmp);
 	AddModule(game);
-
 	AddModule(console);
 
 	// render last to swap buffer
