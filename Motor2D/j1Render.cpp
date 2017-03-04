@@ -3,6 +3,9 @@
 #include "j1App.h"
 #include "j1Window.h"
 #include "j1Render.h"
+#include "j1GameLayer.h"
+#include "Player.h"
+#include "j1Input.h"
 
 #define VSYNC true
 
@@ -46,6 +49,7 @@ bool j1Render::Awake(pugi::xml_node& config)
 		camera.h = App->win->screen_surface->h;
 		camera.x = 0;
 		camera.y = 0;
+		camera_follow = true;
 	}
 
 	return ret;
@@ -72,7 +76,26 @@ bool j1Render::Start()
 // Called each loop iteration
 bool j1Render::PreUpdate()
 {
+	
 	SDL_RenderClear(renderer);
+	return true;
+}
+
+bool j1Render::Update(float dt)
+{	
+	//Check if camera follows Link 
+	if (camera_follow)
+	{
+		//Move camera take in account screen scale, centering it into the player
+		int scale = App->win->GetScale();
+		uint w, h;
+		App->win->GetWindowSize(w, h);
+		camera.x = -(App->game->player->GetWorldPosition().x) * scale;
+		camera.y = -(App->game->player->GetWorldPosition().y) * scale;
+		camera.x += w*0.5;
+		camera.y += h*0.5;
+	}
+
 	return true;
 }
 
@@ -208,6 +231,7 @@ bool j1Render::Draw(Sprite* sprite)
 
 	return ret;
 }
+
 //Sprite
 bool j1Render::DrawSprite(Sprite* sprite, float speed, double angle, int pivot_x, int pivot_y)
 {
@@ -222,6 +246,7 @@ bool j1Render::DrawSprite(Sprite* sprite, float speed, double angle, int pivot_x
 // Blit to screen
 bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y) const
 {
+
 	bool ret = true;
 	uint scale = App->win->GetScale();
 
@@ -264,6 +289,7 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect section, SDL_Color tint, double angle, int pivot_x, int pivot_y, SDL_RendererFlip flip) const
 {
 	bool ret = true;
+	uint scale = App->win->GetScale();
 
 	if (!(ret = (texture != NULL)))
 	{
@@ -271,7 +297,10 @@ bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect s
 	}
 
 	// get correct measures to render
-	SDL_Rect rect = { x, y, 0, 0 };
+	SDL_Rect rect;
+	rect.x = (int)(camera.x) + x * scale;
+	rect.y = (int)(camera.y) + y * scale;
+
 
 	if (section.h > 0 && section.w > 0)
 	{
@@ -290,23 +319,16 @@ bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect s
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
 
-	// scale
-	uint scale;
-	if ((scale = App->win->GetScale()) != 1)
-	{
-		rect.x *= scale;
-		rect.y *= scale;
-		rect.w *= scale;
-		rect.h *= scale;
-	}
+	rect.w *= scale;
+	rect.h *= scale;
 
 	// set pivot offset
 	SDL_Point* p = NULL;
 	SDL_Point pivot;
 	if (pivot_x != 0 && pivot_y != 0)
 	{
-		pivot.x = pivot_x * scale;
-		pivot.y = pivot_y * scale;
+		pivot.x = camera.x + pivot_x * scale;
+		pivot.y = camera.y + pivot_y * scale;
 		p = &pivot;
 	}
 

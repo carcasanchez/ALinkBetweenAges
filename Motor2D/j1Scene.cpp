@@ -52,7 +52,6 @@ bool j1Scene::Start()
 
 	debug_tex = App->tex->Load("maps/path2.png");
 
-	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
 	//App->gui->CreateElement({ 0, 0 }, UI_TYPE::IMAGE_NOT_IN_ATLAS, { 0, 0, 1920, 1080 }, 0);
 
 
@@ -184,9 +183,12 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y += SDL_ceil(100 * dt);
 
+	App->map->Draw();
+
+	/*if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		App->render->camera.y += SDL_ceil(100 * dt);
+	
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		App->render->camera.y -= SDL_ceil(100 * dt);
 
@@ -194,12 +196,10 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x += SDL_ceil(100 * dt);
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= SDL_ceil(100 * dt);
-
-	App->map->Draw();
+		App->render->camera.x -= SDL_ceil(100 * dt);*/
 	
 	// Debug pathfinding ------------------------------
-	int x, y;
+	/*int x, y;
 	App->input->GetMousePosition(x, y);
 	iPoint p = App->render->ScreenToWorld(x, y);
 	p = App->map->WorldToMap(p.x, p.y);
@@ -214,7 +214,7 @@ bool j1Scene::Update(float dt)
 	{
 	iPoint pos = App->map->MapToWorld(path->at(i).x, path->at(i).y);
 	App->render->Blit(debug_tex, pos.x, pos.y);
-	}
+	}*/
 	
 	return true;
 }

@@ -106,6 +106,8 @@ public:
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);
 
+	bool Update(float dt);
+
 	// Called each loop iteration
 	void Draw();
 
@@ -140,6 +142,7 @@ private:
 	pugi::xml_document	map_file;
 	string				folder;
 	bool				map_loaded;
+	bool				debug_collisions = false;
 };
 
 #endif // __j1MAP_H__

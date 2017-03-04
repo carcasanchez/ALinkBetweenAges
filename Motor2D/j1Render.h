@@ -63,6 +63,7 @@ public:
 
 	// Called each loop iteration
 	bool PreUpdate();
+	bool Update(float dt);
 	bool PostUpdate();
 
 	// Called before quitting
@@ -98,7 +99,7 @@ public:
 	SDL_Rect		camera;
 	SDL_Rect		viewport;
 	SDL_Color		background;
-
+	bool			camera_follow;
 	std::map<spriteLayer, std::multimap<int, Sprite*>> spriteMap;
 	std::multimap<int, SimpleGeoFigure*> debugFigures;
 };

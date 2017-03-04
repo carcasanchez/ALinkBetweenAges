@@ -59,11 +59,10 @@ bool Player::Update(float dt)
 			break;
 
 		case(WALKING):
-			Walking();
+			Walking(dt);
 			break;
 	}
-
-
+	
 	
 	return ret;
 }
@@ -89,64 +88,9 @@ bool Player::CleanUp()
 	return ret;
 }
 
-bool Player::Idle()
+iPoint Player::GetWorldPosition()
 {
-	Change_direction();
-
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		player_state = WALKING;
-		LOG("Link is WALKING");
-		return true;
-	}
-
-	return false;
-}
-
-bool Player::Walking()
-{
-	bool moving = false;
-
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-	{
-		current_direction = D_DOWN;
-		worldPosition.y++;
-		moving = true;
-	}
-	
-	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-	{
-		current_direction = D_UP;
-		worldPosition.y--;
-		moving = true;
-
-	}
-	
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		current_direction = D_LEFT;
-		worldPosition.x--;
-		moving = true;
-
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
-		current_direction = D_RIGHT;
-		worldPosition.x++;
-		moving = true;
-
-	}
-	
-	if(moving == false)
-	{
-		player_state = IDLE;
-		LOG("Link is in IDLE");
-		return true;
-	}
-
-	Change_direction();
-
-	return false;
+	return worldPosition;
 }
 
 bool Player::loadAnimations()
@@ -195,20 +139,20 @@ bool Player::loadAnimations()
 				int pivotY = dir.first_child().attribute("pivot_y").as_int();
 				int flip = dir.first_child().attribute("flip").as_int();
 				float animSpeed = action.child("speed").attribute("value").as_float();
-			
+
 				anims.setAnimation(x, y, w, h, fN, margin);
 				anims.loop = loop;
 				anims.speed = animSpeed;
 				anims.pivot.x = pivotX;
 				anims.pivot.y = pivotY;
-				
+
 				if (flip == 1)
 					anims.flip = SDL_FLIP_HORIZONTAL;
 				else if (flip == 2)
 					anims.flip = SDL_FLIP_VERTICAL;
 				else anims.flip = SDL_FLIP_NONE;
-				
-				
+
+
 				iPoint piv;
 
 				playerAnim.insert(std::pair<std::pair<ACTION_STATE, DIRECTION>, Animation >(p, anims));
@@ -233,4 +177,64 @@ void Player::Change_direction()
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		current_direction = D_LEFT;
 }
+
+bool Player::Idle()
+{
+	Change_direction();
+
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+	{
+		player_state = WALKING;
+		LOG("Link is WALKING");
+		return true;
+	}
+
+	return false;
+}
+
+bool Player::Walking(float dt)
+{
+	bool moving = false;
+
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+		current_direction = D_DOWN;
+		worldPosition.y += SDL_ceil(10 * dt);
+		moving = true;
+	}
+	
+	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	{
+		current_direction = D_UP;
+		worldPosition.y -= SDL_ceil(10 * dt);
+		moving = true;
+	}
+	
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		current_direction = D_LEFT;
+		worldPosition.x -= SDL_ceil(10 * dt);
+		moving = true;
+
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		current_direction = D_RIGHT;
+		worldPosition.x += SDL_ceil(10 * dt);
+		moving = true;
+
+	}
+	
+	if(moving == false)
+	{
+		player_state = IDLE;
+		LOG("Link is in IDLE");
+		return true;
+	}
+
+	Change_direction();
+
+	return false;
+}
+
 

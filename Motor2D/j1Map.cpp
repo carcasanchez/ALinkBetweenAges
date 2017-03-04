@@ -6,6 +6,7 @@
 #include "j1Textures.h"
 #include "j1Map.h"
 #include "p2SString.h"
+#include "j1Input.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -28,6 +29,15 @@ bool j1Map::Awake(pugi::xml_node& config)
 	return ret;
 }
 
+bool j1Map::Update(float dt)
+{
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		debug_collisions = !debug_collisions;
+	}
+	return true;
+}
+
 void j1Map::Draw()
 {
 	if(map_loaded == false)
@@ -37,7 +47,7 @@ void j1Map::Draw()
 	{
 		MapLayer* layer = (*item);
 
-		if(layer->properties.Get("Nodraw") != 0)
+		if(layer->properties.Get("Nodraw") != 0 && debug_collisions == false)
 			continue;
 
 		for(int y = 0; y < data.height; ++y)

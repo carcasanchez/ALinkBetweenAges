@@ -33,6 +33,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
+	iPoint GetWorldPosition();
 
 	//Check different player status
 	
@@ -45,7 +46,7 @@ private:
 
 	//State Machine
 	bool Idle();
-	bool Walking();
+	bool Walking(float dt);
 
 
 private:
