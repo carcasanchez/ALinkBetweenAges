@@ -47,33 +47,7 @@ public:
 
 private:
 	SDL_Texture* debug_tex;
-	
-	UI_Image* lol;
 
-	//Exam 
-
-	UI_element* Exam_screen;
-	UI_Image* Background;
-
-	UI_Image* button_image;
-	UI_Image* button_over;
-	UI_Image* clicked_Button;
-
-	UI_Image* window;
-	UI_String* title;
-	UI_Button* Button;
-	UI_String* Button_Label;
-
-	UI_Scroll* Heroe_selector;
-	UI_Image* Slider_image;
-	UI_Image* Heroe_images;
-	UI_Image* Big_heroe_image;
-
-
-	Player* soldier0;
-	Player* soldier1;
-	Player* soldier2;
-	Player* soldier3;
 		
 };
 

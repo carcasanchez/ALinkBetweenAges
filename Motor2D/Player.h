@@ -35,7 +35,7 @@ public:
 	bool CleanUp();
 	iPoint GetWorldPosition();
 
-	//Check different player status
+	int speed;
 	
 
 private:

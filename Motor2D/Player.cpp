@@ -15,6 +15,7 @@ Player::Player()
 bool Player::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
+	speed = 300;
 
 	return ret;
 }
@@ -199,28 +200,28 @@ bool Player::Walking(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		current_direction = D_DOWN;
-		worldPosition.y += SDL_ceil(10 * dt);
+		worldPosition.y += SDL_ceil(speed * dt);
 		moving = true;
 	}
 	
 	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		current_direction = D_UP;
-		worldPosition.y -= SDL_ceil(10 * dt);
+		worldPosition.y -= SDL_ceil(speed * dt);
 		moving = true;
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		current_direction = D_LEFT;
-		worldPosition.x -= SDL_ceil(10 * dt);
+		worldPosition.x -= SDL_ceil(speed * dt);
 		moving = true;
 
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		current_direction = D_RIGHT;
-		worldPosition.x += SDL_ceil(10 * dt);
+		worldPosition.x += SDL_ceil(speed * dt);
 		moving = true;
 
 	}

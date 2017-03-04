@@ -97,9 +97,6 @@
     <ClCompile Include="j1Gui.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -218,9 +215,6 @@
     </ClInclude>
     <ClInclude Include="j1Gui.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
-    </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Desenvolupament  ========\Scenes</Filter>

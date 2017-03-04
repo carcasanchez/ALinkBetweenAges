@@ -44,8 +44,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	particles = new j1ParticleManager();
 	gui = new j1Gui();
 	sceneM = new j1SceneManager();
-	collisions = new j1CollisionManager();
 	game = new j1GameLayer();
+	collisions = new j1CollisionManager();
 	console = new j1Console();
 	render = new j1Render();
 	tmp = new j1Scene();
@@ -62,12 +62,12 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(map);
 	AddModule(pathfinding);
+	AddModule(sceneM);
+	AddModule(game);
 	AddModule(particles);
 	AddModule(gui);
-	AddModule(sceneM);
 	AddModule(collisions);
 	AddModule(tmp);
-	AddModule(game);
 	AddModule(console);
 
 	// render last to swap buffer

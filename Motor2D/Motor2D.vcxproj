@@ -101,7 +101,6 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="UI_Button.cpp" />
     <ClCompile Include="UI_element.cpp" />
     <ClCompile Include="UI_Image.cpp" />
@@ -145,7 +144,6 @@
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_element.h" />
     <ClInclude Include="UI_Image.h" />
