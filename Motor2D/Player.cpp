@@ -4,18 +4,26 @@
 #include "j1FileSystem.h"
 #include "j1Textures.h"
 #include "j1Render.h"
+#include "j1Map.h"
+#include "j1Pathfinding.h"
 #include "p2Log.h"
 
 Player::Player()
 {
 	worldPosition = iPoint(150, 150);
 	mapPosition = iPoint(50, 50);
-}
+	lastWorldPosition = iPoint(0, 0);
+	
+} 
 
 bool Player::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
-	speed = 300;
+
+	//TODO: PICK THESE DATA FROM XML
+	speed = 70;
+	col = App->collisions->AddCollider({ 0, 0, 16, 15 }, COLLIDER_PLAYER, ((j1Module*)App->game));
+	collider_pivot = { 8, 12 };
 
 	return ret;
 }
@@ -42,16 +50,11 @@ bool Player::PreUpdate()
 	return ret;
 }
 
-bool Player::UpdateTicks()
-{
-	bool ret = true;
-
-	return ret;
-}
-
 bool Player::Update(float dt)
 {
 	bool ret = true;
+
+	lastWorldPosition = worldPosition;
 
 	switch (player_state)
 	{
@@ -65,6 +68,7 @@ bool Player::Update(float dt)
 	}
 	
 	
+	UpdateCollider();
 	return ret;
 }
 
@@ -236,6 +240,17 @@ bool Player::Walking(float dt)
 	Change_direction();
 
 	return false;
+}
+
+void Player::UpdateCollider()
+{
+	col->rect.x = worldPosition.x - collider_pivot.x;
+	col->rect.y = worldPosition.y - collider_pivot.y;
+}
+
+void Player::ResetPosition()
+{
+	worldPosition = lastWorldPosition;
 }
 
 

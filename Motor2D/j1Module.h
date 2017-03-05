@@ -19,6 +19,7 @@ struct UI_element;
 enum GUI_INPUT;
 struct command;
 class CVar;
+class Collider;
 
 
 class j1Module
@@ -95,6 +96,7 @@ public:
 
 	virtual bool On_Console_Callback(CVar*) { return true; };
 	virtual bool On_Console_Callback(command*) { return true; };
+	virtual bool On_Collision_Callback(Collider*, Collider*) { return true; };
 
 public:
 

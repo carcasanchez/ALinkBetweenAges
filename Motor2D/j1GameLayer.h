@@ -9,6 +9,7 @@ using namespace std;
 class Player;
 class j1EntityManager;
 class Hud;
+class Collider;
 
 class j1GameLayer : public j1Module
 {
@@ -22,6 +23,9 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
+
+
+	bool On_Collision_Callback(Collider*, Collider*);
 
 public:
 

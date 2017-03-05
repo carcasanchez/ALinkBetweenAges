@@ -9,6 +9,7 @@
 struct SDL_Texture;
 class Entity;
 
+
 using namespace std;
 
 class j1EntityManager
@@ -23,6 +24,7 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
+
 
 	void Entity_selected();
 	void Entity_disselected();

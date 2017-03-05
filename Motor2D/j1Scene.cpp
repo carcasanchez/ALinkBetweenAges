@@ -46,10 +46,6 @@ bool j1Scene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
-
-	App->collisions->AddCollider({ 0, 0, 10, 10 }, COLLIDER_NONE, this);
-
-
 	
 
 	return true;

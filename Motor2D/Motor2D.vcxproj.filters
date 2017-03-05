@@ -258,4 +258,9 @@
       <UniqueIdentifier>{c7cde884-cbfc-45ea-b310-1703a2d3f239}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Game\maps\map_testing.tmx">
+      <Filter>Desenvolupament  ========\Tools</Filter>
+    </None>
+  </ItemGroup>
 </Project>

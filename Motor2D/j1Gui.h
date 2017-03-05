@@ -48,7 +48,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	// TODO 2: Create the factory methods
+
 	// Gui creation functions
 
 	UI_element* CreateScreen(UI_element* new_element);

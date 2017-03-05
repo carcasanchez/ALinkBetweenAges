@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "j1EntityManager.h"
 #include "j1Gui.h"
+#include "p2Log.h"
 
 //#include "Attributes.h"
 //#include "Hud.h"
@@ -44,6 +45,9 @@ bool j1GameLayer::Start()
 	player->Start();
 	em->Start();
 	//hud->Start();
+
+	//TODO: delete this
+	App->collisions->AddCollider({ 1, 1, 20, 20 }, COLLIDER_WALL, ((j1Module*)App->game));
 
 	return true;
 }
@@ -91,5 +95,14 @@ bool j1GameLayer::CleanUp()
 	em->CleanUp();
 	player->CleanUp();
 
+	return true;
+}
+
+bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2)
+{
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
+	{
+		player->ResetPosition();
+	}
 	return true;
 }

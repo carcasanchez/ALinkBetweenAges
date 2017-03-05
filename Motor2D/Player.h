@@ -2,6 +2,7 @@
 #define _PLAYER_H_
 
 #include "Animation.h"
+#include "j1CollisionManager.h"
 #include <map>
 #include "PugiXml\src\pugixml.hpp"
 
@@ -29,14 +30,15 @@ public:
 	bool Awake(pugi::xml_node& config);
 	bool Start();
 	bool PreUpdate();
-	bool UpdateTicks();
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
 	iPoint GetWorldPosition();
+	void ResetPosition();
 
 	int speed;
-	
+	Collider* col;
+	iPoint collider_pivot;
 
 private:
 
@@ -48,13 +50,16 @@ private:
 	bool Idle();
 	bool Walking(float dt);
 
+	void UpdateCollider();
+
+
 
 private:
 
 	//PlayerAttributes* attributes = NULL;
 	iPoint worldPosition;	// position in pixels of player // This is the point of the pivot in the world //The feet of the player
 	iPoint mapPosition;		// position of the tile where player is
-
+	iPoint lastWorldPosition; // position in pixels of previous frame
 
 	Sprite* sprite = NULL;
 	SDL_Texture* playerTex;
@@ -63,6 +68,7 @@ private:
 	Animation* current_animation;
 	ACTION_STATE player_state = IDLE;
 	DIRECTION current_direction = D_DOWN;
+	
 };
 
 #endif // !_PLAYER_H_

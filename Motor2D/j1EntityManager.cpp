@@ -7,6 +7,7 @@
 #include "j1Render.h"
 
 
+
 j1EntityManager::j1EntityManager()
 {
 	
@@ -85,6 +86,9 @@ bool j1EntityManager::CleanUp()
 	return true;
 }
 
+
+
+
 void j1EntityManager::Entity_selected()
 {
 
@@ -96,3 +100,4 @@ void j1EntityManager::Entity_disselected()
 {
 
 }
+

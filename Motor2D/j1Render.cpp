@@ -376,16 +376,17 @@ bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect s
 
 bool j1Render::InsideCameraZone(SDL_Rect rect)const
 {
-	
+	//TODO: Arrange this
 	bool a = (rect.x + rect.w >= camera.x &&
 		rect.x <= camera.x + camera.w &&
 		rect.y + rect.h <= camera.y + camera.h &&
 		rect.y >= camera.y);
 
-	return (rect.x + rect.w >= camera.x &&
+	/*return (rect.x + rect.w >= camera.x &&
 		rect.x <= camera.x + camera.w &&
 		rect.y + rect.h >= camera.y &&
-		rect.y <= camera.y + camera.h);
+		rect.y <= camera.y + camera.h);*/
+	return true;
 }
 
 bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
