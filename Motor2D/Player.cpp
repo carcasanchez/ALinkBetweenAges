@@ -22,6 +22,7 @@ bool Player::Awake(pugi::xml_node& config)
 	mapPosition = iPoint(50, 50);
 
 	speed = 70;
+	attacking_speed = 40;
 	col = App->collisions->AddCollider({ worldPosition.x, worldPosition.y, 16, 15 }, COLLIDER_PLAYER, ((j1Module*)App->game));
 	collider_pivot = { 8, 12 };
 
@@ -63,6 +64,10 @@ bool Player::Update(float dt)
 
 		case(WALKING):
 			Walking(dt);
+			break;
+
+		case(ATTACKING):
+			Attacking(dt);
 			break;
 	}
 	return ret;
@@ -143,6 +148,7 @@ bool Player::loadAnimations()
 
 				anims.setAnimation(x, y, w, h, fN, margin);
 				anims.loop = loop;
+			
 				anims.speed = animSpeed;
 				anims.pivot.x = pivotX;
 				anims.pivot.y = pivotY;
@@ -179,14 +185,45 @@ void Player::Change_direction()
 		current_direction = D_LEFT;
 }
 
+//Displace the entity a given X and Y taking in account collisions w/map
+void Player::Move(int x, int y)
+{
+	worldPosition.x += x;
+	UpdateCollider();
+	if(col->CheckMapCollision())
+		worldPosition.x -= x;
+
+	worldPosition.y += y;
+	UpdateCollider();
+	if (col->CheckMapCollision())
+		worldPosition.y -= y;
+}
+
+
+void Player::UpdateCollider()
+{
+	col->rect.x = worldPosition.x - collider_pivot.x;
+	col->rect.y = worldPosition.y - collider_pivot.y;
+}
+
+
+
 bool Player::Idle()
 {
 	Change_direction();
 
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		player_state = WALKING;
 		LOG("Link is WALKING");
+		return true;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		Change_direction();
+		player_state = ATTACKING;
+		LOG("LINK is ATTACKING");
 		return true;
 	}
 
@@ -203,14 +240,13 @@ bool Player::Walking(float dt)
 		Move(0, SDL_ceil(speed * dt));
 		moving = true;
 	}
-	
 	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		current_direction = D_UP;
 		Move(0, -SDL_ceil(speed * dt));
 		moving = true;
 	}
-	
+
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		current_direction = D_LEFT;
@@ -225,11 +261,19 @@ bool Player::Walking(float dt)
 		moving = true;
 
 	}
-	
-	if(moving == false)
+
+	if (moving == false)
 	{
 		player_state = IDLE;
 		LOG("Link is in IDLE");
+		return true;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		Change_direction();
+		player_state = ATTACKING;
+		LOG("LINK is ATTACKING");
 		return true;
 	}
 
@@ -238,24 +282,32 @@ bool Player::Walking(float dt)
 	return false;
 }
 
-
-
-void Player::Move(int x, int y)
+bool Player::Attacking(float dt)
 {
-	worldPosition.x += x;
-	UpdateCollider();
-	if(col->CheckMapCollision())
-		worldPosition.x -= x;
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+		Move(0, SDL_ceil(attacking_speed * dt));
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	{
+		Move(0, -SDL_ceil(attacking_speed * dt));
+	}
 
-	worldPosition.y += y;
-	UpdateCollider();
-	if (col->CheckMapCollision())
-		worldPosition.y -= y;
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		Move(-SDL_ceil(attacking_speed * dt), 0);
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		Move(SDL_ceil(attacking_speed * dt), 0);
+	}
+
+	if (current_animation->isOver())
+	{
+		current_animation->Reset();
+		LOG("LINK is in IDLE");
+		player_state = IDLE;
+	}
+
+	return true;
 }
-
-void Player::UpdateCollider()
-{
-	col->rect.x = worldPosition.x - collider_pivot.x;
-	col->rect.y = worldPosition.y - collider_pivot.y;
-}
-

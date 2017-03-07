@@ -12,6 +12,7 @@ enum ACTION_STATE
 {
 	IDLE = 0,
 	WALKING,
+	ATTACKING
 };
 
 enum DIRECTION
@@ -37,6 +38,7 @@ public:
 	void Move(int x, int y);
 
 	int speed;
+	int attacking_speed;
 	Collider* col;
 	iPoint collider_pivot;
 
@@ -49,6 +51,7 @@ private:
 	//State Machine
 	bool Idle();
 	bool Walking(float dt);
+	bool Attacking(float dt);
 
 	void UpdateCollider();
 
