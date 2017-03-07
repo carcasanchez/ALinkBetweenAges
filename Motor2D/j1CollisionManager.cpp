@@ -80,13 +80,6 @@ bool j1CollisionManager::Update(float dt)
 					c2->callback->On_Collision_Callback(c2, c1);
 			}
 		}
-		
-		//Check collision with map (only walls by now)
-		if (c1->CheckMapCollision())
-		{
-			Collider c3(COLLIDER_WALL, {0, 0, 0, 0});
-			c1->callback->On_Collision_Callback(c1, &c3);
-		}
 
 	}
 

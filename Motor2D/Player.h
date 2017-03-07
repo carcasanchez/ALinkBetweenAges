@@ -34,7 +34,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 	iPoint GetWorldPosition();
-	void ResetPosition();
+	void Move(int x, int y);
 
 	int speed;
 	Collider* col;
@@ -59,7 +59,6 @@ private:
 	//PlayerAttributes* attributes = NULL;
 	iPoint worldPosition;	// position in pixels of player // This is the point of the pivot in the world //The feet of the player
 	iPoint mapPosition;		// position of the tile where player is
-	iPoint lastWorldPosition; // position in pixels of previous frame
 
 	Sprite* sprite = NULL;
 	SDL_Texture* playerTex;

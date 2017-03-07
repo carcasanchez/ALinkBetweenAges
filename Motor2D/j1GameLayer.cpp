@@ -100,9 +100,5 @@ bool j1GameLayer::CleanUp()
 
 bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2)
 {
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
-	{
-		player->ResetPosition();
-	}
 	return true;
 }

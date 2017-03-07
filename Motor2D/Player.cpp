@@ -10,10 +10,6 @@
 
 Player::Player()
 {
-	worldPosition = iPoint(150, 150);
-	mapPosition = iPoint(50, 50);
-	lastWorldPosition = iPoint(0, 0);
-	
 } 
 
 bool Player::Awake(pugi::xml_node& config)
@@ -21,8 +17,12 @@ bool Player::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	//TODO: PICK THESE DATA FROM XML
+
+	worldPosition = iPoint(150, 150);
+	mapPosition = iPoint(50, 50);
+
 	speed = 70;
-	col = App->collisions->AddCollider({ 0, 0, 16, 15 }, COLLIDER_PLAYER, ((j1Module*)App->game));
+	col = App->collisions->AddCollider({ worldPosition.x, worldPosition.y, 16, 15 }, COLLIDER_PLAYER, ((j1Module*)App->game));
 	collider_pivot = { 8, 12 };
 
 	return ret;
@@ -54,7 +54,6 @@ bool Player::Update(float dt)
 {
 	bool ret = true;
 
-	lastWorldPosition = worldPosition;
 
 	switch (player_state)
 	{
@@ -66,9 +65,6 @@ bool Player::Update(float dt)
 			Walking(dt);
 			break;
 	}
-	
-	
-	UpdateCollider();
 	return ret;
 }
 
@@ -204,28 +200,28 @@ bool Player::Walking(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		current_direction = D_DOWN;
-		worldPosition.y += SDL_ceil(speed * dt);
+		Move(0, SDL_ceil(speed * dt));
 		moving = true;
 	}
 	
 	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		current_direction = D_UP;
-		worldPosition.y -= SDL_ceil(speed * dt);
+		Move(0, -SDL_ceil(speed * dt));
 		moving = true;
 	}
 	
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		current_direction = D_LEFT;
-		worldPosition.x -= SDL_ceil(speed * dt);
+		Move(-SDL_ceil(speed * dt), 0);
 		moving = true;
 
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		current_direction = D_RIGHT;
-		worldPosition.x += SDL_ceil(speed * dt);
+		Move(SDL_ceil(speed * dt), 0);
 		moving = true;
 
 	}
@@ -242,15 +238,24 @@ bool Player::Walking(float dt)
 	return false;
 }
 
+
+
+void Player::Move(int x, int y)
+{
+	worldPosition.x += x;
+	UpdateCollider();
+	if(col->CheckMapCollision())
+		worldPosition.x -= x;
+
+	worldPosition.y += y;
+	UpdateCollider();
+	if (col->CheckMapCollision())
+		worldPosition.y -= y;
+}
+
 void Player::UpdateCollider()
 {
 	col->rect.x = worldPosition.x - collider_pivot.x;
 	col->rect.y = worldPosition.y - collider_pivot.y;
 }
-
-void Player::ResetPosition()
-{
-	worldPosition = lastWorldPosition;
-}
-
 
