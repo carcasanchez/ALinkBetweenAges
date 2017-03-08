@@ -5,6 +5,7 @@
 #include "j1CollisionManager.h"
 #include <map>
 #include "PugiXml\src\pugixml.hpp"
+#include "j1PerfTimer.h"
 
 class Sprite;
 
@@ -12,7 +13,8 @@ enum ACTION_STATE
 {
 	IDLE = 0,
 	WALKING,
-	ATTACKING
+	ATTACKING,
+	DODGING
 };
 
 enum DIRECTION
@@ -52,6 +54,7 @@ private:
 	bool Idle();
 	bool Walking(float dt);
 	bool Attacking(float dt);
+	bool Dodging(float dt);
 
 	void UpdateCollider();
 
@@ -70,6 +73,24 @@ private:
 	Animation* current_animation;
 	ACTION_STATE player_state = IDLE;
 	DIRECTION current_direction = D_DOWN;
+	
+	//Basic stats
+	float max_stamina;
+	float stamina;
+	float stamina_recover_val;
+	int life;
+
+	//Attack data
+	int stamina_atk_tax;
+
+
+	//Dodge data
+	int stamina_dodge_tax;
+	iPoint dodge_direction;
+	j1PerfTimer dodge_timer;
+	uint64 dodge_limit;
+	int dodge_speed;
+
 	
 };
 

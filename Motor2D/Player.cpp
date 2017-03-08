@@ -21,10 +21,20 @@ bool Player::Awake(pugi::xml_node& config)
 	worldPosition = iPoint(150, 150);
 	mapPosition = iPoint(50, 50);
 
+	max_stamina = 100;
+	stamina = 100;
+	life = 3;
 	speed = 70;
 	attacking_speed = 40;
 	col = App->collisions->AddCollider({ worldPosition.x, worldPosition.y, 16, 15 }, COLLIDER_PLAYER, ((j1Module*)App->game));
 	collider_pivot = { 8, 12 };
+
+	dodge_limit = 50;
+	dodge_speed = 700;
+
+	stamina_atk_tax = 20;
+	stamina_dodge_tax = 25;
+	stamina_recover_val = 0.4;
 
 	return ret;
 }
@@ -55,6 +65,11 @@ bool Player::Update(float dt)
 {
 	bool ret = true;
 
+	if (stamina < max_stamina)
+	{
+		stamina += stamina_recover_val;
+	}
+	else stamina = max_stamina;
 
 	switch (player_state)
 	{
@@ -68,6 +83,10 @@ bool Player::Update(float dt)
 
 		case(ATTACKING):
 			Attacking(dt);
+			break;
+
+		case(DODGING):
+			Dodging(dt);
 			break;
 	}
 	return ret;
@@ -199,7 +218,6 @@ void Player::Move(int x, int y)
 		worldPosition.y -= y;
 }
 
-
 void Player::UpdateCollider()
 {
 	col->rect.x = worldPosition.x - collider_pivot.x;
@@ -219,8 +237,9 @@ bool Player::Idle()
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - stamina_atk_tax >= 0))
 	{
+		stamina -= stamina_atk_tax;
 		Change_direction();
 		player_state = ATTACKING;
 		LOG("LINK is ATTACKING");
@@ -233,16 +252,19 @@ bool Player::Idle()
 bool Player::Walking(float dt)
 {
 	bool moving = false;
+	dodge_direction = { 0, 0 };
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		current_direction = D_DOWN;
+		dodge_direction.y = 1;
 		Move(0, SDL_ceil(speed * dt));
 		moving = true;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		current_direction = D_UP;
+		dodge_direction.y = -1;
 		Move(0, -SDL_ceil(speed * dt));
 		moving = true;
 	}
@@ -250,6 +272,7 @@ bool Player::Walking(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		current_direction = D_LEFT;
+		dodge_direction.x = -1;
 		Move(-SDL_ceil(speed * dt), 0);
 		moving = true;
 
@@ -257,9 +280,9 @@ bool Player::Walking(float dt)
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		current_direction = D_RIGHT;
+		dodge_direction.x = 1;
 		Move(SDL_ceil(speed * dt), 0);
 		moving = true;
-
 	}
 
 	if (moving == false)
@@ -269,8 +292,19 @@ bool Player::Walking(float dt)
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_DOWN && (stamina-stamina_dodge_tax >=0))
+	{	
+		stamina -= stamina_dodge_tax;
+		LOG("LINK is DODGING");
+		Change_direction();
+		player_state = DODGING;
+		dodge_timer.Start();
+		return true;
+	}
+	 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - stamina_atk_tax >= 0))
 	{
+ 		stamina -= stamina_atk_tax;
 		Change_direction();
 		player_state = ATTACKING;
 		LOG("LINK is ATTACKING");
@@ -309,5 +343,17 @@ bool Player::Attacking(float dt)
 		player_state = IDLE;
 	}
 
+	return true;
+}
+
+bool Player::Dodging(float dt)
+{
+	if (dodge_timer.ReadMs() > dodge_limit)
+	{
+		player_state = IDLE;
+	}
+
+	Move(SDL_ceil(dodge_speed*dodge_direction.x* dt), SDL_ceil(dodge_speed*dodge_direction.y* dt));
+	
 	return true;
 }
