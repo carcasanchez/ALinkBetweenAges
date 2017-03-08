@@ -90,8 +90,8 @@ bool j1Render::Update(float dt)
 		int scale = App->win->GetScale();
 		uint w, h;
 		App->win->GetWindowSize(w, h);
-		camera.x = -(App->game->player->GetWorldPosition().x) * scale;
-		camera.y = -(App->game->player->GetWorldPosition().y) * scale;
+		camera.x = -(App->game->player->worldPosition.x) * scale;
+		camera.y = -(App->game->player->worldPosition.y) * scale;
 		camera.x += w*0.5;
 		camera.y += h*0.5;
 	}

@@ -25,7 +25,7 @@ public:
 	bool CleanUp();
 
 
-	bool On_Collision_Callback(Collider*, Collider*);
+	bool On_Collision_Callback(Collider*, Collider*, float dt);
 
 public:
 

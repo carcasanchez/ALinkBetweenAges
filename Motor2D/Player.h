@@ -36,13 +36,18 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
-	iPoint GetWorldPosition();
 	void Move(int x, int y);
+	void UpdateCollider();
 
 	int speed;
 	int attacking_speed;
 	Collider* col;
-	iPoint collider_pivot;
+
+
+	//PlayerAttributes* attributes = NULL;
+	iPoint worldPosition;	// position in pixels of player // This is the point of the pivot in the world //The feet of the player
+	iPoint mapPosition;		// position of the tile where player is
+	iPoint lastPosition;			//Last position in world in previous frame
 
 private:
 
@@ -56,15 +61,13 @@ private:
 	bool Attacking(float dt);
 	bool Dodging(float dt);
 
-	void UpdateCollider();
+	
 
 
 
 private:
 
-	//PlayerAttributes* attributes = NULL;
-	iPoint worldPosition;	// position in pixels of player // This is the point of the pivot in the world //The feet of the player
-	iPoint mapPosition;		// position of the tile where player is
+
 
 	Sprite* sprite = NULL;
 	SDL_Texture* playerTex;
@@ -73,7 +76,8 @@ private:
 	Animation* current_animation;
 	ACTION_STATE player_state = IDLE;
 	DIRECTION current_direction = D_DOWN;
-	
+	iPoint collider_pivot;
+
 	//Basic stats
 	float max_stamina;
 	float stamina;
@@ -83,14 +87,13 @@ private:
 	//Attack data
 	int stamina_atk_tax;
 
-
 	//Dodge data
 	int stamina_dodge_tax;
 	iPoint dodge_direction;
 	j1PerfTimer dodge_timer;
 	uint64 dodge_limit;
 	int dodge_speed;
-
+	
 	
 };
 

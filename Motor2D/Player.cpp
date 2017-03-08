@@ -18,7 +18,7 @@ bool Player::Awake(pugi::xml_node& config)
 
 	//TODO: PICK THESE DATA FROM XML
 
-	worldPosition = iPoint(150, 150);
+	worldPosition = lastPosition = iPoint(150, 150);
 	mapPosition = iPoint(50, 50);
 
 	max_stamina = 100;
@@ -30,7 +30,7 @@ bool Player::Awake(pugi::xml_node& config)
 	collider_pivot = { 8, 12 };
 
 	dodge_limit = 50;
-	dodge_speed = 700;
+	dodge_speed = 500;
 
 	stamina_atk_tax = 20;
 	stamina_dodge_tax = 25;
@@ -64,6 +64,7 @@ bool Player::PreUpdate()
 bool Player::Update(float dt)
 {
 	bool ret = true;
+	lastPosition = worldPosition;
 
 	if (stamina < max_stamina)
 	{
@@ -89,6 +90,8 @@ bool Player::Update(float dt)
 			Dodging(dt);
 			break;
 	}
+
+	UpdateCollider();
 	return ret;
 }
 
@@ -111,11 +114,6 @@ bool Player::CleanUp()
 	bool ret = true;
 
 	return ret;
-}
-
-iPoint Player::GetWorldPosition()
-{
-	return worldPosition;
 }
 
 bool Player::loadAnimations()
@@ -224,8 +222,6 @@ void Player::UpdateCollider()
 	col->rect.y = worldPosition.y - collider_pivot.y;
 }
 
-
-
 bool Player::Idle()
 {
 	Change_direction();
@@ -292,7 +288,7 @@ bool Player::Walking(float dt)
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_DOWN && (stamina-stamina_dodge_tax >=0))
+	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && (stamina-stamina_dodge_tax >=0))
 	{	
 		stamina -= stamina_dodge_tax;
 		LOG("LINK is DODGING");

@@ -96,7 +96,7 @@ public:
 
 	virtual bool On_Console_Callback(CVar*) { return true; };
 	virtual bool On_Console_Callback(command*) { return true; };
-	virtual bool On_Collision_Callback(Collider*, Collider*) { return true; };
+	virtual bool On_Collision_Callback(Collider*, Collider*, float dt) { return true; };
 
 public:
 

@@ -47,7 +47,7 @@ bool j1GameLayer::Start()
 	//hud->Start();
 
 	//TODO: delete this
-	App->collisions->AddCollider({ 1, 1, 20, 20 }, COLLIDER_WALL, ((j1Module*)App->game));
+	App->collisions->AddCollider({ 10, 10, 20, 20 }, COLLIDER_WALL, ((j1Module*)App->game));
 
 	return true;
 }
@@ -98,7 +98,13 @@ bool j1GameLayer::CleanUp()
 	return true;
 }
 
-bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2)
+bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {
+	if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC)
+	{
+		player->worldPosition = player->lastPosition;		
+		return true;
+	}
+
 	return true;
 }
