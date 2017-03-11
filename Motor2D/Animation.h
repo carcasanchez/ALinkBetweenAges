@@ -1,10 +1,9 @@
 #ifndef _ANIMATION_H_
 #define _ANIMATION_H_
 
-#include "p2DynArray.h"
+#include "p2Point.h"
 #include "SDL/include/SDL.h"
 #include <vector>
-#include "p2Point.h"
 
 using namespace std;
 

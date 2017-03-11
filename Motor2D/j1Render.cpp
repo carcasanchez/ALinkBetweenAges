@@ -50,7 +50,6 @@ bool j1Render::Awake(pugi::xml_node& config)
 		camera.h = App->win->screen_surface->h;
 		camera.x = 0;
 		camera.y = 0;
-		camera_follow = true;
 	}
 
 	return ret;
@@ -78,24 +77,6 @@ bool j1Render::Start()
 bool j1Render::PreUpdate()
 {	
 	SDL_RenderClear(renderer);
-	return true;
-}
-
-bool j1Render::Update(float dt)
-{	
-	//Check if camera follows Link 
-	if (camera_follow)
-	{
-		//Move camera take in account screen scale, centering it into the player
-		int scale = App->win->GetScale();
-		uint w, h;
-		App->win->GetWindowSize(w, h);
-		camera.x = -(App->game->player->worldPosition.x) * scale;
-		camera.y = -(App->game->player->worldPosition.y) * scale;
-		camera.x += w*0.5;
-		camera.y += h*0.5;
-	}
-
 	return true;
 }
 
@@ -469,6 +450,17 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 	}
 
 	return ret;
+}
+
+void j1Render::CameraFollow(iPoint pos)
+{
+	int scale = App->win->GetScale();
+	uint w, h;
+	App->win->GetWindowSize(w, h);
+	camera.x = -pos.x * scale;
+	camera.y = -pos.y * scale;
+	camera.x += w*0.5;
+	camera.y += h*0.5;
 }
 
 Sprite::Sprite() : texture(NULL), position_map({ 0, 0 }), section_texture({ 0, 0, 0, 0 }), tint({ 255, 255, 255, 0 }),

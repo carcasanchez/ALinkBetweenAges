@@ -63,7 +63,6 @@ public:
 
 	// Called each loop iteration
 	bool PreUpdate();
-	bool Update(float dt);
 	bool PostUpdate();
 
 	// Called before quitting
@@ -93,13 +92,13 @@ public:
 	bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool use_camera = true) const;
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool use_camera = true) const;
 
+	void CameraFollow(iPoint pos);
 public:
 
 	SDL_Renderer*	renderer;
 	SDL_Rect		camera;
 	SDL_Rect		viewport;
 	SDL_Color		background;
-	bool			camera_follow;
 	std::map<spriteLayer, std::multimap<int, Sprite*>> spriteMap;
 	std::multimap<int, SimpleGeoFigure*> debugFigures;
 };
