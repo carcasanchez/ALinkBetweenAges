@@ -40,10 +40,13 @@
   <map>
     <folder>maps/</folder>
   </map>
-
-  <entity_manager>
+  
+  <game>
+    <entityAttributes folder = "attributes/">
+      <link file = "player_attributes.xml"/>
+    </entityAttributes>
     <entities_texture file ="enemies_sprites.png" />
-  </entity_manager>
+  </game>
   
   <console>
     <Position x="0" y="0"/>

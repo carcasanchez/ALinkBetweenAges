@@ -1,37 +1,33 @@
 #include "j1GameLayer.h"
 #include "j1App.h"
-#include "Player.h"
 #include "j1EntityManager.h"
 #include "j1Gui.h"
-#include "p2Log.h"
-
-//#include "Attributes.h"
+#include "j1CollisionManager.h"
+#include "p2Point.h"
+#include "j1Render.h"
 //#include "Hud.h"
+
+
+// just for temporal wall collider
+#include "Entity.h"
+
 
 j1GameLayer::j1GameLayer() : j1Module()
 {
-	//Init modules
-	player = new Player();
+	name = ("game");
 	em = new j1EntityManager();
+	playerId = em->entities.end();
 	//hud = new Hud();
-
-	//player->attributes->setHud(hud);
-	//player->attributes->setReferences(&player->worldPosition.x, &player->worldPosition.y);
-	//hud->playerAtt = player->attributes;
 }
 
-//Destructor
 j1GameLayer::~j1GameLayer()
 {
 	RELEASE(hud);
 	RELEASE(em);
-	RELEASE(player);
 }
 
-// Called before render is available
 bool j1GameLayer::Awake(pugi::xml_node& conf)
 {
-	player->Awake(conf);
 	em->Awake(conf);
 	//hud->Awake(conf);
 	return true;
@@ -42,11 +38,10 @@ bool j1GameLayer::Start()
 {
 	active = true;
 
-	player->Start();
-	em->Start();
-	//hud->Start();
-
 	//TODO: delete this
+
+	em->Create(LINK, 150, 150);
+
 	App->collisions->AddCollider({ 10, 10, 20, 20 }, COLLIDER_WALL, ((j1Module*)App->game));
 
 	return true;
@@ -55,7 +50,6 @@ bool j1GameLayer::Start()
 //preUpdate
 bool j1GameLayer::PreUpdate()
 {
-	player->PreUpdate();
 	em->PreUpdate();
 	//hud->PreUpdate();
 
@@ -67,11 +61,10 @@ bool j1GameLayer::Update(float dt)
 {
 	bool ret = true;
 
-	player->Update(dt);
 	em->Update(dt);
 	//ret = hud->Update(dt);
 
-	//player->Draw();
+	App->render->CameraFollow((*playerId)->currentPos);
 
 	return ret;
 }
@@ -79,7 +72,6 @@ bool j1GameLayer::Update(float dt)
 //postUpdate
 bool j1GameLayer::PostUpdate()
 {
-	player->PostUpdate();
 	em->PostUpdate();
 	//hud->PostUpdate();
 
@@ -93,7 +85,6 @@ bool j1GameLayer::CleanUp()
 
 	//hud->CleanUp();
 	em->CleanUp();
-	player->CleanUp();
 
 	return true;
 }
@@ -102,8 +93,8 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {
 	if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC)
 	{
-		player->worldPosition = player->lastPosition;		
-		return true;
+		if((*playerId) != nullptr)
+			(*playerId)->currentPos = (*playerId)->lastPos;
 	}
 
 	return true;

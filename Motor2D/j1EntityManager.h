@@ -1,16 +1,14 @@
 #ifndef __MANAGER_H__
 #define __MANAGER_H__
 
-#include "Entity.h"
+
 #include "PugiXml\src\pugixml.hpp"
 #include <list>
+#include <map>
 #include <string>
 
-struct SDL_Texture;
 class Entity;
-
-
-using namespace std;
+enum ENTITY_TYPE;
 
 class j1EntityManager
 {
@@ -18,25 +16,18 @@ public:
 
 	j1EntityManager();
 	bool Awake(pugi::xml_node& config);
-	bool Start();
 	bool PreUpdate();
-	bool UpdateTicks();
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
 
-
-	void Entity_selected();
-	void Entity_disselected();
-
 public:
 
-	//Entity* Create();
+	Entity* Create(ENTITY_TYPE type, int x, int y);
 
-	//list<Entity*> Entities;
+	std::list<Entity*> entities;
 
-	//string		Entity_texture_name;
-	//SDL_Texture*	Entity_textures;
+	std::map<ENTITY_TYPE, std::string> dir;
 };
 
 #endif

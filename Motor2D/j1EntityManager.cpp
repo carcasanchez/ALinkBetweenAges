@@ -1,12 +1,11 @@
 #include "j1EntityManager.h"
-#include "j1Input.h"
-#include "j1Map.h"
 #include "j1App.h"
 #include "j1Textures.h"
-#include "p2Log.h"
 #include "j1Render.h"
-
-
+#include "j1GameLayer.h"
+#include "p2Point.h"
+#include "Entity.h"
+#include "Player.h"
 
 j1EntityManager::j1EntityManager()
 {
@@ -15,89 +14,115 @@ j1EntityManager::j1EntityManager()
 
 bool j1EntityManager::Awake(pugi::xml_node & config)
 {
-	LOG("Loading Entity textures");
-
-	//Entity_texture_name = config.child("entities_texture").attribute("file").as_string("");
+	bool ret = true;
 
 
-	return true;
-}
+	pugi::xml_node entityAttributes = config.child("entityAttributes");
+	std::string folder = entityAttributes.attribute("folder").as_string("/");
+	pugi::xml_node entity = entityAttributes.first_child();
 
-bool j1EntityManager::Start()
-{
-	//Entity_textures = App->tex->Load(Entity_texture_name.c_str());
-	/*
-	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
-		(*item)->Start();
+	for (int tmp = 0; !entity.empty(); tmp++)
+	{
+		dir.insert(std::pair<ENTITY_TYPE, std::string >(ENTITY_TYPE(tmp), (folder + entity.attribute("file").as_string(".xml"))));
+		entity = entity.next_sibling();
+	}
 
-	*/
-	return true;
+	return ret;
 }
 
 bool j1EntityManager::PreUpdate()
 {
+	bool ret = true;
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT))
-		Entity_selected();
+	// check for dead entities
+	std::list<Entity*>::iterator item = entities.begin();
+	while (item != entities.end())
+	{
+		if ((*item)->life <= 0)
+		{
+			(*item)->OnDeath();
+			item = entities.erase(item); //calls destroyer
+		}
+		else
+		{
+			++item;
+		}
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_MIDDLE))
-		Entity_disselected();
-	/*
-	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
-		(*item)->PreU();
-		*/	
-	return true;
+		// reasign ids
+		if(item != entities.end())
+			(*item)->id = item;
+	}
+
+	return ret;
 }
 
 bool j1EntityManager::Update(float dt)
 {
-	/*
-	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
-		(*item)->U(dt);
-		*/
-	return true;
-}
+	bool ret = true;
 
-bool j1EntityManager::UpdateTicks()
-{
-	/*
-	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
-		(*item)->UTicks();
-	*/
-	return true;
+	for (std::list<Entity*>::iterator item = entities.begin(); item != entities.end(); item++)
+	{
+		(*item)->Update(dt);
+	}
+
+	return ret;
 }
 
 bool j1EntityManager::PostUpdate()
 {
-	/*
-	for (std::list<entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
-		(*item)->PostU();
-*/
-	return true;
+	bool ret = true;
+
+	for (std::list<Entity*>::iterator item = entities.begin(); item != entities.end(); item++)
+	{
+		(*item)->Draw();
+	}
+
+	return ret;
 }
 
 bool j1EntityManager::CleanUp()
 {
-	/*for (std::list<Entity*>::iterator item = Entities.begin(); item != Entities.end(); item++)
-		Entities.erase(item);
+	bool ret = true;
 
-	Entities.clear();*/
-	
-	return true;
+	for (std::list<Entity*>::iterator item = entities.begin(); item != entities.end(); item++)
+	{
+		entities.erase(item);
+	}
+
+	return ret;
 }
 
-
-
-
-void j1EntityManager::Entity_selected()
+Entity* j1EntityManager::Create(ENTITY_TYPE type, int x, int y)
 {
+	Entity* ret = nullptr;
 
-	
-	
+	switch (type)
+	{
+	case LINK:
+		ret = new Player();
+		break;
+	case NPC1:
+		break;
+	default:
+		break;
+	}
+
+	if (ret != nullptr)
+	{
+		ret->Spawn(dir[type], iPoint(x,y));
+
+		if (type == LINK)
+		{
+			entities.push_front(ret);
+			App->game->playerId = ret->id = entities.begin();
+
+		}
+		else
+		{
+			entities.push_back(ret);
+			ret->id = entities.end();
+		}
+	}
+
+	return ret;
 }
-
-void j1EntityManager::Entity_disselected()
-{
-
-}
-

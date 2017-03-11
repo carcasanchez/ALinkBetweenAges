@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Player;
+class Entity;
 class j1EntityManager;
 class Hud;
 class Collider;
@@ -29,9 +29,10 @@ public:
 
 public:
 
-	Player*				player = NULL;
 	j1EntityManager*	em = NULL;
 	Hud*				hud = NULL;
+
+	std::list<Entity*>::iterator playerId;
 
 	bool        pause = false;
 };
