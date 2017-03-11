@@ -1,53 +1,93 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-#include "Animation.h"
-#include "j1CollisionManager.h"
-#include <map>
-#include "PugiXml\src\pugixml.hpp"
+#include "Entity.h"
 #include "j1PerfTimer.h"
 
-class Sprite;
-
-enum ACTION_STATE
+class Player : public Entity
 {
-	IDLE = 0,
-	WALKING,
-	ATTACKING,
-	DODGING
-};
+	/*virtual bool Spawn(const char* file) { return true; };
+	virtual bool Update(float dt) { return true; };
+	virtual bool Draw();
+	virtual void OnDeath() {};
 
-enum DIRECTION
-{
-	D_UP,
-	D_DOWN,
-	D_RIGHT,
-	D_LEFT
-};
+	virtual bool LoadAnimations() { return true; };
 
-class Player
-{
+public:
+
+	// Position in Entity Manager
+	std::list<Entity*>::iterator id;
+
+	// Graphic Resources
+	Sprite* sprite;
+	Animation* currentAnim;
+	std::map<std::pair<ACTION_STATE, DIRECTION>, Animation>	anim;
+
+	// States
+	ACTION_STATE actionState;
+	DIRECTION currentDir;
+
+	// World Position (to draw)
+	iPoint lastPos;
+	iPoint currentPos;
+
+	// Collider
+	Collider* col;
+	iPoint colPivot;
+
+	// Attributes
+	ENTITY_TYPE type;
+	int life;*/
+
+
 public:
 
 	Player();
-	bool Awake(pugi::xml_node& config);
-	bool Start();
-	bool PreUpdate();
+	bool Spawn(std::string file, iPoint pos);
+
+
+	//bool Awake(pugi::xml_node& config);
 	bool Update(float dt);
-	bool PostUpdate();
-	bool CleanUp();
 	void Move(int x, int y);
 	void UpdateCollider();
 
+public:
+
+	//Base
+	int maxLife;
+	float maxStamina;
+	float stamina;
+	float staminaRec;
 	int speed;
-	int attacking_speed;
+
+	//Attack
+	int attackSpeed;
+	int attackTax;
+
+	//Dodge
+	int dodgeSpeed;
+	int dodgeTax;
+	uint64 dodgeLimit;
+	iPoint dodgeDir;
+	j1PerfTimer dodgeTimer;
+
+
+	//SDL_Texture* playerTex;
+	
+	// Entity fields
+	/*/PlayerAttributes* attributes = NULL;
+	iPoint currentPos;
+	iPoint lastPos;
+
+	Sprite* sprite = NULL;
+	---SDL_Texture* playerTex;
+
+	std::map<std::pair<ACTION_STATE, DIRECTION>, Animation>	anim;
+	Animation* currentAnim;
+	ACTION_STATE actionState = IDLE;
+	DIRECTION currentDir = D_DOWN;
 	Collider* col;
-
-
-	//PlayerAttributes* attributes = NULL;
-	iPoint worldPosition;	// position in pixels of player // This is the point of the pivot in the world //The feet of the player
-	iPoint mapPosition;		// position of the tile where player is
-	iPoint lastPosition;			//Last position in world in previous frame
+	iPoint colPivot;*/
 
 private:
 
@@ -64,36 +104,6 @@ private:
 	
 
 
-
-private:
-
-
-
-	Sprite* sprite = NULL;
-	SDL_Texture* playerTex;
-
-	std::map<std::pair<ACTION_STATE, DIRECTION>, Animation>	playerAnim;
-	Animation* current_animation;
-	ACTION_STATE player_state = IDLE;
-	DIRECTION current_direction = D_DOWN;
-	iPoint collider_pivot;
-
-	//Basic stats
-	float max_stamina;
-	float stamina;
-	float stamina_recover_val;
-	int life;
-
-	//Attack data
-	int stamina_atk_tax;
-
-	//Dodge data
-	int stamina_dodge_tax;
-	iPoint dodge_direction;
-	j1PerfTimer dodge_timer;
-	uint64 dodge_limit;
-	int dodge_speed;
-	
 	
 };
 

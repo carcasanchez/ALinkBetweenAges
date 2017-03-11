@@ -1,26 +1,59 @@
 #include "Entity.h"
-#include "j1Input.h"
-#include "j1App.h"
-#include "j1Map.h"
+#include "Animation.h"
 #include "j1Render.h"
+#include "j1App.h"
+#include "p2Defs.h"
+#include "j1CollisionManager.h"
+#include "j1App.h"
 
-Entity::Entity() {};
-
-Entity::Entity(p2Point<int> pos) : position(pos) {};
-
-void Entity::is_Selected()
+Entity::Entity() :
+	sprite(nullptr),
+	currentAnim(nullptr),
+	actionState(IDLE),
+	currentDir(D_DOWN),
+	lastPos(iPoint()),
+	currentPos(iPoint()),
+	col(nullptr),
+	colPivot(iPoint()),
+	type(ENTITY_TYPE(0)),
+	life(1)
 {
-	if (selectionable)
-		 selected = true;	
+	anim.clear();
 }
 
-void Entity::not_Selected()
+Entity::Entity(ENTITY_TYPE type) :
+	sprite(nullptr),
+	currentAnim(nullptr),
+	actionState(IDLE),
+	currentDir(D_DOWN),
+	lastPos(iPoint()),
+	currentPos(iPoint()),
+	col(nullptr),
+	colPivot(iPoint()),
+	type(type),
+	life(1)
 {
-	if (selected)
-		selected = false;
+	anim.clear();
 }
 
-void Entity::Set_texture(SDL_Rect new_img)
+Entity::~Entity()
 {
-	player_text = new_img;
+	RELEASE(sprite);
+	RELEASE(currentAnim);
+
+	// TODO: tell collision manager to release the entity's collider
+	//App->collisions->
+
+	anim.clear();
+}
+
+bool Entity::Draw()
+{
+	bool ret = true;
+
+	currentAnim = &anim.find({ actionState, currentDir })->second;
+	sprite->updateSprite(currentPos, currentAnim->pivot, currentAnim->getCurrentFrame(), currentAnim->flip);
+	App->render->Draw(sprite);
+
+	return ret;
 }

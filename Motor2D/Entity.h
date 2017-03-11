@@ -2,37 +2,77 @@
 #define _ENTITY_H_
 
 #include "p2Point.h"
-#include "SDL\include\SDL_rect.h"
-#include "j1EntityManager.h"
+#include <string>
+#include <list>
+#include <map>
+
+class Sprite;
+class Animation;
+class Collider;
+
+enum ACTION_STATE
+{
+	IDLE = 0,
+	WALKING,
+	ATTACKING,
+	DODGING
+};
+
+enum DIRECTION
+{
+	D_UP = 0,
+	D_DOWN,
+	D_RIGHT,
+	D_LEFT
+};
+
+enum ENTITY_TYPE
+{
+	LINK = 0,
+	NPC1
+};
+
 
 class Entity
 {
 public:
 
 	Entity();
-	Entity(p2Point<int> pos);
+	Entity(ENTITY_TYPE type);
+	~Entity();
 
-	virtual bool Start() { return true; };
-	virtual bool PreU() { return true; };
-	virtual bool U(float dt) { return true; };
-	virtual bool UTicks() { return true; };
-	virtual bool PostU() { return true; };
+	virtual bool Spawn(std::string file, iPoint pos) { return true; };
+	virtual bool Update(float dt) { return true; };
+	virtual bool Draw();
+	virtual void OnDeath() {};
 
-	void is_Selected();
-	void not_Selected();
+	virtual bool LoadAnimations() { return true; };
 
-	void Set_texture(SDL_Rect);
+public:
 
-	SDL_Rect					player_text;
-	iPoint						position;
-	int							last_point = 0;
-	int							path_length = 0;
+	// Position in Entity Manager
+	std::list<Entity*>::iterator id;
 
-	int							speed;
+	// Graphic Resources
+	Sprite* sprite;
+	Animation* currentAnim;
+	std::map<std::pair<ACTION_STATE, DIRECTION>, Animation>	anim;
 
-	bool						selected = false;
-	bool						selectionable;
+	// States
+	ACTION_STATE actionState;
+	DIRECTION currentDir;
 
+	// World Position (to draw)
+	iPoint lastPos;
+	iPoint currentPos;
+
+	// Collider
+	Collider* col;
+	iPoint colPivot;
+
+	// Attributes
+	ENTITY_TYPE type;
+	int life;
 };
 
 #endif // !_ENTITY_H_

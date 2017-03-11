@@ -6,57 +6,71 @@
 #include "j1Render.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
+#include "j1CollisionManager.h"
 #include "p2Log.h"
+#include "Animation.h"
 
-Player::Player()
-{
-} 
+Player::Player() : Entity() {} 
 
-bool Player::Awake(pugi::xml_node& config)
-{
-	bool ret = true;
-
-	//TODO: PICK THESE DATA FROM XML
-
-	worldPosition = lastPosition = iPoint(150, 150);
-	mapPosition = iPoint(50, 50);
-
-	max_stamina = 100;
-	stamina = 100;
-	life = 3;
-	speed = 70;
-	attacking_speed = 40;
-	col = App->collisions->AddCollider({ worldPosition.x, worldPosition.y, 16, 15 }, COLLIDER_PLAYER, ((j1Module*)App->game));
-	collider_pivot = { 8, 12 };
-
-	dodge_limit = 50;
-	dodge_speed = 500;
-
-	stamina_atk_tax = 20;
-	stamina_dodge_tax = 25;
-	stamina_recover_val = 0.4;
-
-	return ret;
-}
-
-bool Player::Start()
+bool Player::Spawn(std::string file, iPoint pos)
 {
 	bool ret = true;
 
-	if (ret = loadAnimations())
+	string tmp = file;
+
+	// set position
+	currentPos = lastPos = pos;
+
+	// load xml attributes
+	pugi::xml_document	attributesFile;
+	char* buff;
+	int size = App->fs->Load(file.c_str(), &buff);
+	pugi::xml_parse_result result = attributesFile.load_buffer(buff, size);
+	RELEASE(buff);
+
+	if (result == NULL)
 	{
-		playerTex = App->tex->Load("textures/Link_sprites/Link_young.png");
-		current_animation = &playerAnim.find({ IDLE, D_DOWN })->second;
-		sprite = new Sprite(playerTex, worldPosition, SCENE, current_animation->getCurrentFrame(), current_animation->pivot);
-		player_state = IDLE;
+		LOG("Could not load attributes xml file. Pugi error: %s", result.description());
+		ret = false;
+	}
+	else
+	{
+		pugi::xml_node attributes = attributesFile.child("attributes");
+
+		// base stats
+		pugi::xml_node tmp = attributes.child("base");
+		maxLife = life = tmp.attribute("life").as_int(1);
+		maxStamina = stamina = tmp.attribute("stamina").as_int(100);
+		staminaRec = tmp.attribute("staminaRec").as_float();
+		speed = tmp.attribute("speed").as_int(70);
+
+		// attack
+		tmp = attributes.child("attack");
+		attackSpeed = tmp.attribute("speed").as_int(40);
+		attackTax = tmp.attribute("staminaTax").as_int(20);
+
+		//dodge
+		tmp = attributes.child("dodge");
+		dodgeSpeed = tmp.attribute("speed").as_int(500);
+		dodgeTax = tmp.attribute("staminaTax").as_int(25);
+		dodgeLimit = tmp.attribute("limit").as_int(50);
+
+		//collider
+		tmp = attributes.child("collider");
+		colPivot = { tmp.attribute("x").as_int(8), tmp.attribute("y").as_int(12) };
+		col = App->collisions->AddCollider({ pos.x, pos.y, tmp.attribute("w").as_int(16), tmp.attribute("h").as_int(15) }, COLLIDER_PLAYER, ((j1Module*)App->game));
 	}
 
-	return ret;
-}
-
-bool Player::PreUpdate()
-{
-	bool ret = true;
+	if (ret)
+	{
+		if (ret = loadAnimations())
+		{
+			SDL_Texture* playerTex = App->tex->Load("textures/Link_sprites/Link_young.png");
+			currentAnim = &anim.find({ IDLE, D_DOWN })->second;
+			sprite = new Sprite(playerTex, currentPos, SCENE, currentAnim->getCurrentFrame(), currentAnim->pivot);
+			actionState = IDLE;
+		}
+	}
 
 	return ret;
 }
@@ -64,15 +78,15 @@ bool Player::PreUpdate()
 bool Player::Update(float dt)
 {
 	bool ret = true;
-	lastPosition = worldPosition;
+	lastPos = currentPos;
 
-	if (stamina < max_stamina)
+	if (stamina < maxStamina)
 	{
-		stamina += stamina_recover_val;
+		stamina += staminaRec;
 	}
-	else stamina = max_stamina;
+	else stamina = maxStamina;
 
-	switch (player_state)
+	switch (actionState)
 	{
 		case(IDLE):
 			Idle();
@@ -95,33 +109,12 @@ bool Player::Update(float dt)
 	return ret;
 }
 
-bool Player::PostUpdate()
-{
-	bool ret = true;
-
-	// draw
-	current_animation = &playerAnim.find({ player_state, current_direction })->second;
-
-	sprite->updateSprite(worldPosition, current_animation->pivot, current_animation->getCurrentFrame(), current_animation->flip);
-	
-	App->render->Draw(sprite);
-
-	return ret;
-}
-
-bool Player::CleanUp()
-{
-	bool ret = true;
-
-	return ret;
-}
-
 bool Player::loadAnimations()
 {
 	bool ret = true;
 
 	pugi::xml_document	anim_file;
-	pugi::xml_node		anim;
+	pugi::xml_node		animation;
 	char* buff;
 	int size = App->fs->Load("animations/player_animations.xml", &buff);
 	pugi::xml_parse_result result = anim_file.load_buffer(buff, size);
@@ -133,11 +126,11 @@ bool Player::loadAnimations()
 		ret = false;
 	}
 	else
-		anim = anim_file.child("animations");
+		animation = anim_file.child("animations");
 
 	if (ret == true)
 	{
-		pugi::xml_node ent = anim.child("LINK");
+		pugi::xml_node ent = animation.child("LINK");
 
 		for (pugi::xml_node action = ent.child("IDLE"); action != NULL; action = action.next_sibling())
 		{
@@ -179,9 +172,9 @@ bool Player::loadAnimations()
 
 				iPoint piv;
 
-				playerAnim.insert(std::pair<std::pair<ACTION_STATE, DIRECTION>, Animation >(p, anims));
-				playerAnim.find({ p.first, p.second })->second.pivot.Set(pivotX, pivotY);
-				piv = playerAnim.find({ p.first, p.second })->second.pivot;
+				anim.insert(std::pair<std::pair<ACTION_STATE, DIRECTION>, Animation >(p, anims));
+				anim.find({ p.first, p.second })->second.pivot.Set(pivotX, pivotY);
+				piv = anim.find({ p.first, p.second })->second.pivot;
 			}
 		}
 	}
@@ -193,33 +186,33 @@ bool Player::loadAnimations()
 void Player::Change_direction()
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		current_direction = D_UP;
+		currentDir = D_UP;
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		current_direction = D_DOWN;
+		currentDir = D_DOWN;
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		current_direction = D_RIGHT;
+		currentDir = D_RIGHT;
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		current_direction = D_LEFT;
+		currentDir = D_LEFT;
 }
 
 //Displace the entity a given X and Y taking in account collisions w/map
 void Player::Move(int x, int y)
 {
-	worldPosition.x += x;
+	currentPos.x += x;
 	UpdateCollider();
 	if(col->CheckMapCollision())
-		worldPosition.x -= x;
+		currentPos.x -= x;
 
-	worldPosition.y += y;
+	currentPos.y += y;
 	UpdateCollider();
 	if (col->CheckMapCollision())
-		worldPosition.y -= y;
+		currentPos.y -= y;
 }
 
 void Player::UpdateCollider()
 {
-	col->rect.x = worldPosition.x - collider_pivot.x;
-	col->rect.y = worldPosition.y - collider_pivot.y;
+	col->rect.x = currentPos.x - colPivot.x;
+	col->rect.y = currentPos.y - colPivot.y;
 }
 
 bool Player::Idle()
@@ -228,16 +221,16 @@ bool Player::Idle()
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		player_state = WALKING;
+		actionState = WALKING;
 		LOG("Link is WALKING");
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - stamina_atk_tax >= 0))
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - attackTax >= 0))
 	{
-		stamina -= stamina_atk_tax;
+		stamina -= attackTax;
 		Change_direction();
-		player_state = ATTACKING;
+		actionState = ATTACKING;
 		LOG("LINK is ATTACKING");
 		return true;
 	}
@@ -248,61 +241,61 @@ bool Player::Idle()
 bool Player::Walking(float dt)
 {
 	bool moving = false;
-	dodge_direction = { 0, 0 };
+	dodgeDir = { 0, 0 };
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		current_direction = D_DOWN;
-		dodge_direction.y = 1;
+		currentDir = D_DOWN;
+		dodgeDir.y = 1;
 		Move(0, SDL_ceil(speed * dt));
 		moving = true;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		current_direction = D_UP;
-		dodge_direction.y = -1;
+		currentDir = D_UP;
+		dodgeDir.y = -1;
 		Move(0, -SDL_ceil(speed * dt));
 		moving = true;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		current_direction = D_LEFT;
-		dodge_direction.x = -1;
+		currentDir = D_LEFT;
+		dodgeDir.x = -1;
 		Move(-SDL_ceil(speed * dt), 0);
 		moving = true;
 
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		current_direction = D_RIGHT;
-		dodge_direction.x = 1;
+		currentDir = D_RIGHT;
+		dodgeDir.x = 1;
 		Move(SDL_ceil(speed * dt), 0);
 		moving = true;
 	}
 
 	if (moving == false)
 	{
-		player_state = IDLE;
+		actionState = IDLE;
 		LOG("Link is in IDLE");
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && (stamina-stamina_dodge_tax >=0))
+	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && (stamina- dodgeTax >=0))
 	{	
-		stamina -= stamina_dodge_tax;
+		stamina -= dodgeTax;
 		LOG("LINK is DODGING");
 		Change_direction();
-		player_state = DODGING;
-		dodge_timer.Start();
+		actionState = DODGING;
+		dodgeTimer.Start();
 		return true;
 	}
 	 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - stamina_atk_tax >= 0))
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - attackTax >= 0))
 	{
- 		stamina -= stamina_atk_tax;
+ 		stamina -= attackTax;
 		Change_direction();
-		player_state = ATTACKING;
+		actionState = ATTACKING;
 		LOG("LINK is ATTACKING");
 		return true;
 	}
@@ -316,27 +309,27 @@ bool Player::Attacking(float dt)
 {
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		Move(0, SDL_ceil(attacking_speed * dt));
+		Move(0, SDL_ceil(attackSpeed * dt));
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		Move(0, -SDL_ceil(attacking_speed * dt));
+		Move(0, -SDL_ceil(attackSpeed * dt));
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		Move(-SDL_ceil(attacking_speed * dt), 0);
+		Move(-SDL_ceil(attackSpeed * dt), 0);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		Move(SDL_ceil(attacking_speed * dt), 0);
+		Move(SDL_ceil(attackSpeed * dt), 0);
 	}
 
-	if (current_animation->isOver())
+	if (currentAnim->isOver())
 	{
-		current_animation->Reset();
+		currentAnim->Reset();
 		LOG("LINK is in IDLE");
-		player_state = IDLE;
+		actionState = IDLE;
 	}
 
 	return true;
@@ -344,12 +337,12 @@ bool Player::Attacking(float dt)
 
 bool Player::Dodging(float dt)
 {
-	if (dodge_timer.ReadMs() > dodge_limit)
+	if (dodgeTimer.ReadMs() > dodgeLimit)
 	{
-		player_state = IDLE;
+		actionState = IDLE;
 	}
 
-	Move(SDL_ceil(dodge_speed*dodge_direction.x* dt), SDL_ceil(dodge_speed*dodge_direction.y* dt));
+	Move(SDL_ceil(dodgeSpeed * dodgeDir.x * dt), SDL_ceil(dodgeSpeed*dodgeDir.y* dt));
 	
 	return true;
 }
