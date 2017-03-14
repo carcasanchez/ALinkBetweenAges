@@ -16,8 +16,6 @@ bool Player::Spawn(std::string file, iPoint pos)
 {
 	bool ret = true;
 
-	string tmp = file;
-
 	// set position
 	currentPos = lastPos = pos;
 
@@ -37,39 +35,25 @@ bool Player::Spawn(std::string file, iPoint pos)
 	{
 		pugi::xml_node attributes = attributesFile.child("attributes");
 
+		LoadAttributes(attributes);
+
 		// base stats
-		pugi::xml_node tmp = attributes.child("base");
-		maxLife = life = tmp.attribute("life").as_int(1);
-		maxStamina = stamina = tmp.attribute("stamina").as_int(100);
-		staminaRec = tmp.attribute("staminaRec").as_float();
-		speed = tmp.attribute("speed").as_int(70);
+		pugi::xml_node node = attributes.child("base");
+		maxLife = life;
+		maxStamina = stamina = node.attribute("stamina").as_int(100);
+		staminaRec = node.attribute("staminaRec").as_float();
+		speed = node.attribute("speed").as_int(70);
 
 		// attack
-		tmp = attributes.child("attack");
-		attackSpeed = tmp.attribute("speed").as_int(40);
-		attackTax = tmp.attribute("staminaTax").as_int(20);
+		node = attributes.child("attack");
+		attackSpeed = node.attribute("speed").as_int(40);
+		attackTax = node.attribute("staminaTax").as_int(20);
 
 		//dodge
-		tmp = attributes.child("dodge");
-		dodgeSpeed = tmp.attribute("speed").as_int(500);
-		dodgeTax = tmp.attribute("staminaTax").as_int(25);
-		dodgeLimit = tmp.attribute("limit").as_int(50);
-
-		//collider
-		tmp = attributes.child("collider");
-		colPivot = { tmp.attribute("x").as_int(8), tmp.attribute("y").as_int(12) };
-		col = App->collisions->AddCollider({ pos.x, pos.y, tmp.attribute("w").as_int(16), tmp.attribute("h").as_int(15) }, COLLIDER_PLAYER, ((j1Module*)App->game));
-	}
-
-	if (ret)
-	{
-		if (ret = loadAnimations())
-		{
-			SDL_Texture* playerTex = App->tex->Load("textures/Link_sprites/Link_young.png");
-			currentAnim = &anim.find({ IDLE, D_DOWN })->second;
-			sprite = new Sprite(playerTex, currentPos, SCENE, currentAnim->getCurrentFrame(), currentAnim->pivot);
-			actionState = IDLE;
-		}
+		node = attributes.child("dodge");
+		dodgeSpeed = node.attribute("speed").as_int(500);
+		dodgeTax = node.attribute("staminaTax").as_int(25);
+		dodgeLimit = node.attribute("limit").as_int(50);
 	}
 
 	return ret;
@@ -109,80 +93,6 @@ bool Player::Update(float dt)
 	return ret;
 }
 
-bool Player::loadAnimations()
-{
-	bool ret = true;
-
-	pugi::xml_document	anim_file;
-	pugi::xml_node		animation;
-	char* buff;
-	int size = App->fs->Load("animations/player_animations.xml", &buff);
-	pugi::xml_parse_result result = anim_file.load_buffer(buff, size);
-	RELEASE(buff);
-
-	if (result == NULL)
-	{
-		LOG("Could not load animation xml file. Pugi error: %s", result.description());
-		ret = false;
-	}
-	else
-		animation = anim_file.child("animations");
-
-	if (ret == true)
-	{
-		pugi::xml_node ent = animation.child("LINK");
-
-		for (pugi::xml_node action = ent.child("IDLE"); action != NULL; action = action.next_sibling())
-		{
-			for (pugi::xml_node dir = action.child("UP"); dir != action.child("loop"); dir = dir.next_sibling())
-			{
-				std::pair<ACTION_STATE, DIRECTION> p;
-				int state = action.child("name").attribute("value").as_int();
-				p.first = (ACTION_STATE)state;
-
-				int di = dir.first_child().attribute("name").as_int();
-				p.second = (DIRECTION)di;
-
-				Animation anims;
-				int x = dir.first_child().attribute("x").as_int();
-				int y = dir.first_child().attribute("y").as_int();
-				int w = dir.first_child().attribute("w").as_int();
-				int h = dir.first_child().attribute("h").as_int();
-				int fN = dir.first_child().attribute("frameNumber").as_int();
-				int margin = dir.first_child().attribute("margin").as_int();
-				bool loop = action.child("loop").attribute("value").as_bool();
-				int pivotX = dir.first_child().attribute("pivot_x").as_int();
-				int pivotY = dir.first_child().attribute("pivot_y").as_int();
-				int flip = dir.first_child().attribute("flip").as_int();
-				float animSpeed = action.child("speed").attribute("value").as_float();
-
-				anims.setAnimation(x, y, w, h, fN, margin);
-				anims.loop = loop;
-			
-				anims.speed = animSpeed;
-				anims.pivot.x = pivotX;
-				anims.pivot.y = pivotY;
-
-				if (flip == 1)
-					anims.flip = SDL_FLIP_HORIZONTAL;
-				else if (flip == 2)
-					anims.flip = SDL_FLIP_VERTICAL;
-				else anims.flip = SDL_FLIP_NONE;
-
-
-				iPoint piv;
-
-				anim.insert(std::pair<std::pair<ACTION_STATE, DIRECTION>, Animation >(p, anims));
-				anim.find({ p.first, p.second })->second.pivot.Set(pivotX, pivotY);
-				piv = anim.find({ p.first, p.second })->second.pivot;
-			}
-		}
-	}
-
-
-	return ret;
-}
-
 void Player::Change_direction()
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -193,26 +103,6 @@ void Player::Change_direction()
 		currentDir = D_RIGHT;
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		currentDir = D_LEFT;
-}
-
-//Displace the entity a given X and Y taking in account collisions w/map
-void Player::Move(int x, int y)
-{
-	currentPos.x += x;
-	UpdateCollider();
-	if(col->CheckMapCollision())
-		currentPos.x -= x;
-
-	currentPos.y += y;
-	UpdateCollider();
-	if (col->CheckMapCollision())
-		currentPos.y -= y;
-}
-
-void Player::UpdateCollider()
-{
-	col->rect.x = currentPos.x - colPivot.x;
-	col->rect.y = currentPos.y - colPivot.y;
 }
 
 bool Player::Idle()

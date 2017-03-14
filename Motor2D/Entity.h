@@ -1,6 +1,7 @@
 #ifndef _ENTITY_H_
 #define _ENTITY_H_
 
+#include "j1FileSystem.h"
 #include "p2Point.h"
 #include <string>
 #include <list>
@@ -43,10 +44,16 @@ public:
 
 	virtual bool Spawn(std::string file, iPoint pos) { return true; };
 	virtual bool Update(float dt) { return true; };
-	virtual bool Draw();
 	virtual void OnDeath() {};
 
-	virtual bool LoadAnimations() { return true; };
+	virtual bool Draw();
+
+	virtual bool LoadAttributes(pugi::xml_node attributes);
+	virtual bool LoadAnimations(std::string file);
+
+
+	virtual void Move(int x, int y);
+	virtual void UpdateCollider();
 
 public:
 
