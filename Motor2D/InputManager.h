@@ -7,58 +7,37 @@
 #include "j1Input.h"
 #include "PugiXml\src\pugixml.hpp"
 #include <list>
+#include <map>
 #include <string>
 
-enum INPUT_TYPE
+enum INPUTEVENT
 {
-	DOWN,
-	UP,
-	REPEAT
+	NO_EVENT = -1,
+	JUMP = 0,
+	MUP,
+	MDOWN,
+	MLEFT,
+	MRIGHT,
+	PAUSE,
 };
 
-struct ShortCut
+enum EVENTSTATE
 {
-	ShortCut() : active(false)
-	{}
-
-	ShortCut(INPUT_TYPE _type, string _name, string _command) : active(false)
-	{
-		type = _type;
-		name = _name;
-		command = _command;
-	}
-
-	INPUT_TYPE	 type;
-	bool		 active = false;
-	bool		 ready_to_change = false;
-	std::string		 name;
-	std::string		 command; // SDL_ScancodeName
+	E_NOTHING,
+	E_DOWN,
+	E_UP,
+	E_REPEAT
 };
 
-enum ShortCutID
+class InputListener
 {
-	A = 0,
-	B,
-	X,
-	Y,
-	RightTrigger,
-	LeftTrigger,
-	RightBumper,
-	LeftBumper
+public:
+	InputListener() : input_active(false) {}
+	bool input_active;
+	virtual void OnInputCallback(INPUTEVENT, EVENTSTATE) {};
 };
 
-/*-Left stick : move link(8 directions)
-- Right Stick : orient link(4 directions).If in neutral position, Link will orient automatically with left stick.
-- Right Bumper : Attack in the current orientation if rapid touch, spin attack if hold an release.
-- Left Bumper : Dodge in the current orientation.If neutral, dodge backwards.
-- Right Trigger : Use equipped item.
-- Left Trigger : Change item.
-- A : Interact(pick objects, talk), acept in menu.
-- B : Cancel in menu.
-- Y : Open map.
-- Start : Open pause menu.*/
-
-class InputManager: public j1Module
+class InputManager : public j1Module
 {
 public:
 
@@ -68,32 +47,52 @@ public:
 	virtual ~InputManager();
 
 	// Called when before render is available
-	bool awake(pugi::xml_node&);
+	bool Awake(pugi::xml_node&);
 
 	// Called before all Updates
-	bool preUpdate();
+	bool PreUpdate();
 
-	bool update(float dt);
+	bool Update(float dt);
 
 	// Called after all Updates
-	bool postUpdate();
+	bool PostUpdate();
 
 	// Called before quitting
-	bool cleanUp();
+	bool CleanUp();
 
-	//Shortcuts list
-	std::list<ShortCut*>	shortcuts_list;
+	//When detected input
+	void InputDetected(int, EVENTSTATE);
 
-	//Check for shortcut state
-	bool CheckShortcut(ShortCutID id = A);
+	//To Change the action button
+	void ChangeInputEvent(INPUTEVENT);
+
+
+	//For Polling
+	EVENTSTATE EventPressed(INPUTEVENT) const;
+
+	//For Callback system
+	void AddListener(InputListener*);
+	void CallListeners();
 
 private:
 
-	//Refresh commands once have been changed
-	void ChangeShortcutCommand(ShortCut* shortcut);
 
-	//Shortcuts xml file path
-	std::string		inputs_file_path;
+	//Mapping is fun
+	//All the actions possible int->button, INPUTEVENT->attack, moveup...
+	std::multimap<int, INPUTEVENT> actions;
+
+	//All the actions in this frame
+	std::multimap<INPUTEVENT, EVENTSTATE> current_action;
+
+	//All listeners for the callbacks
+	std::list<InputListener*> listeners;
+
+	//To Change the action button
+	bool		next_input_change = false;
+	bool		ChangeEventButton(int);
+	INPUTEVENT	event_to_change = NO_EVENT;
+
+
 };
 
 #endif // __INPUT_MANAGER_H__

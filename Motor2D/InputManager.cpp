@@ -18,183 +18,163 @@ InputManager::~InputManager()
 {}
 
 // Called when before render is available
-bool InputManager::awake(pugi::xml_node& conf)
+bool InputManager::Awake(pugi::xml_node& conf)
 {
 	bool ret = true;
 
-	//Loading shortcuts path xml
-	inputs_file_path = conf.child("shortcuts_path").attribute("value").as_string();
+	//Load All actions
+	for (pugi::xml_node tmp = conf.child("action"); tmp != nullptr; tmp = tmp.next_sibling())
+	{
+		std::pair<int, INPUTEVENT> new_action;
+		new_action.first = tmp.attribute("button").as_int();
+		new_action.second = (INPUTEVENT)tmp.attribute("event").as_int();
+
+		actions.insert(new_action);
+	}
+
 
 	return ret;
 }
 
 // Called before all Updates
-bool InputManager::preUpdate()
+bool InputManager::PreUpdate()
 {
 	bool ret = true;
-
-	//DOWN
-	//Code with down queues here
-	if (!App->input->down_queue.empty())
-	{
-		for (int i = 0; i < App->input->down_queue.size(); i++)
-		{
-			list<ShortCut*>::iterator it = shortcuts_list.begin();
-			while (it != shortcuts_list.end())
-			{
-				if (App->input->down_queue.front() + i == (*it)->command && (*it)->type == DOWN)
-					(*it)->active = true;
-				++it;
-			}
-		}
-	}
-	//UP
-	//Code with up queues here
-	if (!App->input->up_queue.empty())
-	{
-		for (int i = 0; i < App->input->up_queue.size(); i++)
-		{
-			list<ShortCut*>::iterator it = shortcuts_list.begin();
-			while (it != shortcuts_list.end())
-			{
-				if (App->input->up_queue.front() + i == (*it)->command && (*it)->type == UP)
-					(*it)->active = false;
-				++it;
-			}
-		}
-	}
-	//REPEAT
-	//Code with repeat queues here
-	if (!App->input->repeat_queue.empty())
-	{
-		for (int i = 0; i < App->input->repeat_queue.size(); i++)
-		{
-			list<ShortCut*>::iterator it = shortcuts_list.begin();
-			while (it != shortcuts_list.end())
-			{
-				if (App->input->repeat_queue.front() + i == (*it)->command && (*it)->type == REPEAT)
-					(*it)->active = true;
-				++it;
-			}
-		}
-	}
-
 	return ret;
 }
 
-bool InputManager::update(float dt)
+bool InputManager::Update(float dt)
 {
-	bool ret = true;
+	CallListeners();
 
-	// Check for shortcut change
-	list<ShortCut*>::iterator it = shortcuts_list.begin();
-	while (it != shortcuts_list.end())
+	if (EventPressed(PAUSE) == E_DOWN)
 	{
-		if ((*it)->ready_to_change)
-		{
-			static SDL_Event event;
-
-			// COMPLETELY STOPS THE GAME...
-			SDL_WaitEvent(&event);
-
-			if (event.type == SDL_KEYDOWN)
-			{
-				std::string code = SDL_GetScancodeName(event.key.keysym.scancode);
-
-				bool keyAlreadyAssigned = false;
-
-				list<ShortCut*>::iterator it2 = shortcuts_list.begin();
-				for (;it2 != shortcuts_list.end() && !keyAlreadyAssigned; it2++)
-				{
-					keyAlreadyAssigned = (strcmp((*it2)->command.c_str(), code.c_str()) == 0);
-				}
-
-				if (!keyAlreadyAssigned)
-				{
-					(*it)->command = code;
-					ChangeShortcutCommand((*it));
-
-					/*list<ShortCut*>::iterator it = shortcuts_list.begin();
-					while (it != shortcuts_list.end())
-					{
-						(*it)->active = false;
-						++it;
-					}*/
-				}
-				else
-				{
-					LOG("Key already assigned");
-				}
-			}
-
-			(*it)->ready_to_change = false;
-
-			return ret;
-		}
-
-		++it;
+		ChangeInputEvent(MUP);
 	}
 
-	return ret;
+
+	return true;
 }
 
 // Called after all Updates
-bool InputManager::postUpdate()
+bool InputManager::PostUpdate()
 {
-	bool ret = true;
+	if (!current_action.empty())
+		current_action.clear();
 
-	list<ShortCut*>::iterator it = shortcuts_list.begin();
-
-	while (it != shortcuts_list.end())
-	{
-		(*it)->active = false;
-		++it;
-	}
-
-	return ret;
+	return true;
 }
 
 // Called before quitting
-bool InputManager::cleanUp()
+bool InputManager::CleanUp()
 {
 	bool ret = true;
 
-	shortcuts_list.clear();
+
 
 	return ret;
 }
 
-bool InputManager::CheckShortcut(ShortCutID id)
+void InputManager::InputDetected(int button, EVENTSTATE state)
+{
+	if (next_input_change == false)
+	{
+		multimap<int, INPUTEVENT>::iterator tmp = actions.find(button);
+		//If more than one action per button we must iterate until the end
+		if (tmp != actions.end())
+		{
+			std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
+			new_current_action.first = (*tmp).second;
+			new_current_action.second = state;
+			current_action.insert(new_current_action);
+		}
+	}
+	else
+	{
+		ChangeEventButton(button);
+	}
+}
+
+void InputManager::ChangeInputEvent(INPUTEVENT change_ev)
+{
+	next_input_change = true;
+	event_to_change = change_ev;
+}
+
+bool InputManager::ChangeEventButton(int new_button)
 {
 	bool ret = false;
 
-	int i = 0;
-	std::list<ShortCut*>::iterator it = shortcuts_list.begin();
+	//Look if the new button is actually asigned
+	multimap<int, INPUTEVENT>::iterator tmp = actions.find(new_button);
 
-	while (it != shortcuts_list.end())
+	if (tmp != actions.end())
 	{
-		if (i == int(id))
-		{
-			ret = (*it)->active;
-			break;
-		}
-
-		i++;
-		it++;
+		LOG("This button is actually in another action");
+		return ret;
 	}
+
+	//Look for the event to erase it
+	tmp = actions.begin();
+	while ((*tmp).second != event_to_change)
+		tmp++;
+	actions.erase(tmp);
+
+	//This is the event with the new button
+	std::pair<int, INPUTEVENT> event_changed;
+	event_changed.first = new_button;
+	event_changed.second = event_to_change;
+	actions.insert(event_changed);
+
+	//Reset the variables
+	next_input_change = false;
+	event_to_change = NO_EVENT;
+
+	ret = true;
+
 
 	return ret;
 }
 
-void InputManager::ChangeShortcutCommand(ShortCut* shortcut)
+EVENTSTATE InputManager::EventPressed(INPUTEVENT action) const
 {
-	// manage input manager panel
-	/*shortcut->command_label->SetText(shortcut->command, app->font->smallFont);
+	multimap<INPUTEVENT, EVENTSTATE>::const_iterator tmp = current_action.find(action);
 
-	iPoint posLabel = shortcut->command_label->getLocalPosition();
-	iPoint posDecor = shortcut->decor->getLocalPosition();
-	posLabel.x = posDecor.x + 63 - ((int(shortcut->command.size()) - 1) * 5);
-	shortcut->command_label->SetLocalPosition(posLabel);*/
+	if (tmp != current_action.end())
+		return tmp->second;
 
-	shortcut->ready_to_change = false;
+	return E_NOTHING;
 }
+
+void InputManager::AddListener(InputListener* new_listener)
+{
+	//To improve this: Search if the listener is actually in the list
+
+	if (new_listener)
+	{
+		new_listener->input_active = true;
+		listeners.push_back(new_listener);
+	}
+
+}
+
+void InputManager::CallListeners()
+{
+	if (!current_action.empty())
+	{
+		for (list<InputListener*>::iterator it = listeners.begin(); it != listeners.end(); it++)
+		{
+			if ((*it)->input_active)
+			{
+				std::multimap<INPUTEVENT, EVENTSTATE>::iterator frame_actions = current_action.begin();
+				while (frame_actions != current_action.end())
+				{
+					(*it)->OnInputCallback(frame_actions->first, frame_actions->second);
+					frame_actions++;
+				}
+			}
+		}
+	}
+}
+
+

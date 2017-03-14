@@ -2,10 +2,14 @@
 #define __j1INPUT_H__
 
 #include "j1Module.h"
+#include "SDL\include\SDL_gamecontroller.h"
 #include <queue>
 
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
+#define NUM_CONTROLLER_BUTTONS 15
+#define NUM_CONTROLLER_AXIS 6
+#define DEAD_ZONE 20000
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 struct SDL_Rect;
@@ -87,6 +91,10 @@ private:
 	int			mouse_y;
 
 	bool		input_text = false;
+
+	//Game Controller
+	SDL_GameController*	gamepad = nullptr;
+	j1KeyState		controller_buttons[NUM_CONTROLLER_BUTTONS];
 };
 
 #endif // __j1INPUT_H__
