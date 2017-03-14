@@ -24,10 +24,8 @@ class j1PathFinding;
 class j1ParticleManager;
 class j1Gui;
 class j1SceneManager;
-		class j1Scene;
 class j1CollisionManager;
 class j1GameLayer;
-		class j1EntityManager;
 class j1Console;
 class j1Render;
 
@@ -121,8 +119,6 @@ public:
 	j1GameLayer*		game = NULL;
 	j1Console*			console = NULL;
 	j1Render*			render = NULL;
-
-	j1Scene*			tmp = NULL;
 
 private:
 

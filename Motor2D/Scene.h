@@ -7,14 +7,20 @@
 class UI_element;
 enum GUI_INPUT;
 
-using namespace std;
+
+/*
+THIS IS NOT A MODULE BECAUSE I NEEDS MORE FUNCTIONALITY
+THAN THAT OF A MODULE
+
+PLS DONT CHANGE
+*/
 
 class Scene
 {
 public:
 	Scene() : name("unnamed scene") {}
-	Scene(string name){}
-	virtual ~Scene(){}
+	Scene(std::string name) : name(name) {}
+	virtual ~Scene() {}
 	virtual bool Initialize(pugi::xml_node& config) { return true; }
 	virtual bool Start() { return true; }
 	virtual bool PreUpdate() { return true; }
@@ -25,10 +31,10 @@ public:
 	virtual bool On_GUI_Callback(UI_element* elem, GUI_INPUT gui_input) { return true; }
 
 public:
-
-	string name;
-
+	std::string name;
 };
+
+
 
 
 

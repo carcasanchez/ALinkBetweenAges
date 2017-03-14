@@ -10,9 +10,6 @@
     <ClCompile Include="p2Log.cpp">
       <Filter>Programacio 2 ===========</Filter>
     </ClCompile>
-    <ClCompile Include="j1Scene.cpp">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="PugiXml\src\pugixml.cpp">
       <Filter>Desenvolupament  ========\Tools\PuguiXML</Filter>
     </ClCompile>
@@ -97,6 +94,9 @@
     <ClCompile Include="j1Gui.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Desenvolupament  ========\Scenes\Test Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -119,9 +119,6 @@
     </ClInclude>
     <ClInclude Include="p2DynArray.h">
       <Filter>Programacio 2 ===========</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Scene.h">
-      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="PugiXml\src\pugiconfig.hpp">
       <Filter>Desenvolupament  ========\Tools\PuguiXML</Filter>
@@ -222,6 +219,9 @@
     <ClInclude Include="Animation.h">
       <Filter>Desenvolupament  ========</Filter>
     </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Desenvolupament  ========\Scenes\Test Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -256,6 +256,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Game Layer\Entities">
       <UniqueIdentifier>{c7cde884-cbfc-45ea-b310-1703a2d3f239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Scenes\Test Scene">
+      <UniqueIdentifier>{3c43655f-968c-42cf-ad0f-263ec91b3201}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

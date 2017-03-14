@@ -11,7 +11,6 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Audio.h"
-#include "j1Scene.h"
 #include "j1FileSystem.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
@@ -48,7 +47,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	collisions = new j1CollisionManager();
 	console = new j1Console();
 	render = new j1Render();
-	tmp = new j1Scene();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -67,7 +65,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(particles);
 	AddModule(gui);
 	AddModule(collisions);
-	AddModule(tmp);
 	AddModule(console);
 
 	// render last to swap buffer

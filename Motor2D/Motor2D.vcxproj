@@ -91,7 +91,7 @@
     <ClCompile Include="j1ParticleManager.cpp" />
     <ClCompile Include="j1Pathfinding.cpp" />
     <ClCompile Include="j1PerfTimer.cpp" />
-    <ClCompile Include="j1Scene.cpp" />
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="j1SceneManager.cpp" />
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1EntityManager.cpp" />
@@ -123,7 +123,7 @@
     <ClInclude Include="j1ParticleManager.h" />
     <ClInclude Include="j1Pathfinding.h" />
     <ClInclude Include="j1PerfTimer.h" />
-    <ClInclude Include="j1Scene.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="j1SceneManager.h" />
     <ClInclude Include="j1Timer.h" />
     <ClInclude Include="j1EntityManager.h" />
