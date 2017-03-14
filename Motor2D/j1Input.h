@@ -9,7 +9,7 @@
 #define NUM_MOUSE_BUTTONS 5
 #define NUM_CONTROLLER_BUTTONS 15
 #define NUM_CONTROLLER_AXIS 6
-#define DEAD_ZONE 20000
+#define DEAD_ZONE 10000
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 struct SDL_Rect;
@@ -29,6 +29,14 @@ enum j1KeyState
 	KEY_REPEAT,
 	KEY_UP
 };
+
+enum j1JoystickState
+{
+	JOYSTICK_POSITIVE,
+	JOYSTICK_NEGATIVE,
+	JOYSTICK_NOTHING
+};
+
 
 class j1Input : public j1Module
 {
@@ -94,7 +102,8 @@ private:
 
 	//Game Controller
 	SDL_GameController*	gamepad = nullptr;
-	j1KeyState		controller_buttons[NUM_CONTROLLER_BUTTONS];
+	j1KeyState			controller_buttons[NUM_CONTROLLER_BUTTONS];
+	j1JoystickState		controller_axis[NUM_CONTROLLER_AXIS];
 };
 
 #endif // __j1INPUT_H__

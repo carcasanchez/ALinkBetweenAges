@@ -29,6 +29,14 @@ enum EVENTSTATE
 	E_REPEAT
 };
 
+
+enum JSTATE
+{
+	J_NONE,
+	J_POSITIVE,
+	J_NEGATIVE
+};
+
 class InputListener
 {
 public:
@@ -62,6 +70,7 @@ public:
 
 	//When detected input
 	void InputDetected(int, EVENTSTATE);
+	void JoystickDetected(int, JSTATE);
 
 	//To Change the action button
 	void ChangeInputEvent(INPUTEVENT);

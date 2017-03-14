@@ -20,6 +20,7 @@ j1Input::j1Input() : j1Module()
 	keyboard = new j1KeyState[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(j1KeyState) * MAX_KEYS);
 	memset(mouse_buttons, KEY_IDLE, sizeof(j1KeyState) * NUM_MOUSE_BUTTONS);
+	memset(controller_axis, JOYSTICK_NOTHING, sizeof(j1JoystickState) * NUM_CONTROLLER_AXIS);
 }
 
 // Destructor
@@ -124,6 +125,17 @@ bool j1Input::PreUpdate()
 			controller_buttons[i] = KEY_IDLE;
 	}
 
+	for (int i = 0; i < NUM_CONTROLLER_AXIS; ++i)
+	{
+		if (controller_axis[i] == j1JoystickState::JOYSTICK_NEGATIVE)
+			App->inputM->JoystickDetected(i, JSTATE::J_NEGATIVE);
+		
+
+		if (controller_axis[i] == j1JoystickState::JOYSTICK_POSITIVE)
+			App->inputM->JoystickDetected(i, JSTATE::J_POSITIVE);
+				
+	}
+
 	mouse_motion_x = 0;
 	mouse_motion_y = 0;
 	mouse_wheel = 0;
@@ -198,6 +210,62 @@ bool j1Input::PreUpdate()
 						temp->cursor_virtual_pos++;
 						temp->cursor_pos += width;
 				}
+				
+				break;
+
+			case SDL_CONTROLLERAXISMOTION:
+
+				/*switch (event.caxis.axis)
+				{
+				case SDL_CONTROLLER_AXIS_LEFTX:
+					if (event.caxis.value < -DEAD_ZONE)
+					{
+						controller_axis[SDL_CONTROLLER_AXIS_LEFTX] = j1JoystickState::NEGATIVE;
+						
+					}
+					else
+					{
+						if (event.caxis.value > DEAD_ZONE)
+						{
+							controller_axis[SDL_CONTROLLER_AXIS_LEFTX] = j1JoystickState::POSITIVE;
+							
+						}
+						else
+						{
+							controller_axis[SDL_CONTROLLER_AXIS_LEFTX] = j1JoystickState::NOTHING;
+							
+						}
+					}
+					break;
+
+				case SDL_CONTROLLER_AXIS_LEFTY:
+
+					if (event.caxis.value < -DEAD_ZONE)
+						controller_axis[SDL_CONTROLLER_AXIS_LEFTY] = j1JoystickState::NEGATIVE;
+
+					else
+					{
+						if (event.caxis.value > DEAD_ZONE)
+							controller_axis[SDL_CONTROLLER_AXIS_LEFTY] = j1JoystickState::POSITIVE;
+						
+						else controller_axis[SDL_CONTROLLER_AXIS_LEFTY] = j1JoystickState::NOTHING;
+							
+						
+					}
+					break;
+				}*/
+
+				if (event.caxis.value < -DEAD_ZONE)
+					controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_NEGATIVE;
+
+				else
+				{
+					if (event.caxis.value > DEAD_ZONE)
+						controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_POSITIVE;
+
+					else controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_NOTHING;
+				}
+				
 				
 				break;
 

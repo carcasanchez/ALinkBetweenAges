@@ -9,6 +9,7 @@
 #include "j1CollisionManager.h"
 #include "p2Log.h"
 #include "Animation.h"
+#include "InputManager.h"
 
 Player::Player() : Entity() {} 
 
@@ -116,6 +117,13 @@ bool Player::Idle()
 		return true;
 	}
 
+	if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT || App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT || App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT || App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
+	{
+		actionState = WALKING;
+		LOG("Link is WALKING");
+		return true;
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - attackTax >= 0))
 	{
 		stamina -= attackTax;
@@ -133,14 +141,14 @@ bool Player::Walking(float dt)
 	bool moving = false;
 	dodgeDir = { 0, 0 };
 
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT)
 	{
 		currentDir = D_DOWN;
 		dodgeDir.y = 1;
 		Move(0, SDL_ceil(speed * dt));
 		moving = true;
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	else if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT)
 	{
 		currentDir = D_UP;
 		dodgeDir.y = -1;
@@ -148,7 +156,7 @@ bool Player::Walking(float dt)
 		moving = true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT)
 	{
 		currentDir = D_LEFT;
 		dodgeDir.x = -1;
@@ -156,13 +164,15 @@ bool Player::Walking(float dt)
 		moving = true;
 
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
 	{
 		currentDir = D_RIGHT;
 		dodgeDir.x = 1;
 		Move(SDL_ceil(speed * dt), 0);
 		moving = true;
 	}
+
+
 
 	if (moving == false)
 	{

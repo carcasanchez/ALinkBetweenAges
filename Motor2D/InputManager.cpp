@@ -95,6 +95,57 @@ void InputManager::InputDetected(int button, EVENTSTATE state)
 	}
 }
 
+void InputManager::JoystickDetected(int axis, JSTATE state)
+{
+
+	std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
+
+	switch (axis)
+	{
+	case SDL_CONTROLLER_AXIS_LEFTX:
+		if (state == J_POSITIVE)
+		{
+			new_current_action.first = MRIGHT;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		else
+		{
+			new_current_action.first = MLEFT;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		break;
+
+	case SDL_CONTROLLER_AXIS_LEFTY:
+		
+		if (state == J_POSITIVE)
+		{
+			new_current_action.first = MDOWN;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		else
+		{
+			new_current_action.first = MUP;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		break;
+
+	case SDL_CONTROLLER_AXIS_RIGHTX:
+		//std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
+
+		break;
+
+	case SDL_CONTROLLER_AXIS_RIGHTY:
+		//std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
+
+		break;
+
+	}
+}
+
 void InputManager::ChangeInputEvent(INPUTEVENT change_ev)
 {
 	next_input_change = true;
