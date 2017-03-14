@@ -299,4 +299,16 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 		}
 	}
+
+	if (action == DODGE)
+	{
+		if (state == E_DOWN && (stamina - dodgeTax >= 0))
+		{
+			stamina -= dodgeTax;
+			LOG("LINK is DODGING");
+			actionState = DODGING;
+			dodgeTimer.Start();
+		}
+	}
+
 }

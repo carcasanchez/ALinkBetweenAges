@@ -14,7 +14,10 @@ enum INPUTEVENT
 {
 	NO_EVENT = -1,
 	ATTACK = 0,
+	DODGE,
 	PAUSE,
+
+	//No Button Asociated
 	MUP,
 	MDOWN,
 	MLEFT,

@@ -219,7 +219,6 @@ void InputManager::CallListeners()
 				std::multimap<INPUTEVENT, EVENTSTATE>::iterator frame_actions = current_action.begin();
 				while (frame_actions != current_action.end())
 				{
-					if(frame_actions->first == ATTACK)
 					(*it)->OnInputCallback(frame_actions->first, frame_actions->second);
 
 					frame_actions++;

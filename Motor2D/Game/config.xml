@@ -52,6 +52,9 @@
 
     <!--ATTACK-->
     <action event="0" button="10"/>
+    
+    <!--DODGE-->
+    <action event="1" button="9"/>
 
     <!--PAUSE-->
     <action event="2" button="6"/>
