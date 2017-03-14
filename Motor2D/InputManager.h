@@ -17,11 +17,15 @@ enum INPUTEVENT
 	DODGE,
 	PAUSE,
 
-	//No Button Asociated
+	//No Button Asociated -> Joysticks
 	MUP,
 	MDOWN,
 	MLEFT,
 	MRIGHT,
+	LOOKUP,
+	LOOKDOWN,
+	LOOKLEFT,
+	LOOKRIGHT
 	
 };
 

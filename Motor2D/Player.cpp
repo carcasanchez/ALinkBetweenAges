@@ -282,8 +282,11 @@ bool Player::Dodging(float dt)
 
 void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 {
-	if (action == ATTACK)
+
+	switch (action)
 	{
+
+	case ATTACK:
 		switch (state)
 		{
 		case E_REPEAT:
@@ -298,10 +301,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			}
 			break;
 		}
-	}
-
-	if (action == DODGE)
-	{
+		break;
+	case DODGE:
 		if (state == E_DOWN && (stamina - dodgeTax >= 0))
 		{
 			stamina -= dodgeTax;
@@ -309,6 +310,27 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			actionState = DODGING;
 			dodgeTimer.Start();
 		}
+		break;
+
+	
+	case LOOKUP:
+		currentDir = D_UP;
+		break;
+	case LOOKDOWN:
+		currentDir = D_DOWN;
+		break;
+	case LOOKLEFT:
+		currentDir = D_LEFT;
+		break;
+	case LOOKRIGHT:
+		currentDir = D_RIGHT;
+		break;
+
 	}
+
+	
+
+
+	
 
 }

@@ -133,12 +133,34 @@ void InputManager::JoystickDetected(int axis, JSTATE state)
 		break;
 
 	case SDL_CONTROLLER_AXIS_RIGHTX:
-		//std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
+		if (state == J_POSITIVE)
+		{
+			new_current_action.first = LOOKRIGHT;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		else
+		{
+			new_current_action.first = LOOKLEFT;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
 
 		break;
 
 	case SDL_CONTROLLER_AXIS_RIGHTY:
-		//std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
+		if (state == J_POSITIVE)
+		{
+			new_current_action.first = LOOKDOWN;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
+		else
+		{
+			new_current_action.first = LOOKUP;
+			new_current_action.second = E_REPEAT;
+			current_action.insert(new_current_action);
+		}
 
 		break;
 
