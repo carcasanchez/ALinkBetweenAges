@@ -11,7 +11,7 @@
 #include "Animation.h"
 #include "InputManager.h"
 
-Player::Player() : Entity() {} 
+Player::Player() : Entity() { App->inputM->AddListener(this); }
 
 bool Player::Spawn(std::string file, iPoint pos)
 {
@@ -141,6 +141,39 @@ bool Player::Walking(float dt)
 	bool moving = false;
 	dodgeDir = { 0, 0 };
 
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+			currentDir = D_DOWN;
+			dodgeDir.y = 1;
+			Move(0, SDL_ceil(speed * dt));
+			moving = true;
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		{
+			currentDir = D_UP;
+			dodgeDir.y = -1;
+			Move(0, -SDL_ceil(speed * dt));
+			moving = true;
+		}
+
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+		
+		{
+
+		currentDir = D_LEFT;
+		dodgeDir.x = -1;
+		Move(-SDL_ceil(speed * dt), 0);
+		moving = true;
+
+		}
+		else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			currentDir = D_RIGHT;
+			dodgeDir.x = 1;
+			Move(SDL_ceil(speed * dt), 0);
+			moving = true;
+		}
+
 	if (App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT)
 	{
 		currentDir = D_DOWN;
@@ -207,20 +240,20 @@ bool Player::Walking(float dt)
 
 bool Player::Attacking(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (currentDir == D_DOWN)
 	{
 		Move(0, SDL_ceil(attackSpeed * dt));
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	else if (currentDir == D_UP)
 	{
 		Move(0, -SDL_ceil(attackSpeed * dt));
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (currentDir == D_LEFT)
 	{
 		Move(-SDL_ceil(attackSpeed * dt), 0);
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	else if (currentDir == D_RIGHT)
 	{
 		Move(SDL_ceil(attackSpeed * dt), 0);
 	}
@@ -245,4 +278,25 @@ bool Player::Dodging(float dt)
 	Move(SDL_ceil(dodgeSpeed * dodgeDir.x * dt), SDL_ceil(dodgeSpeed*dodgeDir.y* dt));
 	
 	return true;
+}
+
+void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
+{
+	if (action == ATTACK)
+	{
+		switch (state)
+		{
+		case E_REPEAT:
+			break;
+
+		case E_DOWN:
+			if (stamina - attackTax >= 0)
+			{
+				stamina -= attackTax;
+				actionState = ATTACKING;
+				LOG("LINK is ATTACKING");
+			}
+			break;
+		}
+	}
 }

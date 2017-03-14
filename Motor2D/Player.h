@@ -2,9 +2,10 @@
 #define _PLAYER_H_
 
 #include "Entity.h"
+#include "InputManager.h"
 #include "j1PerfTimer.h"
 
-class Player : public Entity
+class Player : public Entity, public InputListener
 {
 public:
 
@@ -40,6 +41,9 @@ private:
 	bool Walking(float dt);
 	bool Attacking(float dt);
 	bool Dodging(float dt);
+
+	//For Input callback
+	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 };
 
 #endif // !_PLAYER_H_

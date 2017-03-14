@@ -48,7 +48,15 @@
     </entityAttributes>
     <entities_texture file ="enemies_sprites.png" />
   </game>
-  
+  -<inputManager>
+
+    <!--ATTACK-->
+    <action event="0" button="10"/>
+
+    <!--PAUSE-->
+    <action event="2" button="6"/>
+
+  </inputManager>  
   <console>
     <Position x="0" y="0"/>
     <Size width="1024" height="300"/>

@@ -45,12 +45,10 @@ bool InputManager::PreUpdate()
 
 bool InputManager::Update(float dt)
 {
-	CallListeners();
 
-	if (EventPressed(PAUSE) == E_DOWN)
-	{
-		ChangeInputEvent(MUP);
-	}
+	CallListeners();
+	
+
 
 
 	return true;
@@ -59,6 +57,7 @@ bool InputManager::Update(float dt)
 // Called after all Updates
 bool InputManager::PostUpdate()
 {
+
 	if (!current_action.empty())
 		current_action.clear();
 
@@ -220,7 +219,9 @@ void InputManager::CallListeners()
 				std::multimap<INPUTEVENT, EVENTSTATE>::iterator frame_actions = current_action.begin();
 				while (frame_actions != current_action.end())
 				{
+					if(frame_actions->first == ATTACK)
 					(*it)->OnInputCallback(frame_actions->first, frame_actions->second);
+
 					frame_actions++;
 				}
 			}

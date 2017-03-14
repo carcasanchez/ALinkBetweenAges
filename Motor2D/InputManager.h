@@ -13,12 +13,13 @@
 enum INPUTEVENT
 {
 	NO_EVENT = -1,
-	JUMP = 0,
+	ATTACK = 0,
+	PAUSE,
 	MUP,
 	MDOWN,
 	MLEFT,
 	MRIGHT,
-	PAUSE,
+	
 };
 
 enum EVENTSTATE

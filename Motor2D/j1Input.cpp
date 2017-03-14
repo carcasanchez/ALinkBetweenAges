@@ -214,46 +214,7 @@ bool j1Input::PreUpdate()
 				break;
 
 			case SDL_CONTROLLERAXISMOTION:
-
-				/*switch (event.caxis.axis)
-				{
-				case SDL_CONTROLLER_AXIS_LEFTX:
-					if (event.caxis.value < -DEAD_ZONE)
-					{
-						controller_axis[SDL_CONTROLLER_AXIS_LEFTX] = j1JoystickState::NEGATIVE;
-						
-					}
-					else
-					{
-						if (event.caxis.value > DEAD_ZONE)
-						{
-							controller_axis[SDL_CONTROLLER_AXIS_LEFTX] = j1JoystickState::POSITIVE;
-							
-						}
-						else
-						{
-							controller_axis[SDL_CONTROLLER_AXIS_LEFTX] = j1JoystickState::NOTHING;
-							
-						}
-					}
-					break;
-
-				case SDL_CONTROLLER_AXIS_LEFTY:
-
-					if (event.caxis.value < -DEAD_ZONE)
-						controller_axis[SDL_CONTROLLER_AXIS_LEFTY] = j1JoystickState::NEGATIVE;
-
-					else
-					{
-						if (event.caxis.value > DEAD_ZONE)
-							controller_axis[SDL_CONTROLLER_AXIS_LEFTY] = j1JoystickState::POSITIVE;
-						
-						else controller_axis[SDL_CONTROLLER_AXIS_LEFTY] = j1JoystickState::NOTHING;
-							
-						
-					}
-					break;
-				}*/
+				
 
 				if (event.caxis.value < -DEAD_ZONE)
 					controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_NEGATIVE;
