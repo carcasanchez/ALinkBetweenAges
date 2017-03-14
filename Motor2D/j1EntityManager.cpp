@@ -6,6 +6,11 @@
 #include "p2Point.h"
 #include "Entity.h"
 #include "Player.h"
+#include "Enemy.h"
+
+//=====Enemy Includes
+#include "GreenSoldier.h"
+
 
 j1EntityManager::j1EntityManager()
 {
@@ -92,37 +97,32 @@ bool j1EntityManager::CleanUp()
 	return ret;
 }
 
-Entity* j1EntityManager::Create(ENTITY_TYPE type, int x, int y)
+Player* j1EntityManager::CreatePlayer(int x, int y)
 {
-	Entity* ret = nullptr;
+	Player* ret = new Player();
+
+	ret->Spawn(dir[LINK], iPoint(x,y));
+	entities.push_front(ret);
+	App->game->playerId = ret->id = entities.begin();
+	
+	return ret;
+}
+
+//Enemy factory
+Enemy * j1EntityManager::CreateEnemy(ENEMY_TYPE type, int x, int y)
+{
+	Enemy* ret = nullptr;
 
 	switch (type)
 	{
-	case LINK:
-		ret = new Player();
-		break;
-	case NPC1:
-		break;
-	default:
+	case GREEN_SOLDIER:
+		ret = new GreenSoldier();
 		break;
 	}
 
-	if (ret != nullptr)
-	{
-		ret->Spawn(dir[type], iPoint(x,y));
+	ret->Spawn(dir[ENEMY], iPoint(x, y));
+	entities.push_back(ret);
+	ret->id = entities.end();
 
-		if (type == LINK)
-		{
-			entities.push_front(ret);
-			App->game->playerId = ret->id = entities.begin();
-
-		}
-		else
-		{
-			entities.push_back(ret);
-			ret->id = entities.end();
-		}
-	}
-
-	return ret;
+	return nullptr;
 }

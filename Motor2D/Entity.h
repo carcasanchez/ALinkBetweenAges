@@ -30,7 +30,8 @@ enum DIRECTION
 enum ENTITY_TYPE
 {
 	LINK = 0,
-	NPC1
+	NPC,
+	ENEMY
 };
 
 

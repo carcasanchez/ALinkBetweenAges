@@ -8,7 +8,10 @@
 #include <string>
 
 class Entity;
+class Player;
+class Enemy;
 enum ENTITY_TYPE;
+enum ENEMY_TYPE;
 
 class j1EntityManager
 {
@@ -23,7 +26,8 @@ public:
 
 public:
 
-	Entity* Create(ENTITY_TYPE type, int x, int y);
+	Player* CreatePlayer(int x, int y);
+	Enemy* CreateEnemy(ENEMY_TYPE, int x, int y);
 
 	std::list<Entity*> entities;
 
