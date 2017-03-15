@@ -100,6 +100,9 @@
     <ClCompile Include="GreenSoldier.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -225,11 +228,11 @@
     <ClInclude Include="Player.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="GreenSoldier.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -17,11 +17,8 @@ class Enemy : public Entity
 public:
 	Enemy() :Entity() {};
 	
-	bool Enemy::Spawn(std::string file, iPoint pos)
-	{
-		//TODO: ENEMY DATA LOAD
-		return true;
-	}
+	virtual bool Spawn(std::string file, iPoint pos) { return true; };
+
 
 };
 

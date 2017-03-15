@@ -5,6 +5,7 @@
 #include "j1CollisionManager.h"
 #include "p2Point.h"
 #include "j1Render.h"
+#include "Enemy.h"
 //#include "Hud.h"
 
 

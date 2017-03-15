@@ -75,6 +75,7 @@ bool Entity::LoadAttributes(pugi::xml_node attributes)
 
 	node = attributes.child("animation");
 
+	//TODO: load three links animation properly
 	if (ret = LoadAnimations(node.attribute("file").as_string()))
 	{
 		node = attributes.child("texture");
@@ -99,7 +100,7 @@ bool Entity::LoadAnimations(std::string file)
 	pugi::xml_document	anim_file;
 	pugi::xml_node		ent;
 	char* buff;
-	int size = App->fs->Load("animations/player_animations.xml", &buff);
+	int size = App->fs->Load(file.c_str(), &buff);
 	pugi::xml_parse_result result = anim_file.load_buffer(buff, size);
 	RELEASE(buff);
 

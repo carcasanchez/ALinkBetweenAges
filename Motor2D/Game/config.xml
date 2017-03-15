@@ -45,8 +45,8 @@
     <entityAttributes folder = "attributes/">
       <link file = "player_attributes.xml"/>
       <enemy file = "enemy_attributes.xml"/>
+      <npc file = "npc_attributes.xml"/>
     </entityAttributes>
-    <entities_texture file ="enemies_sprites.png" />
   </game>
   -<inputManager>
 
