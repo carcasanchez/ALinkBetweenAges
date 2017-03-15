@@ -68,6 +68,7 @@ bool j1EntityManager::Update(float dt)
 	for (std::list<Entity*>::iterator item = entities.begin(); item != entities.end(); item++)
 	{
 		(*item)->Update(dt);
+		(*item)->UpdateCollider();
 	}
 
 	return ret;
