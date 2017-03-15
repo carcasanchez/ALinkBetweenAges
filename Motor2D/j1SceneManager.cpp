@@ -4,7 +4,7 @@
 
 j1SceneManager::j1SceneManager() : currentScene(NULL)
 {
-
+	name = ("sceneManager");
 }
 
 j1SceneManager::~j1SceneManager()
