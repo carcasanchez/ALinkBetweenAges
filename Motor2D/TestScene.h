@@ -8,8 +8,13 @@ class TestScene : public Scene
 public:
 
 	TestScene();
-	bool Start();
+	bool Load(pugi::xml_node& config);
 	bool Update(float dt);
+
+public:
+
+	Room* testRoom;
+	pugi::xml_node data;
 };
 
 #endif // __TEST_SCENE_H__

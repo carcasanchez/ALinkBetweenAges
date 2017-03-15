@@ -6,7 +6,7 @@
 
 class UI_element;
 enum GUI_INPUT;
-
+class Room;
 
 /*
 THIS IS NOT A MODULE BECAUSE I NEEDS MORE FUNCTIONALITY
@@ -17,12 +17,13 @@ PLS DONT CHANGE
 
 class Scene
 {
+
 public:
+
 	Scene() : name("unnamed scene") {}
 	Scene(std::string name) : name(name) {}
 	virtual ~Scene() {}
-	virtual bool Initialize(pugi::xml_node& config) { return true; }
-	virtual bool Start() { return true; }
+	virtual bool Load(pugi::xml_node& config) { return true; }
 	virtual bool PreUpdate() { return true; }
 	virtual bool Update(float dt) { return true; }
 	virtual bool PostUpdate() { return true; }
@@ -31,12 +32,24 @@ public:
 	virtual bool On_GUI_Callback(UI_element* elem, GUI_INPUT gui_input) { return true; }
 
 public:
+
 	std::string name;
 };
 
 
 
+class Room : public Scene
+{
 
+public:
+
+	Room();
+	Room(std::string name) : Scene(name) {}
+	~Room() {}
+
+	virtual bool Load(pugi::xml_node& config);
+	virtual bool CleanUp();
+};
 
 
 
