@@ -20,6 +20,7 @@ public:
 
 public:
 	Scene* currentScene;
+	pugi::xml_node sceneFiles;
 };
 
 

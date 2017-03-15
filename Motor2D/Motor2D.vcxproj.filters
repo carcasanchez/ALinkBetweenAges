@@ -100,8 +100,13 @@
     <ClCompile Include="GreenSoldier.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Enemy.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
+=======
+    <ClCompile Include="Scene.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+>>>>>>> origin/master
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

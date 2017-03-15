@@ -115,7 +115,7 @@ bool j1CollisionManager::DrawDebug()
 	{
 		for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
 		{
-			App->render->DrawQuad((*it)->rect, 255, 0, 0, 100);
+			App->render->DrawQuad((*it)->rect, 255, 255, 0, 150);
 		}
 	}
 	return false;

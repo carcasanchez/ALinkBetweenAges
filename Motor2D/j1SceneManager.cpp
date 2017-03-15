@@ -14,13 +14,14 @@ j1SceneManager::~j1SceneManager()
 
 bool j1SceneManager::Awake(pugi::xml_node& config)
 {
+	sceneFiles = config;
 	return true;
 }
 
 bool j1SceneManager::Start()
 {
 	currentScene = new TestScene();
-	return currentScene->Start();
+	return currentScene->Load(sceneFiles);
 }
 
 bool j1SceneManager::Update(float dt)

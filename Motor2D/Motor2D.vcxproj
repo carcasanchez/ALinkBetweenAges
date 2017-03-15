@@ -93,6 +93,7 @@
     <ClCompile Include="j1ParticleManager.cpp" />
     <ClCompile Include="j1Pathfinding.cpp" />
     <ClCompile Include="j1PerfTimer.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="j1SceneManager.cpp" />
     <ClCompile Include="j1Timer.cpp" />
