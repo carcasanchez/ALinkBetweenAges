@@ -46,8 +46,9 @@ bool InputManager::PreUpdate()
 bool InputManager::Update(float dt)
 {
 
-	CallListeners();
+
 	
+
 
 
 
@@ -57,7 +58,7 @@ bool InputManager::Update(float dt)
 // Called after all Updates
 bool InputManager::PostUpdate()
 {
-
+	CallListeners();
 	if (!current_action.empty())
 		current_action.clear();
 
