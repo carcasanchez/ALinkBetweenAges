@@ -124,6 +124,9 @@ public:
 
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
+	bool LoadRoomMap(const char* path);
+	void UnloadRoomMap();
+
 private:
 
 	bool LoadMap();
@@ -134,13 +137,21 @@ private:
 
 	TileSet* GetTilesetFromTileId(int id) const;
 
+	void UnLoadData();
+
 public:
 
-	MapData data;
+	MapData* data;
 
 private:
 
-	pugi::xml_document	map_file;
+	MapData smallData;
+	MapData normalData;
+
+	pugi::xml_document*	map_file;
+	pugi::xml_document	small_map_file;
+	pugi::xml_document	normal_map_file;
+
 	string				folder;
 	bool				map_loaded;
 	bool				debug_collisions = false;
