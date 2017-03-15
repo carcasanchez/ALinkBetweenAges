@@ -40,6 +40,27 @@
   <map>
     <folder>maps/</folder>
   </map>
+
+  <sceneManager>
+    <scenes folder = "scenes/">
+      <test name = "Test Scene" file = "kakariko.xml"/>
+      <menu name = "menu" file = "kakariko.xml"/>
+      <kakariko name = "kakariko" file = "kakariko.xml"/>
+      <forest name = "forest" file = "kakariko.xml"/>
+      <greenZone1 name = "greenZone1" file = "kakariko.xml"/>
+      <greenZone2 name = "greenZone2" file = "kakariko.xml"/>
+      <witchHouse name = "witchHouse" file = "kakariko.xml"/>
+      <desert1 name = "desert1" file = "kakariko.xml"/>
+      <desert2 name = "desert2" file = "kakariko.xml"/>
+      <dunes name = "dunes" file = "kakariko.xml"/>
+      <temple name = "temple" file = "kakariko.xml"/>
+      <dungeon name = "dungeon" file = "kakariko.xml"/>
+      <masterSword name = "masterSword" file = "kakariko.xml"/>
+      <castleOut name = "castleOut" file = "kakariko.xml"/>
+      <castleIn name = "castleIn" file = "kakariko.xml"/>
+      <boss name = "boss" file = "kakariko.xml"/>
+    </scenes>
+  </sceneManager>
   
   <game>
     <entityAttributes folder = "attributes/">

@@ -190,7 +190,7 @@ bool j1App::Start()
 	bool ret = true;
 
 
-	for (std::list<j1Module*>::const_iterator item = modules.begin(); item != modules.cend(); item++)
+	for (std::list<j1Module*>::const_iterator item = modules.begin(); item != modules.cend() && ret; item++)
 		ret = (*item)->Start();
 
 

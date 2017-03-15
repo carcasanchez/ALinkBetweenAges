@@ -10,11 +10,11 @@
 
 TestScene::TestScene() : Scene("Test Scene"), testRoom(NULL) {}
 
-bool TestScene::Load(pugi::xml_node& config)
+bool TestScene::Load(std::string _data)
 {
 	bool ret = true;
 
-	data = config;
+	data = _data;
 
 	if (ret = (App->map->Load("map_testing.tmx")))
 	{
@@ -39,7 +39,7 @@ bool TestScene::Update(float dt)
 		if (testRoom == NULL)
 		{
 			testRoom = new Room("tmpRoom");
-			testRoom->Load(App->sceneM->sceneFiles);
+			testRoom->Load("data");
 		}
 		else
 		{

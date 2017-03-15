@@ -8,11 +8,18 @@
 #include <list>
 #include "Player.h"
 
+
+bool Scene::Load(std::string data)
+{
+	return true;
+}
+
+
+
+
 Room::Room() : Scene() {}
 
-
-
-bool Room::Load(pugi::xml_node& config)
+bool Room::Load(std::string data)
 {
 	bool ret = true;
 

@@ -8,13 +8,13 @@ class TestScene : public Scene
 public:
 
 	TestScene();
-	bool Load(pugi::xml_node& config);
+	bool Load(std::string data);
 	bool Update(float dt);
 
 public:
 
 	Room* testRoom;
-	pugi::xml_node data;
+	std::string data;
 };
 
 #endif // __TEST_SCENE_H__

@@ -23,7 +23,7 @@ public:
 	Scene() : name("unnamed scene") {}
 	Scene(std::string name) : name(name) {}
 	virtual ~Scene() {}
-	virtual bool Load(pugi::xml_node& config) { return true; }
+	virtual bool Load(std::string data);
 	virtual bool PreUpdate() { return true; }
 	virtual bool Update(float dt) { return true; }
 	virtual bool PostUpdate() { return true; }
@@ -47,7 +47,7 @@ public:
 	Room(std::string name) : Scene(name) {}
 	~Room() {}
 
-	virtual bool Load(pugi::xml_node& config);
+	virtual bool Load(std::string data);
 	virtual bool CleanUp();
 };
 

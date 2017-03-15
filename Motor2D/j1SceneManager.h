@@ -2,6 +2,7 @@
 #define _SCENE_MANAGER_H_
 
 #include "j1Module.h"
+#include <map>
 
 class Scene;
 
@@ -20,7 +21,8 @@ public:
 
 public:
 	Scene* currentScene;
-	pugi::xml_node sceneFiles;
+
+	std::map<std::string, std::string> dir;
 };
 
 
