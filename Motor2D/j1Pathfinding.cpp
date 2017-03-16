@@ -208,6 +208,8 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 	open_list.list.push_back(PathNode(0, origin.DistanceManhattan(destination), origin, nullptr));
 
+
+
 	while (open_list.list.size() > 0)
 	{
 
@@ -260,8 +262,9 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 			for (; (*the_begin) != (*the_end) && (*the_begin) != (*(the_end + 1)) ; the_begin++, the_end++)
 				std::iter_swap(the_begin, the_end);
 
+			break;
 		}
-
+		LOG("ONE NODE");
 	}
 
 	return ret;

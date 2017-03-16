@@ -42,7 +42,10 @@ bool j1GameLayer::Start()
 
 	em->CreatePlayer(150, 150);
 	em->CreateEnemy(GREEN_SOLDIER, 150, 200);
-
+	em->CreateEnemy(GREEN_SOLDIER, 0, 0);
+	em->CreateEnemy(GREEN_SOLDIER, 100, 0);
+	em->CreateEnemy(GREEN_SOLDIER, 0, 100);
+	em->CreateEnemy(GREEN_SOLDIER, 100, 0);
 	return true;
 }
 

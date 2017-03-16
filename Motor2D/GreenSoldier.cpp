@@ -38,15 +38,25 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 
 bool GreenSoldier::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
+
 		iPoint origin = App->map->WorldToMap(currentPos.x, currentPos.y);
 		iPoint dest = App->map->WorldToMap(App->game->playerId._Mynode()->_Myval->currentPos.x, App->game->playerId._Mynode()->_Myval->currentPos.y);
 		if (App->pathfinding->CreatePath(origin,dest))
 		{
 			path = App->pathfinding->ReturnPath();
 		}
+	
+
+	if (path.size() != 0)
+	{
+		if (App->map->WorldToMap(currentPos.x, currentPos.y) == path[0])
+		{
+			path.erase(path.begin());
+		}
+		iPoint movement = path[0] - App->map->WorldToMap(currentPos.x, currentPos.y);
+		currentPos+= movement;
 	}
+
 	return true;
 }
 
