@@ -6,6 +6,8 @@
 #include "p2Point.h"
 #include "j1Render.h"
 #include "Enemy.h"
+#include "j1PerfTimer.h"
+#include "p2Log.h"
 //#include "Hud.h"
 
 
@@ -101,6 +103,21 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		if((*playerId) != nullptr)
 			(*playerId)->currentPos = (*playerId)->lastPos;
+	}
+
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
+	{
+		if ((*playerId)->damaged == false)
+		{
+			if ((*playerId) != nullptr)
+			{
+				LOG("HIT");
+				(*playerId)->life--;
+				(*playerId)->damaged = true;
+				(*playerId)->damagedTimer.Start();
+				
+			}
+		}
 	}
 
 	return true;

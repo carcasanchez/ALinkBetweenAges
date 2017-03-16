@@ -10,6 +10,7 @@
 #include "p2Log.h"
 #include "Animation.h"
 #include "InputManager.h"
+#include "j1PerfTimer.h"
 
 Player::Player() : Entity() { App->inputM->AddListener(this); }
 
@@ -64,6 +65,10 @@ bool Player::Update(float dt)
 {
 	bool ret = true;
 	lastPos = currentPos;
+	if (damagedTimer.ReadMs() > 1000)
+	{
+		damaged = false;
+	}
 
 	if (stamina < maxStamina)
 	{
@@ -92,6 +97,12 @@ bool Player::Update(float dt)
 
 	UpdateCollider();
 	return ret;
+}
+
+void Player::OnDeath()
+{
+	currentPos = {0, 0};
+	life = 3;
 }
 
 void Player::Change_direction()

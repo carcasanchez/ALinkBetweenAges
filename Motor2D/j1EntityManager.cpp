@@ -46,7 +46,7 @@ bool j1EntityManager::PreUpdate()
 		if ((*item)->life <= 0)
 		{
 			(*item)->OnDeath();
-			item = entities.erase(item); //calls destroyer
+			//item = entities.erase(item); //calls destroyer
 		}
 		else
 		{
@@ -103,6 +103,7 @@ Player* j1EntityManager::CreatePlayer(int x, int y)
 	Player* ret = new Player();
 
 	ret->Spawn(dir[LINK], iPoint(x,y));
+	ret->type = LINK;
 	entities.push_front(ret);
 	App->game->playerId = ret->id = entities.begin();
 	
@@ -122,6 +123,7 @@ Enemy * j1EntityManager::CreateEnemy(ENEMY_TYPE type, int x, int y)
 	}
 
 	ret->Spawn(dir[ENEMY], iPoint(x, y));
+	ret->type = ENEMY;
 	entities.push_back(ret);
 	ret->id = entities.end();
 

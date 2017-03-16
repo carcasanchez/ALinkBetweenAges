@@ -5,6 +5,7 @@
 #include "InputManager.h"
 #include "j1PerfTimer.h"
 
+
 class Player : public Entity, public InputListener
 {
 public:
@@ -12,6 +13,7 @@ public:
 	Player();
 	bool Spawn(std::string file, iPoint pos);
 	bool Update(float dt);
+	void OnDeath();
 
 public:
 
@@ -32,6 +34,9 @@ public:
 	uint64 dodgeLimit;
 	iPoint dodgeDir;
 	j1PerfTimer dodgeTimer;
+
+
+
 
 private:
 	void Change_direction();

@@ -2,6 +2,7 @@
 #define _ENTITY_H_
 
 #include "j1FileSystem.h"
+#include "j1PerfTimer.h"
 #include "p2Point.h"
 #include <string>
 #include <list>
@@ -82,6 +83,8 @@ public:
 	ENTITY_TYPE type;
 	int life;
 	int speed;
+	bool damaged = false;
+	j1PerfTimer damagedTimer;
 
 	//Path
 	vector<iPoint> path;
