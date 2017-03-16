@@ -7,6 +7,7 @@
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Textures.h"
+#include "j1Map.h"
 
 Entity::Entity() :
 	sprite(nullptr),
@@ -56,6 +57,7 @@ bool Entity::Draw()
 	currentAnim = &anim.find({ actionState, currentDir })->second;
 	sprite->updateSprite(currentPos, currentAnim->pivot, currentAnim->getCurrentFrame(), currentAnim->flip);
 	App->render->Draw(sprite);
+	App->map->DebugPath(path);
 
 	return ret;
 }
@@ -67,6 +69,8 @@ bool Entity::LoadAttributes(pugi::xml_node attributes)
 	// base stats
 	pugi::xml_node node = attributes.child("base");
 	life = node.attribute("life").as_int(1);
+	speed = node.attribute("speed").as_int(1);
+	
 
 	//collider
 	node = attributes.child("collider");

@@ -107,6 +107,8 @@ public:
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);
 
+	bool Start();
+
 	bool Update(float dt);
 
 	// Called each loop iteration
@@ -121,11 +123,16 @@ public:
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
 	iPoint WorldToMapMouse(int x, int y) const;
+	iPoint GetTileCenter(iPoint);
 
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
 	bool LoadRoomMap(const char* path);
 	void UnloadRoomMap();
+
+
+	//Debug pathfinding
+	void DebugPath(vector<iPoint>);
 
 private:
 
@@ -155,6 +162,8 @@ private:
 	string				folder;
 	bool				map_loaded;
 	bool				debug_collisions = false;
+
+	SDL_Texture* debug_tex;
 };
 
 #endif // __j1MAP_H__

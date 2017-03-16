@@ -4,7 +4,9 @@
 #include "j1GameLayer.h"
 #include "GreenSoldier.h"
 #include "j1Input.h"
-#include  "j1Map.h"
+#include "j1Map.h"
+#include "j1Render.h"
+
 
 
 bool GreenSoldier::Spawn(std::string file, iPoint pos)
@@ -36,33 +38,19 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 	return ret;
 }
 
-bool GreenSoldier::Update(float dt)
+
+
+/*bool GreenSoldier::Draw()
 {
-	iPoint dest = App->map->WorldToMap(App->game->playerId._Mynode()->_Myval->currentPos.x, App->game->playerId._Mynode()->_Myval->currentPos.y);
+	bool ret = true;
 
-	if (dest != currentDest)
-	{
-		LOG("PATHFINDING");
-		currentDest = dest;
-		iPoint origin = App->map->WorldToMap(currentPos.x, currentPos.y);
-		if (App->pathfinding->CreatePath(origin, currentDest))
-		{
-			path = App->pathfinding->ReturnPath();
-		}
-	}
-		
-	
+	currentAnim = &anim.find({ actionState, currentDir })->second;
+	sprite->updateSprite(currentPos, currentAnim->pivot, currentAnim->getCurrentFrame(), currentAnim->flip);
+	App->render->Draw(sprite);
 
-	if (path.size() != 0)
-	{
-		if (App->map->WorldToMap(currentPos.x, currentPos.y) == path[0])
-		{
-			path.erase(path.begin());
-		}
-		iPoint movement = path[0] - App->map->WorldToMap(currentPos.x, currentPos.y);
-		currentPos+= movement;
-	}
+	//for(int i=0, j=path.size();i<j;i++)
+	iPoint k= App->map->MapToWorld(path[0].x, path[0].y);
+	SDL_RenderDrawLine(App->render->renderer, currentPos.x, currentPos.y,k.x, k.y );
 
-	return true;
-}
-
+	return ret;
+}*/

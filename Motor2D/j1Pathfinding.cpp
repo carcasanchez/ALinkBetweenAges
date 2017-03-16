@@ -1,6 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1Map.h"
 #include "j1PathFinding.h"
 
 j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH), width(0), height(0)
@@ -35,6 +36,7 @@ void j1PathFinding::SetMap(uint width, uint height, uchar* data)
 	RELEASE_ARRAY(map);
 	map = new uchar[width*height];
 	memcpy(map, data, width*height);
+
 }
 
 // Utility: return true if pos is inside the map boundaries
@@ -60,11 +62,13 @@ uchar j1PathFinding::GetTileAt(const iPoint& pos) const
 	return INVALID_WALK_CODE;
 }
 
-// To request all tiles involved in the last generated path
-const vector<iPoint>* j1PathFinding::GetLastPath() const
+//Return last path
+vector<iPoint> j1PathFinding::ReturnPath()
 {
-	return &last_path;
-}
+	return last_path;
+};
+
+//Return centre of tile
 
 
 
@@ -115,7 +119,7 @@ list<PathNode>::const_iterator PathList::GetNodeLowestScore() const
 PathNode::PathNode() : g(-1), h(-1), pos(-1, -1), parent(NULL)
 {}
 
-PathNode::PathNode(int g, int h, const iPoint& pos, const PathNode* parent) : g(g), h(h), pos(pos), parent(parent)
+PathNode::PathNode(int g, int h, const iPoint& pos, const PathNode* parent) : g(g), h(h),pos(pos), parent(parent)
 {}
 
 PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), parent(node.parent)

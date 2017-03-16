@@ -7,6 +7,7 @@
 #include "j1Map.h"
 #include "p2SString.h"
 #include "j1Input.h"
+#include "j1Pathfinding.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -29,6 +30,12 @@ bool j1Map::Awake(pugi::xml_node& config)
 	folder = config.child("folder").child_value();
 
 	return ret;
+}
+
+bool j1Map::Start()
+{
+	debug_tex = App->tex->Load("maps/path_debug.png");
+	return true;
 }
 
 bool j1Map::Update(float dt)
@@ -131,8 +138,8 @@ iPoint j1Map::WorldToMap(int x, int y) const
 
 	if(data->type == MAPTYPE_ORTHOGONAL)
 	{
-		ret.x = x / data->tile_width;
-		ret.y = y / data->tile_height;
+		ret.x = (x / data->tile_width);
+		ret.y = (y / data->tile_height);
 	}
 	else if(data->type == MAPTYPE_ISOMETRIC)
 	{
@@ -149,6 +156,15 @@ iPoint j1Map::WorldToMap(int x, int y) const
 	}
 
 	return ret;
+}
+
+iPoint j1Map::GetTileCenter(iPoint tile)
+{
+	iPoint ret = MapToWorld(tile.x, tile.y);
+
+	ret.x += data->tile_width/2;
+	ret.y += data->tile_height/2;
+	return  ret ;
 }
 
 iPoint j1Map::WorldToMapMouse(int x, int y) const
@@ -563,6 +579,15 @@ void j1Map::UnloadRoomMap()
 	UnLoadData();
 	data = &normalData;
 	map_file = &normal_map_file;
+}
+
+void j1Map::DebugPath(vector<iPoint> path)
+{
+	for (int i = 0, j = path.size(); i < j; i++)
+	{
+		iPoint tilePos = MapToWorld(path[i].x, path[i].y);
+		App->render->Blit(debug_tex, tilePos.x, tilePos.y);
+	}
 }
 
 void j1Map::UnLoadData()

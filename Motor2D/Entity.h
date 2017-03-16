@@ -81,6 +81,10 @@ public:
 	// Attributes
 	ENTITY_TYPE type;
 	int life;
+	int speed;
+
+	//Path
+	vector<iPoint> path;
 };
 
 #endif // !_ENTITY_H_

@@ -9,7 +9,6 @@ public:
 	GreenSoldier():Enemy() {};
 
 	bool GreenSoldier::Spawn(std::string file, iPoint pos);
-	bool Update(float dt);
 };
 
 #endif

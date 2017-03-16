@@ -32,8 +32,6 @@ public:
 	// Main function to request a path from A to B
 	int CreatePath(const iPoint& origin, const iPoint& destination);
 
-	// To request all tiles involved in the last generated path
-	const vector<iPoint>* GetLastPath() const;
 
 	// Utility: return true if pos is inside the map boundaries
 	bool CheckBoundaries(const iPoint& pos) const;
@@ -44,11 +42,12 @@ public:
 	// Utility: return the walkability value of a tile
 	uchar GetTileAt(const iPoint& pos) const;
 
-	//Return last path
-	vector<iPoint> ReturnPath()
-	{
-		return last_path;
-	};
+	//Return path
+	vector<iPoint> ReturnPath();
+
+	
+
+	
 
 private:
 

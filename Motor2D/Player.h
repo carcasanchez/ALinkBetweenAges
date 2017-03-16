@@ -20,7 +20,7 @@ public:
 	float maxStamina;
 	float stamina;
 	float staminaRec;
-	int speed;
+
 
 	//Attack
 	int attackSpeed;
