@@ -21,7 +21,7 @@ public:
 
 protected:
 	vector<iPoint> path;
-
+	iPoint currentDest = { 0, 0 };
 };
 
 #endif

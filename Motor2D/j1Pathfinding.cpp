@@ -264,7 +264,6 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 			break;
 		}
-		LOG("ONE NODE");
 	}
 
 	return ret;
