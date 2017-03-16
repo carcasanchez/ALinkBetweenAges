@@ -19,6 +19,8 @@ public:
 	
 	virtual bool Spawn(std::string file, iPoint pos) { return true; };
 
+protected:
+	vector<iPoint> path;
 
 };
 

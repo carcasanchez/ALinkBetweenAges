@@ -1,6 +1,10 @@
 #include "j1App.h"
 #include "p2Log.h"
+#include "j1Pathfinding.h"
+#include "j1GameLayer.h"
 #include "GreenSoldier.h"
+#include "j1Input.h"
+#include  "j1Map.h"
 
 
 bool GreenSoldier::Spawn(std::string file, iPoint pos)
@@ -34,6 +38,15 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 
 bool GreenSoldier::Update(float dt)
 {
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		iPoint origin = App->map->WorldToMap(currentPos.x, currentPos.y);
+		iPoint dest = App->map->WorldToMap(App->game->playerId._Mynode()->_Myval->currentPos.x, App->game->playerId._Mynode()->_Myval->currentPos.y);
+		if (App->pathfinding->CreatePath(origin,dest))
+		{
+			path = App->pathfinding->ReturnPath();
+		}
+	}
 	return true;
 }
 
