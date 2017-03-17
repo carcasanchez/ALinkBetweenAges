@@ -28,9 +28,9 @@ bool Enemy::SearchForPlayer(int speed, float dt)
 		{
 			path = App->pathfinding->ReturnPath();
 			path.erase(path.begin());
-			for (int i = 0, j = path.size(); i < j; i++)
-				LOG("PATH %i: x-%i, y-%i", i, path[i].x, path[i].y);
-			LOG("----------------------------------------");
+			//for (int i = 0, j = path.size(); i < j; i++)
+				//LOG("PATH %i: x-%i, y-%i", i, path[i].x, path[i].y);
+			//LOG("----------------------------------------");
 		}
 	}
 

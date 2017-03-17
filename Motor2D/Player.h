@@ -36,6 +36,8 @@ public:
 	j1PerfTimer dodgeTimer;
 
 
+	bool invulnerable;
+
 
 
 private:

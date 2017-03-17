@@ -86,7 +86,7 @@ public:
 	ENTITY_TYPE type;
 	int life;
 	int speed;
-	bool damaged = false;
+	bool damaged;
 	j1PerfTimer damagedTimer;
 
 	//Path

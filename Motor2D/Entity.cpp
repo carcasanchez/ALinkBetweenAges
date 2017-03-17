@@ -19,7 +19,8 @@ Entity::Entity() :
 	col(nullptr),
 	colPivot(iPoint()),
 	type(ENTITY_TYPE(0)),
-	life(1)
+	life(1),
+	damaged(false)
 {
 	anim.clear();
 }

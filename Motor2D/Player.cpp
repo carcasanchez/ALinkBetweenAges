@@ -56,6 +56,8 @@ bool Player::Spawn(std::string file, iPoint pos)
 		dodgeSpeed = node.attribute("speed").as_int(500);
 		dodgeTax = node.attribute("staminaTax").as_int(25);
 		dodgeLimit = node.attribute("limit").as_int(50);
+
+		invulnerable = false;
 	}
 
 	return ret;
@@ -65,10 +67,12 @@ bool Player::Update(float dt)
 {
 	bool ret = true;
 	lastPos = currentPos;
+
 	
 	if (damagedTimer.ReadMs() > 2000)
 	{
-		damaged = false;
+		invulnerable = false;
+		LOG("DAMAGED FALSE - TIMER STOP");
 	}
 
 	if (stamina < maxStamina)
@@ -100,7 +104,6 @@ bool Player::Update(float dt)
 			break;
 	}
 
-	UpdateCollider();
 	return ret;
 }
 
@@ -108,6 +111,8 @@ void Player::OnDeath()
 {
 	currentPos = {0, 0};
 	life = 3;
+	appliedForce = {0, 0};
+	sprite->tint = { 255, 255, 255, 255 };
 }
 
 void Player::Change_direction()
@@ -129,7 +134,7 @@ bool Player::Idle()
 	if (damaged == true)
 	{
 		actionState = DAMAGED;
-		LOG("LINK DAMAGED");
+		//LOG("LINK DAMAGED");
 		return true;
 	}
 
@@ -166,13 +171,13 @@ bool Player::Walking(float dt)
 	bool moving = false;
 	dodgeDir = { 0, 0 };
 
-
 	if (damaged == true)
 	{
 		actionState = DAMAGED;
-		LOG("LINK DAMAGED");
+	//	LOG("LINK DAMAGED");
 		return true;
 	}
+	
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
@@ -273,7 +278,6 @@ bool Player::Walking(float dt)
 
 bool Player::Attacking(float dt)
 {
-	
 	if (damaged == true)
 	{
 		actionState = DAMAGED;
@@ -328,20 +332,19 @@ bool Player::Dodging(float dt)
 	return true;
 }
 
-
 bool Player::Damaged(float dt)
 {
-	if (damagedTimer.ReadMs() > 200)
+	if (damagedTimer.ReadMs() > 100)
 	{
 		actionState = IDLE;
+		damaged = false;
+		sprite->tint = { 255, 255, 255, 255 };
+		LOG("DAMAGED FALSE");
 	}
-
+		
+	Move(SDL_ceil(appliedForce.x*speed*dt * 2), SDL_ceil(appliedForce.y*speed*dt * 2));
 	
-	Move(SDL_ceil(appliedForce.x*speed*dt), SDL_ceil(appliedForce.y*speed*dt));
-
-
-
-	return false;
+	return true;
 }
 
 

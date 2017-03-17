@@ -14,6 +14,7 @@ public:
 	double ReadMs() const;
 	uint64 ReadTicks() const;
 
+
 private:
 	uint64	started_at;
 	static uint64 frequency;
