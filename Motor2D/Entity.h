@@ -91,6 +91,9 @@ public:
 
 	//Path
 	vector<iPoint> path;
+
+	//Marked to death
+	bool toDelete;
 };
 
 #endif // !_ENTITY_H_

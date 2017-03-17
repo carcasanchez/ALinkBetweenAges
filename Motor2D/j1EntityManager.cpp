@@ -46,7 +46,8 @@ bool j1EntityManager::PreUpdate()
 		if ((*item)->life <= 0)
 		{
 			(*item)->OnDeath();
-			//item = entities.erase(item); //calls destroyer
+			if((*item)->toDelete)
+				item = entities.erase(item); //calls destroyer
 		}
 		else
 		{

@@ -20,7 +20,8 @@ Entity::Entity() :
 	colPivot(iPoint()),
 	type(ENTITY_TYPE(0)),
 	life(1),
-	damaged(false)
+	damaged(false),
+	toDelete(false)
 {
 	anim.clear();
 }
@@ -77,7 +78,7 @@ bool Entity::LoadAttributes(pugi::xml_node attributes)
 	node = attributes.child("collider");
 	colPivot = { node.attribute("x").as_int(8), node.attribute("y").as_int(12) };
 	col = App->collisions->AddCollider({ currentPos.x, currentPos.y, node.attribute("w").as_int(16), node.attribute("h").as_int(15) }, COLLIDER_TYPE(node.attribute("type").as_int(-1)), ((j1Module*)App->game));
-
+	col->parent = this;
 	node = attributes.child("animation");
 
 	//TODO: load three links animation properly

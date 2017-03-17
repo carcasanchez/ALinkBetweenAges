@@ -34,6 +34,7 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 		pugi::xml_node attributes = attributesFile.child("attributes").child("green_soldier");
 
 		LoadAttributes(attributes);
+		
 	}
 	return ret;
 }

@@ -58,6 +58,7 @@ bool Player::Spawn(std::string file, iPoint pos)
 		dodgeLimit = node.attribute("limit").as_int(50);
 
 		invulnerable = false;
+		swordCollider = nullptr;
 	}
 
 	return ret;
@@ -169,6 +170,7 @@ bool Player::Idle()
 		stamina -= attackTax;
 		Change_direction();
 		actionState = ATTACKING;
+		createSwordCollider();
 		LOG("LINK is ATTACKING");
 		return true;
 	}
@@ -282,8 +284,8 @@ bool Player::Walking(float dt)
 		stamina -= attackTax;
 		Change_direction();
 		actionState = ATTACKING;
+		createSwordCollider();
 		LOG("LINK is ATTACKING");
-		return true;
 	}
 
 	Change_direction();
@@ -295,6 +297,7 @@ bool Player::Attacking(float dt)
 {
 	if (damaged == true)
 	{
+		resetSwordCollider();
 		actionState = DAMAGED;
 		LOG("LINK DAMAGED");
 		return true;
@@ -318,12 +321,16 @@ bool Player::Attacking(float dt)
 		Move(SDL_ceil(attackSpeed * dt), 0);
 	}
 
+	updateSwordCollider();
+
 	if (currentAnim->isOver())
 	{
+		resetSwordCollider();
 		currentAnim->Reset();
 		LOG("LINK is in IDLE");
 		actionState = IDLE;
 	}
+
 
 	return true;
 }
@@ -417,4 +424,39 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 
 
+}
+
+void Player::createSwordCollider()
+{
+	swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 20, 20 }, COLLIDER_LINK_SWORD);
+	switch (currentDir)
+	{
+	case(D_UP):
+		swordColliderPivot = { -swordCollider->rect.w / 2, -colPivot.y - swordCollider->rect.h };
+		break;
+	case(D_DOWN):
+		swordColliderPivot = { -swordCollider->rect.w / 2, col->rect.y};
+		break;
+	case(D_RIGHT):
+		swordColliderPivot = { colPivot.x, -swordCollider->rect.h/2};
+		break;
+	case(D_LEFT):
+		swordColliderPivot = { -swordCollider->rect.w - col->rect.w/2, 0 };
+		break;
+	}
+}
+
+void Player::updateSwordCollider()
+{
+	swordCollider->rect.x = currentPos.x + swordColliderPivot.x;
+	swordCollider->rect.y = currentPos.y + swordColliderPivot.y;
+}
+
+void Player::resetSwordCollider()
+{
+	if (swordCollider != nullptr)
+	{
+		swordCollider->to_delete = true;
+		swordCollider = nullptr;
+	}
 }

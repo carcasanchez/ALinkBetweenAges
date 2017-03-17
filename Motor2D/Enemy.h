@@ -18,8 +18,9 @@ public:
 	Enemy() :Entity() {};
 	
 	virtual bool Spawn(std::string file, iPoint pos) { return true; };
-	bool Update(float dt);
+	virtual bool Update(float dt);
 	virtual bool SearchForPlayer(int speed, float dt);
+	virtual void OnDeath();
 
 protected:
 	iPoint currentDest = { 0, 0 };

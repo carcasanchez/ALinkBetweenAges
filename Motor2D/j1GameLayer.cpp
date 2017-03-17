@@ -44,7 +44,6 @@ bool j1GameLayer::Start()
 
 
 	em->CreatePlayer(150, 150);
-	em->CreateEnemy(GREEN_SOLDIER, 16, 16);
 
 
 	return true;
@@ -68,6 +67,9 @@ bool j1GameLayer::Update(float dt)
 	//ret = hud->Update(dt);
 
 	App->render->CameraFollow((*playerId)->currentPos);
+
+	if(App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		em->CreateEnemy(GREEN_SOLDIER, 16, 16);
 	
 	return ret;
 }
@@ -98,6 +100,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		if((*playerId) != nullptr)
 			(*playerId)->currentPos = (*playerId)->lastPos;
+		return true;
 	}
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
@@ -122,7 +125,15 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				else (*playerId)->appliedForce.y = 1;			
 			}
 		}
+
+		return true;
 	}
 
-	return true;
+	if (c1->type == COLLIDER_ENEMY && c2->type == COLLIDER_LINK_SWORD)
+	{
+		c1->parent->life--;
+	}
+	
+		
+		return true;
 }

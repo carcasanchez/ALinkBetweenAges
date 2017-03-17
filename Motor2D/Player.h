@@ -52,6 +52,15 @@ private:
 
 	//For Input callback
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
+
+	// For attack
+	Collider* swordCollider;
+	iPoint swordColliderPivot = { 0, 0 };
+
+	//Create a collider for Link's sword taking in account his direction
+	void createSwordCollider();
+	void updateSwordCollider();
+	void resetSwordCollider();
 };
 
 #endif // !_PLAYER_H_

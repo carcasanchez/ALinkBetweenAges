@@ -4,6 +4,7 @@
 #include "p2Log.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
+#include "j1CollisionManager.h"
 #include <math.h>
 
 bool Enemy::Update(float dt)
@@ -56,12 +57,11 @@ bool Enemy::SearchForPlayer(int speed, float dt)
 			path.erase(path.begin());
 		}
 	}
-	
-	
-
-
-
-
-
 	return false;
+}
+
+void Enemy::OnDeath()
+{
+	toDelete = true;
+	col->to_delete = true;
 }

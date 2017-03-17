@@ -4,6 +4,7 @@
 
 #include "SDL/include/SDL.h"
 #include "j1Module.h"
+#include "Entity.h"
 #include "p2Point.h"
 
 #define MAX_COLLIDERS 300
@@ -15,7 +16,8 @@ enum COLLIDER_TYPE
 	COLLIDER_WALL,
 	COLLIDER_PLAYER,
 	COLLIDER_NPC,
-	COLLIDER_ENEMY
+	COLLIDER_ENEMY,
+	COLLIDER_LINK_SWORD
 };
 class Collider
 {
@@ -24,6 +26,8 @@ public:
 	COLLIDER_TYPE type;
 	j1Module* callback = nullptr;
 	bool to_delete = false;
+
+	Entity* parent = nullptr;
 	
 
 	Collider(COLLIDER_TYPE type, SDL_Rect rect, j1Module* callback = nullptr) :type(type), callback(callback), rect(rect) {};

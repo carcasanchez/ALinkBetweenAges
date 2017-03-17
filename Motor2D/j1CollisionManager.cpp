@@ -8,6 +8,7 @@
 #include "j1Pathfinding.h"
 
 
+
 j1CollisionManager::j1CollisionManager() : j1Module()
 {
 }
@@ -24,16 +25,12 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	//TODO: LOAD DATA FROM CONFIG XML
 	
 	//Player collisions
-	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
 
-	//Wall collisions
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
-
 	//Enemy collisions
-	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
+	matrix[COLLIDER_ENEMY][COLLIDER_LINK_SWORD] = true;
 
 
 	return false;
