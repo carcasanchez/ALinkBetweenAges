@@ -68,13 +68,7 @@ bool j1GameLayer::Update(float dt)
 	//ret = hud->Update(dt);
 
 	App->render->CameraFollow((*playerId)->currentPos);
-
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		em->CreateEnemy(GREEN_SOLDIER, 150, 200);
-
-	}
-
+	
 	return ret;
 }
 

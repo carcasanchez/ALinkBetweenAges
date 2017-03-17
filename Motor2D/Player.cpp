@@ -69,9 +69,10 @@ bool Player::Update(float dt)
 	lastPos = currentPos;
 
 	
-	if (damagedTimer.ReadMs() > 2000)
+	if (damagedTimer.ReadMs() > 2000 && invulnerable == true)
 	{
 		invulnerable = false;
+		sprite->tint = { 255, 255, 255, 255 };
 		LOG("DAMAGED FALSE - TIMER STOP");
 	}
 
@@ -111,25 +112,25 @@ void Player::OnDeath()
 {
 	currentPos = {0, 0};
 	life = 3;
+	damaged = invulnerable = false;
 	appliedForce = {0, 0};
 	sprite->tint = { 255, 255, 255, 255 };
 }
 
 void Player::Change_direction()
 {
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		currentDir = D_UP;
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		currentDir = D_DOWN;
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 		currentDir = D_RIGHT;
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 		currentDir = D_LEFT;
 }
 
 bool Player::Idle()
 {
-	Change_direction();
 
 	if (damaged == true)
 	{
@@ -139,21 +140,31 @@ bool Player::Idle()
 	}
 
 
-	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT ||
+		App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT ||
+		App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT ||
+		App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		actionState = WALKING;
 		LOG("Link is WALKING");
 		return true;
 	}
 
-	if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT || App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT || App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT || App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
+	if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT ||
+		App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT ||
+		App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT ||
+		App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
 	{
 		actionState = WALKING;
 		LOG("Link is WALKING");
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - attackTax >= 0))
+
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
+		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
 		stamina -= attackTax;
 		Change_direction();
@@ -252,7 +263,7 @@ bool Player::Walking(float dt)
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN && (stamina- dodgeTax >=0))
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina- dodgeTax >=0))
 	{	
 		stamina -= dodgeTax;
 		LOG("LINK is DODGING");
@@ -262,9 +273,13 @@ bool Player::Walking(float dt)
 		return true;
 	}
 	 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - attackTax >= 0))
+
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
- 		stamina -= attackTax;
+		stamina -= attackTax;
 		Change_direction();
 		actionState = ATTACKING;
 		LOG("LINK is ATTACKING");
@@ -338,7 +353,7 @@ bool Player::Damaged(float dt)
 	{
 		actionState = IDLE;
 		damaged = false;
-		sprite->tint = { 255, 255, 255, 255 };
+		sprite->tint = { 255, 255, 255, 100 };
 		LOG("DAMAGED FALSE");
 	}
 		
@@ -346,9 +361,6 @@ bool Player::Damaged(float dt)
 	
 	return true;
 }
-
-
-
 
 
 
