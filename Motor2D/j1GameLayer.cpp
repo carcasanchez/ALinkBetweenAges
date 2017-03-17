@@ -43,7 +43,7 @@ bool j1GameLayer::Start()
 
 
 	em->CreatePlayer(150, 150);
-	em->CreateEnemy(GREEN_SOLDIER, 150, 200);
+	em->CreateEnemy(GREEN_SOLDIER, 16, 16);
 
 
 	return true;
@@ -107,15 +107,22 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
 	{
-		if ((*playerId)->damaged == false)
+	if ((*playerId)->damaged == false)
 		{
 			if ((*playerId) != nullptr)
 			{
 				LOG("HIT");
 				(*playerId)->life--;
 				(*playerId)->damaged = true;
-				(*playerId)->damagedTimer.Start();
+				(*playerId)->damagedTimer.Start();	
 				
+				if (c1->rect.x < c2->rect.x)
+					(*playerId)->appliedForce.x = -1;
+				else (*playerId)->appliedForce.x = 1;
+
+				if (c1->rect.y < c2->rect.y)
+					(*playerId)->appliedForce.y = -1;
+				else (*playerId)->appliedForce.y = 1;
 			}
 		}
 	}

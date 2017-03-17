@@ -17,8 +17,10 @@ enum ACTION_STATE
 	IDLE = 0,
 	WALKING,
 	ATTACKING,
-	DODGING
+	DODGING,
+	DAMAGED
 };
+//TODO: change nums per strings in xml
 
 enum DIRECTION
 {
@@ -78,6 +80,7 @@ public:
 	// Collider
 	Collider* col;
 	iPoint colPivot;
+	iPoint appliedForce;
 
 	// Attributes
 	ENTITY_TYPE type;

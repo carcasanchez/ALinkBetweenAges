@@ -23,6 +23,9 @@ public:
 
 protected:
 	iPoint currentDest = { 0, 0 };
+
+private:
+	iPoint movement;
 };
 
 #endif

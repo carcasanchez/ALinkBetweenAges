@@ -65,7 +65,8 @@ bool Player::Update(float dt)
 {
 	bool ret = true;
 	lastPos = currentPos;
-	if (damagedTimer.ReadMs() > 1000)
+	
+	if (damagedTimer.ReadMs() > 2000)
 	{
 		damaged = false;
 	}
@@ -92,6 +93,10 @@ bool Player::Update(float dt)
 
 		case(DODGING):
 			Dodging(dt);
+			break;
+
+		case(DAMAGED):
+			Damaged(dt);
 			break;
 	}
 
@@ -121,6 +126,14 @@ bool Player::Idle()
 {
 	Change_direction();
 
+	if (damaged == true)
+	{
+		actionState = DAMAGED;
+		LOG("LINK DAMAGED");
+		return true;
+	}
+
+
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		actionState = WALKING;
@@ -144,6 +157,7 @@ bool Player::Idle()
 		return true;
 	}
 
+	
 	return false;
 }
 
@@ -151,6 +165,14 @@ bool Player::Walking(float dt)
 {
 	bool moving = false;
 	dodgeDir = { 0, 0 };
+
+
+	if (damaged == true)
+	{
+		actionState = DAMAGED;
+		LOG("LINK DAMAGED");
+		return true;
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
@@ -251,6 +273,14 @@ bool Player::Walking(float dt)
 
 bool Player::Attacking(float dt)
 {
+	
+	if (damaged == true)
+	{
+		actionState = DAMAGED;
+		LOG("LINK DAMAGED");
+		return true;
+	}
+
 	if (currentDir == D_DOWN)
 	{
 		Move(0, SDL_ceil(attackSpeed * dt));
@@ -281,6 +311,13 @@ bool Player::Attacking(float dt)
 
 bool Player::Dodging(float dt)
 {
+	if (damaged == true)
+	{
+		actionState = DAMAGED;
+		LOG("LINK DAMAGED");
+		return true;
+	}
+
 	if (dodgeTimer.ReadMs() > dodgeLimit)
 	{
 		actionState = IDLE;
@@ -290,6 +327,27 @@ bool Player::Dodging(float dt)
 	
 	return true;
 }
+
+
+bool Player::Damaged(float dt)
+{
+	if (damagedTimer.ReadMs() > 200)
+	{
+		actionState = IDLE;
+	}
+
+	
+	Move(SDL_ceil(appliedForce.x*speed*dt), SDL_ceil(appliedForce.y*speed*dt));
+
+
+
+	return false;
+}
+
+
+
+
+
 
 void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 {
@@ -323,7 +381,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		}
 		break;
 
-	
+
 	case LOOKUP:
 		currentDir = D_UP;
 		break;
@@ -339,9 +397,9 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 	}
 
-	
 
 
-	
+
+
 
 }

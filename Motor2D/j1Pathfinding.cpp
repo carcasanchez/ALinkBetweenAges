@@ -153,8 +153,8 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 	if (App->pathfinding->IsWalkable(cell))
 		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
 
-/*	//diagonals
-	cell.create(pos.x + 1, pos.y + 1);
+	//diagonals
+	/*cell.create(pos.x + 1, pos.y + 1);
 	if (App->pathfinding->IsWalkable(cell))
 		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
 

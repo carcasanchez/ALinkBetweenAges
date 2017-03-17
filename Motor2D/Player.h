@@ -46,6 +46,7 @@ private:
 	bool Walking(float dt);
 	bool Attacking(float dt);
 	bool Dodging(float dt);
+	bool Damaged(float dt);
 
 	//For Input callback
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
