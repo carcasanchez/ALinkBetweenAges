@@ -89,10 +89,19 @@ bool j1Gui::CleanUp()
 
 UI_element * j1Gui::CreateScreen(UI_element * new_element)
 {
-	UI_element* ret = new UI_element(*new_element);
+	UI_element* ret = nullptr;
 
-	if (ret)
-		Screen_elements.push_back(ret);
+	if (new_element)
+	{
+		ret = new_element;
+		Screen_elements.push_back(new_element);
+	}
+	else
+	{
+		ret = Add_element(UNDEFINED, this);
+		if (ret)
+			Screen_elements.push_back(ret);
+	}
 
 	return ret;
 }
