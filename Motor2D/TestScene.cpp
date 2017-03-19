@@ -57,7 +57,5 @@ bool TestScene::Update(float dt)
 	
 	App->map->Draw();
 
-	App->render->DebugCamera();
-
 	return ret;
 }

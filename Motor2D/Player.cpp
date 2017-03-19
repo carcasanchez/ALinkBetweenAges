@@ -428,28 +428,50 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 void Player::createSwordCollider()
 {
-	swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 20, 20 }, COLLIDER_LINK_SWORD);
+	
 	switch (currentDir)
 	{
 	case(D_UP):
-		swordColliderPivot = { -swordCollider->rect.w / 2, -colPivot.y - swordCollider->rect.h };
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 26, 14 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_DOWN):
-		swordColliderPivot = { -swordCollider->rect.w / 2, col->rect.y};
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 26, 14 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_RIGHT):
-		swordColliderPivot = { colPivot.x, -swordCollider->rect.h/2};
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 14, 26 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_LEFT):
-		swordColliderPivot = { -swordCollider->rect.w - col->rect.w/2, 0 };
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 14, 26 }, COLLIDER_LINK_SWORD);
 		break;
 	}
+	updateSwordCollider();
 }
 
 void Player::updateSwordCollider()
 {
-	swordCollider->rect.x = currentPos.x + swordColliderPivot.x;
-	swordCollider->rect.y = currentPos.y + swordColliderPivot.y;
+	switch (currentDir)
+	{
+	case(D_UP):
+		swordCollider->rect.x = currentPos.x - swordCollider->rect.w/2;
+		swordCollider->rect.y = currentPos.y - swordCollider->rect.h*2;
+		break;
+
+	case(D_DOWN):
+		swordCollider->rect.x = currentPos.x - swordCollider->rect.w / 2;
+		swordCollider->rect.y = currentPos.y;
+		break;
+
+	case(D_RIGHT):
+		swordCollider->rect.y = currentPos.y - 16;
+		swordCollider->rect.x = currentPos.x + 5;
+		break;
+
+	case(D_LEFT):
+		swordCollider->rect.y = currentPos.y - 16;
+		swordCollider->rect.x = currentPos.x - swordCollider->rect.w -  5;
+		break;
+	}
+
 }
 
 void Player::resetSwordCollider()
