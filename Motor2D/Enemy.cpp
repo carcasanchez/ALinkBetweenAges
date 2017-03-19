@@ -20,6 +20,10 @@ void Enemy::OnDeath()
 	col->to_delete = true;
 }
 
+void Enemy::Repeal()
+{
+}
+
 bool Enemy::Patroling(float dt)
 {
 	iPoint dest = patrolPoints[currentPatrolPoint];
@@ -54,7 +58,7 @@ bool Enemy::Chasing(float dt)
 	}
 
 	iPoint dest = App->map->WorldToMap((*App->game->playerId)->currentPos.x, (*App->game->playerId)->currentPos.y);
-	GoTo(dest, speed, dt);
+	GoTo(dest, speed*2, dt);
 
 	return true;
 }

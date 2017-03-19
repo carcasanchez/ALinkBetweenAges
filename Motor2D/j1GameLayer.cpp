@@ -134,6 +134,21 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		c1->parent->life--;
 	}
 	
+	if (c1->type == COLLIDER_ENEMY && c2->type == COLLIDER_ENEMY)
+	{
+		if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 6)
+			return true;
+
+		if (c1->rect.x < c2->rect.x)
+			c2->parent->currentPos.x += c2->parent->speed*dt * 5;
+		else c2->parent->currentPos.x += -c2->parent->speed*dt* 5;
+
+		if (c1->rect.y < c2->rect.y)
+			c2->parent->currentPos.y += c2->parent->speed*dt*5;
+		else c2->parent->currentPos.y -= c2->parent->speed*dt*5;
+
+		c2->parent->UpdateCollider();
+	}
 		
 		return true;
 }

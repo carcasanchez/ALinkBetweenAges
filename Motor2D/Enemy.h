@@ -27,6 +27,8 @@ public:
 	virtual bool Update(float dt);
 	virtual void OnDeath();
 
+	void Repeal();
+
 	//State Machine
 	virtual bool Patroling(float dt);
 	virtual bool Chasing(float dt);
