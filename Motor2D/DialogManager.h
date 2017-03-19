@@ -29,8 +29,7 @@ public:
 	bool Start();
 	bool Update(float dt);
 
-	bool Load(const char * file_name);
-	bool Draw(const int id);
+	bool Dialog(const int id);
 
 public:
 	std::string folder;

@@ -1,0 +1,9 @@
+<!-- Player Attributes -->
+<attributes>
+  <base life = "3" stamina = "500" staminaRec = "0.4" speed = "90"/>
+  <attack speed = "40" staminaTax = "20"/>
+  <dodge speed = "250" staminaTax = "25" limit = "150"/>
+  <collider x = "8" y = "12" w = "16" h = "15" type = "1"/>
+  <animation file = "animations/player_animations.xml" file2 = "animations/player_animations.xml" file3 = "animations/player_animations.xml"/>
+  <texture file = "textures/Link_sprites/Link_young.png" file2 = "textures/Link_sprites/Link_young.png" file3 = "textures/Link_sprites/Link_young.png"/>
+</attributes>

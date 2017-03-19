@@ -1,0 +1,17 @@
+<!-- Dialogs -->
+<npcs>
+  
+   <npc id="1" state ="1">
+     <dialogue state="0">
+       <text>Hi! #{PlayerName} HI YO BRO? IM TESTING</text>
+       <options interaction="1">
+         <option action="1">I love doing research!</option>
+         <option action="2">Research is so hard :(</option>
+       </options>
+     </dialogue>
+     <dialogue state="1">
+       <text>I've already spoken with you</text>
+     </dialogue>
+   </npc>
+  
+</npcs>
