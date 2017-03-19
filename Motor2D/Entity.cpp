@@ -78,6 +78,7 @@ bool Entity::LoadAttributes(pugi::xml_node attributes)
 	life = node.attribute("life").as_int(1);
 	speed = node.attribute("speed").as_int(1);
 	
+	
 
 	//collider
 	node = attributes.child("collider");

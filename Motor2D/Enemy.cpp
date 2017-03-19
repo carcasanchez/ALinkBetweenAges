@@ -26,6 +26,12 @@ bool Enemy::Patroling(float dt)
 
 	actionState = IDLE;
 
+	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) < hostileRange)
+	{
+		enemyState = CHASING;
+		return true;
+	}
+
 	if (GoTo(dest, speed, dt) == false)
 	{
 		currentPatrolPoint++;
@@ -35,5 +41,20 @@ bool Enemy::Patroling(float dt)
 			currentPatrolPoint = 0;
 		}
 	};
-	return false;
+
+	return true;
+}
+
+bool Enemy::Chasing(float dt)
+{
+	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) >= hostileRange)
+	{
+		enemyState = PATROLING;
+		return true;
+	}
+
+	iPoint dest = App->map->WorldToMap((*App->game->playerId)->currentPos.x, (*App->game->playerId)->currentPos.y);
+	GoTo(dest, speed, dt);
+
+	return true;
 }

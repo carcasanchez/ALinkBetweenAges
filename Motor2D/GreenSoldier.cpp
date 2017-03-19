@@ -35,6 +35,9 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 		LoadAttributes(attributes);
 
 
+		hostileRange = attributes.child("hostile").attribute("range").as_int();
+		
+
 		//TODO: LOAD THIS FROM XML
 		patrolPoints.push_back({ 1, 1 });
 		patrolPoints.push_back({ 1, 10 });
@@ -51,6 +54,9 @@ bool GreenSoldier::Update(float dt)
 	{
 	case(PATROLING):
 		Patroling(dt);
+		break;
+	case(CHASING):
+		Chasing(dt);
 		break;
 
 	}
