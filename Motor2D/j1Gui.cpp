@@ -6,6 +6,7 @@
 #include "j1Fonts.h"
 #include "j1Input.h"
 #include "j1Gui.h"
+#include "j1Window.h"
 #include "UI_Text_Box.h"
 #include "UI_scroll.h"
 #include "UI_Image.h"
@@ -29,6 +30,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	scale_factor = scale_factor / App->win->GetScale();
 
 	return ret;
 }

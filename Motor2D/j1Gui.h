@@ -65,6 +65,7 @@ public:
 	void Actualize_tabs();
 	void Go_Next_Tab();
 	void Look_for(const UI_element* looked_element);
+	float scale_factor = 1;
 
 private:
 

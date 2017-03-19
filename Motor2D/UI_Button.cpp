@@ -26,7 +26,7 @@ bool UI_Button::Update_Draw()
 
 	if (active)
 	{
-		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), (Interactive_box.x - App->render->camera.x), (Interactive_box.y - App->render->camera.y), &Button_image->Image);
+		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y)* App->gui->scale_factor, &Button_image->Image);
 
 		Child_Update_Draw();
 	}

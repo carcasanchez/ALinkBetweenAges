@@ -33,11 +33,11 @@ bool UI_Text_Box::Update_Draw()
 		if(background != nullptr)
 			App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), (Interactive_box.x - App->render->camera.x), (Interactive_box.y - App->render->camera.y), &background->Image);
 
-		App->render->Blit(text.text_texture, (Interactive_box.x - App->render->camera.x), (Interactive_box.y - App->render->camera.y));
+		App->render->Blit(text.text_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y)* App->gui->scale_factor );
 		Child_Update();
 
 		if (SDL_IsTextInputActive()) //This draws a line inside the text box [Cursor]
-			App->render->DrawQuad({ cursor_pos - App->render->camera.x, Interactive_box.y - App->render->camera.y, 1, height }, 255, 255, 255);
+			App->render->DrawQuad({ (int)((cursor_pos - App->render->camera.x)* App->gui->scale_factor),(int)(( Interactive_box.y - App->render->camera.y) * App->gui->scale_factor), 1, height }, 255, 255, 255);
 		
 	}
 
@@ -163,7 +163,7 @@ void UI_Text_Box::Text_management()
 
 				if (cursor_virtual_pos >= 0)
 				{
-					cursor_pos -= width;
+					cursor_pos -= width *(1 / App->gui->scale_factor);
 					cursor_virtual_pos--;
 				}
 			}
@@ -174,7 +174,7 @@ void UI_Text_Box::Text_management()
 				App->font->CalcSize(get_string_pos(cursor_virtual_pos), width, height);
 				if (cursor_virtual_pos >= 0)
 				{
-					cursor_pos -= width;
+					cursor_pos -= width *(1 / App->gui->scale_factor);
 					cursor_virtual_pos--;
 				}
 			}
@@ -185,7 +185,7 @@ void UI_Text_Box::Text_management()
 				App->font->CalcSize(get_string_pos(cursor_virtual_pos + 1), width, height);
 				if (cursor_virtual_pos < (int)(text.text.length() - 1))
 				{
-					cursor_pos += width;
+					cursor_pos += width * (1 / App->gui->scale_factor);
 					cursor_virtual_pos++;
 				}
 			}

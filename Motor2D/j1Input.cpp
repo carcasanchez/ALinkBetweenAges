@@ -208,7 +208,7 @@ bool j1Input::PreUpdate()
 						int width;
 						App->font->CalcSize(event.text.text, width, temp->height);
 						temp->cursor_virtual_pos++;
-						temp->cursor_pos += width;
+						temp->cursor_pos += width * (1/App->gui->scale_factor);
 				}
 				
 				break;

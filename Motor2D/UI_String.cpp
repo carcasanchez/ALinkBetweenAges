@@ -19,7 +19,7 @@ UI_String::UI_String(const UI_String* other) : UI_element(other->element_type, o
 bool UI_String::Update_Draw()
 {
 	if (active)
-		App->render->Blit(text_texture, Interactive_box.x - App->render->camera.x, Interactive_box.y - App->render->camera.y);
+		App->render->Blit(text_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor);
 
 	Child_Update_Draw();
 
@@ -80,7 +80,7 @@ bool UI_String::Handle_input()
 bool UI_String::Draw_console(int height)
 {
 	if(active)
-		App->render->Blit(text_texture, Interactive_box.x - App->render->camera.x, Interactive_box.y - App->render->camera.y + height);
+		App->render->Blit(text_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, Interactive_box.y - App->render->camera.y + height);
 
 	return true;
 }
