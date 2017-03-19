@@ -78,7 +78,6 @@ private:
 	command* help;
 	command* CV_list;
 	
-
 };
 
 

@@ -39,19 +39,21 @@ bool j1Console::Awake(pugi::xml_node& config)
 
 bool j1Console::Start()
 {
-	
+
 	LOG("Setting console text box");
 
 	int width;
 	App->font->CalcSize("Set", width, height, App->font->default);
 
+	
 	Input_text = (UI_Text_Box*)App->gui->Add_element(UI_TYPE::TEXT_BOX, this);
-	Input_text->Set_Interactive_Box({ console_screen.x, (console_screen.y + console_screen.h), console_screen.w, height });
+	Input_text->Set_Interactive_Box({ console_screen.x, (int)((console_screen.y + console_screen.h)), console_screen.w, height });
 	Input_text->Set_Drag_Type(NO_SCROLL);
 
 	help = Add_Command("help", this, 0, 0, NONE);
 	CV_list = Add_Command("cv_list", this, 0, 0, NONE);
 
+	
 	return true;
 }
 
@@ -72,17 +74,16 @@ bool j1Console::Update(float dt)
 
 bool j1Console::PostUpdate()
 {
-	App->render->DrawQuad({ console_screen.x - App->render->camera.x, console_screen.y - App->render->camera.y,console_screen.w, console_screen.h }, Background.r, Background.g, Background.b, Background.a);
-	App->render->DrawQuad({ Input_text->Interactive_box.x - App->render->camera.x, Input_text->Interactive_box.y - App->render->camera.y,Input_text->Interactive_box.w, Input_text->Interactive_box.h }, 0, 0, 255, Background.a);
+	App->render->DrawQuad({ (int)((console_screen.x - App->render->camera.x)* App->gui->scale_factor) , (int)((console_screen.y - App->render->camera.y)* App->gui->scale_factor) , console_screen.w, (int)(console_screen.h* App->gui->scale_factor) }, Background.r, Background.g, Background.b, Background.a);
+	App->render->DrawQuad({ (int)((Input_text->Interactive_box.x - App->render->camera.x)* App->gui->scale_factor),  (int)((Input_text->Interactive_box.y - App->render->camera.y) * App->gui->scale_factor) + 100, Input_text->Interactive_box.w, Input_text->Interactive_box.h }, 0, 0, 255, Background.a);
 
 	//Change viewport
 	SDL_RenderSetViewport(App->render->renderer, &console_screen);
 
 	for (int i = 0; i < num_of_labels; i++)
-		App->render->Blit(Labels[i]->text_texture, Labels[i]->Interactive_box.x - App->render->camera.x, (Labels[i]->Interactive_box.y));
+		App->render->Blit(Labels[i]->text_texture, (Labels[i]->Interactive_box.x - App->render->camera.x)* App->gui->scale_factor, (Labels[i]->Interactive_box.y));
 				
 	SDL_RenderSetViewport(App->render->renderer, nullptr);
-
 
 
 
