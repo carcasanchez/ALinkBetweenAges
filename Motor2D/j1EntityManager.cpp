@@ -7,6 +7,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "j1CollisionManager.h"
 
 //=====Enemy Includes
 #include "GreenSoldier.h"
@@ -67,9 +68,13 @@ bool j1EntityManager::Update(float dt)
 	bool ret = true;
 
 	for (std::list<Entity*>::iterator item = entities.begin(); item != entities.end(); item++)
-	{
-		(*item)->Update(dt);
-		(*item)->UpdateCollider();
+	{		
+		if (App->render->InsideCameraZone((*item)->col->rect))
+		{
+			(*item)->Update(dt);
+			(*item)->UpdateCollider();
+		}
+		
 	}
 
 	return ret;

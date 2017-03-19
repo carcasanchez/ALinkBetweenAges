@@ -111,7 +111,7 @@ bool Player::Update(float dt)
 
 void Player::OnDeath()
 {
-	currentPos = {0, 0};
+	currentPos = {20, 20};
 	life = 3;
 	damaged = invulnerable = false;
 	appliedForce = {0, 0};

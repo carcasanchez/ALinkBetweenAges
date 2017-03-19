@@ -7,6 +7,7 @@
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1PathFinding.h"
+#include "j1Render.h"
 
 TestScene::TestScene() : Scene("Test Scene"), testRoom(NULL) {}
 
@@ -16,7 +17,7 @@ bool TestScene::Load(std::string _data)
 
 	data = _data;
 
-	if (ret = (App->map->Load("map_testing.tmx")))
+	if (ret = (App->map->Load("test.tmx")))
 	{
 		int w, h;
 		uchar* data = NULL;
@@ -55,6 +56,8 @@ bool TestScene::Update(float dt)
 	}
 	
 	App->map->Draw();
+
+	App->render->DebugCamera();
 
 	return ret;
 }

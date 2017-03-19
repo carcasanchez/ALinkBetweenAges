@@ -43,8 +43,8 @@ bool j1Window::Awake(pugi::xml_node& config)
 	}
 	else
 	{
-		width = config.child("resolution").attribute("width").as_int(256);
-		height = config.child("resolution").attribute("height").as_int(224);
+		renderZone.x = width = config.child("resolution").attribute("width").as_int(256);
+		renderZone.y = height = config.child("resolution").attribute("height").as_int(224);
 		scale = config.child("resolution").attribute("scale").as_int(1);
 		int h_margin = config.child("margin ").attribute("horizontal").as_int(0);
 		int v_margin = config.child("margin ").attribute("vertical").as_int(0);
@@ -139,4 +139,9 @@ void j1Window::GetWindowSize(uint& width, uint& height) const
 uint j1Window::GetScale() const
 {
 	return scale;
+}
+
+iPoint j1Window::GetRenderZone()
+{
+	return renderZone;
 }
