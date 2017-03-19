@@ -23,6 +23,7 @@
 #include "j1CollisionManager.h"
 #include "j1GameLayer.h"
 #include "j1App.h"
+#include "DialogManager.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -46,6 +47,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	game = new j1GameLayer();
 	collisions = new j1CollisionManager();
 	console = new j1Console();
+	dialog = new DialogManager();
 	render = new j1Render();
 
 	// Ordered for awake / Start / Update
@@ -66,7 +68,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(gui);
 	AddModule(collisions);
 	AddModule(console);
-
+	AddModule(dialog);
 	// render last to swap buffer
 	AddModule(render);
 
@@ -189,7 +191,7 @@ bool j1App::Start()
 	PERF_START(ptimer);
 	bool ret = true;
 
-
+	
 	for (std::list<j1Module*>::const_iterator item = modules.begin(); item != modules.cend() && ret; item++)
 		ret = (*item)->Start();
 

@@ -5,7 +5,7 @@
      <dialogue>
        <text>Hi! #{PlayerName} How are you?\n 
        </text>        
-       <options interaction="true">
+       <options>
          <option action="1">I love doing research!\n</option>
          <option action="2">Research is so hard :(\n</option>
        </options>

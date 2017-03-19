@@ -28,7 +28,7 @@ class j1CollisionManager;
 class j1GameLayer;
 class j1Console;
 class j1Render;
-
+class DialogManager;
 
 class j1App : public j1Module
 {
@@ -119,7 +119,7 @@ public:
 	j1GameLayer*		game = NULL;
 	j1Console*			console = NULL;
 	j1Render*			render = NULL;
-
+	DialogManager*      dialog = NULL;
 private:
 
 	list<j1Module*>	modules;
