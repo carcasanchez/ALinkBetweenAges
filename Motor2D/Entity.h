@@ -59,6 +59,8 @@ public:
 	virtual void Move(int x, int y);
 	virtual void UpdateCollider();
 
+	virtual bool GoTo(iPoint dest, int speed, float dt);
+
 public:
 
 	// Position in Entity Manager
@@ -91,9 +93,15 @@ public:
 
 	//Path
 	vector<iPoint> path;
+	iPoint currentDest;
 
 	//Marked to death
 	bool toDelete;
+
+	//Patroling points (in tiles)
+	bool patroling;
+	vector<iPoint> patrolPoints;
+	int currentPatrolPoint;
 };
 
 #endif // !_ENTITY_H_

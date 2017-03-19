@@ -8,6 +8,7 @@
 #include "j1App.h"
 #include "j1Textures.h"
 #include "j1Map.h"
+#include "j1Pathfinding.h"
 
 Entity::Entity() :
 	sprite(nullptr),
@@ -21,7 +22,8 @@ Entity::Entity() :
 	type(ENTITY_TYPE(0)),
 	life(1),
 	damaged(false),
-	toDelete(false)
+	toDelete(false),
+	currentPatrolPoint(0)
 {
 	anim.clear();
 }
@@ -32,11 +34,14 @@ Entity::Entity(ENTITY_TYPE type) :
 	actionState(IDLE),
 	currentDir(D_DOWN),
 	lastPos(iPoint()),
-	currentPos(iPoint()),
+	currentPos(lastPos),
 	col(nullptr),
 	colPivot(iPoint()),
 	type(type),
-	life(1)
+	life(1),
+	damaged(false),
+	toDelete(false),
+	currentPatrolPoint(0)
 {
 	anim.clear();
 }
@@ -167,4 +172,61 @@ void Entity::UpdateCollider()
 {
 	col->rect.x = currentPos.x - colPivot.x;
 	col->rect.y = currentPos.y - colPivot.y;
+}
+
+
+//Use pathfinding to go to a given tile
+bool Entity::GoTo(iPoint dest, int speed, float dt)
+{
+	//Create path if player changes tile
+	if (dest != currentDest)
+	{
+		currentDest = dest;
+		iPoint origin = App->map->WorldToMap(currentPos.x, currentPos.y);
+		if (App->pathfinding->CreatePath(origin, currentDest))
+		{
+			path = App->pathfinding->ReturnPath();
+			path.erase(path.begin());
+			LOG("DEST: %i, %i", dest.x, dest.y);
+		}
+	}
+
+
+	if (path.size() != 0)
+	{
+		iPoint immediateDest = App->map->GetTileCenter(path[0]);
+
+		if (immediateDest.x > currentPos.x)
+		{
+			currentPos.x += SDL_ceil(speed * dt);
+			currentDir = D_RIGHT;
+		}
+		else if (immediateDest.x < currentPos.x)
+		{
+			currentPos.x -= SDL_ceil(speed * dt);
+			currentDir = D_LEFT;
+		}
+
+		if (immediateDest.y > currentPos.y)
+		{
+			currentPos.y += SDL_ceil(speed * dt);
+			currentDir = D_DOWN;
+		}
+
+		else if (immediateDest.y < currentPos.y)
+		{
+			currentPos.y -= SDL_ceil(speed * dt);
+			currentDir = D_UP;
+		}
+
+
+		if (abs(immediateDest.x - currentPos.x) < 2 && abs(immediateDest.y - currentPos.y) < 2)
+		{
+			path.erase(path.begin());
+		}
+
+		return true;
+	}
+
+	return false;
 }

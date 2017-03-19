@@ -2,11 +2,10 @@
 #include "p2Log.h"
 #include "j1Pathfinding.h"
 #include "j1GameLayer.h"
-#include "GreenSoldier.h"
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Render.h"
-
+#include "GreenSoldier.h"
 
 
 bool GreenSoldier::Spawn(std::string file, iPoint pos)
@@ -34,24 +33,29 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 		pugi::xml_node attributes = attributesFile.child("attributes").child("green_soldier");
 
 		LoadAttributes(attributes);
-		
+
+
+		//TODO: LOAD THIS FROM XML
+		patrolPoints.push_back({ 1, 1 });
+		patrolPoints.push_back({ 1, 10 });
+		patrolPoints.push_back({ 20, 10 });
+		patrolPoints.push_back({ 40, 10 });
 	}
 	return ret;
 }
 
-
-
-/*bool GreenSoldier::Draw()
+bool GreenSoldier::Update(float dt)
 {
-	bool ret = true;
 
-	currentAnim = &anim.find({ actionState, currentDir })->second;
-	sprite->updateSprite(currentPos, currentAnim->pivot, currentAnim->getCurrentFrame(), currentAnim->flip);
-	App->render->Draw(sprite);
+	switch (enemyState)
+	{
+	case(PATROLING):
+		Patroling(dt);
+		break;
 
-	//for(int i=0, j=path.size();i<j;i++)
-	iPoint k= App->map->MapToWorld(path[0].x, path[0].y);
-	SDL_RenderDrawLine(App->render->renderer, currentPos.x, currentPos.y,k.x, k.y );
+	}
+	
+	return false;
+}
 
-	return ret;
-}*/
+
