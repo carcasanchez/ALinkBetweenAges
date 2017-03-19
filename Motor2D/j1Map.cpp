@@ -66,12 +66,15 @@ void j1Map::Draw()
 				int tile_id = layer->Get(x, y);
 				if(tile_id > 0)
 				{
-					TileSet* tileset = GetTilesetFromTileId(tile_id);
-
-					SDL_Rect r = tileset->GetTileRect(tile_id);
 					iPoint pos = MapToWorld(x, y);
 
-					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+					if (App->render->InsideCameraZone({ pos.x, pos.y, data->tile_width, data->tile_height }))
+					{
+						TileSet* tileset = GetTilesetFromTileId(tile_id);
+						SDL_Rect r = tileset->GetTileRect(tile_id);
+						App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+					}
+					
 				}
 			}
 		}

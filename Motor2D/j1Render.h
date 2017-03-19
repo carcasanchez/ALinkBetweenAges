@@ -93,10 +93,12 @@ public:
 	bool DrawCircle(int x1, int y1, int redius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool use_camera = true) const;
 
 	void CameraFollow(iPoint pos);
+	void DebugCamera();
 public:
 
 	SDL_Renderer*	renderer;
 	SDL_Rect		camera;
+	SDL_Rect		renderZone;
 	SDL_Rect		viewport;
 	SDL_Color		background;
 	std::map<spriteLayer, std::multimap<int, Sprite*>> spriteMap;

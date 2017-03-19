@@ -50,6 +50,11 @@ bool j1Render::Awake(pugi::xml_node& config)
 		camera.h = App->win->screen_surface->h;
 		camera.x = 0;
 		camera.y = 0;
+
+		renderZone.x = renderZone.y = 0;
+		renderZone.w = App->win->GetRenderZone().x;
+		renderZone.h = App->win->GetRenderZone().y;
+
 	}
 
 	return ret;
@@ -278,6 +283,12 @@ bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect s
 		return ret;
 	}
 
+	// check if inside camera's view
+	if (!(ret = InsideCameraZone({ x, y, section.w, section.h })))
+	{
+		return ret;
+	}
+
 	// get correct measures to render
 	SDL_Rect rect;
 	rect.x = (int)(camera.x) + x * scale;
@@ -314,12 +325,7 @@ bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect s
 		p = &pivot;
 	}
 
-	// check if inside camera's view
-	if (!(ret = InsideCameraZone({ rect.x, rect.y, rect.w, rect.h })))
-	{
-		return ret;
-	}
-
+	
 	// apply tint
 	if (!(ret = (SDL_SetTextureColorMod(texture, tint.r, tint.g, tint.b) == 0)))
 	{
@@ -358,16 +364,11 @@ bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect s
 bool j1Render::InsideCameraZone(SDL_Rect rect)const
 {
 	//TODO: Arrange this
-	bool a = (rect.x + rect.w >= camera.x &&
-		rect.x <= camera.x + camera.w &&
-		rect.y + rect.h <= camera.y + camera.h &&
-		rect.y >= camera.y);
-
-	/*return (rect.x + rect.w >= camera.x &&
-		rect.x <= camera.x + camera.w &&
-		rect.y + rect.h >= camera.y &&
-		rect.y <= camera.y + camera.h);*/
-	return true;
+	
+	SDL_Rect res;
+	bool a = SDL_IntersectRect(&rect, &renderZone, &res);
+			
+	return a;
 }
 
 bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
@@ -461,6 +462,17 @@ void j1Render::CameraFollow(iPoint pos)
 	camera.y = -pos.y * scale;
 	camera.x += w*0.5;
 	camera.y += h*0.5;
+
+	renderZone.x = pos.x;
+	renderZone.y = pos.y;
+	renderZone.x -= renderZone.w*0.5;
+	renderZone.y -= renderZone.h*0.5;
+	
+}
+
+void j1Render::DebugCamera()
+{
+	DrawQuad(renderZone, 0, 255, 255, 80);
 }
 
 Sprite::Sprite() : texture(NULL), position_map({ 0, 0 }), section_texture({ 0, 0, 0, 0 }), tint({ 255, 255, 255, 0 }),

@@ -2,6 +2,7 @@
 #define __j1WINDOW_H__
 
 #include "j1Module.h"
+#include "p2Point.h"
 
 struct SDL_Window;
 struct SDL_Surface;
@@ -30,6 +31,9 @@ public:
 	// Retrieve window scale
 	uint GetScale() const;
 
+	//Retrieve render zone
+	iPoint GetRenderZone();
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
@@ -42,6 +46,8 @@ private:
 	uint		width;
 	uint		height;
 	uint		scale;
+
+	iPoint		renderZone;
 };
 
 #endif // __j1WINDOW_H__
