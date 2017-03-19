@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DialogManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GreenSoldier.cpp" />
@@ -115,6 +116,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="CVar_Com.h" />
+    <ClInclude Include="DialogManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GreenSoldier.h" />
@@ -160,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Game\maps\map_testing.tmx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="dialogs.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -109,6 +109,9 @@
     <ClCompile Include="HUD.cpp">
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClCompile>
+    <ClCompile Include="DialogManager.cpp">
+      <Filter>Desenvolupament  ========\Game Layer\Dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -243,6 +246,9 @@
     <ClInclude Include="HUD.h">
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClInclude>
+    <ClInclude Include="DialogManager.h">
+      <Filter>Desenvolupament  ========\Game Layer\Dialogs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -284,10 +290,18 @@
     <Filter Include="Desenvolupament  ========\Game Layer\Entities\Enemies">
       <UniqueIdentifier>{71db718c-24e0-4519-a5cf-5a4ef27745e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Desenvolupament  ========\Game Layer\Dialogs">
+      <UniqueIdentifier>{c525055e-8e4b-410b-ae98-b0a6c51d84b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game\maps\map_testing.tmx">
       <Filter>Desenvolupament  ========\Tools</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="dialogs.xml">
+      <Filter>Desenvolupament  ========\Game Layer\Dialogs</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
