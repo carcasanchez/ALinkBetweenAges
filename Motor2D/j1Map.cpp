@@ -13,7 +13,7 @@
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
 	name = ("map");
-	data = &normalData;
+	data = &bigData;
 	map_file = &normal_map_file;
 }
 
@@ -216,20 +216,20 @@ bool j1Map::CleanUp()
 	// Remove all tilesets
 	for (std::list<TileSet*>::iterator item = smallData.tilesets.begin(); item != smallData.tilesets.cend(); item++)
 		RELEASE(*item);
-	for (std::list<TileSet*>::iterator item = normalData.tilesets.begin(); item != normalData.tilesets.cend(); item++)
+	for (std::list<TileSet*>::iterator item = bigData.tilesets.begin(); item != bigData.tilesets.cend(); item++)
 		RELEASE(*item);
 
 	smallData.tilesets.clear();
-	normalData.tilesets.clear();
+	bigData.tilesets.clear();
 
 	// Remove all layers
 	for (std::list<MapLayer*>::iterator item = smallData.layers.begin(); item != smallData.layers.cend(); item++)
 		RELEASE(*item);
-	for (std::list<MapLayer*>::iterator item = normalData.layers.begin(); item != normalData.layers.cend(); item++)
+	for (std::list<MapLayer*>::iterator item = bigData.layers.begin(); item != bigData.layers.cend(); item++)
 		RELEASE(*item);
 
 	smallData.layers.clear();
-	normalData.layers.clear();
+	bigData.layers.clear();
 
 	// Clean up the pugui tree
 	small_map_file.reset();
@@ -569,7 +569,7 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	return ret;
 }
 
-bool j1Map::LoadRoomMap(const char* file)
+bool j1Map::LoadSmallDataMap(const char* file)
 {
 	data = &smallData;
 	map_file = &small_map_file;
@@ -577,10 +577,10 @@ bool j1Map::LoadRoomMap(const char* file)
 }
 
 
-void j1Map::UnloadRoomMap()
+void j1Map::UnloadSmallDataMap()
 {
 	UnLoadData();
-	data = &normalData;
+	data = &bigData;
 	map_file = &normal_map_file;
 }
 

@@ -2,42 +2,122 @@
 #include "j1App.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
-
-
 #include "j1GameLayer.h"
-#include <list>
 #include "Player.h"
+#include "j1EntityManager.h"
+#include "Enemy.h"
 
-
-bool Scene::Load(std::string data)
+Scene::Scene()
 {
-	return true;
+	name.assign("Unnamed Scene");
+	currentSector = maxSectors = 1;
 }
 
+Scene::Scene(const char* path)
+{
+	name.assign(path);
+	currentSector = maxSectors = 1;
+}
 
-
-
-Room::Room() : Scene() {}
-
-bool Room::Load(std::string data)
+bool Scene::Load(const char* path)
 {
 	bool ret = true;
 
-	if (ret = (App->map->LoadRoomMap("map_testing.tmx")))
-	{
-		int w, h;
-		uchar* data = NULL;
-		if (App->map->CreateWalkabilityMap(w, h, &data))
-			App->pathfinding->SetMap(w, h, data);
+	pugi::xml_node data;
+	pugi::xml_document	doc;
+	char* buf;
+	int size = App->fs->Load(path, &buf);
+	pugi::xml_parse_result result = doc.load_buffer(buf, size);
+	RELEASE(buf);
 
-		RELEASE_ARRAY(data);
+	if (!(ret = !(result == NULL)))
+	{
+		LOG("Could not load map xml file %s. pugi error: %s", path, result.description());
+	}
+	else
+	{
+		data = doc.child("scene");
+		name.assign(data.attribute("name").as_string("Unnamed Scene"));
+		std::string map = data.attribute("map").as_string("test.tmx");
+
+		pugi::xml_node node = data.child("sectors");
+
+		for (pugi::xml_node section = node.first_child(); section != NULL; section = section.next_sibling())
+		{
+			pugi::xml_node entities = section.child("entities");
+
+			pugi::xml_node entity = entities.child("npcs");
+			for (pugi::xml_node npc = entity.first_child(); npc != NULL; npc = npc.next_sibling())
+			{
+				/* load npc at maxSectors
+				App->game->em->CreateNPC(
+					maxSectors,
+					NPC_TYPE(npc.attribute("type").as_int()),
+					other.attribute("x").as_int(),
+					other.attribute("y").as_int());*/
+			}
+
+			entity = entities.child("enemies");
+			for (pugi::xml_node enemy = entity.first_child(); enemy != NULL; enemy = enemy.next_sibling())
+			{
+				App->game->em->CreateEnemy(
+					maxSectors,
+					ENEMY_TYPE(enemy.attribute("type").as_int()),
+					enemy.attribute("x").as_int(),
+					enemy.attribute("y").as_int());
+			}
+
+			entity = entities.child("special");
+			for (pugi::xml_node special = entity.first_child(); special != NULL; special = special.next_sibling())
+			{
+				/* load otherEntity at maxSectors
+				App->game->em->CreateNPC(
+					maxSectors,
+					SPECIAL_ENTITY_TYPE(other.attribute("type").as_int()),
+					other.attribute("x").as_int(),
+					other.attribute("y").as_int());*/
+			}
+
+			pugi::xml_node exits = section.child("exits");
+			for (pugi::xml_node special = entity.first_child(); special != NULL; special = special.next_sibling())
+			{
+				/* add exits to entity manager*/
+			}
+
+			maxSectors++;
+		}
+
+		if (ret = (App->map->Load(map.c_str())))
+		{
+			int w, h;
+			uchar* data = NULL;
+			if (App->map->CreateWalkabilityMap(w, h, &data))
+				App->pathfinding->SetMap(w, h, data);
+
+			RELEASE_ARRAY(data);
+		}
+
+		// TODO manage slot variations to scene
+		//------------------------------------
 	}
 
 	return ret;
 }
 
-bool Room::CleanUp()
+bool Scene::Update(float dt)
 {
-	App->map->UnloadRoomMap();
-	return true;
+	bool ret = true;
+
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		ret = false;
+
+	App->map->Draw();
+
+	return ret;
+}
+
+bool Scene::CleanUp()
+{
+	currentSector = maxSectors = 1;
+	return App->game->em->CleanUp();
 }

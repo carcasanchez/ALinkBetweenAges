@@ -8,6 +8,8 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "j1CollisionManager.h"
+#include "j1SceneManager.h"
+#include "Scene.h"
 
 //=====Enemy Includes
 #include "GreenSoldier.h"
@@ -41,14 +43,14 @@ bool j1EntityManager::PreUpdate()
 	bool ret = true;
 
 	// check for dead entities
-	std::list<Entity*>::iterator item = entities.begin();
-	while (item != entities.end())
+	std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin();
+	while (item != entities[App->sceneM->currentScene->currentSector].end())
 	{
 		if ((*item)->life <= 0)
 		{
 			(*item)->OnDeath();
 			if((*item)->toDelete)
-				item = entities.erase(item); //calls destroyer
+				item = entities[App->sceneM->currentScene->currentSector].erase(item); //calls destroyer
 		}
 		else
 		{
@@ -56,7 +58,7 @@ bool j1EntityManager::PreUpdate()
 		}
 
 		// reasign ids
-		if(item != entities.end())
+		if(item != entities[App->sceneM->currentScene->currentSector].end())
 			(*item)->id = item;
 	}
 
@@ -67,7 +69,7 @@ bool j1EntityManager::Update(float dt)
 {
 	bool ret = true;
 
-	for (std::list<Entity*>::iterator item = entities.begin(); item != entities.end(); item++)
+	for (std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin(); item != entities[App->sceneM->currentScene->currentSector].end(); item++)
 	{		
 		if (App->render->InsideCameraZone((*item)->col->rect))
 		{
@@ -84,7 +86,7 @@ bool j1EntityManager::PostUpdate()
 {
 	bool ret = true;
 
-	for (std::list<Entity*>::iterator item = entities.begin(); item != entities.end(); item++)
+	for (std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin(); item != entities[App->sceneM->currentScene->currentSector].end(); item++)
 	{
 		(*item)->Draw();
 	}
@@ -96,9 +98,9 @@ bool j1EntityManager::CleanUp()
 {
 	bool ret = true;
 
-	for (std::list<Entity*>::iterator item = entities.begin(); item != entities.end(); item++)
+	for (std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin(); item != entities[App->sceneM->currentScene->currentSector].end(); item++)
 	{
-		entities.erase(item);
+		entities[App->sceneM->currentScene->currentSector].erase(item);
 	}
 
 	return ret;
@@ -110,14 +112,14 @@ Player* j1EntityManager::CreatePlayer(int x, int y)
 
 	ret->Spawn(dir[LINK], iPoint(x,y));
 	ret->type = LINK;
-	entities.push_front(ret);
-	App->game->playerId = ret->id = entities.begin();
+	entities[App->sceneM->currentScene->currentSector].push_front(ret);
+	App->game->playerId = ret->id = entities[App->sceneM->currentScene->currentSector].begin();
 	
 	return ret;
 }
 
 //Enemy factory
-Enemy * j1EntityManager::CreateEnemy(ENEMY_TYPE type, int x, int y)
+Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y)
 {
 	Enemy* ret = nullptr;
 
@@ -130,8 +132,8 @@ Enemy * j1EntityManager::CreateEnemy(ENEMY_TYPE type, int x, int y)
 
 	ret->Spawn(dir[ENEMY], iPoint(x, y));
 	ret->type = ENEMY;
-	entities.push_back(ret);
-	ret->id = entities.end();
+	entities[App->sceneM->currentScene->currentSector].push_back(ret);
+	ret->id = entities[App->sceneM->currentScene->currentSector].end();
 
 	return nullptr;
 }
