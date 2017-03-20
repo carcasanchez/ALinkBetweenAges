@@ -127,8 +127,8 @@ public:
 
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
-	bool LoadRoomMap(const char* path);
-	void UnloadRoomMap();
+	bool LoadSmallDataMap(const char* path);
+	void UnloadSmallDataMap();
 
 
 	//Debug pathfinding
@@ -153,7 +153,7 @@ public:
 private:
 
 	MapData smallData;
-	MapData normalData;
+	MapData bigData;
 
 	pugi::xml_document*	map_file;
 	pugi::xml_document	small_map_file;

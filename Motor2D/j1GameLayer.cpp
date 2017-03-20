@@ -9,6 +9,8 @@
 #include "Player.h"
 #include "j1PerfTimer.h"
 #include "p2Log.h"
+#include "j1SceneManager.h"
+#include "Scene.h"
 //#include "Hud.h"
 
 
@@ -20,7 +22,7 @@ j1GameLayer::j1GameLayer() : j1Module()
 {
 	name = ("game");
 	em = new j1EntityManager();
-	playerId = em->entities.end();
+	//playerId = em->entities[App->sceneM->currentScene->currentSector].end();
 	//hud = new Hud();
 }
 
@@ -69,7 +71,7 @@ bool j1GameLayer::Update(float dt)
 	App->render->CameraFollow((*playerId)->currentPos);
 
 	if(App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-		em->CreateEnemy(GREEN_SOLDIER, 16, 16);
+		em->CreateEnemy(1, GREEN_SOLDIER, 16, 16);
 	
 	return ret;
 }
@@ -141,14 +143,14 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 		if (c1->rect.x < c2->rect.x)
 			c2->parent->currentPos.x += c2->parent->speed*dt * 5;
-		else c2->parent->currentPos.x += -c2->parent->speed*dt* 5;
+		else c2->parent->currentPos.x += -c2->parent->speed*dt * 5;
 
 		if (c1->rect.y < c2->rect.y)
-			c2->parent->currentPos.y += c2->parent->speed*dt*5;
-		else c2->parent->currentPos.y -= c2->parent->speed*dt*5;
+			c2->parent->currentPos.y += c2->parent->speed*dt * 5;
+		else c2->parent->currentPos.y -= c2->parent->speed*dt * 5;
 
 		c2->parent->UpdateCollider();
 	}
 		
-		return true;
+	return true;
 }
