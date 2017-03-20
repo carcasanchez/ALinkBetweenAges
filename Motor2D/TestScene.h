@@ -13,7 +13,6 @@ public:
 
 public:
 
-	Room* testRoom;
 	std::string data;
 };
 

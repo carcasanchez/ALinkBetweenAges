@@ -9,7 +9,7 @@
 #include "j1PathFinding.h"
 #include "j1Render.h"
 
-TestScene::TestScene() : Scene("Test Scene"), testRoom(NULL) {}
+TestScene::TestScene() : Scene("Test Scene") {}
 
 bool TestScene::Load(std::string _data)
 {
@@ -37,7 +37,7 @@ bool TestScene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
 	{
-		if (testRoom == NULL)
+		/*if (testRoom == NULL)
 		{
 			testRoom = new Room("tmpRoom");
 			testRoom->Load("data");
@@ -47,7 +47,7 @@ bool TestScene::Update(float dt)
 			testRoom->CleanUp();
 			RELEASE(testRoom);
 			testRoom = NULL;
-		}
+		}*/
 	}
 	else
 	{

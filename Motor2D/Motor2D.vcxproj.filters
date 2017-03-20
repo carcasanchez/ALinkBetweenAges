@@ -299,9 +299,4 @@
       <Filter>Desenvolupament  ========\Tools</Filter>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Xml Include="dialogs.xml">
-      <Filter>Desenvolupament  ========\Game Layer\Dialogs</Filter>
-    </Xml>
-  </ItemGroup>
 </Project>

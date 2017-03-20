@@ -18,7 +18,7 @@ class j1EntityManager
 public:
 
 	j1EntityManager();
-	bool Awake(pugi::xml_node& config);
+	bool Awake(pugi::xml_node&);
 	bool PreUpdate();
 	bool Update(float dt);
 	bool PostUpdate();
@@ -26,10 +26,10 @@ public:
 
 public:
 
-	Player* CreatePlayer(int x, int y);
-	Enemy* CreateEnemy(ENEMY_TYPE, int x, int y);
+	Player* CreatePlayer(int, int);
+	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int);
 
-	std::list<Entity*> entities;
+	std::map<int, std::list<Entity*>> entities;
 
 	std::map<ENTITY_TYPE, std::string> dir;
 };

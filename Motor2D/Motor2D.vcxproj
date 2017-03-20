@@ -163,9 +163,6 @@
   <ItemGroup>
     <None Include="Game\maps\map_testing.tmx" />
   </ItemGroup>
-  <ItemGroup>
-    <Xml Include="dialogs.xml" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
