@@ -70,8 +70,12 @@ bool j1GameLayer::Update(float dt)
 
 	App->render->CameraFollow((*playerId)->currentPos);
 
-	if(App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-		em->CreateEnemy(1, GREEN_SOLDIER, 16, 16);
+	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		iPoint playerPos = (*playerId)->currentPos;
+		em->CreateEnemy(1, GREEN_SOLDIER, playerPos.x-50, playerPos.y - 50);
+	}
+		
 	
 	return ret;
 }
@@ -133,21 +137,38 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_ENEMY && c2->type == COLLIDER_LINK_SWORD)
 	{
-		c1->parent->life--;
+		if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
+		{
+			c1->parent->life--;
+			c1->parent->sprite->tint = {255, 150, 150, 255};
+			((Enemy*)(c1->parent))->enemyState = STEP_BACK;
+		}
 	}
 	
 	if (c1->type == COLLIDER_ENEMY && c2->type == COLLIDER_ENEMY)
 	{
-		if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 6)
-			return true;
+		switch (((Enemy*)(c2->parent))->enemyState)
+		{
+		case CHASING:
+			if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 5)
+				break;
 
-		if (c1->rect.x < c2->rect.x)
-			c2->parent->currentPos.x += c2->parent->speed*dt * 5;
-		else c2->parent->currentPos.x += -c2->parent->speed*dt * 5;
+			if (c1->rect.x < c2->rect.x)
+				c2->parent->currentPos.x += c2->parent->speed*dt * 5;
+			else c2->parent->currentPos.x += -c2->parent->speed*dt * 5;
 
-		if (c1->rect.y < c2->rect.y)
-			c2->parent->currentPos.y += c2->parent->speed*dt * 5;
-		else c2->parent->currentPos.y -= c2->parent->speed*dt * 5;
+			if (c1->rect.y < c2->rect.y)
+				c2->parent->currentPos.y += c2->parent->speed*dt * 5;
+			else c2->parent->currentPos.y -= c2->parent->speed*dt * 5;
+			break;
+
+		case KEEP_DISTANCE:
+			((Enemy*)(c1->parent))->enemyState = KEEP_DISTANCE;
+			break;
+
+		}
+
+		
 
 		c2->parent->UpdateCollider();
 	}

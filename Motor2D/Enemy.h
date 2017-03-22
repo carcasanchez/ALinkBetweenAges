@@ -15,7 +15,9 @@ enum ENEMY_TYPE
 enum ENEMY_STATE
 {
 	PATROLING, 
-	CHASING
+	CHASING,
+	KEEP_DISTANCE,
+	STEP_BACK
 };
 
 class Enemy : public Entity
@@ -32,11 +34,14 @@ public:
 	//State Machine
 	virtual bool Patroling(float dt);
 	virtual bool Chasing(float dt);
+	virtual bool KeepDistance(float dt);
+	virtual bool StepBack(float dt);
 
 
 public:
 	ENEMY_STATE enemyState;
 	int hostileRange;
+	int fightRange;
 
 protected:
 	iPoint currentDest = { 0, 0 };
