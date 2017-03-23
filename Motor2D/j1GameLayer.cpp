@@ -142,6 +142,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 			c1->parent->life--;
 			c1->parent->sprite->tint = {255, 150, 150, 255};
 			((Enemy*)(c1->parent))->enemyState = STEP_BACK;
+			c1->parent->damagedTimer.Start();
 		}
 	}
 	
@@ -162,9 +163,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 			else c2->parent->currentPos.y -= c2->parent->speed*dt * 5;
 			break;
 
-		case KEEP_DISTANCE:
+		/*case KEEP_DISTANCE:
 			((Enemy*)(c1->parent))->enemyState = KEEP_DISTANCE;
-			break;
+			break;*/
 
 		}
 

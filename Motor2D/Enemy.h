@@ -29,7 +29,9 @@ public:
 	virtual bool Update(float dt);
 	virtual void OnDeath();
 
-	void Repeal();
+	void LookToPlayer();
+
+
 
 	//State Machine
 	virtual bool Patroling(float dt);
@@ -47,7 +49,11 @@ protected:
 	iPoint currentDest = { 0, 0 };
 
 private:
+
+	//Combat behaviour variables
 	iPoint movement;
+	j1PerfTimer fightTimer;
+	bool fightDir;
 };
 
 #endif

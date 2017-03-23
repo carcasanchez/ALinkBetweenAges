@@ -7,6 +7,7 @@
 #include "j1CollisionManager.h"
 #include "j1Render.h"
 #include <math.h>
+#include <time.h>
 
 bool Enemy::Update(float dt)
 {
@@ -21,9 +22,26 @@ void Enemy::OnDeath()
 	col->to_delete = true;
 }
 
-void Enemy::Repeal()
+void Enemy::LookToPlayer()
 {
+	iPoint playerPos = (*App->game->playerId)->currentPos;
+
+	if (abs(playerPos.x - currentPos.x) < 15)
+	{
+		if (playerPos.y > currentPos.y)
+			currentDir = D_DOWN;
+		else currentDir = D_UP;
+	}
+	else
+	{
+		if (playerPos.x > currentPos.x)
+			currentDir = D_RIGHT;
+		else currentDir = D_LEFT;
+	}
+	
 }
+
+
 
 bool Enemy::Patroling(float dt)
 {
@@ -61,6 +79,9 @@ bool Enemy::Chasing(float dt)
 	else if (playerDistance <= fightRange)
 	{
 		enemyState = KEEP_DISTANCE;
+		fightTimer.Start();
+		srand(time(NULL));
+		fightDir = true;
 	}
 
 	iPoint dest = App->map->WorldToMap((*App->game->playerId)->currentPos.x, (*App->game->playerId)->currentPos.y);
@@ -71,10 +92,52 @@ bool Enemy::Chasing(float dt)
 
 bool Enemy::KeepDistance(float dt)
 {
-	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) > fightRange)
+	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) > fightRange*2)
 	{
 		enemyState = CHASING;
+		
 	}
+
+	LookToPlayer();
+
+	if (fightDir)
+	{
+		switch (currentDir)
+		{
+		case D_UP:
+			movement = { -1, 0 };
+			break;
+		case D_DOWN:
+			movement = { 1, 0 };
+			break;
+		case D_RIGHT:
+			movement = { 0, -1 };
+			break;
+		case D_LEFT:
+			movement = { 0, 1 };
+			break;
+		}
+	}
+	else 
+		switch (currentDir)
+		{
+		case D_UP:
+			movement = { -1, 0 };
+			break;
+		case D_DOWN:
+			movement = { 1, 0 };
+			break;
+		case D_RIGHT:
+			movement = { 0, -1 };
+			break;
+		case D_LEFT:
+			movement = { 0, 1 };
+			break;
+		}
+
+	Move(SDL_ceil(movement.x), SDL_ceil(movement.y));
+
+
 	return true;
 }
 
@@ -83,18 +146,22 @@ bool Enemy::StepBack(float dt)
 	iPoint movement;
 
 	if ((*App->game->playerId)->currentPos.x > currentPos.x)
-		movement.x -= 1;
-	else movement.x += 1;
+		movement.x = -1;
+	else movement.x = +1;
 	if ((*App->game->playerId)->currentPos.y > currentPos.y)
-		movement.y -= 1;
-	else movement.y += 1;
+		movement.y = -1;
+	else movement.y = +1;
 
 	Move(SDL_ceil(movement.x*speed*dt*5), SDL_ceil(movement.y*speed*dt*5));
 
-	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) > fightRange*2)
+	if (damagedTimer.ReadMs() > 100)
 	{
 		enemyState = CHASING;
 		sprite->tint = { 255, 255, 255, 255 };
+		if (life == 0)
+		{
+			life--;
+		}
 	}
 
 	return true;
