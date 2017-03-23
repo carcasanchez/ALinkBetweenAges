@@ -20,6 +20,31 @@ class Enemy;
 enum ENTITY_TYPE;
 enum ENEMY_TYPE;
 
+class Line
+{
+public:
+
+	Line(bool interaction, std::string text);
+	~Line();
+
+	bool interaction;
+	std::string* line = nullptr;
+};
+
+class Dialog
+{
+private:
+public:
+
+	Dialog(int id, int state);
+	Dialog();
+	~Dialog();
+
+	int id;
+	int state;
+	std::vector<Line*> texts;
+};
+
 class DialogManager : public j1Module
 {
 public:
@@ -29,13 +54,15 @@ public:
 	bool Start();
 	bool Update(float dt);
 
-	bool Dialog(const int id);
+	bool DialogCharge(const int id);
 
 public:
 	std::string folder;
 	std::string path;
 	pugi::xml_document dialogDataFile;
 	pugi::xml_node dialogNode;
+
+	std::vector<Dialog*> dialog;
 };
 
 #endif

@@ -30,6 +30,7 @@ bool DialogManager::Awake(pugi::xml_node & config)
 		ret = false;
 	}
 
+
 	return ret;
 }
 
@@ -37,45 +38,64 @@ bool DialogManager::Start()
 {
 	bool ret = true;
 	dialogNode = dialogDataFile.child("npcs");
+	// Reseve memory to dialog
+	int i = 0;
+	for (pugi::xml_node npc = dialogNode.child("npc"); npc != NULL; npc = npc.next_sibling(), i++)
+	{
+		Dialog* tmp = new Dialog(npc.attribute("id").as_int(), npc.child("dialogue").attribute("state").as_uint());
+		dialog.push_back(tmp);
+
+		for (npc = npc.child("dialogue"); npc != NULL; npc = npc.next_sibling())
+		{
+			int j = 0;
+			pugi::xml_node textx = npc.child("text");
+			for (pugi::xml_node text = npc.child("text"); text != NULL; text = text.next_sibling())
+			{
+				Line* tmp = new Line(false, text.attribute("value").as_string());
+				dialog[i]->texts.push_back(tmp);
+			}
+			for (pugi::xml_node option = npc.child("options").child("option"); option != NULL; option = option.next_sibling())
+			{
+				Line* tmp = new Line(true, option.attribute("value").as_string());
+				dialog[i]->texts.push_back(tmp);
+			}
+			for (pugi::xml_node response = npc.child("response"); response != NULL; response = response.next_sibling())
+			{
+				Line* tmp = new Line(false, response.attribute("value").as_string());
+				dialog[i]->texts.push_back(tmp);
+			}
+		}
+	}
 	return ret;
 }
 
 bool DialogManager::Update(float dt)
 {
-	//Only for test. Send the npc ID to Dialog method
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
-		Dialog(1);
 
 	return true;
 }
 
-bool DialogManager::Dialog(const int id)
+bool DialogManager::DialogCharge(const int id)
 {
-	//Iterate all NPCs
-	for (pugi::xml_node npc = dialogNode.child("npc"); npc != NULL; npc = npc.next_sibling())
-	{
-		if (npc.attribute("id").as_int() == id) //If we found our NPC
-		{
-			uint dialogState = npc.attribute("state").as_uint(); //Dialog state of the NPC
-			for (npc = npc.child("dialogue"); npc != NULL; npc = npc.next_sibling())
-			{
-				if (npc.attribute("state").as_uint() == dialogState)
-				{
-
-					std::string text = npc.child("text").attribute("value").as_string();
-					if (npc.child("options").first_attribute().as_int() == 1)
-					{
-						//Choose option with UI method. TODO
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				}
-			}
-		}
-	}
-	return false;
+	return true;
 }
+
+Dialog::Dialog(int id, int state) : id(id), state(state)
+{}
+
+Dialog::Dialog()
+{}
+
+Dialog::~Dialog()
+{
+	texts.clear();
+}
+
+Line::Line(bool interaction, std::string text) : interaction(interaction)
+{
+	line = new std::string(text);
+}
+
+Line::~Line()
+{}
 
