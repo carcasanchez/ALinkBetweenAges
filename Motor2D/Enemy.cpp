@@ -26,17 +26,19 @@ void Enemy::LookToPlayer()
 {
 	iPoint playerPos = (*App->game->playerId)->currentPos;
 
-	if (abs(playerPos.x - currentPos.x) < 15)
+	if (abs(playerPos.x - currentPos.x) < abs(playerPos.y - currentPos.y))
 	{
 		if (playerPos.y > currentPos.y)
 			currentDir = D_DOWN;
 		else currentDir = D_UP;
+		
+		
 	}
 	else
 	{
-		if (playerPos.x > currentPos.x)
-			currentDir = D_RIGHT;
-		else currentDir = D_LEFT;
+		if (playerPos.x < currentPos.x)
+			currentDir = D_LEFT;
+		else currentDir = D_RIGHT;
 	}
 	
 }
@@ -135,7 +137,7 @@ bool Enemy::KeepDistance(float dt)
 			break;
 		}
 
-	Move(SDL_ceil(movement.x), SDL_ceil(movement.y));
+	Move(SDL_ceil(speed*dt*2)*movement.x, SDL_ceil(speed*dt*2)*movement.y);
 
 
 	return true;
