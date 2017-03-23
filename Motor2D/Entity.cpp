@@ -197,7 +197,7 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 		{
 			path = App->pathfinding->ReturnPath();
 			path.erase(path.begin());
-			LOG("DEST: %i, %i", dest.x, dest.y);
+			//LOG("DEST: %i, %i", dest.x, dest.y);
 		}
 	}
 

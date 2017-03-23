@@ -17,7 +17,8 @@ enum ENEMY_STATE
 	PATROLING, 
 	CHASING,
 	KEEP_DISTANCE,
-	STEP_BACK
+	STEP_BACK,
+	CHARGING
 };
 
 class Enemy : public Entity
@@ -38,6 +39,7 @@ public:
 	virtual bool Chasing(float dt);
 	virtual bool KeepDistance(float dt);
 	virtual bool StepBack(float dt);
+	virtual bool Charging(float dt);
 
 
 public:
@@ -53,6 +55,7 @@ private:
 	//Combat behaviour variables
 	iPoint movement;
 	j1PerfTimer fightTimer;
+	j1PerfTimer attackTimer;
 	bool fightDir;
 
 };

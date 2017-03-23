@@ -82,6 +82,7 @@ bool Enemy::Chasing(float dt)
 	{
 		enemyState = KEEP_DISTANCE;
 		fightTimer.Start();
+		attackTimer.Start();
 		srand(time(NULL));
 		fightDir = rand() % 2;
 	}
@@ -97,7 +98,6 @@ bool Enemy::KeepDistance(float dt)
 	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) > fightRange*1.5)
 	{
 		enemyState = CHASING;
-		
 	}
 
 	LookToPlayer();
@@ -110,6 +110,17 @@ bool Enemy::KeepDistance(float dt)
 		{ 			
 			fightTimer.Start();
 			fightDir = !fightDir;
+		}
+	}
+
+	if (attackTimer.ReadMs() > 600)
+	{	
+		srand(time(NULL));
+		bool attack = rand() % 2;
+		if (attack && currentPos.y == (*App->game->playerId)->currentPos.y || currentPos.x == (*App->game->playerId)->currentPos.x)
+		{
+			attackTimer.Start();
+			enemyState = CHARGING;
 		}
 	}
 
@@ -182,4 +193,46 @@ bool Enemy::StepBack(float dt)
 	}
 
 	return true;
+}
+
+bool Enemy::Charging(float dt)
+{
+	bool ret = true;
+
+	switch (currentDir)
+	{
+	case D_DOWN:
+			ret = Move(0, SDL_ceil(speed * dt * 2));
+			if (currentPos.y > (*App->game->playerId)->currentPos.y)
+				ret = false;			
+			break;
+
+	case D_UP:
+		ret = Move(0, -SDL_ceil(speed * dt * 2));
+		if (currentPos.y < (*App->game->playerId)->currentPos.y)
+			ret = false;
+		break;
+
+	case D_LEFT:
+		ret = Move(-SDL_ceil(speed * dt * 2), 0);
+		if (currentPos.x < (*App->game->playerId)->currentPos.x)
+			ret = false;
+		break;
+
+	case D_RIGHT:
+		ret = Move(SDL_ceil(speed * dt * 2), 0);
+		if (currentPos.x > (*App->game->playerId)->currentPos.x)
+			ret = false;
+		break;
+	}
+	
+
+	if (attackTimer.ReadMs() > 1000)
+		ret = false;
+
+	if (ret == false)
+		enemyState = CHASING;
+	
+
+	return ret;
 }

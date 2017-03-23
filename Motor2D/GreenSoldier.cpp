@@ -65,6 +65,9 @@ bool GreenSoldier::Update(float dt)
 	case(STEP_BACK):
 		StepBack(dt);
 		break;
+	case (CHARGING):
+		Charging(dt);
+		break;
 	}
 	
 	return false;
