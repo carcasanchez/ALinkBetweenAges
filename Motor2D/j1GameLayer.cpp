@@ -111,10 +111,10 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
 	{
-		if (((Player*)(*playerId))->invulnerable == false)
+		if (((Player*)(*playerId))->invulnerable == false && ((Player*)(*playerId))->actionState != DODGING)
 		{
 
-			if ((*playerId) != nullptr)
+ 			if ((*playerId) != nullptr)
 			{
 				(*playerId)->damaged = ((Player*)(*playerId))->invulnerable = true;
 				(*playerId)->damagedTimer.Start();

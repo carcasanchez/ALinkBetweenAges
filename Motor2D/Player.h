@@ -50,6 +50,8 @@ private:
 	bool Dodging(float dt);
 	bool Damaged(float dt);
 
+	bool dodging = false;
+
 	//For Input callback
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 

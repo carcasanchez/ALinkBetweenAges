@@ -79,9 +79,11 @@ bool Player::Update(float dt)
 
 	if (stamina < maxStamina)
 	{
-		stamina += staminaRec;
+		stamina += staminaRec*dt;
+		LOG("STAMINA: %f", stamina);
 	}
 	else stamina = maxStamina;
+	
 
 	switch (actionState)
 	{
@@ -208,7 +210,6 @@ bool Player::Walking(float dt)
 		}
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-		
 		{
 
 		currentDir = D_LEFT;
@@ -265,12 +266,13 @@ bool Player::Walking(float dt)
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina- dodgeTax >=0))
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >=0))
 	{	
 		stamina -= dodgeTax;
 		LOG("LINK is DODGING");
-		Change_direction();
 		actionState = DODGING;
+		Change_direction();
+		dodging = true;
 		dodgeTimer.Start();
 		return true;
 	}
@@ -337,19 +339,42 @@ bool Player::Attacking(float dt)
 
 bool Player::Dodging(float dt)
 {
-	if (damaged == true)
+ 	invulnerable = true;
+
+	Move(SDL_ceil(dodgeSpeed * dodgeDir.x * dt), SDL_ceil(dodgeSpeed*dodgeDir.y* dt));
+
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		actionState = DAMAGED;
-		LOG("LINK DAMAGED");
+		stamina -= attackTax;
+		Change_direction();
+		actionState = ATTACKING;
+		createSwordCollider();
+		invulnerable = false;
+		LOG("LINK is ATTACKING");
 		return true;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		dodging = true;
 	}
 
 	if (dodgeTimer.ReadMs() > dodgeLimit)
 	{
-		actionState = IDLE;
+		if (dodging)
+		{
+			dodgeTimer.Start();
+   			dodging = false;
+		}
+		else
+		{
+			invulnerable = false;
+			actionState = IDLE;
+		}
 	}
-
-	Move(SDL_ceil(dodgeSpeed * dodgeDir.x * dt), SDL_ceil(dodgeSpeed*dodgeDir.y* dt));
 	
 	return true;
 }
@@ -418,12 +443,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		break;
 
 	}
-
-
-
-
-
-
 }
 
 void Player::createSwordCollider()

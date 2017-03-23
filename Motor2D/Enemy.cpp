@@ -102,7 +102,7 @@ bool Enemy::KeepDistance(float dt)
 
 	LookToPlayer();
 
-	if (fightTimer.ReadMs() > 500)
+	if (fightTimer.ReadMs() > 700)
 	{
 		srand(time(NULL));
 		bool change = rand() % 2;
@@ -113,7 +113,7 @@ bool Enemy::KeepDistance(float dt)
 		}
 	}
 
-	if (attackTimer.ReadMs() > 600)
+	if (attackTimer.ReadMs() > 1000)
 	{	
 		srand(time(NULL));
 		bool attack = rand() % 2;
