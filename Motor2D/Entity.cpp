@@ -156,17 +156,26 @@ bool Entity::LoadAnimations(std::string file)
 }
 
 //Displace the entity a given X and Y taking in account collisions w/map
-void Entity::Move(int x, int y)
+bool Entity::Move(int x, int y)
 {
+	bool ret = true;
 	currentPos.x += x;
 	UpdateCollider();
 	if (col->CheckMapCollision())
+	{
 		currentPos.x -= x;
+		ret = false;
+	}
 
 	currentPos.y += y;
 	UpdateCollider();
 	if (col->CheckMapCollision())
+	{
 		currentPos.y -= y;
+		ret = false;
+	}
+
+	return ret;
 }
 
 void Entity::UpdateCollider()

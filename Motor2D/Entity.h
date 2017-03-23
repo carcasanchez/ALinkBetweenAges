@@ -56,7 +56,7 @@ public:
 	virtual bool LoadAnimations(std::string file);
 
 
-	virtual void Move(int x, int y);
+	virtual bool Move(int x, int y);
 	virtual void UpdateCollider();
 
 	virtual bool GoTo(iPoint dest, int speed, float dt);

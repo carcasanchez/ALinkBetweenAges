@@ -83,7 +83,7 @@ bool Enemy::Chasing(float dt)
 		enemyState = KEEP_DISTANCE;
 		fightTimer.Start();
 		srand(time(NULL));
-		fightDir = true;
+		fightDir = rand() % 2;
 	}
 
 	iPoint dest = App->map->WorldToMap((*App->game->playerId)->currentPos.x, (*App->game->playerId)->currentPos.y);
@@ -94,7 +94,7 @@ bool Enemy::Chasing(float dt)
 
 bool Enemy::KeepDistance(float dt)
 {
-	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) > fightRange*2)
+	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) > fightRange*1.5)
 	{
 		enemyState = CHASING;
 		
@@ -102,21 +102,32 @@ bool Enemy::KeepDistance(float dt)
 
 	LookToPlayer();
 
+	if (fightTimer.ReadMs() > 500)
+	{
+		srand(time(NULL));
+		bool change = rand() % 2;
+		if(change)
+		{ 			
+			fightTimer.Start();
+			fightDir = !fightDir;
+		}
+	}
+
 	if (fightDir)
 	{
 		switch (currentDir)
 		{
 		case D_UP:
-			movement = { -1, 0 };
-			break;
-		case D_DOWN:
 			movement = { 1, 0 };
 			break;
+		case D_DOWN:
+			movement = { -1, 0 };
+			break;
 		case D_RIGHT:
-			movement = { 0, -1 };
+			movement = { 0, 1 };
 			break;
 		case D_LEFT:
-			movement = { 0, 1 };
+			movement = { 0, -1 };
 			break;
 		}
 	}
@@ -137,7 +148,11 @@ bool Enemy::KeepDistance(float dt)
 			break;
 		}
 
-	Move(SDL_ceil(speed*dt*2)*movement.x, SDL_ceil(speed*dt*2)*movement.y);
+	if (Move(SDL_ceil(speed*dt)*movement.x, SDL_ceil(speed*dt)*movement.y) == false)
+	{
+		fightDir = !fightDir;
+		fightTimer.Start();
+	}
 
 
 	return true;

@@ -54,6 +54,7 @@ private:
 	iPoint movement;
 	j1PerfTimer fightTimer;
 	bool fightDir;
+
 };
 
 #endif
