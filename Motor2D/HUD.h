@@ -43,6 +43,12 @@ public:
 	UI_Image*		stamina;
 	UI_Image*		stamina_end;
 
+	//Pause Elements
+	UI_element*		pause_screen;
+	UI_Image*		main_menu;
+	UI_Image*		item_menu;
+	UI_Image*		selector;
+	
 };
 
 #endif // !_HUD_H_
