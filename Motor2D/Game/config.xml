@@ -68,7 +68,7 @@
       <enemy file = "enemy_attributes.xml"/>
       <npc file = "npc_attributes.xml"/>
     </entityAttributes>
-    <hud>
+    <hud folder = "gui/">
      <ingame file = "hud_attributes.xml"/>
      <pause file = "pause_attributes.xml"/>
     </hud>

@@ -11,7 +11,7 @@
 #include "p2Log.h"
 #include "j1SceneManager.h"
 #include "Scene.h"
-//#include "Hud.h"
+#include "HUD.h"
 
 
 // just for temporal wall collider
@@ -23,7 +23,7 @@ j1GameLayer::j1GameLayer() : j1Module()
 	name = ("game");
 	em = new j1EntityManager();
 	//playerId = em->entities[App->sceneM->currentScene->currentSector].end();
-	//hud = new Hud();
+	hud = new Hud();
 }
 
 j1GameLayer::~j1GameLayer()
@@ -35,7 +35,7 @@ j1GameLayer::~j1GameLayer()
 bool j1GameLayer::Awake(pugi::xml_node& conf)
 {
 	em->Awake(conf);
-	//hud->Awake(conf);
+	hud->Awake(conf);
 	return true;
 }
 

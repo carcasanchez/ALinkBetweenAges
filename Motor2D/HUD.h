@@ -2,6 +2,7 @@
 #define _HUD_H_
 
 #include "j1Module.h"
+#include "UI_Image.h"
 
 class UI_element;
 class UI_Image;
@@ -44,11 +45,19 @@ public:
 	UI_Image*		stamina_end;
 
 	//Pause Elements
-	UI_element*		pause_screen;
-	UI_Image*		main_menu;
-	UI_Image*		item_menu;
-	UI_Image*		selector;
+	UI_element*		pause_screen = nullptr;
+	UI_Image*		main_menu = nullptr;
+	UI_Image*		item_menu = nullptr;
+	UI_Image*		resume = nullptr;
+	UI_Image*		quit = nullptr;
+
 	
+
+private:
+
+	bool		LoadPause(string file);
+	SDL_Rect	LoadRect(pugi::xml_node);
+
 };
 
 #endif // !_HUD_H_
