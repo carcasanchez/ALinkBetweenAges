@@ -1,0 +1,9 @@
+<!-- Npc Attributes -->
+<attributes>
+	<npc1>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "3"/>
+		<animation file = "animations/npc_animations.xml"/>
+  		<texture file = "textures/npc_sprites/npc.png"/>
+	</npc1>
+</attributes>

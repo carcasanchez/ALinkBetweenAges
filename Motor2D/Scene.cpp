@@ -49,12 +49,12 @@ bool Scene::Load(const char* path)
 			pugi::xml_node entity = entities.child("npcs");
 			for (pugi::xml_node npc = entity.first_child(); npc != NULL; npc = npc.next_sibling())
 			{
-				/* load npc at maxSectors
+				/* load npc at maxSectors*/
 				App->game->em->CreateNPC(
 					maxSectors,
 					NPC_TYPE(npc.attribute("type").as_int()),
-					other.attribute("x").as_int(),
-					other.attribute("y").as_int());*/
+					npc.attribute("x").as_int(),
+					npc.attribute("y").as_int());
 			}
 
 			entity = entities.child("enemies");

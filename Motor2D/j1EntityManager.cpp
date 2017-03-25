@@ -7,6 +7,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "NPC.h"
 #include "j1CollisionManager.h"
 #include "j1SceneManager.h"
 #include "Scene.h"
@@ -132,6 +133,25 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y)
 
 	ret->Spawn(dir[ENEMY], iPoint(x, y));
 	ret->type = ENEMY;
+	entities[App->sceneM->currentScene->currentSector].push_back(ret);
+	ret->id = entities[App->sceneM->currentScene->currentSector].end();
+
+	return nullptr;
+}
+
+Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y)
+{
+	Npc* ret = nullptr;
+
+	switch (type)
+	{
+	case NPC_1:
+		ret = new Npc1();
+		break;
+	}
+
+	ret->Spawn(dir[NPC], iPoint(x, y), type);
+	ret->type = NPC;
 	entities[App->sceneM->currentScene->currentSector].push_back(ret);
 	ret->id = entities[App->sceneM->currentScene->currentSector].end();
 

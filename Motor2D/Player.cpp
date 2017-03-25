@@ -44,7 +44,6 @@ bool Player::Spawn(std::string file, iPoint pos)
 		maxLife = life;
 		maxStamina = stamina = node.attribute("stamina").as_int(100);
 		staminaRec = node.attribute("staminaRec").as_float();
-		speed = node.attribute("speed").as_int(70);
 
 		// attack
 		node = attributes.child("attack");
