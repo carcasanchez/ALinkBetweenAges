@@ -77,6 +77,9 @@ bool Player::Update(float dt)
 		LOG("DAMAGED FALSE - TIMER STOP");
 	}
 
+	if (stamina < 0)
+		stamina = 0;
+
 	if (stamina < maxStamina)
 	{
 		stamina += staminaRec*dt;
@@ -305,20 +308,20 @@ bool Player::Attacking(float dt)
 		return true;
 	}
 
-	if (currentDir == D_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		Move(0, SDL_ceil(attackSpeed * dt));
 	}
-	else if (currentDir == D_UP)
+	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		Move(0, -SDL_ceil(attackSpeed * dt));
 	}
 
-	if (currentDir == D_LEFT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		Move(-SDL_ceil(attackSpeed * dt), 0);
 	}
-	else if (currentDir == D_RIGHT)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		Move(SDL_ceil(attackSpeed * dt), 0);
 	}

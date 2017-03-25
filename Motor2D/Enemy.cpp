@@ -22,17 +22,18 @@ void Enemy::OnDeath()
 	col->to_delete = true;
 }
 
-void Enemy::LookToPlayer()
+//Makes enemy look to player. Returns true if the direction changes
+bool Enemy::LookToPlayer()
 {
 	iPoint playerPos = (*App->game->playerId)->currentPos;
+
+	DIRECTION prevDir = currentDir;
 
 	if (abs(playerPos.x - currentPos.x) < abs(playerPos.y - currentPos.y))
 	{
 		if (playerPos.y > currentPos.y)
 			currentDir = D_DOWN;
-		else currentDir = D_UP;
-		
-		
+		else currentDir = D_UP;		
 	}
 	else
 	{
@@ -40,6 +41,10 @@ void Enemy::LookToPlayer()
 			currentDir = D_LEFT;
 		else currentDir = D_RIGHT;
 	}
+
+	if (prevDir == currentDir)
+		return false;
+	else return true;
 	
 }
 
@@ -70,6 +75,7 @@ bool Enemy::Patroling(float dt)
 	return true;
 }
 
+//Persecute Player
 bool Enemy::Chasing(float dt)
 {
 	int playerDistance = (*App->game->playerId)->currentPos.DistanceTo(currentPos);
@@ -81,39 +87,44 @@ bool Enemy::Chasing(float dt)
 	else if (playerDistance <= fightRange)
 	{
 		enemyState = KEEP_DISTANCE;
-		fightTimer.Start();
 		attackTimer.Start();
 		srand(time(NULL));
-		fightDir = rand() % 2;
+		flankingDir = rand() % 2;
 	}
 
 	iPoint dest = App->map->WorldToMap((*App->game->playerId)->currentPos.x, (*App->game->playerId)->currentPos.y);
-	GoTo(dest, speed*2, dt);
+	GoTo(dest, chaseSpeed, dt);
 
 	return true;
 }
 
+//Flank player
 bool Enemy::KeepDistance(float dt)
 {
+	LookToPlayer();
+
+
+	//If link is out of range, stop chase
 	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) > fightRange*1.5)
 	{
 		enemyState = CHASING;
 	}
 
-	LookToPlayer();
 
-	if (fightTimer.ReadMs() > 700)
+	//Choose randomly if the flanking direction changes
+	if (abs((*App->game->playerId)->currentPos.x - currentPos.x) == abs((*App->game->playerId)->currentPos.y - currentPos.y))
 	{
 		srand(time(NULL));
 		bool change = rand() % 2;
-		if(change)
-		{ 			
-			fightTimer.Start();
-			fightDir = !fightDir;
+		if (change)
+		{
+			flankingDir = !flankingDir;
 		}
 	}
 
-	if (attackTimer.ReadMs() > 1000)
+	
+	//Choose if attack or not if Link is aligned to enemy
+	if (attackTimer.ReadMs() > attackRatio)
 	{	
 		srand(time(NULL));
 		bool attack = rand() % 2;
@@ -124,7 +135,8 @@ bool Enemy::KeepDistance(float dt)
 		}
 	}
 
-	if (fightDir)
+	//Movement depending on the player relative direction
+	if (flankingDir)
 	{
 		switch (currentDir)
 		{
@@ -159,16 +171,17 @@ bool Enemy::KeepDistance(float dt)
 			break;
 		}
 
+	//Change the flanking direction if the enemy hits something
 	if (Move(SDL_ceil(speed*dt)*movement.x, SDL_ceil(speed*dt)*movement.y) == false)
 	{
-		fightDir = !fightDir;
-		fightTimer.Start();
+		flankingDir = !flankingDir;
 	}
 
 
 	return true;
 }
 
+//Go backwards when hit
 bool Enemy::StepBack(float dt)
 {
 	iPoint movement;
@@ -195,6 +208,7 @@ bool Enemy::StepBack(float dt)
 	return true;
 }
 
+//Attack player
 bool Enemy::Charging(float dt)
 {
 	bool ret = true;
@@ -202,32 +216,32 @@ bool Enemy::Charging(float dt)
 	switch (currentDir)
 	{
 	case D_DOWN:
-			ret = Move(0, SDL_ceil(speed * dt * 2));
+			ret = Move(0, SDL_ceil(attackSpeed * dt));
 			if (currentPos.y > (*App->game->playerId)->currentPos.y)
 				ret = false;			
 			break;
 
 	case D_UP:
-		ret = Move(0, -SDL_ceil(speed * dt * 2));
+		ret = Move(0, -SDL_ceil(attackSpeed * dt));
 		if (currentPos.y < (*App->game->playerId)->currentPos.y)
 			ret = false;
 		break;
 
 	case D_LEFT:
-		ret = Move(-SDL_ceil(speed * dt * 2), 0);
+		ret = Move(-SDL_ceil(attackSpeed * dt), 0);
 		if (currentPos.x < (*App->game->playerId)->currentPos.x)
 			ret = false;
 		break;
 
 	case D_RIGHT:
-		ret = Move(SDL_ceil(speed * dt * 2), 0);
+		ret = Move(SDL_ceil(attackSpeed * dt), 0);
 		if (currentPos.x > (*App->game->playerId)->currentPos.x)
 			ret = false;
 		break;
 	}
 	
 
-	if (attackTimer.ReadMs() > 1000)
+	if (attackTimer.ReadMs() > chargeTime)
 		ret = false;
 
 	if (ret == false)
