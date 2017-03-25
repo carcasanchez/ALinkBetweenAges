@@ -29,8 +29,22 @@ bool Hud::Awake(pugi::xml_node& conf)
 
 bool Hud::Start()
 {
-	//SetPauseElements();
+	App->inputM->AddListener(this);
 	return true;
+}
+
+void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
+{
+	
+	switch (new_event)
+	{
+	case PAUSE:
+		if(state == E_DOWN)
+			App->game->pause = !(App->game->pause);
+		
+		break;
+	}
+
 }
 
 bool Hud::LoadPause(string file)
@@ -92,7 +106,7 @@ SDL_Rect Hud::LoadRect(pugi::xml_node node)
 
 void Hud::SetPauseElements()
 {
-	main_menu->Set_Interactive_Box({ 50,-620,0,0 });
+	main_menu->Set_Interactive_Box({ 50, -650,0,0 });
 	item_menu->Set_Interactive_Box({720,0,0,0});
 	resume->Set_Interactive_Box({ 72,86,0,0 });
 	quit->Set_Interactive_Box({ 72,528,0,0 });
@@ -100,5 +114,5 @@ void Hud::SetPauseElements()
 	resume->Set_Active_state(false);
 	quit->Set_Active_state(false);
 
-	//pause_screen->Set_Active_state(false);
+	pause_screen->Set_Active_state(false);
 }

@@ -3,11 +3,12 @@
 
 #include "j1Module.h"
 #include "UI_Image.h"
+#include "InputManager.h"
 
 class UI_element;
 class UI_Image;
 
-class Hud
+class Hud : public InputListener 
 {
 public:
 	Hud();
@@ -16,6 +17,7 @@ public:
 	bool Start();
 	
 	bool Update();
+	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 
 public:
 	//In game HUD elements
@@ -52,7 +54,7 @@ public:
 	UI_Image*		resume = nullptr;
 	UI_Image*		quit = nullptr;
 
-	
+	std::vector<UI_Image*> pause_selectables;
 
 private:
 
