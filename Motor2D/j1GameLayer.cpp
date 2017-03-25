@@ -68,7 +68,8 @@ bool j1GameLayer::Update(float dt)
 
 	if(!pause)
 		em->Update(dt);
-	//ret = hud->Update(dt);
+	
+	ret = hud->Update(dt);
 
 	App->render->CameraFollow((*playerId)->currentPos);
 

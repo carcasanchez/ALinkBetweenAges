@@ -15,8 +15,8 @@ public:
 
 	bool Awake(pugi::xml_node& conf);
 	bool Start();
-	
-	bool Update();
+	bool Update(float);
+
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 
 public:
@@ -48,6 +48,8 @@ public:
 	UI_Image*		stamina_end;
 
 	//Pause Elements
+	bool			pause_transition = false;
+
 	UI_element*		pause_screen = nullptr;
 	UI_Image*		main_menu = nullptr;
 	UI_Image*		item_menu = nullptr;
@@ -58,10 +60,13 @@ public:
 
 private:
 
-	bool		LoadPause(string file);
 	SDL_Rect	LoadRect(pugi::xml_node);
 
+	//Pause methods
+	bool		LoadPause(string file);
 	void		SetPauseElements();
+	void		IntoPause();
+	void		PauseIn(float);
 
 };
 

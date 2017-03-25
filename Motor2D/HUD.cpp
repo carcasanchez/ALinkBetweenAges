@@ -33,14 +33,27 @@ bool Hud::Start()
 	return true;
 }
 
+bool Hud::Update(float dt)
+{
+	if (pause_transition)
+		PauseIn(dt);
+
+	return false;
+}
+
 void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 {
 	
 	switch (new_event)
 	{
 	case PAUSE:
-		if(state == E_DOWN)
+		if (state == E_DOWN)
+		{
 			App->game->pause = !(App->game->pause);
+			IntoPause();
+			pause_transition = true;
+		}
+			
 		
 		break;
 	}
@@ -115,4 +128,25 @@ void Hud::SetPauseElements()
 	quit->Set_Active_state(false);
 
 	pause_screen->Set_Active_state(false);
+}
+
+void Hud::IntoPause()
+{
+	pause_screen->Set_Active_state(true);
+	resume->Set_Active_state(true);
+	pause_transition = true;
+}
+
+void Hud::PauseIn(float dt)
+{
+	if (main_menu->Interactive_box.y <= 50)
+	{
+		main_menu->Interactive_box.y += 1000 * dt;
+		resume->Interactive_box.y += 1000 * dt;
+		quit->Interactive_box.y += 1000 * dt;
+		item_menu->Interactive_box.y += 1000 * dt;
+	}
+		
+
+	else pause_transition = false;
 }
