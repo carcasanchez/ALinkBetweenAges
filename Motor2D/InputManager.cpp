@@ -32,7 +32,6 @@ bool InputManager::Awake(pugi::xml_node& conf)
 		actions.insert(new_action);
 	}
 
-
 	return ret;
 }
 

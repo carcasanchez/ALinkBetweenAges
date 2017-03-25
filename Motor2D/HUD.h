@@ -8,6 +8,13 @@
 class UI_element;
 class UI_Image;
 
+enum PAUSEMOVE
+{
+	PAUSE_NO_MOVE,
+	PAUSE_UP,
+	PAUSE_DOWN
+};
+
 class Hud : public InputListener 
 {
 public:
@@ -48,9 +55,9 @@ public:
 	UI_Image*		stamina_end;
 
 	//Pause Elements
-	bool			pause_transition = false;
+	PAUSEMOVE		pause_transition = PAUSE_NO_MOVE;
 
-	UI_element*		pause_screen = nullptr;
+	//main menu works as screen
 	UI_Image*		main_menu = nullptr;
 	UI_Image*		item_menu = nullptr;
 	UI_Image*		resume = nullptr;
@@ -66,7 +73,9 @@ private:
 	bool		LoadPause(string file);
 	void		SetPauseElements();
 	void		IntoPause();
+	void		GonePause();
 	void		PauseIn(float);
+	void		PauseOut(float);
 
 };
 

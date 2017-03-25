@@ -17,6 +17,14 @@ enum INPUTEVENT
 	DODGE,
 	PAUSE,
 
+	//Inside Menus
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	CONFIRM,
+	DECLINE,
+
 	//No Button Asociated -> Joysticks
 	MUP,
 	MDOWN,
