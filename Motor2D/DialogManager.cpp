@@ -1,7 +1,7 @@
 #include "DialogManager.h"
 #include "j1Input.h"
 #include "j1Render.h"
-
+#include "j1Gui.h"
 
 DialogManager::DialogManager() : j1Module()
 {
@@ -30,7 +30,6 @@ bool DialogManager::Awake(pugi::xml_node & config)
 		ret = false;
 	}
 
-
 	return ret;
 }
 
@@ -38,52 +37,100 @@ bool DialogManager::Start()
 {
 	bool ret = true;
 	dialogNode = dialogDataFile.child("npcs");
-	// Reseve memory to dialog
+	// Allocate memory
 	int i = 0;
 	for (pugi::xml_node npc = dialogNode.child("npc"); npc != NULL; npc = npc.next_sibling(), i++)
 	{
-		Dialog* tmp = new Dialog(npc.attribute("id").as_int(), npc.child("dialogue").attribute("state").as_uint());
+		//Allocate Dialog with his ID and State
+		Dialog* tmp = new Dialog(npc.attribute("id").as_int());
 		dialog.push_back(tmp);
 
-		for (npc = npc.child("dialogue"); npc != NULL; npc = npc.next_sibling())
+		//Allocate text
+		for (pugi::xml_node dialogue = npc.child("dialogue"); dialogue != NULL; dialogue = dialogue.next_sibling())
 		{
-			int j = 0;
-			pugi::xml_node textx = npc.child("text");
-			for (pugi::xml_node text = npc.child("text"); text != NULL; text = text.next_sibling())
+			for (pugi::xml_node text = dialogue.child("text"); text != NULL; text = text.next_sibling("text"))
 			{
-				Line* tmp = new Line(false, text.attribute("value").as_string());
-				dialog[i]->texts.push_back(tmp);
-			}
-			for (pugi::xml_node option = npc.child("options").child("option"); option != NULL; option = option.next_sibling())
-			{
-				Line* tmp = new Line(true, option.attribute("value").as_string());
-				dialog[i]->texts.push_back(tmp);
-			}
-			for (pugi::xml_node response = npc.child("response"); response != NULL; response = response.next_sibling())
-			{
-				Line* tmp = new Line(false, response.attribute("value").as_string());
+				Line* tmp = new Line(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
 				dialog[i]->texts.push_back(tmp);
 			}
 		}
 	}
+
+	//Prepare UI to print
+	screen = App->gui->CreateScreen(screen);
+	text_on_screen = (UI_String*)App->gui->Add_element(STRING, this);
+	text_on_screen->Set_Active_state(true);
+	text_on_screen->Set_Interactive_Box({ 0, 0, 0, 0 });
+	screen->AddChild(text_on_screen);
+
 	return ret;
 }
 
-bool DialogManager::Update(float dt)
+bool DialogManager::PostUpdate()
 {
+	/*--- CODE TO TEST RESULTS IN-GAME ---*/
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	{
+		if (id == 1)
+		{
+			id = 2;
+		}
+		else
+		{
+			id = 1;
+		}
+	}
 
+	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
+	{
+		if (stateInput == 0)
+		{
+			stateInput = 1;
+		}
+		else
+		{
+			stateInput = 0;
+		}
+	}
+	/*--- END ---*/
+
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		dialogState++;
+	}
+
+	BlitDialog(id, stateInput);
 	return true;
 }
 
-bool DialogManager::DialogCharge(const int id)
+bool DialogManager::BlitDialog(int id, int state)
 {
-	return true;
+	//Find the correct ID
+	for (int i = 0; i < dialog.size(); i++)
+	{
+		if (dialog[i]->id == id)
+		{
+			if (dialogState >= dialog[i]->texts.size() - 1)
+			{
+				dialogState = 0;
+			}
+			if (dialog[i]->texts[dialogState]->state == state)
+			{
+				text_on_screen->Set_String((char*)dialog[i]->texts[dialogState]->line->c_str());
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
-Dialog::Dialog(int id, int state) : id(id), state(state)
-{}
+DialogManager::~DialogManager()
+{
+	dialog.clear();
+}
 
-Dialog::Dialog()
+Dialog::Dialog(int id) : id(id)
 {}
 
 Dialog::~Dialog()
@@ -91,11 +138,13 @@ Dialog::~Dialog()
 	texts.clear();
 }
 
-Line::Line(bool interaction, std::string text) : interaction(interaction)
+Line::Line(int NPCstate, std::string text) : state(NPCstate)
 {
 	line = new std::string(text);
 }
 
 Line::~Line()
-{}
+{
+
+}
 
