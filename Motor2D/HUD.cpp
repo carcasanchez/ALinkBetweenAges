@@ -38,6 +38,13 @@ bool Hud::Update(float dt)
 	if (pause_transition)
 		PauseIn(dt);
 
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		App->game->pause = !(App->game->pause);
+		IntoPause();
+		pause_transition = true;
+	}
+
 	return false;
 }
 

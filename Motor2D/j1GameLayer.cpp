@@ -86,8 +86,8 @@ bool j1GameLayer::Update(float dt)
 //postUpdate
 bool j1GameLayer::PostUpdate()
 {
-	//if (!pause)
-		em->PostUpdate();
+	
+	em->PostUpdate(); 
 	//hud->PostUpdate();
 
 	return true;
