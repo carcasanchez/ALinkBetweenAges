@@ -13,6 +13,7 @@ public:
 	Hud();
 
 	bool Awake(pugi::xml_node& conf);
+	bool Start();
 	
 	bool Update();
 
@@ -57,6 +58,8 @@ private:
 
 	bool		LoadPause(string file);
 	SDL_Rect	LoadRect(pugi::xml_node);
+
+	void		SetPauseElements();
 
 };
 

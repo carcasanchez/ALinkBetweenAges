@@ -27,6 +27,12 @@ bool Hud::Awake(pugi::xml_node& conf)
 	return false;
 }
 
+bool Hud::Start()
+{
+	//SetPauseElements();
+	return true;
+}
+
 bool Hud::LoadPause(string file)
 {
 	bool ret = true;
@@ -57,12 +63,14 @@ bool Hud::LoadPause(string file)
 		item_menu->Set_Image_Texture(LoadRect(pause_node.child("item")));
 		resume->Set_Image_Texture(LoadRect(pause_node.child("selector")));
 		quit->Set_Image_Texture(LoadRect(pause_node.child("selector")));
+
+		SetPauseElements();
 	}
 
 	pause_screen->AddChild(main_menu);
-	pause_screen->AddChild(item_menu);
-	pause_screen->AddChild(resume);
-	pause_screen->AddChild(quit);
+	main_menu->AddChild(item_menu);
+	main_menu->AddChild(resume);
+	main_menu->AddChild(quit);
 
 
 	return ret;
@@ -80,4 +88,17 @@ SDL_Rect Hud::LoadRect(pugi::xml_node node)
 	ret = { x,y,w,h };
 
 	return ret;
+}
+
+void Hud::SetPauseElements()
+{
+	main_menu->Set_Interactive_Box({ 50,-620,0,0 });
+	item_menu->Set_Interactive_Box({720,0,0,0});
+	resume->Set_Interactive_Box({ 72,86,0,0 });
+	quit->Set_Interactive_Box({ 72,528,0,0 });
+
+	resume->Set_Active_state(false);
+	quit->Set_Active_state(false);
+
+	//pause_screen->Set_Active_state(false);
 }
