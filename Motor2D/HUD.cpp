@@ -69,9 +69,43 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 				pause_transition = PAUSE_DOWN;
 			}	
 		}
-			
-		
 		break;
+
+	case UP:
+		for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
+		{
+			
+			if ((*it)->active && (it + 1) != pause_selectables.rend())
+			{
+				(*it)->active = false;
+				(*(it + 1))->Set_Active_state(true);
+				break;
+			}
+				
+		}
+		break;
+
+	case DOWN:
+		for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
+		{
+
+			if ((*it)->active && (it + 1) != pause_selectables.end())
+			{
+				(*it)->active = false;
+				(*(it + 1))->Set_Active_state(true);
+				break;
+			}
+		}
+		break;
+
+	case CONFIRM:
+
+		break;
+
+	case DECLINE:
+
+		break;
+
 	}
 
 }
@@ -104,8 +138,13 @@ bool Hud::LoadPause(string file)
 
 		main_menu->Set_Image_Texture(LoadRect(pause_node.child("main")));
 		item_menu->Set_Image_Texture(LoadRect(pause_node.child("item")));
+
+		//selecable items go into vector
 		resume->Set_Image_Texture(LoadRect(pause_node.child("selector")));
 		quit->Set_Image_Texture(LoadRect(pause_node.child("selector")));
+
+		pause_selectables.push_back(resume);
+		pause_selectables.push_back(quit);
 
 		SetPauseElements();
 	}
@@ -155,7 +194,9 @@ void Hud::IntoPause()
 void Hud::GonePause()
 {
 	main_menu->Set_Active_state(false);
-	resume->Set_Active_state(false);
+	
+	for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
+		(*it)->Set_Active_state(false);
 }
 
 void Hud::PauseIn(float dt)
@@ -172,7 +213,7 @@ void Hud::PauseOut(float dt)
 	else
 	{
 		App->game->pause = false;
+		GonePause();
 		pause_transition = PAUSE_NO_MOVE;
 	}
-
 }
