@@ -45,10 +45,10 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 		attackSpeed = attributes.child("combat_speeds").attribute("attack_speed").as_int(0);
 
 		//TODO: LOAD THIS FROM XML
-		patrolPoints.push_back({ 1, 1 });
+	/*	patrolPoints.push_back({ 1, 1 });
 		patrolPoints.push_back({ 1, 10 });
 		patrolPoints.push_back({ 20, 10 });
-		patrolPoints.push_back({ 40, 10 });
+		patrolPoints.push_back({ 40, 10 });*/
 	}
 	return ret;
 }

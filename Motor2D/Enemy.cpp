@@ -49,18 +49,25 @@ bool Enemy::LookToPlayer()
 }
 
 
-
+//Move between different points
 bool Enemy::Patroling(float dt)
 {
-	iPoint dest = patrolPoints[currentPatrolPoint];
-
-	actionState = IDLE;
-
 	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) < hostileRange)
 	{
 		enemyState = CHASING;
 		return true;
 	}
+
+	if (patrolPoints.size() == 0)
+	{
+		return true;
+	}
+	
+	iPoint dest = patrolPoints[currentPatrolPoint];
+
+	actionState = IDLE;
+
+	
 
 	if (GoTo(dest, speed, dt) == false)
 	{
