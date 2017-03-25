@@ -53,7 +53,10 @@ bool j1Gui::PreUpdate()
 		Go_Next_Tab();
 
 	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
-		(*item_screen)->Update();
+	{
+		if((*item_screen)->active)
+			(*item_screen)->Update();
+	}
 	
 	return true;
 }
@@ -70,8 +73,10 @@ bool j1Gui::Update()
 bool j1Gui::PostUpdate()
 {
 	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
-		(*item_screen)->Update_Draw();
-
+	{
+		if ((*item_screen)->active)
+			(*item_screen)->Update_Draw();
+	}
 	return true;
 }
 
