@@ -44,7 +44,7 @@ bool j1GameLayer::Start()
 {
 	active = true;
 
-
+	hud->Start();
 	em->CreatePlayer(50, 50);
 
 
@@ -54,7 +54,8 @@ bool j1GameLayer::Start()
 //preUpdate
 bool j1GameLayer::PreUpdate()
 {
-	em->PreUpdate();
+	if (!pause)
+		em->PreUpdate();
 	//hud->PreUpdate();
 
 	return true;
@@ -65,8 +66,10 @@ bool j1GameLayer::Update(float dt)
 {
 	bool ret = true;
 
-	em->Update(dt);
-	//ret = hud->Update(dt);
+	if(!pause)
+		em->Update(dt);
+	
+	ret = hud->Update(dt);
 
 	App->render->CameraFollow((*playerId)->currentPos);
 
@@ -83,7 +86,8 @@ bool j1GameLayer::Update(float dt)
 //postUpdate
 bool j1GameLayer::PostUpdate()
 {
-	em->PostUpdate();
+	
+	em->PostUpdate(); 
 	//hud->PostUpdate();
 
 	return true;

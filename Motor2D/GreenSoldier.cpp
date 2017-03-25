@@ -34,16 +34,21 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 
 		LoadAttributes(attributes);
 
+		hostileRange = attributes.child("ranges").attribute("hostile").as_int(0);
+		fightRange = attributes.child("ranges").attribute("fight").as_int(0);
+		attackRatio = attributes.child("ratios").attribute("attack").as_int(0);
+		outFightRange = attributes.child("ranges").attribute("out").as_int(0);
+		chargeTime = attributes.child("ratios").attribute("charge_time").as_int(0);
 
-		hostileRange = attributes.child("ranges").attribute("hostile").as_int();
-		fightRange = attributes.child("ranges").attribute("fight").as_int();
-		
+		chaseSpeed = attributes.child("combat_speeds").attribute("chase_speed").as_int(0);
+		flankingSpeed = attributes.child("combat_speeds").attribute("flanking_speed").as_int(0);
+		attackSpeed = attributes.child("combat_speeds").attribute("attack_speed").as_int(0);
 
 		//TODO: LOAD THIS FROM XML
-		patrolPoints.push_back({ 1, 1 });
+	/*	patrolPoints.push_back({ 1, 1 });
 		patrolPoints.push_back({ 1, 10 });
 		patrolPoints.push_back({ 20, 10 });
-		patrolPoints.push_back({ 40, 10 });
+		patrolPoints.push_back({ 40, 10 });*/
 	}
 	return ret;
 }

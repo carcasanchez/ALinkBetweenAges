@@ -30,9 +30,11 @@ UI_element* UI_element::AddChild(UI_element* new_child)
 const UI_element* UI_element::Set_Parent(const UI_element* new_Parent)
 {
 	Parent = new_Parent;
+	/*
 	Interactive_box.x += Parent->Interactive_box.x;
 	Interactive_box.y += Parent->Interactive_box.y;
 	layer += Parent->layer;
+	*/
 
 	return Parent;
 }

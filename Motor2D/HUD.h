@@ -3,19 +3,28 @@
 
 #include "j1Module.h"
 #include "UI_Image.h"
+#include "InputManager.h"
 
 class UI_element;
 class UI_Image;
 
-class Hud
+enum PAUSEMOVE
+{
+	PAUSE_NO_MOVE,
+	PAUSE_UP,
+	PAUSE_DOWN
+};
+
+class Hud : public InputListener 
 {
 public:
 	Hud();
 
 	bool Awake(pugi::xml_node& conf);
 	bool Start();
-	
-	bool Update();
+	bool Update(float);
+
+	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 
 public:
 	//In game HUD elements
@@ -46,20 +55,27 @@ public:
 	UI_Image*		stamina_end;
 
 	//Pause Elements
-	UI_element*		pause_screen = nullptr;
+	PAUSEMOVE		pause_transition = PAUSE_NO_MOVE;
+
+	//main menu works as screen
 	UI_Image*		main_menu = nullptr;
 	UI_Image*		item_menu = nullptr;
 	UI_Image*		resume = nullptr;
 	UI_Image*		quit = nullptr;
 
-	
+	std::vector<UI_Image*> pause_selectables;
 
 private:
 
-	bool		LoadPause(string file);
 	SDL_Rect	LoadRect(pugi::xml_node);
 
+	//Pause methods
+	bool		LoadPause(string file);
 	void		SetPauseElements();
+	void		IntoPause();
+	void		GonePause();
+	void		PauseIn(float);
+	void		PauseOut(float);
 
 };
 

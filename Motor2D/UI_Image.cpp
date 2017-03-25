@@ -15,7 +15,12 @@ bool UI_Image::Update_Draw()
 	{
 		//Looks if is an IMAGE o an IMAGE_NOT_IN_ATLAS and blits the texture needed
 		if (element_type == IMAGE)
-			App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image);
+		{
+			if(!Parent)
+				App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image);
+			else App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + Interactive_box.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &Image);
+		}
+			
 
 		else App->render->Blit((SDL_Texture*)App->gui->Get_Other_Textures(id), (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image);
 	}

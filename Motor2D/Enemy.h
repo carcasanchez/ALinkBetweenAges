@@ -30,7 +30,7 @@ public:
 	virtual bool Update(float dt);
 	virtual void OnDeath();
 
-	void LookToPlayer();
+	bool LookToPlayer();
 
 
 
@@ -44,19 +44,32 @@ public:
 
 public:
 	ENEMY_STATE enemyState;
+	
+	bool flankingDir;
+
+	//Combat ranges
 	int hostileRange;
 	int fightRange;
+	int outFightRange;
+
+	//combat ratios
+	int attackRatio;
+	int chargeTime;
+
+	//combat speeds
+	int chaseSpeed;
+	int flankingSpeed;
+	int attackSpeed;
+	
+
 
 protected:
 	iPoint currentDest = { 0, 0 };
 
-private:
-
 	//Combat behaviour variables
 	iPoint movement;
-	j1PerfTimer fightTimer;
 	j1PerfTimer attackTimer;
-	bool fightDir;
+
 
 };
 
