@@ -35,6 +35,7 @@ public:
 	std::list<Entity*>::iterator playerId;
 
 	bool        pause = false;
+	bool		quit_game = false;
 };
 
 

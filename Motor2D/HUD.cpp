@@ -100,10 +100,20 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 
 	case CONFIRM:
 
+		if (resume->active)
+		{
+			pause_transition = PAUSE_UP;
+		}
+
+		if (quit->active)
+		{
+			App->game->quit_game = true;
+		}
+
 		break;
 
 	case DECLINE:
-
+		pause_transition = PAUSE_UP;
 		break;
 
 	}

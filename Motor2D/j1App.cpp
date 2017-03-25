@@ -355,7 +355,9 @@ bool j1App::PostUpdate()
 		ret = (*item)->PostUpdate();
 	}
 
-	ret = update_stop;
+	if (update_stop == false || game->quit_game == true)
+		ret = false;
+	
 	return ret;
 }
 
