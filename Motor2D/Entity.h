@@ -82,7 +82,7 @@ public:
 	// Collider
 	Collider* col;
 	iPoint colPivot;
-	iPoint appliedForce;
+	iPoint linearMovement;
 
 	// Attributes
 	ENTITY_TYPE type;
@@ -102,6 +102,8 @@ public:
 	bool patroling;
 	vector<iPoint> patrolPoints;
 	int currentPatrolPoint;
+
+
 };
 
 #endif // !_ENTITY_H_

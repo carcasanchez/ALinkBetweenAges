@@ -59,6 +59,11 @@ private:
 	Collider* swordCollider;
 	iPoint swordColliderPivot = { 0, 0 };
 
+	//Damaged
+	int hitTime;
+	int damagedTime;
+	int damagedSpeed;
+
 	//Create a collider for Link's sword taking in account his direction
 	void createSwordCollider();
 	void updateSwordCollider();

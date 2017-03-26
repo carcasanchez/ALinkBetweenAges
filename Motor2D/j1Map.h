@@ -162,6 +162,8 @@ private:
 	string				folder;
 	bool				map_loaded;
 	bool				debug_collisions = false;
+	bool				debug_path = false;
+
 
 	SDL_Texture* debug_tex;
 };

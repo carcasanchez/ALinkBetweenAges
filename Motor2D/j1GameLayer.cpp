@@ -127,12 +127,12 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				(*playerId)->sprite->tint = { 100, 0, 0, 255 };
 
 				if (c1->rect.x < c2->rect.x)
-					(*playerId)->appliedForce.x = -1;
-				else (*playerId)->appliedForce.x = 1;
+					(*playerId)->linearMovement.x = -1;
+				else (*playerId)->linearMovement.x = 1;
 
 				if (c1->rect.y < c2->rect.y)
-					(*playerId)->appliedForce.y = -1;
-				else (*playerId)->appliedForce.y = 1;			
+					(*playerId)->linearMovement.y = -1;
+				else (*playerId)->linearMovement.y = 1;
 			}
 		}
 

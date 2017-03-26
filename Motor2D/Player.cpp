@@ -50,11 +50,18 @@ bool Player::Spawn(std::string file, iPoint pos)
 		attackSpeed = node.attribute("speed").as_int(40);
 		attackTax = node.attribute("staminaTax").as_int(20);
 
+		node = attributes.child("damaged");
+		//damaged
+		hitTime = node.attribute("hitTime").as_int(100);
+		damagedTime = node.attribute("damagedTime").as_int(2000);
+		damagedSpeed = node.attribute("damagedSpeed").as_int(180);
 		//dodge
 		node = attributes.child("dodge");
 		dodgeSpeed = node.attribute("speed").as_int(500);
 		dodgeTax = node.attribute("staminaTax").as_int(25);
 		dodgeLimit = node.attribute("limit").as_int(50);
+
+	
 
 		invulnerable = false;
 		swordCollider = nullptr;
@@ -69,7 +76,7 @@ bool Player::Update(float dt)
 	lastPos = currentPos;
 
 	
-	if (damagedTimer.ReadMs() > 2000 && invulnerable == true)
+	if (damagedTimer.ReadMs() > damagedTime && invulnerable == true)
 	{
 		invulnerable = false;
 		sprite->tint = { 255, 255, 255, 255 };
@@ -118,7 +125,7 @@ void Player::OnDeath()
 	currentPos = {20, 20};
 	life = 3;
 	damaged = invulnerable = false;
-	appliedForce = {0, 0};
+	linearMovement = {0, 0};
 	sprite->tint = { 255, 255, 255, 255 };
 }
 
@@ -383,7 +390,7 @@ bool Player::Dodging(float dt)
 
 bool Player::Damaged(float dt)
 {
-	if (damagedTimer.ReadMs() > 100)
+	if (damagedTimer.ReadMs() > hitTime)
 	{
 		actionState = IDLE;
 		damaged = false;
@@ -391,7 +398,7 @@ bool Player::Damaged(float dt)
 		LOG("DAMAGED FALSE");
 	}
 		
-	Move(SDL_ceil(appliedForce.x*speed*dt * 2), SDL_ceil(appliedForce.y*speed*dt * 2));
+	Move(SDL_ceil(linearMovement.x*damagedSpeed*dt), SDL_ceil(linearMovement.y*damagedSpeed*dt));
 	
 	return true;
 }

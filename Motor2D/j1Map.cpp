@@ -44,6 +44,13 @@ bool j1Map::Update(float dt)
 	{
 		debug_collisions = !debug_collisions;
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		debug_path = !debug_path;
+	}
+
+
 	return true;
 }
 
@@ -58,6 +65,7 @@ void j1Map::Draw()
 
 		if(layer->properties.Get("Nodraw") != 0 && debug_collisions == false)
 			continue;
+
 
 		for(int y = 0; y < data->height; ++y)
 		{
@@ -523,6 +531,7 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	return ret;
 }
 
+
 bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 {
 	bool ret = false;
@@ -586,11 +595,12 @@ void j1Map::UnloadSmallDataMap()
 
 void j1Map::DebugPath(vector<iPoint> path)
 {
-	for (int i = 0, j = path.size(); i < j; i++)
-	{
-		iPoint tilePos = MapToWorld(path[i].x, path[i].y);
-		App->render->Blit(debug_tex, tilePos.x, tilePos.y);
-	}
+	if(debug_path)
+		for (int i = 0, j = path.size(); i < j; i++)
+		{
+			iPoint tilePos = MapToWorld(path[i].x, path[i].y);
+			App->render->Blit(debug_tex, tilePos.x, tilePos.y);
+		}
 }
 
 void j1Map::UnLoadData()

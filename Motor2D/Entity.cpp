@@ -64,6 +64,8 @@ bool Entity::Draw()
 	currentAnim = &anim.find({ actionState, currentDir })->second;
 	sprite->updateSprite(currentPos, currentAnim->pivot, currentAnim->getCurrentFrame(), currentAnim->flip);
 	App->render->Draw(sprite);
+
+
 	App->map->DebugPath(path);
 
 	return ret;
@@ -155,7 +157,7 @@ bool Entity::LoadAnimations(std::string file)
 	return ret;
 }
 
-//Displace the entity a given X and Y taking in account collisions w/map
+//Displace the entity a given X and Y taking in account collisions w/map. Use ONLY W/PLAYER
 bool Entity::Move(int x, int y)
 {
 	bool ret = true;

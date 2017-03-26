@@ -83,6 +83,8 @@ bool j1CollisionManager::Update(float dt)
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->On_Collision_Callback(c2, c1, dt);
 			}
+
+			
 		}
 
 	}

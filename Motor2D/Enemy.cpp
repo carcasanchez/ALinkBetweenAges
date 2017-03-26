@@ -52,6 +52,7 @@ bool Enemy::LookToPlayer()
 //Move between different points
 bool Enemy::Patroling(float dt)
 {
+	actionState = WALKING;
 	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) < hostileRange)
 	{
 		enemyState = CHASING;
@@ -94,6 +95,7 @@ bool Enemy::Chasing(float dt)
 	else if (playerDistance <= fightRange)
 	{
 		enemyState = KEEP_DISTANCE;
+		path.clear();
 		attackTimer.Start();
 		srand(time(NULL));
 		flankingDir = rand() % 2;
@@ -179,6 +181,9 @@ bool Enemy::KeepDistance(float dt)
 		}
 
 	//Change the flanking direction if the enemy hits something
+	//currentPos.x += SDL_ceil(speed*dt)*movement.x;
+	//currentPos.y += SDL_ceil(speed*dt)*movement.x;
+	
 	if (Move(SDL_ceil(speed*dt)*movement.x, SDL_ceil(speed*dt)*movement.y) == false)
 	{
 		flankingDir = !flankingDir;
