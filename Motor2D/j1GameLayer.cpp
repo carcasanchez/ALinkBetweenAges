@@ -139,14 +139,17 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
-	if (c1->type == COLLIDER_ENEMY && c2->type == COLLIDER_LINK_SWORD)
+	if (c1->type == COLLIDER_ENEMY)
 	{
-		if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
+		if (c2->type == COLLIDER_LINK_SWORD)
 		{
-			c1->parent->life--;
-			c1->parent->sprite->tint = {255, 150, 150, 255};
-			((Enemy*)(c1->parent))->enemyState = STEP_BACK;
-			c1->parent->damagedTimer.Start();
+			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
+			{
+				c1->parent->life--;
+				c1->parent->sprite->tint = { 255, 150, 150, 255 };
+				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
+				c1->parent->damagedTimer.Start();
+			}
 		}
 	}
 	

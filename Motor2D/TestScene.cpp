@@ -20,11 +20,17 @@ bool TestScene::Load(std::string _data)
 	if (ret = (App->map->Load("test.tmx")))
 	{
 		int w, h;
-		uchar* data = NULL;
-		if (App->map->CreateWalkabilityMap(w, h, &data))
-			App->pathfinding->SetMap(w, h, data);
+		uchar* player_data = NULL;
+		uchar* enemy_data = NULL;
 
-		RELEASE_ARRAY(data);
+		if (App->map->CreateWalkabilityMap(w, h, &player_data, &enemy_data))
+		{
+			App->pathfinding->SetPlayerMap(w, h, player_data);
+			App->pathfinding->SetEnemyMap(w, h, enemy_data);
+		}
+
+		RELEASE_ARRAY(player_data);
+		RELEASE_ARRAY(enemy_data);
 	}
 
 	return ret;

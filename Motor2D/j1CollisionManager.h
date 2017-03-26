@@ -19,6 +19,20 @@ enum COLLIDER_TYPE
 	COLLIDER_ENEMY,
 	COLLIDER_LINK_SWORD
 };
+
+
+enum COLLISION_ZONE
+{
+	CZ_NONE = -1,
+	CZ_UP,
+	CZ_DOWN,
+	CZ_LEFT,
+	CZ_RIGHT,
+	CZ_UP_LEFT,
+	CZ_UP_RIGHT,
+	CZ_DOWN_LEFT,
+	CZ_DOWN_RIGHT
+};
 class Collider
 {
 public:
@@ -33,8 +47,7 @@ public:
 	Collider(COLLIDER_TYPE type, SDL_Rect rect, j1Module* callback = nullptr) :type(type), callback(callback), rect(rect) {};
 	
 	bool CheckCollision(const SDL_Rect& r) const;
-	bool CheckMapCollision();
-
+	COLLISION_ZONE CheckMapCollision();
 };
 
 

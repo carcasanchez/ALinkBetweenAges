@@ -4,7 +4,7 @@
 #include "j1Map.h"
 #include "j1PathFinding.h"
 
-j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_LENGTH), width(0), height(0)
+j1PathFinding::j1PathFinding() : j1Module(), player_map(NULL), enemy_map(NULL), last_path(DEFAULT_PATH_LENGTH), width(0), height(0)
 {
 	name = ("pathfinding");
 	last_path.clear();
@@ -13,7 +13,8 @@ j1PathFinding::j1PathFinding() : j1Module(), map(NULL), last_path(DEFAULT_PATH_L
 // Destructor
 j1PathFinding::~j1PathFinding()
 {
-	RELEASE_ARRAY(map);
+	RELEASE_ARRAY(player_map);
+	RELEASE_ARRAY(enemy_map);
 }
 
 // Called before quitting
@@ -22,22 +23,35 @@ bool j1PathFinding::CleanUp()
 	LOG("Freeing pathfinding library");
 
 	last_path.clear();
-	RELEASE_ARRAY(map);
+	RELEASE_ARRAY(player_map);
+	RELEASE_ARRAY(enemy_map);
+
 	return true;
 }
 
 
 // Sets up the walkability map
-void j1PathFinding::SetMap(uint width, uint height, uchar* data)
+void j1PathFinding::SetPlayerMap(uint width, uint height, uchar* data)
 {
 	this->width = width;
 	this->height = height;
 
-	RELEASE_ARRAY(map);
-	map = new uchar[width*height];
-	memcpy(map, data, width*height);
+	RELEASE_ARRAY(player_map);
+	player_map = new uchar[width*height];
+	memcpy(player_map, data, width*height);
 
 }
+
+void j1PathFinding::SetEnemyMap(uint width, uint height, uchar * data)
+{
+	this->width = width;
+	this->height = height;
+
+	RELEASE_ARRAY(enemy_map);
+	enemy_map = new uchar[width*height];
+	memcpy(enemy_map, data, width*height);
+}
+
 
 // Utility: return true if pos is inside the map boundaries
 bool j1PathFinding::CheckBoundaries(const iPoint& pos) const
@@ -47,17 +61,32 @@ bool j1PathFinding::CheckBoundaries(const iPoint& pos) const
 }
 
 // Utility: returns true is the tile is walkable
-bool j1PathFinding::IsWalkable(const iPoint& pos) const
+bool j1PathFinding::IsPlayerWalkable(const iPoint& pos) const
 {
-	uchar t = GetTileAt(pos);
+	uchar t = GetTileForPlayer(pos);
 	return t != INVALID_WALK_CODE && t != 0;
 }
 
+bool j1PathFinding::IsEnemyWalkable(const iPoint& pos) const
+{
+	uchar t = GetTileForEnemy(pos);
+	return t != INVALID_WALK_CODE && t != 0;
+
+}
+
 // Utility: return the walkability value of a tile
-uchar j1PathFinding::GetTileAt(const iPoint& pos) const
+uchar j1PathFinding::GetTileForPlayer(const iPoint& pos) const
 {
 	if (CheckBoundaries(pos))
-		return map[(pos.y*width) + pos.x];
+		return player_map[(pos.y*width) + pos.x];
+
+	return INVALID_WALK_CODE;
+}
+
+uchar j1PathFinding::GetTileForEnemy(const iPoint & pos) const
+{
+	if(CheckBoundaries(pos))
+		return enemy_map[(pos.y*width) + pos.x];
 
 	return INVALID_WALK_CODE;
 }
@@ -135,22 +164,22 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 
 	// north
 	cell.create(pos.x, pos.y + 1);
-	if (App->pathfinding->IsWalkable(cell))
+	if (App->pathfinding->IsEnemyWalkable(cell))
 		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
 
 	// south
 	cell.create(pos.x, pos.y - 1);
-	if (App->pathfinding->IsWalkable(cell))
+	if (App->pathfinding->IsEnemyWalkable(cell))
 		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
 
 	// east
 	cell.create(pos.x + 1, pos.y);
-	if (App->pathfinding->IsWalkable(cell))
+	if (App->pathfinding->IsEnemyWalkable(cell))
 		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
 
 	// west
 	cell.create(pos.x - 1, pos.y);
-	if (App->pathfinding->IsWalkable(cell))
+	if (App->pathfinding->IsEnemyWalkable(cell))
 		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
 
 	//diagonals
@@ -202,7 +231,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
 	int ret = -1;
 
-	if (IsWalkable(origin) == false || IsWalkable(destination) == false)
+	if (IsEnemyWalkable(origin) == false || IsEnemyWalkable(destination) == false)
 		return ret;
 
 	last_path.clear();

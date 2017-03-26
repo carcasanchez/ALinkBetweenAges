@@ -84,7 +84,26 @@ bool j1CollisionManager::Update(float dt)
 					c2->callback->On_Collision_Callback(c2, c1, dt);
 			}
 
-			
+			COLLISION_ZONE tmp = c1->CheckMapCollision();
+			switch (tmp)
+			{
+			case CZ_NONE: 
+				break;
+			case CZ_DOWN:
+				c1->parent->linearMovement.y = -1;
+				break;
+			case CZ_UP:
+				c1->parent->linearMovement.y = 1;
+				break;
+			case CZ_LEFT:
+				c1->parent->linearMovement.x = 1;
+				break;
+			case CZ_RIGHT:
+				c1->parent->linearMovement.x = -1;
+				break;
+			}
+
+		
 		}
 
 	}
@@ -137,26 +156,36 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 		rect.h + rect.y > r.y);
 }
 
-bool Collider::CheckMapCollision()
+COLLISION_ZONE Collider::CheckMapCollision()
 {
-	bool ret = false;
+	COLLISION_ZONE ret = CZ_NONE;
 
 	iPoint up_left = App->map->WorldToMap(rect.x, rect.y);
 	iPoint up_right = App->map->WorldToMap(rect.x + rect.w, rect.y); 
 	iPoint down_left = App->map->WorldToMap(rect.x, rect.y + rect.h);
 	iPoint down_right = App->map->WorldToMap(rect.x + rect.w, rect.y + rect.h); 
 
-	if (App->pathfinding->IsWalkable(up_left) == false)
-		ret = true; 
+	if (App->pathfinding->IsPlayerWalkable(up_left) == false)
+	{
+		ret = CZ_UP_LEFT;
+		if (App->pathfinding->IsPlayerWalkable(up_right) == false)
+			ret = CZ_UP;
+		else if (App->pathfinding->IsPlayerWalkable(down_left) == false)
+			ret = CZ_LEFT;
+	}
+	else if (App->pathfinding->IsPlayerWalkable(down_right) == false)
+	{
+		ret = CZ_DOWN_RIGHT;
+		if (App->pathfinding->IsPlayerWalkable(up_right) == false)
+			ret = CZ_RIGHT;
+		else if (App->pathfinding->IsPlayerWalkable(down_left) == false)
+			ret = CZ_DOWN;
+	}
+	else if (App->pathfinding->IsPlayerWalkable(up_right) == false)
+		ret = CZ_UP_RIGHT;
+	else if (App->pathfinding->IsPlayerWalkable(down_left) == false)
+		ret = CZ_DOWN_LEFT;
 
-	if (App->pathfinding->IsWalkable(up_right) == false)
-		ret = true;
-
-	if (App->pathfinding->IsWalkable(down_left) == false)
-		ret = true;
-
-	if (App->pathfinding->IsWalkable(down_right) == false)
-		ret = true;
 
 	return ret;
 }

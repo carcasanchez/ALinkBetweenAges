@@ -22,6 +22,15 @@ void Enemy::OnDeath()
 	col->to_delete = true;
 }
 
+bool Enemy::Move(int x, int y)
+{
+	currentPos.x += x;
+	currentPos.y += y;
+	UpdateCollider();
+
+	return true;
+}
+
 //Makes enemy look to player. Returns true if the direction changes
 bool Enemy::LookToPlayer()
 {
@@ -145,21 +154,22 @@ bool Enemy::KeepDistance(float dt)
 	}
 
 	//Movement depending on the player relative direction
+	iPoint flankingMovement;
 	if (flankingDir)
 	{
 		switch (currentDir)
 		{
 		case D_UP:
-			movement = { 1, 0 };
+			flankingMovement = { 1, 0 };
 			break;
 		case D_DOWN:
-			movement = { -1, 0 };
+			flankingMovement = { -1, 0 };
 			break;
 		case D_RIGHT:
-			movement = { 0, 1 };
+			flankingMovement = { 0, 1 };
 			break;
 		case D_LEFT:
-			movement = { 0, -1 };
+			flankingMovement = { 0, -1 };
 			break;
 		}
 	}
@@ -167,24 +177,25 @@ bool Enemy::KeepDistance(float dt)
 		switch (currentDir)
 		{
 		case D_UP:
-			movement = { -1, 0 };
+			flankingMovement = { -1, 0 };
 			break;
 		case D_DOWN:
-			movement = { 1, 0 };
+			flankingMovement = { 1, 0 };
 			break;
 		case D_RIGHT:
-			movement = { 0, -1 };
+			flankingMovement = { 0, -1 };
 			break;
 		case D_LEFT:
-			movement = { 0, 1 };
+			flankingMovement = { 0, 1 };
 			break;
 		}
 
+	Move(SDL_ceil(flankingSpeed*dt)*flankingMovement.x, SDL_ceil(flankingSpeed*dt)*flankingMovement.y);
+
+
 	//Change the flanking direction if the enemy hits something
-	//currentPos.x += SDL_ceil(speed*dt)*movement.x;
-	//currentPos.y += SDL_ceil(speed*dt)*movement.x;
-	
-	if (Move(SDL_ceil(speed*dt)*movement.x, SDL_ceil(speed*dt)*movement.y) == false)
+		
+	if (col->CheckMapCollision() != CZ_NONE)
 	{
 		flankingDir = !flankingDir;
 	}

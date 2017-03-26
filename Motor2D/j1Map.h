@@ -125,7 +125,7 @@ public:
 	iPoint WorldToMapMouse(int x, int y) const;
 	iPoint GetTileCenter(iPoint);
 
-	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
+	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer, uchar** buffer2) const;
 
 	bool LoadSmallDataMap(const char* path);
 	void UnloadSmallDataMap();
@@ -163,6 +163,7 @@ private:
 	bool				map_loaded;
 	bool				debug_collisions = false;
 	bool				debug_path = false;
+	bool				debug_enemy_collisions = false;
 
 
 	SDL_Texture* debug_tex;

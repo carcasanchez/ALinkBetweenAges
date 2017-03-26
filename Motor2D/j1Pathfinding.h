@@ -27,7 +27,8 @@ public:
 	bool CleanUp();
 
 	// Sets up the walkability map
-	void SetMap(uint width, uint height, uchar* data);
+	void SetPlayerMap(uint width, uint height, uchar* data);
+	void SetEnemyMap(uint width, uint height, uchar* data);
 
 	// Main function to request a path from A to B
 	int CreatePath(const iPoint& origin, const iPoint& destination);
@@ -37,10 +38,13 @@ public:
 	bool CheckBoundaries(const iPoint& pos) const;
 
 	// Utility: returns true is the tile is walkable
-	bool IsWalkable(const iPoint& pos) const;
+	bool IsPlayerWalkable(const iPoint& pos) const;
+	bool IsEnemyWalkable(const iPoint& pos) const;
 
 	// Utility: return the walkability value of a tile
-	uchar GetTileAt(const iPoint& pos) const;
+	uchar GetTileForPlayer(const iPoint& pos) const;
+	uchar GetTileForEnemy(const iPoint& pos) const;
+
 
 	//Return path
 	vector<iPoint> ReturnPath();
@@ -55,7 +59,8 @@ private:
 	uint width;
 	uint height;
 	// all map walkability values [0..255]
-	uchar* map;
+	uchar* player_map;
+	uchar* enemy_map;
 	// we store the created path here
 	vector<iPoint> last_path;
 };

@@ -91,9 +91,6 @@
     <ClCompile Include="TestScene.cpp">
       <Filter>Desenvolupament  ========\Scenes\Test Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Desenvolupament  ========\Game Layer</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClCompile>
@@ -113,6 +110,9 @@
       <Filter>Desenvolupament  ========\Game Layer\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
+      <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -234,9 +234,6 @@
     <ClInclude Include="TestScene.h">
       <Filter>Desenvolupament  ========\Scenes\Test Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Desenvolupament  ========\Game Layer</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
@@ -253,6 +250,9 @@
       <Filter>Desenvolupament  ========\Game Layer\Dialogs</Filter>
     </ClInclude>
     <ClInclude Include="NPC.h">
+      <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
   </ItemGroup>

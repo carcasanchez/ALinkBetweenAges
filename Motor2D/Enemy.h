@@ -30,6 +30,8 @@ public:
 	virtual bool Update(float dt);
 	virtual void OnDeath();
 
+	bool Move(int x, int y);
+
 	bool LookToPlayer();
 
 
@@ -67,7 +69,6 @@ protected:
 	iPoint currentDest = { 0, 0 };
 
 	//Combat behaviour variables
-	iPoint movement;
 	j1PerfTimer attackTimer;
 
 

@@ -55,6 +55,12 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 
 bool GreenSoldier::Update(float dt)
 {
+	if (linearMovement.IsZero() == false)
+	{
+		Move(linearMovement.x*SDL_ceil(dt*speed), linearMovement.y*SDL_ceil(dt*speed));
+		linearMovement.SetToZero();
+	}
+
 
 	switch (enemyState)
 	{
