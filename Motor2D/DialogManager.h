@@ -38,7 +38,7 @@ public:
 	Dialog(int id);
 	~Dialog();
 
-	int id;
+	uint id;
 	std::vector<Line*> texts;
 };
 
@@ -51,25 +51,29 @@ public:
 	bool Awake(pugi::xml_node& config);
 	bool Start();
 	bool PostUpdate();
-	bool BlitDialog(int id, int state);
+	bool BlitDialog(uint id, uint state);
 
 private:
 
-	int dialogState = 0;
-
-	std::string folder;
-	std::string path;
-	pugi::xml_document dialogDataFile;
-	pugi::xml_node dialogNode;
-
-	UI_element* screen = nullptr;
-	UI_String* text_on_screen = nullptr;
+	int dialogueStep = 0; //Allows to order the conversarion correctly
 
 	std::vector<Dialog*> dialog;
 
+	/*-- Data to load XML --*/
+	std::string folder;
+	std::string path;
+	pugi::xml_document dialogueDataFile;
+	pugi::xml_node dialogueNode;
+	/*-- END --*/
+
+	/*--- UI elements to print dialogues on screen ---*/
+	UI_element* screen = nullptr;
+	UI_String* text_on_screen = nullptr;
+	/*-- END --*/
+
 	/*---CODE TO TEST IN-GAME RESULTS ---*/
-	int id = 1;
-	int stateInput = 0;
+	uint id = 1;
+	uint stateInput = 0;
 	/*--- END ---*/
 };
 

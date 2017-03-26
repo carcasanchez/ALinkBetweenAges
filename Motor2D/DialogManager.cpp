@@ -20,13 +20,13 @@ bool DialogManager::Awake(pugi::xml_node & config)
 
 	char* buf;
 	int size = App->fs->Load(tmp.c_str(), &buf);
-	pugi::xml_parse_result result = dialogDataFile.load_buffer(buf, size);
+	pugi::xml_parse_result result = dialogueDataFile.load_buffer(buf, size);
 
 	RELEASE(buf);
 
 	if (result == NULL)
 	{
-		LOG("Could not load gui xml file %s. pugi error: %s", dialogDataFile, result.description());
+		LOG("Could not load gui xml file %s. pugi error: %s", dialogueDataFile, result.description());
 		ret = false;
 	}
 
@@ -36,10 +36,10 @@ bool DialogManager::Awake(pugi::xml_node & config)
 bool DialogManager::Start()
 {
 	bool ret = true;
-	dialogNode = dialogDataFile.child("npcs");
+	dialogueNode = dialogueDataFile.child("npcs");
 	// Allocate memory
 	int i = 0;
-	for (pugi::xml_node npc = dialogNode.child("npc"); npc != NULL; npc = npc.next_sibling(), i++)
+	for (pugi::xml_node npc = dialogueNode.child("npc"); npc != NULL; npc = npc.next_sibling(), i++)
 	{
 		//Allocate Dialog with his ID and State
 		Dialog* tmp = new Dialog(npc.attribute("id").as_int());
@@ -59,7 +59,7 @@ bool DialogManager::Start()
 	//Prepare UI to print
 	screen = App->gui->CreateScreen(screen);
 	text_on_screen = (UI_String*)App->gui->Add_element(STRING, this);
-	text_on_screen->Set_Active_state(true);
+	text_on_screen->Set_Active_state(false);
 	text_on_screen->Set_Interactive_Box({ 0, 0, 0, 0 });
 	screen->AddChild(text_on_screen);
 
@@ -94,30 +94,35 @@ bool DialogManager::PostUpdate()
 	}
 	/*--- END ---*/
 
+	text_on_screen->Set_Active_state(true); //Active screen
+
 	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 	{
-		dialogState++;
+		dialogueStep++;
 	}
 
-	BlitDialog(id, stateInput);
+	BlitDialog(id, stateInput); //Calls Blit function
 	return true;
 }
 
-bool DialogManager::BlitDialog(int id, int state)
+bool DialogManager::BlitDialog(uint id, uint state)
 {
 	//Find the correct ID
 	for (int i = 0; i < dialog.size(); i++)
 	{
 		if (dialog[i]->id == id)
 		{
-			if (dialogState >= dialog[i]->texts.size() - 1)
+			for (int j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct dialog
 			{
-				dialogState = 0;
-			}
-			if (dialog[i]->texts[dialogState]->state == state)
-			{
-				text_on_screen->Set_String((char*)dialog[i]->texts[dialogState]->line->c_str());
-				return true;
+				if (dialogueStep >= dialog[i]->texts.size() - 1)
+				{
+					dialogueStep = 0;
+				}
+				if (dialog[i]->texts[dialogueStep + j]->state == state)
+				{
+					text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep + j]->line->c_str());
+					return true;
+				}
 			}
 		}
 	}
