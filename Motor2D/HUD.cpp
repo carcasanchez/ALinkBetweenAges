@@ -189,16 +189,20 @@ void Hud::SetPauseElements()
 	resume->Set_Interactive_Box({ 72,86,0,0 });
 	quit->Set_Interactive_Box({ 72,528,0,0 });
 
-	resume->Set_Active_state(false);
+	
 	quit->Set_Active_state(false);
 
 	main_menu->Set_Active_state(false);
 }
 
-void Hud::IntoPause()
+bool Hud::IntoPause()
 {
 	main_menu->Set_Active_state(true);
 	resume->Set_Active_state(true);
+
+	quit->active = false;
+
+	return true;
 }
 
 void Hud::GonePause()

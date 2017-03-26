@@ -10,7 +10,7 @@ UI_element::UI_element(UI_TYPE type, j1Module* callback_module) : element_type(t
 
 UI_element::UI_element(UI_TYPE type, SDL_Rect detection_box, bool act, SCROLL_TYPE drag) : element_type(type), Interactive_box(detection_box), active(act), draggable(drag)
 {
-
+	Childs.clear();
 }
 
 UI_element::UI_element(const UI_element* other) : element_type(other->element_type), Interactive_box(other->Interactive_box), active(other->active), draggable(other->draggable){}

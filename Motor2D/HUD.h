@@ -28,7 +28,7 @@ public:
 
 public:
 	//In game HUD elements
-	UI_element*		hud_screen;
+	UI_element*		hud_screen = nullptr;
 
 	//Little items
 	UI_Image*		Rupees;
@@ -72,7 +72,7 @@ private:
 	//Pause methods
 	bool		LoadPause(string file);
 	void		SetPauseElements();
-	void		IntoPause();
+	bool		IntoPause();
 	void		GonePause();
 	void		PauseIn(float);
 	void		PauseOut(float);
