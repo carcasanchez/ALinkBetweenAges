@@ -208,6 +208,7 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 	{
 		iPoint immediateDest = App->map->GetTileCenter(path[0]);
 
+
 		if (immediateDest.x > currentPos.x)
 		{
 			currentPos.x += SDL_ceil(speed * dt);

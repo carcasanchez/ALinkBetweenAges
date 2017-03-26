@@ -151,34 +151,28 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				c1->parent->damagedTimer.Start();
 			}
 		}
-	}
-	
-	if (c1->type == COLLIDER_ENEMY && c2->type == COLLIDER_ENEMY)
-	{
-		switch (((Enemy*)(c2->parent))->enemyState)
+
+		/*if (c2->type == COLLIDER_ENEMY)
 		{
-		case CHASING:
-			if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 5)
+			switch (((Enemy*)(c2->parent))->enemyState)
+			{
+			case CHASING:
+				iPoint Movement;
+				if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 5)
+					break;
+
+				if (c1->rect.x < c2->rect.x)
+					Movement.x = 1;
+				else Movement.x = -1;;
+
+				if (c1->rect.y < c2->rect.y)
+					Movement.y = 1;
+				else Movement.y = -1;
+
+				c2->parent->Move(SDL_ceil(c2->parent->speed*dt * 10)*Movement.x, SDL_ceil(c2->parent->speed*dt * 10)*Movement.y);
 				break;
-
-			if (c1->rect.x < c2->rect.x)
-				c2->parent->currentPos.x += c2->parent->speed*dt * 5;
-			else c2->parent->currentPos.x += -c2->parent->speed*dt * 5;
-
-			if (c1->rect.y < c2->rect.y)
-				c2->parent->currentPos.y += c2->parent->speed*dt * 5;
-			else c2->parent->currentPos.y -= c2->parent->speed*dt * 5;
-			break;
-
-		/*case KEEP_DISTANCE:
-			((Enemy*)(c1->parent))->enemyState = KEEP_DISTANCE;
-			break;*/
-
 		}
-
-		
-
-		c2->parent->UpdateCollider();
+	}*/
 	}
 		
 	return true;

@@ -30,8 +30,6 @@ public:
 	virtual bool Update(float dt);
 	virtual void OnDeath();
 
-	bool Move(int x, int y);
-
 	bool LookToPlayer();
 
 

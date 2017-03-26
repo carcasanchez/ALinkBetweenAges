@@ -22,14 +22,7 @@ void Enemy::OnDeath()
 	col->to_delete = true;
 }
 
-bool Enemy::Move(int x, int y)
-{
-	currentPos.x += x;
-	currentPos.y += y;
-	UpdateCollider();
 
-	return true;
-}
 
 //Makes enemy look to player. Returns true if the direction changes
 bool Enemy::LookToPlayer()
@@ -190,16 +183,18 @@ bool Enemy::KeepDistance(float dt)
 			break;
 		}
 
-	Move(SDL_ceil(flankingSpeed*dt)*flankingMovement.x, SDL_ceil(flankingSpeed*dt)*flankingMovement.y);
-
+	
 
 	//Change the flanking direction if the enemy hits something
-		
-	if (col->CheckMapCollision() != CZ_NONE)
+
+
+	if (Move(SDL_ceil(flankingSpeed*dt)*flankingMovement.x, SDL_ceil(flankingSpeed*dt)*flankingMovement.y) == false)
 	{
-		flankingDir = !flankingDir;
+		flankingDir =!flankingDir;
 	}
 
+
+	
 
 	return true;
 }
