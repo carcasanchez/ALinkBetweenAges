@@ -42,6 +42,24 @@ bool Scene::Load(const char* path)
 
 		pugi::xml_node node = data.child("sectors");
 
+		//IMPORTANT: CREATE THE WALKABILITY MAP BEFORE SPAWN ENTITIES
+		if (ret = (App->map->Load(map.c_str())))
+		{
+			int w, h;
+			uchar* player_data = NULL;
+			uchar* enemy_data = NULL;
+
+			if (App->map->CreateWalkabilityMap(w, h, &player_data, &enemy_data))
+			{
+				App->pathfinding->SetPlayerMap(w, h, player_data);
+				App->pathfinding->SetEnemyMap(w, h, enemy_data);
+			}
+
+			RELEASE_ARRAY(player_data);
+			RELEASE_ARRAY(enemy_data);
+		}
+
+		//Spawn Entities
 		for (pugi::xml_node section = node.first_child(); section != NULL; section = section.next_sibling())
 		{
 			pugi::xml_node entities = section.child("entities");
@@ -87,21 +105,7 @@ bool Scene::Load(const char* path)
 			maxSectors++;
 		}
 
-		if (ret = (App->map->Load(map.c_str())))
-		{
-			int w, h;
-			uchar* player_data = NULL;
-			uchar* enemy_data = NULL;
-
-			if (App->map->CreateWalkabilityMap(w, h, &player_data, &enemy_data))
-			{
-				App->pathfinding->SetPlayerMap(w, h, player_data);
-				App->pathfinding->SetEnemyMap(w, h, enemy_data);
-			}
-
-			RELEASE_ARRAY(player_data);
-			RELEASE_ARRAY(enemy_data);
-		}
+		
 
 		// TODO manage slot variations to scene
 		//------------------------------------

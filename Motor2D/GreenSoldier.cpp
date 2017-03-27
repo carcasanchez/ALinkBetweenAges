@@ -34,6 +34,8 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 
 		LoadAttributes(attributes);
 
+		enemyState = PATROLING;
+
 		hostileRange = attributes.child("ranges").attribute("hostile").as_int(0);
 		fightRange = attributes.child("ranges").attribute("fight").as_int(0);
 		attackRatio = attributes.child("ratios").attribute("attack").as_int(0);
@@ -43,6 +45,7 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 		chaseSpeed = attributes.child("combat_speeds").attribute("chase_speed").as_int(0);
 		flankingSpeed = attributes.child("combat_speeds").attribute("flanking_speed").as_int(0);
 		attackSpeed = attributes.child("combat_speeds").attribute("attack_speed").as_int(0);
+	
 
 		//TODO: LOAD THIS FROM XML
 	/*	patrolPoints.push_back({ 1, 1 });

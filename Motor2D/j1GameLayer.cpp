@@ -11,6 +11,7 @@
 #include "p2Log.h"
 #include "j1SceneManager.h"
 #include "Scene.h"
+#include "j1Map.h"
 #include "HUD.h"
 
 
@@ -45,7 +46,7 @@ bool j1GameLayer::Start()
 	active = true;
 
 	hud->Start();
-	em->CreatePlayer(50, 50);
+	em->CreatePlayer(35, 35);
 
 
 	return true;
@@ -75,8 +76,10 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
-		iPoint playerPos = (*playerId)->currentPos;
-		em->CreateEnemy(1, GREEN_SOLDIER, playerPos.x-50, playerPos.y - 50);
+		iPoint mousePos;
+		App->input->GetMousePosition(mousePos.x, mousePos.y);
+		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
+		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y);
 	}
 		
 	

@@ -61,7 +61,7 @@ bool DialogManager::Start()
 	text_on_screen = (UI_String*)App->gui->Add_element(STRING, this);
 	text_on_screen->Set_Active_state(false);
 	text_on_screen->Set_Interactive_Box({ 0, 0, 0, 0 });
-	screen->AddChild(text_on_screen);
+	//screen->AddChild(text_on_screen);
 
 	return ret;
 }
@@ -150,6 +150,6 @@ Line::Line(int NPCstate, std::string text) : state(NPCstate)
 
 Line::~Line()
 {
-
+	delete line;
 }
 

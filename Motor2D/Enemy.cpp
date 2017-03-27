@@ -63,12 +63,11 @@ bool Enemy::Patroling(float dt)
 
 	if (patrolPoints.size() == 0)
 	{
+		actionState = IDLE;
 		return true;
 	}
 	
 	iPoint dest = patrolPoints[currentPatrolPoint];
-
-	actionState = IDLE;
 
 	
 

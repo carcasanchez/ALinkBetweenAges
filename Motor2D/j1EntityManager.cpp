@@ -11,6 +11,7 @@
 #include "j1CollisionManager.h"
 #include "j1SceneManager.h"
 #include "Scene.h"
+#include "j1Map.h"
 
 //=====Enemy Includes
 #include "GreenSoldier.h"
@@ -111,7 +112,10 @@ Player* j1EntityManager::CreatePlayer(int x, int y)
 {
 	Player* ret = new Player();
 
-	ret->Spawn(dir[LINK], iPoint(x,y));
+
+	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
+
+	ret->Spawn(dir[LINK], worldPos);
 	ret->type = LINK;
 	entities[App->sceneM->currentScene->currentSector].push_front(ret);
 	App->game->playerId = ret->id = entities[App->sceneM->currentScene->currentSector].begin();
@@ -119,7 +123,7 @@ Player* j1EntityManager::CreatePlayer(int x, int y)
 	return ret;
 }
 
-//Enemy factory
+//Enemy factory (X and Y in Map Coordinates)
 Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y)
 {
 	Enemy* ret = nullptr;
@@ -131,7 +135,9 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y)
 		break;
 	}
 
-	ret->Spawn(dir[ENEMY], iPoint(x, y));
+	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
+
+	ret->Spawn(dir[ENEMY], worldPos);
 	ret->type = ENEMY;
 	entities[App->sceneM->currentScene->currentSector].push_back(ret);
 	ret->id = entities[App->sceneM->currentScene->currentSector].end();
@@ -150,7 +156,9 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y)
 		break;
 	}
 
-	ret->Spawn(dir[NPC], iPoint(x, y), type);
+	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
+
+	ret->Spawn(dir[NPC], worldPos, type);
 	ret->type = NPC;
 	entities[App->sceneM->currentScene->currentSector].push_back(ret);
 	ret->id = entities[App->sceneM->currentScene->currentSector].end();
