@@ -74,7 +74,6 @@ bool Player::Update(float dt)
 {
 	bool ret = true;
 	lastPos = currentPos;
-
 	
 	if (damagedTimer.ReadMs() > damagedTime && invulnerable == true)
 	{
@@ -83,19 +82,13 @@ bool Player::Update(float dt)
 		LOG("DAMAGED FALSE - TIMER STOP");
 	}
 
-	if (stamina < 0)
-		stamina = 0;
+	ManageStamina(dt);	
 
-	if (stamina < maxStamina)
+	switch (playerState)
 	{
-		stamina += staminaRec*dt;
-		LOG("STAMINA: %f", stamina);
-	}
-	else stamina = maxStamina;
-	
-
-	switch (actionState)
-	{
+	case ACTIVE:
+		switch (actionState)
+		{
 		case(IDLE):
 			Idle();
 			break;
@@ -115,7 +108,14 @@ bool Player::Update(float dt)
 		case(DAMAGED):
 			Damaged(dt);
 			break;
+		}
+		break;
+	case EVENT:
+		Talking(dt);
+		break;
 	}
+	
+	toTalk = nullptr;
 
 	return ret;
 }
@@ -141,9 +141,20 @@ void Player::Change_direction()
 		currentDir = D_LEFT;
 }
 
+void Player::ManageStamina(float dt)
+{
+	if (stamina < 0)
+		stamina = 0;
+	if (stamina < maxStamina)
+	{
+		stamina += staminaRec*dt;
+		LOG("STAMINA: %f", stamina);
+	}
+	else stamina = maxStamina;
+}
+
 bool Player::Idle()
 {
-
 	if (damaged == true)
 	{
 		actionState = DAMAGED;
@@ -178,12 +189,19 @@ bool Player::Idle()
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		stamina -= attackTax;
-		Change_direction();
-		actionState = ATTACKING;
-		createSwordCollider();
-		LOG("LINK is ATTACKING");
-		return true;
+		if (toTalk != nullptr)
+		{
+			playerState = EVENT;
+			LOG("LINK IS TALKING");
+		}
+		else
+		{
+			stamina -= attackTax;
+			Change_direction();
+			actionState = ATTACKING;
+			createSwordCollider();
+			LOG("LINK is ATTACKING");
+		}
 	}
 
 	
@@ -292,11 +310,19 @@ bool Player::Walking(float dt)
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		stamina -= attackTax;
-		Change_direction();
-		actionState = ATTACKING;
-		createSwordCollider();
-		LOG("LINK is ATTACKING");
+		if (toTalk != nullptr)
+		{
+			playerState = EVENT;
+			LOG("LINK IS TALKING");
+		}
+		else
+		{ 
+			stamina -= attackTax;
+			Change_direction();
+			actionState = ATTACKING;
+			createSwordCollider();
+			LOG("LINK is ATTACKING");
+		}
 	}
 
 	Change_direction();
@@ -401,6 +427,15 @@ bool Player::Damaged(float dt)
 	Move(SDL_ceil(linearMovement.x*damagedSpeed*dt), SDL_ceil(linearMovement.y*damagedSpeed*dt));
 	
 	return true;
+}
+
+
+bool Player::Talking(float dt)
+{
+	actionState = IDLE;
+
+
+	return false;
 }
 
 

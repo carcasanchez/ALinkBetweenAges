@@ -2,9 +2,15 @@
 #define _PLAYER_H_
 
 #include "Entity.h"
+#include "NPC.h"
 #include "InputManager.h"
 #include "j1PerfTimer.h"
 
+enum PLAYER_STATE
+{
+	ACTIVE=0,
+	EVENT
+};
 
 class Player : public Entity, public InputListener
 {
@@ -37,11 +43,13 @@ public:
 
 
 	bool invulnerable;
+	Npc* toTalk = nullptr;
 
-
+	PLAYER_STATE playerState = ACTIVE;
 
 private:
 	void Change_direction();
+	void ManageStamina(float dt);
 
 	//State Machine
 	bool Idle();
@@ -50,8 +58,9 @@ private:
 	bool Dodging(float dt);
 	bool Damaged(float dt);
 
-	bool dodging = false;
+	bool Talking(float dt);
 
+	bool dodging = false;
 	//For Input callback
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 

@@ -126,6 +126,12 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		}
 
 		c1->parent->Move(SDL_ceil(c1->parent->speed*dt)*Movement.x, SDL_ceil(c1->parent->speed*dt)*Movement.y);
+		
+		if (c2->type == COLLIDER_NPC)
+		{
+			((Player*)(*playerId))->toTalk = (Npc*)c2->parent;
+		}
+		
 		return true;
 	}
 
@@ -171,13 +177,13 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 		if (c2->type == COLLIDER_ENEMY)
 		{
-			switch (((Enemy*)(c2->parent))->enemyState)
+		/*	switch (((Enemy*)(c2->parent))->enemyState)
 			{
 			case KEEP_DISTANCE:
 				break;
 			case CHASING:
 				iPoint Movement;
-				if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 5)
+				if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 10)
 					break;
 
 				if (c1->rect.x < c2->rect.x)
@@ -188,9 +194,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 					Movement.y = 1;
 				else Movement.y = -1;
 
-				c2->parent->Move(SDL_ceil(c2->parent->speed*dt * 10)*Movement.x, SDL_ceil(c2->parent->speed*dt * 10)*Movement.y);
+				c2->parent->Move(SDL_ceil(c2->parent->speed*dt * 5)*Movement.x, SDL_ceil(c2->parent->speed*dt * 5)*Movement.y);
 				break;
-		}
+		}*/
 			return true;
 	}
 	}
