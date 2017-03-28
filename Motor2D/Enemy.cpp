@@ -95,6 +95,7 @@ bool Enemy::Chasing(float dt)
 	}
 	else if (playerDistance <= fightRange)
 	{
+		currentDest = {0, 0};
 		enemyState = KEEP_DISTANCE;
 		path.clear();
 		attackTimer.Start();
@@ -138,7 +139,7 @@ bool Enemy::KeepDistance(float dt)
 	{	
 		srand(time(NULL));
 		bool attack = rand() % 2;
-		if (attack && currentPos.y == (*App->game->playerId)->currentPos.y || currentPos.x == (*App->game->playerId)->currentPos.x)
+		if (abs(currentPos.y - (*App->game->playerId)->currentPos.y)<3 || abs(currentPos.x - (*App->game->playerId)->currentPos.x)<3)
 		{
 			attackTimer.Start();
 			enemyState = CHARGING;
@@ -185,8 +186,6 @@ bool Enemy::KeepDistance(float dt)
 	
 
 	//Change the flanking direction if the enemy hits something
-
-
 	if (Move(SDL_ceil(flankingSpeed*dt)*flankingMovement.x, SDL_ceil(flankingSpeed*dt)*flankingMovement.y) == false)
 	{
 		flankingDir =!flankingDir;
@@ -233,27 +232,19 @@ bool Enemy::Charging(float dt)
 	switch (currentDir)
 	{
 	case D_DOWN:
-			ret = Move(0, SDL_ceil(attackSpeed * dt));
-			if (currentPos.y > (*App->game->playerId)->currentPos.y)
-				ret = false;			
+			ret = Move(0, SDL_ceil(attackSpeed * dt));			
 			break;
 
 	case D_UP:
 		ret = Move(0, -SDL_ceil(attackSpeed * dt));
-		if (currentPos.y < (*App->game->playerId)->currentPos.y)
-			ret = false;
 		break;
 
 	case D_LEFT:
 		ret = Move(-SDL_ceil(attackSpeed * dt), 0);
-		if (currentPos.x < (*App->game->playerId)->currentPos.x)
-			ret = false;
 		break;
 
 	case D_RIGHT:
 		ret = Move(SDL_ceil(attackSpeed * dt), 0);
-		if (currentPos.x > (*App->game->playerId)->currentPos.x)
-			ret = false;
 		break;
 	}
 	
@@ -262,7 +253,10 @@ bool Enemy::Charging(float dt)
 		ret = false;
 
 	if (ret == false)
-		enemyState = CHASING;
+	{
+		enemyState = KEEP_DISTANCE;
+		attackTimer.Start();
+	}
 	
 
 	return ret;

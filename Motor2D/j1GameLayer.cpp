@@ -111,8 +111,21 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {
 	if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC)
 	{
-		if((*playerId) != nullptr)
-			(*playerId)->currentPos = (*playerId)->lastPos;
+		iPoint Movement;
+		if (abs(c1->rect.x - c2->rect.x) < abs(c1->rect.y - c2->rect.y))
+		{
+			if (c1->parent->currentPos.y > c2->parent->currentPos.y)
+				Movement = {0, 1};
+			else Movement = { 0, -1 };
+		}
+		else
+		{
+			if (c1->parent->currentPos.x > c2->parent->currentPos.x)
+				Movement = { 1, 0 };
+			else Movement = { -1, 0 };
+		}
+
+		c1->parent->Move(SDL_ceil(c1->parent->speed*dt)*Movement.x, SDL_ceil(c1->parent->speed*dt)*Movement.y);
 		return true;
 	}
 
@@ -153,12 +166,15 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
 				c1->parent->damagedTimer.Start();
 			}
+			return true;
 		}
 
-		/*if (c2->type == COLLIDER_ENEMY)
+		if (c2->type == COLLIDER_ENEMY)
 		{
 			switch (((Enemy*)(c2->parent))->enemyState)
 			{
+			case KEEP_DISTANCE:
+				break;
 			case CHASING:
 				iPoint Movement;
 				if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 5)
@@ -175,7 +191,8 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				c2->parent->Move(SDL_ceil(c2->parent->speed*dt * 10)*Movement.x, SDL_ceil(c2->parent->speed*dt * 10)*Movement.y);
 				break;
 		}
-	}*/
+			return true;
+	}
 	}
 		
 	return true;
