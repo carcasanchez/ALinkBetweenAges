@@ -198,16 +198,15 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 		if (App->pathfinding->CreatePath(origin, currentDest))
 		{
 			path = App->pathfinding->ReturnPath();
-			path.erase(path.begin());
-			//LOG("DEST: %i, %i", dest.x, dest.y);
+			path.pop_back();
+			path.pop_back();
 		}
 	}
 
 
 	if (path.size() != 0)
 	{
-		iPoint immediateDest = App->map->GetTileCenter(path[0]);
-
+		iPoint immediateDest = App->map->GetTileCenter((*path.end()));
 
 		if (immediateDest.x > currentPos.x)
 		{
@@ -235,7 +234,7 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 
 		if (abs(immediateDest.x - currentPos.x) < 2 && abs(immediateDest.y - currentPos.y) < 2)
 		{
-			path.erase(path.begin());
+			path.pop_back();
 		}
 
 		return true;

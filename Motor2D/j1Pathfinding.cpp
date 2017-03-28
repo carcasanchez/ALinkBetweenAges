@@ -183,8 +183,6 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill, const iPoint& desti
 			node->parent = this;
 			node->pos = cell;
 		}
-		node->CalculateF(destination);
-
 		list_to_fill.list.push(node);
 	}
 	
@@ -198,8 +196,6 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill, const iPoint& desti
 			node->parent = this;
 			node->pos = cell;
 		}
-		node->CalculateF(destination);
-
 		list_to_fill.list.push(node);
 	}
 
@@ -212,8 +208,6 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill, const iPoint& desti
 			node->parent = this;
 			node->pos = cell;
 		}
-		node->CalculateF(destination);
-
 		list_to_fill.list.push(node);
 	}
 
@@ -226,30 +220,60 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill, const iPoint& desti
 			node->parent = this;
 			node->pos = cell;
 		}
-		node->CalculateF(destination);
-
 		list_to_fill.list.push(node);
 	}
 
 	//diagonals
 	/*cell.create(pos.x + 1, pos.y + 1);
-	if (App->pathfinding->IsWalkable(cell))
-		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
+	if (App->pathfinding->IsEnemyWalkable(cell))
+	{
+		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
+		if (node->pos != cell) {
+			node->parent = this;
+			node->pos = cell;
+		}
+
+		list_to_fill.list.push(node);
+	}
 
 
 	cell.create(pos.x + 1, pos.y - 1);
-	if (App->pathfinding->IsWalkable(cell))
-		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
+	if (App->pathfinding->IsEnemyWalkable(cell))
+	{
+		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
+		if (node->pos != cell) {
+			node->parent = this;
+			node->pos = cell;
+		}
+
+		list_to_fill.list.push(node);
+	}
 
 
 	cell.create(pos.x - 1, pos.y + 1);
-	if (App->pathfinding->IsWalkable(cell))
-		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));
+	if (App->pathfinding->IsEnemyWalkable(cell))
+	{
+		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
+		if (node->pos != cell) {
+			node->parent = this;
+			node->pos = cell;
+		}
+
+		list_to_fill.list.push(node);
+	}
 
 
 	cell.create(pos.x - 1, pos.y - 1);
-	if (App->pathfinding->IsWalkable(cell))
-		list_to_fill.list.push_back(PathNode(-1, -1, cell, this));*/
+	if (App->pathfinding->IsEnemyWalkable(cell))
+	{
+		PathNode* node = App->pathfinding->GetPathNode(cell.x, cell.y);
+		if (node->pos != cell) {
+			node->parent = this;
+			node->pos = cell;
+		}
+
+		list_to_fill.list.push(node);
+	}*/
 
 	return list_to_fill.list.size();
 }
@@ -310,7 +334,6 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 			}
 			last_path.push_back(current->pos);
-
 			ret = true;
 			break;
 		}
@@ -324,12 +347,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				
 				PathNode* temp = neighbours.list.top();
 				neighbours.list.pop();
-
-				if (temp->pos == destination)
-				{
-					LOG("GOTACH");
-				}
-
+				
 				if (temp->onClose == true)
 				{
 					continue;
@@ -349,6 +367,8 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				}
 				else
 				{
+					temp->CalculateF(destination);
+
 					temp->onOpen = true;
 					open_list.list.push(temp);
 
