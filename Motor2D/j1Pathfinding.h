@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "p2Point.h"
 #include "p2DynArray.h"
+#include <queue>
 
 #define DEFAULT_PATH_LENGTH 50
 #define INVALID_WALK_CODE 255
@@ -13,6 +14,8 @@
 // Intro: http://www.raywenderlich.com/4946/introduction-to-a-pathfinding
 // Details: http://theory.stanford.edu/~amitp/GameProgramming/
 // --------------------------------------------------
+
+struct PathNode;
 
 class j1PathFinding : public j1Module
 {
@@ -45,6 +48,8 @@ public:
 	uchar GetTileForPlayer(const iPoint& pos) const;
 	uchar GetTileForEnemy(const iPoint& pos) const;
 
+	PathNode* GetPathNode(int x, int y);
+
 
 	//Return path
 	vector<iPoint> ReturnPath();
@@ -55,6 +60,8 @@ public:
 
 private:
 
+
+	PathNode* node_map = nullptr;
 	// size of the map
 	uint width;
 	uint height;
@@ -74,12 +81,12 @@ struct PathList;
 struct PathNode
 {
 	// Convenient constructors
-	PathNode();
-	PathNode(int g, int h, const iPoint& pos, const PathNode* parent);
+	PathNode() {};
+	PathNode(int g, int h, const iPoint& pos, PathNode* parent);
 	PathNode(const PathNode& node);
 
 	// Fills a list (PathList) of all valid adjacent pathnodes
-	uint FindWalkableAdjacents(PathList& list_to_fill) const;
+	uint FindWalkableAdjacents(PathList& list_to_fill, const iPoint& destination);
 	// Calculates this tile score
 	int Score() const;
 	// Calculate the F for a specific destination tile
@@ -89,23 +96,35 @@ struct PathNode
 	int g;
 	int h;
 	iPoint pos;
-	const PathNode* parent; // needed to reconstruct the path in the end
+	bool onClose = false;
+	bool onOpen = false;
+	PathNode* parent; // needed to reconstruct the path in the end
 };
 
 // ---------------------------------------------------------------------
 // Helper struct to include a list of path nodes
 // ---------------------------------------------------------------------
+
+struct compare
+{
+	bool operator()(const PathNode* l, const PathNode* r)
+	{
+		return l->Score() >= r->Score();
+	}
+};
+
 struct PathList
 {
 	// Looks for a node in this list and returns it's list node or NULL
-	list<PathNode>::iterator Find(const iPoint& point);
+	//list<PathNode>::iterator Find(const iPoint& point);
 
 	// Returns the Pathnode with lowest score in this list or NULL if empty
-	list<PathNode>::const_iterator GetNodeLowestScore() const;
+	//list<PathNode>::const_iterator GetNodeLowestScore() const;
 
 	// -----------
 	// The list itself, note they are not pointers!
-	std::list<PathNode> list;
+	std::priority_queue<PathNode*, std::vector<PathNode*>, compare > list;
+	//std::list<PathNode> list;
 };
 
 
