@@ -5,7 +5,6 @@
 #include "j1FileSystem.h"
 #include "j1Textures.h"
 #include "j1Map.h"
-#include "p2SString.h"
 #include "j1Input.h"
 #include "j1Pathfinding.h"
 #include <math.h>
