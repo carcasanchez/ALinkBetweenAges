@@ -118,7 +118,7 @@
       <action event="11" button="1"/>
     
       <!--PAUSE-->
-      <action event="12" button="6"/>
+      <action event="5" button="6"/>
   </context>
   
   </inputManager>  
