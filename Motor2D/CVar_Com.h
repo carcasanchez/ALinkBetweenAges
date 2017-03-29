@@ -1,7 +1,6 @@
 #ifndef _CVAR_COM_H_
 #define _CVAR_COM_H_
 
-#include "p2SString.h"
 #include "j1Module.h"
 
 

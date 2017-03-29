@@ -79,11 +79,18 @@ bool Scene::Load(const char* path)
 			entity = entities.child("enemies");
 			for (pugi::xml_node enemy = entity.first_child(); enemy != NULL; enemy = enemy.next_sibling())
 			{
+				vector<iPoint> points;
+				for (pugi::xml_node patrolPoint = enemy.child("patrol"); patrolPoint; patrolPoint = patrolPoint.next_sibling("patrol"))
+				{
+					points.push_back(iPoint(patrolPoint.attribute("x").as_int(), patrolPoint.attribute("y").as_int()));
+				}
+
 				App->game->em->CreateEnemy(
 					maxSectors,
 					ENEMY_TYPE(enemy.attribute("type").as_int()),
 					enemy.attribute("x").as_int(),
-					enemy.attribute("y").as_int());
+					enemy.attribute("y").as_int(),
+					points);
 			}
 
 			entity = entities.child("special");

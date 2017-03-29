@@ -79,7 +79,7 @@ bool j1GameLayer::Update(float dt)
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y);
+		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
 	}
 		
 	

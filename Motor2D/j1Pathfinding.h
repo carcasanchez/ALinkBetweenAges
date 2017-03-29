@@ -3,7 +3,6 @@
 
 #include "j1Module.h"
 #include "p2Point.h"
-#include "p2DynArray.h"
 #include <queue>
 
 #define DEFAULT_PATH_LENGTH 50

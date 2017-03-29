@@ -2,7 +2,6 @@
 #define _UI_STRING_H_
 
 #include "UI_element.h"
-#include "p2SString.h"
 
 struct _TTF_Font;
 struct SDL_Texture;

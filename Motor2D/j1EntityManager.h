@@ -6,6 +6,10 @@
 #include <list>
 #include <map>
 #include <string>
+#include <vector>
+#include "p2Point.h"
+
+
 
 class Entity;
 class Player;
@@ -29,7 +33,7 @@ public:
 public:
 
 	Player* CreatePlayer(int, int);
-	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int);
+	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>);
 	Npc*	CreateNPC(int, NPC_TYPE, int, int, int);
 
 	std::map<int, std::list<Entity*>> entities;

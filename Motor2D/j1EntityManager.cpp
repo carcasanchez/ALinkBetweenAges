@@ -3,7 +3,6 @@
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1GameLayer.h"
-#include "p2Point.h"
 #include "Entity.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -124,7 +123,7 @@ Player* j1EntityManager::CreatePlayer(int x, int y)
 }
 
 //Enemy factory (X and Y in Map Coordinates)
-Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y)
+Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, vector<iPoint> patrolPoints)
 {
 	Enemy* ret = nullptr;
 
@@ -141,6 +140,9 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y)
 	ret->type = ENEMY;
 	entities[App->sceneM->currentScene->currentSector].push_back(ret);
 	ret->id = entities[App->sceneM->currentScene->currentSector].end();
+	
+	//Take patrol points from xml	
+	ret->patrolPoints = patrolPoints;
 
 	return nullptr;
 }

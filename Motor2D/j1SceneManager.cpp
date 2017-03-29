@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "TestScene.h"
 #include "j1EntityManager.h"
+#include "p2Defs.h"
 
 j1SceneManager::j1SceneManager() : currentScene(NULL)
 {

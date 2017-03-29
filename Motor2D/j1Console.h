@@ -4,8 +4,6 @@
 #include "j1Module.h"
 #include "CVar_Com.h"
 #include "UI_Text_Box.h"
-#include "p2SString.h"
-#include "p2DynArray.h"
 #include "SDL\include\SDL_rect.h"
 
 struct _TTF_Font;

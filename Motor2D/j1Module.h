@@ -11,7 +11,6 @@
 #include <vector>
 using namespace std;
 
-#include"p2SString.h"
 #include "PugiXml\src\pugixml.hpp"
 
 class j1App;
