@@ -97,7 +97,6 @@ public:
 	//To Change the action button
 	void ChangeInputEvent(INPUTEVENT);
 
-
 	//For Polling
 	EVENTSTATE EventPressed(INPUTEVENT) const;
 
@@ -105,19 +104,24 @@ public:
 	void AddListener(InputListener*);
 	void CallListeners();
 
-private:
+	//To change the game context
+	GAMECONTEXT GetGameContext();
+	void SetGameContext(GAMECONTEXT);
 
-	std::map<GAMECONTEXT, std::multimap<int, INPUTEVENT>> context_filter;
+private:
 
 	//Mapping is fun
 	//All the actions possible int->button, INPUTEVENT->attack, moveup...
-	std::multimap<int, INPUTEVENT> actions;
+	std::map<GAMECONTEXT, std::multimap<int, INPUTEVENT>> context_filter;
 
 	//All the actions in this frame
 	std::multimap<INPUTEVENT, EVENTSTATE> current_action;
 
 	//All listeners for the callbacks
 	std::list<InputListener*> listeners;
+
+	//GAMECONTEXT
+	GAMECONTEXT  actions_filter;
 
 	//To Change the action button
 	bool		next_input_change = false;

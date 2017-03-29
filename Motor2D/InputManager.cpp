@@ -41,6 +41,7 @@ bool InputManager::Awake(pugi::xml_node& conf)
 		context_filter.insert(new_context);
 	}
 
+	actions_filter = IN_GAME;
 
 	return ret;
 }
@@ -79,7 +80,9 @@ bool InputManager::CleanUp()
 {
 	bool ret = true;
 
-
+	context_filter.clear();
+	current_action.clear();
+	listeners.clear();
 
 	return ret;
 }
@@ -88,14 +91,20 @@ void InputManager::InputDetected(int button, EVENTSTATE state)
 {
 	if (next_input_change == false)
 	{
-		multimap<int, INPUTEVENT>::iterator tmp = actions.find(button);
-		//If more than one action per button we must iterate until the end
-		if (tmp != actions.end())
+		std::map<GAMECONTEXT, std::multimap<int, INPUTEVENT>>::iterator cont = context_filter.find(actions_filter);
+
+		if (cont != context_filter.end())
 		{
-			std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
-			new_current_action.first = (*tmp).second;
-			new_current_action.second = state;
-			current_action.insert(new_current_action);
+			//contexts actions
+			multimap<int, INPUTEVENT>::iterator actions = cont->second.find(button);
+			
+			if (actions != cont->second.end())
+			{
+				std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
+				new_current_action.first = (*actions).second;
+				new_current_action.second = state;
+				current_action.insert(new_current_action);
+			}	
 		}
 	}
 	else
@@ -106,75 +115,78 @@ void InputManager::InputDetected(int button, EVENTSTATE state)
 
 void InputManager::JoystickDetected(int axis, JSTATE state)
 {
-
-	std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
-
-	switch (axis)
+	if (actions_filter == IN_GAME)
 	{
-	case SDL_CONTROLLER_AXIS_LEFTX:
-		if (state == J_POSITIVE)
-		{
-			new_current_action.first = MRIGHT;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
-		else
-		{
-			new_current_action.first = MLEFT;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
-		break;
+		std::pair<INPUTEVENT, EVENTSTATE> new_current_action;
 
-	case SDL_CONTROLLER_AXIS_LEFTY:
-		
-		if (state == J_POSITIVE)
+		switch (axis)
 		{
-			new_current_action.first = MDOWN;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
-		else
-		{
-			new_current_action.first = MUP;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
-		break;
+		case SDL_CONTROLLER_AXIS_LEFTX:
+			if (state == J_POSITIVE)
+			{
+				new_current_action.first = MRIGHT;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+			else
+			{
+				new_current_action.first = MLEFT;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+			break;
 
-	case SDL_CONTROLLER_AXIS_RIGHTX:
-		if (state == J_POSITIVE)
-		{
-			new_current_action.first = LOOKRIGHT;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
-		else
-		{
-			new_current_action.first = LOOKLEFT;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
+		case SDL_CONTROLLER_AXIS_LEFTY:
 
-		break;
+			if (state == J_POSITIVE)
+			{
+				new_current_action.first = MDOWN;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+			else
+			{
+				new_current_action.first = MUP;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+			break;
 
-	case SDL_CONTROLLER_AXIS_RIGHTY:
-		if (state == J_POSITIVE)
-		{
-			new_current_action.first = LOOKDOWN;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
+		case SDL_CONTROLLER_AXIS_RIGHTX:
+			if (state == J_POSITIVE)
+			{
+				new_current_action.first = LOOKRIGHT;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+			else
+			{
+				new_current_action.first = LOOKLEFT;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+
+			break;
+
+		case SDL_CONTROLLER_AXIS_RIGHTY:
+			if (state == J_POSITIVE)
+			{
+				new_current_action.first = LOOKDOWN;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+			else
+			{
+				new_current_action.first = LOOKUP;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+
+			break;
+
 		}
-		else
-		{
-			new_current_action.first = LOOKUP;
-			new_current_action.second = E_REPEAT;
-			current_action.insert(new_current_action);
-		}
-
-		break;
-
 	}
+	
 }
 
 void InputManager::ChangeInputEvent(INPUTEVENT change_ev)
@@ -186,7 +198,7 @@ void InputManager::ChangeInputEvent(INPUTEVENT change_ev)
 bool InputManager::ChangeEventButton(int new_button)
 {
 	bool ret = false;
-
+/*
 	//Look if the new button is actually asigned
 	multimap<int, INPUTEVENT>::iterator tmp = actions.find(new_button);
 
@@ -214,7 +226,7 @@ bool InputManager::ChangeEventButton(int new_button)
 
 	ret = true;
 
-
+*/
 	return ret;
 }
 
@@ -258,6 +270,16 @@ void InputManager::CallListeners()
 			}
 		}
 	}
+}
+
+GAMECONTEXT InputManager::GetGameContext()
+{
+	return actions_filter;
+}
+
+void InputManager::SetGameContext(GAMECONTEXT context)
+{
+	actions_filter = context;
 }
 
 
