@@ -155,14 +155,14 @@ void InputManager::JoystickDetected(int axis, JSTATE state)
 		case SDL_CONTROLLER_AXIS_RIGHTX:
 			if (state == J_POSITIVE)
 			{
-				new_current_action.first = LOOKRIGHT;
-				new_current_action.second = E_REPEAT;
+				new_current_action.first = ATTACK_RIGHT;
+				new_current_action.second = E_DOWN;
 				current_action.insert(new_current_action);
 			}
 			else
 			{
-				new_current_action.first = LOOKLEFT;
-				new_current_action.second = E_REPEAT;
+				new_current_action.first = ATTACK_LEFT;
+				new_current_action.second = E_DOWN;
 				current_action.insert(new_current_action);
 			}
 
@@ -171,14 +171,14 @@ void InputManager::JoystickDetected(int axis, JSTATE state)
 		case SDL_CONTROLLER_AXIS_RIGHTY:
 			if (state == J_POSITIVE)
 			{
-				new_current_action.first = LOOKDOWN;
-				new_current_action.second = E_REPEAT;
+				new_current_action.first = ATTACK_DOWN;
+				new_current_action.second = E_DOWN;
 				current_action.insert(new_current_action);
 			}
 			else
 			{
-				new_current_action.first = LOOKUP;
-				new_current_action.second = E_REPEAT;
+				new_current_action.first = ATTACK_UP;
+				new_current_action.second = E_DOWN;
 				current_action.insert(new_current_action);
 			}
 

@@ -332,20 +332,20 @@ bool Player::Attacking(float dt)
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || currentDir == D_DOWN)
 	{
 		Move(0, SDL_ceil(attackSpeed * dt));
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || currentDir == D_UP)
 	{
 		Move(0, -SDL_ceil(attackSpeed * dt));
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || currentDir == D_LEFT)
 	{
 		Move(-SDL_ceil(attackSpeed * dt), 0);
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || currentDir == D_RIGHT)
 	{
 		Move(SDL_ceil(attackSpeed * dt), 0);
 	}
@@ -430,7 +430,6 @@ bool Player::Damaged(float dt)
 	return true;
 }
 
-
 bool Player::Talking(float dt)
 {
 	actionState = IDLE;
@@ -439,15 +438,13 @@ bool Player::Talking(float dt)
 	return false;
 }
 
-
-
 void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 {
 
 	switch (action)
 	{
 
-	case ATTACK:
+	case ATTACK_UP:
 		switch (state)
 		{
 		case E_REPEAT:
@@ -456,6 +453,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		case E_DOWN:
 			if (stamina - attackTax >= 0)
 			{
+				currentDir = DIRECTION::D_UP;
+				createSwordCollider();
 				stamina -= attackTax;
 				actionState = ATTACKING;
 				LOG("LINK is ATTACKING");
@@ -463,6 +462,64 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 		}
 		break;
+
+	case ATTACK_DOWN:
+		switch (state)
+		{
+		case E_REPEAT:
+			break;
+
+		case E_DOWN:
+			if (stamina - attackTax >= 0)
+			{
+				currentDir = DIRECTION::D_DOWN;
+				createSwordCollider();
+				stamina -= attackTax;
+				actionState = ATTACKING;
+				LOG("LINK is ATTACKING");
+			}
+			break;
+		}
+		break;
+
+	case ATTACK_LEFT:
+		switch (state)
+		{
+		case E_REPEAT:
+			break;
+
+		case E_DOWN:
+			if (stamina - attackTax >= 0)
+			{
+				currentDir = DIRECTION::D_LEFT;
+				createSwordCollider();
+				stamina -= attackTax;
+				actionState = ATTACKING;
+				LOG("LINK is ATTACKING");
+			}
+			break;
+		}
+		break;
+
+	case ATTACK_RIGHT:
+		switch (state)
+		{
+		case E_REPEAT:
+			break;
+
+		case E_DOWN:
+			if (stamina - attackTax >= 0)
+			{
+				currentDir = DIRECTION::D_RIGHT;
+				createSwordCollider();
+				stamina -= attackTax;
+				actionState = ATTACKING;
+				LOG("LINK is ATTACKING");
+			}
+			break;
+		}
+		break;
+
 	case DODGE:
 		if (state == E_DOWN && (stamina - dodgeTax >= 0))
 		{
