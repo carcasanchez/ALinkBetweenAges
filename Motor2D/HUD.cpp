@@ -66,6 +66,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			{
 				App->game->pause = true;
 				IntoPause();
+				App->inputM->SetGameContext(IN_MENU);
 				pause_transition = PAUSE_DOWN;
 			}	
 		}
@@ -211,6 +212,8 @@ void Hud::GonePause()
 	
 	for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
 		(*it)->Set_Active_state(false);
+
+	App->inputM->SetGameContext(IN_GAME);
 }
 
 void Hud::PauseIn(float dt)
