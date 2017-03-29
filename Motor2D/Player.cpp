@@ -310,19 +310,11 @@ bool Player::Walking(float dt)
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		if (toTalk != nullptr)
-		{
-			playerState = EVENT;
-			LOG("LINK IS TALKING");
-		}
-		else
-		{ 
 			stamina -= attackTax;
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
 			LOG("LINK is ATTACKING");
-		}
 	}
 
 	Change_direction();
@@ -366,6 +358,15 @@ bool Player::Attacking(float dt)
 		currentAnim->Reset();
 		LOG("LINK is in IDLE");
 		actionState = IDLE;
+	}
+
+	else if (toTalk != nullptr)
+	{
+		resetSwordCollider();
+		currentAnim->Reset();
+		LOG("LINK is in IDLE");
+		actionState = IDLE;
+		playerState = EVENT;
 	}
 
 

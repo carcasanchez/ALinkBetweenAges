@@ -88,6 +88,7 @@ public:
 	ENTITY_TYPE type;
 	int life;
 	int speed;
+	int damage;
 	bool damaged;
 	j1PerfTimer damagedTimer;
 

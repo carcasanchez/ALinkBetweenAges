@@ -21,6 +21,7 @@ Entity::Entity() :
 	colPivot(iPoint()),
 	type(ENTITY_TYPE(0)),
 	life(1),
+	damage(0),
 	damaged(false),
 	toDelete(false),
 	currentPatrolPoint(0)
@@ -79,7 +80,7 @@ bool Entity::LoadAttributes(pugi::xml_node attributes)
 	pugi::xml_node node = attributes.child("base");
 	life = node.attribute("life").as_int(1);
 	speed = node.attribute("speed").as_int(1);
-	
+	damage = node.attribute("damage").as_int(0);
 	
 
 	//collider

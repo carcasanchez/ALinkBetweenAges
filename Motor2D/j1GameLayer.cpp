@@ -126,12 +126,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		}
 
 		c1->parent->Move(SDL_ceil(c1->parent->speed*dt)*Movement.x, SDL_ceil(c1->parent->speed*dt)*Movement.y);
-		
-		if (c2->type == COLLIDER_NPC)
-		{
-			((Player*)(*playerId))->toTalk = (Npc*)c2->parent;
-		}
-		
+				
 		return true;
 	}
 
@@ -145,7 +140,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				(*playerId)->damaged = ((Player*)(*playerId))->invulnerable = true;
 				(*playerId)->damagedTimer.Start();
 				LOG("DAMAGED TIMER STARTED");
-				(*playerId)->life--;
+				(*playerId)->life -= c2->parent->damage;
 				(*playerId)->sprite->tint = { 100, 0, 0, 255 };
 
 				if (c1->rect.x < c2->rect.x)
@@ -167,7 +162,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		{
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
 			{
-				c1->parent->life--;
+				c1->parent->life -= (*playerId)->damage;
 				c1->parent->sprite->tint = { 255, 150, 150, 255 };
 				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
 				c1->parent->damagedTimer.Start();
@@ -199,6 +194,14 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		}*/
 			return true;
 	}
+	}
+
+	if (c1->type == COLLIDER_NPC)
+	{
+		if (c2->type == COLLIDER_LINK_SWORD)
+		{
+			((Player*)(*playerId))->toTalk = (Npc*)c1->parent;
+		}
 	}
 		
 	return true;

@@ -7,6 +7,7 @@
 #include "j1Window.h"
 #include "j1Console.h"
 #include "UI_Text_Box.h"
+#include "j1Render.h"
 #include "j1Gui.h"
 #include "SDL/include/SDL.h"
 #include "InputManager.h"
@@ -276,8 +277,9 @@ bool j1Input::GetWindowEvent(j1EventWindow ev)
 
 void j1Input::GetMousePosition(int& x, int& y)
 {
-	x = mouse_x;
-	y = mouse_y;
+	x = (mouse_x*App->win->GetScale() - App->render->camera.x);
+	y = (mouse_y*App->win->GetScale() - App->render->camera.y);
+	LOG("MOUSE POS: %i, %i", x, y);
 }
 
 void j1Input::GetMouseMotion(int& x, int& y)
