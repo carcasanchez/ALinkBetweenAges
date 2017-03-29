@@ -38,7 +38,7 @@ bool Scene::Load(const char* path)
 	{
 		data = doc.child("scene");
 		name.assign(data.attribute("name").as_string("Unnamed Scene"));
-		std::string map = data.attribute("map").as_string("test.tmx");
+		std::string map = data.attribute("map").as_string("none");
 
 		pugi::xml_node node = data.child("sectors");
 
