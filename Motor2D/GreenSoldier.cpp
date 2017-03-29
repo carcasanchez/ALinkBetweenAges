@@ -35,6 +35,7 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 		LoadAttributes(attributes);
 
 		enemyState = PATROLING;
+		actionState = WALKING;
 
 		hostileRange = attributes.child("ranges").attribute("hostile").as_int(0);
 		fightRange = attributes.child("ranges").attribute("fight").as_int(0);

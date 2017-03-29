@@ -72,7 +72,8 @@ bool Scene::Load(const char* path)
 					maxSectors,
 					NPC_TYPE(npc.attribute("type").as_int()),
 					npc.attribute("x").as_int(),
-					npc.attribute("y").as_int());
+					npc.attribute("y").as_int(), 
+					npc.attribute("id").as_int());
 			}
 
 			entity = entities.child("enemies");

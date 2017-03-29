@@ -145,7 +145,7 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y)
 	return nullptr;
 }
 
-Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y)
+Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int id)
 {
 	Npc* ret = nullptr;
 
@@ -162,6 +162,9 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y)
 	ret->type = NPC;
 	entities[App->sceneM->currentScene->currentSector].push_back(ret);
 	ret->id = entities[App->sceneM->currentScene->currentSector].end();
+	
+	//For dialog purposes
+	ret->npcId = id;
 
 	return nullptr;
 }

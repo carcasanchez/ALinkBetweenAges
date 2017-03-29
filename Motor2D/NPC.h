@@ -11,6 +11,7 @@ enum NPC_TYPE
 };
 
 
+
 class Npc : public Entity, public InputListener
 {
 public:
@@ -24,13 +25,15 @@ public:
 
 public:
 
+	int npcId;
+	int dialogState;
+
 	
 private:
 	//void Change_direction();
 
 	//State Machine
-	//bool Idle();
-	//bool Walking(float dt);
+
 
 };
 

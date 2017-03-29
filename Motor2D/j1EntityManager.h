@@ -30,7 +30,7 @@ public:
 
 	Player* CreatePlayer(int, int);
 	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int);
-	Npc*	CreateNPC(int, NPC_TYPE, int, int);
+	Npc*	CreateNPC(int, NPC_TYPE, int, int, int);
 
 	std::map<int, std::list<Entity*>> entities;
 
