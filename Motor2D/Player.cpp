@@ -524,26 +524,12 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		if (state == E_DOWN && (stamina - dodgeTax >= 0))
 		{
 			stamina -= dodgeTax;
-			LOG("LINK is DODGING");
 			actionState = DODGING;
+			Change_direction();
+			dodging = true;
 			dodgeTimer.Start();
 		}
 		break;
-
-
-	case LOOKUP:
-		currentDir = D_UP;
-		break;
-	case LOOKDOWN:
-		currentDir = D_DOWN;
-		break;
-	case LOOKLEFT:
-		currentDir = D_LEFT;
-		break;
-	case LOOKRIGHT:
-		currentDir = D_RIGHT;
-		break;
-
 	}
 }
 

@@ -91,7 +91,7 @@
       <action event="3" button="1"/>
     
       <!--DODGE-->
-      <action event="4" button="9"/>
+      <action event="4" button="10"/>
 
       <!--PAUSE-->
       <action event="5" button="6"/>
