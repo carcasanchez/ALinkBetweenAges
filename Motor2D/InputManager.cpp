@@ -23,14 +23,24 @@ bool InputManager::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	//Load All actions
-	for (pugi::xml_node tmp = conf.child("action"); tmp != nullptr; tmp = tmp.next_sibling())
+	
+	for (pugi::xml_node con_tmp = conf.child("context"); con_tmp != nullptr; con_tmp = con_tmp.next_sibling())
 	{
-		std::pair<int, INPUTEVENT> new_action;
-		new_action.first = tmp.attribute("button").as_int();
-		new_action.second = (INPUTEVENT)tmp.attribute("event").as_int();
+		std::pair<GAMECONTEXT, std::multimap<int, INPUTEVENT>> new_context;
+		new_context.first = (GAMECONTEXT)con_tmp.attribute("value").as_int();
 
-		actions.insert(new_action);
+		for (pugi::xml_node act_tmp = con_tmp.child("action"); act_tmp != nullptr; act_tmp = act_tmp.next_sibling())
+		{
+			std::pair<int, INPUTEVENT> new_action;
+			new_action.first = act_tmp.attribute("button").as_int();
+			new_action.second = (INPUTEVENT)act_tmp.attribute("event").as_int();
+
+			new_context.second.insert(new_action);
+		}
+
+		context_filter.insert(new_context);
 	}
+
 
 	return ret;
 }

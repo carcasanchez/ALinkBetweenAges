@@ -10,6 +10,12 @@
 #include <map>
 #include <string>
 
+enum GAMECONTEXT
+{
+	IN_GAME,
+	IN_MENU
+};
+
 enum INPUTEVENT
 {
 	NO_EVENT = -1,
@@ -101,6 +107,7 @@ public:
 
 private:
 
+	std::map<GAMECONTEXT, std::multimap<int, INPUTEVENT>> context_filter;
 
 	//Mapping is fun
 	//All the actions possible int->button, INPUTEVENT->attack, moveup...

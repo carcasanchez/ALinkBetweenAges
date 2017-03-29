@@ -74,7 +74,10 @@
     </hud>
   </game>
   -<inputManager>
-      <!--ATTACK-->
+
+    <!--IN GAME CONTEXT-->
+    <context value="0">
+       <!--ATTACK-->
       <action event="0" button="10"/>
     
       <!--DODGE-->
@@ -82,7 +85,10 @@
 
       <!--PAUSE-->
       <action event="2" button="6"/>
-  
+    </context>
+    
+     <!--PAUSE CONTEXT-->
+    <context value="1"> 
       <!--UP-->
       <action event="3" button="11"/>
     
@@ -100,7 +106,8 @@
 
       <!--DECLINE-->
       <action event="8" button="1"/>
-
+  </context>
+  
   </inputManager>  
   <console>
     <Position x="0" y="0"/>
