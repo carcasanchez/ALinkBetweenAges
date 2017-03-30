@@ -479,15 +479,19 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (stamina - attackTax >= 0)
+
+			if (actionState != ATTACKING && playerState != EVENT)
 			{
-				currentDir = DIRECTION::D_UP;
-				createSwordCollider();
-				stamina -= attackTax;
-				actionState = ATTACKING;
-				LOG("LINK is ATTACKING");
+				if (stamina - attackTax >= 0)
+				{
+					currentDir = DIRECTION::D_UP;
+					createSwordCollider();
+					stamina -= attackTax;
+					actionState = ATTACKING;
+					LOG("LINK is ATTACKING");
+				}
+				break;
 			}
-			break;
 		}
 		break;
 
@@ -498,15 +502,18 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (stamina - attackTax >= 0)
+			if (actionState != ATTACKING && playerState != EVENT)
 			{
-				currentDir = DIRECTION::D_DOWN;
-				createSwordCollider();
-				stamina -= attackTax;
-				actionState = ATTACKING;
-				LOG("LINK is ATTACKING");
+				if (stamina - attackTax >= 0)
+				{
+					currentDir = DIRECTION::D_DOWN;
+					createSwordCollider();
+					stamina -= attackTax;
+					actionState = ATTACKING;
+					LOG("LINK is ATTACKING");
+				}
+				break;
 			}
-			break;
 		}
 		break;
 
@@ -517,15 +524,18 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (stamina - attackTax >= 0)
+			if (actionState != ATTACKING && playerState != EVENT)
 			{
-				currentDir = DIRECTION::D_LEFT;
-				createSwordCollider();
-				stamina -= attackTax;
-				actionState = ATTACKING;
-				LOG("LINK is ATTACKING");
+				if (stamina - attackTax >= 0)
+				{
+					currentDir = DIRECTION::D_LEFT;
+					createSwordCollider();
+					stamina -= attackTax;
+					actionState = ATTACKING;
+					LOG("LINK is ATTACKING");
+				}
+				break;
 			}
-			break;
 		}
 		break;
 
@@ -536,15 +546,18 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (stamina - attackTax >= 0)
+			if (actionState != ATTACKING && playerState != EVENT)
 			{
-				currentDir = DIRECTION::D_RIGHT;
-				createSwordCollider();
-				stamina -= attackTax;
-				actionState = ATTACKING;
-				LOG("LINK is ATTACKING");
+				if (stamina - attackTax >= 0)
+				{
+					currentDir = DIRECTION::D_RIGHT;
+					createSwordCollider();
+					stamina -= attackTax;
+					actionState = ATTACKING;
+					LOG("LINK is ATTACKING");
+				}
+				break;
 			}
-			break;
 		}
 		break;
 
