@@ -337,7 +337,7 @@ bool j1Map::Load(const char* file_name)
 
 
 		//Fill tile clusters
-		for (int x = 0; x < data->width;)
+		for (int x = 0; x < data->width; x++)
 		{
 
 		}
