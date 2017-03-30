@@ -76,10 +76,8 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
-		iPoint mousePos;
-		App->input->GetMousePosition(mousePos.x, mousePos.y);
-		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+		iPoint mousePos = App->map->WorldToMap((*playerId)->currentPos.x, (*playerId)->currentPos.y);
+		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x-5, mousePos.y-5, vector<iPoint>());
 	}
 		
 	
