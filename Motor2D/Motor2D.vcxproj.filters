@@ -115,6 +115,9 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Quadtree.cpp">
+      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -245,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadtree.h">
+      <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

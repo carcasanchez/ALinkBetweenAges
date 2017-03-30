@@ -74,13 +74,12 @@ void j1Map::Draw()
 
 		
 
-
-		for(int y = 0; y < data->height; ++y)
+		for (int y = 0; y < data->height; ++y)
 		{
-			for(int x = 0; x < data->width; ++x)
+			for (int x = 0; x < data->width; ++x)
 			{
 				int tile_id = layer->Get(x, y);
-				if(tile_id > 0)
+				if (tile_id > 0)
 				{
 					iPoint pos = MapToWorld(x, y);
 
@@ -90,10 +89,13 @@ void j1Map::Draw()
 						SDL_Rect r = tileset->GetTileRect(tile_id);
 						App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 					}
-					
+
 				}
 			}
 		}
+	
+
+
 	}
 }
 
@@ -333,6 +335,15 @@ bool j1Map::Load(const char* file_name)
 			//LOG("spacing: %d margin: %d", s->spacing, s->margin);
 		}
 
+
+		//Fill tile clusters
+		for (int x = 0; x < data->width;)
+		{
+
+		}
+
+		
+
 	}
 
 	map_loaded = ret;
@@ -511,6 +522,9 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 
 
 
+
+
+
 	return ret;
 }
 
@@ -658,6 +672,12 @@ void j1Map::UnLoadData()
 		RELEASE(*item);
 
 	data->layers.clear();
+
+
+	for (std::vector<MapCluster*>::iterator item = data->clusters.begin(); item != data->clusters.cend(); item++)
+		RELEASE(*item);
+	
+	data->clusters.clear();
 
 	// Clean up the pugui tree
 	map_file->reset();
