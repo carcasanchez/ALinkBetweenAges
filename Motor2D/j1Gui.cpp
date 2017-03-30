@@ -75,7 +75,7 @@ bool j1Gui::PostUpdate()
 	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
 	{
 		if ((*item_screen)->active)
-			(*item_screen)->Update_Draw();
+			(*item_screen)->GoToRender();
 	}
 	return true;
 }
