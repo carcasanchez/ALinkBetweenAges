@@ -77,6 +77,10 @@ private:
 	void		PauseIn(float);
 	void		PauseOut(float);
 
+	//In game HUD methods
+	bool		LoadHud(string file);
+	void		SetHudElements();
+
 };
 
 #endif // !_HUD_H_
