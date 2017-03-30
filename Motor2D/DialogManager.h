@@ -53,7 +53,7 @@ public:
 	bool PostUpdate();
 	bool BlitDialog(int id, int state);
 
-	int dialogueStep = -1; //Allows to order the conversarion correctly
+	int dialogueStep = 0; //Allows to order the conversarion correctly
 
 	/*--- UI elements to print dialogues on screen ---*/
 	UI_element* screen = nullptr;

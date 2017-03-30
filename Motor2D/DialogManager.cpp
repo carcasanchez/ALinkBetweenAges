@@ -64,9 +64,9 @@ bool DialogManager::Start()
 	screen = App->gui->CreateScreen(screen);
 	text_on_screen = (UI_String*)App->gui->Add_element(STRING, this);
 	text_on_screen->Set_Active_state(false);
-	text_on_screen->Set_Interactive_Box({ 0, 0, 0, 0 });
+	text_on_screen->Set_Interactive_Box({ App->console->console_screen.w-600, App->console->console_screen.h+500, 0, 0 });
 
-	//screen->AddChild(text_on_screen);
+	screen->AddChild(text_on_screen);
 
 	return ret;
 }
@@ -108,17 +108,17 @@ bool DialogManager::BlitDialog(int id, int state)
 	{
 		if (dialog[i]->id == id)
 		{
-			for (int j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct dialog
+			int vectorPos; //Looks the exact vector position deppending of the state
+			for(vectorPos = 0; dialog[i]->texts[vectorPos]->state != state; vectorPos++)
+			{}
+			if ((dialogueStep+vectorPos) >= dialog[i]->texts.size())
 			{
-				if (dialogueStep >= dialog[i]->texts.size() - 1)
-				{
-					return false;
-				}
-				if (dialog[i]->texts[dialogueStep + j]->state == state)
-				{
-					text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep + j]->line->c_str());
-					return true;
-				}
+				return false;
+			}
+			if (dialog[i]->texts[dialogueStep + vectorPos]->state == state)
+			{
+				text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep + vectorPos]->line->c_str());
+				return true;
 			}
 		}
 	}
