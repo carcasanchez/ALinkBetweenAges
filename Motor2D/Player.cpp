@@ -11,6 +11,8 @@
 #include "Animation.h"
 #include "InputManager.h"
 #include "j1PerfTimer.h"
+#include "DialogManager.h"
+#include "InputManager.h"
 
 Player::Player() : Entity() { App->inputM->AddListener(this); }
 
@@ -114,8 +116,6 @@ bool Player::Update(float dt)
 		Talking(dt);
 		break;
 	}
-	
-	toTalk = nullptr;
 
 	return ret;
 }
@@ -433,7 +433,22 @@ bool Player::Damaged(float dt)
 bool Player::Talking(float dt)
 {
 	actionState = IDLE;
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		if (toTalk != nullptr)
+		{
+			App->dialog->text_on_screen->Set_Active_state(true);
+			App->dialog->dialogueStep++;
+			if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
+			{
+			playerState = ACTIVE;
+			App->dialog->text_on_screen->Set_Active_state(false);
+			toTalk = nullptr;
+			}
+		}
+	}
 
+	
 
 	return false;
 }

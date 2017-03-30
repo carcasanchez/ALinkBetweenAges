@@ -2,6 +2,10 @@
 #include "j1Input.h"
 #include "j1Render.h"
 #include "j1Gui.h"
+#include "j1Console.h"
+#include "j1App.h"
+
+
 
 DialogManager::DialogManager() : j1Module()
 {
@@ -50,7 +54,7 @@ bool DialogManager::Start()
 		{
 			for (pugi::xml_node text = dialogue.child("text"); text != NULL; text = text.next_sibling("text"))
 			{
-				Line* tmp = new Line(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
+				TextLine* tmp = new TextLine(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
 				dialog[i]->texts.push_back(tmp);
 			}
 		}
@@ -60,7 +64,8 @@ bool DialogManager::Start()
 	screen = App->gui->CreateScreen(screen);
 	text_on_screen = (UI_String*)App->gui->Add_element(STRING, this);
 	text_on_screen->Set_Active_state(false);
-	text_on_screen->Set_Interactive_Box({ 0, 0, 0, 0 });
+	text_on_screen->Set_Interactive_Box({ 0, App->console->console_screen.h + 20, 0, 0 });
+
 	//screen->AddChild(text_on_screen);
 
 	return ret;
@@ -69,7 +74,7 @@ bool DialogManager::Start()
 bool DialogManager::PostUpdate()
 {
 	/*--- CODE TO TEST RESULTS IN-GAME ---*/
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+	/*if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 	{
 		if (id == 1)
 		{
@@ -91,21 +96,12 @@ bool DialogManager::PostUpdate()
 		{
 			stateInput = 0;
 		}
-	}
+	}*/
 	/*--- END ---*/
-
-	text_on_screen->Set_Active_state(true); //Active screen
-
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-	{
-		dialogueStep++;
-	}
-
-	BlitDialog(id, stateInput); //Calls Blit function
 	return true;
 }
 
-bool DialogManager::BlitDialog(uint id, uint state)
+bool DialogManager::BlitDialog(int id, int state)
 {
 	//Find the correct ID
 	for (int i = 0; i < dialog.size(); i++)
@@ -116,7 +112,7 @@ bool DialogManager::BlitDialog(uint id, uint state)
 			{
 				if (dialogueStep >= dialog[i]->texts.size() - 1)
 				{
-					dialogueStep = 0;
+					return false;
 				}
 				if (dialog[i]->texts[dialogueStep + j]->state == state)
 				{
@@ -143,12 +139,12 @@ Dialog::~Dialog()
 	texts.clear();
 }
 
-Line::Line(int NPCstate, std::string text) : state(NPCstate)
+TextLine::TextLine(int NPCstate, std::string text) : state(NPCstate)
 {
 	line = new std::string(text);
 }
 
-Line::~Line()
+TextLine::~TextLine()
 {
 	delete line;
 }
