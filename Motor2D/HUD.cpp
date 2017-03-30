@@ -24,6 +24,7 @@ bool Hud::Awake(pugi::xml_node& conf)
 	LoadPause(pause_folder);
 	LoadHud(hud_folder);
 
+
 	return false;
 }
 
@@ -185,7 +186,7 @@ SDL_Rect Hud::LoadRect(pugi::xml_node node)
 
 void Hud::SetPauseElements()
 {
-	main_menu->Set_Interactive_Box({ 50, -650,0,0 });
+	main_menu->Set_Interactive_Box({ 50, -830,0,0 });
 	item_menu->Set_Interactive_Box({720,0,0,0});
 	resume->Set_Interactive_Box({ 72,86,0,0 });
 	quit->Set_Interactive_Box({ 72,528,0,0 });
@@ -219,15 +220,27 @@ void Hud::GonePause()
 
 void Hud::PauseIn(float dt)
 {
-	if (main_menu->Interactive_box.y <= 50)
-		main_menu->Interactive_box.y += ceil(1000 * dt);
-	else pause_transition = PAUSE_NO_MOVE;
+	if (main_menu->Interactive_box.y <= 55)
+	{
+		main_menu->Interactive_box.y += (1000 * dt);
+		hud_screen->Interactive_box.y += (1000 * dt);
+	}
+	
+	else
+	{
+		main_menu->Set_Interactive_Box({ 50, 50,0,0 });
+		hud_screen->Set_Interactive_Box({ 0,880,0,0 });
+		pause_transition = PAUSE_NO_MOVE;
+	}
 }
 
 void Hud::PauseOut(float dt)
 {
-	if (main_menu->Interactive_box.y >= -650)
+	if (main_menu->Interactive_box.y >= -830)
+	{
 		main_menu->Interactive_box.y -= ceil(1000 * dt);
+		hud_screen->Interactive_box.y -= ceil(1000 * dt);
+	}
 	else
 	{
 		App->game->pause = false;
