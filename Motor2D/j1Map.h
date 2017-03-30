@@ -5,6 +5,8 @@
 #include "SDL\include\SDL.h"
 #include "p2Point.h"
 #include "j1Module.h"
+#include "Quadtree.h"
+
 #define NON_WALKABLE_TILE 50
 
 // ----------------------------------------------------
@@ -73,6 +75,14 @@ struct TileSet
 	int					offset_y;
 };
 
+struct MapCluster
+{
+	MapCluster() {};
+	SDL_Rect rect = { 0, 0, 60, 60 };
+	std::vector<iPoint> tiles;
+};
+
+
 enum MapTypes
 {
 	MAPTYPE_UNKNOWN = 0,
@@ -89,9 +99,11 @@ struct MapData
 	int					tile_height;
 	SDL_Color			background_color;
 	MapTypes			type;
+	vector<MapCluster*> clusters;
 	list<TileSet*>	tilesets;
 	list<MapLayer*>	layers;
 };
+
 
 // ----------------------------------------------------
 class j1Map : public j1Module
