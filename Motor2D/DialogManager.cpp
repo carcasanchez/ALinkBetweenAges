@@ -64,41 +64,11 @@ bool DialogManager::Start()
 	screen = App->gui->CreateScreen(screen);
 	text_on_screen = (UI_String*)App->gui->Add_element(STRING, this);
 	text_on_screen->Set_Active_state(false);
-	text_on_screen->Set_Interactive_Box({ App->console->console_screen.w-600, App->console->console_screen.h+500, 0, 0 });
+	text_on_screen->Set_Interactive_Box({ App->console->console_screen.w-600, App->console->console_screen.h+550, 0, 0 });
 
 	screen->AddChild(text_on_screen);
 
 	return ret;
-}
-
-bool DialogManager::PostUpdate()
-{
-	/*--- CODE TO TEST RESULTS IN-GAME ---*/
-	/*if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
-	{
-		if (id == 1)
-		{
-			id = 2;
-		}
-		else
-		{
-			id = 1;
-		}
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
-	{
-		if (stateInput == 0)
-		{
-			stateInput = 1;
-		}
-		else
-		{
-			stateInput = 0;
-		}
-	}*/
-	/*--- END ---*/
-	return true;
 }
 
 bool DialogManager::BlitDialog(int id, int state)

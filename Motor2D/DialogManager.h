@@ -50,7 +50,6 @@ public:
 	~DialogManager();
 	bool Awake(pugi::xml_node& config);
 	bool Start();
-	bool PostUpdate();
 	bool BlitDialog(int id, int state);
 
 	int dialogueStep = 0; //Allows to order the conversarion correctly
@@ -69,11 +68,6 @@ private:
 	pugi::xml_document dialogueDataFile;
 	pugi::xml_node dialogueNode;
 	/*-- END --*/
-
-	/*---CODE TO TEST IN-GAME RESULTS ---*/
-	uint id = 1;
-	uint stateInput = 0;
-	/*--- END ---*/
 };
 
 #endif
