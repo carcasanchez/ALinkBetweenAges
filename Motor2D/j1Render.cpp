@@ -5,6 +5,7 @@
 #include "j1Render.h"
 #include "j1GameLayer.h"
 #include "Player.h"
+#include "j1Gui.h"
 #include "j1Input.h"
 #include "j1CollisionManager.h"
 
@@ -102,6 +103,8 @@ bool j1Render::PostUpdate()
 
 		layer->second.clear();
 	}
+
+	PrintUI();
 
 	App->collisions->DrawDebug();
 
@@ -473,6 +476,17 @@ void j1Render::CameraFollow(iPoint pos)
 void j1Render::DebugCamera()
 {
 	DrawQuad(renderZone, 0, 255, 255, 80);
+}
+
+bool j1Render::PrintUI()
+{
+	for (std::list<UI_element*>::iterator it = ui_elements.begin(); it != ui_elements.end(); it++)
+	{
+		if ((*it)->active)
+			(*it)->Update_Draw();
+	}
+
+	return true;
 }
 
 Sprite::Sprite() : texture(NULL), position_map({ 0, 0 }), section_texture({ 0, 0, 0, 0 }), tint({ 255, 255, 255, 0 }),

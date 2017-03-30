@@ -2,6 +2,10 @@
 #include "j1Input.h"
 #include "j1Render.h"
 #include "j1Gui.h"
+#include "j1Console.h"
+#include "j1App.h"
+
+
 
 DialogManager::DialogManager() : j1Module()
 {
@@ -50,7 +54,7 @@ bool DialogManager::Start()
 		{
 			for (pugi::xml_node text = dialogue.child("text"); text != NULL; text = text.next_sibling("text"))
 			{
-				Line* tmp = new Line(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
+				TextLine* tmp = new TextLine(dialogue.attribute("state").as_int(), text.attribute("value").as_string());
 				dialog[i]->texts.push_back(tmp);
 			}
 		}
@@ -60,69 +64,31 @@ bool DialogManager::Start()
 	screen = App->gui->CreateScreen(screen);
 	text_on_screen = (UI_String*)App->gui->Add_element(STRING, this);
 	text_on_screen->Set_Active_state(false);
-	text_on_screen->Set_Interactive_Box({ 0, 0, 0, 0 });
-	//screen->AddChild(text_on_screen);
+	text_on_screen->Set_Interactive_Box({ App->console->console_screen.w-600, App->console->console_screen.h+550, 0, 0 });
+
+	screen->AddChild(text_on_screen);
 
 	return ret;
 }
 
-bool DialogManager::PostUpdate()
-{
-	/*--- CODE TO TEST RESULTS IN-GAME ---*/
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
-	{
-		if (id == 1)
-		{
-			id = 2;
-		}
-		else
-		{
-			id = 1;
-		}
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_DOWN)
-	{
-		if (stateInput == 0)
-		{
-			stateInput = 1;
-		}
-		else
-		{
-			stateInput = 0;
-		}
-	}
-	/*--- END ---*/
-
-	text_on_screen->Set_Active_state(true); //Active screen
-
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
-	{
-		dialogueStep++;
-	}
-
-	BlitDialog(id, stateInput); //Calls Blit function
-	return true;
-}
-
-bool DialogManager::BlitDialog(uint id, uint state)
+bool DialogManager::BlitDialog(int id, int state)
 {
 	//Find the correct ID
 	for (int i = 0; i < dialog.size(); i++)
 	{
 		if (dialog[i]->id == id)
 		{
-			for (int j = 0; (j + dialogueStep) < dialog[i]->texts.size(); j++) //Search correct dialog
+			int vectorPos; //Looks the exact vector position deppending of the state
+			for(vectorPos = 0; dialog[i]->texts[vectorPos]->state != state; vectorPos++)
+			{}
+			if ((dialogueStep+vectorPos) >= dialog[i]->texts.size())
 			{
-				if (dialogueStep >= dialog[i]->texts.size() - 1)
-				{
-					dialogueStep = 0;
-				}
-				if (dialog[i]->texts[dialogueStep + j]->state == state)
-				{
-					text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep + j]->line->c_str());
-					return true;
-				}
+				return false;
+			}
+			if (dialog[i]->texts[dialogueStep + vectorPos]->state == state)
+			{
+				text_on_screen->Set_String((char*)dialog[i]->texts[dialogueStep + vectorPos]->line->c_str());
+				return true;
 			}
 		}
 	}
@@ -143,12 +109,12 @@ Dialog::~Dialog()
 	texts.clear();
 }
 
-Line::Line(int NPCstate, std::string text) : state(NPCstate)
+TextLine::TextLine(int NPCstate, std::string text) : state(NPCstate)
 {
 	line = new std::string(text);
 }
 
-Line::~Line()
+TextLine::~TextLine()
 {
 	delete line;
 }

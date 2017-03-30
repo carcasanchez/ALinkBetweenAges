@@ -53,6 +53,7 @@ public:
 	SCROLL_TYPE draggable;
 
 	j1Module* my_module;
+	bool into_render = false;
 
 public:
 	
@@ -92,6 +93,13 @@ public:
 	void Check_state();										//Changes the state of the element
 	void Return_state();									//Returns to state nothing when key up
 	void Drag_element();									//Moves the element
+
+	void GoToRender();
+	void QuitFromRender();
+	void QuitChildsFromRender();
+
+private:
+	void ChildsGoToRender();
 	
 };
 

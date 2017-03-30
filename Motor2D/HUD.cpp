@@ -19,7 +19,7 @@ bool Hud::Awake(pugi::xml_node& conf)
 	hud_folder += hud_attributes.child("ingame").attribute("file").as_string();
 	pause_folder += hud_attributes.child("pause").attribute("file").as_string();
 
-	hud_screen = App->gui->CreateScreen(hud_screen);
+	//hud_screen = App->gui->CreateScreen(hud_screen);
 	
 	LoadPause(pause_folder);
 
@@ -209,6 +209,7 @@ bool Hud::IntoPause()
 void Hud::GonePause()
 {
 	main_menu->Set_Active_state(false);
+	main_menu->QuitFromRender();
 	
 	for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
 		(*it)->Set_Active_state(false);

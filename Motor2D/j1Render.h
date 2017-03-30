@@ -6,6 +6,8 @@
 #include "p2Point.h"
 #include <map>
 
+class UI_element;
+
 enum spriteLayer
 {
 	BACKGROUND = 0,
@@ -94,6 +96,11 @@ public:
 
 	void CameraFollow(iPoint pos);
 	void DebugCamera();
+
+private:
+
+	bool PrintUI();
+
 public:
 
 	SDL_Renderer*	renderer;
@@ -101,8 +108,12 @@ public:
 	SDL_Rect		renderZone;
 	SDL_Rect		viewport;
 	SDL_Color		background;
+
 	std::map<spriteLayer, std::multimap<int, Sprite*>> spriteMap;
+
 	std::multimap<int, SimpleGeoFigure*> debugFigures;
+
+	std::list<UI_element*> ui_elements;
 };
 
 #endif // __j1RENDER_H__

@@ -50,13 +50,15 @@ bool InputManager::Awake(pugi::xml_node& conf)
 bool InputManager::PreUpdate()
 {
 	bool ret = true;
+
+
 	return ret;
 }
 
 bool InputManager::Update(float dt)
 {
 
-
+	CallListeners();
 	
 
 
@@ -68,7 +70,7 @@ bool InputManager::Update(float dt)
 // Called after all Updates
 bool InputManager::PostUpdate()
 {
-	CallListeners();
+	
 	if (!current_action.empty())
 		current_action.clear();
 

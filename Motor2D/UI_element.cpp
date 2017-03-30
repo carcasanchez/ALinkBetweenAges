@@ -3,6 +3,7 @@
 #include "UI_Text_Box.h"
 #include "UI_Button.h"
 #include "j1Gui.h"
+#include "j1Render.h"
 #include "UI_scroll.h"
 #include "j1App.h"
 
@@ -164,6 +165,48 @@ void UI_element::Drag_element()
 
 }
 
+void UI_element::GoToRender()
+{
+	if (into_render == false)
+	{
+		App->render->ui_elements.push_back(this);
+		into_render = true;
+		ChildsGoToRender();
+	}
+	
+}
+
+void UI_element::QuitFromRender()
+{
+	if (into_render)
+	{
+		for (std::list<UI_element*>::iterator it = App->render->ui_elements.begin(); it != App->render->ui_elements.end(); it++)
+		{
+			if ((*it) == this)
+			{
+				App->render->ui_elements.erase(it);
+				into_render = false;
+				break;
+			}
+		}
+	}
+
+	QuitChildsFromRender();
+}
+
+void UI_element::QuitChildsFromRender()
+{
+	for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
+		(*item_child)->QuitFromRender();
+}
+
+void UI_element::ChildsGoToRender()
+{
+	for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
+		(*item_child)->GoToRender();
+
+}
+
 void UI_element::Add_to_Tab()
 {
 	tab_order = App->gui->Get_tabs() + 1;
@@ -173,7 +216,6 @@ void UI_element::Add_to_Tab()
 		App->gui->focus_element = this;
 	
 }
-
 
 UI_element* UI_element::get_higher_child()
 {

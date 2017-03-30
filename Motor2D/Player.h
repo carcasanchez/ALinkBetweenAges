@@ -77,6 +77,9 @@ private:
 	void createSwordCollider();
 	void updateSwordCollider();
 	void resetSwordCollider();
+
+	//Dialogue
+	bool firstText = true; //Enter once in to the function
 };
 
 #endif // !_PLAYER_H_
