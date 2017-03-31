@@ -122,7 +122,7 @@ bool Player::Update(float dt)
 
 void Player::OnDeath()
 {
-	currentPos = App->map->MapToWorld( 107, 232 );
+	currentPos = App->map->MapToWorld( 133, 249 );
 	life = 3;
 	damaged = invulnerable = false;
 	linearMovement = {0, 0};

@@ -46,7 +46,7 @@ bool j1GameLayer::Start()
 	active = true;
 
 	hud->Start();
-	em->CreatePlayer(107, 232);
+	em->CreatePlayer(133, 249);
 
 
 	return true;
