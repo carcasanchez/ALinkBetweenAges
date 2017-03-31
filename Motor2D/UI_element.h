@@ -3,6 +3,7 @@
 
 #include "p2Point.h"
 #include "j1Input.h"
+#include "j1Timer.h"
 #include "SDL\include\SDL.h"
 #include "SDL\include\SDL_rect.h"
 
@@ -30,6 +31,22 @@ enum SCROLL_TYPE
 	FREE_SCROLL,
 	Y_SCROLL,
 	X_SCROLL
+};
+
+enum ANIMATION_TRANSITION
+{
+	NO_AT,
+
+	//animations
+
+	//Separator
+	AT_SEPARATOR,
+
+	//transitions
+	T_FADE,
+	T_MOVE_UP,
+	T_MOVE_DOWN
+
 };
 
 struct j1Module;
@@ -98,9 +115,43 @@ public:
 	void QuitFromRender();
 	void QuitChildsFromRender();
 
+	//animations and transitions
+	void LookAnimationTransition();
+	void SetAnimationTransition(ANIMATION_TRANSITION, int, iPoint);
+
 private:
+
 	void ChildsGoToRender();
+
+	//animations and transitions
+	ANIMATION_TRANSITION	current_animation = NO_AT;
+	ANIMATION_TRANSITION	current_transition = NO_AT;
+
+	bool					doing_animation = false;
+	bool					doing_transition = false;
 	
+	//timers
+	j1Timer					animation_timer;
+	j1Timer					transition_timer;
+	int						anim_duration = 0;
+	int						trans_duration = 0;
+	int						current_trans_time = 0;
+	int						current_anim_time = 0;
+	
+	//bool					must_disable = false;
+
+	//bezier destination
+	iPoint					trans_origin = iPoint(0, 0);
+	iPoint					trans_destiny = iPoint(0, 0);
+
+	//transitions
+	void					Fade();
+	void					MoveUp();
+	void					MoveDown();
+
+
+
+
 };
 
 

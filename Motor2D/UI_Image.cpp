@@ -86,6 +86,8 @@ bool UI_Image::Update()
 {
 	Handle_input();
 
+	LookAnimationTransition();
+
 	if (App->gui->element_selected == this && draggable)
 		Drag_element();
 

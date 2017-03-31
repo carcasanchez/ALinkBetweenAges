@@ -5,9 +5,11 @@
 #include "p2Point.h"
 #include "UI_element.h"
 
+
 #define CURSOR_WIDTH 2
 
 struct SDL_Texture;
+class CBeizier;
 
 enum GUI_INPUT
 {
@@ -57,14 +59,17 @@ public:
 	const SDL_Texture* GetAtlas() const;
 	const SDL_Texture* Get_Other_Textures(uint id) const;
 
-	UI_element* element_selected;
-	UI_element* focus_element;
+	UI_element* element_selected = nullptr;
+	UI_element* focus_element = nullptr;
 
 	int Get_tabs() const;
 	void Actualize_tabs();
 	void Go_Next_Tab();
 	void Look_for(const UI_element* looked_element);
 	float scale_factor = 1;
+
+	//bezier love
+	CBeizier*	bezier_curve = nullptr;
 
 private:
 

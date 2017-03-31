@@ -12,6 +12,7 @@
 #include "UI_Image.h"
 #include "UI_Interactive_String.h"
 #include "UI_String.h"
+#include "Bezier.h"
 #include "UI_Button.h"
 
 j1Gui::j1Gui() : j1Module()
@@ -31,6 +32,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 	scale_factor = scale_factor / App->win->GetScale();
+
+	bezier_curve = new CBeizier();
 
 	return ret;
 }
