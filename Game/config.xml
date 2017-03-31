@@ -57,7 +57,7 @@
       <scene name = "dungeon" file = "kakariko.xml"/>
       <scene name = "masterSword" file = "kakariko.xml"/>
       <scene name = "castleOut" file = "kakariko.xml"/>
-      <scene name = "castleIn" file = "kakariko.xml"/>
+      <scene name = "insideCastle" file = "inside_castle.xml"/>
       <scene name = "boss" file = "kakariko.xml"/>
     </scenes>
   </sceneManager>
