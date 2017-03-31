@@ -36,9 +36,7 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
-	if (pause_transition == PAUSE_DOWN)
-		//PauseIn(dt);
-
+	
 	if (pause_transition == PAUSE_UP)
 		PauseOut(dt);
 
@@ -63,12 +61,13 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			if (App->game->pause)
 			{
 				pause_transition = PAUSE_UP;
+				main_menu->SetAnimationTransition(T_FLY_UP, 1500, { main_menu->Interactive_box.x, -650 });
 			}
 			else
 			{
 				App->game->pause = true;
 				IntoPause();
-				main_menu->SetAnimationTransition(T_MOVE_DOWN, 2000, { main_menu->Interactive_box.x, 145 });
+				main_menu->SetAnimationTransition(T_MOVE_DOWN, 2000, { main_menu->Interactive_box.x, 140 });
 				App->inputM->SetGameContext(IN_MENU);
 				pause_transition = PAUSE_DOWN;
 			}	
@@ -107,6 +106,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		if (resume->active)
 		{
 			pause_transition = PAUSE_UP;
+			main_menu->SetAnimationTransition(T_FLY_UP, 1500, { main_menu->Interactive_box.x, -650 });
 		}
 
 		if (quit->active)
@@ -118,6 +118,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 
 	case DECLINE:
 		pause_transition = PAUSE_UP;
+		main_menu->SetAnimationTransition(T_FLY_UP, 1500, { main_menu->Interactive_box.x, -650 });
 		break;
 
 	}
@@ -187,7 +188,7 @@ SDL_Rect Hud::LoadRect(pugi::xml_node node)
 
 void Hud::SetPauseElements()
 {
-	main_menu->Set_Interactive_Box({ 50, -830,0,0 });
+	main_menu->Set_Interactive_Box({ 50, -650,0,0 });
 	item_menu->Set_Interactive_Box({720,0,0,0});
 	resume->Set_Interactive_Box({ 72,86,0,0 });
 	quit->Set_Interactive_Box({ 72,528,0,0 });
@@ -210,7 +211,6 @@ bool Hud::IntoPause()
 
 void Hud::GonePause()
 {
-	main_menu->Set_Active_state(false);
 	main_menu->QuitFromRender();
 	
 	for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
@@ -219,30 +219,10 @@ void Hud::GonePause()
 	App->inputM->SetGameContext(IN_GAME);
 }
 
-void Hud::PauseIn(float dt)
-{
-	if (main_menu->Interactive_box.y <= 55)
-	{
-		main_menu->Interactive_box.y += (1000 * dt);
-		hud_screen->Interactive_box.y += (1000 * dt);
-	}
-	
-	else
-	{
-		main_menu->Set_Interactive_Box({ 50, 50,0,0 });
-		hud_screen->Set_Interactive_Box({ 0,880,0,0 });
-		pause_transition = PAUSE_NO_MOVE;
-	}
-}
 
 void Hud::PauseOut(float dt)
 {
-	if (main_menu->Interactive_box.y >= -830)
-	{
-		main_menu->Interactive_box.y -= ceil(1000 * dt);
-		hud_screen->Interactive_box.y -= ceil(1000 * dt);
-	}
-	else
+	if (main_menu->GetCurrentTransition() == NO_AT)
 	{
 		App->game->pause = false;
 		GonePause();

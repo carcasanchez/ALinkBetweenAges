@@ -271,13 +271,23 @@ void UI_element::LookAnimationTransition()
 		{
 		case T_FADE:
 			break;
+		case T_FLY_UP:
+			FlyUp();
+			break;
+
 		case T_MOVE_UP:
+			MoveUp();
 			break;
 		case T_MOVE_DOWN:
 			MoveDown();
 			break;
 		}
 	}
+}
+
+ANIMATION_TRANSITION UI_element::GetCurrentTransition() const
+{
+	return current_transition;
 }
 
 void UI_element::SetAnimationTransition(ANIMATION_TRANSITION new_anim_trans, int time, iPoint  trans_destination = { 0,0 })
@@ -299,6 +309,31 @@ void UI_element::SetAnimationTransition(ANIMATION_TRANSITION new_anim_trans, int
 
 void UI_element::Fade()
 {
+}
+
+void UI_element::MoveUp()
+{
+	if (!doing_transition)
+	{
+		transition_timer.Start();
+		current_trans_time = 0;
+		trans_origin = { Interactive_box.x, Interactive_box.y };
+		doing_transition = true;
+	}
+
+	current_trans_time = transition_timer.Read();
+
+	if (current_trans_time <= trans_duration)
+	{
+
+		Interactive_box.y = trans_origin.y + App->gui->bezier_curve->GetActualPoint(trans_origin, trans_destiny, trans_duration, current_trans_time, cbezier_type::CB_EASE_INOUT_BACK);
+
+	}
+	else
+	{
+		current_trans_time = 0;
+		current_transition = NO_AT;
+	}
 }
 
 void UI_element::MoveDown()
@@ -326,4 +361,29 @@ void UI_element::MoveDown()
 		current_transition = NO_AT;
 	}
 
+}
+
+void UI_element::FlyUp()
+{
+	if (!doing_transition)
+	{
+		transition_timer.Start();
+		current_trans_time = 0;
+		trans_origin = { Interactive_box.x, Interactive_box.y };
+		doing_transition = true;
+	}
+
+	current_trans_time = transition_timer.Read();
+
+	if (current_trans_time <= trans_duration)
+	{
+
+		Interactive_box.y = trans_origin.y + App->gui->bezier_curve->GetActualPoint(trans_origin, trans_destiny, trans_duration, current_trans_time, cbezier_type::CB_FLY);
+
+	}
+	else
+	{
+		current_trans_time = 0;
+		current_transition = NO_AT;
+	}
 }

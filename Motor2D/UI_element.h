@@ -44,6 +44,7 @@ enum ANIMATION_TRANSITION
 
 	//transitions
 	T_FADE,
+	T_FLY_UP,
 	T_MOVE_UP,
 	T_MOVE_DOWN
 
@@ -116,8 +117,9 @@ public:
 	void QuitChildsFromRender();
 
 	//animations and transitions
-	void LookAnimationTransition();
-	void SetAnimationTransition(ANIMATION_TRANSITION, int, iPoint);
+	void					LookAnimationTransition();
+	ANIMATION_TRANSITION	GetCurrentTransition() const;
+	void					SetAnimationTransition(ANIMATION_TRANSITION, int, iPoint);
 
 private:
 
@@ -148,6 +150,7 @@ private:
 	void					Fade();
 	void					MoveUp();
 	void					MoveDown();
+	void					FlyUp();
 
 
 
