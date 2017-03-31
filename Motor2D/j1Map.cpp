@@ -65,23 +65,13 @@ void j1Map::Draw()
 	j1PerfTimer drawTimer;
 	drawTimer.Start();
 
-	//Detect inside-camera clusters
-	vector <int> toDrawClust;
+	SDL_Rect cameraSection;
 
-	for (int i = 0; i < clusters.size(); i++)
-	{
-		if (App->render->InsideCameraZone(clusters[i].rect))
-		{
-			toDrawClust.push_back(i);
-		}
-
-	}
-
-	LOG("Search clusters time: %f", drawTimer.ReadMs());
-	drawTimer.Start();
-
-
-
+	cameraSection.x = App->render->renderZone.x/data->tile_width;
+	cameraSection.y = App->render->renderZone.y /data->tile_height;
+	cameraSection.w = (App->render->renderZone.w / data->tile_width) +1;
+	cameraSection.h = (App->render->renderZone.h / data->tile_width) +1 ;
+	
 	for(list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
 	{
 		MapLayer* layer = (*item);
@@ -91,37 +81,25 @@ void j1Map::Draw()
 
 		if (layer->properties.Get("Nodraw") != 0 && layer->properties.Get("Enemy") != 0 && debug_enemy_collisions == false)
 			continue;
-
-		
-		//Draw only tiles inside them
-		
-		for(int i =0; i<toDrawClust.size(); i++)
-		{ 
-			int currentClust = toDrawClust[i];
-
-
-			for (int j = 0; j < clusters[currentClust].tiles.size();j++)
+					
+		for (int x = cameraSection.x; x < cameraSection.x + cameraSection.w; x++)
+		{
+			for (int y = cameraSection.y; y < cameraSection.y + cameraSection.h; y++)
 			{
-				iPoint tilePos = clusters[currentClust].tiles[j];
 
-				int tile_id = layer->Get(tilePos.x, tilePos.y);
+				int tile_id = layer->Get(x, y);
 				if (tile_id > 0)
 				{
-					iPoint pos = MapToWorld(tilePos.x, tilePos.y);
-
-					if (App->render->InsideCameraZone({ pos.x, pos.y, data->tile_width, data->tile_height }))
-					{
-						TileSet* tileset = GetTilesetFromTileId(tile_id);
-						SDL_Rect r = tileset->GetTileRect(tile_id);
-						App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-					}
-
+					iPoint pos = MapToWorld(x, y);
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 				}
 			}
-					
-				
-				
+
 		}
+				
+		
 
 	}
 
@@ -363,9 +341,8 @@ bool j1Map::Load(const char* file_name)
 			//LOG("tile width: %d tile height: %d", s->tile_width, s->tile_height);
 			//LOG("spacing: %d margin: %d", s->spacing, s->margin);
 		}
-
-
-		//TODO: Optimize this
+		
+		/*//TODO: Optimize this
 		//Create tile clusters
 		int clusterSize = 10;
 		int x=0, y = 0;
@@ -407,7 +384,7 @@ bool j1Map::Load(const char* file_name)
 
 			}
 		}
-
+		*/
 	}
 
 	map_loaded = ret;
