@@ -277,8 +277,8 @@ bool j1Input::GetWindowEvent(j1EventWindow ev)
 
 void j1Input::GetMousePosition(int& x, int& y)
 {
-	x = (mouse_x*App->win->GetScale() - App->render->camera.x);
-	y = (mouse_y*App->win->GetScale() - App->render->camera.y);
+	x = mouse_x + App->render->renderZone.x;
+	y = mouse_y + App->render->renderZone.y;
 //	LOG("MOUSE POS: %i, %i", x, y);
 }
 

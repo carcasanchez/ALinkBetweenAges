@@ -162,21 +162,48 @@ bool Entity::LoadAnimations(std::string file)
 bool Entity::Move(int x, int y)
 {
 	bool ret = true;
-	currentPos.x += x;
-	UpdateCollider();
-	if (col->CheckMapCollision() != CZ_NONE)
+	
+
+	if (type == LINK)
 	{
-		currentPos.x -= x;
-		ret = false;
+		currentPos.x += x;
+		UpdateCollider();
+
+		if (col->CheckPlayerMapCollision() != CZ_NONE)
+		{
+			currentPos.x -= x;
+			ret = false;
+		}
+
+		currentPos.y += y;
+		UpdateCollider();
+		if (col->CheckPlayerMapCollision() != CZ_NONE)
+		{
+			currentPos.y -= y;
+			ret = false;
+		}
 	}
 
-	currentPos.y += y;
-	UpdateCollider();
-	if (col->CheckMapCollision() != CZ_NONE)
+	if (type == ENEMY)
 	{
-		currentPos.y -= y;
-		ret = false;
+		currentPos.x += x;
+		UpdateCollider();
+
+		if (col->CheckEnemyMapCollision() != CZ_NONE)
+		{
+			currentPos.x -= x;
+			ret = false;
+		}
+
+		currentPos.y += y;
+		UpdateCollider();
+		if (col->CheckEnemyMapCollision() != CZ_NONE)
+		{
+			currentPos.y -= y;
+			ret = false;
+		}
 	}
+	
 
 	return ret;
 }
@@ -191,8 +218,8 @@ void Entity::UpdateCollider()
 //Use pathfinding to go to a given tile
 bool Entity::GoTo(iPoint dest, int speed, float dt)
 {
-	//Create path if player changes tile
-	/*if (dest != currentDest)
+	/*//Create path if player changes tile
+	if (dest != currentDest)
 	{
 		currentDest = dest;
 		iPoint origin = App->map->WorldToMap(currentPos.x, currentPos.y);
@@ -241,5 +268,38 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 		return true;
 	}
 	*/
-	return false;
+
+	dest = App->map->MapToWorld(dest.x, dest.y);
+
+	iPoint movement;
+	movement.SetToZero();
+
+	if (dest.x > currentPos.x)
+	{
+		movement.x = 1;
+		currentDir = D_RIGHT;
+	}
+	else if (dest.x < currentPos.x)
+	{
+		movement.x = -1;
+		currentDir = D_LEFT;
+	}
+
+	if (dest.y > currentPos.y)
+	{
+		movement.y = 1;
+		currentDir = D_DOWN;
+	}
+
+	else if (dest.y < currentPos.y)
+	{
+		movement.y = -1;
+		currentDir = D_UP;
+	}
+
+	if (movement.IsZero())
+		return false;
+
+	Move(SDL_ceil(speed*dt)*movement.x, SDL_ceil(speed*dt)*movement.y);	
+	return true;
 }

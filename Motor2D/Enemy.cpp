@@ -67,11 +67,7 @@ bool Enemy::Patroling(float dt)
 		return true;
 	}
 	
-	iPoint dest = patrolPoints[currentPatrolPoint];
-
-	
-
-	if (GoTo(dest, speed, dt) == false)
+	if (GoTo(patrolPoints[currentPatrolPoint], speed, dt) == false)
 	{
 		currentPatrolPoint++;
 		if (currentPatrolPoint == patrolPoints.size())
@@ -95,7 +91,6 @@ bool Enemy::Chasing(float dt)
 	}
 	else if (playerDistance <= fightRange)
 	{
-		currentDest = {0, 0};
 		enemyState = KEEP_DISTANCE;
 		path.clear();
 		attackTimer.Start();
@@ -103,8 +98,9 @@ bool Enemy::Chasing(float dt)
 		flankingDir = rand() % 2;
 	}
 
-	iPoint dest = App->map->WorldToMap((*App->game->playerId)->currentPos.x, (*App->game->playerId)->currentPos.y);
-	GoTo(dest, chaseSpeed, dt);
+	iPoint playerTile = App->map->WorldToMap((*App->game->playerId)->currentPos.x, (*App->game->playerId)->currentPos.y);
+
+	GoTo(playerTile, chaseSpeed, dt);
 
 	return true;
 }

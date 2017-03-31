@@ -74,10 +74,12 @@ bool j1GameLayer::Update(float dt)
 
 	App->render->CameraFollow((*playerId)->currentPos);
 
-	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 	{
-		iPoint mousePos = App->map->WorldToMap((*playerId)->currentPos.x, (*playerId)->currentPos.y);
-		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x-5, mousePos.y-5, vector<iPoint>());
+		iPoint mousePos;
+		App->input->GetMousePosition(mousePos.x, mousePos.y);
+		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
+		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
 	}
 		
 	
@@ -170,10 +172,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 		if (c2->type == COLLIDER_ENEMY)
 		{
-		/*	switch (((Enemy*)(c2->parent))->enemyState)
+			switch (((Enemy*)(c2->parent))->enemyState)
 			{
 			case KEEP_DISTANCE:
-				break;
 			case CHASING:
 				iPoint Movement;
 				if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 10)
@@ -187,9 +188,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 					Movement.y = 1;
 				else Movement.y = -1;
 
-				c2->parent->Move(SDL_ceil(c2->parent->speed*dt * 5)*Movement.x, SDL_ceil(c2->parent->speed*dt * 5)*Movement.y);
+				c2->parent->Move(SDL_ceil(c2->parent->speed*dt)*Movement.x, SDL_ceil(c2->parent->speed*dt)*Movement.y);
 				break;
-		}*/
+		}
 			return true;
 	}
 	}
