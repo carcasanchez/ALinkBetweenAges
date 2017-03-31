@@ -192,7 +192,7 @@ void Entity::UpdateCollider()
 bool Entity::GoTo(iPoint dest, int speed, float dt)
 {
 	//Create path if player changes tile
-	if (dest != currentDest)
+	/*if (dest != currentDest)
 	{
 		currentDest = dest;
 		iPoint origin = App->map->WorldToMap(currentPos.x, currentPos.y);
@@ -240,6 +240,6 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 
 		return true;
 	}
-
+	*/
 	return false;
 }

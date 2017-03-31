@@ -78,7 +78,7 @@ struct TileSet
 struct MapCluster
 {
 	MapCluster() {};
-	SDL_Rect rect = { 0, 0, 60, 60 };
+	SDL_Rect rect;
 	std::vector<iPoint> tiles;
 };
 
@@ -99,7 +99,6 @@ struct MapData
 	int					tile_height;
 	SDL_Color			background_color;
 	MapTypes			type;
-	vector<MapCluster*> clusters;
 	list<TileSet*>	tilesets;
 	list<MapLayer*>	layers;
 };
@@ -169,6 +168,8 @@ private:
 	pugi::xml_document*	map_file;
 	pugi::xml_document	small_map_file;
 	pugi::xml_document	normal_map_file;
+
+	std::vector<MapCluster> clusters;
 
 	string				folder;
 	bool				map_loaded;

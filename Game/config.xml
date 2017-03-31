@@ -25,7 +25,7 @@
   </gui>
     
   <window> 
-    <resolution width="552" height="448" scale="2"/>
+    <resolution width="400" height="300" scale="2"/>
     <margin horizontal="1000" vertical="900"/>
     <fullscreen value="false"/>
     <borderless value="false"/>

@@ -279,7 +279,7 @@ void j1Input::GetMousePosition(int& x, int& y)
 {
 	x = (mouse_x*App->win->GetScale() - App->render->camera.x);
 	y = (mouse_y*App->win->GetScale() - App->render->camera.y);
-	LOG("MOUSE POS: %i, %i", x, y);
+//	LOG("MOUSE POS: %i, %i", x, y);
 }
 
 void j1Input::GetMouseMotion(int& x, int& y)

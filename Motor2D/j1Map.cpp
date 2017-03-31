@@ -62,6 +62,26 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
+	j1PerfTimer drawTimer;
+	drawTimer.Start();
+
+	//Detect inside-camera clusters
+	vector <int> toDrawClust;
+
+	for (int i = 0; i < clusters.size(); i++)
+	{
+		if (App->render->InsideCameraZone(clusters[i].rect))
+		{
+			toDrawClust.push_back(i);
+		}
+
+	}
+
+	LOG("Search clusters time: %f", drawTimer.ReadMs());
+	drawTimer.Start();
+
+
+
 	for(list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
 	{
 		MapLayer* layer = (*item);
@@ -73,15 +93,21 @@ void j1Map::Draw()
 			continue;
 
 		
+		//Draw only tiles inside them
+		
+		for(int i =0; i<toDrawClust.size(); i++)
+		{ 
+			int currentClust = toDrawClust[i];
 
-		for (int y = 0; y < data->height; ++y)
-		{
-			for (int x = 0; x < data->width; ++x)
+
+			for (int j = 0; j < clusters[currentClust].tiles.size();j++)
 			{
-				int tile_id = layer->Get(x, y);
+				iPoint tilePos = clusters[currentClust].tiles[j];
+
+				int tile_id = layer->Get(tilePos.x, tilePos.y);
 				if (tile_id > 0)
 				{
-					iPoint pos = MapToWorld(x, y);
+					iPoint pos = MapToWorld(tilePos.x, tilePos.y);
 
 					if (App->render->InsideCameraZone({ pos.x, pos.y, data->tile_width, data->tile_height }))
 					{
@@ -92,11 +118,14 @@ void j1Map::Draw()
 
 				}
 			}
+					
+				
+				
 		}
-	
-
 
 	}
+
+	LOG("Draw map time: %f", drawTimer.ReadMs());
 }
 
 int Properties::Get(const char* value, int default_value) const
@@ -336,13 +365,48 @@ bool j1Map::Load(const char* file_name)
 		}
 
 
-		//Fill tile clusters
-		for (int x = 0; x < data->width; x++)
+		//TODO: Optimize this
+		//Create tile clusters
+		int clusterSize = 10;
+		int x=0, y = 0;
+		while (x < data->width)
 		{
+			while (y < data->height)
+			{
+				MapCluster newCluster;
+				newCluster.rect.x = x* data->tile_width;
+				newCluster.rect.y = y* data->tile_height;
+				newCluster.rect.h = newCluster.rect.w = clusterSize * data->tile_height;
+				clusters.push_back(newCluster);
+				y += clusterSize;
+			}
 
+			y = 0;
+			x+= clusterSize;
 		}
 
-		
+
+		//Fill tile clusters
+		for (x = 0; x < data->width; x++)
+		{
+			for (y = 0; y < data->height; y++)
+			{
+				iPoint tileInWorld = MapToWorld(x, y);
+				SDL_Point point;
+				point.x = tileInWorld.x;
+				point.y = tileInWorld.y;
+
+				for (int i = 0; i < clusters.size(); i++)
+				{
+					if (SDL_PointInRect(&point, &clusters[i].rect))
+					{
+						clusters[i].tiles.push_back(iPoint(x, y));
+					}
+				}
+
+
+			}
+		}
 
 	}
 
@@ -673,11 +737,6 @@ void j1Map::UnLoadData()
 
 	data->layers.clear();
 
-
-	for (std::vector<MapCluster*>::iterator item = data->clusters.begin(); item != data->clusters.cend(); item++)
-		RELEASE(*item);
-	
-	data->clusters.clear();
 
 	// Clean up the pugui tree
 	map_file->reset();
