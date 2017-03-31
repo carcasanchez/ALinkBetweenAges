@@ -37,7 +37,7 @@ bool Hud::Start()
 bool Hud::Update(float dt)
 {
 	if (pause_transition == PAUSE_DOWN)
-		PauseIn(dt);
+		//PauseIn(dt);
 
 	if (pause_transition == PAUSE_UP)
 		PauseOut(dt);
@@ -68,6 +68,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			{
 				App->game->pause = true;
 				IntoPause();
+				main_menu->SetAnimationTransition(T_MOVE_DOWN, 2000, { main_menu->Interactive_box.x, 145 });
 				App->inputM->SetGameContext(IN_MENU);
 				pause_transition = PAUSE_DOWN;
 			}	
@@ -194,7 +195,7 @@ void Hud::SetPauseElements()
 	
 	quit->Set_Active_state(false);
 
-	main_menu->Set_Active_state(false);
+	main_menu->Set_Active_state(true);
 }
 
 bool Hud::IntoPause()
