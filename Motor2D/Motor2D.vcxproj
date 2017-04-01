@@ -85,6 +85,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GreenSoldier.cpp" />
+    <ClCompile Include="UI_Heart.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="j1CollisionManager.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_element.h" />
+    <ClInclude Include="UI_Heart.h" />
     <ClInclude Include="UI_Image.h" />
     <ClInclude Include="UI_scroll.h" />
     <ClInclude Include="UI_String.h" />

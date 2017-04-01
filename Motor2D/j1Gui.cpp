@@ -12,6 +12,7 @@
 #include "UI_Image.h"
 #include "UI_Interactive_String.h"
 #include "UI_String.h"
+#include "UI_Heart.h"
 #include "Bezier.h"
 #include "UI_Button.h"
 
@@ -139,6 +140,9 @@ UI_element* j1Gui::Add_element(UI_TYPE TYPE, j1Module* element_module)
 		break;
 	case SCROLL:
 		ret = new UI_Scroll(TYPE, element_module);
+		break;
+	case HEART:
+		ret = new UI_Heart(TYPE, element_module);
 		break;
 	
 	}
