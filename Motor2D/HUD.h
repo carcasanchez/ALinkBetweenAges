@@ -2,6 +2,8 @@
 #define _HUD_H_
 
 #include "j1Module.h"
+#include "Player.h"
+#include "UI_Heart.h"
 #include "UI_Image.h"
 #include "InputManager.h"
 
@@ -35,11 +37,13 @@ public:
 	UI_Image*		Bombs;
 	UI_Image*		Arrows;
 
-	//life images
-	UI_Image*		life;	//Letters up hearts
-	UI_Image*		empty_heart;
-	UI_Image*		medium_heart;
-	UI_Image*		full_heart;
+	//life hud
+	UI_Image*			life;	//Letters up hearts
+	UI_Image*			empty_heart;
+	UI_Image*			medium_heart;
+	UI_Image*			full_heart;
+	vector<UI_Heart*>	hearts;
+	void				AddHearts();
 
 	//items images
 	UI_Image*		items_frame;
@@ -74,7 +78,6 @@ private:
 	void		SetPauseElements();
 	bool		IntoPause();
 	void		GonePause();
-	void		PauseIn(float);
 	void		PauseOut(float);
 
 	//In game HUD methods

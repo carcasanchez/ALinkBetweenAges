@@ -31,6 +31,7 @@ bool Hud::Awake(pugi::xml_node& conf)
 bool Hud::Start()
 {
 	App->inputM->AddListener(this);
+
 	return true;
 }
 
@@ -64,12 +65,8 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 				main_menu->SetAnimationTransition(T_FLY_UP, 1500, { main_menu->Interactive_box.x, -650 });
 			}
 			else
-			{
-				App->game->pause = true;
+			{	
 				IntoPause();
-				main_menu->SetAnimationTransition(T_MOVE_DOWN, 2000, { main_menu->Interactive_box.x, 140 });
-				App->inputM->SetGameContext(IN_MENU);
-				pause_transition = PAUSE_DOWN;
 			}	
 		}
 		break;
@@ -201,6 +198,10 @@ void Hud::SetPauseElements()
 
 bool Hud::IntoPause()
 {
+	App->game->pause = true;
+	main_menu->SetAnimationTransition(T_MOVE_DOWN, 2000, { main_menu->Interactive_box.x, 140 });
+	App->inputM->SetGameContext(IN_MENU);
+
 	main_menu->Set_Active_state(true);
 	resume->Set_Active_state(true);
 
@@ -218,7 +219,6 @@ void Hud::GonePause()
 
 	App->inputM->SetGameContext(IN_GAME);
 }
-
 
 void Hud::PauseOut(float dt)
 {
@@ -254,17 +254,27 @@ bool Hud::LoadHud(string file)
 		items_frame = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		life = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		stamina_bar = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		empty_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		medium_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		full_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 
 		pugi::xml_node hud_node = hud_file.child("images");
 		
+		//little items
 		Rupees->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("rupees")));
 		Bombs->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("bombs")));
 		Arrows->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("arrows")));
 
+		//items
 		items_frame->Set_Image_Texture(LoadRect(hud_node.child("items").child("frame")));
 
+		//life
 		life->Set_Image_Texture(LoadRect(hud_node.child("life")));
+		empty_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("empty")));
+		medium_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("mid")));
+		full_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("full")));
 
+		//stamina
 		stamina_bar->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("bar")));
 	
 		SetHudElements();
@@ -276,6 +286,9 @@ bool Hud::LoadHud(string file)
 		hud_screen->AddChild(items_frame);
 		hud_screen->AddChild(life);
 		hud_screen->AddChild(stamina_bar);
+		hud_screen->AddChild(empty_heart);
+		hud_screen->AddChild(medium_heart);
+		hud_screen->AddChild(full_heart);
 
 	}
 
@@ -293,8 +306,11 @@ void Hud::SetHudElements()
 	items_frame->Set_Interactive_Box({ 50, 20,0,0 });
 
 	life->Set_Interactive_Box({ 700, 20,0,0 });
+	empty_heart->Set_Interactive_Box({ 100,100,0,0 });
+	medium_heart->Set_Interactive_Box({ 100,200,0,0 });
+	full_heart->Set_Interactive_Box({ 100,300,0,0 });
 
-	stamina_bar->Set_Interactive_Box({ 700, 50,0,0 });
+	stamina_bar->Set_Interactive_Box({ 700, 150,0,0 });
 
 
 
