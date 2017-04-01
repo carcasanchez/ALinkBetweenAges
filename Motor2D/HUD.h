@@ -46,6 +46,8 @@ public:
 	vector<UI_Heart*>	hearts;
 	int					space_between_hearts = 4;
 	void				AddHearts();
+	void				RestoreHearts();
+	void				UpdateHearts();
 
 	//items images
 	UI_Image*		items_frame = nullptr;

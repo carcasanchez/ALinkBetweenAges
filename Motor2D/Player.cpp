@@ -8,6 +8,7 @@
 #include "j1Pathfinding.h"
 #include "j1CollisionManager.h"
 #include "p2Log.h"
+#include "HUD.h"
 #include "Animation.h"
 #include "InputManager.h"
 #include "j1PerfTimer.h"
@@ -123,6 +124,7 @@ void Player::OnDeath()
 {
 	currentPos = App->map->MapToWorld( 133, 249 );
 	life = 3;
+	App->game->hud->RestoreHearts();
 	damaged = invulnerable = false;
 	linearMovement = {0, 0};
 	sprite->tint = { 255, 255, 255, 255 };

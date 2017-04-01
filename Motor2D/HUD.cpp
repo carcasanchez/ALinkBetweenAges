@@ -315,7 +315,7 @@ void Hud::SetHudElements()
 
 void Hud::SetHearts()
 {
-	for (int i = 0; i < (*App->game->playerId)->life; i++)
+	for (int i = 0; i <= (*App->game->playerId)->life; i++)
 	{
 		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
 
@@ -338,4 +338,32 @@ void Hud::AddHearts()
 
 	hud_screen->AddChild(new_heart);
 	hearts.push_back(new_heart);
+}
+
+void Hud::RestoreHearts()
+{
+	for (std::vector<UI_Heart*>::iterator it = hearts.begin(); it != hearts.end(); it++)
+	{
+		(*it)->heart_img = full_heart;
+		(*it)->h_state = FULL;
+	}
+		
+}
+
+void Hud::UpdateHearts()
+{
+	int num_hearts = hearts.size();
+	int empty_hearts = num_hearts - ((*App->game->playerId)->life + 1);
+
+	std::vector<UI_Heart*>::reverse_iterator it = hearts.rbegin();
+
+	for (; empty_hearts > 0 && it != hearts.rend(); it++)
+	{
+		if ((*it)->h_state != EMPTY)
+		{
+			(*it)->heart_img = empty_heart;
+			(*it)->h_state = EMPTY;
+		}	
+		empty_hearts--;	
+	}
 }

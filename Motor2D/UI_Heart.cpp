@@ -5,7 +5,7 @@
 #include "UI_Image.h"
 #include "j1Render.h"
 
-UI_Heart::UI_Heart(UI_TYPE type, j1Module* callback) : UI_element(type, callback) {}
+UI_Heart::UI_Heart(UI_TYPE type, j1Module* callback) : UI_element(type, callback), h_state(FULL){}
 
 bool UI_Heart::Update_Draw()
 {
