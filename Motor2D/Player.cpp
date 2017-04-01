@@ -479,18 +479,23 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-
-			if (actionState != ATTACKING && playerState != EVENT)
+			if (toTalk != nullptr)
+				NextDialog();
+			
+			else
 			{
-				if (stamina - attackTax >= 0)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
-					currentDir = DIRECTION::D_UP;
-					createSwordCollider();
-					stamina -= attackTax;
-					actionState = ATTACKING;
-					LOG("LINK is ATTACKING");
+					if (stamina - attackTax >= 0)
+					{
+						currentDir = DIRECTION::D_UP;
+						createSwordCollider();
+						stamina -= attackTax;
+						actionState = ATTACKING;
+						LOG("LINK is ATTACKING");
+					}
+					break;
 				}
-				break;
 			}
 		}
 		break;
@@ -502,17 +507,22 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (actionState != ATTACKING && playerState != EVENT)
+			if (toTalk != nullptr)
+				NextDialog();
+			else
 			{
-				if (stamina - attackTax >= 0)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
-					currentDir = DIRECTION::D_DOWN;
-					createSwordCollider();
-					stamina -= attackTax;
-					actionState = ATTACKING;
-					LOG("LINK is ATTACKING");
+					if (stamina - attackTax >= 0)
+					{
+						currentDir = DIRECTION::D_DOWN;
+						createSwordCollider();
+						stamina -= attackTax;
+						actionState = ATTACKING;
+						LOG("LINK is ATTACKING");
+					}
+					break;
 				}
-				break;
 			}
 		}
 		break;
@@ -524,17 +534,22 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (actionState != ATTACKING && playerState != EVENT)
+			if (toTalk != nullptr)
+				NextDialog();
+			else
 			{
-				if (stamina - attackTax >= 0)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
-					currentDir = DIRECTION::D_LEFT;
-					createSwordCollider();
-					stamina -= attackTax;
-					actionState = ATTACKING;
-					LOG("LINK is ATTACKING");
+					if (stamina - attackTax >= 0)
+					{
+						currentDir = DIRECTION::D_LEFT;
+						createSwordCollider();
+						stamina -= attackTax;
+						actionState = ATTACKING;
+						LOG("LINK is ATTACKING");
+					}
+					break;
 				}
-				break;
 			}
 		}
 		break;
@@ -546,17 +561,22 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (actionState != ATTACKING && playerState != EVENT)
+			if (toTalk != nullptr)
+				NextDialog();
+			else
 			{
-				if (stamina - attackTax >= 0)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
-					currentDir = DIRECTION::D_RIGHT;
-					createSwordCollider();
-					stamina -= attackTax;
-					actionState = ATTACKING;
-					LOG("LINK is ATTACKING");
+					if (stamina - attackTax >= 0)
+					{
+						currentDir = DIRECTION::D_RIGHT;
+						createSwordCollider();
+						stamina -= attackTax;
+						actionState = ATTACKING;
+						LOG("LINK is ATTACKING");
+					}
+					break;
 				}
-				break;
 			}
 		}
 		break;
@@ -628,5 +648,26 @@ void Player::resetSwordCollider()
 	{
 		swordCollider->to_delete = true;
 		swordCollider = nullptr;
+	}
+}
+
+void Player::NextDialog()
+{
+	if (toTalk != nullptr)
+	{
+		App->dialog->dialogueStep++;
+		if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
+		{
+			playerState = ACTIVE;
+			App->dialog->text_on_screen->Set_Active_state(false);
+			if (toTalk->dialogState == 0)
+			{
+				toTalk->dialogState++;
+			}
+			App->dialog->dialogueStep = 0;
+			int test = toTalk->dialogState;
+			firstText = true;
+			toTalk = nullptr;
+		}
 	}
 }

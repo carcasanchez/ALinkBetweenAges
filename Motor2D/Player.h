@@ -79,6 +79,7 @@ private:
 	void resetSwordCollider();
 
 	//Dialogue
+	void NextDialog();
 	bool firstText = true; //Enter once in to the function
 };
 
