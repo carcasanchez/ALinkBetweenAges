@@ -450,7 +450,10 @@ bool Player::Talking(float dt)
 		App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState);
 		firstText = false;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
 		if (toTalk != nullptr)
 		{
