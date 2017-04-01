@@ -30,7 +30,7 @@ public:
 	virtual bool Update(float dt);
 	virtual void OnDeath();
 
-	bool LookToPlayer();
+
 
 
 

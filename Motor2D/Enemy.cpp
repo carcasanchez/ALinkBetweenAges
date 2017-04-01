@@ -24,31 +24,7 @@ void Enemy::OnDeath()
 
 
 
-//Makes enemy look to player. Returns true if the direction changes
-bool Enemy::LookToPlayer()
-{
-	iPoint playerPos = (*App->game->playerId)->currentPos;
 
-	DIRECTION prevDir = currentDir;
-
-	if (abs(playerPos.x - currentPos.x) < abs(playerPos.y - currentPos.y))
-	{
-		if (playerPos.y > currentPos.y)
-			currentDir = D_DOWN;
-		else currentDir = D_UP;		
-	}
-	else
-	{
-		if (playerPos.x < currentPos.x)
-			currentDir = D_LEFT;
-		else currentDir = D_RIGHT;
-	}
-
-	if (prevDir == currentDir)
-		return false;
-	else return true;
-	
-}
 
 
 //Move between different points

@@ -9,6 +9,7 @@
 #include "j1Textures.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
+#include "j1GameLayer.h"
 
 Entity::Entity() :
 	sprite(nullptr),
@@ -302,4 +303,31 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 
 	Move(SDL_ceil(speed*dt)*movement.x, SDL_ceil(speed*dt)*movement.y);	
 	return true;
+}
+
+
+//Makes entity look to player. Returns true if the direction changes
+bool Entity::LookToPlayer()
+{
+	iPoint playerPos = (*App->game->playerId)->currentPos;
+
+	DIRECTION prevDir = currentDir;
+
+	if (abs(playerPos.x - currentPos.x) < abs(playerPos.y - currentPos.y))
+	{
+		if (playerPos.y > currentPos.y)
+			currentDir = D_DOWN;
+		else currentDir = D_UP;
+	}
+	else
+	{
+		if (playerPos.x < currentPos.x)
+			currentDir = D_LEFT;
+		else currentDir = D_RIGHT;
+	}
+
+	if (prevDir == currentDir)
+		return false;
+	else return true;
+
 }

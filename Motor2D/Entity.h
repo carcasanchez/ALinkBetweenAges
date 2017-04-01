@@ -60,6 +60,7 @@ public:
 	virtual void UpdateCollider();
 
 	virtual bool GoTo(iPoint dest, int speed, float dt);
+	virtual bool LookToPlayer();
 
 public:
 

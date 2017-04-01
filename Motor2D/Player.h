@@ -43,6 +43,7 @@ public:
 
 
 	bool invulnerable;
+	bool dodging = false;
 	Npc* toTalk = nullptr;
 
 	PLAYER_STATE playerState = ACTIVE;
@@ -60,7 +61,7 @@ private:
 
 	bool Talking(float dt);
 
-	bool dodging = false;
+
 	//For Input callback
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 

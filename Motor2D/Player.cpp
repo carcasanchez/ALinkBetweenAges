@@ -332,20 +332,31 @@ bool Player::Attacking(float dt)
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || currentDir == D_DOWN)
+	else if (toTalk != nullptr)
+	{
+		resetSwordCollider();
+		currentAnim->Reset();
+		LOG("LINK is in IDLE");
+		actionState = IDLE;
+		playerState = EVENT;
+		toTalk->LookToPlayer();
+		return true;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		Move(0, SDL_ceil(attackSpeed * dt));
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || currentDir == D_UP)
+	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		Move(0, -SDL_ceil(attackSpeed * dt));
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || currentDir == D_LEFT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		Move(-SDL_ceil(attackSpeed * dt), 0);
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || currentDir == D_RIGHT)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		Move(SDL_ceil(attackSpeed * dt), 0);
 	}
@@ -360,22 +371,12 @@ bool Player::Attacking(float dt)
 		actionState = IDLE;
 	}
 
-	else if (toTalk != nullptr)
-	{
-		resetSwordCollider();
-		currentAnim->Reset();
-		LOG("LINK is in IDLE");
-		actionState = IDLE;
-		playerState = EVENT;
-	}
-
 
 	return true;
 }
 
 bool Player::Dodging(float dt)
 {
- 	invulnerable = true;
 
 	Move(SDL_ceil(dodgeSpeed * dodgeDir.x * dt), SDL_ceil(dodgeSpeed*dodgeDir.y* dt));
 
@@ -407,7 +408,6 @@ bool Player::Dodging(float dt)
 		}
 		else
 		{
-			invulnerable = false;
 			actionState = IDLE;
 		}
 	}

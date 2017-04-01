@@ -34,6 +34,9 @@ bool j1PathFinding::CleanUp()
 // Sets up the walkability map
 void j1PathFinding::SetPlayerMap(uint width, uint height, uchar* data)
 {
+	if (data == nullptr)
+		return;
+
 	this->width = width;
 	this->height = height;
 
@@ -45,6 +48,10 @@ void j1PathFinding::SetPlayerMap(uint width, uint height, uchar* data)
 
 void j1PathFinding::SetEnemyMap(uint width, uint height, uchar * data)
 {
+
+	if (data == nullptr)
+		return;
+
 	this->width = width;
 	this->height = height;
 
