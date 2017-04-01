@@ -81,7 +81,6 @@ bool Player::Update(float dt)
 	{
 		invulnerable = false;
 		sprite->tint = { 255, 255, 255, 255 };
-		LOG("DAMAGED FALSE - TIMER STOP");
 	}
 
 	ManageStamina(dt);	
@@ -148,7 +147,6 @@ void Player::ManageStamina(float dt)
 	if (stamina < maxStamina)
 	{
 		stamina += staminaRec*dt;
-		LOG("STAMINA: %f", stamina);
 	}
 	else stamina = maxStamina;
 }
@@ -169,7 +167,6 @@ bool Player::Idle()
 		App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		actionState = WALKING;
-		LOG("Link is WALKING");
 		return true;
 	}
 
@@ -200,7 +197,6 @@ bool Player::Idle()
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
-			LOG("LINK is ATTACKING");
 		}
 	}
 
@@ -289,14 +285,12 @@ bool Player::Walking(float dt)
 	if (moving == false)
 	{
 		actionState = IDLE;
-		LOG("Link is in IDLE");
 		return true;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >=0))
 	{	
 		stamina -= dodgeTax;
-		LOG("LINK is DODGING");
 		actionState = DODGING;
 		Change_direction();
 		dodging = true;
@@ -314,7 +308,6 @@ bool Player::Walking(float dt)
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
-			LOG("LINK is ATTACKING");
 	}
 
 	Change_direction();
@@ -386,7 +379,6 @@ bool Player::Attacking(float dt)
 	{
 		resetSwordCollider();
 		currentAnim->Reset();
-		LOG("LINK is in IDLE");
 		actionState = IDLE;
 	}
 
@@ -441,7 +433,6 @@ bool Player::Damaged(float dt)
 		actionState = IDLE;
 		damaged = false;
 		sprite->tint = { 255, 255, 255, 100 };
-		LOG("DAMAGED FALSE");
 	}
 		
 	Move(SDL_ceil(linearMovement.x*damagedSpeed*dt), SDL_ceil(linearMovement.y*damagedSpeed*dt));

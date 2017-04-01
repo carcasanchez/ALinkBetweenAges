@@ -139,7 +139,6 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 			{
 				(*playerId)->damaged = ((Player*)(*playerId))->invulnerable = true;
 				(*playerId)->damagedTimer.Start();
-				LOG("DAMAGED TIMER STARTED");
 				(*playerId)->life -= c2->parent->damage;
 				(*playerId)->sprite->tint = { 100, 0, 0, 255 };
 

@@ -62,9 +62,7 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	j1PerfTimer drawTimer;
-	drawTimer.Start();
-
+	
 	SDL_Rect cameraSection;
 
 	cameraSection.x = App->render->renderZone.x/data->tile_width;
@@ -103,7 +101,6 @@ void j1Map::Draw()
 
 	}
 
-	LOG("Draw map time: %f", drawTimer.ReadMs());
 }
 
 int Properties::Get(const char* value, int default_value) const

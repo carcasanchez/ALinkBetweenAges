@@ -8,6 +8,7 @@
 #include "j1Render.h"
 #include <math.h>
 #include <time.h>
+#include "Player.h"
 
 bool Enemy::Update(float dt)
 {
@@ -20,6 +21,8 @@ void Enemy::OnDeath()
 {
 	toDelete = true;
 	col->to_delete = true;
+	((Player*)(*App->game->playerId))->defeatedEnemies++;
+	LOG("Defeated Enemies: %i", ((Player*)(*App->game->playerId))->defeatedEnemies);
 }
 
 

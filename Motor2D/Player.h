@@ -23,6 +23,9 @@ public:
 
 public:
 
+	//Enemies defeated
+	int defeatedEnemies = 0;
+
 	//Base
 	int maxLife;
 	float maxStamina;
