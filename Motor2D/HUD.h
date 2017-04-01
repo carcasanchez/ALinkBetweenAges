@@ -33,20 +33,22 @@ public:
 	UI_element*		hud_screen = nullptr;
 
 	//Little items
-	UI_Image*		Rupees;
-	UI_Image*		Bombs;
-	UI_Image*		Arrows;
+	UI_Image*		Rupees = nullptr;
+	UI_Image*		Bombs = nullptr;
+	UI_Image*		Arrows = nullptr;
 
 	//life hud
-	UI_Image*			life;	//Letters up hearts
-	UI_Image*			empty_heart;
-	UI_Image*			medium_heart;
-	UI_Image*			full_heart;
+	UI_Image*			life = nullptr;	//Letters up hearts
+	UI_Image*			empty_heart = nullptr;
+	UI_Image*			medium_heart = nullptr;
+	UI_Image*			full_heart = nullptr;
+
 	vector<UI_Heart*>	hearts;
+	int					space_between_hearts = 4;
 	void				AddHearts();
 
 	//items images
-	UI_Image*		items_frame;
+	UI_Image*		items_frame = nullptr;
 	UI_Image*		items_bow;
 	UI_Image*		items_bomb;
 	UI_Image*		items_bumerang;
@@ -54,7 +56,7 @@ public:
 	UI_Image*		items_potion_green;
 
 	//Stamina images
-	UI_Image*		stamina_bar;
+	UI_Image*		stamina_bar = nullptr;
 	UI_Image*		stamina;
 	UI_Image*		stamina_end;
 
@@ -83,6 +85,10 @@ private:
 	//In game HUD methods
 	bool		LoadHud(string file);
 	void		SetHudElements();
+
+	//Life methods
+	void		SetHearts();
+	
 
 };
 

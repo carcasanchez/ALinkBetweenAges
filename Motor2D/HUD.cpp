@@ -31,6 +31,7 @@ bool Hud::Awake(pugi::xml_node& conf)
 bool Hud::Start()
 {
 	App->inputM->AddListener(this);
+	SetHearts();
 
 	return true;
 }
@@ -41,11 +42,9 @@ bool Hud::Update(float dt)
 	if (pause_transition == PAUSE_UP)
 		PauseOut(dt);
 
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
-		App->game->pause = !(App->game->pause);
-		IntoPause();
-		pause_transition = PAUSE_DOWN;
+		AddHearts();
 	}
 
 	return false;
@@ -292,8 +291,6 @@ bool Hud::LoadHud(string file)
 
 	}
 
-
-
 	return false;
 }
 
@@ -306,12 +303,39 @@ void Hud::SetHudElements()
 	items_frame->Set_Interactive_Box({ 50, 20,0,0 });
 
 	life->Set_Interactive_Box({ 700, 20,0,0 });
-	empty_heart->Set_Interactive_Box({ 100,100,0,0 });
-	medium_heart->Set_Interactive_Box({ 100,200,0,0 });
-	full_heart->Set_Interactive_Box({ 100,300,0,0 });
+	empty_heart->Set_Active_state(false);
+	medium_heart->Set_Active_state(false);
+	full_heart->Set_Active_state(false);
 
 	stamina_bar->Set_Interactive_Box({ 700, 150,0,0 });
 
 
 
+}
+
+void Hud::SetHearts()
+{
+	for (int i = 0; i < (*App->game->playerId)->life; i++)
+	{
+		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
+
+		new_heart->heart_img = full_heart;
+		new_heart->Set_Interactive_Box({ 700 + (i * ((full_heart->Image.w * 2) + space_between_hearts)), 55, 0,0 }); //El 4 es la separacion entre corazones 
+
+		hud_screen->AddChild(new_heart);
+		hearts.push_back(new_heart);
+	}
+
+}
+
+void Hud::AddHearts()
+{
+	UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
+	new_heart->heart_img = full_heart;
+
+	iPoint pos = { hearts.back()->Interactive_box.x + (hearts.back()->heart_img->Image.w * 2) + space_between_hearts, hearts.back()->Interactive_box.y };
+	new_heart->Set_Interactive_Box({pos.x, pos.y, 0,0 });
+
+	hud_screen->AddChild(new_heart);
+	hearts.push_back(new_heart);
 }

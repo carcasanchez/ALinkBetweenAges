@@ -5,14 +5,23 @@
 
 class UI_Image;
 
+enum HEARTSTATE
+{
+	FULL, 
+	MID, 
+	EMPTY
+};
+
 class UI_Heart : public UI_element
 {
 public:
 	UI_Heart(UI_TYPE, j1Module*);
 
-	UI_Image*	heart_img = nullptr;
+	bool		Update_Draw();
 	bool		Update();
-	bool		empty = false; 
+
+	UI_Image*	heart_img = nullptr;
+	HEARTSTATE	h_state;
 	int			hit = 4;
 };
 
