@@ -361,6 +361,25 @@ bool Player::Attacking(float dt)
 		Move(SDL_ceil(attackSpeed * dt), 0);
 	}
 
+
+	if (App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT)
+	{
+		Move(0, SDL_ceil(attackSpeed * dt));
+	}
+	else if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT)
+	{
+		Move(0, -SDL_ceil(attackSpeed * dt));
+	}
+
+	if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT)
+	{
+		Move(-SDL_ceil(attackSpeed * dt), 0);
+	}
+	else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
+	{
+		Move(SDL_ceil(attackSpeed * dt), 0);
+	}
+
 	updateSwordCollider();
 
 	if (currentAnim->isOver())
