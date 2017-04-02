@@ -10,6 +10,8 @@
 #include "j1Map.h"
 #include "j1Pathfinding.h"
 #include "j1GameLayer.h"
+#include "j1EntityManager.h"
+#include "Player.h"
 
 Entity::Entity() :
 	sprite(nullptr),
@@ -320,7 +322,7 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 //Makes entity look to player. Returns true if the direction changes
 bool Entity::LookToPlayer()
 {
-	iPoint playerPos = (*App->game->playerId)->currentPos;
+	iPoint playerPos = App->game->em->player->currentPos;
 
 	DIRECTION prevDir = currentDir;
 

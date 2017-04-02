@@ -9,31 +9,29 @@
 
 
 Exit::Exit() :
-	currentPos({ 0,0 }),
+	exitDest(0),
+	dir(DIRECTION(0)),
 	locked(false),
-	destPos({ 0,0 }),
 	sprite(NULL),
-	col(NULL),
-	colPivot({ 0,0 })
+	col(NULL)
 {
 	destiny.assign("");
 }
 
 Exit::~Exit() {}
 
-bool Exit::Spawn(DIRECTION direction, iPoint pos, std::string dest, iPoint dPos)
+bool Exit::Spawn(std::string dest, int destExit, SDL_Rect pos, DIRECTION d)
 {
 	bool ret = true;
 
-	currentPos = pos;
-	dir = direction;
 	destiny = dest;
-	destPos = dPos;
+	exitDest = destExit;
+	rect = pos;
+	dir = d;
 
-	// TODO: load sprite
+	// TODO: load sprite if needed
 
-	colPivot = { 16, 16 };
-	col = App->collisions->AddCollider({ currentPos.x, currentPos.y, 16, 16 }, COLLIDER_TYPE(5), ((j1Module*)App->game));
+	col = App->collisions->AddCollider(rect, COLLIDER_TYPE(5), ((j1Module*)App->game));
 
 	return ret;
 }
@@ -42,7 +40,7 @@ void Exit::Update()
 {
 	if (col->CheckCollision(App->game->em->player->col->rect) && !locked)
 	{
-		App->sceneM->RequestSceneChange(destiny, destPos);
+		App->sceneM->RequestSceneChange(this);
 	}
 }
 

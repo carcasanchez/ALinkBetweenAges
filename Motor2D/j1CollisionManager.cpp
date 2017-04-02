@@ -75,35 +75,13 @@ bool j1CollisionManager::Update(float dt)
 			c2 = (*it2);
 
 			
-			if (c1->CheckCollision(c2->rect) == true)
+			if (c1->CheckCollision(c2->rect))
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
 					c1->callback->On_Collision_Callback(c1, c2, dt);
 
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->On_Collision_Callback(c2, c1, dt);
-			}
-      
-			if (c1->parent != NULL)
-			{
-				COLLISION_ZONE tmp = c1->CheckMapCollision();
-				switch (tmp)
-				{
-				case CZ_NONE:
-					break;
-				case CZ_DOWN:
-					c1->parent->linearMovement.y = -1;
-					break;
-				case CZ_UP:
-					c1->parent->linearMovement.y = 1;
-					break;
-				case CZ_LEFT:
-					c1->parent->linearMovement.x = 1;
-					break;
-				case CZ_RIGHT:
-					c1->parent->linearMovement.x = -1;
-					break;
-				}
 			}
 		}
 	}

@@ -16,37 +16,9 @@ void Enemy::OnDeath()
 {
 	toDelete = true;
 	col->to_delete = true;
-	((Player*)(*App->game->playerId))->defeatedEnemies++;
-	LOG("Defeated Enemies: %i", ((Player*)(*App->game->playerId))->defeatedEnemies);
+	App->game->em->player->defeatedEnemies++;
+	LOG("Defeated Enemies: %i", (App->game->em->player->defeatedEnemies));
 }
-
-//Makes enemy look to player. Returns true if the direction changes
-bool Enemy::LookToPlayer()
-{
-	iPoint playerPos = App->game->em->player->currentPos;
-
-	DIRECTION prevDir = currentDir;
-
-	if (abs(playerPos.x - currentPos.x) < abs(playerPos.y - currentPos.y))
-	{
-		if (playerPos.y > currentPos.y)
-			currentDir = D_DOWN;
-		else currentDir = D_UP;		
-	}
-	else
-	{
-		if (playerPos.x < currentPos.x)
-			currentDir = D_LEFT;
-		else currentDir = D_RIGHT;
-	}
-
-	if (prevDir == currentDir)
-		return false;
-	else return true;
-	
-}
-
-
 
 //Move between different points
 bool Enemy::Patroling(float dt)
@@ -95,7 +67,7 @@ bool Enemy::Chasing(float dt)
 		flankingDir = rand() % 2;
 	}
   
-	iPoint playerTile = App->map->WorldToMap(App->game->em->player->>currentPos.x, App->game->em->player->currentPos.y);
+	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 
 	GoTo(playerTile, chaseSpeed, dt);
 

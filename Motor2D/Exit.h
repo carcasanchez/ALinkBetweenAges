@@ -2,6 +2,7 @@
 #define __EXIT_H__
 
 #include "p2Point.h"
+#include "SDL\include\SDL_rect.h"
 #include <string>
 
 class Collider;
@@ -15,25 +16,25 @@ public:
 	Exit();
 	~Exit();
 
-	bool Spawn(DIRECTION, iPoint, std::string, iPoint);
+	bool Spawn(std::string, int, SDL_Rect, DIRECTION);
 	void Update();
 	void Draw();
 	bool CleanUp();
 
 public:
 
-	iPoint currentPos;
-	DIRECTION dir;
-	bool locked;
 	std::string destiny;
-	iPoint destPos;
+	int exitDest;
+	SDL_Rect rect;
+	DIRECTION dir;
+
+	bool locked;
 
 	// Graphic Resources
 	Sprite* sprite;
 
 	// Collider
 	Collider* col;
-	iPoint colPivot;
 };
 
 

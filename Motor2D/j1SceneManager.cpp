@@ -6,17 +6,15 @@
 #include "Player.h"
 #include "Scene.h"
 #include "TestScene.h"
+#include "j1Map.h"
 
-j1SceneManager::j1SceneManager() : currentScene(NULL)
+j1SceneManager::j1SceneManager() : currentScene(nullptr)
 {
 	name = ("sceneManager");
-	destPos = { 0, 0 };
 }
 
 j1SceneManager::~j1SceneManager()
-{
-
-}
+{}
 
 bool j1SceneManager::Awake(pugi::xml_node& config)
 {
@@ -63,13 +61,14 @@ bool j1SceneManager::CleanUp()
 	return true;
 }
 
-void j1SceneManager::RequestSceneChange(std::string dest, iPoint pos)
+void j1SceneManager::RequestSceneChange(Exit* exit)
 {
 	App->game->em->player->sceneOverride = true;
-
 	changeRequest = true;
-	destiny = dest;
-	destPos = pos;
+
+	destiny = exit->destiny;
+	exitDest = exit->exitDest;
+	dir = exit->dir;
 
 	// Apply transition
 }
@@ -79,11 +78,30 @@ bool j1SceneManager::ChangeScene()
 	bool ret = true;
 
 	ret = currentScene->CleanUp();
+	App->map->CleanUp();
 
 	if (ret)
 	{
 		App->game->em->CleanEntities();
-		ret = currentScene->Load("scenes/kakariko.xml", false);
+		ret = currentScene->Load(data[destiny].c_str(), true);
+
+		iPoint destPos = currentScene->GetExitPlayerPos(exitDest, 0);
+
+		switch (dir)
+		{
+		case(D_UP) :
+			destPos.y += 24;
+			break;
+		case(D_DOWN) :
+			destPos.y -= 24;
+			break;
+		case(D_RIGHT) :
+			destPos.x += 24;
+			break;
+		case(D_LEFT) :
+			destPos.x -= 24;
+			break;
+		}
 
 		App->game->em->player->currentPos = destPos;
 

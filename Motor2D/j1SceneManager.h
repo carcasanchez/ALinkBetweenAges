@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include "p2Point.h"
+#include "Exit.h"
 #include <map>
 
 /*enum SCENE_NAME
@@ -42,7 +43,7 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	void RequestSceneChange(std::string, iPoint);
+	void RequestSceneChange(Exit*);
 	bool ChangeScene();
 
 public:
@@ -51,8 +52,12 @@ public:
 	std::map<std::string, std::string> data;
 
 	bool changeRequest = false;
+
+private:
+
 	std::string destiny;
-	iPoint destPos;
+	int exitDest;
+	DIRECTION dir;
 };
 
 

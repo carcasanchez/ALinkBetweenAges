@@ -2,6 +2,7 @@
 #define __SCENE_H__
 
 #include "PugiXml\src\pugixml.hpp"
+#include "p2Point.h"
 #include <string>
 #include <map>
 #include <list>
@@ -25,6 +26,8 @@ public:
 	virtual bool CleanUp();
 
 	//virtual bool On_GUI_Callback(UI_element* elem, GUI_INPUT gui_input) { return true; }
+
+	iPoint GetExitPlayerPos(int, int);
 
 public:
 

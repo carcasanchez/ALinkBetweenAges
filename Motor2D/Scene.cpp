@@ -112,14 +112,22 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			pugi::xml_node exits = section.child("exits");
 			for (pugi::xml_node exit = exits.first_child(); exit != NULL; exit = exit.next_sibling())
 			{
-				/* add exits to scene*/
+
+				iPoint worldPos = App->map->MapToWorld(exit.attribute("x").as_int(), exit.attribute("y").as_int());
+
+				SDL_Rect rect = {
+					worldPos.x,
+					worldPos.y,
+					exit.attribute("w").as_int() * 8,
+					exit.attribute("h").as_int() * 8};
+
 				Exit* tmp = new Exit();
 
 				if (tmp->Spawn(
-					DIRECTION(exit.attribute("direction").as_int()),
-					iPoint(exit.attribute("x").as_int(), exit.attribute("y").as_int()),
-					exit.attribute("destiny").as_string(),
-					iPoint(exit.attribute("dx").as_int(), exit.attribute("dy").as_int())))
+					exit.attribute("destinyScene").as_string(),
+					exit.attribute("destinyExit").as_int(),
+					rect,
+					DIRECTION(exit.attribute("direction").as_int())))
 				{
 					this->exits[maxSectors].push_back(tmp);
 				}
@@ -176,6 +184,21 @@ bool Scene::CleanUp()
 	}
 
 	exits.clear();
+
+	return ret;
+}
+
+iPoint Scene::GetExitPlayerPos(int sector, int exitNum)
+{
+	iPoint ret = { 0,0 };
+
+	std::list<Exit*>::iterator it = exits[sector].begin();
+
+	for (int i = 0; i < exitNum && it != exits[sector].end(); i++)
+		it++;
+
+	ret.x = (*it)->rect.x;
+	ret.y = (*it)->rect.y;
 
 	return ret;
 }

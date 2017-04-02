@@ -3,6 +3,8 @@
 #include "j1Gui.h"
 #include "j1FileSystem.h"
 #include "j1GameLayer.h"
+#include "j1EntityManager.h"
+#include "Player.h"
 #include "p2Log.h"
 
 Hud::Hud()
@@ -315,7 +317,7 @@ void Hud::SetHudElements()
 
 void Hud::SetHearts()
 {
-	for (int i = 0; i < (*App->game->playerId)->life; i++)
+	for (int i = 0; i < App->game->em->player->life; i++)
 	{
 		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
 
@@ -353,7 +355,7 @@ void Hud::RestoreHearts()
 void Hud::UpdateHearts()
 {
 	int num_hearts = hearts.size();
-	int empty_hearts = num_hearts - ((*App->game->playerId)->life);
+	int empty_hearts = num_hearts - (App->game->em->player->life);
 
 	std::vector<UI_Heart*>::reverse_iterator it = hearts.rbegin();
 
