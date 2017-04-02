@@ -44,7 +44,7 @@ public:
 
 	Entity();
 	Entity(ENTITY_TYPE type);
-	~Entity();
+	virtual ~Entity();
 
 	virtual bool Spawn(std::string file, iPoint pos) { return true; };
 	virtual bool Update(float dt) { return true; };

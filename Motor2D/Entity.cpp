@@ -51,11 +51,6 @@ Entity::Entity(ENTITY_TYPE type) :
 Entity::~Entity()
 {
 	RELEASE(sprite);
-	RELEASE(currentAnim);
-
-	col->to_delete = true;
-	col = nullptr;
-
 	anim.clear();
 }
 
