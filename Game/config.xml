@@ -43,6 +43,8 @@
 
   <sceneManager>
     <scenes folder = "scenes/">
+      <scene name = "kakarikoVillage" file = "kakariko_village.xml"/>
+      <scene name = "kakarikoForest" file = "kakariko_forest.xml"/>
       <scene name = "insideCastle" file = "inside_castle.xml"/>
       <scene name = "outsideCastle" file = "outside_castle.xml"/>
     </scenes>
