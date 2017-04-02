@@ -28,8 +28,6 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_NPC] = true;
-	
-	matrix[COLLIDER_NPC][COLLIDER_LINK_SWORD] = true;
 
 	//Enemy collisions
 	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
@@ -86,28 +84,28 @@ bool j1CollisionManager::Update(float dt)
 					c2->callback->On_Collision_Callback(c2, c1, dt);
 			}
 
-			COLLISION_ZONE tmp = c1->CheckMapCollision();
-			switch (tmp)
+			if (c1->parent != NULL)
 			{
-			case CZ_NONE: 
-				break;
-			case CZ_DOWN:
-				c1->parent->linearMovement.y = -1;
-				break;
-			case CZ_UP:
-				c1->parent->linearMovement.y = 1;
-				break;
-			case CZ_LEFT:
-				c1->parent->linearMovement.x = 1;
-				break;
-			case CZ_RIGHT:
-				c1->parent->linearMovement.x = -1;
-				break;
+				COLLISION_ZONE tmp = c1->CheckMapCollision();
+				switch (tmp)
+				{
+				case CZ_NONE:
+					break;
+				case CZ_DOWN:
+					c1->parent->linearMovement.y = -1;
+					break;
+				case CZ_UP:
+					c1->parent->linearMovement.y = 1;
+					break;
+				case CZ_LEFT:
+					c1->parent->linearMovement.x = 1;
+					break;
+				case CZ_RIGHT:
+					c1->parent->linearMovement.x = -1;
+					break;
+				}
 			}
-
-		
 		}
-
 	}
 
 	return true;

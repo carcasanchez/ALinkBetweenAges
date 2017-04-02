@@ -118,6 +118,9 @@
     <ClCompile Include="Quadtree.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -251,6 +254,9 @@
     </ClInclude>
     <ClInclude Include="Quadtree.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Exit.h">
+      <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

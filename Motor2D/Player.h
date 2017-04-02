@@ -47,6 +47,8 @@ public:
 
 	PLAYER_STATE playerState = ACTIVE;
 
+	bool sceneOverride = false;
+
 private:
 	void Change_direction();
 	void ManageStamina(float dt);

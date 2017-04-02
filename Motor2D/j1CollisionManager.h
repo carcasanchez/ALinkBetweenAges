@@ -17,7 +17,8 @@ enum COLLIDER_TYPE
 	COLLIDER_PLAYER,
 	COLLIDER_NPC,
 	COLLIDER_ENEMY,
-	COLLIDER_LINK_SWORD
+	COLLIDER_LINK_SWORD,
+	COLLIDER_EXIT
 };
 
 
@@ -41,7 +42,7 @@ public:
 	j1Module* callback = nullptr;
 	bool to_delete = false;
 
-	Entity* parent = nullptr;
+	Entity* parent = NULL;
 	
 
 	Collider(COLLIDER_TYPE type, SDL_Rect rect, j1Module* callback = nullptr) :type(type), callback(callback), rect(rect) {};

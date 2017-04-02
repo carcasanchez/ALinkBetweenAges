@@ -30,15 +30,23 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-public:
-
 	Player* CreatePlayer(int, int);
 	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>);
 	Npc*	CreateNPC(int, NPC_TYPE, int, int, int);
 
-	std::map<int, std::list<Entity*>> entities;
+	bool CleanEntities();
+	void SetSectorRef(int*);
 
+public:
+
+	Player* player;
+	std::map<int, std::list<Entity*>> entities;
 	std::map<ENTITY_TYPE, std::string> dir;
+
+private:
+
+	int* sector;
+
 };
 
 #endif

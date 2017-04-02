@@ -1,6 +1,7 @@
 #include "Exit.h"
 #include "j1App.h"
 #include "j1GameLayer.h"
+#include "j1EntityManager.h"
 #include "Player.h"
 #include "j1SceneManager.h"
 #include "j1CollisionManager.h"
@@ -39,12 +40,10 @@ bool Exit::Spawn(DIRECTION direction, iPoint pos, std::string dest, iPoint dPos)
 
 void Exit::Update()
 {
-	if (col->CheckCollision((*App->game->playerId)->col->rect) && !locked)
+	if (col->CheckCollision(App->game->em->player->col->rect) && !locked)
 	{
 		App->sceneM->RequestSceneChange(destiny, destPos);
 	}
-
-	
 }
 
 void Exit::Draw()

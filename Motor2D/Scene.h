@@ -3,9 +3,14 @@
 
 #include "PugiXml\src\pugixml.hpp"
 #include <string>
+#include <map>
+#include <list>
 
 //class UI_element;
 //enum GUI_INPUT;
+
+class Exit;
+enum DIRECTION;
 
 class Scene
 {
@@ -15,7 +20,7 @@ public:
 	Scene();
 	Scene(const char*);
 	virtual ~Scene() {}
-	virtual bool Load(const char*);
+	virtual bool Load(const char*, const bool reloadMap = true);
 	virtual bool Update(float);
 	virtual bool CleanUp();
 
@@ -26,6 +31,10 @@ public:
 	std::string name;
 	int currentSector;
 	int maxSectors;
+
+private:
+
+	std::map<int, std::list<Exit*>> exits;
 };
 
 #endif // __SCENE_H__

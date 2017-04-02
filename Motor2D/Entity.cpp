@@ -23,8 +23,7 @@ Entity::Entity() :
 	life(1),
 	damage(0),
 	damaged(false),
-	toDelete(false),
-	currentPatrolPoint(0)
+	toDelete(false)
 {
 	anim.clear();
 }
@@ -41,8 +40,7 @@ Entity::Entity(ENTITY_TYPE type) :
 	type(type),
 	life(1),
 	damaged(false),
-	toDelete(false),
-	currentPatrolPoint(0)
+	toDelete(false)
 {
 	anim.clear();
 }
@@ -177,6 +175,19 @@ bool Entity::Move(int x, int y)
 		currentPos.y -= y;
 		ret = false;
 	}
+
+	return ret;
+}
+
+bool Entity::MoveTo(int x, int y)
+{
+	bool ret = true;
+
+	// check if position is available/walkable
+
+	currentPos.x = x;
+	currentPos.y = y;
+	UpdateCollider();
 
 	return ret;
 }
