@@ -13,10 +13,6 @@ UI_Stamina::UI_Stamina(UI_TYPE type, j1Module* callback) : UI_element(type, call
 bool UI_Stamina::Update()
 {
 
-	/*if (move_rect.x < draw_rect.x)
-	move_rect.x++;
-	else move_rect.x = draw_rect.x;*/
-
 	return true;
 }
 
@@ -73,13 +69,9 @@ bool UI_Stamina::SetDrawRect(SDL_Rect rect)
 void UI_Stamina::WasteStamina(int tax)
 {
 	//Calculate percent of move
-	//Max stamina should come from player, this is a trial
-
-	float stamina_max = 200;
 	float percent = tax / App->game->em->player->maxStamina;
 
 	//move the bar
-
 	int full_move = 160;
 	int move = ceil(full_move * percent);
 
@@ -87,9 +79,17 @@ void UI_Stamina::WasteStamina(int tax)
 
 }
 
-void UI_Stamina::RecoverStamina(float recover)
+void UI_Stamina::RecoverStamina()
 {
-	move_rect.x += recover;
+	
+	int percent_stamina = (App->game->em->player->stamina * 100) / App->game->em->player->maxStamina;
+
+	//magic numbers :c
+	int image_width = 160;
+
+	int move_to = 160 - ((percent_stamina * image_width) / 100);
+
+	move_rect.x = draw_rect.x - move_to;
 }
 
 void UI_Stamina::PrintBar()

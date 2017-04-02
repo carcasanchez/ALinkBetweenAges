@@ -19,7 +19,7 @@ public:
 	bool		SetDrawRect(SDL_Rect);
 
 	void		WasteStamina(int);
-	void		RecoverStamina(float);
+	void		RecoverStamina();
 
 	SDL_Rect	move_rect;
 

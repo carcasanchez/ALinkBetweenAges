@@ -152,6 +152,7 @@ void Player::ManageStamina(float dt)
 	if (stamina < maxStamina)
 	{
 		stamina += staminaRec*dt;
+		App->game->hud->stamina_bar->RecoverStamina();
 	}
 	else stamina = maxStamina;
 }
