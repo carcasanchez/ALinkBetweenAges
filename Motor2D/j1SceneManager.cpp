@@ -84,6 +84,9 @@ bool j1SceneManager::ChangeScene()
 	{
 		App->game->em->CleanEntities();
 		ret = currentScene->Load("scenes/kakariko.xml", false);
+
+		App->game->em->player->currentPos = destPos;
+
 		changeRequest = false;
 	}
 
