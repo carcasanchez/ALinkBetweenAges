@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "TestScene.h"
 #include "j1Map.h"
+#include "j1CollisionManager.h"
 
 j1SceneManager::j1SceneManager() : currentScene(nullptr)
 {
@@ -79,13 +80,14 @@ bool j1SceneManager::ChangeScene()
 
 	ret = currentScene->CleanUp();
 	App->map->CleanUp();
+	App->collisions->CleanUp();
 
 	if (ret)
 	{
 		App->game->em->CleanEntities();
 		ret = currentScene->Load(data[destiny].c_str(), true);
 
-		iPoint destPos = currentScene->GetExitPlayerPos(exitDest, 0);
+		iPoint destPos = currentScene->GetExitPlayerPos(1, exitDest);
 
 		switch (dir)
 		{
