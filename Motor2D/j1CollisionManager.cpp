@@ -83,7 +83,7 @@ bool j1CollisionManager::Update(float dt)
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->On_Collision_Callback(c2, c1, dt);
 			}
-
+      
 			if (c1->parent != NULL)
 			{
 				COLLISION_ZONE tmp = c1->CheckMapCollision();
@@ -156,7 +156,7 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 		rect.h + rect.y > r.y);
 }
 
-COLLISION_ZONE Collider::CheckMapCollision()
+COLLISION_ZONE Collider::CheckPlayerMapCollision()
 {
 	COLLISION_ZONE ret = CZ_NONE;
 
@@ -184,6 +184,40 @@ COLLISION_ZONE Collider::CheckMapCollision()
 	else if (App->pathfinding->IsPlayerWalkable(up_right) == false)
 		ret = CZ_UP_RIGHT;
 	else if (App->pathfinding->IsPlayerWalkable(down_left) == false)
+		ret = CZ_DOWN_LEFT;
+
+
+	return ret;
+}
+
+COLLISION_ZONE Collider::CheckEnemyMapCollision()
+{
+	COLLISION_ZONE ret = CZ_NONE;
+
+	iPoint up_left = App->map->WorldToMap(rect.x, rect.y);
+	iPoint up_right = App->map->WorldToMap(rect.x + rect.w, rect.y);
+	iPoint down_left = App->map->WorldToMap(rect.x, rect.y + rect.h);
+	iPoint down_right = App->map->WorldToMap(rect.x + rect.w, rect.y + rect.h);
+
+	if (App->pathfinding->IsEnemyWalkable(up_left) == false)
+	{
+		ret = CZ_UP_LEFT;
+		if (App->pathfinding->IsEnemyWalkable(up_right) == false)
+			ret = CZ_UP;
+		else if (App->pathfinding->IsEnemyWalkable(down_left) == false)
+			ret = CZ_LEFT;
+	}
+	else if (App->pathfinding->IsEnemyWalkable(down_right) == false)
+	{
+		ret = CZ_DOWN_RIGHT;
+		if (App->pathfinding->IsEnemyWalkable(up_right) == false)
+			ret = CZ_RIGHT;
+		else if (App->pathfinding->IsEnemyWalkable(down_left) == false)
+			ret = CZ_DOWN;
+	}
+	else if (App->pathfinding->IsEnemyWalkable(up_right) == false)
+		ret = CZ_UP_RIGHT;
+	else if (App->pathfinding->IsEnemyWalkable(down_left) == false)
 		ret = CZ_DOWN_LEFT;
 
 

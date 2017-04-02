@@ -80,11 +80,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bezier.cpp" />
     <ClCompile Include="DialogManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="GreenSoldier.cpp" />
+    <ClCompile Include="UI_Heart.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="j1CollisionManager.cpp" />
@@ -118,11 +120,13 @@
     <ClCompile Include="UI_element.cpp" />
     <ClCompile Include="UI_Image.cpp" />
     <ClCompile Include="UI_scroll.cpp" />
+    <ClCompile Include="UI_Stamina.cpp" />
     <ClCompile Include="UI_String.cpp" />
     <ClCompile Include="UI_Text_Box.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Bezier.h" />
     <ClInclude Include="CVar_Com.h" />
     <ClInclude Include="DialogManager.h" />
     <ClInclude Include="Enemy.h" />
@@ -163,8 +167,10 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_element.h" />
+    <ClInclude Include="UI_Heart.h" />
     <ClInclude Include="UI_Image.h" />
     <ClInclude Include="UI_scroll.h" />
+    <ClInclude Include="UI_Stamina.h" />
     <ClInclude Include="UI_String.h" />
     <ClInclude Include="UI_Text_Box.h" />
   </ItemGroup>

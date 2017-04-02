@@ -10,13 +10,15 @@
 #include "Player.h"
 #include <math.h>
 #include <time.h>
+#include "Player.h"
 
 void Enemy::OnDeath()
 {
 	toDelete = true;
 	col->to_delete = true;
+	((Player*)(*App->game->playerId))->defeatedEnemies++;
+	LOG("Defeated Enemies: %i", ((Player*)(*App->game->playerId))->defeatedEnemies);
 }
-
 
 //Makes enemy look to player. Returns true if the direction changes
 bool Enemy::LookToPlayer()
@@ -45,6 +47,7 @@ bool Enemy::LookToPlayer()
 }
 
 
+
 //Move between different points
 bool Enemy::Patroling(float dt)
 {
@@ -61,11 +64,7 @@ bool Enemy::Patroling(float dt)
 		return true;
 	}
 	
-	iPoint dest = patrolPoints[currentPatrolPoint];
-
-	
-
-	if (GoTo(dest, speed, dt) == false)
+	if (GoTo(patrolPoints[currentPatrolPoint], speed, dt) == false)
 	{
 		currentPatrolPoint++;
 		if (currentPatrolPoint == patrolPoints.size())
@@ -89,16 +88,16 @@ bool Enemy::Chasing(float dt)
 	}
 	else if (playerDistance <= fightRange)
 	{
-		currentDest = {0, 0};
 		enemyState = KEEP_DISTANCE;
 		path.clear();
 		attackTimer.Start();
 		srand(time(NULL));
 		flankingDir = rand() % 2;
 	}
+  
+	iPoint playerTile = App->map->WorldToMap(App->game->em->player->>currentPos.x, App->game->em->player->currentPos.y);
 
-	iPoint dest = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
-	GoTo(dest, chaseSpeed, dt);
+	GoTo(playerTile, chaseSpeed, dt);
 
 	return true;
 }

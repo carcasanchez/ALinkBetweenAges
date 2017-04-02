@@ -31,22 +31,20 @@ bool Hud::Awake(pugi::xml_node& conf)
 bool Hud::Start()
 {
 	App->inputM->AddListener(this);
+	SetHearts();
+
 	return true;
 }
 
 bool Hud::Update(float dt)
 {
-	if (pause_transition == PAUSE_DOWN)
-		PauseIn(dt);
-
+	
 	if (pause_transition == PAUSE_UP)
 		PauseOut(dt);
 
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
-		App->game->pause = !(App->game->pause);
-		IntoPause();
-		pause_transition = PAUSE_DOWN;
+		AddHearts();
 	}
 
 	return false;
@@ -63,13 +61,11 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			if (App->game->pause)
 			{
 				pause_transition = PAUSE_UP;
+				main_menu->SetAnimationTransition(T_FLY_UP, 1500, { main_menu->Interactive_box.x, -650 });
 			}
 			else
-			{
-				App->game->pause = true;
+			{	
 				IntoPause();
-				App->inputM->SetGameContext(IN_MENU);
-				pause_transition = PAUSE_DOWN;
 			}	
 		}
 		break;
@@ -106,6 +102,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		if (resume->active)
 		{
 			pause_transition = PAUSE_UP;
+			main_menu->SetAnimationTransition(T_FLY_UP, 1500, { main_menu->Interactive_box.x, -650 });
 		}
 
 		if (quit->active)
@@ -117,6 +114,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 
 	case DECLINE:
 		pause_transition = PAUSE_UP;
+		main_menu->SetAnimationTransition(T_FLY_UP, 1500, { main_menu->Interactive_box.x, -650 });
 		break;
 
 	}
@@ -186,7 +184,7 @@ SDL_Rect Hud::LoadRect(pugi::xml_node node)
 
 void Hud::SetPauseElements()
 {
-	main_menu->Set_Interactive_Box({ 50, -830,0,0 });
+	main_menu->Set_Interactive_Box({ 50, -650,0,0 });
 	item_menu->Set_Interactive_Box({720,0,0,0});
 	resume->Set_Interactive_Box({ 72,86,0,0 });
 	quit->Set_Interactive_Box({ 72,528,0,0 });
@@ -194,11 +192,15 @@ void Hud::SetPauseElements()
 	
 	quit->Set_Active_state(false);
 
-	main_menu->Set_Active_state(false);
+	main_menu->Set_Active_state(true);
 }
 
 bool Hud::IntoPause()
 {
+	App->game->pause = true;
+	main_menu->SetAnimationTransition(T_MOVE_DOWN, 2000, { main_menu->Interactive_box.x, 140 });
+	App->inputM->SetGameContext(IN_MENU);
+
 	main_menu->Set_Active_state(true);
 	resume->Set_Active_state(true);
 
@@ -209,7 +211,6 @@ bool Hud::IntoPause()
 
 void Hud::GonePause()
 {
-	main_menu->Set_Active_state(false);
 	main_menu->QuitFromRender();
 	
 	for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
@@ -218,30 +219,9 @@ void Hud::GonePause()
 	App->inputM->SetGameContext(IN_GAME);
 }
 
-void Hud::PauseIn(float dt)
-{
-	if (main_menu->Interactive_box.y <= 55)
-	{
-		main_menu->Interactive_box.y += (1000 * dt);
-		hud_screen->Interactive_box.y += (1000 * dt);
-	}
-	
-	else
-	{
-		main_menu->Set_Interactive_Box({ 50, 50,0,0 });
-		hud_screen->Set_Interactive_Box({ 0,880,0,0 });
-		pause_transition = PAUSE_NO_MOVE;
-	}
-}
-
 void Hud::PauseOut(float dt)
 {
-	if (main_menu->Interactive_box.y >= -830)
-	{
-		main_menu->Interactive_box.y -= ceil(1000 * dt);
-		hud_screen->Interactive_box.y -= ceil(1000 * dt);
-	}
-	else
+	if (main_menu->GetCurrentTransition() == NO_AT)
 	{
 		App->game->pause = false;
 		GonePause();
@@ -273,17 +253,27 @@ bool Hud::LoadHud(string file)
 		items_frame = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		life = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		stamina_bar = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		empty_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		medium_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		full_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 
 		pugi::xml_node hud_node = hud_file.child("images");
 		
+		//little items
 		Rupees->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("rupees")));
 		Bombs->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("bombs")));
 		Arrows->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("arrows")));
 
+		//items
 		items_frame->Set_Image_Texture(LoadRect(hud_node.child("items").child("frame")));
 
+		//life
 		life->Set_Image_Texture(LoadRect(hud_node.child("life")));
+		empty_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("empty")));
+		medium_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("mid")));
+		full_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("full")));
 
+		//stamina
 		stamina_bar->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("bar")));
 	
 		SetHudElements();
@@ -295,10 +285,11 @@ bool Hud::LoadHud(string file)
 		hud_screen->AddChild(items_frame);
 		hud_screen->AddChild(life);
 		hud_screen->AddChild(stamina_bar);
+		hud_screen->AddChild(empty_heart);
+		hud_screen->AddChild(medium_heart);
+		hud_screen->AddChild(full_heart);
 
 	}
-
-
 
 	return false;
 }
@@ -312,9 +303,67 @@ void Hud::SetHudElements()
 	items_frame->Set_Interactive_Box({ 50, 20,0,0 });
 
 	life->Set_Interactive_Box({ 700, 20,0,0 });
+	empty_heart->Set_Active_state(false);
+	medium_heart->Set_Active_state(false);
+	full_heart->Set_Active_state(false);
 
-	stamina_bar->Set_Interactive_Box({ 700, 50,0,0 });
+	stamina_bar->Set_Interactive_Box({ 700, 150,0,0 });
 
 
 
+}
+
+void Hud::SetHearts()
+{
+	for (int i = 0; i < (*App->game->playerId)->life; i++)
+	{
+		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
+
+		new_heart->heart_img = full_heart;
+		new_heart->Set_Interactive_Box({ 700 + (i * ((full_heart->Image.w * 2) + space_between_hearts)), 55, 0,0 }); //El 4 es la separacion entre corazones 
+
+		hud_screen->AddChild(new_heart);
+		hearts.push_back(new_heart);
+	}
+
+}
+
+void Hud::AddHearts()
+{
+	UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
+	new_heart->heart_img = full_heart;
+
+	iPoint pos = { hearts.back()->Interactive_box.x + (hearts.back()->heart_img->Image.w * 2) + space_between_hearts, hearts.back()->Interactive_box.y };
+	new_heart->Set_Interactive_Box({pos.x, pos.y, 0,0 });
+
+	hud_screen->AddChild(new_heart);
+	hearts.push_back(new_heart);
+}
+
+void Hud::RestoreHearts()
+{
+	for (std::vector<UI_Heart*>::iterator it = hearts.begin(); it != hearts.end(); it++)
+	{
+		(*it)->heart_img = full_heart;
+		(*it)->h_state = FULL;
+	}
+		
+}
+
+void Hud::UpdateHearts()
+{
+	int num_hearts = hearts.size();
+	int empty_hearts = num_hearts - ((*App->game->playerId)->life);
+
+	std::vector<UI_Heart*>::reverse_iterator it = hearts.rbegin();
+
+	for (; empty_hearts > 0 && it != hearts.rend(); it++)
+	{
+		if ((*it)->h_state != EMPTY)
+		{
+			(*it)->heart_img = empty_heart;
+			(*it)->h_state = EMPTY;
+		}	
+		empty_hearts--;	
+	}
 }

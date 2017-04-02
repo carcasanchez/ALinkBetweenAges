@@ -62,6 +62,14 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
+	
+	SDL_Rect cameraSection;
+
+	cameraSection.x = App->render->renderZone.x/data->tile_width;
+	cameraSection.y = App->render->renderZone.y /data->tile_height;
+	cameraSection.w = (App->render->renderZone.w / data->tile_width) +1;
+	cameraSection.h = (App->render->renderZone.h / data->tile_width) +1 ;
+	
 	for(list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
 	{
 		MapLayer* layer = (*item);
@@ -72,31 +80,72 @@ void j1Map::Draw()
 		if (layer->properties.Get("Nodraw") != 0 && layer->properties.Get("Enemy") != 0 && debug_enemy_collisions == false)
 			continue;
 
-		
-
-		for (int y = 0; y < data->height; ++y)
+		if (layer->properties.Get("Paintover"))
+			continue;
+					
+		for (int x = cameraSection.x; x < cameraSection.x + cameraSection.w; x++)
 		{
-			for (int x = 0; x < data->width; ++x)
+			for (int y = cameraSection.y; y < cameraSection.y + cameraSection.h; y++)
 			{
+
 				int tile_id = layer->Get(x, y);
 				if (tile_id > 0)
 				{
 					iPoint pos = MapToWorld(x, y);
-
-					if (App->render->InsideCameraZone({ pos.x, pos.y, data->tile_width, data->tile_height }))
-					{
-						TileSet* tileset = GetTilesetFromTileId(tile_id);
-						SDL_Rect r = tileset->GetTileRect(tile_id);
-						App->render->Blit(tileset->texture, pos.x, pos.y, &r);
-					}
-
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 				}
 			}
-		}
-	
 
+		}
+				
+		
 
 	}
+
+}
+
+void j1Map::DrawOver()
+{
+	if (map_loaded == false)
+		return;
+
+
+	SDL_Rect cameraSection;
+
+	cameraSection.x = App->render->renderZone.x / data->tile_width;
+	cameraSection.y = App->render->renderZone.y / data->tile_height;
+	cameraSection.w = (App->render->renderZone.w / data->tile_width) + 1;
+	cameraSection.h = (App->render->renderZone.h / data->tile_width) + 1;
+
+	for (list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
+	{
+		MapLayer* layer = (*item);
+
+		if (layer->properties.Get("Paintover") == 0)
+			continue;
+
+		for (int x = cameraSection.x; x < cameraSection.x + cameraSection.w; x++)
+		{
+			for (int y = cameraSection.y; y < cameraSection.y + cameraSection.h; y++)
+			{
+
+				int tile_id = layer->Get(x, y);
+				if (tile_id > 0)
+				{
+					iPoint pos = MapToWorld(x, y);
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+				}
+			}
+
+		}
+
+		break;
+	}
+
 }
 
 int Properties::Get(const char* value, int default_value) const
@@ -334,16 +383,50 @@ bool j1Map::Load(const char* file_name)
 			//LOG("tile width: %d tile height: %d", s->tile_width, s->tile_height);
 			//LOG("spacing: %d margin: %d", s->spacing, s->margin);
 		}
+		
+		/*//TODO: Optimize this
+		//Create tile clusters
+		int clusterSize = 10;
+		int x=0, y = 0;
+		while (x < data->width)
+		{
+			while (y < data->height)
+			{
+				MapCluster newCluster;
+				newCluster.rect.x = x* data->tile_width;
+				newCluster.rect.y = y* data->tile_height;
+				newCluster.rect.h = newCluster.rect.w = clusterSize * data->tile_height;
+				clusters.push_back(newCluster);
+				y += clusterSize;
+			}
+
+			y = 0;
+			x+= clusterSize;
+		}
 
 
 		//Fill tile clusters
-		for (int x = 0; x < data->width; x++)
+		for (x = 0; x < data->width; x++)
 		{
+			for (y = 0; y < data->height; y++)
+			{
+				iPoint tileInWorld = MapToWorld(x, y);
+				SDL_Point point;
+				point.x = tileInWorld.x;
+				point.y = tileInWorld.y;
 
+				for (int i = 0; i < clusters.size(); i++)
+				{
+					if (SDL_PointInRect(&point, &clusters[i].rect))
+					{
+						clusters[i].tiles.push_back(iPoint(x, y));
+					}
+				}
+
+
+			}
 		}
-
-		
-
+		*/
 	}
 
 	map_loaded = ret;
@@ -673,11 +756,6 @@ void j1Map::UnLoadData()
 
 	data->layers.clear();
 
-
-	for (std::vector<MapCluster*>::iterator item = data->clusters.begin(); item != data->clusters.cend(); item++)
-		RELEASE(*item);
-	
-	data->clusters.clear();
 
 	// Clean up the pugui tree
 	map_file->reset();

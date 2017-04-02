@@ -8,6 +8,7 @@
 #include "j1Pathfinding.h"
 #include "j1CollisionManager.h"
 #include "p2Log.h"
+#include "HUD.h"
 #include "Animation.h"
 #include "InputManager.h"
 #include "j1PerfTimer.h"
@@ -84,7 +85,6 @@ bool Player::Update(float dt)
 	{
 		invulnerable = false;
 		sprite->tint = { 255, 255, 255, 255 };
-		LOG("DAMAGED FALSE - TIMER STOP");
 	}
 
 	ManageStamina(dt);	
@@ -125,8 +125,9 @@ bool Player::Update(float dt)
 
 void Player::OnDeath()
 {
-	currentPos = App->map->MapToWorld( 107, 232 );
+	currentPos = App->map->MapToWorld( App->game->playerX, App->game->playerY);
 	life = 3;
+	App->game->hud->RestoreHearts();
 	damaged = invulnerable = false;
 	linearMovement = {0, 0};
 	sprite->tint = { 255, 255, 255, 255 };
@@ -151,7 +152,6 @@ void Player::ManageStamina(float dt)
 	if (stamina < maxStamina)
 	{
 		stamina += staminaRec*dt;
-		LOG("STAMINA: %f", stamina);
 	}
 	else stamina = maxStamina;
 }
@@ -172,7 +172,6 @@ bool Player::Idle()
 		App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		actionState = WALKING;
-		LOG("Link is WALKING");
 		return true;
 	}
 
@@ -203,7 +202,6 @@ bool Player::Idle()
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
-			LOG("LINK is ATTACKING");
 		}
 	}
 
@@ -292,14 +290,12 @@ bool Player::Walking(float dt)
 	if (moving == false)
 	{
 		actionState = IDLE;
-		LOG("Link is in IDLE");
 		return true;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >=0))
 	{	
 		stamina -= dodgeTax;
-		LOG("LINK is DODGING");
 		actionState = DODGING;
 		Change_direction();
 		dodging = true;
@@ -317,7 +313,6 @@ bool Player::Walking(float dt)
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
-			LOG("LINK is ATTACKING");
 	}
 
 	Change_direction();
@@ -335,20 +330,50 @@ bool Player::Attacking(float dt)
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || currentDir == D_DOWN)
+	else if (toTalk != nullptr)
+	{
+		resetSwordCollider();
+		currentAnim->Reset();
+		LOG("LINK is in IDLE");
+		actionState = IDLE;
+		playerState = EVENT;
+		toTalk->LookToPlayer();
+		return true;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		Move(0, SDL_ceil(attackSpeed * dt));
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || currentDir == D_UP)
+	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		Move(0, -SDL_ceil(attackSpeed * dt));
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || currentDir == D_LEFT)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		Move(-SDL_ceil(attackSpeed * dt), 0);
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || currentDir == D_RIGHT)
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		Move(SDL_ceil(attackSpeed * dt), 0);
+	}
+
+
+	if (App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT)
+	{
+		Move(0, SDL_ceil(attackSpeed * dt));
+	}
+	else if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT)
+	{
+		Move(0, -SDL_ceil(attackSpeed * dt));
+	}
+
+	if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT)
+	{
+		Move(-SDL_ceil(attackSpeed * dt), 0);
+	}
+	else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
 	{
 		Move(SDL_ceil(attackSpeed * dt), 0);
 	}
@@ -359,17 +384,7 @@ bool Player::Attacking(float dt)
 	{
 		resetSwordCollider();
 		currentAnim->Reset();
-		LOG("LINK is in IDLE");
 		actionState = IDLE;
-	}
-
-	else if (toTalk != nullptr)
-	{
-		resetSwordCollider();
-		currentAnim->Reset();
-		LOG("LINK is in IDLE");
-		actionState = IDLE;
-		playerState = EVENT;
 	}
 
 
@@ -378,7 +393,6 @@ bool Player::Attacking(float dt)
 
 bool Player::Dodging(float dt)
 {
- 	invulnerable = true;
 
 	Move(SDL_ceil(dodgeSpeed * dodgeDir.x * dt), SDL_ceil(dodgeSpeed*dodgeDir.y* dt));
 
@@ -410,7 +424,6 @@ bool Player::Dodging(float dt)
 		}
 		else
 		{
-			invulnerable = false;
 			actionState = IDLE;
 		}
 	}
@@ -425,7 +438,6 @@ bool Player::Damaged(float dt)
 		actionState = IDLE;
 		damaged = false;
 		sprite->tint = { 255, 255, 255, 100 };
-		LOG("DAMAGED FALSE");
 	}
 		
 	Move(SDL_ceil(linearMovement.x*damagedSpeed*dt), SDL_ceil(linearMovement.y*damagedSpeed*dt));
@@ -443,7 +455,10 @@ bool Player::Talking(float dt)
 		App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState);
 		firstText = false;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
 		if (toTalk != nullptr)
 		{
@@ -482,18 +497,23 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-
-			if (actionState != ATTACKING && playerState != EVENT)
+			if (toTalk != nullptr)
+				NextDialog();
+			
+			else
 			{
-				if (stamina - attackTax >= 0)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
-					currentDir = DIRECTION::D_UP;
-					createSwordCollider();
-					stamina -= attackTax;
-					actionState = ATTACKING;
-					LOG("LINK is ATTACKING");
+					if (stamina - attackTax >= 0)
+					{
+						currentDir = DIRECTION::D_UP;
+						createSwordCollider();
+						stamina -= attackTax;
+						actionState = ATTACKING;
+						LOG("LINK is ATTACKING");
+					}
+					break;
 				}
-				break;
 			}
 		}
 		break;
@@ -505,17 +525,22 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (actionState != ATTACKING && playerState != EVENT)
+			if (toTalk != nullptr)
+				NextDialog();
+			else
 			{
-				if (stamina - attackTax >= 0)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
-					currentDir = DIRECTION::D_DOWN;
-					createSwordCollider();
-					stamina -= attackTax;
-					actionState = ATTACKING;
-					LOG("LINK is ATTACKING");
+					if (stamina - attackTax >= 0)
+					{
+						currentDir = DIRECTION::D_DOWN;
+						createSwordCollider();
+						stamina -= attackTax;
+						actionState = ATTACKING;
+						LOG("LINK is ATTACKING");
+					}
+					break;
 				}
-				break;
 			}
 		}
 		break;
@@ -527,17 +552,22 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (actionState != ATTACKING && playerState != EVENT)
+			if (toTalk != nullptr)
+				NextDialog();
+			else
 			{
-				if (stamina - attackTax >= 0)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
-					currentDir = DIRECTION::D_LEFT;
-					createSwordCollider();
-					stamina -= attackTax;
-					actionState = ATTACKING;
-					LOG("LINK is ATTACKING");
+					if (stamina - attackTax >= 0)
+					{
+						currentDir = DIRECTION::D_LEFT;
+						createSwordCollider();
+						stamina -= attackTax;
+						actionState = ATTACKING;
+						LOG("LINK is ATTACKING");
+					}
+					break;
 				}
-				break;
 			}
 		}
 		break;
@@ -549,17 +579,22 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			break;
 
 		case E_DOWN:
-			if (actionState != ATTACKING && playerState != EVENT)
+			if (toTalk != nullptr)
+				NextDialog();
+			else
 			{
-				if (stamina - attackTax >= 0)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
-					currentDir = DIRECTION::D_RIGHT;
-					createSwordCollider();
-					stamina -= attackTax;
-					actionState = ATTACKING;
-					LOG("LINK is ATTACKING");
+					if (stamina - attackTax >= 0)
+					{
+						currentDir = DIRECTION::D_RIGHT;
+						createSwordCollider();
+						stamina -= attackTax;
+						actionState = ATTACKING;
+						LOG("LINK is ATTACKING");
+					}
+					break;
 				}
-				break;
 			}
 		}
 		break;
@@ -631,5 +666,26 @@ void Player::resetSwordCollider()
 	{
 		swordCollider->to_delete = true;
 		swordCollider = nullptr;
+	}
+}
+
+void Player::NextDialog()
+{
+	if (toTalk != nullptr)
+	{
+		App->dialog->dialogueStep++;
+		if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
+		{
+			playerState = ACTIVE;
+			App->dialog->text_on_screen->Set_Active_state(false);
+			if (toTalk->dialogState == 0)
+			{
+				toTalk->dialogState++;
+			}
+			App->dialog->dialogueStep = 0;
+			int test = toTalk->dialogState;
+			firstText = true;
+			toTalk = nullptr;
+		}
 	}
 }

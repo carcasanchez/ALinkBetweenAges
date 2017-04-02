@@ -43,22 +43,10 @@
 
   <sceneManager>
     <scenes folder = "scenes/">
-      <scene name = "Test Scene" file = "kakariko.xml"/>
-      <scene name = "menu" file = "kakariko.xml"/>
-      <scene name = "kakariko" file = "kakariko.xml"/>
-      <scene name = "forest" file = "kakariko.xml"/>
-      <scene name = "greenZone1" file = "kakariko.xml"/>
-      <scene name = "greenZone2" file = "kakariko.xml"/>
-      <scene name = "witchHouse" file = "kakariko.xml"/>
-      <scene name = "desert1" file = "kakariko.xml"/>
-      <scene name = "desert2" file = "kakariko.xml"/>
-      <scene name = "dunes" file = "kakariko.xml"/>
-      <scene name = "temple" file = "kakariko.xml"/>
-      <scene name = "dungeon" file = "kakariko.xml"/>
-      <scene name = "masterSword" file = "kakariko.xml"/>
-      <scene name = "castleOut" file = "kakariko.xml"/>
-      <scene name = "castleIn" file = "kakariko.xml"/>
-      <scene name = "boss" file = "kakariko.xml"/>
+      <scene name = "kakarikoVillage" file = "kakariko_village.xml"/>
+      <scene name = "kakarikoForest" file = "kakariko_forest.xml"/>
+      <scene name = "insideCastle" file = "inside_castle.xml"/>
+      <scene name = "outsideCastle" file = "outside_castle.xml"/>
     </scenes>
   </sceneManager>
   

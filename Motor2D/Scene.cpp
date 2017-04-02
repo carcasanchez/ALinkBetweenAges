@@ -151,7 +151,6 @@ bool Scene::Update(float dt)
 	for (; exit != exits[currentSector].cend() && ret; exit++)
 		(*exit)->Update();
 
-	App->map->Draw();
 
 	exit = exits[currentSector].begin();
 	for (; exit != exits[currentSector].cend() && ret; exit++)

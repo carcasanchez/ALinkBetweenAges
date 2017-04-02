@@ -11,6 +11,7 @@ class j1EntityManager;
 class Hud;
 class Collider;
 
+
 class j1GameLayer : public j1Module
 {
 public:
@@ -34,6 +35,9 @@ public:
 
 	bool        pause = false;
 	bool		quit_game = false;
+
+	int playerX = 133;
+	int playerY = 248;
 };
 
 

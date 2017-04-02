@@ -23,6 +23,9 @@ public:
 
 public:
 
+	//Enemies defeated
+	int defeatedEnemies = 0;
+
 	//Base
 	int maxLife;
 	float maxStamina;
@@ -43,6 +46,7 @@ public:
 
 
 	bool invulnerable;
+	bool dodging = false;
 	Npc* toTalk = nullptr;
 
 	PLAYER_STATE playerState = ACTIVE;
@@ -62,7 +66,7 @@ private:
 
 	bool Talking(float dt);
 
-	bool dodging = false;
+
 	//For Input callback
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 
@@ -81,6 +85,7 @@ private:
 	void resetSwordCollider();
 
 	//Dialogue
+	void NextDialog();
 	bool firstText = true; //Enter once in to the function
 };
 

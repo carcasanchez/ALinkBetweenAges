@@ -12,6 +12,9 @@
 #include "UI_Image.h"
 #include "UI_Interactive_String.h"
 #include "UI_String.h"
+#include "UI_Heart.h"
+#include "Bezier.h"
+#include "UI_Stamina.h"
 #include "UI_Button.h"
 
 j1Gui::j1Gui() : j1Module()
@@ -31,6 +34,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 	scale_factor = scale_factor / App->win->GetScale();
+
+	bezier_curve = new CBeizier();
 
 	return ret;
 }
@@ -136,6 +141,12 @@ UI_element* j1Gui::Add_element(UI_TYPE TYPE, j1Module* element_module)
 		break;
 	case SCROLL:
 		ret = new UI_Scroll(TYPE, element_module);
+		break;
+	case HEART:
+		ret = new UI_Heart(TYPE, element_module);
+		break;
+	case STAMINA_BAR:
+		ret = new UI_Stamina(TYPE, element_module);
 		break;
 	
 	}

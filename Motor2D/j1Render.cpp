@@ -8,6 +8,7 @@
 #include "j1Gui.h"
 #include "j1Input.h"
 #include "j1CollisionManager.h"
+#include "j1Map.h"
 
 #define VSYNC true
 
@@ -90,6 +91,9 @@ bool j1Render::PostUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
 
+
+	App->map->Draw();
+
 	std::map<spriteLayer, std::multimap<int, Sprite*>>::iterator layer;
 	for (layer = spriteMap.begin(); layer != spriteMap.end(); layer++)
 	{
@@ -104,7 +108,11 @@ bool j1Render::PostUpdate()
 		layer->second.clear();
 	}
 
+
+	App->map->DrawOver();
+
 	PrintUI();
+	
 
 	App->collisions->DrawDebug();
 

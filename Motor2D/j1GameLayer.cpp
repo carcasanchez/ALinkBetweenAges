@@ -45,9 +45,8 @@ bool j1GameLayer::Start()
 	bool ret = true;
 
 	active = true;
-
 	hud->Start();
-	em->player = em->CreatePlayer(107, 232);
+	em->player = em->CreatePlayer(playerX, playerY);
 	ret = em->player != NULL;
 
 	return ret;
@@ -75,10 +74,12 @@ bool j1GameLayer::Update(float dt)
 
 	App->render->CameraFollow(em->player->currentPos);
 
-	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 	{
-		iPoint mousePos = App->map->WorldToMap(em->player->currentPos.x, em->player->currentPos.y);
-		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x-5, mousePos.y-5, vector<iPoint>());
+		iPoint mousePos;
+		App->input->GetMousePosition(mousePos.x, mousePos.y);
+		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
+		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
 	}
 		
 	
@@ -129,27 +130,26 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
+ 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
 	{
-		if (em->player->invulnerable == false && em->player->actionState != DODGING)
+		if (em->player->invulnerable == false && em->player->dodging == false)
 		{
+  			if (em->player != nullptr)
+			  {
+				  em->player->damaged = em->player->invulnerable = true;
+				  em->player->damagedTimer.Start();
+				  em->player->life -= c2->parent->damage;
+				  hud->UpdateHearts();
+				  em->player->sprite->tint = { 100, 0, 0, 255 };
 
- 			if (em->player != NULL)
-			{
-				em->player->damaged = em->player->invulnerable = true;
-				em->player->damagedTimer.Start();
-				LOG("DAMAGED TIMER STARTED");
-				em->player->life -= c2->parent->damage;
-				em->player->sprite->tint = { 100, 0, 0, 255 };
+				  if (c1->rect.x < c2->rect.x)
+					  em->player->linearMovement.x = -1;
+				  else em->player->linearMovement.x = 1;
 
-				if (c1->rect.x < c2->rect.x)
-					em->player->linearMovement.x = -1;
-				else em->player->linearMovement.x = 1;
-
-				if (c1->rect.y < c2->rect.y)
-					em->player->linearMovement.y = -1;
-				else em->player->linearMovement.y = 1;
-			}
+				  if (c1->rect.y < c2->rect.y)
+					  em->player->linearMovement.y = -1;
+				  else em->player->linearMovement.y = 1;
+			  }
 		}
 
 		return true;
@@ -171,10 +171,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 		if (c2->type == COLLIDER_ENEMY)
 		{
-		/*	switch (((Enemy*)(c2->parent))->enemyState)
+			switch (((Enemy*)(c2->parent))->enemyState)
 			{
 			case KEEP_DISTANCE:
-				break;
 			case CHASING:
 				iPoint Movement;
 				if (c1->parent->currentPos.DistanceTo(c2->parent->currentPos) > 10)
@@ -188,9 +187,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 					Movement.y = 1;
 				else Movement.y = -1;
 
-				c2->parent->Move(SDL_ceil(c2->parent->speed*dt * 5)*Movement.x, SDL_ceil(c2->parent->speed*dt * 5)*Movement.y);
+				c2->parent->Move(SDL_ceil(c2->parent->speed*dt)*Movement.x, SDL_ceil(c2->parent->speed*dt)*Movement.y);
 				break;
-		}*/
+		}
 			return true;
 	}
 	}
