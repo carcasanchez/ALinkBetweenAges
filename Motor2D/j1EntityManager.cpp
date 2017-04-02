@@ -49,8 +49,12 @@ bool j1EntityManager::PreUpdate()
 		if ((*item)->life <= 0)
 		{
 			(*item)->OnDeath();
-			if((*item)->toDelete)
+			if ((*item)->toDelete)
+			{
+				delete (*item);
 				item = entities[*sector].erase(item); //calls destroyer
+			}
+				
 		}
 		else
 		{
@@ -201,6 +205,7 @@ bool j1EntityManager::CleanEntities()
 	{
 		for (std::list<Entity*>::iterator item = entities[i].begin(); item != entities[i].end(); item++)
 		{
+			delete (*item);
 			entities[i].erase(item);
 		}
 

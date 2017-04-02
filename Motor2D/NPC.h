@@ -17,6 +17,7 @@ class Npc : public Entity, public InputListener
 public:
 
 	Npc();
+	~Npc() {};
 
 	NPC_TYPE npcType;
 	bool Spawn(std::string file, iPoint pos, NPC_TYPE);

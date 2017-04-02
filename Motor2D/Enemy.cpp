@@ -11,6 +11,9 @@
 #include <math.h>
 #include <time.h>
 #include "Player.h"
+#include "Animation.h"
+
+
 
 void Enemy::OnDeath()
 {

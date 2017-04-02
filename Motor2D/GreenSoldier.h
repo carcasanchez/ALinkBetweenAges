@@ -7,7 +7,7 @@ class GreenSoldier : public Enemy
 {
 public:
 	GreenSoldier():Enemy() {};
-	~GreenSoldier(){};
+	~GreenSoldier() {};
 
 	bool Spawn(std::string file, iPoint pos);
 	bool Update(float dt);

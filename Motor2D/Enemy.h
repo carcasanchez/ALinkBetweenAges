@@ -25,7 +25,8 @@ class Enemy : public Entity
 {
 public:
 	Enemy() :Entity() {};
-	
+
+
 	virtual bool Spawn(std::string file, iPoint pos) { return true; };
 	virtual bool Update(float dt) { return true; };
 	virtual void OnDeath();
