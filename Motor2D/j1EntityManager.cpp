@@ -11,15 +11,14 @@
 #include "j1SceneManager.h"
 #include "Scene.h"
 #include "j1Map.h"
+#include "p2Defs.h"
 
 //=====Enemy Includes
 #include "GreenSoldier.h"
 
 
-j1EntityManager::j1EntityManager()
-{
-	
-}
+j1EntityManager::j1EntityManager() : player(NULL), sector(NULL)
+{}
 
 bool j1EntityManager::Awake(pugi::xml_node & config)
 {
@@ -44,14 +43,14 @@ bool j1EntityManager::PreUpdate()
 	bool ret = true;
 
 	// check for dead entities
-	std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin();
-	while (item != entities[App->sceneM->currentScene->currentSector].end())
+	std::list<Entity*>::iterator item = entities[*sector].begin();
+	while (item != entities[*sector].end())
 	{
 		if ((*item)->life <= 0)
 		{
 			(*item)->OnDeath();
 			if((*item)->toDelete)
-				item = entities[App->sceneM->currentScene->currentSector].erase(item); //calls destroyer
+				item = entities[*sector].erase(item); //calls destroyer
 		}
 		else
 		{
@@ -59,7 +58,7 @@ bool j1EntityManager::PreUpdate()
 		}
 
 		// reasign ids
-		if(item != entities[App->sceneM->currentScene->currentSector].end())
+		if(item != entities[*sector].end())
 			(*item)->id = item;
 	}
 
@@ -70,7 +69,14 @@ bool j1EntityManager::Update(float dt)
 {
 	bool ret = true;
 
-	for (std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin(); item != entities[App->sceneM->currentScene->currentSector].end(); item++)
+	if (!player->sceneOverride)
+	{
+		player->Update(dt);
+		player->UpdateCollider();
+	}
+	
+
+	for (std::list<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
 	{		
 		if (App->render->InsideCameraZone((*item)->col->rect))
 		{
@@ -87,7 +93,12 @@ bool j1EntityManager::PostUpdate()
 {
 	bool ret = true;
 
-	for (std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin(); item != entities[App->sceneM->currentScene->currentSector].end(); item++)
+	if (!player->sceneOverride)
+	{
+		player->Draw();
+	}
+
+	for (std::list<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
 	{
 		(*item)->Draw();
 	}
@@ -99,10 +110,8 @@ bool j1EntityManager::CleanUp()
 {
 	bool ret = true;
 
-	for (std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin(); item != entities[App->sceneM->currentScene->currentSector].end(); item++)
-	{
-		entities[App->sceneM->currentScene->currentSector].erase(item);
-	}
+	RELEASE(player);
+	CleanEntities();
 
 	return ret;
 }
@@ -114,10 +123,11 @@ Player* j1EntityManager::CreatePlayer(int x, int y)
 
 	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
 
-	ret->Spawn(dir[LINK], worldPos);
-	ret->type = LINK;
-	entities[App->sceneM->currentScene->currentSector].push_front(ret);
-	App->game->playerId = ret->id = entities[App->sceneM->currentScene->currentSector].begin();
+	if (!ret->Spawn(dir[LINK], worldPos))
+	{
+		RELEASE(ret);
+		ret = NULL;
+	}
 	
 	return ret;
 }
@@ -136,20 +146,25 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, 
 
 	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
 
-	ret->Spawn(dir[ENEMY], worldPos);
-	ret->type = ENEMY;
-	entities[App->sceneM->currentScene->currentSector].push_back(ret);
-	ret->id = entities[App->sceneM->currentScene->currentSector].end();
-	
-	//Take patrol points from xml	
-	ret->patrolPoints = patrolPoints;
+	if (ret->Spawn(dir[ENEMY], worldPos))
+	{
+		ret->type = ENEMY;
+		entities[sector].push_back(ret);
+		ret->id = entities[sector].end();
+		ret->patrolPoints = patrolPoints;
+	}
+	else
+	{
+		RELEASE(ret);
+		ret = NULL;
+	}
 
-	return nullptr;
+	return ret;
 }
 
 Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int id)
 {
-	Npc* ret = nullptr;
+	Npc* ret = NULL;
 
 	switch (type)
 	{
@@ -160,13 +175,44 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 
 	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
 
-	ret->Spawn(dir[NPC], worldPos, type);
-	ret->type = NPC;
-	entities[App->sceneM->currentScene->currentSector].push_back(ret);
-	ret->id = entities[App->sceneM->currentScene->currentSector].end();
-	
-	//For dialog purposes
-	ret->npcId = id;
+	if (ret->Spawn(dir[NPC], worldPos, type))
+	{
+		ret->type = NPC;
+		entities[sector].push_back(ret);
+		ret->id = entities[sector].end();
 
-	return nullptr;
+		//For dialog purposes
+		ret->npcId = id;
+	}
+	else
+	{
+		RELEASE(ret);
+		ret = NULL;
+	}
+
+	return ret;
+}
+
+bool j1EntityManager::CleanEntities()
+{
+	bool ret = true;
+
+	for (int i = 1; i <= App->sceneM->currentScene->maxSectors; i++)
+	{
+		for (std::list<Entity*>::iterator item = entities[i].begin(); item != entities[i].end(); item++)
+		{
+			entities[i].erase(item);
+		}
+
+		entities[i].clear();
+	}
+
+	entities.clear();
+
+	return ret;
+}
+
+void j1EntityManager::SetSectorRef(int*s)
+{
+	sector = s;
 }

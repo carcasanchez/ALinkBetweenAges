@@ -84,6 +84,7 @@
     <ClCompile Include="DialogManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Exit.cpp" />
     <ClCompile Include="GreenSoldier.cpp" />
     <ClCompile Include="UI_Heart.cpp" />
     <ClCompile Include="HUD.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="DialogManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Exit.h" />
     <ClInclude Include="GreenSoldier.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="InputManager.h" />

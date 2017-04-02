@@ -23,7 +23,6 @@ j1GameLayer::j1GameLayer() : j1Module()
 {
 	name = ("game");
 	em = new j1EntityManager();
-	//playerId = em->entities[App->sceneM->currentScene->currentSector].end();
 	hud = new Hud();
 }
 
@@ -43,13 +42,16 @@ bool j1GameLayer::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1GameLayer::Start()
 {
+	bool ret = true;
+
 	active = true;
+	em->player = em->CreatePlayer(playerX, playerY);
 
-
-	em->CreatePlayer(playerX, playerY);
 	hud->Start();
+	
+	ret = em->player != NULL;
 
-	return true;
+	return ret;
 }
 
 //preUpdate
@@ -72,7 +74,7 @@ bool j1GameLayer::Update(float dt)
 	
 	ret = hud->Update(dt);
 
-	App->render->CameraFollow((*playerId)->currentPos);
+	App->render->CameraFollow(em->player->currentPos);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 	{
@@ -132,25 +134,24 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
  	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
 	{
-		if (((Player*)(*playerId))->invulnerable == false && ((Player*)(*playerId))->dodging == false)
+		if (em->player->invulnerable == false && em->player->dodging == false)
 		{
+  			if (em->player != nullptr)
+			  {
+				  em->player->damaged = em->player->invulnerable = true;
+				  em->player->damagedTimer.Start();
+				  em->player->life -= c2->parent->damage;
+				  hud->UpdateHearts();
+				  em->player->sprite->tint = { 100, 0, 0, 255 };
 
-  			if ((*playerId) != nullptr)
-			{
-				(*playerId)->damaged = ((Player*)(*playerId))->invulnerable = true;
-				(*playerId)->damagedTimer.Start();
-				(*playerId)->life -= c2->parent->damage;
-				hud->UpdateHearts();
-				(*playerId)->sprite->tint = { 100, 0, 0, 255 };
+				  if (c1->rect.x < c2->rect.x)
+					  em->player->linearMovement.x = -1;
+				  else em->player->linearMovement.x = 1;
 
-				if (c1->rect.x < c2->rect.x)
-					(*playerId)->linearMovement.x = -1;
-				else (*playerId)->linearMovement.x = 1;
-
-				if (c1->rect.y < c2->rect.y)
-					(*playerId)->linearMovement.y = -1;
-				else (*playerId)->linearMovement.y = 1;
-			}
+				  if (c1->rect.y < c2->rect.y)
+					  em->player->linearMovement.y = -1;
+				  else em->player->linearMovement.y = 1;
+			  }
 		}
 
 		return true;
@@ -162,7 +163,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		{
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
 			{
-				c1->parent->life -= (*playerId)->damage;
+				c1->parent->life -= em->player->damage;
 				c1->parent->sprite->tint = { 255, 150, 150, 255 };
 				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
 				c1->parent->damagedTimer.Start();
@@ -199,7 +200,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		if (c2->type == COLLIDER_LINK_SWORD)
 		{
-			((Player*)(*playerId))->toTalk = (Npc*)c1->parent;
+			em->player->toTalk = (Npc*)c1->parent;
 		}
 	}
 		

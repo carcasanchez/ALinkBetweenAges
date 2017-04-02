@@ -33,8 +33,6 @@ public:
 	j1EntityManager*	em = NULL;
 	Hud*				hud = NULL;
 
-	std::list<Entity*>::iterator playerId;
-
 	bool        pause = false;
 	bool		quit_game = false;
 

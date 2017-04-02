@@ -9,7 +9,7 @@
 #include "j1PathFinding.h"
 #include "j1Render.h"
 
-TestScene::TestScene() : Scene("Test Scene") {}
+TestScene::TestScene() {}
 
 bool TestScene::Load(std::string _data)
 {

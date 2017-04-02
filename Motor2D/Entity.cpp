@@ -10,6 +10,8 @@
 #include "j1Map.h"
 #include "j1Pathfinding.h"
 #include "j1GameLayer.h"
+#include "j1EntityManager.h"
+#include "Player.h"
 
 Entity::Entity() :
 	sprite(nullptr),
@@ -24,8 +26,7 @@ Entity::Entity() :
 	life(1),
 	damage(0),
 	damaged(false),
-	toDelete(false),
-	currentPatrolPoint(0)
+	toDelete(false)
 {
 	anim.clear();
 }
@@ -42,8 +43,7 @@ Entity::Entity(ENTITY_TYPE type) :
 	type(type),
 	life(1),
 	damaged(false),
-	toDelete(false),
-	currentPatrolPoint(0)
+	toDelete(false)
 {
 	anim.clear();
 }
@@ -209,6 +209,19 @@ bool Entity::Move(int x, int y)
 	return ret;
 }
 
+bool Entity::MoveTo(int x, int y)
+{
+	bool ret = true;
+
+	// check if position is available/walkable
+
+	currentPos.x = x;
+	currentPos.y = y;
+	UpdateCollider();
+
+	return ret;
+}
+
 void Entity::UpdateCollider()
 {
 	col->rect.x = currentPos.x - colPivot.x;
@@ -309,7 +322,7 @@ bool Entity::GoTo(iPoint dest, int speed, float dt)
 //Makes entity look to player. Returns true if the direction changes
 bool Entity::LookToPlayer()
 {
-	iPoint playerPos = (*App->game->playerId)->currentPos;
+	iPoint playerPos = App->game->em->player->currentPos;
 
 	DIRECTION prevDir = currentDir;
 

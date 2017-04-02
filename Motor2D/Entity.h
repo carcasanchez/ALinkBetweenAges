@@ -57,13 +57,13 @@ public:
 
 
 	virtual bool Move(int x, int y);
+	virtual bool MoveTo(int, int);
 	virtual void UpdateCollider();
 
 	virtual bool GoTo(iPoint dest, int speed, float dt);
 	virtual bool LookToPlayer();
 
 public:
-
 	// Position in Entity Manager
 	std::list<Entity*>::iterator id;
 
@@ -99,13 +99,6 @@ public:
 
 	//Marked to death
 	bool toDelete;
-
-	//Patroling points (in tiles)
-	bool patroling;
-	vector<iPoint> patrolPoints;
-	int currentPatrolPoint;
-
-
 };
 
 #endif // !_ENTITY_H_

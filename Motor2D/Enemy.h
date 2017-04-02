@@ -27,7 +27,7 @@ public:
 	Enemy() :Entity() {};
 	
 	virtual bool Spawn(std::string file, iPoint pos) { return true; };
-	virtual bool Update(float dt);
+	virtual bool Update(float dt) { return true; };
 	virtual void OnDeath();
 
 
@@ -61,7 +61,10 @@ public:
 	int flankingSpeed;
 	int attackSpeed;
 	
-
+	//Patroling points (in tiles)
+	bool patroling;
+	vector<iPoint> patrolPoints;
+	int currentPatrolPoint = 0;
 
 protected:
 	iPoint currentDest = { 0, 0 };

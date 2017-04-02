@@ -28,8 +28,6 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_NPC] = true;
-	
-	matrix[COLLIDER_NPC][COLLIDER_LINK_SWORD] = true;
 
 	//Enemy collisions
 	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
@@ -77,7 +75,7 @@ bool j1CollisionManager::Update(float dt)
 			c2 = (*it2);
 
 			
-			if (c1->CheckCollision(c2->rect) == true)
+			if (c1->CheckCollision(c2->rect))
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
 					c1->callback->On_Collision_Callback(c1, c2, dt);
@@ -85,11 +83,7 @@ bool j1CollisionManager::Update(float dt)
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->On_Collision_Callback(c2, c1, dt);
 			}
-				
-
-		
 		}
-
 	}
 
 	return true;

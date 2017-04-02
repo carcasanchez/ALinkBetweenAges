@@ -2,6 +2,8 @@
 #define _SCENE_MANAGER_H_
 
 #include "j1Module.h"
+#include "p2Point.h"
+#include "Exit.h"
 #include <map>
 
 /*enum SCENE_NAME
@@ -41,12 +43,21 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	bool ChangeScene(std::string);
+	void RequestSceneChange(Exit*);
+	bool ChangeScene();
 
 public:
 	Scene* currentScene;
 
 	std::map<std::string, std::string> data;
+
+	bool changeRequest = false;
+
+private:
+
+	std::string destiny;
+	int exitDest;
+	DIRECTION dir;
 };
 
 

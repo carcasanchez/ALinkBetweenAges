@@ -6,35 +6,25 @@
 #include "j1Pathfinding.h"
 #include "j1CollisionManager.h"
 #include "j1Render.h"
+#include "j1EntityManager.h"
+#include "Player.h"
 #include <math.h>
 #include <time.h>
 #include "Player.h"
-
-bool Enemy::Update(float dt)
-{
-	return true;
-}
-
-
 
 void Enemy::OnDeath()
 {
 	toDelete = true;
 	col->to_delete = true;
-	((Player*)(*App->game->playerId))->defeatedEnemies++;
-	LOG("Defeated Enemies: %i", ((Player*)(*App->game->playerId))->defeatedEnemies);
+	App->game->em->player->defeatedEnemies++;
+	LOG("Defeated Enemies: %i", (App->game->em->player->defeatedEnemies));
 }
-
-
-
-
-
 
 //Move between different points
 bool Enemy::Patroling(float dt)
 {
 	actionState = WALKING;
-	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) < hostileRange)
+	if (App->game->em->player->currentPos.DistanceTo(currentPos) < hostileRange)
 	{
 		enemyState = CHASING;
 		return true;
@@ -62,7 +52,7 @@ bool Enemy::Patroling(float dt)
 //Persecute Player
 bool Enemy::Chasing(float dt)
 {
-	int playerDistance = (*App->game->playerId)->currentPos.DistanceTo(currentPos);
+	int playerDistance = App->game->em->player->currentPos.DistanceTo(currentPos);
 	if (playerDistance >= hostileRange)
 	{
 		enemyState = PATROLING;
@@ -76,8 +66,8 @@ bool Enemy::Chasing(float dt)
 		srand(time(NULL));
 		flankingDir = rand() % 2;
 	}
-
-	iPoint playerTile = App->map->WorldToMap((*App->game->playerId)->currentPos.x, (*App->game->playerId)->currentPos.y);
+  
+	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 
 	GoTo(playerTile, chaseSpeed, dt);
 	LookToPlayer();
@@ -92,14 +82,14 @@ bool Enemy::KeepDistance(float dt)
 
 
 	//If link is out of range, stop chase
-	if ((*App->game->playerId)->currentPos.DistanceTo(currentPos) > fightRange*1.5)
+	if (App->game->em->player->currentPos.DistanceTo(currentPos) > fightRange*1.5)
 	{
 		enemyState = CHASING;
 	}
 
 
 	//Choose randomly if the flanking direction changes
-	if (abs((*App->game->playerId)->currentPos.x - currentPos.x) == abs((*App->game->playerId)->currentPos.y - currentPos.y))
+	if (abs(App->game->em->player->currentPos.x - currentPos.x) == abs(App->game->em->player->currentPos.y - currentPos.y))
 	{
 		srand(time(NULL));
 		bool change = rand() % 2;
@@ -115,7 +105,7 @@ bool Enemy::KeepDistance(float dt)
 	{	
 		srand(time(NULL));
 		bool attack = rand() % 2;
-		if (abs(currentPos.y - (*App->game->playerId)->currentPos.y)<3 || abs(currentPos.x - (*App->game->playerId)->currentPos.x)<3)
+		if (abs(currentPos.y - App->game->em->player->currentPos.y)<3 || abs(currentPos.x - App->game->em->player->currentPos.x)<3)
 		{
 			attackTimer.Start();
 			enemyState = CHARGING;
@@ -178,10 +168,10 @@ bool Enemy::StepBack(float dt)
 {
 	iPoint movement;
 
-	if ((*App->game->playerId)->currentPos.x > currentPos.x)
+	if (App->game->em->player->currentPos.x > currentPos.x)
 		movement.x = -1;
 	else movement.x = +1;
-	if ((*App->game->playerId)->currentPos.y > currentPos.y)
+	if (App->game->em->player->currentPos.y > currentPos.y)
 		movement.y = -1;
 	else movement.y = +1;
 

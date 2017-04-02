@@ -15,7 +15,10 @@
 #include "DialogManager.h"
 #include "InputManager.h"
 
-Player::Player() : Entity() { App->inputM->AddListener(this); }
+Player::Player() : Entity(LINK)
+{
+	App->inputM->AddListener(this);
+}
 
 bool Player::Spawn(std::string file, iPoint pos)
 {
