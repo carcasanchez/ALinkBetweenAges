@@ -70,6 +70,7 @@ bool Enemy::Chasing(float dt)
 	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 
 	GoTo(playerTile, chaseSpeed, dt);
+	LookToPlayer();
 
 	return true;
 }
