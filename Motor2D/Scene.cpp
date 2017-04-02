@@ -129,7 +129,6 @@ bool Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
-	App->map->Draw();
 
 	return ret;
 }

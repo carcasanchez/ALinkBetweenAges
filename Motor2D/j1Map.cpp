@@ -79,6 +79,9 @@ void j1Map::Draw()
 
 		if (layer->properties.Get("Nodraw") != 0 && layer->properties.Get("Enemy") != 0 && debug_enemy_collisions == false)
 			continue;
+
+		if (layer->properties.Get("Paintover"))
+			continue;
 					
 		for (int x = cameraSection.x; x < cameraSection.x + cameraSection.w; x++)
 		{
@@ -99,6 +102,48 @@ void j1Map::Draw()
 				
 		
 
+	}
+
+}
+
+void j1Map::DrawOver()
+{
+	if (map_loaded == false)
+		return;
+
+
+	SDL_Rect cameraSection;
+
+	cameraSection.x = App->render->renderZone.x / data->tile_width;
+	cameraSection.y = App->render->renderZone.y / data->tile_height;
+	cameraSection.w = (App->render->renderZone.w / data->tile_width) + 1;
+	cameraSection.h = (App->render->renderZone.h / data->tile_width) + 1;
+
+	for (list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
+	{
+		MapLayer* layer = (*item);
+
+		if (layer->properties.Get("Paintover") == 0)
+			continue;
+
+		for (int x = cameraSection.x; x < cameraSection.x + cameraSection.w; x++)
+		{
+			for (int y = cameraSection.y; y < cameraSection.y + cameraSection.h; y++)
+			{
+
+				int tile_id = layer->Get(x, y);
+				if (tile_id > 0)
+				{
+					iPoint pos = MapToWorld(x, y);
+					TileSet* tileset = GetTilesetFromTileId(tile_id);
+					SDL_Rect r = tileset->GetTileRect(tile_id);
+					App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+				}
+			}
+
+		}
+
+		break;
 	}
 
 }

@@ -122,7 +122,7 @@ bool Player::Update(float dt)
 
 void Player::OnDeath()
 {
-	currentPos = App->map->MapToWorld( 133, 249 );
+	currentPos = App->map->MapToWorld( App->game->playerX, App->game->playerY);
 	life = 3;
 	App->game->hud->RestoreHearts();
 	damaged = invulnerable = false;

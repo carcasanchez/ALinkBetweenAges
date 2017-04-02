@@ -123,6 +123,7 @@ public:
 
 	// Called each loop iteration
 	void Draw();
+	void DrawOver();
 
 	// Called before quitting
 	bool CleanUp();

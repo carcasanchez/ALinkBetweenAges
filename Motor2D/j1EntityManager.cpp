@@ -47,7 +47,7 @@ bool j1EntityManager::PreUpdate()
 	std::list<Entity*>::iterator item = entities[App->sceneM->currentScene->currentSector].begin();
 	while (item != entities[App->sceneM->currentScene->currentSector].end())
 	{
-		if ((*item)->life < 0)
+		if ((*item)->life <= 0)
 		{
 			(*item)->OnDeath();
 			if((*item)->toDelete)
