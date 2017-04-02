@@ -11,11 +11,17 @@ public:
 
 	UI_Stamina(UI_TYPE, j1Module*);
 
-	bool		UpdateDraw();
+	bool		Update();
+	bool		Update_Draw();
 
 	bool		SetBackground(UI_Image*);
 	bool		SetStamina(UI_Image*);
 	bool		SetDrawRect(SDL_Rect);
+
+	void		WasteStamina(int);
+	void		RecoverStamina(float);
+
+	SDL_Rect	move_rect;
 
 private:
 
@@ -23,9 +29,12 @@ private:
 	UI_Image*	stamina = nullptr;
 
 	SDL_Rect	draw_rect;
-	SDL_Rect	move_rect;
+
+
+	void		PrintBar();
 
 };
 
 
 #endif // !_UI_STAMINA_H_
+

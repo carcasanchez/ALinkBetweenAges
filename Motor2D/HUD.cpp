@@ -4,7 +4,6 @@
 #include "j1FileSystem.h"
 #include "j1GameLayer.h"
 #include "j1EntityManager.h"
-#include "Player.h"
 #include "p2Log.h"
 
 Hud::Hud()
@@ -17,12 +16,12 @@ bool Hud::Awake(pugi::xml_node& conf)
 
 	string hud_folder = hud_attributes.attribute("folder").as_string();
 	string pause_folder = hud_attributes.attribute("folder").as_string();
-	
+
 	hud_folder += hud_attributes.child("ingame").attribute("file").as_string();
 	pause_folder += hud_attributes.child("pause").attribute("file").as_string();
 
 	hud_screen = App->gui->CreateScreen(hud_screen);
-	
+
 	LoadPause(pause_folder);
 	LoadHud(hud_folder);
 
@@ -40,7 +39,7 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
-	
+
 	if (pause_transition == PAUSE_UP)
 		PauseOut(dt);
 
@@ -49,12 +48,17 @@ bool Hud::Update(float dt)
 		AddHearts();
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	{
+		stamina_bar->move_rect.x -= 10;
+	}
+
 	return false;
 }
 
 void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 {
-	
+
 	switch (new_event)
 	{
 	case PAUSE:
@@ -66,23 +70,23 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 				main_menu->SetAnimationTransition(T_FLY_UP, 1500, { main_menu->Interactive_box.x, -650 });
 			}
 			else
-			{	
+			{
 				IntoPause();
-			}	
+			}
 		}
 		break;
 
 	case UP:
 		for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
 		{
-			
+
 			if ((*it)->active && (it + 1) != pause_selectables.rend())
 			{
 				(*it)->active = false;
 				(*(it + 1))->Set_Active_state(true);
 				break;
 			}
-				
+
 		}
 		break;
 
@@ -187,11 +191,11 @@ SDL_Rect Hud::LoadRect(pugi::xml_node node)
 void Hud::SetPauseElements()
 {
 	main_menu->Set_Interactive_Box({ 50, -650,0,0 });
-	item_menu->Set_Interactive_Box({720,0,0,0});
+	item_menu->Set_Interactive_Box({ 720,0,0,0 });
 	resume->Set_Interactive_Box({ 72,86,0,0 });
 	quit->Set_Interactive_Box({ 72,528,0,0 });
 
-	
+
 	quit->Set_Active_state(false);
 
 	main_menu->Set_Active_state(true);
@@ -214,7 +218,7 @@ bool Hud::IntoPause()
 void Hud::GonePause()
 {
 	main_menu->QuitFromRender();
-	
+
 	for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
 		(*it)->Set_Active_state(false);
 
@@ -254,13 +258,15 @@ bool Hud::LoadHud(string file)
 		Arrows = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		items_frame = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		life = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		stamina_bar = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		stamina_container = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		stamina_green = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		stamina_bar = (UI_Stamina*)App->gui->Add_element(STAMINA_BAR, App->game);
 		empty_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		medium_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		full_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 
 		pugi::xml_node hud_node = hud_file.child("images");
-		
+
 		//little items
 		Rupees->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("rupees")));
 		Bombs->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("bombs")));
@@ -276,8 +282,10 @@ bool Hud::LoadHud(string file)
 		full_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("full")));
 
 		//stamina
-		stamina_bar->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("bar")));
-	
+		stamina_container->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("bar")));
+		stamina_green->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("sta")));
+
+
 		SetHudElements();
 
 
@@ -309,8 +317,12 @@ void Hud::SetHudElements()
 	medium_heart->Set_Active_state(false);
 	full_heart->Set_Active_state(false);
 
-	stamina_bar->Set_Interactive_Box({ 700, 150,0,0 });
-
+	stamina_bar->Set_Interactive_Box({ 700, 90,0,0 });
+	stamina_bar->SetDrawRect({ 10,10,0,0 });
+	stamina_bar->SetBackground(stamina_container);
+	stamina_bar->SetStamina(stamina_green);
+	stamina_container->Set_Active_state(false);
+	stamina_green->Set_Active_state(false);
 
 
 }
@@ -336,7 +348,7 @@ void Hud::AddHearts()
 	new_heart->heart_img = full_heart;
 
 	iPoint pos = { hearts.back()->Interactive_box.x + (hearts.back()->heart_img->Image.w * 2) + space_between_hearts, hearts.back()->Interactive_box.y };
-	new_heart->Set_Interactive_Box({pos.x, pos.y, 0,0 });
+	new_heart->Set_Interactive_Box({ pos.x, pos.y, 0,0 });
 
 	hud_screen->AddChild(new_heart);
 	hearts.push_back(new_heart);
@@ -349,13 +361,13 @@ void Hud::RestoreHearts()
 		(*it)->heart_img = full_heart;
 		(*it)->h_state = FULL;
 	}
-		
+
 }
 
 void Hud::UpdateHearts()
 {
 	int num_hearts = hearts.size();
-	int empty_hearts = num_hearts - (App->game->em->player->life);
+	int empty_hearts = num_hearts - App->game->em->player->life;
 
 	std::vector<UI_Heart*>::reverse_iterator it = hearts.rbegin();
 
@@ -365,7 +377,7 @@ void Hud::UpdateHearts()
 		{
 			(*it)->heart_img = empty_heart;
 			(*it)->h_state = EMPTY;
-		}	
-		empty_hearts--;	
+		}
+		empty_hearts--;
 	}
 }

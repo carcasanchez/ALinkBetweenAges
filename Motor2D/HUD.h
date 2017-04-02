@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "Player.h"
 #include "UI_Heart.h"
+#include "UI_Stamina.h"
 #include "UI_Image.h"
 #include "InputManager.h"
 
@@ -17,7 +18,7 @@ enum PAUSEMOVE
 	PAUSE_DOWN
 };
 
-class Hud : public InputListener 
+class Hud : public InputListener
 {
 public:
 	Hud();
@@ -58,9 +59,9 @@ public:
 	UI_Image*		items_potion_green;
 
 	//Stamina images
-	UI_Image*		stamina_bar = nullptr;
-	UI_Image*		stamina;
-	UI_Image*		stamina_end;
+	UI_Image*		stamina_container = nullptr;
+	UI_Image*		stamina_green = nullptr;
+	UI_Stamina*		stamina_bar = nullptr;
 
 	//Pause Elements
 	PAUSEMOVE		pause_transition = PAUSE_NO_MOVE;
@@ -90,7 +91,7 @@ private:
 
 	//Life methods
 	void		SetHearts();
-	
+
 
 };
 

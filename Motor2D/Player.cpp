@@ -509,6 +509,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						currentDir = DIRECTION::D_UP;
 						createSwordCollider();
 						stamina -= attackTax;
+						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
 						LOG("LINK is ATTACKING");
 					}
@@ -536,6 +537,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						currentDir = DIRECTION::D_DOWN;
 						createSwordCollider();
 						stamina -= attackTax;
+						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
 						LOG("LINK is ATTACKING");
 					}
@@ -563,6 +565,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						currentDir = DIRECTION::D_LEFT;
 						createSwordCollider();
 						stamina -= attackTax;
+						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
 						LOG("LINK is ATTACKING");
 					}
@@ -590,6 +593,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						currentDir = DIRECTION::D_RIGHT;
 						createSwordCollider();
 						stamina -= attackTax;
+						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
 						LOG("LINK is ATTACKING");
 					}
@@ -603,6 +607,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		if (state == E_DOWN && (stamina - dodgeTax >= 0))
 		{
 			stamina -= dodgeTax;
+			App->game->hud->stamina_bar->WasteStamina(dodgeTax);
 			actionState = DODGING;
 			Change_direction();
 			dodging = true;
