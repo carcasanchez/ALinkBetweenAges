@@ -62,7 +62,4 @@ bool Npc::Update(float dt)
 	return false;
 }
 
-void Npc::OnDeath()
-{
 
-}

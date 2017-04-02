@@ -42,11 +42,14 @@ bool j1EntityManager::PreUpdate()
 {
 	bool ret = true;
 
+	if (player->life <= 0)
+		player->OnDeath();
+
 	// check for dead entities
 	std::list<Entity*>::iterator item = entities[*sector].begin();
 	while (item != entities[*sector].end())
 	{
-		if ((*item)->life <= 0)
+		if ((*item)->life < 0)
 		{
 			(*item)->OnDeath();
 			if ((*item)->toDelete)

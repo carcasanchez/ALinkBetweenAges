@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="220" height="260" tilewidth="8" tileheight="8" nextobjectid="1">
  <tileset firstgid="1" name="tileset_kakariko_castle" tilewidth="8" tileheight="8" tilecount="9810" columns="90">
-  <image source="tileset_kakariko_village.png" width="720" height="872"/>
+  <image source="tilesetKakarikoVillage.png" width="720" height="872"/>
  </tileset>
  <tileset firstgid="9811" name="collisions" tilewidth="8" tileheight="8" tilecount="2" columns="2">
   <image source="collisions.png" width="16" height="8"/>

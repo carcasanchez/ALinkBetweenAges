@@ -22,7 +22,6 @@ public:
 	NPC_TYPE npcType;
 	bool Spawn(std::string file, iPoint pos, NPC_TYPE);
 	virtual bool Update(float dt);
-	virtual void OnDeath();
 
 public:
 
