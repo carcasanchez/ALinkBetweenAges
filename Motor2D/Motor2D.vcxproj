@@ -119,6 +119,7 @@
     <ClCompile Include="UI_element.cpp" />
     <ClCompile Include="UI_Image.cpp" />
     <ClCompile Include="UI_scroll.cpp" />
+    <ClCompile Include="UI_Stamina.cpp" />
     <ClCompile Include="UI_String.cpp" />
     <ClCompile Include="UI_Text_Box.cpp" />
   </ItemGroup>
@@ -167,6 +168,7 @@
     <ClInclude Include="UI_Heart.h" />
     <ClInclude Include="UI_Image.h" />
     <ClInclude Include="UI_scroll.h" />
+    <ClInclude Include="UI_Stamina.h" />
     <ClInclude Include="UI_String.h" />
     <ClInclude Include="UI_Text_Box.h" />
   </ItemGroup>
