@@ -132,6 +132,7 @@ void Player::OnDeath()
 	App->game->hud->RestoreHearts();
 	damaged = invulnerable = false;
 	linearMovement = {0, 0};
+	currentDir = D_DOWN;
 	sprite->tint = { 255, 255, 255, 255 };
 }
 
