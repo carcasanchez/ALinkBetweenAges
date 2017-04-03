@@ -18,7 +18,10 @@ Exit::Exit() :
 	destiny.assign("");
 }
 
-Exit::~Exit() {}
+Exit::~Exit() 
+{
+	col->to_delete = true;
+}
 
 bool Exit::Spawn(std::string dest, int destExit, SDL_Rect pos, DIRECTION d)
 {

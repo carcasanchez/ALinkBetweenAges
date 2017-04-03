@@ -84,6 +84,14 @@ bool j1GameLayer::Update(float dt)
 		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
 	}
+
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+	{
+		iPoint mousePos;
+		App->input->GetMousePosition(mousePos.x, mousePos.y);
+		
+		em->player->currentPos = mousePos;
+	}
 		
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
@@ -145,7 +153,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		if (em->player->invulnerable == false && em->player->dodging == false)
 		{
-  			if (em->player != nullptr)
+  			if (em->player != nullptr && c2->parent != nullptr)
 			  {
 				  em->player->damaged = em->player->invulnerable = true;
 				  em->player->damagedTimer.Start();
@@ -171,6 +179,8 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		
 		if (c2->type == COLLIDER_LINK_SWORD)
 		{
+			if (c1->parent == nullptr)
+				return false;
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
 			{
 				c1->parent->life -= em->player->damage;

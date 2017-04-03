@@ -119,7 +119,10 @@ bool j1SceneManager::ChangeScene()
 				break;
 			}
 		}
-		else destPos = spawnPoint;
+		else
+		{
+			destPos = spawnPoint;
+		}
 		
 
 		App->game->em->player->currentPos = destPos;
