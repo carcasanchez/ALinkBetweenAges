@@ -102,11 +102,11 @@ bool j1SceneManager::ChangeScene()
 		if (exitDest != -1)
 		{
 			 destPos = currentScene->GetExitPlayerPos(1, exitDest);
-
 			switch (dir)
 			{
 			case(D_UP):
-				destPos.y += 24;
+				destPos.x += 8;
+				destPos.y -= 24;
 				break;
 			case(D_DOWN):
 				destPos.y -= 24;
