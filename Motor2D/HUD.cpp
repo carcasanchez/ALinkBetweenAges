@@ -332,7 +332,7 @@ bool Hud::LoadHud(string file)
 void Hud::SetHudElements()
 {
 	numbers->Set_Active_state(false);
-	enemies_counter->Set_Interactive_Box({ 0,0,0,0 });
+	enemies_counter->SetImage(numbers, 14, 14);
 
 	Rupees->Set_Interactive_Box({ 175,20,0,0 });
 	Bombs->Set_Interactive_Box({ 250,20,0,0 });
