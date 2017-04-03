@@ -21,6 +21,8 @@ public:
 	bool Update(float dt);
 	void OnDeath();
 
+	void ChangeAge();
+
 public:
 
 	//Enemies defeated

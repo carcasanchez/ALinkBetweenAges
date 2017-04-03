@@ -85,6 +85,10 @@ bool j1GameLayer::Update(float dt)
 		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
 	}
 		
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		em->player->ChangeAge();
+	}
 
 	if (em->player->defeatedEnemies > ENEMIES_TO_DEFEAT)
 	{
