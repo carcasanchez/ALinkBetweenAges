@@ -34,6 +34,9 @@ public:
 	//Retrieve render zone
 	iPoint GetRenderZone();
 
+	// Check window fullscreen state
+	bool isFullScreen() const;
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
@@ -48,6 +51,7 @@ private:
 	uint		scale;
 
 	iPoint		renderZone;
+	bool		fullScreen;
 };
 
 #endif // __j1WINDOW_H__
