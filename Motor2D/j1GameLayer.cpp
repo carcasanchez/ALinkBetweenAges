@@ -17,6 +17,7 @@
 
 // just for temporal wall collider
 #include "Entity.h"
+#define ENEMIES_TO_DEFEAT 10
 
 
 j1GameLayer::j1GameLayer() : j1Module()
@@ -84,7 +85,11 @@ bool j1GameLayer::Update(float dt)
 		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
 	}
 		
-	
+
+	if (em->player->defeatedEnemies > ENEMIES_TO_DEFEAT)
+	{
+		em->player->life = 0;
+	}
 	return ret;
 }
 
@@ -159,9 +164,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_ENEMY)
 	{
-		if (c2->parent == nullptr)
-			return false;
-
+		
 		if (c2->type == COLLIDER_LINK_SWORD)
 		{
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
@@ -176,6 +179,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 		if (c2->type == COLLIDER_ENEMY)
 		{
+			if (c2->parent == nullptr)
+				return false;
+
 			switch (((Enemy*)(c2->parent))->enemyState)
 			{
 			case KEEP_DISTANCE:
