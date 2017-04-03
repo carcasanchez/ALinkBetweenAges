@@ -266,6 +266,7 @@ bool Hud::LoadHud(string file)
 	else
 	{
 		numbers = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		enemies_counter = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
 
 		Rupees = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		Bombs = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
@@ -308,13 +309,17 @@ bool Hud::LoadHud(string file)
 
 		SetHudElements();
 
+		hud_screen->AddChild(enemies_counter);
 
 		hud_screen->AddChild(Rupees);
 		hud_screen->AddChild(Bombs);
 		hud_screen->AddChild(Arrows);
+
 		hud_screen->AddChild(items_frame);
-		hud_screen->AddChild(life);
+
 		hud_screen->AddChild(stamina_bar);
+
+		hud_screen->AddChild(life);
 		hud_screen->AddChild(empty_heart);
 		hud_screen->AddChild(medium_heart);
 		hud_screen->AddChild(full_heart);
@@ -327,6 +332,7 @@ bool Hud::LoadHud(string file)
 void Hud::SetHudElements()
 {
 	numbers->Set_Active_state(false);
+	enemies_counter->Set_Interactive_Box({ 0,0,0,0 });
 
 	Rupees->Set_Interactive_Box({ 175,20,0,0 });
 	Bombs->Set_Interactive_Box({ 250,20,0,0 });

@@ -6,6 +6,7 @@
 #include "UI_Heart.h"
 #include "UI_Stamina.h"
 #include "UI_Image.h"
+#include "UI_Counter.h"
 #include "InputManager.h"
 
 class UI_element;
@@ -36,6 +37,7 @@ public:
 
 	//Counters image
 	UI_Image*		numbers = nullptr; //Image not in gui
+	UI_Counter*		enemies_counter = nullptr;
 
 	//Little items
 	UI_Image*		Rupees = nullptr;
