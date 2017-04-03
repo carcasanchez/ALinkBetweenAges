@@ -103,7 +103,7 @@ bool j1GameLayer::CleanUp()
 {
 	active = false;
 
-	//hud->CleanUp();
+	hud->CleanUp();
 	em->CleanUp();
 
 	return true;

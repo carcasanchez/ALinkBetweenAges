@@ -56,6 +56,18 @@ bool Hud::Update(float dt)
 	return false;
 }
 
+bool Hud::CleanUp()
+{
+	delete numbers;
+	delete empty_heart;
+	delete medium_heart;
+	delete full_heart;
+	delete stamina_container;
+	delete stamina_green;
+
+	return true;
+}
+
 void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 {
 
@@ -253,19 +265,27 @@ bool Hud::LoadHud(string file)
 	}
 	else
 	{
+		numbers = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+
 		Rupees = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		Bombs = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		Arrows = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+
 		items_frame = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+
 		life = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		stamina_container = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		stamina_green = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		stamina_bar = (UI_Stamina*)App->gui->Add_element(STAMINA_BAR, App->game);
 		empty_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		medium_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		full_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 
+		stamina_container = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		stamina_green = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		stamina_bar = (UI_Stamina*)App->gui->Add_element(STAMINA_BAR, App->game);
+		
 		pugi::xml_node hud_node = hud_file.child("images");
+
+		//Numbers counter image
+		numbers->Set_Image_Texture(LoadRect(hud_node.child("numbers")));
 
 		//little items
 		Rupees->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("rupees")));
@@ -306,6 +326,8 @@ bool Hud::LoadHud(string file)
 
 void Hud::SetHudElements()
 {
+	numbers->Set_Active_state(false);
+
 	Rupees->Set_Interactive_Box({ 175,20,0,0 });
 	Bombs->Set_Interactive_Box({ 250,20,0,0 });
 	Arrows->Set_Interactive_Box({ 325,20,0,0 });
