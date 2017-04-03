@@ -9,6 +9,7 @@
 #include "j1Input.h"
 #include "j1CollisionManager.h"
 #include "j1Map.h"
+#include "j1Textures.h"
 
 #define VSYNC true
 
@@ -108,15 +109,25 @@ bool j1Render::PostUpdate()
 		layer->second.clear();
 	}
 
-
 	App->map->DrawOver();
-
 	PrintUI();
-	
-
 	App->collisions->DrawDebug();
 
+	// cover culling zone
+	if (App->win->isFullScreen())
+	{
+		SDL_Rect rect = { 1,1,0,0 };
+		rect.w = App->win->screen_surface->w - renderZone.w;
+		rect.h = App->win->screen_surface->h;
+
+		CompleteBlit(App->tex->GetDefault("black"), renderZone.x + renderZone.w, 0, rect);
+	}
+
+	//hide culling
+
+
 	SDL_RenderPresent(renderer);
+
 	return true;
 }
 
@@ -474,12 +485,12 @@ void j1Render::CameraFollow(iPoint pos)
 	camera.y = -pos.y * scale;
 	camera.x += w*0.5;
 	camera.y += h*0.5;
-		
-	
+
 	renderZone.x = pos.x;
 	renderZone.y = pos.y;
-	renderZone.x -= renderZone.w*0.5;
 	renderZone.y -= renderZone.h*0.5;
+
+	renderZone.x -= App->win->isFullScreen() ? renderZone.w*0.25 : renderZone.w*0.5;
 
 	if (renderZone.x < 0)
 	{
@@ -502,9 +513,6 @@ void j1Render::CameraFollow(iPoint pos)
 		renderZone.y = App->map->data->height*App->map->data->tile_height - renderZone.h;
 		camera.y = -renderZone.y* scale;
 	}
-
-
-	
 }
 
 void j1Render::DebugCamera()
