@@ -35,7 +35,7 @@ bool j1SceneManager::Awake(pugi::xml_node& config)
 
 bool j1SceneManager::Start()
 {
-	currentScene = new Scene("insideCastle");
+	currentScene = new Scene("kakarikoVillage");
 	return currentScene->Load(data[currentScene->name].c_str());
 }
 
@@ -80,7 +80,7 @@ bool j1SceneManager::ChangeScene()
 
 	ret = currentScene->CleanUp();
 	App->map->CleanUp();
-	App->collisions->CleanUp();
+	
 
 	if (ret)
 	{
