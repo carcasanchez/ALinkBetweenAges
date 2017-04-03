@@ -132,7 +132,56 @@ void Player::OnDeath()
 	App->game->hud->RestoreHearts();
 	damaged = invulnerable = false;
 	linearMovement = {0, 0};
+	currentDir = D_DOWN;
 	sprite->tint = { 255, 255, 255, 255 };
+}
+
+void Player::ChangeAge()
+{
+	RELEASE(sprite);
+	anim.clear();
+
+	// load xml attributes
+	pugi::xml_document	attributesFile;
+	char* buff;
+	int size = App->fs->Load("attributes/old_link_attributes.xml", &buff);
+	pugi::xml_parse_result result = attributesFile.load_buffer(buff, size);
+	RELEASE(buff);
+
+	if (result == NULL)
+	{
+		LOG("Could not load attributes xml file. Pugi error: %s", result.description());
+	}
+	else
+	{
+		pugi::xml_node attributes = attributesFile.child("attributes");
+
+		LoadAttributes(attributes);
+
+		// base stats
+		pugi::xml_node node = attributes.child("base");
+		maxLife = life;
+		maxStamina = stamina = node.attribute("stamina").as_int(100);
+		staminaRec = node.attribute("staminaRec").as_float();
+
+		// attack
+		node = attributes.child("attack");
+		attackSpeed = node.attribute("speed").as_int(40);
+		attackTax = node.attribute("staminaTax").as_int(20);
+
+		node = attributes.child("damaged");
+		//damaged
+		hitTime = node.attribute("hitTime").as_int(100);
+		damagedTime = node.attribute("damagedTime").as_int(2000);
+		damagedSpeed = node.attribute("damagedSpeed").as_int(180);
+		//dodge
+		node = attributes.child("dodge");
+		dodgeSpeed = node.attribute("speed").as_int(500);
+		dodgeTax = node.attribute("staminaTax").as_int(25);
+		dodgeLimit = node.attribute("limit").as_int(50);
+	}
+
+
 }
 
 void Player::Change_direction()

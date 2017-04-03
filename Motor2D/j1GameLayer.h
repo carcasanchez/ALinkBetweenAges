@@ -36,8 +36,8 @@ public:
 	bool        pause = false;
 	bool		quit_game = false;
 
-	int playerX = 107;
-	int playerY = 233;
+	int playerX = 123;
+	int playerY = 90;
 };
 
 

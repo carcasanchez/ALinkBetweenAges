@@ -156,16 +156,18 @@ bool j1Input::PreUpdate()
 					case SDL_WINDOWEVENT_HIDDEN:
 					case SDL_WINDOWEVENT_MINIMIZED:
 					case SDL_WINDOWEVENT_FOCUS_LOST:
-					windowEvents[WE_HIDE] = true;
-					break;
+						windowEvents[WE_HIDE] = true;
+						break;
 
 					//case SDL_WINDOWEVENT_ENTER:
 					case SDL_WINDOWEVENT_SHOWN:
 					case SDL_WINDOWEVENT_FOCUS_GAINED:
 					case SDL_WINDOWEVENT_MAXIMIZED:
+						windowEvents[WE_MAXIMIZED] = true;
+						break;
 					case SDL_WINDOWEVENT_RESTORED:
-					windowEvents[WE_SHOW] = true;
-					break;
+						windowEvents[WE_SHOW] = true;
+						break;
 				}
 			break;
 

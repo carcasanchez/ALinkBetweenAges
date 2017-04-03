@@ -46,8 +46,8 @@ bool j1Window::Awake(pugi::xml_node& config)
 		renderZone.x = width = config.child("resolution").attribute("width").as_int(256);
 		renderZone.y = height = config.child("resolution").attribute("height").as_int(224);
 		scale = config.child("resolution").attribute("scale").as_int(1);
-		int h_margin = config.child("margin ").attribute("horizontal").as_int(0);
-		int v_margin = config.child("margin ").attribute("vertical").as_int(0);
+		int h_margin = config.child("margin").attribute("horizontal").as_int(0);
+		int v_margin = config.child("margin").attribute("vertical").as_int(0);
 
 		// check display has minimum dimensions
 		if (mode.w < width || mode.h < height)
@@ -70,7 +70,7 @@ bool j1Window::Awake(pugi::xml_node& config)
 		//Create window
 		Uint32 flags = SDL_WINDOW_SHOWN;
 
-		if(config.child("fullscreen").attribute("value").as_bool(false))
+		if(fullScreen = config.child("fullscreen").attribute("value").as_bool(false))
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
@@ -144,4 +144,9 @@ uint j1Window::GetScale() const
 iPoint j1Window::GetRenderZone()
 {
 	return renderZone;
+}
+
+bool j1Window::isFullScreen() const
+{
+	return fullScreen;
 }

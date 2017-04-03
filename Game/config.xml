@@ -26,7 +26,7 @@
     
   <window> 
     <resolution width="552" height="448" scale="2"/>
-    <margin horizontal="1000" vertical="900"/>
+    <margin horizontal="20" vertical="20"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="true"/>
@@ -40,6 +40,10 @@
   <map>
     <folder>maps/</folder>
   </map>
+
+  <textures folder = "textures/">
+    <texture name = "black" file = "black.png"/>
+  </textures>
 
   <sceneManager>
     <scenes folder = "scenes/">

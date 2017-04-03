@@ -19,6 +19,7 @@ enum j1EventWindow
 	WE_QUIT = 0,
 	WE_HIDE = 1,
 	WE_SHOW = 2,
+	WE_MAXIMIZED,
 	WE_COUNT
 };
 
