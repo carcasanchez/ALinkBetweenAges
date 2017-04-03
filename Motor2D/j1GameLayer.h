@@ -37,7 +37,7 @@ public:
 	bool		quit_game = false;
 
 	int playerX = 133;
-	int playerY = 248;
+	int playerY = 230;
 };
 
 

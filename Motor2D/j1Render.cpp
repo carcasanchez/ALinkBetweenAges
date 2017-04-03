@@ -469,15 +469,41 @@ void j1Render::CameraFollow(iPoint pos)
 	int scale = App->win->GetScale();
 	uint w, h;
 	App->win->GetWindowSize(w, h);
+
 	camera.x = -pos.x * scale;
 	camera.y = -pos.y * scale;
 	camera.x += w*0.5;
 	camera.y += h*0.5;
-
+		
+	
 	renderZone.x = pos.x;
 	renderZone.y = pos.y;
 	renderZone.x -= renderZone.w*0.5;
 	renderZone.y -= renderZone.h*0.5;
+
+	if (renderZone.x < 0)
+	{
+		camera.x = 0;
+		renderZone.x = 0;
+	}
+	else if (renderZone.x + renderZone.w > App->map->data->width*App->map->data->tile_width)
+	{
+		renderZone.x = App->map->data->width*App->map->data->tile_width - renderZone.w;
+		camera.x = -renderZone.x* scale;
+	}
+
+	if (renderZone.y < 0)
+	{
+		camera.y = 0;
+		renderZone.y = 0;
+	}
+	else if (renderZone.y + renderZone.h > App->map->data->height*App->map->data->tile_height)
+	{
+		renderZone.y = App->map->data->height*App->map->data->tile_height - renderZone.h;
+		camera.y = -renderZone.y* scale;
+	}
+
+
 	
 }
 
