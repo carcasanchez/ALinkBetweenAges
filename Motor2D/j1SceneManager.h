@@ -44,6 +44,7 @@ public:
 	bool CleanUp();
 
 	void RequestSceneChange(Exit*);
+	void RequestSceneChange(iPoint dest, char* scene, DIRECTION dir);
 	bool ChangeScene();
 
 public:
@@ -55,6 +56,7 @@ public:
 
 private:
 
+	iPoint spawnPoint = {0, 0};
 	std::string destiny;
 	int exitDest;
 	DIRECTION dir;

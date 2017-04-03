@@ -35,7 +35,7 @@ bool j1SceneManager::Awake(pugi::xml_node& config)
 
 bool j1SceneManager::Start()
 {
-	currentScene = new Scene("insideCastle");
+	currentScene = new Scene("kakarikoVillage");
 	return currentScene->Load(data[currentScene->name].c_str());
 }
 
@@ -74,36 +74,53 @@ void j1SceneManager::RequestSceneChange(Exit* exit)
 	// Apply transition
 }
 
+void j1SceneManager::RequestSceneChange(iPoint dest, char * scene, DIRECTION dir)
+{
+	App->game->em->player->sceneOverride = true;
+	changeRequest = true;
+
+	destiny = scene;
+	exitDest = -1;
+	dir = dir;
+	spawnPoint = dest;
+}
+
 bool j1SceneManager::ChangeScene()
 {
 	bool ret = true;
 
 	ret = currentScene->CleanUp();
 	App->map->CleanUp();
-	App->collisions->CleanUp();
+	
 
 	if (ret)
 	{
 		App->game->em->CleanEntities();
 		ret = currentScene->Load(data[destiny].c_str(), true);
 
-		iPoint destPos = currentScene->GetExitPlayerPos(1, exitDest);
-
-		switch (dir)
+		iPoint destPos;
+		if (exitDest != -1)
 		{
-		case(D_UP) :
-			destPos.y += 24;
-			break;
-		case(D_DOWN) :
-			destPos.y -= 24;
-			break;
-		case(D_RIGHT) :
-			destPos.x += 24;
-			break;
-		case(D_LEFT) :
-			destPos.x -= 24;
-			break;
+			 destPos = currentScene->GetExitPlayerPos(1, exitDest);
+
+			switch (dir)
+			{
+			case(D_UP):
+				destPos.y += 24;
+				break;
+			case(D_DOWN):
+				destPos.y -= 24;
+				break;
+			case(D_RIGHT):
+				destPos.x += 24;
+				break;
+			case(D_LEFT):
+				destPos.x -= 24;
+				break;
+			}
 		}
+		else destPos = spawnPoint;
+		
 
 		App->game->em->player->currentPos = destPos;
 
@@ -115,3 +132,4 @@ bool j1SceneManager::ChangeScene()
 
 	return ret;
 }
+

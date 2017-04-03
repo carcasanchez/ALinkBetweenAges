@@ -6,6 +6,7 @@
 #include "UI_Heart.h"
 #include "UI_Stamina.h"
 #include "UI_Image.h"
+#include "UI_Counter.h"
 #include "InputManager.h"
 
 class UI_element;
@@ -26,6 +27,7 @@ public:
 	bool Awake(pugi::xml_node& conf);
 	bool Start();
 	bool Update(float);
+	bool CleanUp();
 
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 
@@ -33,16 +35,20 @@ public:
 	//In game HUD elements
 	UI_element*		hud_screen = nullptr;
 
+	//Counters image
+	UI_Image*		numbers = nullptr; //Image not in gui
+	UI_Counter*		enemies_counter = nullptr;
+
 	//Little items
 	UI_Image*		Rupees = nullptr;
 	UI_Image*		Bombs = nullptr;
 	UI_Image*		Arrows = nullptr;
 
 	//life hud
-	UI_Image*			life = nullptr;	//Letters up hearts
-	UI_Image*			empty_heart = nullptr;
-	UI_Image*			medium_heart = nullptr;
-	UI_Image*			full_heart = nullptr;
+	UI_Image*			life = nullptr;	
+	UI_Image*			empty_heart = nullptr; //Image not in gui
+	UI_Image*			medium_heart = nullptr; //Image not in gui
+	UI_Image*			full_heart = nullptr; //Image not in gui
 
 	vector<UI_Heart*>	hearts;
 	int					space_between_hearts = 4;
@@ -59,8 +65,8 @@ public:
 	UI_Image*		items_potion_green;
 
 	//Stamina images
-	UI_Image*		stamina_container = nullptr;
-	UI_Image*		stamina_green = nullptr;
+	UI_Image*		stamina_container = nullptr; //Image not in gui
+	UI_Image*		stamina_green = nullptr; //Image not in gui
 	UI_Stamina*		stamina_bar = nullptr;
 
 	//Pause Elements

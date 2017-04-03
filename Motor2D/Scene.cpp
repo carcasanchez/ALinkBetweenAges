@@ -177,6 +177,7 @@ bool Scene::CleanUp()
 	{
 		for (std::list<Exit*>::iterator exit = exits[sector].begin(); exit != exits[sector].end(); exit++)
 		{
+			delete (*exit);
 			exits[sector].erase(exit);
 		}
 

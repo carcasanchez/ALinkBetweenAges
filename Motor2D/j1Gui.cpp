@@ -15,6 +15,7 @@
 #include "UI_Heart.h"
 #include "Bezier.h"
 #include "UI_Stamina.h"
+#include "UI_Counter.h"
 #include "UI_Button.h"
 
 j1Gui::j1Gui() : j1Module()
@@ -147,6 +148,9 @@ UI_element* j1Gui::Add_element(UI_TYPE TYPE, j1Module* element_module)
 		break;
 	case STAMINA_BAR:
 		ret = new UI_Stamina(TYPE, element_module);
+		break;
+	case COUNTER:
+		ret = new UI_Counter(TYPE, element_module);
 		break;
 	
 	}

@@ -86,6 +86,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="GreenSoldier.cpp" />
+    <ClCompile Include="UI_Counter.cpp" />
     <ClCompile Include="UI_Heart.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="UI_Button.h" />
+    <ClInclude Include="UI_Counter.h" />
     <ClInclude Include="UI_element.h" />
     <ClInclude Include="UI_Heart.h" />
     <ClInclude Include="UI_Image.h" />

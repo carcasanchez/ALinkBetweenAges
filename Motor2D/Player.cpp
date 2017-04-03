@@ -13,7 +13,7 @@
 #include "InputManager.h"
 #include "j1PerfTimer.h"
 #include "DialogManager.h"
-#include "InputManager.h"
+#include "j1SceneManager.h"
 
 Player::Player() : Entity(LINK)
 {
@@ -125,8 +125,10 @@ bool Player::Update(float dt)
 
 void Player::OnDeath()
 {
-	currentPos = App->map->MapToWorld( App->game->playerX, App->game->playerY);
+	defeatedEnemies = 0;
 	life = 3;
+	iPoint respawn = App->map->MapToWorld(App->game->playerX, App->game->playerY);
+	App->sceneM->RequestSceneChange(respawn, "kakarikoVillage", D_DOWN);
 	App->game->hud->RestoreHearts();
 	damaged = invulnerable = false;
 	linearMovement = {0, 0};
