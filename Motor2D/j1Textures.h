@@ -3,6 +3,9 @@
 
 #include "j1Module.h"
 #include "p2Defs.h"
+#include <list>
+#include <map>
+#include <string>
 
 struct SDL_Texture;
 struct SDL_Surface;
@@ -31,9 +34,17 @@ public:
 	SDL_Texture* const	LoadSurface(SDL_Surface* surface);
 	void				GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
 
+	// Get Default Tecture
+	SDL_Texture* GetDefault(std::string) const;
+
 public:
 
 	list<SDL_Texture*>	textures;
+
+private:
+
+	map<std::string,SDL_Texture*>	defaultTextures;
+	list<pair<std::string, std::string>> defaultData;
 };
 
 

@@ -31,6 +31,17 @@ bool j1Textures::Awake(pugi::xml_node& config)
 		LOG("Could not initialize Image lib. IMG_Init: %s", IMG_GetError());
 		ret = false;
 	}
+	else
+	{
+		std::string folder = config.attribute("folder").as_string("/");
+		for (pugi::xml_node tex = config.child("texture"); !tex.empty(); tex = tex.next_sibling())
+		{
+			std::string path = folder + tex.attribute("file").as_string();
+			std::string name = tex.attribute("name").as_string();
+			pair<std::string, std::string> pair = { name, path };
+			defaultData.push_back(pair);
+		}
+	}
 
 	return ret;
 }
@@ -38,8 +49,26 @@ bool j1Textures::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool j1Textures::Start()
 {
-	LOG("start textures");
 	bool ret = true;
+
+	list<pair<std::string, std::string>>::iterator item = defaultData.begin();
+
+	while (!defaultData.empty())
+	{
+		pair<std::string, SDL_Texture*> pair = { item->first, Load(item->second.c_str()) };
+
+		if (pair.second != NULL)
+		{
+			defaultTextures.insert(pair);
+		}
+		else
+		{
+			LOG("Couldn't load default texture %s @%s", item->first.c_str(), item->second.c_str());
+		}
+
+		defaultData.erase(item);
+	}
+
 	return ret;
 }
 
@@ -50,7 +79,6 @@ bool j1Textures::CleanUp()
 
 	for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end(); item++)
 		SDL_DestroyTexture((*item));
-
 
 	textures.clear();
 	IMG_Quit();
@@ -79,7 +107,6 @@ SDL_Texture* const j1Textures::Load(const char* path)
 // Unload texture
 bool j1Textures::UnLoad(SDL_Texture* texture)
 {
-
 	for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end(); item++)
 	{
 		if (texture == *item)
@@ -114,4 +141,20 @@ SDL_Texture* const j1Textures::LoadSurface(SDL_Surface* surface)
 void j1Textures::GetSize(const SDL_Texture* texture, uint& width, uint& height) const
 {
 	SDL_QueryTexture((SDL_Texture*)texture, NULL, NULL, (int*) &width, (int*) &height);
+}
+
+SDL_Texture* j1Textures::GetDefault(std::string name) const
+{
+	SDL_Texture* ret;
+
+	try // check for out-of-range throw
+	{
+		ret = defaultTextures.at(name);
+	}
+	catch (const std::out_of_range& oor)
+	{
+		ret = NULL;
+	}
+
+	return ret;
 }
