@@ -159,6 +159,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_ENEMY)
 	{
+		if (c2->parent == nullptr)
+			return false;
+
 		if (c2->type == COLLIDER_LINK_SWORD)
 		{
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
