@@ -17,11 +17,6 @@
 
         <enemies>
         </enemies>
-
-        <special>
-          <!--rocks, grass, etc-->
-          <sample type = "0" x = "150" y = "150" />
-        </special>
       </entities>
 
       <exits>
