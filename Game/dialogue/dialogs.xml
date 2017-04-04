@@ -80,7 +80,8 @@
 	<text value="I'm glad to see you again Link, thank you for save me."/>
 	<text value="This morning a group of soldiers came to try to take me to ganon,"/>
 	<text value="but I managed to escape into the forest and hide here."/>
-	<text value="I need your help to get my home back, could you throw out all the soldiers of the castle?."/>
+	<text value="I need your help to get my home back, could you throw out all the soldiers of the castle?"/>
+<text value="Take the book behind me, could be very helpful"/>
 	<text value="Thank you so much Link."/>
      </dialogue>
      <dialogue state="1">
