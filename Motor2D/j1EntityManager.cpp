@@ -175,9 +175,12 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 
 	switch (type)
 	{
-	case NPC_1:
-		ret = new Npc1();
+	case NPC_ZELDA:
+		ret = new Npc_Zelda();
 		break;
+
+	default:
+		return nullptr;
 	}
 
 	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));

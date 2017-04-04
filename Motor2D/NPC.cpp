@@ -40,8 +40,8 @@ bool Npc::Spawn(std::string file, iPoint pos, NPC_TYPE type)
 
 		switch (type)
 		{
-		case NPC_1:
-			attributes = attributesFile.child("attributes").child("npc1");
+		case NPC_ZELDA:
+			attributes = attributesFile.child("attributes").child("zelda");
 			break;
 		}
 		
