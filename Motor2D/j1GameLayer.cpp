@@ -102,6 +102,7 @@ bool j1GameLayer::Update(float dt)
 	if (em->player->defeatedEnemies > ENEMIES_TO_DEFEAT)
 	{
 		em->player->defeatedEnemies = 0;
+		em->player->win_con = true;
 		hud->win->Set_Active_state(true);
 		hud->win2->Set_Active_state(true);
 		App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);

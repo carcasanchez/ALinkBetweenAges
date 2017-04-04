@@ -35,7 +35,7 @@ bool Hud::Start()
 	SetHearts();
 
 	//THRASH VS
-	win->Set_String("You Killed all the soldiers. Thankyou for playing this demo");
+	win->Set_String("You Killed all the soldiers. Thank you for playing this demo");
 	win->Set_Interactive_Box({ 300,300,0,0 });
 	win->Set_Active_state(false);
 
@@ -78,7 +78,10 @@ bool Hud::CleanUp()
 
 void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 {
+	if (App->game->em->player->win_con == false)
+	{
 
+	
 	switch (new_event)
 	{
 	case PAUSE:
@@ -143,6 +146,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
 		break;
 
+	}
 	}
 
 }

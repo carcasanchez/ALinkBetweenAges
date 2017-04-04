@@ -127,6 +127,23 @@ bool Player::Update(float dt)
 		break;
 	}
 
+	//THRASH FOR VS
+
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && win_con == true)
+	{
+		life = 0;
+		App->game->hud->player_continue = true;
+		App->game->hud->win->Set_Active_state(false);
+		App->game->hud->win2->Set_Active_state(false);
+		App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
+		win_con = false;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && win_con == true)
+	{
+		App->game->quit_game = true;
+	}
+
 	return ret;
 }
 
@@ -730,20 +747,21 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 	//TRASH FOR VERTICAL SLICE
 	case UP:
 	{
-		if (state == E_DOWN)
+		if (state == E_DOWN && win_con)
 		{
 			life = 0;
 			App->game->hud->player_continue = true;
 			App->game->hud->win->Set_Active_state(false);
 			App->game->hud->win2->Set_Active_state(false);
 			App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
+			win_con = false;
 		}
 		break;
 	}
 
 	case DOWN:
 	{
-		if (state == E_DOWN)
+		if (state == E_DOWN && win_con)
 		{
 			App->game->quit_game = true;
 		}

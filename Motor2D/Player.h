@@ -23,6 +23,9 @@ public:
 
 	void ChangeAge();
 
+	//THRASH VL
+	bool win_con = false;
+
 public:
 
 	//Enemies defeated
