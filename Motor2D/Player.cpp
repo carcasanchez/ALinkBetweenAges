@@ -161,6 +161,8 @@ void Player::OnDeath()
 	sprite->tint = { 255, 255, 255, 255 };
 	actionState = IDLE;
 
+	if (swordCollider != nullptr)
+		swordCollider->to_delete = true;
 	//THRASH FOR VL
 	App->game->hud->win->Set_Active_state(false);
 	App->game->hud->win2->Set_Active_state(false);

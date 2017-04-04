@@ -20,7 +20,7 @@
       </entities>
 
       <exits>
-        <exit destinyScene = "outsideCastle" destinyExit = "0" x = "87" y = "26" w="12" h="1" direction = "1"/>
+        <exit destinyScene = "outsideCastle" destinyExit = "1" x = "87" y = "26" w="12" h="1" direction = "1"/>
 	<exit destinyScene = "kakarikoForest" destinyExit = "0" x = "13" y = "221" w="1" h="12" direction = "2"/>
       </exits>
 
