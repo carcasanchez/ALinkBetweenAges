@@ -9,6 +9,12 @@
         </npcs>
 
         <enemies>
+		<sample type = "1" x = "73" y = "41">
+ 	 	</sample>
+		<sample type = "1" x = "79" y = "55">
+ 	 	</sample>
+		<sample type = "1" x = "70" y = "62">
+ 	 	</sample>
         </enemies>
 
         <special>
