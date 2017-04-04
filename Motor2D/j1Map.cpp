@@ -284,6 +284,11 @@ SDL_Rect TileSet::GetTileRect(int id) const
 	return rect;
 }
 
+TileSet::~TileSet()
+{
+	App->tex->UnLoad(texture);
+}
+
 // Called before quitting
 bool j1Map::CleanUp()
 {
@@ -291,7 +296,10 @@ bool j1Map::CleanUp()
 
 	// Remove all tilesets
 	for (std::list<TileSet*>::iterator item = smallData.tilesets.begin(); item != smallData.tilesets.cend(); item++)
+	{
+
 		RELEASE_ARRAY(*item);
+	}
 	for (std::list<TileSet*>::iterator item = bigData.tilesets.begin(); item != bigData.tilesets.cend(); item++)
 		RELEASE(*item);
 
