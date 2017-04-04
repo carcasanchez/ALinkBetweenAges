@@ -130,6 +130,7 @@ void Player::OnDeath()
 	iPoint respawn = App->map->MapToWorld(App->game->playerX, App->game->playerY);
 	App->sceneM->RequestSceneChange(respawn, "kakarikoVillage", D_DOWN);
 	App->game->hud->RestoreHearts();
+	App->game->hud->enemies_counter->Reset();
 	damaged = invulnerable = false;
 	linearMovement = {0, 0};
 	currentDir = D_DOWN;

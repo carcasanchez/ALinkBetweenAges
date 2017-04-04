@@ -52,6 +52,13 @@ void UI_Counter::SetImage(UI_Image* new_img, int width, int height)
 
 }
 
+void UI_Counter::Reset()
+{
+	unit = 0;
+	dec = 0;
+	cent = 0;
+}
+
 void UI_Counter::BlitUnit()
 {
 	if (Parent)

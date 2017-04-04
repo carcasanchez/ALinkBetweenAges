@@ -13,6 +13,7 @@ public:
 
 	void SumNumber(int);
 	void SetImage(UI_Image*, int, int);
+	void Reset();
 
 private:
 
