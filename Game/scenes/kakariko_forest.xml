@@ -1,0 +1,26 @@
+<!-- kakariko forest -->
+<scene name = "kakarikoForest" map= "kakarikoForest.tmx">
+  <sectors>
+    <sector>
+      <!--sector 1-->
+      <entities>
+
+        <npcs>
+        </npcs>
+
+        <enemies>
+        </enemies>
+
+        <special>
+          <!--rocks, grass, etc-->
+          <sample type = "0" x = "74" y = "75" />
+        </special>
+      </entities>
+
+      <exits>
+        <exit destinyScene = "kakarikoVillage" destinyExit = "1" x = "231" y = "320" w="1" h="20" direction = "3"/>
+      </exits>
+
+    </sector>
+  </sectors>
+</scene>

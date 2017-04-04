@@ -1,0 +1,66 @@
+<!-- Castle Inside -->
+<scene name = "insideCastle" map= "insideCastle.tmx">
+  <sectors>
+    <sector>
+      <!--sector 1-->
+      <entities>
+
+        <npcs>
+          <sample type = "0" x = "133" y = "237" id="1"/>
+        </npcs>
+
+        <enemies>
+          <sample type = "1" x = "125" y = "202">
+		<patrol x="125" y="202"/>
+		<patrol x="125" y="212"/>
+ 	  </sample >
+ 	<sample type = "1" x = "145" y = "202">
+	<patrol x = "145" y = "202"/>
+	<patrol x="145" y="212"/>
+ 	  </sample >
+
+
+	<sample type = "1" x = "105" y = "184">
+<patrol x = "105" y = "184"/>
+	<patrol x = "105" y = "191"/>
+ 	  </sample >
+	<sample type = "1" x = "164" y = "189">
+<patrol x = "164" y = "189"/>
+	<patrol x="156" y = "189"/>
+ 	  </sample >
+	<sample type = "1" x = "149" y = "180">
+<patrol x = "149" y = "180"/>
+	<patrol x="149" y="188"/>
+ 	  </sample >
+
+	<sample type = "1" x = "99" y = "131"/>
+	<sample type = "1" x = "169" y = "131"/>
+	<sample type = "1" x = "149" y = "141"/>
+	<sample type = "1" x = "120" y = "141"/>
+
+
+	<sample type = "1" x = "46" y = "178"/>
+	<sample type = "1" x = "58" y = "193"/>
+
+
+
+<sample type = "1" x = "133" y = "227">
+		<patrol x = "133" y = "227"/>
+		<patrol x="133" y="243"/>
+ 	  </sample >
+
+        </enemies>
+
+        <special>
+          <!--rocks, grass, etc-->
+          <sample type = "0" x = "150" y = "150" />
+        </special>
+      </entities>
+
+      <exits>
+        <exit destinyScene = "outsideCastle" destinyExit = "0" x = "107" y = "236" w="2" h="1" direction = "0"/>
+      </exits>
+
+    </sector>
+  </sectors>
+</scene>

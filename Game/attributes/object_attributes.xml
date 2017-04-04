@@ -1,7 +1,7 @@
 <!-- Object Attributes -->
 <attributes>
   <base life = "1"/>
-  <collider x = "7" y = "7" w = "10" h = "10" type = "6"/>
+   <collider x = "7" y = "7" w = "10" h = "10" type = "6"/>
   <animation file = "animations/book_animations.xml"/>
   <texture file = "textures/Object_sprites/book.png"/>
 </attributes>

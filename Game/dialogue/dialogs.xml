@@ -1,0 +1,92 @@
+<!-- Dialogues -->
+<npcs>
+  
+   <npc id="1">
+     <dialogue state="0">
+       <text value="Hi Link! We had problems with Ganon's soldiers."/>
+	<text value="They came out of nowhere with the intention of kidnapping Zelda"/>
+	<text value="but she managed to escape into the forest, at the southwest."/>
+	<text value="We need your help, bring Zelda back please"/>
+     </dialogue>
+     <dialogue state="1">
+   	<text value="Go to the forest and find Zelda."/>
+  	<text value="You are our last hope, good luck Link."/>
+     </dialogue>
+   </npc>
+  
+   <npc id="2">
+     <dialogue state="0">
+	<text value="The instant of a close of eyes is enough to make a peaceful man a warrior."/>
+     </dialogue>
+     <dialogue state="1">
+	<text value="I can see fear on your eyes, be brave Link."/>
+     </dialogue>
+   </npc>
+
+   <npc id="3">
+     <dialogue state="0">
+	<text value="The soldiers stole my chickens, I'm so sad. They are bad people."/>
+     </dialogue>
+     <dialogue state="1">
+	<text value="Bring my chickens back please."/>
+     </dialogue>
+   </npc>
+
+   <npc id="4">
+     <dialogue state="0">
+	<text value="A group of soldiers have gone to the forest,"/>
+	<text value="I don't know what they are looking for."/>
+     </dialogue>
+<dialogue state="1">
+	<text value="A group of soldiers have gone to the forest,"/>
+	<text value="I don't know what they are looking for."/>
+     </dialogue>
+   </npc>
+
+   <npc id="5">
+     <dialogue state="0">
+	<text value="To the left is the entrance to the forest,"/>
+	<text value="be very careful if you are going to enter there."/>
+</dialogue>
+<dialogue state="1">
+	<text value="To the left is the entrance to the forest,"/>
+	<text value="be very careful if you are going to enter there."/>
+</dialogue>
+
+
+   </npc>
+
+   <npc id="6">
+     <dialogue state="0">
+	<text value="Hey! I think you do not talk so much, I like you."/>
+     </dialogue>
+<dialogue state="1">
+	<text value="Good boy."/>
+     </dialogue>
+
+   </npc>
+
+   <npc id="7">
+     <dialogue state="0">
+	<text value="I love turtles but I can not find any one in this village."/>
+     </dialogue>
+     <dialogue state="1">
+	<text value="I'm so sad."/>
+     </dialogue>
+   </npc>
+
+   <npc id="8">
+     <dialogue state="0">
+	<text value="I'm glad to see you again Link, thank you for save me."/>
+	<text value="This morning a group of soldiers came to try to take me to ganon,"/>
+	<text value="but I managed to escape into the forest and hide here."/>
+	<text value="I need your help to get my home back, could you throw out all the soldiers of the castle?."/>
+	<text value="Thank you so much Link."/>
+     </dialogue>
+     <dialogue state="1">
+	<text value="Kakariko is on danger, throw out all the soldiers of the castle please."/>
+     </dialogue>
+   </npc>
+
+
+</npcs>

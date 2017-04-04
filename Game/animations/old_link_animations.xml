@@ -1,0 +1,139 @@
+<!-- Old Link Animations -->
+<animations>
+
+  <name value = "0" />
+  <!-- Old Link -->
+
+  <IDLE>
+    <!-- Idle -->
+    <name value = "0"  />
+
+    <UP>
+      <values name = "0" x ="63" y = "57" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "22" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="55" y = "16" w = "17" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="52" y = "98" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="52" y = "98" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "1"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </IDLE>
+
+  <WALKING>
+    <!-- Walking -->
+    <name value = "1"  />
+
+    <UP>
+      <values name = "0" x ="1" y = "57" w = "19" h = "25" frameNumber = "11" margin = "1" pivot_x = "11" pivot_y = "22" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="1" y = "16" w = "17" h = "25" frameNumber = "12" margin = "1" pivot_x = "9" pivot_y = "22" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="1" y = "98" w = "16" h = "25" frameNumber = "12" margin = "1" pivot_x = "10" pivot_y = "22" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="1" y = "98" w = "16" h = "25" frameNumber = "12" margin = "1" pivot_x = "10" pivot_y = "22" flip= "1"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.6" />
+
+  </WALKING>
+
+  <ATTACKING>
+    <!-- Sword -->
+    <name value = "2" />
+
+    <UP>
+      <values name = "0" x = "180" y = "170" w = "33" h = "35" frameNumber = "9" margin = "1" pivot_x = "19" pivot_y = "33" flip = "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x = "180" y = "129" w = "32" h = "35" frameNumber = "6" margin = "1" pivot_x = "13" pivot_y = "23" flip = "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x = "182" y = "212" w = "40" h = "34" frameNumber = "9" margin = "1" pivot_x = "20" pivot_y = "25" flip = "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x = "182" y = "212" w = "40" h = "34" frameNumber = "9" margin = "1" pivot_x = "20" pivot_y = "25" flip = "1"/>
+    </LEFT>
+
+    <loop value = "false" />
+
+    <speed value = "1.2" />
+
+  </ATTACKING>
+
+  <DODGING>
+    <!-- Dodging -->
+    <name value = "3" />
+
+    <UP>
+      <values name = "0" x ="63" y = "57" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "22" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="55" y = "16" w = "17" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="52" y = "98" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="52" y = "98" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "1"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </DODGING>
+
+
+ <DAMAGED>
+    <!-- Idle -->
+    <name value = "4"  />
+
+   <UP>
+      <values name = "0" x ="63" y = "57" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "22" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="55" y = "16" w = "17" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="52" y = "98" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="52" y = "98" w = "16" h = "25" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "22" flip= "1"/>
+    </LEFT>
+
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </DAMAGED>
+
+</animations>
