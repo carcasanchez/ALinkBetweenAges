@@ -18,6 +18,13 @@ UI_element::UI_element(UI_TYPE type, SDL_Rect detection_box, bool act, SCROLL_TY
 
 UI_element::UI_element(const UI_element* other) : element_type(other->element_type), Interactive_box(other->Interactive_box), active(other->active), draggable(other->draggable){}
 
+UI_element::~UI_element()
+{
+	for (std::list<UI_element*>::iterator child = Childs.begin(); child != Childs.end(); child++)
+		RELEASE(*child);
+
+}
+
 UI_element* UI_element::AddChild(UI_element* new_child)
 {
 	UI_element* ret = new_child;

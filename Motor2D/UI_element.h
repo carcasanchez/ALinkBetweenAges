@@ -81,7 +81,8 @@ public:
 	UI_element(UI_TYPE type, j1Module*);
 	UI_element(UI_TYPE type, SDL_Rect detection_box, bool active = true, SCROLL_TYPE draggable = FREE_SCROLL);
 	UI_element(const UI_element* other_element);
-	
+	~UI_element();
+
 	//loop functions
 	virtual bool Start() { return true; };
 	virtual bool Update();

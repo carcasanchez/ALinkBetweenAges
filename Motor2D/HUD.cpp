@@ -66,12 +66,15 @@ bool Hud::Update(float dt)
 
 bool Hud::CleanUp()
 {
-	delete numbers;
-	delete empty_heart;
-	delete medium_heart;
-	delete full_heart;
-	delete stamina_container;
-	delete stamina_green;
+	RELEASE(numbers);
+
+	
+	//RELEASE(empty_heart);
+	//delete medium_heart;
+	//delete full_heart;
+
+	RELEASE(stamina_container);
+	RELEASE(stamina_green);
 
 	return true;
 }

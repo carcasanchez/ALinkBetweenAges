@@ -92,7 +92,7 @@ bool j1Gui::CleanUp()
 	LOG("Freeing GUI");
 
 	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
-		Screen_elements.erase(item_screen);
+		RELEASE((*item_screen));
 
 	Screen_elements.clear();
 
