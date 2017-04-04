@@ -291,7 +291,7 @@ bool j1Map::CleanUp()
 
 	// Remove all tilesets
 	for (std::list<TileSet*>::iterator item = smallData.tilesets.begin(); item != smallData.tilesets.cend(); item++)
-		RELEASE(*item);
+		RELEASE_ARRAY(*item);
 	for (std::list<TileSet*>::iterator item = bigData.tilesets.begin(); item != bigData.tilesets.cend(); item++)
 		RELEASE(*item);
 
@@ -300,7 +300,7 @@ bool j1Map::CleanUp()
 
 	// Remove all layers
 	for (std::list<MapLayer*>::iterator item = smallData.layers.begin(); item != smallData.layers.cend(); item++)
-		RELEASE(*item);
+		RELEASE_ARRAY(*item);
 	for (std::list<MapLayer*>::iterator item = bigData.layers.begin(); item != bigData.layers.cend(); item++)
 		RELEASE(*item);
 
@@ -325,7 +325,7 @@ bool j1Map::Load(const char* file_name)
 	int size = App->fs->Load(tmp.c_str(), &buf);
 	pugi::xml_parse_result result = map_file->load_buffer(buf, size);
 
-	RELEASE(buf);
+	RELEASE_ARRAY(buf);
 
 	if(result == NULL)
 	{
@@ -587,7 +587,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	{
 		LOG("Error parsing map xml file: Cannot find 'layer/data' tag.");
 		ret = false;
-		RELEASE(layer);
+		RELEASE_ARRAY(layer);
 	}
 	else
 	{
@@ -755,13 +755,13 @@ void j1Map::UnLoadData()
 {
 	// Remove all tilesets
 	for (std::list<TileSet*>::iterator item = data->tilesets.begin(); item != data->tilesets.cend(); item++)
-		RELEASE(*item);
+		RELEASE_ARRAY(*item);
 
 	data->tilesets.clear();
 
 	// Remove all layers
 	for (std::list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
-		RELEASE(*item);
+		RELEASE_ARRAY(*item);
 
 	data->layers.clear();
 

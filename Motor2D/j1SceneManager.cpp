@@ -8,6 +8,7 @@
 #include "TestScene.h"
 #include "j1Map.h"
 #include "j1CollisionManager.h"
+#include "j1Pathfinding.h"
 
 j1SceneManager::j1SceneManager() : currentScene(nullptr)
 {
@@ -95,8 +96,11 @@ bool j1SceneManager::ChangeScene()
 
 	if (ret)
 	{
+		App->pathfinding->CleanUp();
 		App->game->em->CleanEntities();
-		ret = currentScene->Load(data[destiny].c_str(), true);
+		RELEASE(currentScene);
+		currentScene = new Scene(destiny.c_str());
+		currentScene->Load(data[currentScene->name].c_str());
 
 		iPoint destPos;
 		if (exitDest != -1)
@@ -126,7 +130,6 @@ bool j1SceneManager::ChangeScene()
 		
 
 		App->game->em->player->currentPos = destPos;
-
 		changeRequest = false;
 	}
 

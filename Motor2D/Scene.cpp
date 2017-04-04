@@ -30,7 +30,7 @@ bool Scene::Load(const char* path, const bool reloadMap)
 	char* buf;
 	int size = App->fs->Load(path, &buf);
 	pugi::xml_parse_result result = doc.load_buffer(buf, size);
-	RELEASE(buf);
+	RELEASE_ARRAY(buf);
 
 	if (!(ret = !(result == NULL)))
 	{

@@ -156,7 +156,7 @@ bool Hud::LoadPause(string file)
 	char* buff;
 	int size = App->fs->Load(file.c_str(), &buff);
 	pugi::xml_parse_result result = pause_file.load_buffer(buff, size);
-	RELEASE(buff);
+	RELEASE_ARRAY(buff);
 
 	if (result == NULL)
 	{
@@ -264,7 +264,7 @@ bool Hud::LoadHud(string file)
 	char* buff;
 	int size = App->fs->Load(file.c_str(), &buff);
 	pugi::xml_parse_result result = hud_file.load_buffer(buff, size);
-	RELEASE(buff);
+	RELEASE_ARRAY(buff);
 
 	if (result == NULL)
 	{

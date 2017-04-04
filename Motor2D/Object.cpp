@@ -13,7 +13,7 @@ bool Object::Spawn(std::string file, iPoint pos)
 	char* buff;
 	int size = App->fs->Load(file.c_str(), &buff);
 	pugi::xml_parse_result result = attributesFile.load_buffer(buff, size);
-	RELEASE(buff);
+	RELEASE_ARRAY(buff);
 
 	if (result == NULL)
 	{

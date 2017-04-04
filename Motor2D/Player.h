@@ -49,6 +49,7 @@ public:
 
 	bool invulnerable;
 	bool dodging = false;
+	bool changeAge = false;
 	Npc* toTalk = nullptr;
 
 	PLAYER_STATE playerState = ACTIVE;

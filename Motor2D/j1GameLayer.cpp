@@ -234,7 +234,8 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c2->type == COLLIDER_BOOK)
 	{
-		em->player->ChangeAge();
+		em->player->changeAge = true;
+		c2->to_delete = true;
 		c2->parent->life = -1;
 		return true;
 	}

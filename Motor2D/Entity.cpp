@@ -115,7 +115,7 @@ bool Entity::LoadAnimations(std::string file)
 	char* buff;
 	int size = App->fs->Load(file.c_str(), &buff);
 	pugi::xml_parse_result result = anim_file.load_buffer(buff, size);
-	RELEASE(buff);
+	RELEASE_ARRAY(buff);
 
 	if (ret = (result != NULL))
 	{

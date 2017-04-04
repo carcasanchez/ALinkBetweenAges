@@ -32,7 +32,7 @@ bool Player::Spawn(std::string file, iPoint pos)
 	char* buff;
 	int size = App->fs->Load(file.c_str(), &buff);
 	pugi::xml_parse_result result = attributesFile.load_buffer(buff, size);
-	RELEASE(buff);
+	RELEASE_ARRAY(buff);
 
 	if (result == NULL)
 	{
@@ -80,12 +80,19 @@ bool Player::Update(float dt)
 {
 	bool ret = true;
 	lastPos = currentPos;
+
+	if (changeAge)
+	{
+		changeAge = false;
+		ChangeAge();
+	}
 	
 	if (damagedTimer.ReadMs() > damagedTime && invulnerable == true)
 	{
 		invulnerable = false;
 		sprite->tint = { 255, 255, 255, 255 };
 	}
+
 
 	ManageStamina(dt);	
 
@@ -151,7 +158,7 @@ void Player::OnDeath()
 	char* buff;
 	int size = App->fs->Load("attributes/player_attributes.xml", &buff);
 	pugi::xml_parse_result result = attributesFile.load_buffer(buff, size);
-	RELEASE(buff);
+	RELEASE_ARRAY(buff);
 
 	if (result == NULL)
 	{
@@ -198,7 +205,7 @@ void Player::ChangeAge()
 	char* buff;
 	int size = App->fs->Load("attributes/old_link_attributes.xml", &buff);
 	pugi::xml_parse_result result = attributesFile.load_buffer(buff, size);
-	RELEASE(buff);
+	RELEASE_ARRAY(buff);
 
 	if (result == NULL)
 	{

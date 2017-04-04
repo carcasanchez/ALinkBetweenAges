@@ -46,7 +46,7 @@ struct MapLayer
 
 	~MapLayer()
 	{
-		RELEASE(data);
+		RELEASE_ARRAY(data);
 	}
 
 	inline uint Get(int x, int y) const
