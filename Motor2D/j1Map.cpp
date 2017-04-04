@@ -87,8 +87,12 @@ void j1Map::Draw()
 		{
 			for (int y = cameraSection.y; y < cameraSection.y + cameraSection.h; y++)
 			{
+				int tile_id = 0;
 
-				int tile_id = layer->Get(x, y);
+				if (x > data->width || y > data->height)
+					tile_id = 0;
+				else tile_id = layer->Get(x, y);
+
 				if (tile_id > 0)
 				{
 					iPoint pos = MapToWorld(x, y);

@@ -53,6 +53,7 @@ struct MapLayer
 	{
 		if (x < 0 || y < 0)
 			return 0;
+
 		return data[(y*width) + x];
 	}
 };
