@@ -1,6 +1,8 @@
 #include "UI_Image.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "HUD.h"
+#include "j1GameLayer.h"
 #include "j1Gui.h"
 
 UI_Image::UI_Image(UI_TYPE type, j1Module* callback) : UI_element(type, callback), Image({ 0,0,0,0 }) {}
@@ -11,6 +13,9 @@ UI_Image::UI_Image(const UI_Image* other) : UI_element(other->element_type, othe
 
 bool UI_Image::Update_Draw()
 {
+	if (this == App->game->hud->Rupees)
+		int lol = 0;
+
 	if (active)
 	{
 		//Looks if is an IMAGE o an IMAGE_NOT_IN_ATLAS and blits the texture needed

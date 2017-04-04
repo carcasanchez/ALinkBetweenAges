@@ -45,14 +45,11 @@ bool Hud::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
 	{
-		AddHearts();
+	//	AddHearts();
+		enemies_counter->SumNumber(1);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
-	{
-		stamina_bar->move_rect.x -= 10;
-	}
-
+	
 	return false;
 }
 
@@ -309,8 +306,6 @@ bool Hud::LoadHud(string file)
 
 		SetHudElements();
 
-		hud_screen->AddChild(enemies_counter);
-
 		hud_screen->AddChild(Rupees);
 		hud_screen->AddChild(Bombs);
 		hud_screen->AddChild(Arrows);
@@ -324,6 +319,8 @@ bool Hud::LoadHud(string file)
 		hud_screen->AddChild(medium_heart);
 		hud_screen->AddChild(full_heart);
 
+		hud_screen->AddChild(enemies_counter);
+
 	}
 
 	return false;
@@ -332,7 +329,7 @@ bool Hud::LoadHud(string file)
 void Hud::SetHudElements()
 {
 	numbers->Set_Active_state(false);
-	enemies_counter->Set_Interactive_Box({ -100,50,0,0 });
+	enemies_counter->Set_Interactive_Box({ 500,50,0,0 });
 	enemies_counter->SetImage(numbers, 14, 14);
 
 	Rupees->Set_Interactive_Box({ 175,20,0,0 });
