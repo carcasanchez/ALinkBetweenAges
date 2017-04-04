@@ -6,7 +6,9 @@
        <text value="Hi Link! We had problems with Ganon's soldiers."/>
 	<text value="They came out of nowhere with the intention of kidnapping Zelda"/>
 	<text value="but she managed to escape into the forest, at the southwest."/>
-	<text value="We need your help, bring Zelda back please"/>
+	<text value="We need your help, bring Zelda back please."/>
+<text value="I forgot! You can attack in four directions"/>
+<text value="using ABXY and dodge with RB."/>
      </dialogue>
      <dialogue state="1">
    	<text value="Go to the forest and find Zelda."/>
@@ -78,10 +80,10 @@
    <npc id="8">
      <dialogue state="0">
 	<text value="I'm glad to see you again Link, thank you for save me."/>
-	<text value="This morning a group of soldiers came to try to take me to ganon,"/>
+	<text value="This morning a group of soldiers came trying to take me to Ganon,"/>
 	<text value="but I managed to escape into the forest and hide here."/>
-	<text value="I need your help to get my home back, could you throw out all the soldiers of the castle?"/>
-<text value="Take the book behind me, could be very helpful"/>
+	<text value="I need your help to get my home back, could you throw out all the soldiers of the village?"/>
+<text value="It's dangerous to go alone, take the book behind me."/>
 	<text value="Thank you so much Link."/>
      </dialogue>
      <dialogue state="1">

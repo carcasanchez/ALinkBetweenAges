@@ -66,6 +66,28 @@
 		<sample type = "1" x = "242" y = "29"/>
 		<sample type = "1" x = "260" y = "29"/>
 
+		<sample type = "1" x = "102" y = "117"/>
+		<sample type = "1" x = "115" y = "117"/>
+
+		<sample type = "1" x = "34" y = "172"/>
+		<sample type = "1" x = "33" y = "167"/>
+
+		<sample type = "1" x = "108" y = "144"/>
+
+		<sample type = "1" x = "249" y = "165"/>
+		<sample type = "1" x = "241" y = "164"/>
+
+		<sample type = "1" x = "246" y = "57"/>
+		<sample type = "1" x = "255" y = "57"/>
+		<sample type = "1" x = "240" y = "67"/>
+		<sample type = "1" x = "260" y = "67"/>
+
+		<sample type = "1" x = "251" y = "34"/>
+
+		<sample type = "1" x = "248" y = "137"/>
+		<sample type = "1" x = "248" y = "141"/>
+		<sample type = "1" x = "264" y = "103"/>
+		<sample type = "1" x = "236" y = "104"/>
 
         </enemies>
       </entities>

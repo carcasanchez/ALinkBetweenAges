@@ -15,6 +15,8 @@
  	 	</sample>
 		<sample type = "1" x = "70" y = "62">
  	 	</sample>
+		<sample type = "1" x = "81" y = "63"/>
+
         </enemies>
 
         <special>
