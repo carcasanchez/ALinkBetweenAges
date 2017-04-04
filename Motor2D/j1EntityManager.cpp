@@ -178,6 +178,27 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 	case NPC_ZELDA:
 		ret = new Npc_Zelda();
 		break;
+	case NPC_UNCLE:
+		ret = new Npc_Uncle();
+		break;
+	case NPC_HIPPIE:
+		ret = new Npc_Hippie();
+		break;
+	case NPC_FARM_KID:
+		ret = new Npc_Farm_Kid();
+		break;
+	case NPC_WOMAN:
+		ret = new Npc_Woman();
+		break;
+	case NPC_GRANDMA:
+		ret = new Npc_Grandma();
+		break;
+	case NPC_TAVERN_OLD_MAN:
+		ret = new Npc_Tavern_Old_Man();
+		break;
+	case NPC_LITTLE_KID:
+		ret = new Npc_Little_Kid();
+		break;
 
 	default:
 		return nullptr;

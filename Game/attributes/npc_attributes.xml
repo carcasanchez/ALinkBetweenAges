@@ -1,9 +1,0 @@
-<!-- Npc Attributes -->
-<attributes>
-	<zelda>
-		<base life = "1" speed = "30"/>
-		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcZelda_animations.xml"/>
-  		<texture file = "textures/Npc_sprites/Npc.png"/>
-	</zelda>
-</attributes>

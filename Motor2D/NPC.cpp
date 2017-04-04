@@ -43,6 +43,27 @@ bool Npc::Spawn(std::string file, iPoint pos, NPC_TYPE type)
 		case NPC_ZELDA:
 			attributes = attributesFile.child("attributes").child("zelda");
 			break;
+		case NPC_UNCLE:
+			attributes = attributesFile.child("attributes").child("uncle");
+			break;
+		case NPC_HIPPIE:
+			attributes = attributesFile.child("attributes").child("hippie");
+			break;
+		case NPC_FARM_KID:
+			attributes = attributesFile.child("attributes").child("farm_kid");
+			break;
+		case NPC_WOMAN:
+			attributes = attributesFile.child("attributes").child("woman");
+			break;
+		case NPC_GRANDMA:
+			attributes = attributesFile.child("attributes").child("grandma");
+			break;
+		case NPC_TAVERN_OLD_MAN:
+			attributes = attributesFile.child("attributes").child("tavern_old_man");
+			break;
+		case NPC_LITTLE_KID:
+			attributes = attributesFile.child("attributes").child("little_kid");
+			break;
 		}
 		
 		actionState = IDLE;
