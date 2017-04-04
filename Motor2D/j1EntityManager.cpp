@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Object.h"
 #include "NPC.h"
 #include "j1CollisionManager.h"
 #include "j1SceneManager.h"
@@ -222,6 +223,30 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 	}
 
 	return ret;
+}
+
+Object * j1EntityManager::CreateObject(int sector, int x, int y)
+{
+	Object* ret = new Object();
+
+	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
+
+	if (ret->Spawn(dir[OBJECT], worldPos))
+	{
+		ret->type = OBJECT;
+		entities[sector].push_back(ret);
+		ret->id = entities[sector].end();
+
+	}
+	else 
+	{
+		RELEASE(ret);
+		ret = NULL;
+	}
+
+	return ret;
+
+	return nullptr;
 }
 
 bool j1EntityManager::CleanEntities()

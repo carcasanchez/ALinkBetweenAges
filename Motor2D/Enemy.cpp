@@ -18,7 +18,6 @@
 void Enemy::OnDeath()
 {
 	toDelete = true;
-	col->to_delete = true;
 	App->game->em->player->defeatedEnemies++;
 	LOG("Defeated Enemies: %i", (App->game->em->player->defeatedEnemies));
 }

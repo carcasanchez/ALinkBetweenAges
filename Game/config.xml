@@ -59,6 +59,7 @@
       <link file = "player_attributes.xml"/>
       <enemy file = "enemy_attributes.xml"/>
       <npc file = "npc_attributes.xml"/>
+      <object file = "object_attributes.xml"/>
     </entityAttributes>
     <hud folder = "gui/">
      <ingame file = "hud_attributes.xml"/>

@@ -101,12 +101,11 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			entity = entities.child("special");
 			for (pugi::xml_node special = entity.first_child(); special != NULL; special = special.next_sibling())
 			{
-				/* load otherEntity at maxSectors
-				App->game->em->CreateNPC(
+		
+				App->game->em->CreateObject(
 					maxSectors,
-					SPECIAL_ENTITY_TYPE(other.attribute("type").as_int()),
-					other.attribute("x").as_int(),
-					other.attribute("y").as_int());*/
+					special.attribute("x").as_int(),
+					special.attribute("y").as_int());
 			}
 
 			pugi::xml_node exits = section.child("exits");

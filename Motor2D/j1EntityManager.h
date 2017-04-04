@@ -15,9 +15,11 @@ class Entity;
 class Player;
 class Enemy;
 class Npc;
+class Object;
 enum ENTITY_TYPE;
 enum ENEMY_TYPE;
 enum NPC_TYPE;
+
 
 class j1EntityManager
 {
@@ -33,6 +35,7 @@ public:
 	Player* CreatePlayer(int, int);
 	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>);
 	Npc*	CreateNPC(int, NPC_TYPE, int, int, int);
+	Object* CreateObject(int, int, int);
 
 	bool CleanEntities();
 	void SetSectorRef(int*);

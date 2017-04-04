@@ -226,6 +226,13 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 			em->player->toTalk = (Npc*)c1->parent;
 		}
 	}
+
+	if (c2->type == COLLIDER_BOOK)
+	{
+		em->player->ChangeAge();
+		c2->parent->life = -1;
+		return true;
+	}
 		
 	return true;
 }

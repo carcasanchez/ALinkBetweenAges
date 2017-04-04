@@ -34,7 +34,8 @@ enum ENTITY_TYPE
 {
 	LINK = 0,
 	ENEMY,
-	NPC
+	NPC,
+	OBJECT
 };
 
 
