@@ -34,6 +34,15 @@ bool Hud::Start()
 	App->inputM->AddListener(this);
 	SetHearts();
 
+	//THRASH VS
+	win->Set_String("You Killed all the soldiers. Thankyou for playing this demo");
+	win->Set_Interactive_Box({ 300,300,0,0 });
+	win->Set_Active_state(false);
+
+	win2->Set_String("Press UP to play again, press DOWN to close");
+	win2->Set_Interactive_Box({ 300,325,0,0 });
+	win2->Set_Active_state(false);
+
 	return true;
 }
 
@@ -49,6 +58,8 @@ bool Hud::Update(float dt)
 		enemies_counter->SumNumber(1);
 	}
 
+	if (App->game->hud->player_continue == true)
+		input_active = true;
 	
 	return false;
 }
@@ -279,6 +290,10 @@ bool Hud::LoadHud(string file)
 		stamina_container = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		stamina_green = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		stamina_bar = (UI_Stamina*)App->gui->Add_element(STAMINA_BAR, App->game);
+
+		//THRASH FOR VERTICAL SLICE
+		win = (UI_String*)App->gui->Add_element(STRING, App->game);
+		win2 = (UI_String*)App->gui->Add_element(STRING, App->game);
 		
 		pugi::xml_node hud_node = hud_file.child("images");
 
@@ -321,6 +336,9 @@ bool Hud::LoadHud(string file)
 
 		hud_screen->AddChild(enemies_counter);
 
+		hud_screen->AddChild(win);
+		hud_screen->AddChild(win2);
+
 	}
 
 	return false;
@@ -349,6 +367,8 @@ void Hud::SetHudElements()
 	stamina_bar->SetStamina(stamina_green);
 	stamina_container->Set_Active_state(false);
 	stamina_green->Set_Active_state(false);
+
+	
 
 
 }

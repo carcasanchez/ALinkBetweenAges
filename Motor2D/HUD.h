@@ -6,6 +6,7 @@
 #include "UI_Heart.h"
 #include "UI_Stamina.h"
 #include "UI_Image.h"
+#include "UI_String.h"
 #include "UI_Counter.h"
 #include "InputManager.h"
 
@@ -30,6 +31,13 @@ public:
 	bool CleanUp();
 
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
+
+	//TRASH FOR VERTICAL SLICE
+	bool player_continue = false;
+
+	UI_String* win = nullptr;
+	UI_String* win2 = nullptr;
+
 
 public:
 	//In game HUD elements
@@ -79,6 +87,8 @@ public:
 	UI_Image*		quit = nullptr;
 
 	std::vector<UI_Image*> pause_selectables;
+
+	
 
 private:
 

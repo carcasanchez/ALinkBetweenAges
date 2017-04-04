@@ -137,6 +137,9 @@ void Player::OnDeath()
 	sprite->tint = { 255, 255, 255, 255 };
 	actionState = IDLE;
 
+	//THRASH FOR VL
+	App->game->hud->win->Set_Active_state(false);
+	App->game->hud->win2->Set_Active_state(false);
 
 	//TODO: delete this
 	col->to_delete = true;
@@ -716,6 +719,30 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			dodgeTimer.Start();
 		}
 		break;
+
+	//TRASH FOR VERTICAL SLICE
+	case UP:
+	{
+		if (state == E_DOWN)
+		{
+			life = 0;
+			App->game->hud->player_continue = true;
+			App->game->hud->win->Set_Active_state(false);
+			App->game->hud->win2->Set_Active_state(false);
+			App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
+		}
+		break;
+	}
+
+	case DOWN:
+	{
+		if (state == E_DOWN)
+		{
+			App->game->quit_game = true;
+		}
+		break;
+	}
+
 	}
 }
 
