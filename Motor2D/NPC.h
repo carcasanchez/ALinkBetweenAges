@@ -19,7 +19,7 @@ enum NPC_TYPE
 
 
 
-class Npc : public Entity, public InputListener
+class Npc : public Entity
 {
 public:
 

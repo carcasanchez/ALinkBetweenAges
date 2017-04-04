@@ -12,7 +12,7 @@
 #include "InputManager.h"
 #include "j1PerfTimer.h"
 
-Npc::Npc() : Entity(), dialogState(0) { App->inputM->AddListener(this); }
+Npc::Npc() : Entity(), dialogState(0) {}
 
 bool Npc::Spawn(std::string file, iPoint pos, NPC_TYPE type)
 {
