@@ -36,7 +36,7 @@ bool Hud::Start()
 
 	//THRASH VS
 	win->Set_String("You Killed all the soldiers. Thank you for playing this demo");
-	win->Set_Interactive_Box({ 300,300,0,0 });
+	win->Set_Interactive_Box({ 300,300,324,30 });
 	win->Set_Active_state(false);
 
 	win2->Set_String("Press UP to play again, press DOWN to close");
