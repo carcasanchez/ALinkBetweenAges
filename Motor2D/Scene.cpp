@@ -188,7 +188,7 @@ bool Scene::CleanUp()
 	return ret;
 }
 
-iPoint Scene::GetExitPlayerPos(int sector, int exitNum)
+iPoint Scene::GetExitPlayerPos(int sector, int exitNum, DIRECTION &destDir)
 {
 	iPoint ret = { 0,0 };
 
@@ -197,8 +197,10 @@ iPoint Scene::GetExitPlayerPos(int sector, int exitNum)
 	for (int i = 0; i < exitNum && it != exits[sector].end(); i++)
 		it++;
 
-	ret.x = (*it)->rect.x;
-	ret.y = (*it)->rect.y;
+	ret.x = (*it)->rect.x + (*it)->rect.w/2;
+	ret.y = (*it)->rect.y + (*it)->rect.h / 2;
+
+	destDir = (*it)->dir;
 
 	return ret;
 }

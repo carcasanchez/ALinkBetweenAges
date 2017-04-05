@@ -70,7 +70,8 @@ void j1SceneManager::RequestSceneChange(Exit* exit)
 
 	destiny = exit->destiny;
 	exitDest = exit->exitDest;
-	dir = exit->dir;
+
+	
 
 	// Apply transition
 }
@@ -105,21 +106,20 @@ bool j1SceneManager::ChangeScene()
 		iPoint destPos;
 		if (exitDest != -1)
 		{
-			 destPos = currentScene->GetExitPlayerPos(1, exitDest);
+				 destPos = currentScene->GetExitPlayerPos(1, exitDest, dir);
 			switch (dir)
 			{
 			case(D_UP):
-				destPos.x += 8;
-				destPos.y -= 24;
+				destPos.y -= 48;
 				break;
 			case(D_DOWN):
-				destPos.y -= 24;
+				destPos.y += 48;
 				break;
 			case(D_RIGHT):
-				destPos.x += 24;
+				destPos.x -= 48;
 				break;
 			case(D_LEFT):
-				destPos.x -= 24;
+				destPos.x += 48;
 				break;
 			}
 		}
