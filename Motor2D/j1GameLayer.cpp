@@ -164,7 +164,6 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				  em->player->damaged = em->player->invulnerable = true;
 				  em->player->damagedTimer.Start();
 				  em->player->life -= c2->parent->damage;
-				  hud->UpdateHearts();
 				  em->player->sprite->tint = { 100, 0, 0, 255 };
 
 				  if (c1->rect.x < c2->rect.x)

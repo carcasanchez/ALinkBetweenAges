@@ -74,8 +74,11 @@ bool UI_element::Mouse_is_in(const iPoint& mouse_pos)
 
 void UI_element::Child_Update_Draw()
 {
-	for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
-		(*item_child)->Update_Draw();
+	if (Childs.size())
+	{
+		for (list<UI_element*>::iterator item_child = Childs.begin(); item_child != Childs.cend(); item_child++)
+			(*item_child)->Update_Draw();
+	}
 }
 
 void UI_element::Child_Update()

@@ -63,6 +63,8 @@ public:
 	void				AddHearts();
 	void				RestoreHearts();
 	void				UpdateHearts();
+	void				SetHearts();
+	void				ResetHearts();
 
 	//items images
 	UI_Image*		items_frame = nullptr;
@@ -106,7 +108,8 @@ private:
 	void		SetHudElements();
 
 	//Life methods
-	void		SetHearts();
+	void		HeartUP(int);
+	void		VaciarHearts(int);
 
 
 };
