@@ -93,7 +93,7 @@
       </entities>
 
       <exits>
-        <exit destinyScene = "outsideCastle" destinyExit = "0" x = "107" y = "236" w="2" h="1" direction = "0"/>
+        <exit destinyScene = "outsideCastle" destinyExit = "0" x = "107" y = "237" w="2" h="1" direction = "0"/>
       </exits>
 
     </sector>

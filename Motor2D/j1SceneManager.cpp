@@ -110,16 +110,16 @@ bool j1SceneManager::ChangeScene()
 			switch (dir)
 			{
 			case(D_UP):
-				destPos.y -= 48;
+				destPos.y -= 16;
 				break;
 			case(D_DOWN):
-				destPos.y += 48;
+				destPos.y += 16;
 				break;
 			case(D_RIGHT):
-				destPos.x -= 48;
+				destPos.x += 16;
 				break;
 			case(D_LEFT):
-				destPos.x += 48;
+				destPos.x -= 16;
 				break;
 			}
 		}
