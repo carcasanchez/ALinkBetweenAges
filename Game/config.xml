@@ -28,8 +28,8 @@
     <resolution width="552" height="448" scale="2"/>
     <margin horizontal="20" vertical="20"/>
     <fullscreen value="false"/>
-    <borderless value="false"/>
-    <resizable value="true"/>
+    <borderless value="true"/>
+    <resizable value="false"/>
     <fullscreen_window value="false"/>
   </window>
 

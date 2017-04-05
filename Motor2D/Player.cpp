@@ -324,27 +324,25 @@ bool Player::Idle()
 		App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
 	{
 		actionState = WALKING;
-		LOG("Link is WALKING");
 		return true;
 	}
 
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
+	if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
-		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN))
 	{
 		if (toTalk != nullptr)
 		{
 			playerState = EVENT;
-			LOG("LINK IS TALKING");
 		}
 		else
 		{
-			stamina -= attackTax;
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
+			stickTimer.Start();
 		}
 	}
 
@@ -646,7 +644,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			
 			else
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
+				if (actionState != ATTACKING && playerState != EVENT && stickTimer.ReadMs() > 150)
 				{
 					if (stamina - attackTax >= 0)
 					{
@@ -656,6 +654,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
 						attack_vicente = true;
+						stickTimer.Start();
 						LOG("LINK is ATTACKING");
 					}
 					break;
@@ -675,7 +674,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				NextDialog();
 			else
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
+				if (actionState != ATTACKING && playerState != EVENT && stickTimer.ReadMs() > 150)
 				{
 					if (stamina - attackTax >= 0)
 					{
@@ -685,6 +684,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
 						attack_vicente = true;
+						stickTimer.Start();
 						LOG("LINK is ATTACKING");
 					}
 					break;

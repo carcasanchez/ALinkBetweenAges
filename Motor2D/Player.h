@@ -80,6 +80,7 @@ private:
 	// For attack
 	Collider* swordCollider;
 	iPoint swordColliderPivot = { 0, 0 };
+	j1PerfTimer stickTimer;
 
 	//Damaged
 	int hitTime;
