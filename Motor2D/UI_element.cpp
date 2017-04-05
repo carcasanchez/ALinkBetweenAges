@@ -37,6 +37,21 @@ UI_element* UI_element::AddChild(UI_element* new_child)
 	return ret;
 }
 
+bool UI_element::QuitChild(UI_element* del_child)
+{
+	for (std::list<UI_element*>::iterator it = Childs.begin(); it != Childs.end(); it++)
+	{
+		if ((*it) == del_child)
+		{
+			Childs.erase(it);
+			RELEASE((del_child));			
+			return true;
+		}
+	}
+
+	return false;
+}
+
 const UI_element* UI_element::Set_Parent(const UI_element* new_Parent)
 {
 	Parent = new_Parent;

@@ -405,10 +405,7 @@ void Hud::ResetHearts()
 	{
 		for (std::vector<UI_Heart*>::reverse_iterator it = hearts.rbegin(); it != hearts.rend() && num_hearts > App->game->em->player->life; it++)
 		{
-			//RELEASE(*it);
-
-			delete *it;
-			*it = nullptr;
+			hud_screen->QuitChild(*it);
 			hearts.pop_back();
 			num_hearts--;
 		}

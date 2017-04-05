@@ -90,7 +90,8 @@ public:
 	virtual bool Handle_input() { return true; };		//Calls the UI callbacks 
 
 	//Childs and parents functions
-	UI_element* AddChild(UI_element* new_child);				
+	UI_element* AddChild(UI_element* new_child);
+	bool		QuitChild(UI_element* new_child);
 	
 	//Adds the element to the tab
 	void Add_to_Tab();

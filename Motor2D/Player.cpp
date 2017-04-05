@@ -166,6 +166,7 @@ void Player::OnDeath()
 	life = 3;
 	iPoint respawn = App->map->MapToWorld(App->game->playerX, App->game->playerY);
 	App->sceneM->RequestSceneChange(respawn, "kakarikoVillage", D_DOWN);
+	App->game->hud->ResetHearts();
 	App->game->hud->RestoreHearts();
 	App->game->hud->enemies_counter->Reset();
 	damaged = invulnerable = false;
@@ -324,25 +325,27 @@ bool Player::Idle()
 		App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
 	{
 		actionState = WALKING;
+		LOG("Link is WALKING");
 		return true;
 	}
 
 
-	if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
-		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN))
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
 		if (toTalk != nullptr)
 		{
 			playerState = EVENT;
+			LOG("LINK IS TALKING");
 		}
 		else
 		{
+			stamina -= attackTax;
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
-			stickTimer.Start();
 		}
 	}
 
@@ -644,7 +647,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			
 			else
 			{
-				if (actionState != ATTACKING && playerState != EVENT && stickTimer.ReadMs() > 150)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
 					if (stamina - attackTax >= 0)
 					{
@@ -654,7 +657,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
 						attack_vicente = true;
-						stickTimer.Start();
 						LOG("LINK is ATTACKING");
 					}
 					break;
@@ -674,7 +676,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				NextDialog();
 			else
 			{
-				if (actionState != ATTACKING && playerState != EVENT && stickTimer.ReadMs() > 150)
+				if (actionState != ATTACKING && playerState != EVENT)
 				{
 					if (stamina - attackTax >= 0)
 					{
@@ -684,7 +686,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
 						attack_vicente = true;
-						stickTimer.Start();
 						LOG("LINK is ATTACKING");
 					}
 					break;
