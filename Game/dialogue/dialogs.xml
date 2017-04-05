@@ -4,14 +4,15 @@
    <npc id="1">
      <dialogue state="0">
        <text value=" Hi Link! We had problems with Ganon's soldiers."/>
-	<text value=" They came out of nowhere with pretending to kidnap Zelda"/>
-	<text value=" but she managed to escape into the forest, at the southwest."/>
-	<text value=" We need your help, bring Zelda back please."/>
+	<text value=" They came out of nowhere with pretending to kidnap Zelda,"/>
+	<text value=" but she managed to escape into the forest."/>
+	<text value=" The forest is at the south-west, passing the village."/>
+	<text value=" We need your help. Bring Zelda back, please. "/>
 	<text value=" I forgot! You can attack in four directions "/>
-	<text value=" using ABXY and dodge with RB."/>
+	<text value=" using ABXY, and dodge with RB."/>
      </dialogue>
      <dialogue state="1">
-   	<text value=" Go to the forest and find Zelda."/>
+   	<text value=" Go to the forest, at south-west, and find Zelda."/>
   	<text value=" You are our last hope, good luck Link."/>
      </dialogue>
    </npc>
@@ -21,16 +22,16 @@
 	<text value=" A close of eyes is enough to make a peaceful man a warrior."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" I can see fear on your eyes, be brave Link."/>
+	<text value=" I can see fear on your eyes. Be brave, Link."/>
      </dialogue>
    </npc>
 
    <npc id="3">
      <dialogue state="0">
-	<text value=" The soldiers stole my chickens, I'm so sad. They are bad people."/>
+	<text value=" The soldiers stole my chickens. I'm so sad. They are bad people."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" Bring my chickens back please."/>
+	<text value=" Bring my chickens back, please."/>
      </dialogue>
    </npc>
 
@@ -47,12 +48,12 @@
 
    <npc id="5">
      <dialogue state="0">
-	<text value=" To the left is the entrance to the forest,"/>
-	<text value=" be very careful if you are going to enter there."/>
+	<text value=" To the left is the entrance to the forest."/>
+	<text value=" Be very careful if you are going to enter there."/>
 </dialogue>
 <dialogue state="1">
-	<text value=" To the left is the entrance to the forest,"/>
-	<text value=" be very careful if you are going to enter there."/>
+	<text value=" To the left is the entrance to the forest."/>
+	<text value=" Be very careful if you are going to enter there."/>
 </dialogue>
 
 
@@ -60,7 +61,8 @@
 
    <npc id="6">
      <dialogue state="0">
-	<text value=" Hey! I think you don't talk so much, I like you."/>
+	<text value=" Hey! I think you don't talk so much. I like you."/>
+	<text value=" I like you."/>
      </dialogue>
 <dialogue state="1">
 	<text value=" Good boy."/>
@@ -70,23 +72,26 @@
 
    <npc id="7">
      <dialogue state="0">
-	<text value=" I love turtles but I can not find any one in this village."/>
+	<text value=" I love turtles, but I can not find any one in this village."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" I'm so sad, I want turtles."/>
+	<text value=" I'm so sad. I want turtles."/>
      </dialogue>
    </npc>
 
    <npc id="8">
      <dialogue state="0">
-	<text value=" I'm glad to see you again Link, thank you for come to rescue me"/>
-	<text value=" This morning a group of soldiers came to kidnap me,"/>
+	<text value=" I'm glad to see you again Link. Thank you for rescue me."/>
+	<text value=" This morning, a group of soldiers came to kidnap me,"/>
 	<text value=" but I managed to escape and hide here."/>
-	<text value=" I need your help Link, could you throw out all the soldiers of the village?"/>
+	<text value=" I need your help, Link. Could you defeat all the soldiers of the castle?"/>
+	<text value=" The castle is at the north of Kakariko village, passing the bridge."/>
 	<text value=" It's dangerous to go alone, take the book behind me."/>
+	<text value=" This is the Book of Ages. It gives power to the owner."/>
+	<text value=" You will become stronger and faster. Good luck, Link."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" Kakariko is on danger, throw out all the soldiers of the castle please."/>
+	<text value=" Kakariko is on danger. Throw out all the soldiers of the castle, please."/>
      </dialogue>
    </npc>
 
