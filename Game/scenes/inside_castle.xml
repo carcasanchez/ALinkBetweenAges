@@ -89,6 +89,9 @@
 		<sample type = "1" x = "264" y = "103"/>
 		<sample type = "1" x = "236" y = "104"/>
 
+		<sample type = "1" x = "36" y = "129"/>
+		<sample type = "1" x = "184" y = "138"/>
+
         </enemies>
       </entities>
 

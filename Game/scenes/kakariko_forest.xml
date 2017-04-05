@@ -6,7 +6,7 @@
       <entities>
  
 	  <npcs>
-		<sample type = "7" x = "80" y = "74" id="8"/>
+		<sample type = "7" x = "75" y = "76" id="8"/>
         </npcs>
 
         <enemies>
@@ -15,9 +15,9 @@
 		<patrol x="146" y = "291"/>
  	 	</sample >
 
-		<sample type = "1" x = "76" y = "161">
-		<patrol x="76" y = "161"/>
-		<patrol x="76" y = "171"/>
+		<sample type = "1" x = "174" y = "125">
+		<patrol x="174" y = "125"/>
+		<patrol x="174" y = "135"/>
  	 	</sample >
 		<sample type = "1" x = "136" y = "181">
 		<patrol x="136" y = "181"/>
@@ -36,7 +36,7 @@
 
         <special>
           <!--rocks, grass, etc-->
-          <sample type = "0" x = "74" y = "75" />
+          <sample type = "0" x = "71" y = "75" />
         </special>
       </entities>
 
