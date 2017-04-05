@@ -150,6 +150,13 @@ bool Player::Update(float dt)
 		App->game->quit_game = true;
 	}
 
+	if (attack_vicente && swordCollider != nullptr && actionState == ACTION_STATE::DODGING)
+	{
+		attack_vicente = false;
+		resetSwordCollider();
+	}
+
+
 	return ret;
 }
 
@@ -627,6 +634,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 	{
 
 	case ATTACK_UP:
+
 		switch (state)
 		{
 		case E_REPEAT:
@@ -647,6 +655,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
+						attack_vicente = true;
 						LOG("LINK is ATTACKING");
 					}
 					break;
@@ -675,6 +684,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
+						attack_vicente = true;
 						LOG("LINK is ATTACKING");
 					}
 					break;
@@ -703,6 +713,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
+						attack_vicente = true;
 						LOG("LINK is ATTACKING");
 					}
 					break;
@@ -731,6 +742,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						actionState = ATTACKING;
+						attack_vicente = true;
 						LOG("LINK is ATTACKING");
 					}
 					break;

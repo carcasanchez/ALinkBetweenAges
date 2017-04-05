@@ -25,6 +25,7 @@ public:
 
 	//THRASH VL
 	bool win_con = false;
+	bool attack_vicente = false;
 
 public:
 
