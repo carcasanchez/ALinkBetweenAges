@@ -81,6 +81,12 @@ bool Player::Update(float dt)
 	bool ret = true;
 	lastPos = currentPos;
 
+	if(dt > 0.1)
+	{
+		dt = 0;
+
+	}
+
 	if (changeAge)
 	{
 		changeAge = false;
@@ -92,7 +98,7 @@ bool Player::Update(float dt)
 		invulnerable = false;
 		sprite->tint = { 255, 255, 255, 255 };
 	}
-
+	
 
 	ManageStamina(dt);	
 

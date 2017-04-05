@@ -17,7 +17,7 @@
 
 // just for temporal wall collider
 #include "Entity.h"
-#define ENEMIES_TO_DEFEAT 10
+#define ENEMIES_TO_DEFEAT 20
 
 
 j1GameLayer::j1GameLayer() : j1Module()
@@ -99,7 +99,7 @@ bool j1GameLayer::Update(float dt)
 	}
 
 	//TRASH FOR VERTICAL SLICE
-	if (em->player->defeatedEnemies > ENEMIES_TO_DEFEAT)
+	if (em->player->defeatedEnemies >= ENEMIES_TO_DEFEAT)
 	{
 		em->player->defeatedEnemies = 0;
 		em->player->win_con = true;
