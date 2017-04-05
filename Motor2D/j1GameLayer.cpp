@@ -17,7 +17,7 @@
 
 // just for temporal wall collider
 #include "Entity.h"
-#define ENEMIES_TO_DEFEAT 20
+#define ENEMIES_TO_DEFEAT 48
 
 
 j1GameLayer::j1GameLayer() : j1Module()
