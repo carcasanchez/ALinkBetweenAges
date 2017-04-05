@@ -1,6 +1,6 @@
 <!-- Old Link Attributes -->
 <attributes>
-  <base life = "5" stamina = "250"  damage ="2" staminaRec = "50" speed = "95"/>
+  <base life = "4" stamina = "250"  damage ="2" staminaRec = "50" speed = "95"/>
   <attack speed = "20" staminaTax = "25"/>
   <damaged hitTime = "100" damagedTime = "2000" damagedSpeed = "180"/>
   <dodge speed = "320" staminaTax = "50" limit = "60"/>
