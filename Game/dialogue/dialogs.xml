@@ -4,7 +4,7 @@
    <npc id="1">
      <dialogue state="0">
        <text value="Hi Link! We had problems with Ganon's soldiers."/>
-	<text value="They came out of nowhere with the intention of kidnapping Zelda"/>
+	<text value="They came out of nowhere with pretending to kidnap Zelda"/>
 	<text value="but she managed to escape into the forest, at the southwest."/>
 	<text value="We need your help, bring Zelda back please."/>
 <text value="I forgot! You can attack in four directions"/>
@@ -18,7 +18,7 @@
   
    <npc id="2">
      <dialogue state="0">
-	<text value="The instant of a close of eyes is enough to make a peaceful man a warrior."/>
+	<text value="A close of eyes is enough to make a peaceful man a warrior."/>
      </dialogue>
      <dialogue state="1">
 	<text value="I can see fear on your eyes, be brave Link."/>
@@ -60,7 +60,7 @@
 
    <npc id="6">
      <dialogue state="0">
-	<text value="Hey! I think you do not talk so much, I like you."/>
+	<text value="Hey! I think you don't talk so much, I like you."/>
      </dialogue>
 <dialogue state="1">
 	<text value="Good boy."/>
@@ -73,18 +73,17 @@
 	<text value="I love turtles but I can not find any one in this village."/>
      </dialogue>
      <dialogue state="1">
-	<text value="I'm so sad."/>
+	<text value="I'm so sad, I want turtles."/>
      </dialogue>
    </npc>
 
    <npc id="8">
      <dialogue state="0">
-	<text value="I'm glad to see you again Link, thank you for save me."/>
-	<text value="This morning a group of soldiers came trying to take me to Ganon,"/>
-	<text value="but I managed to escape into the forest and hide here."/>
-	<text value="I need your help to get my home back, could you throw out all the soldiers of the village?"/>
-<text value="It's dangerous to go alone, take the book behind me."/>
-	<text value="Thank you so much Link."/>
+	<text value="I'm glad to see you again Link, thank you for come to rescue me"/>
+	<text value="This morning a group of soldiers came to kidnap me,"/>
+	<text value="but I managed to escape and hide here."/>
+	<text value="I need your help Link, could you throw out all the soldiers of the village?"/>
+	<text value="It's dangerous to go alone, take the book behind me."/>
      </dialogue>
      <dialogue state="1">
 	<text value="Kakariko is on danger, throw out all the soldiers of the castle please."/>
