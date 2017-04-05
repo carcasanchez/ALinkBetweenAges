@@ -27,7 +27,7 @@ public:
 
 	//virtual bool On_GUI_Callback(UI_element* elem, GUI_INPUT gui_input) { return true; }
 
-	iPoint GetExitPlayerPos(int, int);
+	iPoint GetExitPlayerPos(int, int, DIRECTION &);
 
 public:
 
