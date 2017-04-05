@@ -12,6 +12,7 @@ UI_Stamina::UI_Stamina(UI_TYPE type, j1Module* callback) : UI_element(type, call
 
 bool UI_Stamina::Update()
 {
+	RecoverStamina();
 
 	return true;
 }
