@@ -385,7 +385,7 @@ void Hud::SetHudElements()
 void Hud::SetHearts()
 {
 
-	for (int i = 0; i < App->game->em->player->life; i++)
+	for (int i = 0; i < (App->game->em->player)->life; i++)
 	{
 		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
 

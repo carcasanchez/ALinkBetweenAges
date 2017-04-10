@@ -496,9 +496,9 @@ void j1Render::CameraFollow(iPoint pos)
 		camera.x = 0;
 		renderZone.x = 0;
 	}
-	else if (renderZone.x + renderZone.w >= (App->map->data->width-1)*App->map->data->tile_width)
+	else if (renderZone.x + renderZone.w >= (App->map->data->width)*App->map->data->tile_width)
 	{
-		renderZone.x = (App->map->data->width-1)*App->map->data->tile_width - renderZone.w;
+		renderZone.x = (App->map->data->width)*App->map->data->tile_width - renderZone.w;
 		camera.x = -renderZone.x* scale;
 	}
 
@@ -507,9 +507,9 @@ void j1Render::CameraFollow(iPoint pos)
 		camera.y = 0;
 		renderZone.y = 0;
 	}
-	else if (renderZone.y + renderZone.h >= (App->map->data->height - 1)*App->map->data->tile_height)
+	else if (renderZone.y + renderZone.h >= (App->map->data->height)*App->map->data->tile_height)
 	{
-		renderZone.y = (App->map->data->height-1)*App->map->data->tile_height - renderZone.h;
+		renderZone.y = (App->map->data->height)*App->map->data->tile_height - renderZone.h;
 		camera.y = (-renderZone.y)* scale;
 	}
 }

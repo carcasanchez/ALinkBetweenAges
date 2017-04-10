@@ -72,7 +72,7 @@ public:
 	Sprite* sprite;
 	Animation* currentAnim;
 	std::map<std::pair<ACTION_STATE, DIRECTION>, Animation>	anim;
-
+	
 	// States
 	ACTION_STATE actionState;
 	DIRECTION currentDir;
@@ -100,6 +100,10 @@ public:
 
 	//Marked to death
 	bool toDelete;
+
+private:
+	int textureFile = 1;
+	int animationFile = 1;
 };
 
 #endif // !_ENTITY_H_

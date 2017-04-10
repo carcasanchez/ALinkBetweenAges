@@ -46,7 +46,7 @@ bool j1GameLayer::Start()
 	bool ret = true;
 
 	active = true;
-	em->player = em->CreatePlayer(playerX, playerY);
+	em->player = em->CreatePlayer(playerX, playerY, YOUNG);
 
 	hud->Start();
 	
@@ -95,7 +95,15 @@ bool j1GameLayer::Update(float dt)
 		
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		em->player->ChangeAge();
+		em->player->changeAge = 0;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		em->player->changeAge = 0;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		em->player->changeAge = 2;
 	}
 
 	//TRASH FOR VERTICAL SLICE
@@ -234,7 +242,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c2->type == COLLIDER_BOOK)
 	{
-		em->player->changeAge = true;
+		em->player->changeAge = 2;
 		c2->to_delete = true;
 		c2->parent->life = -1;
 		return true;

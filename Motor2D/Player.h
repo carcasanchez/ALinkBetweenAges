@@ -12,6 +12,13 @@ enum PLAYER_STATE
 	EVENT
 };
 
+enum LINK_AGE
+{
+	YOUNG=0,
+	MEDIUM,
+	ADULT
+};
+
 class Player : public Entity, public InputListener
 {
 public:
@@ -21,16 +28,18 @@ public:
 	bool Update(float dt);
 	void OnDeath();
 
-	void ChangeAge();
+	void ChangeAge(LINK_AGE);
 
 	//THRASH VL
 	bool win_con = false;
 	bool attack_vicente = false;
+	int defeatedEnemies = 0;
 
 public:
 
-	//Enemies defeated
-	int defeatedEnemies = 0;
+
+	PLAYER_STATE playerState = ACTIVE;
+	LINK_AGE age = YOUNG;
 
 	//Base
 	int maxLife;
@@ -53,10 +62,8 @@ public:
 
 	bool invulnerable;
 	bool dodging = false;
-	bool changeAge = false;
+	int changeAge = -1;
 	Npc* toTalk = nullptr;
-
-	PLAYER_STATE playerState = ACTIVE;
 
 	bool sceneOverride = false;
 

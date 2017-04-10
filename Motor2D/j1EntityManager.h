@@ -19,6 +19,7 @@ class Object;
 enum ENTITY_TYPE;
 enum ENEMY_TYPE;
 enum NPC_TYPE;
+enum LINK_AGE;
 
 
 class j1EntityManager
@@ -32,7 +33,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	Player* CreatePlayer(int, int);
+	Player* CreatePlayer(int, int, LINK_AGE);
 	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>);
 	Npc*	CreateNPC(int, NPC_TYPE, int, int, int);
 	Object* CreateObject(int, int, int);

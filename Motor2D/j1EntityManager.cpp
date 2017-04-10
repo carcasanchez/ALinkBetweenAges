@@ -124,12 +124,13 @@ bool j1EntityManager::CleanUp()
 	return ret;
 }
 
-Player* j1EntityManager::CreatePlayer(int x, int y)
+Player* j1EntityManager::CreatePlayer(int x, int y, LINK_AGE age)
 {
 	Player* ret = new Player();
 
 
 	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
+	ret->age = age;
 
 	if (!ret->Spawn(dir[LINK], worldPos))
 	{
