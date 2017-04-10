@@ -56,7 +56,7 @@ bool j1Render::Awake(pugi::xml_node& config)
 
 		renderZone.x = renderZone.y = 0;
 		renderZone.w = App->win->GetRenderZone().x;
-		renderZone.h = App->win->GetRenderZone().y;
+		renderZone.h =  App->win->GetRenderZone().y;
 
 	}
 
@@ -385,8 +385,7 @@ bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect s
 
 bool j1Render::InsideCameraZone(SDL_Rect rect)const
 {
-	//TODO: Arrange this
-	
+
 	SDL_Rect res;
 	bool a = SDL_IntersectRect(&rect, &renderZone, &res);
 			
@@ -497,9 +496,9 @@ void j1Render::CameraFollow(iPoint pos)
 		camera.x = 0;
 		renderZone.x = 0;
 	}
-	else if (renderZone.x + renderZone.w > App->map->data->width*App->map->data->tile_width)
+	else if (renderZone.x + renderZone.w >= (App->map->data->width-1)*App->map->data->tile_width)
 	{
-		renderZone.x = App->map->data->width*App->map->data->tile_width - renderZone.w;
+		renderZone.x = (App->map->data->width-1)*App->map->data->tile_width - renderZone.w;
 		camera.x = -renderZone.x* scale;
 	}
 
@@ -508,10 +507,10 @@ void j1Render::CameraFollow(iPoint pos)
 		camera.y = 0;
 		renderZone.y = 0;
 	}
-	else if (renderZone.y + renderZone.h > App->map->data->height*App->map->data->tile_height)
+	else if (renderZone.y + renderZone.h >= (App->map->data->height - 1)*App->map->data->tile_height)
 	{
-		renderZone.y = App->map->data->height*App->map->data->tile_height - renderZone.h;
-		camera.y = -renderZone.y* scale;
+		renderZone.y = (App->map->data->height-1)*App->map->data->tile_height - renderZone.h;
+		camera.y = (-renderZone.y)* scale;
 	}
 }
 
