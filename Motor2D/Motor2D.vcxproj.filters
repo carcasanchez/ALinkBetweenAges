@@ -136,6 +136,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="RedSoldier.cpp">
+      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -290,6 +293,9 @@
     </ClInclude>
     <ClInclude Include="MemLeaks.h">
       <Filter>Desenvolupament  ========\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="RedSoldier.h">
+      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

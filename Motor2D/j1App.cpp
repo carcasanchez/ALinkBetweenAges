@@ -235,7 +235,7 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 
 
 	char* buf;
-	//TODO: Add game/ before config to Release
+
 	int size = App->fs->Load("config.xml", &buf);
 	pugi::xml_parse_result result = config_file.load_buffer(buf, size);
 	RELEASE_ARRAY(buf);

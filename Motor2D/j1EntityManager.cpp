@@ -16,7 +16,7 @@
 
 //=====Enemy Includes
 #include "GreenSoldier.h"
-
+#include "RedSoldier.h"
 
 j1EntityManager::j1EntityManager() : player(NULL), sector(NULL)
 {}
@@ -150,6 +150,9 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, 
 	{
 	case GREEN_SOLDIER:
 		ret = new GreenSoldier();
+		break;
+	case RED_SOLDIER:
+		ret = new RedSoldier();
 		break;
 	}
 

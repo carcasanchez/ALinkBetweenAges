@@ -88,7 +88,6 @@ bool Entity::LoadAttributes(pugi::xml_node attributes)
 	col->parent = this;
 	node = attributes.child("animation");
 
-	//TODO: load three links animation properly
 	if (ret = LoadAnimations(node.attribute("file").as_string()))
 	{
 		node = attributes.child("texture");

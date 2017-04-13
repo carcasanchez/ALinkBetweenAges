@@ -6,10 +6,10 @@
 #include "j1Map.h"
 #include "j1Render.h"
 #include "Animation.h"
-#include "GreenSoldier.h"
+#include "RedSoldier.h"
 
 
-bool GreenSoldier::Spawn(std::string file, iPoint pos)
+bool RedSoldier::Spawn(std::string file, iPoint pos)
 {
 	bool ret = true;
 
@@ -31,7 +31,7 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 
 	else
 	{
-		pugi::xml_node attributes = attributesFile.child("attributes").child("green_soldier");
+		pugi::xml_node attributes = attributesFile.child("attributes").child("red_soldier");
 
 		LoadAttributes(attributes);
 
@@ -47,14 +47,13 @@ bool GreenSoldier::Spawn(std::string file, iPoint pos)
 		chaseSpeed = attributes.child("combat_speeds").attribute("chase_speed").as_int(0);
 		flankingSpeed = attributes.child("combat_speeds").attribute("flanking_speed").as_int(0);
 		attackSpeed = attributes.child("combat_speeds").attribute("attack_speed").as_int(0);
-	
+
 	}
 	return ret;
 }
 
-bool GreenSoldier::Update(float dt)
+bool RedSoldier::Update(float dt)
 {
-
 	switch (enemyState)
 	{
 	case(PATROLING):
@@ -73,8 +72,6 @@ bool GreenSoldier::Update(float dt)
 		Charging(dt);
 		break;
 	}
-	
+
 	return false;
 }
-
-

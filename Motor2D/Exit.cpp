@@ -32,8 +32,6 @@ bool Exit::Spawn(std::string dest, int destExit, SDL_Rect pos, DIRECTION d)
 	rect = pos;
 	dir = d;
 
-	// TODO: load sprite if needed
-
 	col = App->collisions->AddCollider(rect, COLLIDER_TYPE(5), ((j1Module*)App->game));
 
 	return ret;

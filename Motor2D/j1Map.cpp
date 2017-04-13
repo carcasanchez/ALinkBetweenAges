@@ -401,49 +401,7 @@ bool j1Map::Load(const char* file_name)
 			//LOG("spacing: %d margin: %d", s->spacing, s->margin);
 		}
 		
-		/*//TODO: Optimize this
-		//Create tile clusters
-		int clusterSize = 10;
-		int x=0, y = 0;
-		while (x < data->width)
-		{
-			while (y < data->height)
-			{
-				MapCluster newCluster;
-				newCluster.rect.x = x* data->tile_width;
-				newCluster.rect.y = y* data->tile_height;
-				newCluster.rect.h = newCluster.rect.w = clusterSize * data->tile_height;
-				clusters.push_back(newCluster);
-				y += clusterSize;
-			}
-
-			y = 0;
-			x+= clusterSize;
-		}
-
-
-		//Fill tile clusters
-		for (x = 0; x < data->width; x++)
-		{
-			for (y = 0; y < data->height; y++)
-			{
-				iPoint tileInWorld = MapToWorld(x, y);
-				SDL_Point point;
-				point.x = tileInWorld.x;
-				point.y = tileInWorld.y;
-
-				for (int i = 0; i < clusters.size(); i++)
-				{
-					if (SDL_PointInRect(&point, &clusters[i].rect))
-					{
-						clusters[i].tiles.push_back(iPoint(x, y));
-					}
-				}
-
-
-			}
-		}
-		*/
+		
 	}
 
 	map_loaded = ret;

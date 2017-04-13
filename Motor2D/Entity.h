@@ -20,7 +20,7 @@ enum ACTION_STATE
 	DODGING,
 	DAMAGED
 };
-//TODO: change nums per strings in xml
+
 
 enum DIRECTION
 {

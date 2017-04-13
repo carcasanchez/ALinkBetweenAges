@@ -87,6 +87,7 @@
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="GreenSoldier.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="RedSoldier.cpp" />
     <ClCompile Include="UI_Counter.cpp" />
     <ClCompile Include="UI_Heart.cpp" />
     <ClCompile Include="HUD.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Quadtree.h" />
+    <ClInclude Include="RedSoldier.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="j1SceneManager.h" />
     <ClInclude Include="j1Timer.h" />
