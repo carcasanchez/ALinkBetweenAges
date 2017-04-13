@@ -3,49 +3,49 @@
 	<zelda>
 		<base life = "1" speed = "30"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcZelda_animations.xml"/>
+		<animation file = "animations/npc/npcZelda_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</zelda>
 	<uncle>
 		<base life = "1" speed = "30"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcUncle_animations.xml"/>
+		<animation file = "animations/npc/npcUncle_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</uncle>
 	<grandma>
 		<base life = "1" speed = "30"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcGrandma_animations.xml"/>
+		<animation file = "animations/npc/npcGrandma_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</grandma>
 	<hippie>
 		<base life = "1" speed = "30"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcHippie_animations.xml"/>
+		<animation file = "animations/npc/npcHippie_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</hippie>
 	<little_kid>
 		<base life = "1" speed = "30"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcLittleKid_animations.xml"/>
+		<animation file = "animations/npc/npcLittleKid_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</little_kid>
 	<tavern_old_man>
 		<base life = "1" speed = "30"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcTavernOldMan_animations.xml"/>
+		<animation file = "animations/npc/npcTavernOldMan_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</tavern_old_man>
 	<woman>
 		<base life = "1" speed = "30"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcWoman_animations.xml"/>
+		<animation file = "animations/npc/npcWoman_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</woman>
 	<farm_kid>
 		<base life = "1" speed = "30"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
-		<animation file = "animations/npcFarmKid_animations.xml"/>
+		<animation file = "animations/npc/npcFarmKid_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</farm_kid>
 </attributes>

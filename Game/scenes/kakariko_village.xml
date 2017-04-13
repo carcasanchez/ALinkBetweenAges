@@ -17,6 +17,10 @@
 
         <enemies>
         </enemies>
+
+ 	<special>
+        </special>
+
       </entities>
 
       <exits>

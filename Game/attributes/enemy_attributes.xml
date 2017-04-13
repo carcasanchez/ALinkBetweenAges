@@ -6,7 +6,7 @@
 		<ranges hostile= "185" fight = "55" out="60" />
 		<ratios attack = "500" charge_time = "1000"/>  <!-- In Miliseconds -->
 		<combat_speeds chase_speed = "50" flanking_speed = "40" attack_speed = "110"/>
-		<animation file = "animations/green_soldier_animations.xml"/>
+		<animation file = "animations/enemies/green_soldier_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</green_soldier>
 </attributes>

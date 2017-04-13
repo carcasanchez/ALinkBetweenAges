@@ -105,7 +105,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 				App->game->em->CreateObject(
 					maxSectors,
 					special.attribute("x").as_int(),
-					special.attribute("y").as_int());
+					special.attribute("y").as_int(), 
+					(OBJECT_TYPE)(special.attribute("object_type").as_int()));
 			}
 
 			pugi::xml_node exits = section.child("exits");

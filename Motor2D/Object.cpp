@@ -1,12 +1,13 @@
 #include "Object.h"
 #include "j1CollisionManager.h"
 
-bool Object::Spawn(std::string file, iPoint pos)
+bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 {
 	bool ret = true;
 
 	// set position
 	currentPos = lastPos = pos;
+	this->objectType = type;
 
 	// load xml attributes
 	pugi::xml_document	attributesFile;
@@ -22,7 +23,17 @@ bool Object::Spawn(std::string file, iPoint pos)
 	}
 	else
 	{
-		pugi::xml_node attributes = attributesFile.child("attributes");
+		pugi::xml_node attributes;
+		attributes = attributesFile.child("attributes");
+		switch (type)
+		{
+			case BOOK:
+				attributes = attributes.child("book");
+				break;
+			case ARROW:
+				attributes = attributes.child("arrow");
+				break;
+		}		
 		LoadAttributes(attributes);
 	}
 

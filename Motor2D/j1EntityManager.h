@@ -20,7 +20,7 @@ enum ENTITY_TYPE;
 enum ENEMY_TYPE;
 enum NPC_TYPE;
 enum LINK_AGE;
-
+enum OBJECT_TYPE;
 
 class j1EntityManager
 {
@@ -36,7 +36,7 @@ public:
 	Player* CreatePlayer(int, int, LINK_AGE);
 	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>);
 	Npc*	CreateNPC(int, NPC_TYPE, int, int, int);
-	Object* CreateObject(int, int, int);
+	Object* CreateObject(int, int, int, OBJECT_TYPE);
 
 	bool CleanEntities();
 	void SetSectorRef(int*);

@@ -226,13 +226,13 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 	return ret;
 }
 
-Object * j1EntityManager::CreateObject(int sector, int x, int y)
+Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE type)
 {
 	Object* ret = new Object();
 
 	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
 
-	if (ret->Spawn(dir[OBJECT], worldPos))
+	if (ret->Spawn(dir[OBJECT], worldPos, type))
 	{
 		ret->type = OBJECT;
 		entities[sector].push_back(ret);

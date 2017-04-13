@@ -36,7 +36,7 @@
 
         <special>
           <!--rocks, grass, etc-->
-          <sample type = "0" x = "71" y = "75" />
+          <book object_type = "0" x = "71" y = "75" />
         </special>
       </entities>
 

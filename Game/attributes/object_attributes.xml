@@ -1,7 +1,16 @@
 <!-- Object Attributes -->
 <attributes>
-  <base life = "1"/>
-   <collider x = "7" y = "7" w = "10" h = "10" type = "6"/>
-  <animation file = "animations/book_animations.xml"/>
-  <texture file = "textures/Object_sprites/book.png"/>
+   <book>
+ 	 <base life = "1"/>
+ 	  <collider x = "7" y = "7" w = "10" h = "10" type = "6"/>
+ 	 <animation file = "animations/objects/book_animations.xml"/>
+ 	 <texture file = "textures/Object_sprites/book.png"/>
+   </book>
+
+   <arrow>
+ 	 <base life = "1"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "15" type = "7"/>
+ 	 <animation file = "animations/objects/arrow_animations.xml"/>
+ 	 <texture file = "textures/Object_sprites/arrow.png"/>
+   </arrow>
 </attributes>
