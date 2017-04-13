@@ -1,5 +1,8 @@
 #include "Object.h"
+#include "j1GameLayer.h"
 #include "j1CollisionManager.h"
+#include "j1EntityManager.h"
+#include "Player.h"
 
 bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 {
@@ -30,11 +33,24 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case BOOK:
 				attributes = attributes.child("book");
 				break;
-			case ARROW:
+			case LINK_ARROW:
 				attributes = attributes.child("arrow");
+				damage = 1;
+				currentDir = App->game->em->player->currentDir;
 				break;
 		}		
 		LoadAttributes(attributes);
+
+		switch (type)
+		{
+		case LINK_ARROW:
+			if (currentDir == D_RIGHT || currentDir == D_LEFT)
+			{
+				col->rect.h = 7;
+				col->rect.w = 15;
+			}
+			break;
+		}
 	}
 
 	return ret;

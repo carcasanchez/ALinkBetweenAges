@@ -7,6 +7,7 @@
 #include "j1Render.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "Object.h"
 #include "j1PerfTimer.h"
 #include "p2Log.h"
 #include "j1SceneManager.h"
@@ -82,15 +83,19 @@ bool j1GameLayer::Update(float dt)
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateEnemy(1, RED_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
 	}
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
+		//iPoint mousePos;
+		//App->input->GetMousePosition(mousePos.x, mousePos.y);
+		
+		//em->player->currentPos = mousePos;
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
-		
-		em->player->currentPos = mousePos;
+		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
+		em->CreateObject(1, mousePos.x, mousePos.y, LINK_ARROW);
 	}
 		
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
@@ -230,6 +235,20 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		}
 			return true;
 	}
+
+		if (c2->type == COLLIDER_LINK_ARROW)
+		{
+			c2->parent->life = -1;
+
+			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
+			{
+				c1->parent->life -= em->player->damage;
+				c1->parent->sprite->tint = { 255, 150, 150, 255 };
+				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
+				c1->parent->damagedTimer.Start();
+			}
+			return true;
+		}
 	}
 
 	if (c1->type == COLLIDER_NPC)

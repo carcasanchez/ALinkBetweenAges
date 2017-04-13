@@ -36,6 +36,7 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_LINK_SWORD] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_ENEMY][COLLIDER_LINK_ARROW] = true;
 
 
 	return false;

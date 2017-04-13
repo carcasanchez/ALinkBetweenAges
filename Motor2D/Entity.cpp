@@ -161,25 +161,7 @@ bool Entity::Move(int x, int y)
 	bool ret = true;
 	
 
-	if (type == LINK)
-	{
-		currentPos.x += x;
-		UpdateCollider();
-
-		if (col->CheckPlayerMapCollision() != CZ_NONE)
-		{
-			currentPos.x -= x;
-			ret = false;
-		}
-
-		currentPos.y += y;
-		UpdateCollider();
-		if (col->CheckPlayerMapCollision() != CZ_NONE)
-		{
-			currentPos.y -= y;
-			ret = false;
-		}
-	}
+	
 
 	if (type == ENEMY)
 	{
@@ -201,6 +183,25 @@ bool Entity::Move(int x, int y)
 		}
 	}
 	
+	else
+	{
+		currentPos.x += x;
+		UpdateCollider();
+
+		if (col->CheckPlayerMapCollision() != CZ_NONE)
+		{
+			currentPos.x -= x;
+			ret = false;
+		}
+
+		currentPos.y += y;
+		UpdateCollider();
+		if (col->CheckPlayerMapCollision() != CZ_NONE)
+		{
+			currentPos.y -= y;
+			ret = false;
+		}
+	}
 
 	return ret;
 }

@@ -104,6 +104,7 @@ public:
 private:
 	int textureFile = 1;
 	int animationFile = 1;
+	
 };
 
 #endif // !_ENTITY_H_

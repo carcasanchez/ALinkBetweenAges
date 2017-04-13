@@ -231,7 +231,17 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 
 Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE type)
 {
-	Object* ret = new Object();
+	Object* ret;
+	switch (type)
+	{
+	default:
+		ret = new Object();
+		break;
+	case LINK_ARROW:
+		ret = new Arrow();
+		break;
+	}
+	
 
 	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
 
