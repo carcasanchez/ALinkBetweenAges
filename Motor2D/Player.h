@@ -46,7 +46,7 @@ public:
 	float maxStamina;
 	float stamina;
 	float staminaRec;
-
+	int rupees = 0 ;
 
 	//Attack
 	int attackSpeed;

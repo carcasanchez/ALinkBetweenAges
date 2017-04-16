@@ -1,0 +1,26 @@
+﻿<!--Red Rupee Animations -->
+<animations>
+
+  <name value = "1" />
+
+  <IDLE>
+    <!-- Idle -->
+    <name value = "0"  />
+    <UP>
+      <values name = "0" x ="32" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "4" pivot_y = "1" flip= "0"/>
+    </UP>
+    <DOWN>
+      <values name = "1" x ="32" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "4" pivot_y = "1" flip= "0"/>
+    </DOWN>
+    <RIGHT>
+      <values name = "2" x ="32" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "4" pivot_y = "1" flip= "0"/>
+    </RIGHT>
+    <LEFT>
+      <values name = "3" x ="32" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "4" pivot_y = "1" flip= "0"/>
+    </LEFT>
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </IDLE>
+</animations>

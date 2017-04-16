@@ -8,7 +8,10 @@
 enum OBJECT_TYPE
 {
 	BOOK = 0,
-	LINK_ARROW
+	LINK_ARROW,
+	GREEN_RUPEE,
+	BLUE_RUPEE,
+	RED_RUPEE
 };
 
 class Object : public Entity
@@ -31,8 +34,6 @@ class Arrow : public Object
 public:
 
 	Arrow() {};
-
-	
 
 	bool Update(float dt)
 	{ 
@@ -64,6 +65,16 @@ public:
 
 public:
 
+};
+
+class Rupee : public Object
+{
+public:
+
+	Rupee() {};
+	
+public:
+	int rupeeValue = 0;
 };
 
 

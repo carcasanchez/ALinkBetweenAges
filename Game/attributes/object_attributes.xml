@@ -13,4 +13,25 @@
  	 <animation file = "animations/objects/arrow_animations.xml"/>
  	 <texture file = "textures/Object_sprites/arrow.png"/>
    </arrow>
+
+   <green_rupee>
+ 	 <base life = "1"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "14" type = "8"/>
+ 	 <animation file = "animations/objects/green_rupee_animations.xml"/>
+ 	 <texture file = "textures/Object_sprites/rupees.png"/>
+   </green_rupee>
+
+   <blue_rupee>
+ 	 <base life = "1"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "14" type = "8"/>
+ 	 <animation file = "animations/objects/blue_rupee_animations.xml"/>
+ 	 <texture file = "textures/Object_sprites/rupees.png"/>
+   </blue_rupee>
+
+  <red_rupee>
+ 	 <base life = "1"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "14" type = "8"/>
+ 	 <animation file = "animations/objects/red_rupee_animations.xml"/>
+ 	 <texture file = "textures/Object_sprites/rupees.png"/>
+   </red_rupee>
 </attributes>

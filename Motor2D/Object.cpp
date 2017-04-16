@@ -38,6 +38,18 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 				damage = 1;
 				currentDir = App->game->em->player->currentDir;
 				break;
+			case GREEN_RUPEE:
+				attributes = attributes.child("green_rupee");
+				((Rupee*)this)->rupeeValue = 1;
+				break;
+			case BLUE_RUPEE:
+				attributes = attributes.child("blue_rupee");
+				((Rupee*)this)->rupeeValue = 5;
+				break;
+			case RED_RUPEE:
+				attributes = attributes.child("red_rupee");
+				((Rupee*)this)->rupeeValue = 20;
+				break;
 		}		
 		LoadAttributes(attributes);
 

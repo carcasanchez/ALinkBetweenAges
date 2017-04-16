@@ -237,8 +237,15 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	default:
 		ret = new Object();
 		break;
+
 	case LINK_ARROW:
 		ret = new Arrow();
+		break;
+
+	case GREEN_RUPEE:
+	case BLUE_RUPEE:
+	case RED_RUPEE:
+		ret = new Rupee();
 		break;
 	}
 	

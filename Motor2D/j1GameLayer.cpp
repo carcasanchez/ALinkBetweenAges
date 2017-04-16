@@ -95,7 +95,9 @@ bool j1GameLayer::Update(float dt)
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateObject(1, mousePos.x, mousePos.y, LINK_ARROW);
+		em->CreateObject(1, mousePos.x, mousePos.y, GREEN_RUPEE);
+		em->CreateObject(1, mousePos.x+1, mousePos.y, BLUE_RUPEE);
+		em->CreateObject(1, mousePos.x+2, mousePos.y, RED_RUPEE);
 	}
 		
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
@@ -265,6 +267,12 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		c2->to_delete = true;
 		c2->parent->life = -1;
 		return true;
+	}
+
+	if(c2->type == COLLIDER_RUPEE)
+	{
+		em->player->rupees += ((Rupee*)c2->parent)->rupeeValue;
+		c2->parent->life = -1;
 	}
 		
 	return true;
