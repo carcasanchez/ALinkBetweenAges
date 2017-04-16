@@ -14,6 +14,8 @@
 #include "j1PerfTimer.h"
 #include "DialogManager.h"
 #include "j1SceneManager.h"
+#include "j1EntityManager.h"
+#include "Object.h"
 
 Player::Player() : Entity(LINK)
 {
@@ -140,7 +142,12 @@ bool Player::Update(float dt)
 		case(DAMAGED):
 			Damaged(dt);
 			break;
+
+		case (SHOOTING_BOW):
+			ShootingBow(dt);
+			break;
 		}
+
 		break;
 	case EVENT:
 		Talking(dt);
@@ -312,8 +319,20 @@ bool Player::Idle()
 		return true;
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && age != YOUNG)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
+			App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
+			App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
+			App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		{
+			Change_direction();
+			actionState = SHOOTING_BOW;
+		}
+	}
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
+
+	else if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
@@ -321,7 +340,6 @@ bool Player::Idle()
 		if (toTalk != nullptr)
 		{
 			playerState = EVENT;
-			LOG("LINK IS TALKING");
 		}
 		else
 		{
@@ -569,6 +587,18 @@ bool Player::Damaged(float dt)
 		
 	Move(SDL_ceil(linearMovement.x*damagedSpeed*dt), SDL_ceil(linearMovement.y*damagedSpeed*dt));
 	
+	return true;
+}
+
+bool Player::ShootingBow(float dt)
+{
+	if (currentAnim->isOver())
+	{
+		currentAnim->Reset();
+		actionState = IDLE;
+		iPoint pos = App->map->WorldToMap(currentPos.x, currentPos.y);
+		App->game->em->CreateObject(1, pos.x, pos.y, LINK_ARROW);
+	}
 	return true;
 }
 

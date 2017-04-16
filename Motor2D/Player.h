@@ -77,6 +77,7 @@ private:
 	bool Attacking(float dt);
 	bool Dodging(float dt);
 	bool Damaged(float dt);
+	bool ShootingBow(float dt);
 
 	bool Talking(float dt);
 

@@ -31,22 +31,26 @@ class Arrow : public Object
 public:
 
 	Arrow() {};
+
+	
+
 	bool Update(float dt)
 	{ 
 		bool ret;
+		speed = 500;
 		switch (currentDir)
 		{
 		case D_UP:
-			ret = Move(0, -SDL_ceil(500 * dt));
+			ret = Move(0, -SDL_ceil(speed * dt));
 			break;
 		case D_DOWN:
-			ret = Move(0, SDL_ceil(500 * dt));
+			ret = Move(0, SDL_ceil(speed * dt));
 			break;
 		case D_LEFT:
-			ret = Move(-SDL_ceil(500 * dt), 0);
+			ret = Move(-SDL_ceil(speed * dt), 0);
 			break;
 		case D_RIGHT:
-			ret = Move(SDL_ceil(500 * dt), 0);
+			ret = Move(SDL_ceil(speed * dt), 0);
 			break;
 		}
 
