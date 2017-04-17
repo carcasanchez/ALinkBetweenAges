@@ -84,6 +84,8 @@ bool j1GameLayer::Update(float dt)
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+		em->CreateEnemy(1, RED_SOLDIER, mousePos.x+2, mousePos.y, vector<iPoint>());
+
 	}
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
@@ -171,7 +173,16 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
  	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
 	{
-		if (em->player->invulnerable == false && em->player->dodging == false)
+		
+		if (em->player->actionState == DODGING && em->player->age == ADULT )
+		{
+			if (((Enemy*)(c2->parent))->enemyState != STEP_BACK)
+			{ 
+				((Enemy*)(c2->parent))->enemyState = STEP_BACK;
+				c2->parent->pushedBackTimer.Start();
+			}
+		}
+		else if (em->player->invulnerable == false && em->player->dodging == false)
 		{
   			if (em->player != nullptr && c2->parent != nullptr)
 			  {

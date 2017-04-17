@@ -180,8 +180,8 @@ bool Enemy::StepBack(float dt)
 	else movement.y = +1;
 
 	Move(SDL_ceil(movement.x*speed*dt*5), SDL_ceil(movement.y*speed*dt*5));
-
-	if (damagedTimer.ReadMs() > 100)
+	
+	if (damagedTimer.ReadMs() > 100 && pushedBackTimer.ReadMs() > 200)
 	{
 		enemyState = CHASING;
 		sprite->tint = { 255, 255, 255, 255 };

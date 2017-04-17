@@ -94,6 +94,7 @@ public:
 	int damage;
 	bool damaged;
 	j1PerfTimer damagedTimer;
+	j1PerfTimer pushedBackTimer;
 
 	//Path
 	vector<iPoint> path;
