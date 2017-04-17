@@ -20,7 +20,6 @@ void Enemy::OnDeath()
 {
 	toDelete = true;
 	App->game->em->player->defeatedEnemies++;
-	LOG("Defeated Enemies: %i", (App->game->em->player->defeatedEnemies));
 	App->game->hud->enemies_counter->SumNumber(1);
 }
 

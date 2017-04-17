@@ -11,6 +11,7 @@ public:
 
 	bool Spawn(std::string file, iPoint pos);
 	bool Update(float dt);
+	void OnDeath();
 
 };
 

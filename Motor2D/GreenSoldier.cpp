@@ -7,6 +7,8 @@
 #include "j1Render.h"
 #include "Animation.h"
 #include "GreenSoldier.h"
+#include "j1EntityManager.h"
+#include "Object.h"
 
 
 bool GreenSoldier::Spawn(std::string file, iPoint pos)
@@ -75,6 +77,22 @@ bool GreenSoldier::Update(float dt)
 	}
 	
 	return false;
+}
+
+void GreenSoldier::OnDeath()
+{
+	toDelete = true;
+	int drop = rand() % 4;
+	if (drop == 1 || drop == 2)
+	{
+		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+		App->game->em->CreateObject(1, mapPos.x, mapPos.y, GREEN_RUPEE);
+	}
+	else if (drop == 3)
+	{
+		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
+	}
 }
 
 

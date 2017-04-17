@@ -7,6 +7,8 @@
 #include "j1Render.h"
 #include "Animation.h"
 #include "RedSoldier.h"
+#include "j1EntityManager.h"
+#include "Object.h"
 
 
 bool RedSoldier::Spawn(std::string file, iPoint pos)
@@ -74,4 +76,12 @@ bool RedSoldier::Update(float dt)
 	}
 
 	return false;
+}
+
+void RedSoldier::OnDeath()
+{
+	toDelete = true;
+	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+	App->game->em->CreateObject(1, mapPos.x, mapPos.y, RED_RUPEE);
+
 }
