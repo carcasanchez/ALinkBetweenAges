@@ -30,6 +30,7 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_PLAYER][COLLIDER_NPC] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_BOOK] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_RUPEE] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_HEART] = true;
 
 	matrix[COLLIDER_NPC][COLLIDER_LINK_SWORD] = true;
 

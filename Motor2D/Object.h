@@ -11,7 +11,8 @@ enum OBJECT_TYPE
 	LINK_ARROW,
 	GREEN_RUPEE,
 	BLUE_RUPEE,
-	RED_RUPEE
+	RED_RUPEE,
+	LIFEHEART
 };
 
 class Object : public Entity

@@ -50,6 +50,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 				attributes = attributes.child("red_rupee");
 				((Rupee*)this)->rupeeValue = 20;
 				break;
+			case LIFEHEART:
+				attributes = attributes.child("heart");
+				break;
 		}		
 		LoadAttributes(attributes);
 
@@ -63,6 +66,8 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			}
 			break;
 		}
+
+		
 	}
 
 	return ret;
