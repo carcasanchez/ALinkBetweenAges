@@ -83,8 +83,9 @@ bool j1GameLayer::Update(float dt)
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateEnemy(1, RED_SOLDIER, mousePos.x+2, mousePos.y, vector<iPoint>());
+		em->CreateObject(1, mousePos.x, mousePos.y, BUSH);
+	//	em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+		//em->CreateEnemy(1, RED_SOLDIER, mousePos.x+2, mousePos.y, vector<iPoint>());
 
 	}
 
@@ -150,7 +151,7 @@ bool j1GameLayer::CleanUp()
 
 bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {
-	if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC)
+	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC || c2->type == COLLIDER_BUSH))
 	{
 		iPoint Movement;
 		if (abs(c1->rect.x - c2->rect.x) < abs(c1->rect.y - c2->rect.y))
@@ -269,6 +270,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		{
 			em->player->toTalk = (Npc*)c1->parent;
 		}
+		return true;
 	}
 
 	if (c2->type == COLLIDER_BOOK)
@@ -291,6 +293,12 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		if (em->player->life < em->player->maxLife)
 			em->player->life++;
 		c2->parent->life = -1;
+		return true;
+	}
+
+	if (c1->type == COLLIDER_BUSH && c2->type == COLLIDER_LINK_SWORD)
+	{
+		c1->parent->life = -1;
 		return true;
 	}
 		

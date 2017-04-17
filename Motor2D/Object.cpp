@@ -53,6 +53,12 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case LIFEHEART:
 				attributes = attributes.child("heart");
 				break;
+			case BUSH:
+				attributes = attributes.child("bush");
+				break;
+			case POT:
+				attributes = attributes.child("pot");
+				break;
 		}		
 		LoadAttributes(attributes);
 

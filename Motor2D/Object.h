@@ -12,7 +12,9 @@ enum OBJECT_TYPE
 	GREEN_RUPEE,
 	BLUE_RUPEE,
 	RED_RUPEE,
-	LIFEHEART
+	LIFEHEART,
+	BUSH,
+	POT
 };
 
 class Object : public Entity

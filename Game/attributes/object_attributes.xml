@@ -34,10 +34,18 @@
  	 <animation file = "animations/objects/red_rupee_animations.xml"/>
  	 <texture file = "textures/Object_sprites/rupees.png"/>
    </red_rupee>
+
    <heart>
  	 <base life = "1"/>
  	 <collider x = "0" y = "0" w = "9" h = "8" type = "9"/>
  	 <animation file = "animations/objects/heart_animations.xml"/>
  	 <texture file = "textures/Object_sprites/heart.png"/>
    </heart>
+
+   <bush>
+ 	 <base life = "1"/>
+ 	 <collider x = "0" y = "0" w = "16" h = "16" type = "10"/>
+ 	 <animation file = "animations/objects/bush_animations.xml"/>
+ 	 <texture file = "textures/Object_sprites/bush.png"/>
+   </bush>
 </attributes>

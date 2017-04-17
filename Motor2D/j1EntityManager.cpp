@@ -250,7 +250,7 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	}
 	
 
-	iPoint worldPos = App->map->GetTileCenter(iPoint(x, y));
+	iPoint worldPos = App->map->MapToWorld(x, y);
 
 	if (ret->Spawn(dir[OBJECT], worldPos, type))
 	{

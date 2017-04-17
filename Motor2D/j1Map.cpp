@@ -7,6 +7,9 @@
 #include "j1Map.h"
 #include "j1Input.h"
 #include "j1Pathfinding.h"
+#include "j1GameLayer.h"
+#include "j1EntityManager.h"
+#include "Object.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -80,7 +83,7 @@ void j1Map::Draw()
 		if (layer->properties.Get("Nodraw") != 0 && layer->properties.Get("Enemy") != 0 && debug_enemy_collisions == false)
 			continue;
 
-		if (layer->properties.Get("Paintover"))
+		if (layer->properties.Get("Paintover") || layer->properties.Get("Bush"))
 			continue;
 					
 		for (int x = cameraSection.x; x < cameraSection.x + cameraSection.w; x++)
@@ -394,14 +397,26 @@ bool j1Map::Load(const char* file_name)
 
 		for (std::list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
 		{
-			MapLayer* s = *item;
-			LOG("Tileset ----");
-			//LOG("name: %s firstgid: %d", s->name.GetString(), s->firstgid);
-			//LOG("tile width: %d tile height: %d", s->tile_width, s->tile_height);
-			//LOG("spacing: %d margin: %d", s->spacing, s->margin);
+
+			//Create Entityes based on map data
+			if ((*item)->properties.Get("Bush"))
+				for (int x = 0; x < data->width; x++)
+					for (int y = 0; y < data->height; y++)
+					{
+						int tile_id = 0;
+
+						if (x > data->width || y > data->height)
+							tile_id = 0;
+						else tile_id = (*item)->Get(x, y);
+
+						if (tile_id > 0)
+						{
+							App->game->em->CreateObject(1, x, y, BUSH);
+						}
+					}	
+			
 		}
-		
-		
+				
 	}
 
 	map_loaded = ret;
