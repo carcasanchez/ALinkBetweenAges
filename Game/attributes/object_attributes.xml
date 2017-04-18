@@ -48,4 +48,10 @@
  	 <animation file = "animations/objects/bush_animations.xml"/>
  	 <texture file = "textures/Object_sprites/bush.png"/>
    </bush>
+   <octo_stone>
+ 	 <base life = "1" damage = "1"/>
+ 	 <collider x = "0" y = "0" w = "8" h = "8" type = "11"/>
+ 	 <animation file = "animations/objects/octostone_animations.xml"/>
+ 	 <texture file = "textures/Enemy_sprites/Enemy.png"/>
+   </octo_stone>
 </attributes>

@@ -97,7 +97,7 @@ bool j1GameLayer::Update(float dt)
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);
+		em->CreateObject(1, mousePos.x, mousePos.y, OCTO_STONE);
 
 	}
 		
@@ -171,7 +171,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
- 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY)
+ 	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE))
 	{
 		
 		if (em->player->actionState == DODGING && em->player->age == ADULT )

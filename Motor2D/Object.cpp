@@ -59,6 +59,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case POT:
 				attributes = attributes.child("pot");
 				break;
+			case OCTO_STONE:
+				attributes = attributes.child("octo_stone");
+				break;
 		}		
 		LoadAttributes(attributes);
 

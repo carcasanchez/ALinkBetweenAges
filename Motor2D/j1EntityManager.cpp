@@ -252,6 +252,10 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 		ret = new Arrow();
 		break;
 
+	case OCTO_STONE:
+		ret = new Octostone();
+		break;
+
 	case GREEN_RUPEE:
 	case BLUE_RUPEE:
 	case RED_RUPEE:
