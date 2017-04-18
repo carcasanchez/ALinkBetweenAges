@@ -17,6 +17,8 @@
 //=====Enemy Includes
 #include "GreenSoldier.h"
 #include "RedSoldier.h"
+#include "DarkZelda.h"
+
 
 j1EntityManager::j1EntityManager() : player(NULL), sector(NULL)
 {}
@@ -141,7 +143,7 @@ Player* j1EntityManager::CreatePlayer(int x, int y, LINK_AGE age)
 	return ret;
 }
 
-//Enemy factory (X and Y in Map Coordinates)
+//Entity factory methods (X and Y in Map Coordinates)
 Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, vector<iPoint> patrolPoints)
 {
 	Enemy* ret = nullptr;
@@ -153,6 +155,9 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, 
 		break;
 	case RED_SOLDIER:
 		ret = new RedSoldier();
+		break;
+	case DARK_ZELDA:
+		ret = new DarkZelda();
 		break;
 	}
 

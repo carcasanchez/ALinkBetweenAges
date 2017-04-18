@@ -18,4 +18,14 @@
 		<animation file = "animations/enemies/red_soldier_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</red_soldier>
+
+	<dark_zelda>
+		<base life = "4" speed = "30" damage ="2"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "3"/>
+		<ranges hostile= "185" fight = "55" out="60" />
+		<ratios attack = "500" charge_time = "1000"/>  <!-- In Miliseconds -->
+		<combat_speeds chase_speed = "50" flanking_speed = "40" attack_speed = "110"/>
+		<animation file = "animations/enemies/dark_zelda_animations.xml"/>
+  		<texture file = "textures/Enemy_sprites/DarkZelda.png"/>
+	</dark_zelda>
 </attributes>

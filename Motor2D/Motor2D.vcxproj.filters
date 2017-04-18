@@ -139,6 +139,9 @@
     <ClCompile Include="RedSoldier.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="DarkZelda.cpp">
+      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -295,6 +298,9 @@
       <Filter>Desenvolupament  ========\Tools</Filter>
     </ClInclude>
     <ClInclude Include="RedSoldier.h">
+      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="DarkZelda.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
