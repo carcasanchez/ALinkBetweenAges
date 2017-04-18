@@ -142,6 +142,9 @@
     <ClCompile Include="DarkZelda.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Octorok.cpp">
+      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -301,6 +304,9 @@
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="DarkZelda.h">
+      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Octorok.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>

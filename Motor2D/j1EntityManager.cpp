@@ -17,6 +17,7 @@
 //=====Enemy Includes
 #include "GreenSoldier.h"
 #include "RedSoldier.h"
+#include "Octorok.h"
 #include "DarkZelda.h"
 
 
@@ -158,6 +159,10 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, 
 		break;
 	case DARK_ZELDA:
 		ret = new DarkZelda();
+		break;
+
+	case OCTOROK:
+		ret = new Octorok();
 		break;
 	}
 
