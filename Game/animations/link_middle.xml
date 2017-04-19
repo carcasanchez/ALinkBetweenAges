@@ -1,0 +1,236 @@
+<!-- Mandatory Link Middle -->
+<animations>
+	
+	<Link_middle>
+
+		<name value = "0" /> 
+
+		<TAKE_STH> <!-- Idle -->
+			<name value = "0"  />
+
+			<UP> 
+				<values name = "0" x ="280" y = "40" w = "40" h = "40" frameNumber = "6" margin = "" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="280" y = "0" w = "40" h = "40" frameNumber = "6" margin = "" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="280" y = "80" w = "40" h = "40" frameNumber = "6" margin = "" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="280" y = "80" w = "40" h = "40" frameNumber = "6" margin = "" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.15" />
+
+		</TAKE_STH>
+
+		<WALKING> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="0" y = "40" w = "40" h = "40" frameNumber = "7" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="0" y = "0" w = "40" h = "40" frameNumber = "7" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="0" y = "80" w = "40" h = "40" frameNumber = "7" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="0" y = "80" w = "40" h = "40" frameNumber = "7" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</WALKING>
+		
+		<ATTACK> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="0" y = "160" w = "40" h = "40" frameNumber = "9" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="0" y = "120" w = "40" h = "40" frameNumber = "6" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="0" y = "200" w = "40" h = "40" frameNumber = "9" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="0" y = "200" w = "40" h = "40" frameNumber = "9" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</ATTACK>
+		
+		<ESPECIAL_ATTACK> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="0" y = "320" w = "40" h = "40" frameNumber = "16" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="0" y = "280" w = "40" h = "40" frameNumber = "15" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="0" y = "360" w = "40" h = "40" frameNumber = "28" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="0" y = "360" w = "40" h = "40" frameNumber = "28" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</ESPECIAL_ATTACK>
+
+		<STRETCH> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="360" y = "200" w = "40" h = "40" frameNumber = "5" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="360" y = "160" w = "40" h = "40" frameNumber = "5" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="280" y = "120" w = "40" h = "40" frameNumber = "5" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="280" y = "120" w = "40" h = "40" frameNumber = "5" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</STRETCH>
+		
+		<PUSH> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="160" y = "240" w = "40" h = "40" frameNumber = "3" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="0" y = "240" w = "40" h = "40" frameNumber = "3" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="360" y = "240" w = "40" h = "40" frameNumber = "4" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="360" y = "240" w = "40" h = "40" frameNumber = "4" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</PUSH>
+		
+		<WALK_SWORD> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="520" y = "40" w = "40" h = "40" frameNumber = "5" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="520" y = "0" w = "40" h = "40" frameNumber = "5" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="520" y = "80" w = "40" h = "40" frameNumber = "4" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="520" y = "80" w = "40" h = "40" frameNumber = "4" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</WALK_SWORD>
+		
+		<BOOMERANG> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="560" y = "200" w = "40" h = "40" frameNumber = "1" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="560" y = "160" w = "40" h = "40" frameNumber = "1" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="560" y = "240" w = "40" h = "40" frameNumber = "1" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="560" y = "240" w = "40" h = "40" frameNumber = "1" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</BOOMERANG>
+		
+		<ARCHER> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="720" y = "200" w = "40" h = "40" frameNumber = "3" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="720" y = "160" w = "40" h = "40" frameNumber = "3" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="720" y = "240" w = "40" h = "40" frameNumber = "3" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="720" y = "240" w = "40" h = "40" frameNumber = "3" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</ARCHER>
+		
+
+	<Link_middle>
+
+</animations>
