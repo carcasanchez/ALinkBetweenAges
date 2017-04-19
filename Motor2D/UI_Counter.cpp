@@ -35,6 +35,24 @@ void UI_Counter::SumNumber(int plus)
 	}
 }
 
+void UI_Counter::QuitNumber(int less)
+{
+	int full_number = (cent * 100) + (dec * 10) + unit;
+
+	if ((full_number - less) >= 0)
+	{
+		full_number -= less;
+		cent = full_number / 100;
+		dec = (full_number % 100) / 10;
+		unit = ((full_number % 100) % 10);
+	}
+	else
+	{
+		cent = 0;
+		dec = 0;
+		unit = 0;
+	}
+}
 
 void UI_Counter::SetImage(UI_Image* new_img, int width, int height)
 {

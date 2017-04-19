@@ -12,6 +12,7 @@ public:
 	bool Update_Draw();
 
 	void SumNumber(int);
+	void QuitNumber(int);
 	void SetImage(UI_Image*, int, int);
 	void Reset();
 
