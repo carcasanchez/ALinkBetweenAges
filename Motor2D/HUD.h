@@ -45,10 +45,11 @@ public:
 
 	//Counters image
 	UI_Image*		numbers = nullptr; //Image not in gui
-	UI_Counter*		enemies_counter = nullptr;
-
+	
 	//Little items
 	UI_Image*		Rupees = nullptr;
+	UI_Counter*		rupees_counter = nullptr;
+
 	UI_Image*		Bombs = nullptr;
 	UI_Image*		Arrows = nullptr;
 

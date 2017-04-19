@@ -52,10 +52,14 @@ bool Hud::Update(float dt)
 	if (pause_transition == PAUSE_UP)
 		PauseOut(dt);
 
-	if (App->input->GetKey(SDL_SCANCODE_H) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 	{
-	//	AddHearts();
-		enemies_counter->SumNumber(1);
+		rupees_counter->QuitNumber(5);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
+	{
+		rupees_counter->SumNumber(3);
 	}
 
 	if (App->game->hud->player_continue == true)
@@ -283,7 +287,7 @@ bool Hud::LoadHud(string file)
 	else
 	{
 		numbers = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		enemies_counter = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
+		rupees_counter  = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
 
 		Rupees = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		Bombs = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
@@ -331,6 +335,7 @@ bool Hud::LoadHud(string file)
 		SetHudElements();
 
 		hud_screen->AddChild(Rupees);
+		Rupees->AddChild(rupees_counter);
 		hud_screen->AddChild(Bombs);
 		hud_screen->AddChild(Arrows);
 
@@ -343,8 +348,6 @@ bool Hud::LoadHud(string file)
 		hud_screen->AddChild(medium_heart);
 		hud_screen->AddChild(full_heart);
 
-		hud_screen->AddChild(enemies_counter);
-
 		hud_screen->AddChild(win);
 		hud_screen->AddChild(win2);
 
@@ -356,14 +359,15 @@ bool Hud::LoadHud(string file)
 void Hud::SetHudElements()
 {
 	numbers->Set_Active_state(false);
-	enemies_counter->Set_Interactive_Box({ 500,50,0,0 });
-	enemies_counter->SetImage(numbers, 14, 14);
 
 	Rupees->Set_Interactive_Box({ 175,20,0,0 });
+	rupees_counter->Set_Interactive_Box({-30,40,0,0 });
+	rupees_counter->SetImage(numbers, 14, 14);
+
 	Bombs->Set_Interactive_Box({ 250,20,0,0 });
 	Arrows->Set_Interactive_Box({ 325,20,0,0 });
 
-	items_frame->Set_Interactive_Box({ 50, 20,0,0 });
+	items_frame->Set_Interactive_Box({ 40, 20,0,0 });
 
 	life->Set_Interactive_Box({ 700, 20,0,0 });
 	empty_heart->Set_Active_state(false);
@@ -376,9 +380,6 @@ void Hud::SetHudElements()
 	stamina_bar->SetStamina(stamina_green);
 	stamina_container->Set_Active_state(false);
 	stamina_green->Set_Active_state(false);
-
-	
-
 
 }
 

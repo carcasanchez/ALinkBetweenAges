@@ -195,7 +195,6 @@ void Player::OnDeath()
 	App->sceneM->RequestSceneChange(respawn, "kakarikoVillage", D_DOWN);
 	App->game->hud->ResetHearts();
 	App->game->hud->RestoreHearts();
-	App->game->hud->enemies_counter->Reset();
 	damaged = invulnerable = false;
 	linearMovement = {0, 0};
 	currentDir = D_DOWN;
