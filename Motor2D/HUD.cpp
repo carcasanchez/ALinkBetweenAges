@@ -76,8 +76,11 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		{
 			if (App->game->pause)
 			{
-				pause_transition = PAUSE_UP;
-				main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+				if (pause_transition == PAUSE_NO_MOVE)
+				{
+					pause_transition = PAUSE_UP;
+					main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+				}
 			}
 			else
 			{
@@ -117,8 +120,11 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 
 		if (resume->active)
 		{
-			pause_transition = PAUSE_UP;
-			main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+			if (pause_transition == PAUSE_NO_MOVE)
+			{
+				pause_transition = PAUSE_UP;
+				main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+			}
 		}
 
 		if (quit->active)
@@ -129,8 +135,11 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		break;
 
 	case DECLINE:
-		pause_transition = PAUSE_UP;
-		main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+		if (pause_transition == PAUSE_NO_MOVE)
+		{
+			pause_transition = PAUSE_UP;
+			main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+		}
 		break;
 
 	}
