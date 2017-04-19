@@ -55,6 +55,7 @@ public:
 	//Dodge
 	int dodgeSpeed;
 	int dodgeTax;
+	int spinTax;
 	uint64 dodgeLimit;
 	iPoint dodgeDir;
 	j1PerfTimer dodgeTimer;
@@ -78,6 +79,7 @@ private:
 	bool Dodging(float dt);
 	bool Damaged(float dt);
 	bool ShootingBow(float dt);
+	bool Spinning(float dt);
 
 	bool Talking(float dt);
 

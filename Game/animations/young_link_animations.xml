@@ -134,10 +134,36 @@
     <speed value = "0.15" />
 
   </DAMAGED>
+  
+   <SPINNING>
+    <!-- spin -->
+    <name value = "6" />
+
+    <UP>
+      <values name = "0" x = "0" y = "496" w = "50" h = "64" frameNumber = "10" margin = "0" pivot_x = "25" pivot_y = "36" flip = "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x = "0" y = "496" w = "50" h = "64" frameNumber = "10" margin = "0" pivot_x = "25" pivot_y = "36" flip = "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x = "0" y = "496" w = "50" h = "64" frameNumber = "10" margin = "0" pivot_x = "25" pivot_y = "36" flip = "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x = "0" y = "496" w = "50" h = "64" frameNumber = "10" margin = "0" pivot_x = "25" pivot_y = "36" flip = "0"/>
+    </LEFT>
+
+    <loop value = "false" />
+
+    <speed value = "0.9" />
+
+  </SPINNING>
 
   <PULL>
     <!-- Pull -->
-    <name value = "4" />
+    <name value = "1116" />
 
     <UP>
       <values name = "0" x = "8" y = "266" w = "30" h = "21" frameNumber = "4" margin = "1" pivot_x = "8" pivot_y = "21" flip = "0"/>
@@ -163,7 +189,7 @@
 
   <PUSH>
     <!-- Push -->
-    <name value = "5" />
+    <name value = "22227" />
 
     <UP>
       <values name = "0" x = "206" y = "347" w = "16" h = "22" frameNumber = "3" margin = "1" pivot_x = "8" pivot_y = "21" flip = "0"/>
@@ -189,7 +215,7 @@
 
   <LIFT>
     <!-- Lift -->
-    <name value = "6" />
+    <name value = "44448" />
 
     <UP>
       <values name = "0" x = "10" y = "288" w = "33" h = "40" frameNumber = "6" margin = "1" pivot_x = "8" pivot_y = "21" flip = "0"/>
@@ -212,5 +238,7 @@
     <speed value = "0.6" />
 
   </LIFT>
+  
+
 
 </animations>

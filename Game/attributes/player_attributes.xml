@@ -2,7 +2,7 @@
 <young>
    <attributes>
   	<base life = "3" stamina = "200"  damage ="1" staminaRec = "50" speed = "70"/>
-  	<attack speed = "20" staminaTax = "20"/>
+  	<attack speed = "20" staminaTax = "20" spinTax = "50"/>
   	<damaged hitTime = "100" damagedTime = "2000" damagedSpeed = "180"/>
   	<dodge speed = "300" staminaTax = "50" limit = "60"/>
   	<collider x = "6" y = "9" w = "12" h = "10" type = "1"/>
@@ -14,7 +14,7 @@
 <adult>
    <attributes>
   	<base life = "5" stamina = "250"  damage ="2" staminaRec = "50" speed = "120"/>
-  	<attack speed = "110" staminaTax = "25"/>
+  	<attack speed = "110" staminaTax = "25" spinTax = "75"/>
   	<damaged hitTime = "100" damagedTime = "2000" damagedSpeed = "180"/>
   	<dodge speed = "320" staminaTax = "50" limit = "90"/>
   	<collider x = "6" y = "9" w = "12" h = "10" type = "1"/>

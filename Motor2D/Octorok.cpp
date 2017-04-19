@@ -60,7 +60,9 @@ bool Octorok::Update(float dt)
 
 	switch (enemyState)
 	{
-	
+	case(STEP_BACK):
+		StepBack(dt);
+		break;
 	}
 
 	return false;

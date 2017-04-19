@@ -71,12 +71,14 @@ bool Player::Spawn(std::string file, iPoint pos)
 		node = attributes.child("attack");
 		attackSpeed = node.attribute("speed").as_int(40);
 		attackTax = node.attribute("staminaTax").as_int(20);
+		spinTax = node.attribute("spinTax").as_int(0);
 
 		node = attributes.child("damaged");
 		//damaged
 		hitTime = node.attribute("hitTime").as_int(100);
 		damagedTime = node.attribute("damagedTime").as_int(2000);
 		damagedSpeed = node.attribute("damagedSpeed").as_int(180);
+
 		//dodge
 		node = attributes.child("dodge");
 		dodgeSpeed = node.attribute("speed").as_int(500);
@@ -145,6 +147,10 @@ bool Player::Update(float dt)
 
 		case (SHOOTING_BOW):
 			ShootingBow(dt);
+			break;
+
+		case (SPINNING):
+			Spinning(dt);
 			break;
 		}
 
@@ -300,6 +306,7 @@ bool Player::Idle()
 	}
 
 
+	//Walk
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT ||
 		App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT ||
 		App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT ||
@@ -315,23 +322,19 @@ bool Player::Idle()
 		App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
 	{
 		actionState = WALKING;
-		LOG("Link is WALKING");
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && age != YOUNG)
+	//Spin
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && age == YOUNG && (stamina - spinTax >= 0))
 	{
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
-			App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
-			App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
-			App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
-		{
-			Change_direction();
-			actionState = SHOOTING_BOW;
-		}
+		stamina -= spinTax;
+		actionState = SPINNING;
+		createSwordCollider();
 	}
 
 
+	//Attack
 	else if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
@@ -438,7 +441,7 @@ bool Player::Walking(float dt)
 		return true;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >=0))
+	/*if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >=0))
 	{	
 		stamina -= dodgeTax;
 		actionState = DODGING;
@@ -446,6 +449,14 @@ bool Player::Walking(float dt)
 		dodging = true;
 		dodgeTimer.Start();
 		return true;
+	}*/
+
+	//Spin
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && age == YOUNG && (stamina - spinTax >= 0))
+	{
+		stamina -= spinTax;
+		actionState = SPINNING;
+		createSwordCollider();
 	}
 	 
 
@@ -599,6 +610,57 @@ bool Player::ShootingBow(float dt)
 		iPoint pos = App->map->WorldToMap(currentPos.x, currentPos.y);
 		App->game->em->CreateObject(1, pos.x, pos.y, LINK_ARROW);
 	}
+	return true;
+}
+
+bool Player::Spinning(float dt)
+{
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+		Move(0, SDL_ceil(attackSpeed * dt));
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	{
+		Move(0, -SDL_ceil(attackSpeed * dt));
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		Move(-SDL_ceil(attackSpeed * dt), 0);
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		Move(SDL_ceil(attackSpeed * dt), 0);
+	}
+
+
+	if (App->inputM->EventPressed(INPUTEVENT::MDOWN) == EVENTSTATE::E_REPEAT)
+	{
+		Move(0, SDL_ceil(attackSpeed * dt));
+	}
+	else if (App->inputM->EventPressed(INPUTEVENT::MUP) == EVENTSTATE::E_REPEAT)
+	{
+		Move(0, -SDL_ceil(attackSpeed * dt));
+	}
+
+	if (App->inputM->EventPressed(INPUTEVENT::MLEFT) == EVENTSTATE::E_REPEAT)
+	{
+		Move(-SDL_ceil(attackSpeed * dt), 0);
+	}
+	else if (App->inputM->EventPressed(INPUTEVENT::MRIGHT) == EVENTSTATE::E_REPEAT)
+	{
+		Move(SDL_ceil(attackSpeed * dt), 0);
+	}
+
+	updateSwordCollider();
+
+	if (currentAnim->isOver())
+	{
+		resetSwordCollider();
+		currentAnim->Reset();
+		actionState = IDLE;
+	}
+	
 	return true;
 }
 
@@ -806,8 +868,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 void Player::createSwordCollider()
 {
-	
-	switch (currentDir)
+	if(actionState == ATTACKING)
+		switch (currentDir)
 	{
 	case(D_UP):
 		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 26, 14 }, COLLIDER_LINK_SWORD);
@@ -822,11 +884,17 @@ void Player::createSwordCollider()
 		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 14, 26 }, COLLIDER_LINK_SWORD);
 		break;
 	}
+
+	else if (actionState == SPINNING)
+	{
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 40, 40 }, COLLIDER_LINK_SWORD);
+	}
 	updateSwordCollider();
 }
 
 void Player::updateSwordCollider()
 {
+	if (actionState == ATTACKING)
 	switch (currentDir)
 	{
 	case(D_UP):
@@ -848,6 +916,11 @@ void Player::updateSwordCollider()
 		swordCollider->rect.y = currentPos.y - 16;
 		swordCollider->rect.x = currentPos.x - swordCollider->rect.w -  5;
 		break;
+	}
+	else if (actionState == SPINNING)
+	{
+		swordCollider->rect.x = currentPos.x - swordCollider->rect.w / 2;
+		swordCollider->rect.y = currentPos.y - swordCollider->rect.h / 2 -10;
 	}
 
 }
