@@ -52,7 +52,7 @@ bool Player::Spawn(std::string file, iPoint pos)
 			attributes = attributesFile.child("young").child("attributes");
 			break;
 		case MEDIUM:
-			attributes = attributesFile.child("medium").child("attributes");
+			attributes = attributesFile.child("middle").child("attributes");
 			break;
 		case ADULT:
 			attributes = attributesFile.child("adult").child("attributes");
@@ -239,7 +239,7 @@ void Player::ChangeAge(LINK_AGE new_age)
 			attributes = attributesFile.child("young").child("attributes");
 			break;
 		case MEDIUM:
-			attributes = attributesFile.child("medium").child("attributes");
+			attributes = attributesFile.child("middle").child("attributes");
 			break;
 		case ADULT:
 			attributes = attributesFile.child("adult").child("attributes");

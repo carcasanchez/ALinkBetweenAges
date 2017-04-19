@@ -106,7 +106,7 @@ bool j1GameLayer::Update(float dt)
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		em->player->changeAge = 0;
+		em->player->changeAge = 1;
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
