@@ -726,11 +726,11 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				{
 					if (stamina - attackTax >= 0)
 					{
+						actionState = ATTACKING;
 						currentDir = DIRECTION::D_UP;
 						createSwordCollider();
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						actionState = ATTACKING;
 						attack_vicente = true;
 						LOG("LINK is ATTACKING");
 					}
@@ -755,11 +755,11 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				{
 					if (stamina - attackTax >= 0)
 					{
+						actionState = ATTACKING;
 						currentDir = DIRECTION::D_DOWN;
 						createSwordCollider();
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						actionState = ATTACKING;
 						attack_vicente = true;
 						LOG("LINK is ATTACKING");
 					}
@@ -784,11 +784,11 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				{
 					if (stamina - attackTax >= 0)
 					{
+						actionState = ATTACKING;
 						currentDir = DIRECTION::D_LEFT;
 						createSwordCollider();
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						actionState = ATTACKING;
 						attack_vicente = true;
 						LOG("LINK is ATTACKING");
 					}
@@ -813,11 +813,12 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				{
 					if (stamina - attackTax >= 0)
 					{
+						actionState = ATTACKING;
+
 						currentDir = DIRECTION::D_RIGHT;
 						createSwordCollider();
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						actionState = ATTACKING;
 						attack_vicente = true;
 						LOG("LINK is ATTACKING");
 					}
@@ -894,6 +895,8 @@ void Player::createSwordCollider()
 
 void Player::updateSwordCollider()
 {
+	
+
 	if (actionState == ATTACKING)
 	switch (currentDir)
 	{
@@ -917,6 +920,7 @@ void Player::updateSwordCollider()
 		swordCollider->rect.x = currentPos.x - swordCollider->rect.w -  5;
 		break;
 	}
+
 	else if (actionState == SPINNING)
 	{
 		swordCollider->rect.x = currentPos.x - swordCollider->rect.w / 2;
