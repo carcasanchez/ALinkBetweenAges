@@ -34,15 +34,6 @@ bool Hud::Start()
 	App->inputM->AddListener(this);
 	SetHearts();
 
-	//THRASH VS
-	win->Set_String("You Killed all the soldiers. Thank you for playing this demo");
-	win->Set_Interactive_Box({ 300,300,324,30 });
-	win->Set_Active_state(false);
-
-	win2->Set_String("Press UP to play again, press DOWN to close");
-	win2->Set_Interactive_Box({ 300,325,0,0 });
-	win2->Set_Active_state(false);
-
 	return true;
 }
 
@@ -51,19 +42,6 @@ bool Hud::Update(float dt)
 
 	if (pause_transition == PAUSE_UP)
 		PauseOut(dt);
-
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		rupees_counter->QuitNumber(5);
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN)
-	{
-		rupees_counter->SumNumber(3);
-	}
-
-	if (App->game->hud->player_continue == true)
-		input_active = true;
 
 	UpdateHearts();
 	
@@ -304,10 +282,6 @@ bool Hud::LoadHud(string file)
 		stamina_green = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		stamina_bar = (UI_Stamina*)App->gui->Add_element(STAMINA_BAR, App->game);
 
-		//THRASH FOR VERTICAL SLICE
-		win = (UI_String*)App->gui->Add_element(STRING, App->game);
-		win2 = (UI_String*)App->gui->Add_element(STRING, App->game);
-		
 		pugi::xml_node hud_node = hud_file.child("images");
 
 		//Numbers counter image
@@ -347,9 +321,6 @@ bool Hud::LoadHud(string file)
 		hud_screen->AddChild(empty_heart);
 		hud_screen->AddChild(medium_heart);
 		hud_screen->AddChild(full_heart);
-
-		hud_screen->AddChild(win);
-		hud_screen->AddChild(win2);
 
 	}
 

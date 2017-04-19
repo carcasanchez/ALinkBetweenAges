@@ -162,21 +162,6 @@ bool Player::Update(float dt)
 
 	//THRASH FOR VS
 
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN && win_con == true)
-	{
-		life = 0;
-		App->game->hud->player_continue = true;
-		App->game->hud->win->Set_Active_state(false);
-		App->game->hud->win2->Set_Active_state(false);
-		App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
-		win_con = false;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN && win_con == true)
-	{
-		App->game->quit_game = true;
-	}
-
 	if (attack_vicente && swordCollider != nullptr && actionState == ACTION_STATE::DODGING)
 	{
 		attack_vicente = false;
@@ -189,7 +174,6 @@ bool Player::Update(float dt)
 
 void Player::OnDeath()
 {
-	defeatedEnemies = 0;
 	life = 3;
 	iPoint respawn = App->map->MapToWorld(App->game->playerX, App->game->playerY);
 	App->sceneM->RequestSceneChange(respawn, "kakarikoVillage", D_DOWN);
@@ -203,9 +187,6 @@ void Player::OnDeath()
 
 	if (swordCollider != nullptr)
 		swordCollider->to_delete = true;
-	//THRASH FOR VL
-	App->game->hud->win->Set_Active_state(false);
-	App->game->hud->win2->Set_Active_state(false);
 
 }
 
@@ -839,28 +820,14 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		}
 		break;
 
-	//TRASH FOR VERTICAL SLICE
 	case UP:
 	{
-		if (state == E_DOWN && win_con)
-		{
-			life = 0;
-			App->game->hud->player_continue = true;
-			App->game->hud->win->Set_Active_state(false);
-			App->game->hud->win2->Set_Active_state(false);
-			App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
-			win_con = false;
-		}
-		break;
+		
 	}
 
 	case DOWN:
 	{
-		if (state == E_DOWN && win_con)
-		{
-			App->game->quit_game = true;
-		}
-		break;
+	
 	}
 
 	}

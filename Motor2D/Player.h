@@ -33,7 +33,6 @@ public:
 	//THRASH VL
 	bool win_con = false;
 	bool attack_vicente = false;
-	int defeatedEnemies = 0;
 
 public:
 

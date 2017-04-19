@@ -32,13 +32,6 @@ public:
 
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 
-	//TRASH FOR VERTICAL SLICE
-	bool player_continue = false;
-
-	UI_String* win = nullptr;
-	UI_String* win2 = nullptr;
-
-
 public:
 	//In game HUD elements
 	UI_element*		hud_screen = nullptr;

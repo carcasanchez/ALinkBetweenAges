@@ -19,7 +19,6 @@
 void Enemy::OnDeath()
 {
 	toDelete = true;
-	App->game->em->player->defeatedEnemies++;
 }
 
 //Move between different points
