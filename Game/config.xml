@@ -2,8 +2,8 @@
 
 <config>
   <app framerate_cap="">
-    <title>Pathfinding Test</title>
-    <organization>UPC</organization>
+    <title>ALinkBetweenAges</title>
+    <organization>DuckDev</organization>
     <cvars>
       <cvar name ="max_fps" description ="Caps the FPS" value="60" min="0" max="120" type="int" read_only="false"/>
     </cvars>

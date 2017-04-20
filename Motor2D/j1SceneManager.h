@@ -44,7 +44,7 @@ public:
 	bool CleanUp();
 
 	void RequestSceneChange(Exit*);
-	void RequestSceneChange(iPoint dest, char* scene, DIRECTION dir);
+	void RequestSceneChange(iPoint dest, const char* scene, DIRECTION dir);
 	bool ChangeScene();
 
 public:

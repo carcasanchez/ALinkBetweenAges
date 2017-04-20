@@ -25,6 +25,8 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
+	bool Save(pugi::xml_node&) const;
+	bool Load(pugi::xml_node&);
 
 	bool On_Collision_Callback(Collider*, Collider*, float dt);
 

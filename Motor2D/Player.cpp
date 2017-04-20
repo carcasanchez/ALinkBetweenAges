@@ -175,8 +175,9 @@ bool Player::Update(float dt)
 void Player::OnDeath()
 {
 	life = 3;
-	iPoint respawn = App->map->MapToWorld(App->game->playerX, App->game->playerY);
-	App->sceneM->RequestSceneChange(respawn, "kakarikoVillage", D_DOWN);
+	
+	App->LoadGame("saves.xml");
+
 	App->game->hud->ResetHearts();
 	App->game->hud->RestoreHearts();
 	damaged = invulnerable = false;
@@ -184,6 +185,8 @@ void Player::OnDeath()
 	currentDir = D_DOWN;
 	sprite->tint = { 255, 255, 255, 255 };
 	actionState = IDLE;
+
+	UpdateCollider();
 
 	if (swordCollider != nullptr)
 		swordCollider->to_delete = true;

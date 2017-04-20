@@ -107,6 +107,11 @@ bool j1GameLayer::Update(float dt)
 		em->player->changeAge = 2;
 	}
 
+
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+		App->SaveGame("saves.xml");
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+		App->LoadGame("saves.xml");
 	
 	return ret;
 }
@@ -131,6 +136,41 @@ bool j1GameLayer::CleanUp()
 
 	return true;
 }
+
+
+//Save game
+bool j1GameLayer::Save(pugi::xml_node &data) const
+{
+
+	//Save player data
+	pugi::xml_node player = data.append_child("player");
+	
+	pugi::xml_node pos = player.append_child("position");
+	pos.append_attribute("x") = em->player->currentPos.x;
+	pos.append_attribute("y") = em->player->currentPos.y;
+	player.append_attribute("life") = em->player->life;
+
+	//Save current map
+	data.append_child("current_map").append_attribute("name") = App->sceneM->currentScene->name.c_str();
+	
+	return true;
+}
+//Load game
+bool j1GameLayer::Load(pugi::xml_node& data)
+{
+	em->player->currentPos.x = data.child("player").child("position").attribute("x").as_int();
+	em->player->currentPos.y = data.child("player").child("position").attribute("y").as_int();
+	em->player->life = data.child("player").attribute("life").as_int();
+
+
+	string dest = data.child("current_map").attribute("name").as_string();
+	App->sceneM->RequestSceneChange(em->player->currentPos, dest.c_str() , D_DOWN);
+
+
+	return true;
+}
+
+
 
 bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {

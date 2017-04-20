@@ -750,3 +750,6 @@ void j1Map::UnLoadData()
 	// Clean up the pugui tree
 	map_file->reset();
 }
+
+
+

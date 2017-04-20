@@ -76,14 +76,14 @@ void j1SceneManager::RequestSceneChange(Exit* exit)
 	// Apply transition
 }
 
-void j1SceneManager::RequestSceneChange(iPoint dest, char * scene, DIRECTION dir)
+void j1SceneManager::RequestSceneChange(iPoint dest, const char * scene, DIRECTION dir)
 {
 	App->game->em->player->sceneOverride = true;
 	changeRequest = true;
 
 	destiny = scene;
 	exitDest = -1;
-	dir = dir;
+	this->dir = dir;
 	spawnPoint = dest;
 }
 
@@ -102,6 +102,7 @@ bool j1SceneManager::ChangeScene()
 		RELEASE(currentScene);
 		currentScene = new Scene(destiny.c_str());
 		currentScene->Load(data[currentScene->name].c_str());
+		
 
 		iPoint destPos;
 		if (exitDest != -1)
@@ -122,6 +123,9 @@ bool j1SceneManager::ChangeScene()
 				destPos.x -= 16;
 				break;
 			}
+
+			App->SaveGame("saves.xml");
+
 		}
 		else
 		{
@@ -130,6 +134,7 @@ bool j1SceneManager::ChangeScene()
 		
 
 		App->game->em->player->currentPos = destPos;
+		App->game->em->player->currentDir = dir;
 		changeRequest = false;
 	}
 
