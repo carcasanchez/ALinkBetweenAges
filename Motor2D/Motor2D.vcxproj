@@ -91,6 +91,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="RedSoldier.cpp" />
     <ClCompile Include="UI_Counter.cpp" />
+    <ClCompile Include="UI_DialogBox.cpp" />
     <ClCompile Include="UI_Heart.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_Counter.h" />
+    <ClInclude Include="UI_DialogBox.h" />
     <ClInclude Include="UI_element.h" />
     <ClInclude Include="UI_Heart.h" />
     <ClInclude Include="UI_Image.h" />
