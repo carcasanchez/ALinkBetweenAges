@@ -68,10 +68,10 @@ void j1Map::Draw()
 	
 	SDL_Rect cameraSection;
 
-	cameraSection.x = (App->render->renderZone.x / data->tile_width);// -data->tile_width;
-	cameraSection.y = (App->render->renderZone.y / data->tile_height);// -data->tile_height;
-	cameraSection.w = (App->render->renderZone.w / data->tile_width) +data->tile_width;
-	cameraSection.h = (App->render->renderZone.h / data->tile_height)+data->tile_height;
+	cameraSection.x = (App->render->renderZone.x / data->tile_width);
+	cameraSection.y = (App->render->renderZone.y / data->tile_height);
+	cameraSection.w = ((App->render->renderZone.w) / data->tile_width) + 1;
+	cameraSection.h = ((App->render->renderZone.h) / data->tile_height) + 2;
 	
 	for(list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
 	{
@@ -121,10 +121,10 @@ void j1Map::DrawOver()
 
 	SDL_Rect cameraSection;
 
-	cameraSection.x = (App->render->renderZone.x / data->tile_width);// -data->tile_width;
-	cameraSection.y = (App->render->renderZone.y / data->tile_height);// -data->tile_height;
-	cameraSection.w = (App->render->renderZone.w / data->tile_width) + data->tile_width;
-	cameraSection.h = (App->render->renderZone.h / data->tile_height)+ data->tile_height;
+	cameraSection.x = (App->render->renderZone.x / data->tile_width);
+	cameraSection.y = (App->render->renderZone.y / data->tile_height);
+	cameraSection.w = ((App->render->renderZone.w) / data->tile_width) + 1;
+	cameraSection.h = ((App->render->renderZone.h) / data->tile_height) + 2;
 
 	for (list<MapLayer*>::iterator item = data->layers.begin(); item != data->layers.cend(); item++)
 	{

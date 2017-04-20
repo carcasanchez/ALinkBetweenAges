@@ -102,11 +102,7 @@ bool j1Window::Awake(pugi::xml_node& config)
 			//Get window surface
 			screen_surface = SDL_GetWindowSurface(window);
 		}
-
-		uint a, b;
-		GetWindowSize(a, b);
-		renderZone.x = a / scale;
-		renderZone.y = b / scale;
+			
 	}
 
 	return ret;

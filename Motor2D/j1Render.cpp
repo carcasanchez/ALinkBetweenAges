@@ -55,8 +55,8 @@ bool j1Render::Awake(pugi::xml_node& config)
 		camera.y = 0;
 
 		renderZone.x = renderZone.y = 0;
-		renderZone.w = App->win->GetRenderZone().x;
-		renderZone.h =  App->win->GetRenderZone().y;
+		renderZone.w = App->win->screen_surface->w / App->win->GetScale();
+		renderZone.h = App->win->screen_surface->h / App->win->GetScale();
 
 	}
 
@@ -90,6 +90,32 @@ bool j1Render::PreUpdate()
 
 bool j1Render::PostUpdate()
 {
+	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+	{
+		freeCamera =! freeCamera;
+	}
+
+	if (freeCamera)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			camera.y++;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			camera.y--;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			camera.x--;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			camera.x++;
+		}
+	}
+
+
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
 
 
@@ -379,6 +405,7 @@ bool j1Render::CompleteBlit(SDL_Texture* texture, int x, int y, const SDL_Rect s
 		}
 	}
 
+	//App->render->DrawQuad(renderZone, 255, 0, 0, 20);
 
 	return ret;
 }
@@ -478,41 +505,51 @@ void j1Render::CameraFollow(iPoint pos)
 {
 	int scale = App->win->GetScale();
 	uint w, h;
-	App->win->GetWindowSize(w, h);
 
-	camera.x = -pos.x * scale;
-	camera.y = -pos.y * scale;
-	camera.x += w*0.5;
-	camera.y += h*0.5;
 
-	renderZone.x = pos.x;
-	renderZone.y = pos.y;
-	renderZone.x -= renderZone.w*0.5;
-	renderZone.y -= renderZone.h*0.5;
-
-	//renderZone.x -= App->win->isFullScreen() ? renderZone.w*0.25 : renderZone.w*0.5;
-
-	if (renderZone.x < 0)
+	if (!freeCamera)
 	{
-		camera.x = 0;
-		renderZone.x = 0;
-	}
-	else if (renderZone.x + renderZone.w >= (App->map->data->width)*App->map->data->tile_width)
-	{
-		renderZone.x = (App->map->data->width)*App->map->data->tile_width - renderZone.w;
-		camera.x = -renderZone.x* scale;
-	}
 
-	if (renderZone.y < 0)
-	{
-		camera.y = 0;
-		renderZone.y = 0;
+		camera.x = -(pos.x * scale);
+		camera.y = -(pos.y * scale);
+		camera.x += SDL_ceil((camera.w)*0.5);
+		camera.y += SDL_ceil((camera.h)*0.5);
+
+		LOG("camera: x %i, y %i, w %i, h %i", camera.x, camera.y, camera.w, camera.h);
+	
+		renderZone.x = pos.x;
+		renderZone.y = pos.y;
+		renderZone.x -= renderZone.w*0.5;
+		renderZone.y -= renderZone.h*0.5;
+
+		LOG("renderZone: x %i, y %i, w %i, h %i", renderZone.x, renderZone.y, renderZone.w, renderZone.h);
+
+
+		//renderZone.x -= App->win->isFullScreen() ? renderZone.w*0.25 : renderZone.w*0.5;
+
+		if (renderZone.x < 0)
+		{
+			camera.x = 0;
+			renderZone.x = 0;
+		}
+		else if (renderZone.x + renderZone.w >= (App->map->data->width)*App->map->data->tile_width)
+		{
+			renderZone.x = (App->map->data->width)*App->map->data->tile_width - renderZone.w;
+			camera.x = -renderZone.x* scale;
+		}
+
+		if (renderZone.y < 0)
+		{
+			camera.y = 0;
+			renderZone.y = 0;
+		}
+		else if (renderZone.y + renderZone.h >= (App->map->data->height)*App->map->data->tile_height)
+		{
+			renderZone.y = (App->map->data->height)*App->map->data->tile_height - renderZone.h;
+			camera.y = (-renderZone.y)* scale;
+		}
 	}
-	else if (renderZone.y + renderZone.h >= (App->map->data->height)*App->map->data->tile_height)
-	{
-		renderZone.y = (App->map->data->height)*App->map->data->tile_height - renderZone.h;
-		camera.y = (-renderZone.y)* scale;
-	}
+	
 }
 
 void j1Render::DebugCamera()

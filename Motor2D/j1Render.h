@@ -100,6 +100,7 @@ public:
 private:
 
 	bool PrintUI();
+	bool freeCamera = false;
 
 public:
 
