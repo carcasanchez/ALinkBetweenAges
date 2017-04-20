@@ -18,7 +18,7 @@
 
 // just for temporal wall collider
 #include "Entity.h"
-#define ENEMIES_TO_DEFEAT 46
+
 
 
 j1GameLayer::j1GameLayer() : j1Module()
@@ -89,15 +89,9 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
-		//iPoint mousePos;
-		//App->input->GetMousePosition(mousePos.x, mousePos.y);
-		
-		//em->player->currentPos = mousePos;
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
-		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateObject(1, mousePos.x, mousePos.y, OCTO_STONE);
-
+		em->player->currentPos = mousePos;
 	}
 		
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)

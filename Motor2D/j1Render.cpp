@@ -487,9 +487,10 @@ void j1Render::CameraFollow(iPoint pos)
 
 	renderZone.x = pos.x;
 	renderZone.y = pos.y;
+	renderZone.x -= renderZone.w*0.5;
 	renderZone.y -= renderZone.h*0.5;
 
-	renderZone.x -= App->win->isFullScreen() ? renderZone.w*0.25 : renderZone.w*0.5;
+	//renderZone.x -= App->win->isFullScreen() ? renderZone.w*0.25 : renderZone.w*0.5;
 
 	if (renderZone.x < 0)
 	{

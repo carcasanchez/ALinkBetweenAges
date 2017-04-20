@@ -43,8 +43,8 @@ bool j1Window::Awake(pugi::xml_node& config)
 	}
 	else
 	{
-		renderZone.x = width = config.child("resolution").attribute("width").as_int(256);
-		renderZone.y = height = config.child("resolution").attribute("height").as_int(224);
+		width = config.child("resolution").attribute("width").as_int(256);
+		height = config.child("resolution").attribute("height").as_int(224);
 		scale = config.child("resolution").attribute("scale").as_int(1);
 		int h_margin = config.child("margin").attribute("horizontal").as_int(0);
 		int v_margin = config.child("margin").attribute("vertical").as_int(0);
@@ -102,6 +102,11 @@ bool j1Window::Awake(pugi::xml_node& config)
 			//Get window surface
 			screen_surface = SDL_GetWindowSurface(window);
 		}
+
+		uint a, b;
+		GetWindowSize(a, b);
+		renderZone.x = a / scale;
+		renderZone.y = b / scale;
 	}
 
 	return ret;
