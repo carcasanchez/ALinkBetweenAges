@@ -90,10 +90,20 @@ bool UI_String::Draw_console(int height)
 	return true;
 }
 
+void UI_String::SetBlitTimeMS(int time)
+{
+	blit_time = time;
+}
+
+
+
 
 bool UI_String::Update()
 {
 	Handle_input();
+
+	if (active)
+		BlitDialog();
 
 	Return_state();
 
@@ -103,13 +113,12 @@ bool UI_String::Update()
 bool UI_String::Set_String(char* new_text)
 {
 	text = new_text;
+	blit_text.clear();
 
-	//looks if the text is already loaded and unloads
-	if(text_texture)
+	if (text_texture)
 		App->tex->UnLoad(text_texture);
 
-	//loads the new texture
-	text_texture = App->font->Print(text.c_str());
+	char_blit_time.Start();
 
 	return (text.c_str() != nullptr) ? true : false;
 }
@@ -117,5 +126,20 @@ bool UI_String::Set_String(char* new_text)
 void UI_String::Load_text_texture()
 {
 	text_texture = App->font->Print(text.c_str());
+}
+
+
+void UI_String::BlitDialog()
+{
+	if (blit_text.size() < text.size() && char_blit_time.Read() >= (blit_time /text.size()))
+	{
+		blit_text += text.at(blit_text.size());
+		//looks if the text is already loaded and unloads
+		if (text_texture)
+			App->tex->UnLoad(text_texture);
+
+		text_texture = App->font->Print(blit_text.c_str());
+		char_blit_time.Start();
+	}
 }
 
