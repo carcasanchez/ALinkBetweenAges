@@ -4,15 +4,11 @@
    <npc id="1">
      <dialogue state="0">
        <text value=" Hi Link! We had problems with Ganon's soldiers. They came out of nowhere with pretending to kidnap Zelda,but she managed to escape into the forest."/>
-	
-	<text value=" The forest is at the south-west, passing the village."/>
-	<text value=" We need your help. Bring Zelda back, please. "/>
-	<text value=" I forgot! You can attack in four directions "/>
-	<text value=" using ABXY, and dodge with RB."/>
+	<text value=" The forest is at the south-west, passing the village. We need your help. Bring Zelda back, please."/>
+	<text value=" I forgot! You can attack in four directions using ABXY, and dodge with RB. "/>
      </dialogue>
      <dialogue state="1">
-   	<text value=" Go to the forest, at south-west, and find Zelda."/>
-  	<text value=" You are our last hope, good luck Link."/>
+   	<text value=" Go to the forest, at south-west, and find Zelda.You are our last hope, good luck Link."/>
      </dialogue>
    </npc>
   
@@ -36,23 +32,19 @@
 
    <npc id="4">
      <dialogue state="0">
-	<text value=" A group of soldiers have gone to the forest,"/>
-	<text value=" I don't know what they are looking for."/>
+	<text value=" A group of soldiers have gone to the forest, I don't know what they are looking for."/>
      </dialogue>
 <dialogue state="1">
-	<text value=" A group of soldiers have gone to the forest,"/>
-	<text value=" I don't know what they are looking for."/>
+	<text value=" A group of soldiers have gone to the forest, I don't know what they are looking for."/>
      </dialogue>
    </npc>
 
    <npc id="5">
      <dialogue state="0">
-	<text value=" To the left is the entrance to the forest."/>
-	<text value=" Be very careful if you are going to enter there."/>
+	<text value=" To the left is the entrance to the forest. Be very careful if you are going to enter there."/>
 </dialogue>
 <dialogue state="1">
-	<text value=" To the left is the entrance to the forest."/>
-	<text value=" Be very careful if you are going to enter there."/>
+	<text value=" To the left is the entrance to the forest. Be very careful if you are going to enter there."/>
 </dialogue>
 
 
@@ -80,13 +72,9 @@
 
    <npc id="8">
      <dialogue state="0">
-	<text value=" I'm glad to see you again Link. Thank you for rescue me."/>
-	<text value=" This morning, a group of soldiers came to kidnap me,"/>
-	<text value=" but I managed to escape and hide here."/>
+	<text value=" I'm glad to see you again Link. Thank you for rescue me. This morning, a group of soldiers came to kidnap me, but I managed to escape and hide here."/>
 	<text value=" I need your help, Link. Could you defeat all the soldiers of the castle?"/>
-	<text value=" The castle is at the north of Kakariko village, passing the bridge."/>
-	<text value=" It's dangerous to go alone, take the book behind me."/>
-	<text value=" This is the Book of Ages. It gives power to the owner."/>
+	<text value=" The castle is at the north of Kakariko village, passing the bridge. It's dangerous to go alone, take the book behind me.This is the Book of Ages. It gives power to the owner."/>
 	<text value=" You will become stronger and faster. Good luck, Link."/>
      </dialogue>
      <dialogue state="1">
