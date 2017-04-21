@@ -2,63 +2,63 @@
 <attributes>
    <book>
  	 <base life = "1"/>
- 	  <collider x = "7" y = "7" w = "10" h = "10" type = "6"/>
+ 	  <collider x = "7" y = "7" w = "10" h = "10" type = "7"/>
  	 <animation file = "animations/objects/book_animations.xml"/>
  	 <texture file = "textures/Object_sprites/book.png"/>
    </book>
 
    <arrow>
  	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "7" h = "15" type = "7"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "15" type = "6"/>
  	 <animation file = "animations/objects/arrow_animations.xml"/>
  	 <texture file = "textures/Object_sprites/arrow.png"/>
    </arrow>
 
    <green_rupee>
  	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "7" h = "14" type = "8"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "14" type = "7"/>
  	 <animation file = "animations/objects/green_rupee_animations.xml"/>
  	 <texture file = "textures/Object_sprites/rupees.png"/>
    </green_rupee>
 
    <blue_rupee>
  	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "7" h = "14" type = "8"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "14" type = "7"/>
  	 <animation file = "animations/objects/blue_rupee_animations.xml"/>
  	 <texture file = "textures/Object_sprites/rupees.png"/>
    </blue_rupee>
 
   <red_rupee>
  	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "7" h = "14" type = "8"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "14" type = "7"/>
  	 <animation file = "animations/objects/red_rupee_animations.xml"/>
  	 <texture file = "textures/Object_sprites/rupees.png"/>
    </red_rupee>
 
    <heart>
  	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "9" h = "8" type = "9"/>
+ 	 <collider x = "0" y = "0" w = "9" h = "8" type = "7"/>
  	 <animation file = "animations/objects/heart_animations.xml"/>
  	 <texture file = "textures/Object_sprites/heart.png"/>
    </heart>
 
    <bush>
  	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "16" h = "16" type = "10"/>
+ 	 <collider x = "0" y = "0" w = "16" h = "16" type = "8"/>
  	 <animation file = "animations/objects/bush_animations.xml"/>
  	 <texture file = "textures/Object_sprites/bush.png"/>
    </bush>
 
    <octo_stone>
  	 <base life = "1" damage = "1"/>
- 	 <collider x = "0" y = "0" w = "8" h = "8" type = "11"/>
+ 	 <collider x = "0" y = "0" w = "8" h = "8" type = "9"/>
  	 <animation file = "animations/objects/octostone_animations.xml"/>
  	 <texture file = "textures/Enemy_sprites/Enemy.png"/>
    </octo_stone>
 
    <chest>
  	 <base life = "1" damage = "0"/>
- 	 <collider x = "0" y = "0" w = "16" h = "16" type = "12"/>
+ 	 <collider x = "0" y = "0" w = "16" h = "16" type = "10"/>
  	 <animation file = "animations/objects/chest_animations.xml"/>
  	 <texture file = "textures/Object_sprites/Chest.png"/>
    </chest>

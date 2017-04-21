@@ -28,9 +28,7 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_NPC] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_BOOK] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_RUPEE] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_HEART] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_PICKABLE_ITEM] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_BUSH] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_OCTOSTONE] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_CHEST] = true;

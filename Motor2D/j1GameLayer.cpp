@@ -326,7 +326,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	}
 
 	
-	if(c2->type == COLLIDER_RUPEE || c2->type == COLLIDER_HEART)
+	if(c2->type == COLLIDER_PICKABLE_ITEM)
 	{
 		PickObject((Object*)c2->parent);
 		return true;
