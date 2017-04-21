@@ -134,7 +134,7 @@ void UI_String::BlitDialog()
 {
 	if (blit_text.size() < text.size())
 	{
-		if(char_blit_time.Read() >= (blit_time / text.size()))
+		if(char_blit_time.Read() >= (blit_time))
 		{ 
 			blit_text += text.at(blit_text.size());
 			//looks if the text is already loaded and unloads

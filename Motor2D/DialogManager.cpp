@@ -65,7 +65,7 @@ bool DialogManager::Start()
 	text_on_screen = (UI_String*)App->gui->Add_element(STRING, this);
 	text_on_screen->Set_Active_state(false);
 	text_on_screen->Set_Interactive_Box({ 150, 600, 390, 20 });
-	text_on_screen->SetBlitTimeMS(1500);
+	text_on_screen->SetBlitTimeMS(20);
 
 	screen->AddChild(text_on_screen);
 
