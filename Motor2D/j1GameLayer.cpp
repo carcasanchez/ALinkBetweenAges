@@ -149,22 +149,31 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 	pos.append_attribute("x") = em->player->currentPos.x;
 	pos.append_attribute("y") = em->player->currentPos.y;
 	player.append_attribute("life") = em->player->life;
+	player.append_attribute("max_life") = em->player->maxLife;
+	player.append_attribute("direction") = em->player->currentDir;
+	player.append_attribute("age") = em->player->age;
+	player.append_attribute("rupees") = em->player->rupees;
 
 	//Save current map
 	data.append_child("current_map").append_attribute("name") = App->sceneM->currentScene->name.c_str();
 	
 	return true;
 }
+
 //Load game
 bool j1GameLayer::Load(pugi::xml_node& data)
 {
 	em->player->currentPos.x = data.child("player").child("position").attribute("x").as_int();
 	em->player->currentPos.y = data.child("player").child("position").attribute("y").as_int();
 	em->player->life = data.child("player").attribute("life").as_int();
+	em->player->maxLife = data.child("player").attribute("max_life").as_int();
+	em->player->rupees = data.child("player").attribute("rupees").as_int();
 
+	em->player->changeAge = data.child("player").attribute("age").as_int();
 
 	string dest = data.child("current_map").attribute("name").as_string();
-	App->sceneM->RequestSceneChange(em->player->currentPos, dest.c_str() , D_DOWN);
+
+	App->sceneM->RequestSceneChange(em->player->currentPos, dest.c_str() , (DIRECTION)data.child("player").attribute("direction").as_int());
 
 
 	return true;
