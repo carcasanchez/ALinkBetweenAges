@@ -120,7 +120,7 @@ bool Entity::LoadAnimations(std::string file)
 	{
 		ent = anim_file.child("animations");
 
-		for (pugi::xml_node action = ent.child("IDLE"); action != NULL; action = action.next_sibling())
+		for (pugi::xml_node action = ent.first_child(); action != NULL; action = action.next_sibling())
 		{
 			for (pugi::xml_node dir = action.child("UP"); dir != action.child("loop"); dir = dir.next_sibling())
 			{

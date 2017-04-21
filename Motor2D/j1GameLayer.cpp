@@ -83,8 +83,8 @@ bool j1GameLayer::Update(float dt)
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
-
+		//em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+		em->CreateObject(1, mousePos.x, mousePos.y, CHEST);
 	}
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
@@ -183,7 +183,7 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 
 bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {
-	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC || c2->type == COLLIDER_BUSH))
+	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC || c2->type == COLLIDER_BUSH || c2->type == COLLIDER_CHEST))
 	{
 		iPoint Movement;
 		if (abs(c1->rect.x - c2->rect.x) < abs(c1->rect.y - c2->rect.y))
@@ -332,6 +332,12 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	if (c1->type == COLLIDER_BUSH && c2->type == COLLIDER_LINK_SWORD)
 	{
 		c1->parent->life = -1;
+		return true;
+	}
+
+	if (c1->type == COLLIDER_CHEST && c2->type == COLLIDER_LINK_SWORD && c1->parent->actionState == CLOSE)
+	{
+		c1->parent->actionState = OPEN;
 		return true;
 	}
 		

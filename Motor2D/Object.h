@@ -15,7 +15,8 @@ enum OBJECT_TYPE
 	LIFEHEART,
 	BUSH,
 	POT,
-	OCTO_STONE
+	OCTO_STONE,
+	CHEST
 };
 
 class Object : public Entity
@@ -115,6 +116,16 @@ public:
 
 		return ret;
 	};
+};
+
+class Chest : public Object
+{
+public:
+
+	Chest() {};
+
+public:
+	OBJECT_TYPE objectInside = GREEN_RUPEE;
 };
 
 

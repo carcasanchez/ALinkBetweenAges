@@ -62,6 +62,10 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case OCTO_STONE:
 				attributes = attributes.child("octo_stone");
 				break;
+			case CHEST:
+				actionState = CLOSE;
+				attributes = attributes.child("chest");
+				break;
 		}		
 		LoadAttributes(attributes);
 

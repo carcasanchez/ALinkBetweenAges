@@ -261,6 +261,11 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case RED_RUPEE:
 		ret = new Rupee();
 		break;
+
+	case CHEST:
+		ret = new Chest();
+		break;
+
 	}
 	
 
