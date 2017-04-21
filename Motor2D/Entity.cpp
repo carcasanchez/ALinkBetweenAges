@@ -161,8 +161,6 @@ bool Entity::Move(int x, int y)
 	bool ret = true;
 	
 
-	
-
 	if (type == ENEMY)
 	{
 		currentPos.x += x;

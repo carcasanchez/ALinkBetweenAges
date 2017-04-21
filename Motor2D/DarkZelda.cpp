@@ -9,7 +9,8 @@
 #include "Animation.h"
 #include "j1EntityManager.h"
 #include "Object.h"
-
+#include "j1GameLayer.h"
+#include "Player.h"
 
 bool DarkZelda::Spawn(std::string file, iPoint pos)
 {
@@ -40,16 +41,6 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		enemyState = PATROLING;
 		actionState = WALKING;
 
-		hostileRange = attributes.child("ranges").attribute("hostile").as_int(0);
-		fightRange = attributes.child("ranges").attribute("fight").as_int(0);
-		attackRatio = attributes.child("ratios").attribute("attack").as_int(0);
-		outFightRange = attributes.child("ranges").attribute("out").as_int(0);
-		chargeTime = attributes.child("ratios").attribute("charge_time").as_int(0);
-
-		chaseSpeed = attributes.child("combat_speeds").attribute("chase_speed").as_int(0);
-		flankingSpeed = attributes.child("combat_speeds").attribute("flanking_speed").as_int(0);
-		attackSpeed = attributes.child("combat_speeds").attribute("attack_speed").as_int(0);
-
 	}
 	return ret;
 }
@@ -59,6 +50,14 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 
 bool DarkZelda::Update(float dt)
 {
+	
+
+	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
+
+	GoTo(playerTile, speed, dt);
+
+	LookToPlayer();
+
 	switch (phase)
 	{	
 	case 1:
