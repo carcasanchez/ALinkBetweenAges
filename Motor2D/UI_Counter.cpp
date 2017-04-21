@@ -77,6 +77,27 @@ void UI_Counter::Reset()
 	cent = 0;
 }
 
+void UI_Counter::LookNumber(int count_num)
+{
+	if (count_num < 10)
+	{
+		unit = count_num;
+		return;
+	}
+
+	if (count_num < 100)
+	{
+		dec = count_num / 10;
+		unit = count_num % 10;
+		return;
+	}
+
+	cent = count_num / 100;
+	dec = (count_num % 100) / 10;
+	unit = unit = count_num % 10;
+
+}
+
 void UI_Counter::BlitUnit()
 {
 	if (Parent)

@@ -44,6 +44,8 @@ bool Hud::Update(float dt)
 		PauseOut(dt);
 
 	UpdateHearts();
+
+	rupees_counter->LookNumber(App->game->em->player->rupees);
 	
 	return false;
 }

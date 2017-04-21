@@ -16,6 +16,8 @@ public:
 	void SetImage(UI_Image*, int, int);
 	void Reset();
 
+	void LookNumber(int);
+
 private:
 
 	int cent = 0;

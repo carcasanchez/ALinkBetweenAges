@@ -139,13 +139,12 @@ bool j1GameLayer::CleanUp()
 
 void j1GameLayer::PickObject(Object* object)
 {
-	switch (object->type)
+	switch (object->objectType)
 	{
 	case GREEN_RUPEE:
 	case BLUE_RUPEE:
 	case RED_RUPEE:
 		em->player->rupees += ((Rupee*)object)->rupeeValue;
-		hud->rupees_counter->SumNumber(((Rupee*)object)->rupeeValue);
 		break;
 
 	case HEART:
