@@ -1,0 +1,82 @@
+<!-- Zelda Animations -->
+<animations>
+	
+		<name value = "0" /> 
+
+		<IDLE> <!-- Idle -->
+			<name value = "0"  />
+
+			<UP> 
+				<values name = "0" x ="93" y = "1" w = "20" h = "36" frameNumber = "2" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="1" y = "1" w = "20" h = "36" frameNumber = "2" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="43" y = "1" w = "24" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="43" y = "1" w = "24" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.2" />
+
+		</IDLE>
+
+		<WALKING> 
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="93" y = "38" w = "20" h = "36" frameNumber = "4" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="1" y = "38" w = "20" h = "36" frameNumber = "4" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="1" y = "75" w = "24" h = "36" frameNumber = "4" margin = "1" pivot_x = "12" pivot_y = "34" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="1" y = "75" w = "24" h = "36" frameNumber = "4" margin = "1" pivot_x = "12" pivot_y = "34" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.5" />
+
+		</WALKING>
+
+		<ATTACKING> 
+			<name value = "2"  />
+
+			<UP> 
+				<values name = "0" x ="0" y = "160" w = "40" h = "40" frameNumber = "9" margin = "" pivot_x = "24" pivot_y = "33" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="0" y = "120" w = "40" h = "40" frameNumber = "6" margin = "" pivot_x = "20" pivot_y = "25" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="0" y = "200" w = "40" h = "40" frameNumber = "9" margin = "" pivot_x = "20" pivot_y = "25" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="0" y = "200" w = "40" h = "40" frameNumber = "9" margin = "" pivot_x = "20" pivot_y = "25" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "false" />
+
+			<speed value = "1.2" />
+
+		</ATTACKING>		
+		
+		
+</animations>
