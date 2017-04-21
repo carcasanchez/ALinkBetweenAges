@@ -88,9 +88,6 @@
     <ClCompile Include="j1Gui.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>Desenvolupament  ========\Scenes\Test Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClCompile>
@@ -255,9 +252,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Desenvolupament  ========</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>Desenvolupament  ========\Scenes\Test Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
@@ -349,9 +343,6 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Game Layer\Entities">
       <UniqueIdentifier>{c7cde884-cbfc-45ea-b310-1703a2d3f239}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Desenvolupament  ========\Scenes\Test Scene">
-      <UniqueIdentifier>{3c43655f-968c-42cf-ad0f-263ec91b3201}</UniqueIdentifier>
     </Filter>
     <Filter Include="Desenvolupament  ========\Game Layer\Entities\Enemies">
       <UniqueIdentifier>{71db718c-24e0-4519-a5cf-5a4ef27745e2}</UniqueIdentifier>
