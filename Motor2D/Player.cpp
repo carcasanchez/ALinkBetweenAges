@@ -663,19 +663,25 @@ bool Player::Talking(float dt)
 	{
 		if (toTalk != nullptr)
 		{
-			App->dialog->dialogueStep++;
-			if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
+			if (App->dialog->text_on_screen->dialog_state == MID_TEXT)
+				App->dialog->text_on_screen->ForcedFinish();
+
+			else
 			{
-			playerState = ACTIVE;
-			App->dialog->text_on_screen->Set_Active_state(false);
-			if (toTalk->dialogState == 0)
-			{
-				toTalk->dialogState++;
-			}
-			App->dialog->dialogueStep = 0;
-			int test = toTalk->dialogState;
-			firstText = true;
-			toTalk = nullptr;
+				App->dialog->dialogueStep++;
+				if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
+				{
+					playerState = ACTIVE;
+					App->dialog->text_on_screen->Set_Active_state(false);
+					if (toTalk->dialogState == 0)
+					{
+						toTalk->dialogState++;
+					}
+					App->dialog->dialogueStep = 0;
+					int test = toTalk->dialogState;
+					firstText = true;
+					toTalk = nullptr;
+				}
 			}
 		}
 	}
@@ -910,19 +916,25 @@ void Player::NextDialog()
 {
 	if (toTalk != nullptr)
 	{
-		App->dialog->dialogueStep++;
-		if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
+		if (App->dialog->text_on_screen->dialog_state == MID_TEXT)
+			App->dialog->text_on_screen->ForcedFinish();
+		
+		else
 		{
-			playerState = ACTIVE;
-			App->dialog->text_on_screen->Set_Active_state(false);
-			if (toTalk->dialogState == 0)
+			App->dialog->dialogueStep++;
+			if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
 			{
-				toTalk->dialogState++;
+				playerState = ACTIVE;
+				App->dialog->text_on_screen->Set_Active_state(false);
+				if (toTalk->dialogState == 0)
+				{
+					toTalk->dialogState++;
+				}
+				App->dialog->dialogueStep = 0;
+				int test = toTalk->dialogState;
+				firstText = true;
+				toTalk = nullptr;
 			}
-			App->dialog->dialogueStep = 0;
-			int test = toTalk->dialogState;
-			firstText = true;
-			toTalk = nullptr;
 		}
 	}
 }

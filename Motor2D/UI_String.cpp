@@ -95,14 +95,20 @@ void UI_String::SetBlitTimeMS(int time)
 	blit_time = time;
 }
 
+void UI_String::ForcedFinish()
+{
+	blit_text = text;
+	if (text_texture)
+		App->tex->UnLoad(text_texture);
 
-
+	text_texture = App->font->Print(blit_text.c_str());
+}
 
 bool UI_String::Update()
 {
 	Handle_input();
 
-	if (active)
+	if (dialog_state == MID_TEXT && active)
 		BlitDialog();
 
 	Return_state();
@@ -119,6 +125,7 @@ bool UI_String::Set_String(char* new_text)
 		App->tex->UnLoad(text_texture);
 
 	char_blit_time.Start();
+	dialog_state = MID_TEXT;
 
 	return (text.c_str() != nullptr) ? true : false;
 }
@@ -131,15 +138,21 @@ void UI_String::Load_text_texture()
 
 void UI_String::BlitDialog()
 {
-	if (blit_text.size() < text.size() && char_blit_time.Read() >= (blit_time /text.size()))
+	if (blit_text.size() < text.size())
 	{
-		blit_text += text.at(blit_text.size());
-		//looks if the text is already loaded and unloads
-		if (text_texture)
-			App->tex->UnLoad(text_texture);
+		if(char_blit_time.Read() >= (blit_time / text.size()))
+		{ 
+			blit_text += text.at(blit_text.size());
+			//looks if the text is already loaded and unloads
+			if (text_texture)
+				App->tex->UnLoad(text_texture);
 
-		text_texture = App->font->Print(blit_text.c_str());
-		char_blit_time.Start();
+			text_texture = App->font->Print(blit_text.c_str());
+			char_blit_time.Start();
+		}	
 	}
+	else dialog_state = FINISHED_TEXT;
+	
+
 }
 

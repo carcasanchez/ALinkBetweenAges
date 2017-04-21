@@ -4,18 +4,26 @@
 #include "UI_element.h"
 #include "j1Timer.h"
 
+enum TEXTSTATE
+{
+	FINISHED_TEXT,
+	MID_TEXT,
+	
+};
+
 struct _TTF_Font;
 struct SDL_Texture;
 
 class UI_String : public UI_element
 {
 public:
-	string text;
-	int text_size;
-	_TTF_Font* text_font = nullptr;
-	SDL_Texture* text_texture = nullptr;
-
-	int blit_time = 0;
+	string			text;
+	int				text_size;
+	_TTF_Font*		text_font = nullptr;
+	SDL_Texture*	text_texture = nullptr;
+	
+	TEXTSTATE		dialog_state = FINISHED_TEXT;
+	int				blit_time = 0;
 
 public:
 
@@ -34,6 +42,7 @@ public:
 	bool Draw_console(int height);					//Blits the string in the console [takes into account the height where it is the string]
 	
 	void SetBlitTimeMS(int);
+	void ForcedFinish();
 
 private:
 
