@@ -13,6 +13,8 @@ public:
 	UI_DialogBox(UI_TYPE, j1Module*);
 	~UI_DialogBox();
 
+	bool Update_Draw();
+
 	void SetImage(const UI_Image*);
 	void SetText(const UI_String*);
 	void SetViewport(SDL_Rect);
