@@ -10,6 +10,7 @@ class Entity;
 class j1EntityManager;
 class Hud;
 class Collider;
+class Object;
 
 
 class j1GameLayer : public j1Module
@@ -24,6 +25,8 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
+
+	void PickObject(Object* object);
 
 	bool Save(pugi::xml_node&) const;
 	bool Load(pugi::xml_node&);

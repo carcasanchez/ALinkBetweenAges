@@ -137,6 +137,26 @@ bool j1GameLayer::CleanUp()
 	return true;
 }
 
+void j1GameLayer::PickObject(Object* object)
+{
+	switch (object->type)
+	{
+	case GREEN_RUPEE:
+	case BLUE_RUPEE:
+	case RED_RUPEE:
+		em->player->rupees += ((Rupee*)object)->rupeeValue;
+		hud->rupees_counter->SumNumber(((Rupee*)object)->rupeeValue);
+		break;
+
+	case HEART:
+		if (em->player->life < em->player->maxLife)
+			em->player->life++;
+		break;
+	}
+
+	object->life = -1;
+}
+
 
 //Save game
 bool j1GameLayer::Save(pugi::xml_node &data) const
@@ -305,29 +325,13 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
-	if (c2->type == COLLIDER_BOOK)
+	
+	if(c2->type == COLLIDER_RUPEE || c2->type == COLLIDER_HEART)
 	{
-		em->player->changeAge = 2;
-		c2->to_delete = true;
-		c2->parent->life = -1;
+		PickObject((Object*)c2->parent);
 		return true;
 	}
 
-	if(c2->type == COLLIDER_RUPEE)
-	{
-		em->player->rupees += ((Rupee*)c2->parent)->rupeeValue;
-		hud->rupees_counter->SumNumber(((Rupee*)c2->parent)->rupeeValue);
-		c2->parent->life = -1;
-		return true;
-	}
-
-	if (c2->type == COLLIDER_HEART)
-	{
-		if (em->player->life < em->player->maxLife)
-			em->player->life++;
-		c2->parent->life = -1;
-		return true;
-	}
 
 	if (c1->type == COLLIDER_BUSH && c2->type == COLLIDER_LINK_SWORD)
 	{
@@ -338,6 +342,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	if (c1->type == COLLIDER_CHEST && c2->type == COLLIDER_LINK_SWORD && c1->parent->actionState == CLOSE)
 	{
 		c1->parent->actionState = OPEN;
+		iPoint objPos = App->map->WorldToMap(c1->parent->currentPos.x, c1->parent->currentPos.y);
+		Object* obj = em->CreateObject(1, objPos.x, objPos.y, ((Chest*)c1->parent)->objectInside);
+		PickObject(obj);
 		return true;
 	}
 		
