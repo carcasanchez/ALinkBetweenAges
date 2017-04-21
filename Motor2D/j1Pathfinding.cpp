@@ -86,6 +86,19 @@ bool j1PathFinding::IsEnemyWalkable(const iPoint& pos) const
 
 }
 
+bool j1PathFinding::IsPlayerJumpable(const iPoint & pos) const
+{
+	for (list<MapLayer*>::iterator item = App->map->data->layers.begin(); item != App->map->data->layers.cend(); item++)
+	{
+		if ((*item)->properties.Get("Jump"))
+		{
+			if ((*item)->Get(pos.x, pos.y) > 0)
+				return true;
+			else return false;
+		}
+	}
+}
+
 // Utility: return the walkability value of a tile
 uchar j1PathFinding::GetTileForPlayer(const iPoint& pos) const
 {

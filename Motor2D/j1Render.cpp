@@ -515,14 +515,12 @@ void j1Render::CameraFollow(iPoint pos)
 		camera.x += SDL_ceil((camera.w)*0.5);
 		camera.y += SDL_ceil((camera.h)*0.5);
 
-		LOG("camera: x %i, y %i, w %i, h %i", camera.x, camera.y, camera.w, camera.h);
 	
 		renderZone.x = pos.x;
 		renderZone.y = pos.y;
 		renderZone.x -= renderZone.w*0.5;
 		renderZone.y -= renderZone.h*0.5;
 
-		LOG("renderZone: x %i, y %i, w %i, h %i", renderZone.x, renderZone.y, renderZone.w, renderZone.h);
 
 
 		//renderZone.x -= App->win->isFullScreen() ? renderZone.w*0.25 : renderZone.w*0.5;

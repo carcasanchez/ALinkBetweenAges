@@ -211,3 +211,37 @@ COLLISION_ZONE Collider::CheckEnemyMapCollision()
 
 	return ret;
 }
+
+COLLISION_ZONE Collider::CheckPlayerMapJump()
+{
+	COLLISION_ZONE ret = CZ_NONE;
+
+	iPoint up_left = App->map->WorldToMap(rect.x, rect.y);
+	iPoint up_right = App->map->WorldToMap(rect.x + rect.w, rect.y);
+	iPoint down_left = App->map->WorldToMap(rect.x, rect.y + rect.h);
+	iPoint down_right = App->map->WorldToMap(rect.x + rect.w, rect.y + rect.h);
+
+	if (App->pathfinding->IsPlayerJumpable(up_left))
+	{
+		ret = CZ_UP_LEFT;
+		if (App->pathfinding->IsPlayerJumpable(up_right))
+			ret = CZ_UP;
+		else if (App->pathfinding->IsPlayerJumpable(down_left))
+			ret = CZ_LEFT;
+	}
+	else if (App->pathfinding->IsPlayerJumpable(down_right))
+	{
+		ret = CZ_DOWN_RIGHT;
+		if (App->pathfinding->IsPlayerJumpable(up_right))
+			ret = CZ_RIGHT;
+		else if (App->pathfinding->IsPlayerJumpable(down_left))
+			ret = CZ_DOWN;
+	}
+
+	else if (App->pathfinding->IsPlayerJumpable(up_right))
+		ret = CZ_UP_RIGHT;
+	else if (App->pathfinding->IsPlayerJumpable(down_left))
+		ret = CZ_DOWN_LEFT;
+	
+	return ret;
+}

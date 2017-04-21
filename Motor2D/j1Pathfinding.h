@@ -43,6 +43,8 @@ public:
 	bool IsPlayerWalkable(const iPoint& pos) const;
 	bool IsEnemyWalkable(const iPoint& pos) const;
 
+	bool IsPlayerJumpable(const iPoint& pos) const;
+
 	// Utility: return the walkability value of a tile
 	uchar GetTileForPlayer(const iPoint& pos) const;
 	uchar GetTileForEnemy(const iPoint& pos) const;

@@ -83,7 +83,7 @@ void j1Map::Draw()
 		if (layer->properties.Get("Nodraw") != 0 && layer->properties.Get("Enemy") != 0 && debug_enemy_collisions == false)
 			continue;
 
-		if (layer->properties.Get("Paintover") || layer->properties.Get("Bush"))
+		if (layer->properties.Get("Paintover") || layer->properties.Get("Bush") || layer->properties.Get("Jump"))
 			continue;
 					
 		for (int x = cameraSection.x; x < cameraSection.x + cameraSection.w; x++)

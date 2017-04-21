@@ -55,6 +55,7 @@ public:
 	bool CheckCollision(const SDL_Rect& r) const;
 	COLLISION_ZONE CheckPlayerMapCollision();
 	COLLISION_ZONE CheckEnemyMapCollision();
+	COLLISION_ZONE CheckPlayerMapJump();
 };
 
 

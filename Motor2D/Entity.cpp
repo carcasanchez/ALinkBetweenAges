@@ -186,6 +186,38 @@ bool Entity::Move(int x, int y)
 		currentPos.x += x;
 		UpdateCollider();
 
+		//Jump right
+		if (col->CheckPlayerMapJump() != CZ_NONE && currentDir == D_RIGHT)
+		{
+			iPoint tmpPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+			for (int i = 1; i < 100; i++)
+			{
+				tmpPos.x += i;
+				if (App->pathfinding->IsPlayerWalkable(tmpPos))
+				{
+					currentPos = App->map->MapToWorld(tmpPos.x+ 2, tmpPos.y );
+					UpdateCollider();
+					break;
+				}
+			}
+		}
+		else //Jump left
+			if (col->CheckPlayerMapJump() != CZ_NONE && currentDir == D_LEFT)
+			{
+				iPoint tmpPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+				for (int i = 1; i < 100; i++)
+				{
+					tmpPos.x -= i;
+					if (App->pathfinding->IsPlayerWalkable(tmpPos))
+					{
+						currentPos = App->map->MapToWorld(tmpPos.x - 2, tmpPos.y);
+						UpdateCollider();
+						break;
+					}
+				}
+			}
+			
+
 		if (col->CheckPlayerMapCollision() != CZ_NONE)
 		{
 			currentPos.x -= x;
@@ -194,6 +226,24 @@ bool Entity::Move(int x, int y)
 
 		currentPos.y += y;
 		UpdateCollider();
+
+
+		//Jump down
+		if (col->CheckPlayerMapJump() != CZ_NONE && currentDir == D_DOWN)
+		{
+			iPoint tmpPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+			for (int i = 1; i < 100; i++)
+			{
+				tmpPos.y += i;
+				if (App->pathfinding->IsPlayerWalkable(tmpPos))
+				{
+					currentPos = App->map->MapToWorld(tmpPos.x, tmpPos.y +2);
+					UpdateCollider();
+					break;
+				}
+			}
+		}
+
 		if (col->CheckPlayerMapCollision() != CZ_NONE)
 		{
 			currentPos.y -= y;
