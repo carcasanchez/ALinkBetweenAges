@@ -3,8 +3,11 @@
 
 #include "Entity.h"
 #include "NPC.h"
+#include "Bezier.h"
 #include "InputManager.h"
 #include "j1PerfTimer.h"
+
+
 
 enum PLAYER_STATE
 {
@@ -65,6 +68,8 @@ public:
 	int changeAge = -1;
 	Npc* toTalk = nullptr;
 
+	iPoint toJump = { 0, 0 };
+
 	bool sceneOverride = false;
 
 private:
@@ -79,6 +84,7 @@ private:
 	bool Damaged(float dt);
 	bool ShootingBow(float dt);
 	bool Spinning(float dt);
+	bool Jumping(float dt);
 
 	bool Talking(float dt);
 
@@ -104,6 +110,14 @@ private:
 	//Dialogue
 	void NextDialog();
 	bool firstText = true; //Enter once in to the function
+
+
+	//For jumping
+	iPoint jumpOrigin;
+	CBeizier jumpCurve;
+	j1PerfTimer jumpTimer;
+	
+	float forceUp = 0, forceDown = 0;
 };
 
 #endif // !_PLAYER_H_

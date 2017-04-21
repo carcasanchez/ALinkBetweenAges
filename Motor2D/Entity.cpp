@@ -187,7 +187,7 @@ bool Entity::Move(int x, int y)
 		UpdateCollider();
 
 		//Jump right
-		if (col->CheckPlayerMapJump() != CZ_NONE && currentDir == D_RIGHT)
+		if (col->CheckPlayerMapJump() == CZ_RIGHT)
 		{
 			iPoint tmpPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 			for (int i = 1; i < 100; i++)
@@ -195,14 +195,15 @@ bool Entity::Move(int x, int y)
 				tmpPos.x += i;
 				if (App->pathfinding->IsPlayerWalkable(tmpPos))
 				{
-					currentPos = App->map->MapToWorld(tmpPos.x+ 2, tmpPos.y );
-					UpdateCollider();
+					tmpPos.y = 0;
+					tmpPos.x++;
+					App->game->em->player->toJump = tmpPos;
 					break;
 				}
 			}
 		}
 		else //Jump left
-			if (col->CheckPlayerMapJump() != CZ_NONE && currentDir == D_LEFT)
+			if (col->CheckPlayerMapJump() == CZ_LEFT)
 			{
 				iPoint tmpPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 				for (int i = 1; i < 100; i++)
@@ -210,26 +211,28 @@ bool Entity::Move(int x, int y)
 					tmpPos.x -= i;
 					if (App->pathfinding->IsPlayerWalkable(tmpPos))
 					{
-						currentPos = App->map->MapToWorld(tmpPos.x - 2, tmpPos.y);
-						UpdateCollider();
+						tmpPos.y = 0;
+						tmpPos.x--;
+						App->game->em->player->toJump = tmpPos;
 						break;
 					}
 				}
-			}
-			
+			}			
 
+
+		//Check horizontal collisions
 		if (col->CheckPlayerMapCollision() != CZ_NONE)
 		{
 			currentPos.x -= x;
 			ret = false;
 		}
 
+
 		currentPos.y += y;
 		UpdateCollider();
 
-
 		//Jump down
-		if (col->CheckPlayerMapJump() != CZ_NONE && currentDir == D_DOWN)
+		if (col->CheckPlayerMapJump() == CZ_DOWN)
 		{
 			iPoint tmpPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 			for (int i = 1; i < 100; i++)
@@ -237,13 +240,15 @@ bool Entity::Move(int x, int y)
 				tmpPos.y += i;
 				if (App->pathfinding->IsPlayerWalkable(tmpPos))
 				{
-					currentPos = App->map->MapToWorld(tmpPos.x, tmpPos.y +2);
-					UpdateCollider();
+					tmpPos.x = 0;
+					tmpPos.y++;
+					App->game->em->player->toJump = tmpPos;
 					break;
 				}
 			}
 		}
 
+		//Check vertical collisions
 		if (col->CheckPlayerMapCollision() != CZ_NONE)
 		{
 			currentPos.y -= y;
@@ -277,56 +282,6 @@ void Entity::UpdateCollider()
 //Use pathfinding to go to a given tile
 bool Entity::GoTo(iPoint dest, int speed, float dt)
 {
-	/*//Create path if player changes tile
-	if (dest != currentDest)
-	{
-		currentDest = dest;
-		iPoint origin = App->map->WorldToMap(currentPos.x, currentPos.y);
-		if (App->pathfinding->CreatePath(origin, currentDest))
-		{
-			path = App->pathfinding->ReturnPath();
-			path.pop_back();
-			path.pop_back();
-		}
-	}
-
-
-	if (path.size() != 0)
-	{
-		iPoint immediateDest = App->map->GetTileCenter((*path.end()));
-
-		if (immediateDest.x > currentPos.x)
-		{
-			currentPos.x += SDL_ceil(speed * dt);
-			currentDir = D_RIGHT;
-		}
-		else if (immediateDest.x < currentPos.x)
-		{
-			currentPos.x -= SDL_ceil(speed * dt);
-			currentDir = D_LEFT;
-		}
-
-		if (immediateDest.y > currentPos.y)
-		{
-			currentPos.y += SDL_ceil(speed * dt);
-			currentDir = D_DOWN;
-		}
-
-		else if (immediateDest.y < currentPos.y)
-		{
-			currentPos.y -= SDL_ceil(speed * dt);
-			currentDir = D_UP;
-		}
-
-
-		if (abs(immediateDest.x - currentPos.x) < 2 && abs(immediateDest.y - currentPos.y) < 2)
-		{
-			path.pop_back();
-		}
-
-		return true;
-	}
-	*/
 
 	dest = App->map->MapToWorld(dest.x, dest.y);
 

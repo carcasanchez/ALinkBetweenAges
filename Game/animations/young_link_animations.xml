@@ -239,6 +239,30 @@
 
   </LIFT>
   
+   <JUMP>
+    <!-- jump -->
+    <name value = "9"  />
 
+    <UP>
+      <values name = "0" x ="52" y = "58" w = "16" h = "24" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "24" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="52" y = "18" w = "16" h = "23" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "21" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="52" y = "100" w = "16" h = "23" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "21" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="52" y = "100" w = "16" h = "23" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "21" flip= "1"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </JUMP>
 
 </animations>

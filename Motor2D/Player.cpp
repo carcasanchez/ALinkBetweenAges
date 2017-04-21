@@ -17,6 +17,7 @@
 #include "j1EntityManager.h"
 #include "Object.h"
 
+
 Player::Player() : Entity(LINK)
 {
 	App->inputM->AddListener(this);
@@ -38,7 +39,6 @@ bool Player::Spawn(std::string file, iPoint pos)
 
 	if (result == NULL)
 	{
-		LOG("Could not load attributes xml file. Pugi error: %s", result.description());
 		ret = false;
 	}
 	else
@@ -92,6 +92,25 @@ bool Player::Spawn(std::string file, iPoint pos)
 	}
 
 	return ret;
+}
+void Player::OnDeath()
+{
+
+	App->LoadGame("saves.xml");
+
+	App->game->hud->ResetHearts();
+	App->game->hud->RestoreHearts();
+	damaged = invulnerable = false;
+	linearMovement = { 0, 0 };
+	currentDir = D_DOWN;
+	sprite->tint = { 255, 255, 255, 255 };
+	actionState = IDLE;
+
+	UpdateCollider();
+
+	if (swordCollider != nullptr)
+		swordCollider->to_delete = true;
+
 }
 
 bool Player::Update(float dt)
@@ -152,6 +171,10 @@ bool Player::Update(float dt)
 		case (SPINNING):
 			Spinning(dt);
 			break;
+
+		case (JUMPING):
+			Jumping(dt);
+			break;
 		}
 
 		break;
@@ -172,112 +195,10 @@ bool Player::Update(float dt)
 	return ret;
 }
 
-void Player::OnDeath()
-{
-	
-	App->LoadGame("saves.xml");
 
-	App->game->hud->ResetHearts();
-	App->game->hud->RestoreHearts();
-	damaged = invulnerable = false;
-	linearMovement = {0, 0};
-	currentDir = D_DOWN;
-	sprite->tint = { 255, 255, 255, 255 };
-	actionState = IDLE;
 
-	UpdateCollider();
 
-	if (swordCollider != nullptr)
-		swordCollider->to_delete = true;
-
-}
-
-void Player::ChangeAge(LINK_AGE new_age)
-{
-	RELEASE(sprite);
-	anim.clear();
-	col->to_delete = true;
-
-	// load xml attributes
-	pugi::xml_document	attributesFile;
-	char* buff;
-	int size = App->fs->Load("attributes/player_attributes.xml", &buff);
-	pugi::xml_parse_result result = attributesFile.load_buffer(buff, size);
-	RELEASE_ARRAY(buff);
-
-	if (result == NULL)
-	{
-		LOG("Could not load attributes xml file. Pugi error: %s", result.description());
-	}
-	else
-	{
-		age = new_age;
-		pugi::xml_node attributes;
-
-		switch (age)
-		{
-		default:
-		case YOUNG:
-			attributes = attributesFile.child("young").child("attributes");
-			break;
-		case MEDIUM:
-			attributes = attributesFile.child("middle").child("attributes");
-			break;
-		case ADULT:
-			attributes = attributesFile.child("adult").child("attributes");
-			break;
-		}
-
-		LoadAttributes(attributes);
-
-		// base stats
-		pugi::xml_node node = attributes.child("base");
-		maxLife = life;
-		maxStamina = stamina = node.attribute("stamina").as_int(100);
-		staminaRec = node.attribute("staminaRec").as_float();
-
-		// attack
-		node = attributes.child("attack");
-		attackSpeed = node.attribute("speed").as_int(40);
-		attackTax = node.attribute("staminaTax").as_int(20);
-
-		node = attributes.child("damaged");
-		//damaged
-		hitTime = node.attribute("hitTime").as_int(100);
-		damagedTime = node.attribute("damagedTime").as_int(2000);
-		damagedSpeed = node.attribute("damagedSpeed").as_int(180);
-		//dodge
-		node = attributes.child("dodge");
-		dodgeSpeed = node.attribute("speed").as_int(500);
-		dodgeTax = node.attribute("staminaTax").as_int(25);
-		dodgeLimit = node.attribute("limit").as_int(50);
-	}
-
-}
-
-void Player::Change_direction()
-{
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		currentDir = D_UP;
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
-		currentDir = D_DOWN;
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
-		currentDir = D_RIGHT;
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
-		currentDir = D_LEFT;
-}
-
-void Player::ManageStamina(float dt)
-{
-	if (stamina < 0)
-		stamina = 0;
-	if (stamina < maxStamina)
-	{
-		stamina += staminaRec*dt;
-	}
-	else stamina = maxStamina;
-}
-
+//State machine
 bool Player::Idle()
 {
 	if (damaged == true)
@@ -347,11 +268,9 @@ bool Player::Walking(float dt)
 	if (damaged == true)
 	{
 		actionState = DAMAGED;
-	//	LOG("LINK DAMAGED");
 		return true;
 	}
 	
-
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 			currentDir = D_DOWN;
@@ -415,7 +334,7 @@ bool Player::Walking(float dt)
 		moving = true;
 	}
 
-
+	
 
 	if (moving == false)
 	{
@@ -442,6 +361,7 @@ bool Player::Walking(float dt)
 	}
 	 
 
+	//Attack
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
@@ -451,6 +371,15 @@ bool Player::Walking(float dt)
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
+	}
+
+	//Jump
+	else if (!toJump.IsZero())
+	{
+		actionState = JUMPING;
+		jumpOrigin = App->map->WorldToMap(currentPos.x, currentPos.y);
+		forceUp = 4;
+		forceDown = 0;
 	}
 
 	Change_direction();
@@ -464,7 +393,6 @@ bool Player::Attacking(float dt)
 	{
 		resetSwordCollider();
 		actionState = DAMAGED;
-		LOG("LINK DAMAGED");
 		return true;
 	}
 
@@ -472,7 +400,6 @@ bool Player::Attacking(float dt)
 	{
 		resetSwordCollider();
 		currentAnim->Reset();
-		LOG("LINK is in IDLE");
 		actionState = IDLE;
 		playerState = EVENT;
 		toTalk->LookToPlayer();
@@ -544,7 +471,6 @@ bool Player::Dodging(float dt)
 		actionState = ATTACKING;
 		createSwordCollider();
 		invulnerable = false;
-		LOG("LINK is ATTACKING");
 		return true;
 	}
 
@@ -646,6 +572,52 @@ bool Player::Spinning(float dt)
 	return true;
 }
 
+bool Player::Jumping(float dt)
+{
+	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+
+	if ((currentDir != D_DOWN && mapPos.x == toJump.x) || (currentDir == D_DOWN && mapPos.y == toJump.y))
+	{
+		forceUp = forceDown = 0;
+		actionState = IDLE;
+		toJump.SetToZero();
+		return true;
+	}
+	
+	if (toJump.y == 0)
+	{
+		int totalTime = (toJump.x - jumpOrigin.x) / (speed * dt * 4);
+
+		if (toJump.x > mapPos.x)
+		{
+			currentDir = D_RIGHT;
+			currentPos.x += (speed * dt *4);			
+		}
+		else
+		{
+			currentDir = D_LEFT;
+			currentPos.x -= (speed * dt* 4);
+		}
+
+		currentPos.y -= SDL_ceil(speed * dt * forceUp);
+		currentPos.y -= SDL_ceil(speed * dt * forceUp);
+		currentPos.y += SDL_ceil(speed * dt * forceDown);
+		if (forceDown < 10)
+			forceDown += 30 * dt;
+		
+	}
+	else if (toJump.x == 0)
+	{
+		currentDir = D_DOWN;
+		currentPos.y -= SDL_ceil(speed * dt * forceUp);
+		currentPos.y += SDL_ceil(speed * dt * forceDown);
+		if(forceDown < 10)
+			forceDown += 30 * dt;
+	}
+
+	return true;
+}
+
 bool Player::Talking(float dt)
 {
 	
@@ -691,6 +663,9 @@ bool Player::Talking(float dt)
 	return false;
 }
 
+
+
+
 void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 {
 
@@ -720,7 +695,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						attack_vicente = true;
-						LOG("LINK is ATTACKING");
 					}
 					break;
 				}
@@ -749,7 +723,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						attack_vicente = true;
-						LOG("LINK is ATTACKING");
 					}
 					break;
 				}
@@ -778,7 +751,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						attack_vicente = true;
-						LOG("LINK is ATTACKING");
 					}
 					break;
 				}
@@ -808,7 +780,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						stamina -= attackTax;
 						App->game->hud->stamina_bar->WasteStamina(attackTax);
 						attack_vicente = true;
-						LOG("LINK is ATTACKING");
 					}
 					break;
 				}
@@ -937,4 +908,91 @@ void Player::NextDialog()
 			}
 		}
 	}
+}
+
+
+void Player::ChangeAge(LINK_AGE new_age)
+{
+	RELEASE(sprite);
+	anim.clear();
+	col->to_delete = true;
+
+	// load xml attributes
+	pugi::xml_document	attributesFile;
+	char* buff;
+	int size = App->fs->Load("attributes/player_attributes.xml", &buff);
+	pugi::xml_parse_result result = attributesFile.load_buffer(buff, size);
+	RELEASE_ARRAY(buff);
+
+	if (result == NULL)
+	{
+		LOG("Could not load attributes xml file. Pugi error: %s", result.description());
+	}
+	else
+	{
+		age = new_age;
+		pugi::xml_node attributes;
+
+		switch (age)
+		{
+		default:
+		case YOUNG:
+			attributes = attributesFile.child("young").child("attributes");
+			break;
+		case MEDIUM:
+			attributes = attributesFile.child("middle").child("attributes");
+			break;
+		case ADULT:
+			attributes = attributesFile.child("adult").child("attributes");
+			break;
+		}
+
+		LoadAttributes(attributes);
+
+		// base stats
+		pugi::xml_node node = attributes.child("base");
+		maxLife = life;
+		maxStamina = stamina = node.attribute("stamina").as_int(100);
+		staminaRec = node.attribute("staminaRec").as_float();
+
+		// attack
+		node = attributes.child("attack");
+		attackSpeed = node.attribute("speed").as_int(40);
+		attackTax = node.attribute("staminaTax").as_int(20);
+
+		node = attributes.child("damaged");
+		//damaged
+		hitTime = node.attribute("hitTime").as_int(100);
+		damagedTime = node.attribute("damagedTime").as_int(2000);
+		damagedSpeed = node.attribute("damagedSpeed").as_int(180);
+		//dodge
+		node = attributes.child("dodge");
+		dodgeSpeed = node.attribute("speed").as_int(500);
+		dodgeTax = node.attribute("staminaTax").as_int(25);
+		dodgeLimit = node.attribute("limit").as_int(50);
+	}
+
+}
+
+void Player::Change_direction()
+{
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		currentDir = D_UP;
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		currentDir = D_DOWN;
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		currentDir = D_RIGHT;
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+		currentDir = D_LEFT;
+}
+
+void Player::ManageStamina(float dt)
+{
+	if (stamina < 0)
+		stamina = 0;
+	if (stamina < maxStamina)
+	{
+		stamina += staminaRec*dt;
+	}
+	else stamina = maxStamina;
 }
