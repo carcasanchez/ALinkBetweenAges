@@ -174,7 +174,6 @@ bool Player::Update(float dt)
 
 void Player::OnDeath()
 {
-	life = 3;
 	
 	App->LoadGame("saves.xml");
 

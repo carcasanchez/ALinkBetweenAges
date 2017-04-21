@@ -206,7 +206,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				c2->parent->pushedBackTimer.Start();
 			}
 		}
-		else if (em->player->invulnerable == false && em->player->dodging == false)
+		else if (em->player->invulnerable == false && em->player->dodging == false && em->player->life > 0)
 		{
   			if (em->player != nullptr && c2->parent != nullptr)
 			  {

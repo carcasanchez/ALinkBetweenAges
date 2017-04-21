@@ -432,6 +432,9 @@ void Hud::UpdateHearts()
 
 void Hud::HeartUP(int heart)
 {
+	if (heart < 0)
+		return;
+
 	for (; heart < 0; heart++)
 	{
 		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
