@@ -7,6 +7,7 @@
 #include "j1EntityManager.h"
 #include "Enemy.h"
 #include "Exit.h"
+#include "Object.h"
 #include "p2Log.h"
 
 Scene::Scene()
@@ -102,11 +103,18 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			for (pugi::xml_node special = entity.first_child(); special != NULL; special = special.next_sibling())
 			{
 		
-				App->game->em->CreateObject(
+				Object* obj = App->game->em->CreateObject(
 					maxSectors,
 					special.attribute("x").as_int(),
 					special.attribute("y").as_int(), 
 					(OBJECT_TYPE)(special.attribute("object_type").as_int()));
+
+				if (obj->objectType == CHEST)
+				{
+					((Chest*)obj)->objectInside = (OBJECT_TYPE)special.attribute("item_inside").as_int();
+				}
+
+
 			}
 
 			pugi::xml_node exits = section.child("exits");

@@ -112,7 +112,6 @@
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="j1SceneManager.cpp" />
     <ClCompile Include="j1Timer.cpp" />
     <ClCompile Include="j1EntityManager.cpp" />
@@ -158,7 +157,6 @@
     <ClInclude Include="Octorok.h" />
     <ClInclude Include="Quadtree.h" />
     <ClInclude Include="RedSoldier.h" />
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="j1SceneManager.h" />
     <ClInclude Include="j1Timer.h" />
     <ClInclude Include="j1EntityManager.h" />

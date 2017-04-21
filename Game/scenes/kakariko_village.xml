@@ -19,6 +19,7 @@
         </enemies>
 
  	<special>
+ 	  <chest object_type = "9" x = "73" y = "80" item_inside = "4"/>
         </special>
 
       </entities>
