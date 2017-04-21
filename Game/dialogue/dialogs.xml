@@ -3,9 +3,8 @@
   
    <npc id="1">
      <dialogue state="0">
-       <text value=" Hi Link! We had problems with Ganon's soldiers."/>
-	<text value=" They came out of nowhere with pretending to kidnap Zelda,"/>
-	<text value=" but she managed to escape into the forest."/>
+       <text value=" Hi Link! We had problems with Ganon's soldiers. They came out of nowhere with pretending to kidnap Zelda,but she managed to escape into the forest."/>
+	
 	<text value=" The forest is at the south-west, passing the village."/>
 	<text value=" We need your help. Bring Zelda back, please. "/>
 	<text value=" I forgot! You can attack in four directions "/>

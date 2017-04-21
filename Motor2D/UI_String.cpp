@@ -10,18 +10,12 @@ UI_String::UI_String(UI_TYPE type, j1Module* callback) : UI_element(type, callba
 
 UI_String::UI_String(UI_TYPE type, SDL_Rect detection_box, char* new_text, bool act, SCROLL_TYPE drag) : UI_element(type, detection_box, act, drag), text(new_text) {}
 
-UI_String::UI_String(const UI_String* other) : UI_element(other->element_type, other->Interactive_box, other->active, other->draggable), text(other->text) 
-{
-	text_texture = App->font->Print(other->text.c_str());
-}
-
-
 bool UI_String::Update_Draw()
 {
 	if (active)
 	{
-		SDL_Rect tmp = { (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, Interactive_box.w, Interactive_box.h };
-		App->render->DrawQuad(tmp, 0, 0, 0, 110);
+		SDL_Rect tmp = {0, 0, 405,75 };
+		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), (Interactive_box.x - App->render->camera.x - 15) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y - 15) * App->gui->scale_factor, &tmp);
 		App->render->Blit(text_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor);
 		
 	}
@@ -101,7 +95,7 @@ void UI_String::ForcedFinish()
 	if (text_texture)
 		App->tex->UnLoad(text_texture);
 
-	text_texture = App->font->Print(blit_text.c_str());
+	text_texture = App->font->Print(blit_text.c_str(), Interactive_box.w);
 }
 
 bool UI_String::Update()
@@ -132,7 +126,7 @@ bool UI_String::Set_String(char* new_text)
 
 void UI_String::Load_text_texture()
 {
-	text_texture = App->font->Print(text.c_str());
+	text_texture = App->font->Print(text.c_str(), Interactive_box.w);
 }
 
 
@@ -147,7 +141,7 @@ void UI_String::BlitDialog()
 			if (text_texture)
 				App->tex->UnLoad(text_texture);
 
-			text_texture = App->font->Print(blit_text.c_str());
+			text_texture = App->font->Print(blit_text.c_str(), Interactive_box.w);
 			char_blit_time.Start();
 		}	
 	}

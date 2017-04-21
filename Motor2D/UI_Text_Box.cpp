@@ -68,7 +68,7 @@ void UI_Text_Box::Insert_Char(int position, const char * new_char)
 
 	//Unloads the actual text texture and loads the new one
 	App->tex->UnLoad(text.text_texture);
-	text.text_texture = App->font->Print(text.text.c_str());
+	text.text_texture = App->font->Print(text.text.c_str(), 1000);
 }
 
 void UI_Text_Box::Delete_Char(int position)
@@ -79,7 +79,7 @@ void UI_Text_Box::Delete_Char(int position)
 		//Erases the char in the position and unload the actual texture and loads the new one
 		text.text.erase(position, 1);
 		App->tex->UnLoad(text.text_texture);
-		text.text_texture = App->font->Print(text.text.c_str());
+		text.text_texture = App->font->Print(text.text.c_str(),1000);
 	}
 }
 
