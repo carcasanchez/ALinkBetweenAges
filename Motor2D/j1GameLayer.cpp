@@ -298,7 +298,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_NPC)
 	{
-		if (c2->type == COLLIDER_LINK_SWORD)
+		if (c2->type == COLLIDER_LINK_SWORD && em->player->actionState == ATTACKING)
 		{
 			em->player->toTalk = (Npc*)c1->parent;
 		}
