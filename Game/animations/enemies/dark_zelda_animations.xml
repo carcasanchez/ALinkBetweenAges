@@ -53,30 +53,63 @@
 
 		</WALKING>
 
-		<ATTACKING> 
-			<name value = "2"  />
-
-			<UP> 
-				<values name = "0" x ="0" y = "160" w = "40" h = "40" frameNumber = "9" margin = "" pivot_x = "24" pivot_y = "33" flip= "0"/>
-			</UP>
-
-			<DOWN> 
-				<values name = "1" x ="0" y = "120" w = "40" h = "40" frameNumber = "6" margin = "" pivot_x = "20" pivot_y = "25" flip= "0"/>
-			</DOWN>
-
-			<RIGHT> 
-				<values name = "2" x ="0" y = "200" w = "40" h = "40" frameNumber = "9" margin = "" pivot_x = "20" pivot_y = "25" flip= "0"/>
-			</RIGHT>
-
-			<LEFT> 
-				<values name = "3" x ="0" y = "200" w = "40" h = "40" frameNumber = "9" margin = "" pivot_x = "20" pivot_y = "25" flip= "1"/>
-			</LEFT>
-					
-			<loop value = "false" />
-
-			<speed value = "1.2" />
-
-		</ATTACKING>		
 		
+		<BOW>
+			<name value = "3"  />
+			
+			<UNSHEATHE>
+				<values name = "0" x ="1" y = "111" w = "22" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "0"/>
+			</UNSHEATHE>
+
+			<CHARGE> 
+				<values name = "1" x =46" y = "111" w = "22" h = "36" frameNumber = "1" margin = "" pivot_x = "12" pivot_y = "34" flip= "0"/>
+			</CHARGE>
+
+			<SHEATHE> 
+				<values name = "2" x ="68" y = "111" w = "22" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "0"/>
+			</SHEATHE>
+		
+			<WALKING>
+				<values name = "3" x ="90" y = "111" w = "22" h = "36" frameNumber = "4" margin = "1" pivot_x = "12" pivot_y = "34" flip= "0"/>
+			</WALKING>
+
+			<loop value = "true" />
+
+			<speed value = "0.1" />
+
+		</BOW>
+
+		<TELEPORT>
+			<name value = "4"  />
+			
+			<FRONT_APPEAR> 
+				<values name = "0" x ="1" y = "186" w = "20" h = "36" frameNumber = "2" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
+			<FRONT_APPEAR>
+
+			<FRONT_DISAPPEAR> 
+				<values name = "1" x ="1" y = "149" w = "20" h = "36" frameNumber = "8" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
+			</FRONT_DISAPPEAR>
+
+			<RIGHT_APPEAR> 
+				<values name = "2" x ="1" y = "262" w = "24" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "0"/>
+			</RIGHT_APPEAR>
+
+			<RIGHT_DISAPPEAR> 
+				<values name = "3" x ="1" y = "225" w = "24" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "0"/>
+			</RIGHT_DISAPPEAR>
+
+			<LEFT_APPEAR> 
+				<values name = "2" x ="1" y = "262" w = "24" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "1"/>
+			</LEFT_APPEAR>
+
+			<LEFT_DISAPPEAR> 
+				<values name = "3" x ="1" y = "225" w = "24" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "1"/>
+			</LEFT_DISAPPEAR>
+
+			<loop value = "true" />
+
+			<speed value = "0.1" />
+
+		</TELEPORT>
 		
 </animations>
