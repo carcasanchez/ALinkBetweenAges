@@ -112,7 +112,7 @@ void j1Map::Draw()
 
 	}
 
-	iPoint a = App->game->em->player->jumpOrigin;
+	/*iPoint a = App->game->em->player->jumpOrigin;
 	iPoint b = App->game->em->player->toJump;
 	
 	if (!b.IsZero())
@@ -120,7 +120,7 @@ void j1Map::Draw()
 		a = App->map->MapToWorld(a.x, a.y);
 		b = App->map->MapToWorld(b.x, b.y);
 		App->render->DrawLine(a.x, a.y, b.x, b.y, 255, 255, 255, 255);
-	}
+	}*/
 }
 
 void j1Map::DrawOver()

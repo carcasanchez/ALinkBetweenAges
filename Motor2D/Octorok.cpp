@@ -40,15 +40,6 @@ bool Octorok::Spawn(std::string file, iPoint pos)
 		enemyState = PATROLING;
 		actionState = IDLE;
 
-		hostileRange = attributes.child("ranges").attribute("hostile").as_int(0);
-		fightRange = attributes.child("ranges").attribute("fight").as_int(0);
-		attackRatio = attributes.child("ratios").attribute("attack").as_int(0);
-		outFightRange = attributes.child("ranges").attribute("out").as_int(0);
-		chargeTime = attributes.child("ratios").attribute("charge_time").as_int(0);
-
-		chaseSpeed = attributes.child("combat_speeds").attribute("chase_speed").as_int(0);
-		flankingSpeed = attributes.child("combat_speeds").attribute("flanking_speed").as_int(0);
-		attackSpeed = attributes.child("combat_speeds").attribute("attack_speed").as_int(0);
 
 	}
 	return ret;

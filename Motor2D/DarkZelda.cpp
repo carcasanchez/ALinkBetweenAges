@@ -11,6 +11,7 @@
 #include "Object.h"
 #include "j1GameLayer.h"
 #include "Player.h"
+#include <time.h>
 
 bool DarkZelda::Spawn(std::string file, iPoint pos)
 {
@@ -38,32 +39,53 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 
 		LoadAttributes(attributes);
 
-		enemyState = PATROLING;
+		enemyState = LATERAL_WALK;
 		actionState = WALKING;
 
+		speed = 10;
+		walkTimelimit = 2000;
+
+		bowTenseLimit = 2000;
 	}
 	return ret;
 }
 
+void DarkZelda::OnDeath()
+{
+	if(phase == 1)
+	{
+		phase = 2;
+		life = 5;	
+	}
+
+	if (phase == 2)
+	{
+		toDelete = true;
+	}
+
+}
 
 
 
 bool DarkZelda::Update(float dt)
-{
-	
+{	
 
 	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
-
-	GoTo(playerTile, speed, dt);
-
-	LookToPlayer();
 
 	switch (phase)
 	{	
 	case 1:
 		switch (enemyState)
 		{
-
+		case PATROLING:
+			Patroling(dt);
+			break;
+		case LATERAL_WALK:
+			LateralWalk(dt);
+			break;
+		case CHARGE_BOW:
+			ChargeBow(dt);
+			break;
 		}
 		break;
 	case 2:
@@ -80,5 +102,53 @@ bool DarkZelda::Update(float dt)
 		break;
 	}
 	
+	return false;
+}
+
+
+//Zelda State machine
+
+bool DarkZelda::LateralWalk(float dt)
+{
+	currentDir = D_DOWN;
+	actionState = WALKING;
+
+	bool ret;
+	if (lateralDirection)
+	{
+		ret = Move(SDL_ceil(speed*dt), 0);
+		
+	}
+	else ret = Move(-SDL_ceil(speed*dt), 0);
+
+	if (!ret)
+		lateralDirection = !lateralDirection;
+
+	if (walkTimer.ReadMs() > walkTimelimit)
+	{
+		enemyState = CHARGE_BOW;
+		chargeBowTimer.Start();
+	}
+
+	return false;
+}
+
+bool DarkZelda::ChargeBow(float dt)
+{
+	actionState = IDLE;
+
+	if (chargeBowTimer.ReadMs() > bowTenseLimit)
+	{
+		srand(time(NULL));
+		bool change = rand() % 2;
+		if (change)
+		{
+			lateralDirection = !lateralDirection;
+		}
+
+		enemyState = LATERAL_WALK;
+		walkTimer.Start();
+	}
+
 	return false;
 }

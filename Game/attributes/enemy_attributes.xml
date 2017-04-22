@@ -20,7 +20,7 @@
 	</red_soldier>
 
 	<dark_zelda>
-		<base life = "4" speed = "30" damage ="2"/>
+		<base life = "1" speed = "30" damage ="2"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "3"/>
 		<ranges hostile= "185" fight = "55" out="60" />
 		<ratios attack = "500" charge_time = "1000"/>  <!-- In Miliseconds -->

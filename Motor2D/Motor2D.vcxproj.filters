@@ -97,9 +97,6 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Desenvolupament  ========\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="HUD.cpp">
       <Filter>Desenvolupament  ========\Game Layer</Filter>
     </ClCompile>
@@ -144,6 +141,9 @@
     </ClCompile>
     <ClCompile Include="UI_DialogBox.cpp">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,9 +255,6 @@
     <ClInclude Include="Player.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="GreenSoldier.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClInclude>
@@ -308,6 +305,9 @@
     </ClInclude>
     <ClInclude Include="UI_DialogBox.h">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

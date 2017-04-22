@@ -3,6 +3,8 @@
 
 #include "Enemy.h"
 
+class j1PerfTimer;
+
 class DarkZelda : public Enemy
 {
 public:
@@ -11,10 +13,23 @@ public:
 
 	bool Spawn(std::string file, iPoint pos);
 	bool Update(float dt);
-	// OnDeath();
 
-public:
+	bool LateralWalk(float dt);
+	bool ChargeBow(float dt);
+	void OnDeath();
+
+private:
+
 	int phase = 1;
+
+	//phase 1 vars
+	bool lateralDirection = true;
+	j1PerfTimer walkTimer;
+	int walkTimelimit;
+
+	j1PerfTimer chargeBowTimer;
+	int bowTenseLimit;
+
 };
 
 #endif

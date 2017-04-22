@@ -20,7 +20,9 @@ enum ENEMY_STATE
 	CHASING,
 	KEEP_DISTANCE,
 	STEP_BACK,
-	CHARGING
+	CHARGING,
+	LATERAL_WALK,
+	CHARGE_BOW
 };
 
 class Enemy : public Entity
