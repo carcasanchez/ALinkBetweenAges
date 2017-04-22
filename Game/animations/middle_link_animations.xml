@@ -308,7 +308,31 @@
 			<speed value = "0.15" />
 
 		</TAKE_STH>
-		
-		
+
+  <JUMP>
+    <!-- Jump -->
+    <name value = "9"  />
+
+    <UP>
+      <values name = "0" x ="360" y = "40" w = "40" h = "40" frameNumber = "1" margin = "" pivot_x = "20" pivot_y = "25" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="360" y = "0" w = "40" h = "40" frameNumber = "1" margin = "" pivot_x = "20" pivot_y = "25" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="360" y = "80" w = "40" h = "40" frameNumber = "1" margin = "" pivot_x = "20" pivot_y = "25" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="360" y = "80" w = "40" h = "40" frameNumber = "1" margin = "" pivot_x = "20" pivot_y = "25" flip= "1"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </JUMP>
 		
 </animations>

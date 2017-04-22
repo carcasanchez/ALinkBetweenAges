@@ -378,13 +378,23 @@ bool Player::Walking(float dt)
 	{
 		actionState = JUMPING;
 		jumpOrigin = App->map->WorldToMap(currentPos.x, currentPos.y);
+
+		if (toJump.y > jumpOrigin.y)
+			currentDir = D_DOWN;
+		else if (toJump.x > jumpOrigin.x)
+			currentDir = D_RIGHT;
+		else if (toJump.x < jumpOrigin.x)
+			currentDir = D_LEFT;
 		forceUp = 4;
 		forceDown = 0;
+		jumpTimer.Start();
+
+		return true;
 	}
 
 	Change_direction();
 
-	return false;
+	return true;
 }
 
 bool Player::Attacking(float dt)
@@ -576,37 +586,33 @@ bool Player::Jumping(float dt)
 {
 	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 
-	if ((currentDir != D_DOWN && mapPos.x == toJump.x) || (currentDir == D_DOWN && mapPos.y == toJump.y))
+	if ((currentDir == D_DOWN && mapPos.y >= toJump.y)||
+		(currentDir == D_RIGHT && mapPos.x >= toJump.x)||
+		(currentDir == D_LEFT && mapPos.x <= toJump.x))
 	{
 		forceUp = forceDown = 0;
 		actionState = IDLE;
 		toJump.SetToZero();
 		return true;
 	}
+
 	
-	if (toJump.y == 0)
+	if (currentDir == D_RIGHT || currentDir == D_LEFT)
 	{
+
 		int totalTime = (toJump.x - jumpOrigin.x) / (speed * dt * 4);
 
-		if (toJump.x > mapPos.x)
-		{
-			currentDir = D_RIGHT;
-			currentPos.x += (speed * dt *4);			
+		if (currentDir = D_RIGHT)
+		{		
+			currentPos.x += (speed * dt * 4);			
 		}
 		else
 		{
-			currentDir = D_LEFT;
-			currentPos.x -= (speed * dt* 4);
+			currentPos.x -= (speed * dt * 4);
 		}
-
-		currentPos.y -= SDL_ceil(speed * dt * forceUp);
-		currentPos.y -= SDL_ceil(speed * dt * forceUp);
-		currentPos.y += SDL_ceil(speed * dt * forceDown);
-		if (forceDown < 10)
-			forceDown += 30 * dt;
 		
 	}
-	else if (toJump.x == 0)
+	else if (currentDir == D_DOWN)
 	{
 		currentDir = D_DOWN;
 		currentPos.y -= SDL_ceil(speed * dt * forceUp);

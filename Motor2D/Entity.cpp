@@ -195,7 +195,6 @@ bool Entity::Move(int x, int y)
 				tmpPos.x += i;
 				if (App->pathfinding->IsPlayerWalkable(tmpPos))
 				{
-					tmpPos.y = 0;
 					tmpPos.x++;
 					App->game->em->player->toJump = tmpPos;
 					break;
@@ -211,7 +210,6 @@ bool Entity::Move(int x, int y)
 					tmpPos.x -= i;
 					if (App->pathfinding->IsPlayerWalkable(tmpPos))
 					{
-						tmpPos.y = 0;
 						tmpPos.x--;
 						App->game->em->player->toJump = tmpPos;
 						break;
@@ -240,7 +238,6 @@ bool Entity::Move(int x, int y)
 				tmpPos.y += i;
 				if (App->pathfinding->IsPlayerWalkable(tmpPos))
 				{
-					tmpPos.x = 0;
 					tmpPos.y++;
 					App->game->em->player->toJump = tmpPos;
 					break;

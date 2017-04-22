@@ -69,6 +69,7 @@ public:
 	Npc* toTalk = nullptr;
 
 	iPoint toJump = { 0, 0 };
+	iPoint jumpOrigin;
 
 	bool sceneOverride = false;
 
@@ -113,7 +114,7 @@ private:
 
 
 	//For jumping
-	iPoint jumpOrigin;
+
 	CBeizier jumpCurve;
 	j1PerfTimer jumpTimer;
 	
