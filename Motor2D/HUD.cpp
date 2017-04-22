@@ -32,18 +32,16 @@ bool Hud::Awake(pugi::xml_node& conf)
 bool Hud::Start()
 {
 	App->inputM->AddListener(this);
-	SetHearts();
 
 	return true;
 }
 
 bool Hud::Update(float dt)
 {
-
 	if (pause_transition == PAUSE_UP)
 		PauseOut(dt);
 
-	UpdateHearts();
+	LookLife();
 
 	rupees_counter->LookNumber(App->game->em->player->rupees);
 	
@@ -332,6 +330,7 @@ bool Hud::LoadHud(string file)
 		hud_screen->AddChild(empty_heart);
 		hud_screen->AddChild(medium_heart);
 		hud_screen->AddChild(full_heart);
+		LoadHearts();
 
 	}
 
@@ -365,101 +364,55 @@ void Hud::SetHudElements()
 
 }
 
-void Hud::SetHearts()
+void Hud::LoadHearts()
 {
-
-	for (int i = 0; i < (App->game->em->player)->life; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
 
 		new_heart->heart_img = full_heart;
-		new_heart->Set_Interactive_Box({ 700 + (i * ((full_heart->Image.w * 2) + space_between_hearts)), 55, 0,0 }); //El 4 es la separacion entre corazones 
+		new_heart->Set_Interactive_Box({ 700 + (i * ((full_heart->Image.w * 2) + space_between_hearts)), 55, 0,0 });
+		new_heart->Set_Active_state(false);
 
 		hud_screen->AddChild(new_heart);
 		hearts.push_back(new_heart);
 	}
+	
+}
+
+void Hud::LookLife()
+{
+	LookNumHearts();
+
+	int full_hearts = 1;
+	for (vector<UI_Heart*>::iterator it = hearts.begin(); it != hearts.end(); it++)
+	{
+		if ((*it)->active)
+		{
+			if (full_hearts <= App->game->em->player->life)
+			{
+				(*it)->ChangeState(HEARTSTATE::FULL_HEART);
+				full_hearts++;
+			}
+			else (*it)->ChangeState(HEARTSTATE::EMPTY_HEART);
+		}
+		else break;
+	}
 
 }
 
-void Hud::ResetHearts()
+void Hud::LookNumHearts()
 {
-	int num_hearts = hearts.size();
-	if (num_hearts > App->game->em->player->life)
+	if (active_hearts < App->game->em->player->maxLife)
 	{
-		for (std::vector<UI_Heart*>::reverse_iterator it = hearts.rbegin(); it != hearts.rend() && num_hearts > App->game->em->player->life; it++)
+		for (vector<UI_Heart*>::iterator it = hearts.begin(); it != hearts.end() && active_hearts < App->game->em->player->maxLife; it++)
 		{
-			hud_screen->QuitChild(*it);
-			hearts.pop_back();
-			num_hearts--;
+			if ((*it)->active)
+				continue;
+
+			(*it)->Set_Active_state(true);
+			active_hearts++;
 		}
 	}
 }
 
-void Hud::AddHearts()
-{
-	UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
-	new_heart->heart_img = full_heart;
-
-	iPoint pos = { hearts.back()->Interactive_box.x + (hearts.back()->heart_img->Image.w * 2) + space_between_hearts, hearts.back()->Interactive_box.y };
-	new_heart->Set_Interactive_Box({ pos.x, pos.y, 0,0 });
-
-	hud_screen->AddChild(new_heart);
-	hearts.push_back(new_heart);
-}
-
-void Hud::RestoreHearts()
-{
-	for (std::vector<UI_Heart*>::iterator it = hearts.begin(); it != hearts.end(); it++)
-	{
-		(*it)->heart_img = full_heart;
-		(*it)->h_state = FULL;
-	}
-
-}
-
-void Hud::UpdateHearts()
-{
-	int num_hearts = hearts.size();
-	int empty_hearts = num_hearts - App->game->em->player->life;
-
-	if (empty_hearts < 0)
-		HeartUP(empty_hearts);	
-	else
-	{
-		if (empty_hearts > 0)
-			VaciarHearts(empty_hearts);
-		
-	}
-}
-
-void Hud::HeartUP(int heart)
-{
-	if (heart < 0)
-		return;
-
-	for (; heart < 0; heart++)
-	{
-		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
-
-		new_heart->heart_img = full_heart;
-		new_heart->Set_Interactive_Box({ hearts.back()->Interactive_box.x + ((full_heart->Image.w * 2) + space_between_hearts), hearts.back()->Interactive_box.y, hearts.back()->Interactive_box.w, hearts.back()->Interactive_box.h });
-
-		hud_screen->AddChild(new_heart);
-		hearts.push_back(new_heart);
-	}
-}
-
-void Hud::VaciarHearts(int num_empty_hearts)
-{
-	std::vector<UI_Heart*>::reverse_iterator it = hearts.rbegin();
-
-	for (; num_empty_hearts > 0 && it != hearts.rend(); it++)
-	{
-		if ((*it)->h_state != EMPTY)
-		{
-			(*it)->heart_img = empty_heart;
-			(*it)->h_state = EMPTY;
-		}
-		num_empty_hearts--;
-	}
-}

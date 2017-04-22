@@ -97,9 +97,6 @@ void Player::OnDeath()
 {
 
 	App->LoadGame("saves.xml");
-
-	App->game->hud->ResetHearts();
-	App->game->hud->RestoreHearts();
 	damaged = invulnerable = false;
 	linearMovement = { 0, 0 };
 	currentDir = D_DOWN;

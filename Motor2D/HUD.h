@@ -54,11 +54,6 @@ public:
 
 	vector<UI_Heart*>	hearts;
 	int					space_between_hearts = 4;
-	void				AddHearts();
-	void				RestoreHearts();
-	void				UpdateHearts();
-	void				SetHearts();
-	void				ResetHearts();
 
 	//items images
 	UI_Image*		items_frame = nullptr;
@@ -102,8 +97,10 @@ private:
 	void		SetHudElements();
 
 	//Life methods
-	void		HeartUP(int);
-	void		VaciarHearts(int);
+	int			active_hearts = 0;
+	void		LoadHearts();
+	void		LookLife();
+	void		LookNumHearts();
 
 
 };

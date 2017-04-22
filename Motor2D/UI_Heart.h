@@ -7,9 +7,8 @@ class UI_Image;
 
 enum HEARTSTATE
 {
-	FULL, 
-	MID, 
-	EMPTY
+	FULL_HEART,  
+	EMPTY_HEART
 };
 
 class UI_Heart : public UI_element
@@ -19,6 +18,7 @@ public:
 
 	bool		Update_Draw();
 	bool		Update();
+	void		ChangeState(HEARTSTATE);
 
 	UI_Image*	heart_img = nullptr;
 	HEARTSTATE	h_state;
