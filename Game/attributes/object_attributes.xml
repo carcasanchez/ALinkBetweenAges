@@ -60,7 +60,7 @@
  	 <base life = "1" damage = "0"/>
  	 <collider x = "0" y = "0" w = "16" h = "16" type = "10"/>
  	 <animation file = "animations/objects/chest_animations.xml"/>
- 	 <texture file = "textures/Object_sprites/Chest.png"/>
+ 	 <texture file = "textures/Object_sprites/chest.png"/>
    </chest>
 
   <magic_slash>

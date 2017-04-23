@@ -141,16 +141,20 @@ public:
 		switch (currentDir)
 		{
 		case D_UP:
+			//currentPos.y -= SDL_ceil(speed * dt);
 			ret = Move(0, -SDL_ceil(speed * dt));
 			break;
 		case D_DOWN:
 			ret = Move(0, SDL_ceil(speed * dt));
+		//	currentPos.y += SDL_ceil(speed * dt);		
 			break;
 		case D_LEFT:
 			ret = Move(-SDL_ceil(speed * dt), 0);
+			//currentPos.x -= SDL_ceil(speed * dt);			
 			break;
 		case D_RIGHT:
 			ret = Move(SDL_ceil(speed * dt), 0);
+			//currentPos.x += SDL_ceil(speed * dt);
 			break;
 		}
 

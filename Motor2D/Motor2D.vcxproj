@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bezier.cpp" />
+    <ClCompile Include="Eyegore.cpp" />
     <ClCompile Include="Octorok.cpp" />
     <ClCompile Include="DarkZelda.cpp" />
     <ClCompile Include="DialogManager.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="Eyegore.h" />
     <ClInclude Include="GreenSoldier.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="InputManager.h" />

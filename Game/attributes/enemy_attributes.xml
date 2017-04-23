@@ -32,7 +32,7 @@
 	<octorok>
 		<base life = "2" speed = "30" damage ="2"/>
 		<collider x = "5" y = "7" w = "10" h = "15" type = "3"/>
-		<ranges hostile= "185" fight = "55" out="60" />
+		<ranges hostile= "185" fight = "55" out="185" />
 		<ratios attack = "500"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/octorok_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
@@ -41,9 +41,18 @@
 	<wizdrove>
 		<base life = "2" speed = "30" damage ="1"/>
 		<collider x = "9" y = "22" w = "15" h = "18" type = "3"/>
-		<ranges hostile= "185" fight = "55" out="60" />
+		<ranges hostile= "185" fight = "55" out="185" />
 		<ratios attack = "1000"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/wizdrove_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</wizdrove>
+
+	<eyegore>
+		<base life = "5" speed = "30" damage ="1"/>
+		<collider x = "12" y = "23" w = "22" h = "22" type = "3"/>
+		<ranges hostile= "185" fight = "55" out="185" />
+		<ratios attack = "1000"/>  <!-- In Miliseconds -->
+		<animation file = "animations/enemies/eyegore_animations.xml"/>
+  		<texture file = "textures/Enemy_sprites/Enemy.png"/>
+	</eyegore>
 </attributes>

@@ -148,6 +148,9 @@
     <ClCompile Include="Wizdrove.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Eyegore.cpp">
+      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -313,6 +316,9 @@
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Wizdrove.h">
+      <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Eyegore.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>

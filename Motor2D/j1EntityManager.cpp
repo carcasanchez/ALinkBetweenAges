@@ -20,6 +20,7 @@
 #include "Octorok.h"
 #include "DarkZelda.h"
 #include "Wizdrove.h"
+#include "Eyegore.h"
 
 
 j1EntityManager::j1EntityManager() : player(NULL), sector(NULL)
@@ -166,6 +167,9 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, 
 		break;
 	case WIZDROVE:
 		ret = new Wizdrove();
+		break;
+	case EYEGORE:
+		ret = new Eyegore();
 		break;
 	}
 

@@ -84,7 +84,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//	em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, MAGIC_SLASH);
+		em->CreateObject(1, mousePos.x, mousePos.y, CHEST);
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
@@ -106,6 +106,8 @@ bool j1GameLayer::Update(float dt)
 		em->CreateEnemy(1, OCTOROK, mousePos.x, mousePos.y, vector<iPoint>());
 	else if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
 		em->CreateEnemy(1, WIZDROVE, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+		em->CreateEnemy(1, EYEGORE, mousePos.x, mousePos.y, vector<iPoint>());
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)

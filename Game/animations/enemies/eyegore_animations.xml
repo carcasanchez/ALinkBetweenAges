@@ -1,0 +1,56 @@
+﻿<!-- Eyegore  Animations -->
+<animations>	
+
+	<name value = "0" /> 
+
+		<IDLE> <!-- Idle -->
+			<name value = "0"  />
+
+			<UP> 
+				<values name = "0" x ="256" y = "352" w = "32" h = "32" frameNumber = "1" margin = "" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="32" y = "352" w = "32" h = "32" frameNumber = "1" margin = "" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="96" y = "352" w = "32" h = "32" frameNumber = "1" margin = "" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="96" y = "352" w = "32" h = "32" frameNumber = "1" margin = "" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.15" />
+
+		</IDLE>
+
+		<WALKING> <!-- Walking -->
+			<name value = "1"  />
+
+			<UP> 
+				<values name = "0" x ="224" y = "352" w = "32" h = "32" frameNumber = "3" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</UP>
+
+			<DOWN> 
+				<values name = "1" x ="128" y = "352" w = "32" h = "32" frameNumber = "3" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</DOWN>
+
+			<RIGHT> 
+				<values name = "2" x ="64" y = "352" w = "32" h = "32" frameNumber = "2" margin = "1" pivot_x = "17" pivot_y = "29" flip= "0"/>
+			</RIGHT>
+
+			<LEFT> 
+				<values name = "3" x ="64" y = "352" w = "32" h = "32" frameNumber = "2" margin = "1" pivot_x = "17" pivot_y = "29" flip= "1"/>
+			</LEFT>
+					
+			<loop value = "true" />
+
+			<speed value = "0.6" />
+
+		</WALKING>
+
+</animations>

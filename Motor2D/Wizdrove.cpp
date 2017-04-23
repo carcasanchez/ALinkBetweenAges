@@ -42,9 +42,9 @@ bool Wizdrove::Spawn(std::string file, iPoint pos)
 		enemyState = PATROLING;
 		actionState = IDLE;
 
-		attackRatio = 1000;
-		outFightRange = 10000;
-		hostileRange = 10000;
+		attackRatio = attributes.child("ratios").attribute("attack").as_int(0);
+		outFightRange = attributes.child("ranges").attribute("out").as_int(0);
+		hostileRange = attributes.child("ranges").attribute("hostile").as_int(0);
 
 	}
 	return ret;
