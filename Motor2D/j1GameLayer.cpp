@@ -147,7 +147,7 @@ void j1GameLayer::PickObject(Object* object)
 		em->player->rupees += ((Rupee*)object)->rupeeValue;
 		break;
 
-	case HEART:
+	case LIFEHEART:
 		if (em->player->life < em->player->maxLife)
 			em->player->life++;
 		break;

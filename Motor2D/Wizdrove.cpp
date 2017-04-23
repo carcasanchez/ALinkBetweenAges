@@ -43,8 +43,8 @@ bool Wizdrove::Spawn(std::string file, iPoint pos)
 		actionState = IDLE;
 
 		attackRatio = 1000;
-		outFightRange = 100;
-		hostileRange = 100;
+		outFightRange = 10000;
+		hostileRange = 10000;
 
 	}
 	return ret;
