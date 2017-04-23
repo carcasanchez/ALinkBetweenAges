@@ -122,7 +122,7 @@ bool Entity::LoadAnimations(std::string file)
 
 		for (pugi::xml_node action = ent.first_child(); action != NULL; action = action.next_sibling())
 		{
-			for (pugi::xml_node dir = action.child("UP"); dir != action.child("loop"); dir = dir.next_sibling())
+			for (pugi::xml_node dir = action.first_child().next_sibling(); dir != NULL; dir = dir.next_sibling())
 			{
 				std::pair<ACTION_STATE, DIRECTION> p;
 				p.first = ACTION_STATE(action.child("name").attribute("value").as_int());

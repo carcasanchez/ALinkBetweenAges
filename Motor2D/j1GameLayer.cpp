@@ -78,16 +78,13 @@ bool j1GameLayer::Update(float dt)
 
 	App->render->CameraFollow(em->player->currentPos);
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		iPoint mousePos;
-		App->input->GetMousePosition(mousePos.x, mousePos.y);
-		mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-		em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		//em->CreateObject(1, mousePos.x, mousePos.y, CHEST);
-	}
+	iPoint mousePos;
+	App->input->GetMousePosition(mousePos.x, mousePos.y);
+	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)	
+		em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
@@ -95,17 +92,18 @@ bool j1GameLayer::Update(float dt)
 	}
 		
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
 		em->player->changeAge = 0;
-	}
 	else if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
 		em->player->changeAge = 1;
-	}
 	else if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
 		em->player->changeAge = 2;
-	}
+	else if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+		em->CreateEnemy(1, RED_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+		em->CreateEnemy(1, OCTOROK, mousePos.x, mousePos.y, vector<iPoint>());
+
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
@@ -254,6 +252,13 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		}
 
 		return true;
+	}
+
+	if (c1->type == COLLIDER_OCTOSTONE && c2->type == COLLIDER_LINK_SWORD)
+	{
+		if (c1->parent == nullptr)
+			return false;
+		else c1->parent->life = -1;
 	}
 
 	if (c1->type == COLLIDER_ENEMY)

@@ -92,7 +92,7 @@ public:
 	bool Update(float dt)
 	{
 		bool ret;
-		speed = 500;
+		speed = 200;
 		switch (currentDir)
 		{
 		case D_UP:

@@ -11,7 +11,13 @@ public:
 
 	bool Spawn(std::string file, iPoint pos);
 	bool Update(float dt);
+
+	bool Patroling(float dt);
+	bool ThrowingRock(float dt);
+
 	//void OnDeath();
+
+
 
 };
 

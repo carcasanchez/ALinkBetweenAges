@@ -8,6 +8,7 @@
 #include "Animation.h"
 #include "Octorok.h"
 #include "j1EntityManager.h"
+#include "Player.h"
 #include "Object.h"
 
 
@@ -40,6 +41,8 @@ bool Octorok::Spawn(std::string file, iPoint pos)
 		enemyState = PATROLING;
 		actionState = IDLE;
 
+		attackRatio = 1000;
+		hostileRange = 100;
 
 	}
 	return ret;
@@ -47,10 +50,15 @@ bool Octorok::Spawn(std::string file, iPoint pos)
 
 bool Octorok::Update(float dt)
 {
-	LookToPlayer();
-
+	
 	switch (enemyState)
 	{
+	case (PATROLING):
+		Patroling(dt);
+		break;
+	case (THROWING_ROCK):
+		ThrowingRock(dt);
+		break;
 	case(STEP_BACK):
 		StepBack(dt);
 		break;
@@ -61,3 +69,48 @@ bool Octorok::Update(float dt)
 
 
 
+bool Octorok::Patroling(float dt)
+{
+	actionState = WALKING;
+	if (App->game->em->player->currentPos.DistanceTo(currentPos) < hostileRange)
+	{
+		enemyState = THROWING_ROCK;
+		attackTimer.Start();
+		return true;
+	}
+
+	if (patrolPoints.size() == 0)
+	{
+		actionState = IDLE;
+		return true;
+	}
+
+	if (GoTo(patrolPoints[currentPatrolPoint], speed, dt) == false)
+	{
+		currentPatrolPoint++;
+		if (currentPatrolPoint == patrolPoints.size())
+		{
+			patrolPoints._Swap_all(patrolPoints);
+			currentPatrolPoint = 0;
+		}
+	};
+
+	return true;
+}
+
+bool Octorok::ThrowingRock(float dt)
+{
+	actionState = IDLE;
+	LookToPlayer();
+
+	if (attackTimer.ReadMs() > attackRatio)
+	{
+		attackTimer.Start();
+		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+		Object* rock = App->game->em->CreateObject(1, mapPos.x, mapPos.y, OCTO_STONE);
+		rock->currentDir = currentDir;
+	}
+
+
+	return true;
+}

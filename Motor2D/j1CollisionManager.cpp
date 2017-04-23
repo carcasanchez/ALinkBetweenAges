@@ -37,6 +37,7 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_BUSH][COLLIDER_LINK_SWORD] = true;
 	matrix[COLLIDER_CHEST][COLLIDER_LINK_SWORD] = true;
 	matrix[COLLIDER_NPC][COLLIDER_LINK_SWORD] = true;
+	matrix[COLLIDER_OCTOSTONE][COLLIDER_LINK_SWORD] = true;
 
 	//Enemy collisions
 	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
