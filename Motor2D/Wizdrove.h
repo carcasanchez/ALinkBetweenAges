@@ -1,19 +1,20 @@
-#ifndef _OCTOROK_H_
-#define _OCTOROK_H_
+#ifndef _WIZDROVE_H_
+#define _WIZDROVE_H_
 
 #include "Enemy.h"
 
-class Octorok : public Enemy
+class Wizdrove : public Enemy
 {
 public:
-	Octorok() :Enemy() {};
-	~Octorok() {};
+	Wizdrove() :Enemy() {};
+	~Wizdrove() {};
 
 	bool Spawn(std::string file, iPoint pos);
 	bool Update(float dt);
 
 	bool Patroling(float dt);
 	bool ThrowingAttack(float dt);
+	bool PreparingAttack(float dt);
 
 	//void OnDeath();
 

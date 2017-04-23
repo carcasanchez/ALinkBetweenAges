@@ -180,7 +180,7 @@ bool Enemy::StepBack(float dt)
 	
 	if (damagedTimer.ReadMs() > 100 && pushedBackTimer.ReadMs() > 200)
 	{
-		enemyState = CHASING;
+		enemyState = PATROLING;
 		sprite->tint = { 255, 255, 255, 255 };
 		if (life == 0)
 		{

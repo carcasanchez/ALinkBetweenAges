@@ -33,9 +33,17 @@
 		<base life = "2" speed = "30" damage ="2"/>
 		<collider x = "5" y = "7" w = "10" h = "15" type = "3"/>
 		<ranges hostile= "185" fight = "55" out="60" />
-		<ratios attack = "500" charge_time = "1000"/>  <!-- In Miliseconds -->
-		<combat_speeds chase_speed = "50" flanking_speed = "40" attack_speed = "110"/>
+		<ratios attack = "500"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/octorok_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</octorok>
+
+	<wizdrove>
+		<base life = "2" speed = "30" damage ="1"/>
+		<collider x = "9" y = "22" w = "15" h = "18" type = "3"/>
+		<ranges hostile= "185" fight = "55" out="60" />
+		<ratios attack = "1000"/>  <!-- In Miliseconds -->
+		<animation file = "animations/enemies/wizdrove_animations.xml"/>
+  		<texture file = "textures/Enemy_sprites/Enemy.png"/>
+	</wizdrove>
 </attributes>

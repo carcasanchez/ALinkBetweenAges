@@ -50,7 +50,7 @@
    </bush>
 
    <octo_stone>
- 	 <base life = "1" damage = "1"/>
+ 	 <base life = "1" damage = "1" speed = "200"/>
  	 <collider x = "0" y = "0" w = "8" h = "8" type = "9"/>
  	 <animation file = "animations/objects/octostone_animations.xml"/>
  	 <texture file = "textures/Enemy_sprites/Enemy.png"/>
@@ -62,5 +62,12 @@
  	 <animation file = "animations/objects/chest_animations.xml"/>
  	 <texture file = "textures/Object_sprites/Chest.png"/>
    </chest>
+
+  <magic_slash>
+ 	 <base life = "1" damage = "1" speed = "200"/>
+ 	 <collider x = "8" y = "6" w = "16" h = "8" type = "11"/>
+ 	 <animation file = "animations/objects/magic_slash_animations.xml"/>
+ 	 <texture file = "textures/Enemy_sprites/Enemy.png"/>
+   </magic_slash>
 
 </attributes>

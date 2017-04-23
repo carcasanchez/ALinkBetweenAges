@@ -581,6 +581,7 @@ bool Player::Spinning(float dt)
 
 bool Player::Jumping(float dt)
 {
+	dodging = true;
 	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 
 	if ((currentDir == D_DOWN && mapPos.y >= toJump.y)||
@@ -589,6 +590,7 @@ bool Player::Jumping(float dt)
 	{
 		forceUp = forceDown = 0;
 		actionState = IDLE;
+		dodging = false;
 		toJump.SetToZero();
 		return true;
 	}

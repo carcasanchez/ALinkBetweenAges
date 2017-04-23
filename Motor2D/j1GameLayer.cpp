@@ -82,8 +82,9 @@ bool j1GameLayer::Update(float dt)
 	App->input->GetMousePosition(mousePos.x, mousePos.y);
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)	
-		em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		//	em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
+		em->CreateObject(1, mousePos.x, mousePos.y, MAGIC_SLASH);
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
@@ -103,7 +104,8 @@ bool j1GameLayer::Update(float dt)
 		em->CreateEnemy(1, RED_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
 	else if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
 		em->CreateEnemy(1, OCTOROK, mousePos.x, mousePos.y, vector<iPoint>());
-
+	else if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
+		em->CreateEnemy(1, WIZDROVE, mousePos.x, mousePos.y, vector<iPoint>());
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
@@ -221,9 +223,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
- 	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE))
+ 	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE || c2->type == COLLIDER_MAGIC_SLASH))
 	{
-		
+		//When link is adult, empuja enemigos
 		if (em->player->actionState == DODGING && em->player->age == ADULT )
 		{
 			if (((Enemy*)(c2->parent))->enemyState != STEP_BACK)

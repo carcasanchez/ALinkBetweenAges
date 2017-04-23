@@ -19,6 +19,7 @@
 #include "RedSoldier.h"
 #include "Octorok.h"
 #include "DarkZelda.h"
+#include "Wizdrove.h"
 
 
 j1EntityManager::j1EntityManager() : player(NULL), sector(NULL)
@@ -160,9 +161,11 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, 
 	case DARK_ZELDA:
 		ret = new DarkZelda();
 		break;
-
 	case OCTOROK:
 		ret = new Octorok();
+		break;
+	case WIZDROVE:
+		ret = new Wizdrove();
 		break;
 	}
 
@@ -265,7 +268,9 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case CHEST:
 		ret = new Chest();
 		break;
-
+	case MAGIC_SLASH:
+		ret = new MagicSlash();
+		break;
 	}
 	
 
@@ -276,6 +281,7 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 		ret->type = OBJECT;
 		entities[sector].push_back(ret);
 		ret->id = entities[sector].end();
+		ret->UpdateCollider();
 
 	}
 	else 
@@ -285,8 +291,6 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	}
 
 	return ret;
-
-	return nullptr;
 }
 
 bool j1EntityManager::CleanEntities()

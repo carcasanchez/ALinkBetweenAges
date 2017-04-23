@@ -32,7 +32,7 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_PLAYER][COLLIDER_BUSH] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_OCTOSTONE] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_CHEST] = true;
-
+	matrix[COLLIDER_PLAYER][COLLIDER_MAGIC_SLASH] = true;
 
 	matrix[COLLIDER_BUSH][COLLIDER_LINK_SWORD] = true;
 	matrix[COLLIDER_CHEST][COLLIDER_LINK_SWORD] = true;

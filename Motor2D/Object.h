@@ -16,7 +16,8 @@ enum OBJECT_TYPE
 	BUSH,
 	POT,
 	OCTO_STONE,
-	CHEST
+	CHEST,
+	MAGIC_SLASH
 };
 
 class Object : public Entity
@@ -92,7 +93,6 @@ public:
 	bool Update(float dt)
 	{
 		bool ret;
-		speed = 200;
 		switch (currentDir)
 		{
 		case D_UP:
@@ -126,6 +126,44 @@ public:
 
 public:
 	OBJECT_TYPE objectInside = GREEN_RUPEE;
+};
+
+
+class MagicSlash : public Object
+{
+public:
+
+	MagicSlash() {};
+
+	bool Update(float dt)
+	{
+		bool ret;
+		switch (currentDir)
+		{
+		case D_UP:
+			ret = Move(0, -SDL_ceil(speed * dt));
+			break;
+		case D_DOWN:
+			ret = Move(0, SDL_ceil(speed * dt));
+			break;
+		case D_LEFT:
+			ret = Move(-SDL_ceil(speed * dt), 0);
+			break;
+		case D_RIGHT:
+			ret = Move(SDL_ceil(speed * dt), 0);
+			break;
+		}
+
+		if (!ret)
+		{
+			life = -1;
+		}
+
+		return ret;
+	};
+
+public:
+
 };
 
 

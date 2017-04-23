@@ -6,13 +6,14 @@
 #include "j1Map.h"
 #include "j1Render.h"
 #include "Animation.h"
-#include "Octorok.h"
+#include "Wizdrove.h"
 #include "j1EntityManager.h"
 #include "Player.h"
 #include "Object.h"
+#include "j1CollisionManager.h"
 
 
-bool Octorok::Spawn(std::string file, iPoint pos)
+bool Wizdrove::Spawn(std::string file, iPoint pos)
 {
 	bool ret = true;
 
@@ -34,7 +35,7 @@ bool Octorok::Spawn(std::string file, iPoint pos)
 
 	else
 	{
-		pugi::xml_node attributes = attributesFile.child("attributes").child("octorok");
+		pugi::xml_node attributes = attributesFile.child("attributes").child("wizdrove");
 
 		LoadAttributes(attributes);
 
@@ -42,15 +43,16 @@ bool Octorok::Spawn(std::string file, iPoint pos)
 		actionState = IDLE;
 
 		attackRatio = 1000;
+		outFightRange = 100;
 		hostileRange = 100;
 
 	}
 	return ret;
 }
 
-bool Octorok::Update(float dt)
+bool Wizdrove::Update(float dt)
 {
-	
+
 	switch (enemyState)
 	{
 	case (PATROLING):
@@ -62,6 +64,9 @@ bool Octorok::Update(float dt)
 	case(STEP_BACK):
 		StepBack(dt);
 		break;
+	case (PREPARING_ATTACK):
+		PreparingAttack(dt);
+		break;
 	}
 
 	return false;
@@ -69,9 +74,8 @@ bool Octorok::Update(float dt)
 
 
 
-bool Octorok::Patroling(float dt)
+bool Wizdrove::Patroling(float dt)
 {
-	actionState = WALKING;
 	if (App->game->em->player->currentPos.DistanceTo(currentPos) < hostileRange)
 	{
 		enemyState = THROWING_ATTACK;
@@ -98,19 +102,51 @@ bool Octorok::Patroling(float dt)
 	return true;
 }
 
-bool Octorok::ThrowingAttack(float dt)
+bool Wizdrove::ThrowingAttack(float dt)
 {
-	actionState = IDLE;
+	actionState = ATTACKING;
 	LookToPlayer();
+
+
+	if (currentAnim->isOver())
+	{
+		attackTimer.Start();
+		enemyState = PREPARING_ATTACK;
+		currentAnim->Reset();
+		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+		Object* slash = App->game->em->CreateObject(1, mapPos.x, mapPos.y, MAGIC_SLASH);
+		slash->currentDir = currentDir;
+	
+		if (currentDir == D_RIGHT || currentDir == D_LEFT)
+		{
+			slash->col->rect.w = 8;
+			slash->col->rect.h = 16;
+			slash->colPivot = { 3, 8 };
+		}
+
+		slash->currentPos = currentPos;
+		slash->currentPos.y -= 5;
+	
+	}
+
+
+	return true;
+}
+
+bool Wizdrove::PreparingAttack(float dt)
+{
+	LookToPlayer();
+	actionState = IDLE;
 
 	if (attackTimer.ReadMs() > attackRatio)
 	{
-		attackTimer.Start();
-		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-		Object* rock = App->game->em->CreateObject(1, mapPos.x, mapPos.y, OCTO_STONE);
-		rock->currentDir = currentDir;
+		enemyState = THROWING_ATTACK;
 	}
 
+	if (App->game->em->player->currentPos.DistanceTo(currentPos) > outFightRange)
+	{
+		enemyState = PATROLING;
+	}
 
 	return true;
 }

@@ -66,6 +66,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 				actionState = CLOSE;
 				attributes = attributes.child("chest");
 				break;
+			case MAGIC_SLASH:
+				attributes = attributes.child("magic_slash");
+				break;
 		}		
 		LoadAttributes(attributes);
 
