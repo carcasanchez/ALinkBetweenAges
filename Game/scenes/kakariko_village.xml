@@ -20,6 +20,8 @@
 
  	<special>
 	 <chest object_type = "9" x = "73" y = "80" item_inside = "4"/>
+<book object_type = "0" x = "73" y = "86"/>
+
         </special>
 
       </entities>

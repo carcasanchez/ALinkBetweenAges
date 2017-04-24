@@ -33,7 +33,9 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_PLAYER][COLLIDER_OCTOSTONE] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_CHEST] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_MAGIC_SLASH] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_BUYABLE_ITEM] = true; //	Shop
 
+	matrix[COLLIDER_BUYABLE_ITEM][COLLIDER_LINK_SWORD] = true; //	Shop
 	matrix[COLLIDER_BUSH][COLLIDER_LINK_SWORD] = true;
 	matrix[COLLIDER_CHEST][COLLIDER_LINK_SWORD] = true;
 	matrix[COLLIDER_NPC][COLLIDER_LINK_SWORD] = true;
@@ -84,7 +86,6 @@ bool j1CollisionManager::Update(float dt)
 		for (std::list <Collider*>::iterator it2 = it; it2 != colliders.end(); it2++)
 		{
 			c2 = (*it2);
-
 			
 			if (c1->CheckCollision(c2->rect))
 			{

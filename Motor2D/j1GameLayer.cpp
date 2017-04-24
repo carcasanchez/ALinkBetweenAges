@@ -153,7 +153,14 @@ void j1GameLayer::PickObject(Object* object)
 		if (em->player->life < em->player->maxLife)
 			em->player->life++;
 		break;
+	case BOOK:
+		if (em->player->rupees > 10)//Shop	
+		{
+			em->player->rupees -= 10;
+		}
+		break;
 	}
+	
 
 	object->life = -1;
 }
@@ -340,6 +347,15 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
+	if (c1->type == COLLIDER_BUYABLE_ITEM && c2->type == COLLIDER_LINK_SWORD) //	Shop
+	{
+		//	Shop
+		if (em->player->rupees > 10)//Shop	
+		{
+			PickObject((Object*)c1->parent);
+		}
+		return true;
+	}
 
 	if (c1->type == COLLIDER_BUSH && c2->type == COLLIDER_LINK_SWORD)
 	{
