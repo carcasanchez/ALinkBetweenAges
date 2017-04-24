@@ -77,11 +77,17 @@ public:
 	vector<iPoint> patrolPoints;
 	int currentPatrolPoint = 0;
 
+	bool arrowWeakness = false;
+	bool bombWeakness = false;
+
 protected:
 	iPoint currentDest = { 0, 0 };
 
 	//Combat behaviour variables
 	j1PerfTimer attackTimer;
+
+
+	
 
 
 };

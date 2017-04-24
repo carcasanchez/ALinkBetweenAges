@@ -84,7 +84,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//	em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, CHEST);
+		em->CreateObject(1, mousePos.x, mousePos.y, LINK_ARROW);
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
@@ -293,6 +293,8 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				c1->parent->sprite->tint = { 255, 150, 150, 255 };
 				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
 				c1->parent->damagedTimer.Start();
+				LOG("Eyegore damaged");
+
 			}
 			return true;
 		}
@@ -330,7 +332,11 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
 			{
-				c1->parent->life -= em->player->damage;
+				if(((Enemy*)(c1->parent))->arrowWeakness)
+					c1->parent->life -= (c2->parent->damage*3);
+				else c1->parent->life -= c2->parent->damage;
+				
+
 				c1->parent->sprite->tint = { 255, 150, 150, 255 };
 				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
 				c1->parent->damagedTimer.Start();

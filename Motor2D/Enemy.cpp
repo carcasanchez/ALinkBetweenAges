@@ -178,7 +178,7 @@ bool Enemy::StepBack(float dt)
 
 	Move(SDL_ceil(movement.x*speed*dt*5), SDL_ceil(movement.y*speed*dt*5));
 	
-	if (damagedTimer.ReadMs() > 100 && pushedBackTimer.ReadMs() > 200)
+	if (damagedTimer.ReadMs() > damagedLimit && pushedBackTimer.ReadMs() > 200)
 	{
 		enemyState = PATROLING;
 		sprite->tint = { 255, 255, 255, 255 };
