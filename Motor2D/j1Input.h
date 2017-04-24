@@ -105,6 +105,8 @@ private:
 	SDL_GameController*	gamepad = nullptr;
 	j1KeyState			controller_buttons[NUM_CONTROLLER_BUTTONS];
 	j1JoystickState		controller_axis[NUM_CONTROLLER_AXIS];
+	bool				l_trigger = false;
+	bool				r_trigger = false;
 };
 
 #endif // __j1INPUT_H__

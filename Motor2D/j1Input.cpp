@@ -130,11 +130,12 @@ bool j1Input::PreUpdate()
 	{
 		if (controller_axis[i] == j1JoystickState::JOYSTICK_NEGATIVE)
 			App->inputM->JoystickDetected(i, JSTATE::J_NEGATIVE);
-		
+
 
 		if (controller_axis[i] == j1JoystickState::JOYSTICK_POSITIVE)
 			App->inputM->JoystickDetected(i, JSTATE::J_POSITIVE);
-				
+
+	
 	}
 
 	mouse_motion_x = 0;
@@ -226,10 +227,19 @@ bool j1Input::PreUpdate()
 				{
 					if (event.caxis.value > DEAD_ZONE)
 						controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_POSITIVE;
+					
+					else
+					{
+						controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_NOTHING;
 
-					else controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_NOTHING;
+						if (event.caxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT)
+							App->inputM->JoystickDetected(event.caxis.axis, J_NONE);
+							
+						if (event.caxis.axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
+							App->inputM->JoystickDetected(event.caxis.axis, J_NONE);	
+					}
+					
 				}
-				
 				
 				break;
 

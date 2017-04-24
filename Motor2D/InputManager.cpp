@@ -185,7 +185,40 @@ void InputManager::JoystickDetected(int axis, JSTATE state)
 			}
 
 			break;
+		case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
 
+			if (state == J_POSITIVE)
+			{
+				new_current_action.first = SPIN_TO_WIN;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+			
+			if (state == J_NONE)
+			{
+				new_current_action.first = NOT_TO_SPIN;
+				new_current_action.second = E_DOWN;
+				current_action.insert(new_current_action);
+			}
+
+			break;
+
+		case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+			if (state == J_POSITIVE)
+			{
+				new_current_action.first = USE_ITEM;
+				new_current_action.second = E_REPEAT;
+				current_action.insert(new_current_action);
+			}
+
+
+			if (state == J_NONE)
+			{
+				new_current_action.first = STOP_ITEM;
+				new_current_action.second = E_DOWN;
+				current_action.insert(new_current_action);
+			}
+			break;
 		}
 	}
 	
