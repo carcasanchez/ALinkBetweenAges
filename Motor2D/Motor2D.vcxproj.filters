@@ -154,6 +154,9 @@
     <ClCompile Include="j1CutSceneManager.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -325,6 +328,9 @@
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="j1CutSceneManager.h">
+      <Filter>Desenvolupament  ========\Modules\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
   </ItemGroup>
