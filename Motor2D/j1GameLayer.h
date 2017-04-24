@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include <list>
+#include "j1Timer.h"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ public:
 	bool CleanUp();
 
 	void PickObject(Object* object);
+	void BuyObject(Object* object);
 
 	bool Save(pugi::xml_node&) const;
 	bool Load(pugi::xml_node&);
@@ -43,6 +45,8 @@ public:
 
 	int playerX = 123;
 	int playerY = 90;
+
+	j1Timer buy_timer; 
 };
 
 

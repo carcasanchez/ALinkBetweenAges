@@ -72,6 +72,8 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 		}		
 		LoadAttributes(attributes);
 
+		price = attributes.child("base").attribute("price").as_int();
+
 		switch (type)
 		{
 		case LINK_ARROW:

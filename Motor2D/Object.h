@@ -32,7 +32,7 @@ public:
 
 public:
 	OBJECT_TYPE objectType = BOOK;
-
+	int price = 0;
 };
 
 class Arrow : public Object

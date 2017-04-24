@@ -1,8 +1,8 @@
 <!-- Object Attributes -->
 <attributes>
    <book>
- 	 <base life = "1"/>
- 	  <collider x = "7" y = "7" w = "10" h = "10" type = "12"/>
+ 	 <base life = "1" price = "10"/>
+ 	 <collider x = "7" y = "7" w = "10" h = "10" type = "12"/>
  	 <animation file = "animations/objects/book_animations.xml"/>
  	 <texture file = "textures/Object_sprites/book.png"/>
    </book>
