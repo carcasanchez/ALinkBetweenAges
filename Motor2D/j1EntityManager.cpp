@@ -275,6 +275,10 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case MAGIC_SLASH:
 		ret = new MagicSlash();
 		break;
+
+	case BOMB:
+		ret = new Bomb();
+		break;
 	}
 	
 

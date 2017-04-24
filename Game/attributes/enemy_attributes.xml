@@ -48,11 +48,11 @@
 	</wizdrove>
 
 	<eyegore>
-		<base life = "5" speed = "30" damage ="1"/>
-		<collider x = "12" y = "23" w = "22" h = "22" type = "3"/>
-		<ranges hostile= "185" fight = "55" out="185" />
+		<base life = "9" speed = "10" rage_speed="60" rage_life ="3" damage ="1"/>
+		<collider x = "12" y = "22" w = "20" h = "20" type = "3"/>
+    <ranges hostile= "185" fight = "55" out="185" />
 		<ratios attack = "1000"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/eyegore_animations.xml"/>
-  		<texture file = "textures/Enemy_sprites/Enemy.png"/>
+  	<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</eyegore>
 </attributes>

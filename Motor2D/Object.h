@@ -17,7 +17,8 @@ enum OBJECT_TYPE
 	POT,
 	OCTO_STONE,
 	CHEST,
-	MAGIC_SLASH
+	MAGIC_SLASH,
+	BOMB
 };
 
 class Object : public Entity
@@ -32,7 +33,7 @@ public:
 
 public:
 	OBJECT_TYPE objectType = BOOK;
-
+	int price = 0;
 };
 
 class Arrow : public Object
@@ -168,6 +169,17 @@ public:
 
 public:
 
+};
+
+
+class Bomb : public Object
+{
+public:
+
+	Bomb() {};
+
+public:
+	int timer;
 };
 
 

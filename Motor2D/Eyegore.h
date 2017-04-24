@@ -11,7 +11,16 @@ public:
 
 	bool Spawn(std::string file, iPoint pos);
 	bool Update(float dt);
+
+	bool Chasing(float dt);
+	bool StepBack(float dt);
 	//void OnDeath();
+
+private:
+
+	int rageSpeed;
+	int rageLife;
+
 };
 
 #endif

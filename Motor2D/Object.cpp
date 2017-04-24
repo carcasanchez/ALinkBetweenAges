@@ -69,8 +69,13 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case MAGIC_SLASH:
 				attributes = attributes.child("magic_slash");
 				break;
+			case BOMB:
+				attributes = attributes.child("bomb");
+				break;
 		}		
 		LoadAttributes(attributes);
+
+		price = attributes.child("base").attribute("price").as_int();
 
 		switch (type)
 		{

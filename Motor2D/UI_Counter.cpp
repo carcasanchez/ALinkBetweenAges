@@ -82,6 +82,8 @@ void UI_Counter::LookNumber(int count_num)
 	if (count_num < 10)
 	{
 		unit = count_num;
+		dec = 0;
+		cent = 0;
 		return;
 	}
 
@@ -89,6 +91,7 @@ void UI_Counter::LookNumber(int count_num)
 	{
 		dec = count_num / 10;
 		unit = count_num % 10;
+		cent = 0;
 		return;
 	}
 

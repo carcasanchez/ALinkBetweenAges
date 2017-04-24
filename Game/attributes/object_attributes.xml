@@ -1,14 +1,14 @@
 <!-- Object Attributes -->
 <attributes>
    <book>
- 	 <base life = "1"/>
- 	  <collider x = "7" y = "7" w = "10" h = "10" type = "12"/>
+ 	 <base life = "1" price = "10"/>
+ 	 <collider x = "7" y = "7" w = "10" h = "10" type = "12"/>
  	 <animation file = "animations/objects/book_animations.xml"/>
  	 <texture file = "textures/Object_sprites/book.png"/>
    </book>
 
    <arrow>
- 	 <base life = "1"/>
+ 	 <base life = "1" damage = "1"/>
  	 <collider x = "0" y = "0" w = "7" h = "15" type = "6"/>
  	 <animation file = "animations/objects/arrow_animations.xml"/>
  	 <texture file = "textures/Object_sprites/arrow.png"/>
@@ -69,5 +69,12 @@
  	 <animation file = "animations/objects/magic_slash_animations.xml"/>
  	 <texture file = "textures/Enemy_sprites/Enemy.png"/>
    </magic_slash>
+
+  <bomb>
+    <base life = "1" damage = "1" speed = "200"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "14"/>
+    <animation file = "animations/objects/bomb_animations.xml"/>
+    <texture file = "textures/Object_sprites/bomb.png"/>
+  </bomb>
 
 </attributes>

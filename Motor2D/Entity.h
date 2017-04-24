@@ -110,6 +110,9 @@ public:
 private:
 	int textureFile = 1;
 	int animationFile = 1;
+
+protected:
+	int damagedLimit = 100;
 	
 };
 

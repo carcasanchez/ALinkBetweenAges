@@ -84,7 +84,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//	em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, CHEST);
+		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
@@ -153,16 +153,24 @@ void j1GameLayer::PickObject(Object* object)
 		if (em->player->life < em->player->maxLife)
 			em->player->life++;
 		break;
-	case BOOK:
-		if (em->player->rupees > 10)//Shop	
-		{
-			em->player->rupees -= 10;
-		}
-		break;
 	}
 	
 
 	object->life = -1;
+}
+
+void j1GameLayer::BuyObject(Object * object)
+{
+	switch (object->objectType)
+	{
+	case BOOK:
+		if (em->player->rupees >= object->price && buy_timer.Read() > 700)//Shop	
+		{
+			em->player->rupees -= object->price;
+			buy_timer.Start();
+		}
+		break;
+	}
 }
 
 
@@ -285,6 +293,8 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				c1->parent->sprite->tint = { 255, 150, 150, 255 };
 				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
 				c1->parent->damagedTimer.Start();
+				LOG("Eyegore damaged");
+
 			}
 			return true;
 		}
@@ -322,7 +332,11 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
 			{
-				c1->parent->life -= em->player->damage;
+				if(((Enemy*)(c1->parent))->arrowWeakness)
+					c1->parent->life -= (c2->parent->damage*3);
+				else c1->parent->life -= c2->parent->damage;
+				
+
 				c1->parent->sprite->tint = { 255, 150, 150, 255 };
 				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
 				c1->parent->damagedTimer.Start();
@@ -350,10 +364,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	if (c1->type == COLLIDER_BUYABLE_ITEM && c2->type == COLLIDER_LINK_SWORD) //	Shop
 	{
 		//	Shop
-		if (em->player->rupees > 10)//Shop	
-		{
-			PickObject((Object*)c1->parent);
-		}
+		BuyObject((Object*)c1->parent);
 		return true;
 	}
 
