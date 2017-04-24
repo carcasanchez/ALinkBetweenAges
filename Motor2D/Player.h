@@ -119,6 +119,9 @@ private:
 	j1PerfTimer jumpTimer;
 	
 	float forceUp = 0, forceDown = 0;
+
+	//bow
+	bool shoot_bow = false;
 };
 
 #endif // !_PLAYER_H_

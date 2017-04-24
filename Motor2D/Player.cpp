@@ -690,18 +690,26 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			
 			else
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
+				if (!shoot_bow)
 				{
-					if (stamina - attackTax >= 0)
+					if (actionState != ATTACKING && playerState != EVENT)
 					{
-						actionState = ATTACKING;
-						currentDir = DIRECTION::D_UP;
-						createSwordCollider();
-						stamina -= attackTax;
-						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						attack_vicente = true;
+						if (stamina - attackTax >= 0)
+						{
+							actionState = ATTACKING;
+							currentDir = DIRECTION::D_UP;
+							createSwordCollider();
+							stamina -= attackTax;
+							App->game->hud->stamina_bar->WasteStamina(attackTax);
+							attack_vicente = true;
+						}
+						break;
 					}
-					break;
+				}
+				else
+				{
+					currentDir = DIRECTION::D_UP;
+					actionState = SHOOTING_BOW;	
 				}
 			}
 		}
@@ -802,6 +810,28 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			dodging = true;
 			dodgeTimer.Start();
 		}
+		break;
+
+	case SPIN_TO_WIN:
+		if (actionState != SPINNING && stamina > spinTax)
+		{
+			stamina -= spinTax;
+			actionState = SPINNING;
+			createSwordCollider();
+		}
+		break;
+
+	case USE_ITEM:
+
+		if (actionState != SHOOTING_BOW)
+			shoot_bow = true;
+		
+		break;
+
+	case STOP_ITEM:
+
+		shoot_bow = false;
+
 		break;
 
 	case UP:
