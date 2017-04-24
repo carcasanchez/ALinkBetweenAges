@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="Bezier.cpp" />
     <ClCompile Include="Eyegore.cpp" />
+    <ClCompile Include="j1CutSceneManager.cpp" />
     <ClCompile Include="Octorok.cpp" />
     <ClCompile Include="DarkZelda.cpp" />
     <ClCompile Include="DialogManager.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="j1CollisionManager.h" />
     <ClInclude Include="j1Console.h" />
+    <ClInclude Include="j1CutSceneManager.h" />
     <ClInclude Include="j1FileSystem.h" />
     <ClInclude Include="j1Fonts.h" />
     <ClInclude Include="j1GameLayer.h" />
