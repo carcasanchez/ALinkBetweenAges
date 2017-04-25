@@ -50,6 +50,7 @@ public:
 	COLLIDER_TYPE type;
 	j1Module* callback = nullptr;
 	bool to_delete = false;
+	bool active = true;
 
 	Entity* parent = NULL;
 	

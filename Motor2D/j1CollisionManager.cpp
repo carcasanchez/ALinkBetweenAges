@@ -88,7 +88,7 @@ bool j1CollisionManager::Update(float dt)
 		{
 			c2 = (*it2);
 			
-			if (c1->CheckCollision(c2->rect))
+			if (c1->CheckCollision(c2->rect) && c1->active && c2->active)
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
 					c1->callback->On_Collision_Callback(c1, c2, dt);

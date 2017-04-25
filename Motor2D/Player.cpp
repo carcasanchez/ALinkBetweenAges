@@ -675,8 +675,14 @@ void Player::ShowPickedObject()
 	if (pickedObject)
 	{
 		pickedObject->currentPos = currentPos;
-	}
+		pickedObject->currentPos.y -= 30;
 
+		if (showObjectTimer.ReadMs() > 500)
+		{
+			pickedObject->life = -1;
+			pickedObject = nullptr;
+		}
+	}	
 
 }
 

@@ -158,9 +158,16 @@ void j1GameLayer::PickObject(Object* object)
 		em->player->life = em->player->maxLife;
 	}
 	
+	if (em->player->pickedObject)
+	{
+		em->player->pickedObject->life = -1;
+	}
 
 	em->player->pickedObject = object;
+	em->player->pickedObject->col->active = false;
 	em->player->showObjectTimer.Start();
+	
+	
 }
 
 void j1GameLayer::BuyObject(Object * object)

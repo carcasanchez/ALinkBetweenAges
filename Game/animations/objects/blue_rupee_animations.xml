@@ -7,16 +7,16 @@
     <!-- Idle -->
     <name value = "0"  />
     <UP>
-      <values name = "0" x ="16" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "4" pivot_y = "1" flip= "0"/>
+      <values name = "0" x ="16" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "11" flip= "0"/>
     </UP>
     <DOWN>
-      <values name = "1" x ="16" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "4" pivot_y = "1" flip= "0"/>
+      <values name = "1" x ="16" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "11" flip= "0"/>
     </DOWN>
     <RIGHT>
-      <values name = "2" x ="16" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "4" pivot_y = "1" flip= "0"/>
+      <values name = "2" x ="16" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "11" flip= "0"/>
     </RIGHT>
     <LEFT>
-      <values name = "3" x ="16" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "4" pivot_y = "1" flip= "0"/>
+      <values name = "3" x ="16" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "11" flip= "0"/>
     </LEFT>
     <loop value = "true" />
 
