@@ -18,7 +18,8 @@ enum OBJECT_TYPE
 	OCTO_STONE,
 	CHEST,
 	MAGIC_SLASH,
-	BOMB
+	BOMB,
+	HEART_CONTAINER
 };
 
 class Object : public Entity

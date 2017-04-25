@@ -57,7 +57,7 @@
    </octo_stone>
 
    <chest>
- 	 <base life = "1" damage = "0"/>
+ 	 <base life = "1"/>
  	 <collider x = "0" y = "0" w = "16" h = "16" type = "10"/>
  	 <animation file = "animations/objects/chest_animations.xml"/>
  	 <texture file = "textures/Object_sprites/chest.png"/>
@@ -77,4 +77,10 @@
     <texture file = "textures/Object_sprites/bomb.png"/>
   </bomb>
 
+<heart_container>
+    <base life = "1"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "7"/>
+    <animation file = "animations/objects/heart_container_animations.xml"/>
+    <texture file = "textures/Object_sprites/heartContainer.png"/>
+  </heart_container>
 </attributes>

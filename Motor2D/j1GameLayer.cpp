@@ -84,7 +84,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//	em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
+		em->CreateObject(1, mousePos.x, mousePos.y, HEART_CONTAINER);
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
@@ -153,6 +153,9 @@ void j1GameLayer::PickObject(Object* object)
 		if (em->player->life < em->player->maxLife)
 			em->player->life++;
 		break;
+	case HEART_CONTAINER:
+		em->player->maxLife++;
+		em->player->life = em->player->maxLife;
 	}
 	
 
@@ -282,11 +285,12 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_ENEMY)
 	{
+
+		if (c1->parent == nullptr)
+			return false;
 		
 		if (c2->type == COLLIDER_LINK_SWORD)
 		{
-			if (c1->parent == nullptr)
-				return false;
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
 			{
 				c1->parent->life -= em->player->damage;
