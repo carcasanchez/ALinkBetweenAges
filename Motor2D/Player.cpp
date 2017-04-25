@@ -136,6 +136,8 @@ bool Player::Update(float dt)
 
 	ManageStamina(dt);	
 
+	ShowPickedObject();
+
 	switch (playerState)
 	{
 	case ACTIVE:
@@ -666,6 +668,16 @@ bool Player::Talking(float dt)
 	
 
 	return false;
+}
+
+void Player::ShowPickedObject()
+{
+	if (pickedObject)
+	{
+		pickedObject->currentPos = currentPos;
+	}
+
+
 }
 
 

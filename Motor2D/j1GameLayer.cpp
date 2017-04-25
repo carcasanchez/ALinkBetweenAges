@@ -159,7 +159,8 @@ void j1GameLayer::PickObject(Object* object)
 	}
 	
 
-	object->life = -1;
+	em->player->pickedObject = object;
+	em->player->showObjectTimer.Start();
 }
 
 void j1GameLayer::BuyObject(Object * object)

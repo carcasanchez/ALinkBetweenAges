@@ -7,6 +7,8 @@
 #include "InputManager.h"
 #include "j1PerfTimer.h"
 
+class Object;
+
 
 
 enum PLAYER_STATE
@@ -73,6 +75,9 @@ public:
 
 	bool sceneOverride = false;
 
+	Object* pickedObject = nullptr;
+	j1PerfTimer showObjectTimer;
+
 private:
 	void Change_direction();
 	void ManageStamina(float dt);
@@ -88,6 +93,9 @@ private:
 	bool Jumping(float dt);
 
 	bool Talking(float dt);
+
+
+	void ShowPickedObject();
 
 
 	//For Input callback
