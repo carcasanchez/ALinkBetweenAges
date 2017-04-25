@@ -91,7 +91,7 @@ bool Eyegore::Chasing(float dt)
 		currentSpeed = rageSpeed;
 	else currentSpeed = speed;
 	GoTo(playerTile, currentSpeed, dt);
-	LookToPlayer();
+
 
 	return true;
 }
@@ -108,7 +108,14 @@ bool Eyegore::StepBack(float dt)
 		movement.y = -1;
 	else movement.y = +1;
 
-	Move(SDL_ceil(movement.x*speed*dt * 10), SDL_ceil(movement.y*speed*dt * 10));
+	//Move(SDL_ceil(movement.x*speed*dt * 10), SDL_ceil(movement.y*speed*dt * 10));
+	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
+
+	int currentSpeed;
+	if (life <= rageLife)
+		currentSpeed = rageSpeed;
+	else currentSpeed = speed;
+	GoTo(playerTile, currentSpeed, dt);
 
 	if (damagedTimer.ReadMs() > damagedLimit && pushedBackTimer.ReadMs() > 200)
 	{
