@@ -44,7 +44,10 @@ public:
 	UI_Counter*		rupees_counter = nullptr;
 
 	UI_Image*		Bombs = nullptr;
+	UI_Counter*		bombs_counter = nullptr;
+
 	UI_Image*		Arrows = nullptr;
+	UI_Counter*		arrows_counter = nullptr;
 
 	//life hud
 	UI_Image*			life = nullptr;	

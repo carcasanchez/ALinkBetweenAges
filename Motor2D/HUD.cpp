@@ -44,7 +44,10 @@ bool Hud::Update(float dt)
 	LookLife();
 
 	rupees_counter->LookNumber(App->game->em->player->rupees);
-	
+	bombs_counter->LookNumber(App->game->em->player->bombs);
+	arrows_counter->LookNumber(App->game->em->player->arrows);
+
+
 	return false;
 }
 
@@ -270,6 +273,8 @@ bool Hud::LoadHud(string file)
 	{
 		numbers = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		rupees_counter  = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
+		bombs_counter = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
+		arrows_counter = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
 
 		Rupees = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		Bombs = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
@@ -312,15 +317,23 @@ bool Hud::LoadHud(string file)
 
 		SetHudElements();
 
+		//RUPEES BOMBS ARROWS
 		hud_screen->AddChild(Rupees);
 		Rupees->AddChild(rupees_counter);
-		hud_screen->AddChild(Bombs);
-		hud_screen->AddChild(Arrows);
 
+		hud_screen->AddChild(Bombs);
+		Bombs->AddChild(bombs_counter);
+
+		hud_screen->AddChild(Arrows);
+		Arrows->AddChild(arrows_counter);
+
+		//ITEM FRAME
 		hud_screen->AddChild(items_frame);
 
+		//STAMINA
 		hud_screen->AddChild(stamina_bar);
 
+		//HEARTS
 		hud_screen->AddChild(life);
 		hud_screen->AddChild(empty_heart);
 		hud_screen->AddChild(medium_heart);
@@ -340,8 +353,13 @@ void Hud::SetHudElements()
 	rupees_counter->Set_Interactive_Box({-30,40,0,0 });
 	rupees_counter->SetImage(numbers, 14, 14);
 
-	Bombs->Set_Interactive_Box({ 250,20,0,0 });
-	Arrows->Set_Interactive_Box({ 325,20,0,0 });
+	Bombs->Set_Interactive_Box({ 275,20,0,0 });
+	bombs_counter->Set_Interactive_Box({ -30,40,0,0 });
+	bombs_counter->SetImage(numbers, 14, 14);
+
+	Arrows->Set_Interactive_Box({ 375,20,0,0 });
+	arrows_counter->Set_Interactive_Box({ -30,40,0,0 });
+	arrows_counter->SetImage(numbers, 14, 14);
 
 	items_frame->Set_Interactive_Box({ 40, 20,0,0 });
 
