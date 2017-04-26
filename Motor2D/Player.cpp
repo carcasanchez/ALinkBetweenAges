@@ -694,18 +694,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 	case ATTACK_UP:
 
-		switch (state)
+		if (state == E_DOWN)
 		{
-		case E_REPEAT:
-			break;
-
-		case E_DOWN:
-			if (toTalk != nullptr)
-				NextDialog();
-			
-			else
+			switch (holded_item)
 			{
-				if (!shoot_bow)
+			case NO_OBJECT:
+				if (toTalk != nullptr)
+					NextDialog();
+
+				else
 				{
 					if (actionState != ATTACKING && playerState != EVENT)
 					{
@@ -720,27 +717,31 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-				else
+
+			case BOMB_SAC:
+				if (bombs > 0)
 				{
-					currentDir = DIRECTION::D_UP;
-					actionState = SHOOTING_BOW;	
+					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+					bombs--;
+					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
 				}
+				break;
+
 			}
 		}
 		break;
 
 	case ATTACK_DOWN:
-		switch (state)
-		{
-		case E_REPEAT:
-			break;
 
-		case E_DOWN:
-			if (toTalk != nullptr)
-				NextDialog();
-			else
+		if (state == E_DOWN)
+		{
+			switch (holded_item)
 			{
-				if (!shoot_bow)
+			case NO_OBJECT:
+				if (toTalk != nullptr)
+					NextDialog();
+
+				else
 				{
 					if (actionState != ATTACKING && playerState != EVENT)
 					{
@@ -755,27 +756,31 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-				else
+
+			case BOMB_SAC:
+				if (bombs > 0)
 				{
-					currentDir = DIRECTION::D_DOWN;
-					actionState = SHOOTING_BOW;
+					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+					bombs--;
+					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
 				}
+				break;
+
 			}
 		}
 		break;
 
 	case ATTACK_LEFT:
-		switch (state)
-		{
-		case E_REPEAT:
-			break;
 
-		case E_DOWN:
-			if (toTalk != nullptr)
-				NextDialog();
-			else
+		if (state == E_DOWN)
+		{
+			switch (holded_item)
 			{
-				if(!shoot_bow)
+			case NO_OBJECT:
+				if (toTalk != nullptr)
+					NextDialog();
+
+				else
 				{
 					if (actionState != ATTACKING && playerState != EVENT)
 					{
@@ -790,34 +795,37 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-				else
+
+			case BOMB_SAC:
+				if (bombs > 0)
 				{
-					currentDir = DIRECTION::D_LEFT;
-					actionState = SHOOTING_BOW;
+					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+					bombs--;
+					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
 				}
+				break;
+
 			}
 		}
 		break;
 
 	case ATTACK_RIGHT:
-		switch (state)
-		{
-		case E_REPEAT:
-			break;
 
-		case E_DOWN:
-			if (toTalk != nullptr)
-				NextDialog();
-			else
+		if (state == E_DOWN)
+		{
+			switch (holded_item)
 			{
-				if(!shoot_bow)
+			case NO_OBJECT:
+				if (toTalk != nullptr)
+					NextDialog();
+
+				else
 				{
 					if (actionState != ATTACKING && playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
 							actionState = ATTACKING;
-
 							currentDir = DIRECTION::D_RIGHT;
 							createSwordCollider();
 							stamina -= attackTax;
@@ -826,14 +834,20 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-				else
+
+			case BOMB_SAC:
+				if (bombs > 0)
 				{
-					currentDir = DIRECTION::D_RIGHT;
-					actionState = SHOOTING_BOW;
+					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+					bombs--;
+					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
 				}
+				break;
+
 			}
 		}
 		break;
+
 
 	case DODGE:
 		if (state == E_DOWN && (stamina - dodgeTax >= 0))
@@ -860,27 +874,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		break;
 
 	case USE_ITEM:
+		UseObject();
 
-		if (actionState != SHOOTING_BOW)
-			shoot_bow = true;
-		
 		break;
 
 	case STOP_ITEM:
-
-		shoot_bow = false;
+		holded_item = NO_OBJECT;
 
 		break;
 
-	case UP:
-	{
-		
-	}
-
-	case DOWN:
-	{
-	
-	}
 
 	}
 }
@@ -1095,12 +1097,10 @@ void Player::UseObject(float dt)
 		break;
 
 	case BOMB_SAC:
-		if (bombs > 0)
-		{
-			iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-			bombs--;
-			App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
-		}
+
+		if(bombs > 0)
+			holded_item = BOMB_SAC;
+
 		break;
 
 	}

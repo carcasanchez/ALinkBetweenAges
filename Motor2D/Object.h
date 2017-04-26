@@ -7,6 +7,7 @@
 
 enum OBJECT_TYPE
 {
+	NO_OBJECT,
 	BOOK = 0,
 	LINK_ARROW,
 	GREEN_RUPEE,
