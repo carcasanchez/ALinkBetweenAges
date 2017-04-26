@@ -93,6 +93,7 @@
     <ClCompile Include="GreenSoldier.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="RedSoldier.cpp" />
+    <ClCompile Include="Tektite.cpp" />
     <ClCompile Include="UI_Counter.cpp" />
     <ClCompile Include="UI_DialogBox.cpp" />
     <ClCompile Include="UI_Heart.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Tektite.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_Counter.h" />
     <ClInclude Include="UI_DialogBox.h" />

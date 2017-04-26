@@ -108,6 +108,8 @@ bool j1GameLayer::Update(float dt)
 		em->CreateEnemy(1, WIZDROVE, mousePos.x, mousePos.y, vector<iPoint>());
 	else if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
 		em->CreateEnemy(1, EYEGORE, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+		em->CreateEnemy(1, TEKTITE, mousePos.x, mousePos.y, vector<iPoint>());
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
@@ -305,8 +307,6 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				c1->parent->sprite->tint = { 255, 150, 150, 255 };
 				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
 				c1->parent->damagedTimer.Start();
-				LOG("Eyegore damaged");
-
 			}
 			return true;
 		}

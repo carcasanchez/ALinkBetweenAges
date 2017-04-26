@@ -32,7 +32,7 @@
 	<octorok>
 		<base life = "2" speed = "30" damage ="2"/>
 		<collider x = "5" y = "7" w = "10" h = "15" type = "3"/>
-		<ranges hostile= "185" fight = "55" out="185" />
+		<ranges hostile= "185" out="185" />
 		<ratios attack = "500"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/octorok_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
@@ -41,7 +41,7 @@
 	<wizdrove>
 		<base life = "2" speed = "30" damage ="1"/>
 		<collider x = "9" y = "22" w = "15" h = "18" type = "3"/>
-		<ranges hostile= "185" fight = "55" out="185" />
+		<ranges hostile= "185" out="185" />
 		<ratios attack = "1000"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/wizdrove_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
@@ -50,9 +50,17 @@
 	<eyegore>
 		<base life = "9" speed = "1" rage_speed="60" rage_life ="3" damage ="1"/>
 		<collider x = "12" y = "22" w = "20" h = "20" type = "3"/>
-  		<ranges hostile= "185" fight = "55" out="185" />
+  		<ranges hostile= "185" out="185" />
 		<ratios attack = "1000"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/eyegore_animations.xml"/>
-  	<texture file = "textures/Enemy_sprites/Enemy.png"/>
+  		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</eyegore>
+
+	<tektite>
+		<base life = "2" speed = "10"  damage ="1"/>
+		<collider x = "10" y = "15" w = "20" h = "20" type = "3"/>
+  		<ranges hostile= "185" out="185" />
+		<animation file = "animations/enemies/tektite_animations.xml"/>
+  		<texture file = "textures/Enemy_sprites/Enemy.png"/>
+	</tektite>
 </attributes>

@@ -21,6 +21,7 @@
 #include "DarkZelda.h"
 #include "Wizdrove.h"
 #include "Eyegore.h"
+#include "Tektite.h"
 
 
 j1EntityManager::j1EntityManager() : player(NULL), sector(NULL)
@@ -170,6 +171,9 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, 
 		break;
 	case EYEGORE:
 		ret = new Eyegore();
+		break;
+	case TEKTITE:
+		ret = new Tektite();
 		break;
 	}
 
