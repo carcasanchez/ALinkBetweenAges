@@ -35,10 +35,6 @@ public:
 
 	void ChangeAge(LINK_AGE);
 
-	//THRASH VL
-	bool win_con = false;
-	bool attack_vicente = false;
-
 public:
 
 
@@ -86,6 +82,7 @@ public:
 
 
 	std::list <OBJECT_TYPE> inventory;
+	OBJECT_TYPE				holded_item = NO_OBJECT;
 	int equippedObject = 0;
 
 private:
@@ -106,7 +103,7 @@ private:
 
 
 	void ShowPickedObject();
-	void UseObject(float dt);
+	void UseObject(float dt = 0);
 
 	
 	//For Input callback
@@ -139,8 +136,6 @@ private:
 	
 	float forceUp = 0, forceDown = 0;
 
-	//bow
-	bool shoot_bow = false;
 };
 
 #endif // !_PLAYER_H_

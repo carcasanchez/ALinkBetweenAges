@@ -188,15 +188,6 @@ bool Player::Update(float dt)
 		break;
 	}
 
-	//THRASH FOR VS
-
-	if (attack_vicente && swordCollider != nullptr && actionState == ACTION_STATE::DODGING)
-	{
-		attack_vicente = false;
-		resetSwordCollider();
-	}
-
-
 	return ret;
 }
 
@@ -259,6 +250,23 @@ bool Player::Idle()
 			actionState = ATTACKING;
 			createSwordCollider();
 		}
+	}
+
+	//Dodge
+	switch (currentDir)
+	{
+	case D_UP:
+		dodgeDir.y = -1;
+		break;
+	case D_DOWN:
+		dodgeDir.y = 1;
+		break;
+	case D_RIGHT:
+		dodgeDir.x = 1;
+		break;
+	case D_LEFT:
+		dodgeDir.x = -1;
+		break;
 	}
 
 	
@@ -703,18 +711,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 	case ATTACK_UP:
 
-		switch (state)
+		if (state == E_DOWN)
 		{
-		case E_REPEAT:
-			break;
-
-		case E_DOWN:
-			if (toTalk != nullptr)
-				NextDialog();
-			
-			else
+			switch (holded_item)
 			{
-				if (!shoot_bow)
+			case NO_OBJECT:
+				if (toTalk != nullptr)
+					NextDialog();
+
+				else
 				{
 					if (actionState != ATTACKING && playerState != EVENT)
 					{
@@ -725,114 +730,154 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 							createSwordCollider();
 							stamina -= attackTax;
 							App->game->hud->stamina_bar->WasteStamina(attackTax);
-							attack_vicente = true;
 						}
 						break;
 					}
 				}
-				else
+
+			case BOMB_SAC:
+				if (bombs > 0)
 				{
-					currentDir = DIRECTION::D_UP;
-					actionState = SHOOTING_BOW;	
+					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+					bombs--;
+					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
 				}
+				break;
+
 			}
 		}
 		break;
 
 	case ATTACK_DOWN:
-		switch (state)
-		{
-		case E_REPEAT:
-			break;
 
-		case E_DOWN:
-			if (toTalk != nullptr)
-				NextDialog();
-			else
+		if (state == E_DOWN)
+		{
+			switch (holded_item)
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
+			case NO_OBJECT:
+				if (toTalk != nullptr)
+					NextDialog();
+
+				else
 				{
-					if (stamina - attackTax >= 0)
+					if (actionState != ATTACKING && playerState != EVENT)
 					{
-						actionState = ATTACKING;
-						currentDir = DIRECTION::D_DOWN;
-						createSwordCollider();
-						stamina -= attackTax;
-						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						attack_vicente = true;
+						if (stamina - attackTax >= 0)
+						{
+							actionState = ATTACKING;
+							currentDir = DIRECTION::D_DOWN;
+							createSwordCollider();
+							stamina -= attackTax;
+							App->game->hud->stamina_bar->WasteStamina(attackTax);
+						}
+						break;
 					}
-					break;
 				}
+
+			case BOMB_SAC:
+				if (bombs > 0)
+				{
+					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+					bombs--;
+					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
+				}
+				break;
+
 			}
 		}
 		break;
 
 	case ATTACK_LEFT:
-		switch (state)
-		{
-		case E_REPEAT:
-			break;
 
-		case E_DOWN:
-			if (toTalk != nullptr)
-				NextDialog();
-			else
+		if (state == E_DOWN)
+		{
+			switch (holded_item)
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
+			case NO_OBJECT:
+				if (toTalk != nullptr)
+					NextDialog();
+
+				else
 				{
-					if (stamina - attackTax >= 0)
+					if (actionState != ATTACKING && playerState != EVENT)
 					{
-						actionState = ATTACKING;
-						currentDir = DIRECTION::D_LEFT;
-						createSwordCollider();
-						stamina -= attackTax;
-						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						attack_vicente = true;
+						if (stamina - attackTax >= 0)
+						{
+							actionState = ATTACKING;
+							currentDir = DIRECTION::D_LEFT;
+							createSwordCollider();
+							stamina -= attackTax;
+							App->game->hud->stamina_bar->WasteStamina(attackTax);
+						}
+						break;
 					}
-					break;
 				}
+
+			case BOMB_SAC:
+				if (bombs > 0)
+				{
+					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+					bombs--;
+					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
+				}
+				break;
+
 			}
 		}
 		break;
 
 	case ATTACK_RIGHT:
-		switch (state)
+
+		if (state == E_DOWN)
 		{
-		case E_REPEAT:
-			break;
-
-		case E_DOWN:
-			if (toTalk != nullptr)
-				NextDialog();
-			else
+			switch (holded_item)
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
-				{
-					if (stamina - attackTax >= 0)
-					{
-						actionState = ATTACKING;
+			case NO_OBJECT:
+				if (toTalk != nullptr)
+					NextDialog();
 
-						currentDir = DIRECTION::D_RIGHT;
-						createSwordCollider();
-						stamina -= attackTax;
-						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						attack_vicente = true;
+				else
+				{
+					if (actionState != ATTACKING && playerState != EVENT)
+					{
+						if (stamina - attackTax >= 0)
+						{
+							actionState = ATTACKING;
+							currentDir = DIRECTION::D_RIGHT;
+							createSwordCollider();
+							stamina -= attackTax;
+							App->game->hud->stamina_bar->WasteStamina(attackTax);
+						}
+						break;
 					}
-					break;
 				}
+
+			case BOMB_SAC:
+				if (bombs > 0)
+				{
+					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+					bombs--;
+					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
+				}
+				break;
+
 			}
 		}
 		break;
 
+
 	case DODGE:
 		if (state == E_DOWN && (stamina - dodgeTax >= 0))
 		{
-			stamina -= dodgeTax;
-			App->game->hud->stamina_bar->WasteStamina(dodgeTax);
-			actionState = DODGING;
-			Change_direction();
-			dodging = true;
-			dodgeTimer.Start();
+			if (actionState != SPINNING && actionState != ATTACKING)
+			{
+				stamina -= dodgeTax;
+				App->game->hud->stamina_bar->WasteStamina(dodgeTax);
+				actionState = DODGING;
+				Change_direction();
+				dodging = true;
+				dodgeTimer.Start();
+			}
 		}
 		break;
 
@@ -846,27 +891,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		break;
 
 	case USE_ITEM:
+		UseObject();
 
-		if (actionState != SHOOTING_BOW)
-			shoot_bow = true;
-		
 		break;
 
 	case STOP_ITEM:
-
-		shoot_bow = false;
+		holded_item = NO_OBJECT;
 
 		break;
 
-	case UP:
-	{
-		
-	}
-
-	case DOWN:
-	{
-	
-	}
 
 	}
 }
@@ -1081,12 +1114,10 @@ void Player::UseObject(float dt)
 		break;
 
 	case BOMB_SAC:
-		if (bombs > 0)
-		{
-			iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-			bombs--;
-			App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
-		}
+
+		if(bombs > 0)
+			holded_item = BOMB_SAC;
+
 		break;
 
 	}
