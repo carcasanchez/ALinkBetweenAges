@@ -15,6 +15,7 @@ public:
 
 	bool Chasing(float dt);
 	bool StepBack(float dt);
+	void OnDeath();
 };
 
 #endif#pragma once

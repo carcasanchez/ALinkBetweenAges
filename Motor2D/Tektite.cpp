@@ -109,3 +109,14 @@ bool Tektite::StepBack(float dt)
 
 	return true;
 }
+
+void Tektite::OnDeath()
+{
+	toDelete = true;
+	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+	int drop = rand() % 5;
+	if (drop == 3)
+	{
+		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
+	}
+}

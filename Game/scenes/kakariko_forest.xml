@@ -6,27 +6,11 @@
       <entities>
  
 	  <npcs>
-		<sample type = "7" x = "75" y = "76" id="8"/>
+		<sample type = "7" x = "75" y = "70" id="8"/>
         </npcs>
 
         <enemies>
-		<sample type = "1" x = "146" y = "285">
-		<patrol x="146" y = "285"/>
-		<patrol x="146" y = "291"/>
- 	 	</sample >
 
-		<sample type = "1" x = "174" y = "125">
-		<patrol x="174" y = "125"/>
-		<patrol x="174" y = "135"/>
- 	 	</sample >
-		<sample type = "1" x = "136" y = "181">
-		<patrol x="136" y = "181"/>
-		<patrol x="136" y = "186"/>
- 	 	</sample >
-		<sample type = "1" x = "187" y = "154">
-		<patrol x = "187" y = "154"/>
-		<patrol x = "174" y = "154"/>
- 	 	</sample >
 
 		<sample type = "1" x = "148" y = "105">
  	 	</sample >
@@ -36,8 +20,6 @@
 
         <special>
           <!--rocks, grass, etc-->
-          <book object_type = "0" x = "71" y = "75" />
-	 
         </special>
       </entities>
 
