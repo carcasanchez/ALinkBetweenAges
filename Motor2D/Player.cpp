@@ -750,18 +750,26 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				NextDialog();
 			else
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
+				if (!shoot_bow)
 				{
-					if (stamina - attackTax >= 0)
+					if (actionState != ATTACKING && playerState != EVENT)
 					{
-						actionState = ATTACKING;
-						currentDir = DIRECTION::D_DOWN;
-						createSwordCollider();
-						stamina -= attackTax;
-						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						attack_vicente = true;
+						if (stamina - attackTax >= 0)
+						{
+							actionState = ATTACKING;
+							currentDir = DIRECTION::D_DOWN;
+							createSwordCollider();
+							stamina -= attackTax;
+							App->game->hud->stamina_bar->WasteStamina(attackTax);
+							attack_vicente = true;
+						}
+						break;
 					}
-					break;
+				}
+				else
+				{
+					currentDir = DIRECTION::D_DOWN;
+					actionState = SHOOTING_BOW;
 				}
 			}
 		}
@@ -778,18 +786,26 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				NextDialog();
 			else
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
+				if(!shoot_bow)
 				{
-					if (stamina - attackTax >= 0)
+					if (actionState != ATTACKING && playerState != EVENT)
 					{
-						actionState = ATTACKING;
-						currentDir = DIRECTION::D_LEFT;
-						createSwordCollider();
-						stamina -= attackTax;
-						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						attack_vicente = true;
+						if (stamina - attackTax >= 0)
+						{
+							actionState = ATTACKING;
+							currentDir = DIRECTION::D_LEFT;
+							createSwordCollider();
+							stamina -= attackTax;
+							App->game->hud->stamina_bar->WasteStamina(attackTax);
+							attack_vicente = true;
+						}
+						break;
 					}
-					break;
+				}
+				else
+				{
+					currentDir = DIRECTION::D_LEFT;
+					actionState = SHOOTING_BOW;
 				}
 			}
 		}
@@ -806,19 +822,27 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				NextDialog();
 			else
 			{
-				if (actionState != ATTACKING && playerState != EVENT)
+				if(!shoot_bow)
 				{
-					if (stamina - attackTax >= 0)
+					if (actionState != ATTACKING && playerState != EVENT)
 					{
-						actionState = ATTACKING;
+						if (stamina - attackTax >= 0)
+						{
+							actionState = ATTACKING;
 
-						currentDir = DIRECTION::D_RIGHT;
-						createSwordCollider();
-						stamina -= attackTax;
-						App->game->hud->stamina_bar->WasteStamina(attackTax);
-						attack_vicente = true;
+							currentDir = DIRECTION::D_RIGHT;
+							createSwordCollider();
+							stamina -= attackTax;
+							App->game->hud->stamina_bar->WasteStamina(attackTax);
+							attack_vicente = true;
+						}
+						break;
 					}
-					break;
+				}
+				else
+				{
+					currentDir = DIRECTION::D_RIGHT;
+					actionState = SHOOTING_BOW;
 				}
 			}
 		}
