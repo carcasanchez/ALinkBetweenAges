@@ -3,6 +3,7 @@
 #include "j1Gui.h"
 #include "j1GameLayer.h"
 #include "j1EntityManager.h"
+#include "HUD.h"
 #include "Player.h"
 #include "j1App.h"
 
@@ -85,12 +86,33 @@ void UI_Stamina::RecoverStamina()
 	
 	int percent_stamina = (App->game->em->player->stamina * 100) / App->game->em->player->maxStamina;
 
+	
+	ChangeColor(percent_stamina);
+	
 	//magic numbers :c
 	int image_width = 160;
 
 	int move_to = 160 - ((percent_stamina * image_width) / 100);
 
 	move_rect.x = draw_rect.x - move_to;
+}
+
+void UI_Stamina::ChangeColor(int percent)
+{
+	if (percent < 40)
+	{
+		if (percent < 15)
+		{
+			SetStamina(App->game->hud->stamina_red);
+			return;
+		}	
+		SetStamina(App->game->hud->stamina_yellow);
+		return;
+	}
+
+	if(stamina != App->game->hud->stamina_green)
+		SetStamina(App->game->hud->stamina_green);
+
 }
 
 void UI_Stamina::PrintBar()

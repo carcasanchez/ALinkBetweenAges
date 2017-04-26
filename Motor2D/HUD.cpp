@@ -62,6 +62,8 @@ bool Hud::CleanUp()
 
 	RELEASE(stamina_container);
 	RELEASE(stamina_green);
+	RELEASE(stamina_yellow);
+	RELEASE(stamina_red);
 
 	return true;
 }
@@ -289,6 +291,8 @@ bool Hud::LoadHud(string file)
 
 		stamina_container = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		stamina_green = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		stamina_yellow = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
+		stamina_red = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
 		stamina_bar = (UI_Stamina*)App->gui->Add_element(STAMINA_BAR, App->game);
 
 		pugi::xml_node hud_node = hud_file.child("images");
@@ -312,8 +316,9 @@ bool Hud::LoadHud(string file)
 
 		//stamina
 		stamina_container->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("bar")));
-		stamina_green->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("sta")));
-
+		stamina_green->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("sta_g")));
+		stamina_yellow->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("sta_y")));
+		stamina_red->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("sta_r")));
 
 		SetHudElements();
 

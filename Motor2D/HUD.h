@@ -69,6 +69,9 @@ public:
 	//Stamina images
 	UI_Image*		stamina_container = nullptr; //Image not in gui
 	UI_Image*		stamina_green = nullptr; //Image not in gui
+	UI_Image*		stamina_yellow = nullptr; //Image not in gui
+	UI_Image*		stamina_red = nullptr; //Image not in gui
+
 	UI_Stamina*		stamina_bar = nullptr;
 
 	//Pause Elements

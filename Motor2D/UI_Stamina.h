@@ -4,7 +4,6 @@
 #include "UI_element.h"
 #include "UI_Image.h"
 
-
 class UI_Stamina : public UI_element
 {
 public:
@@ -20,6 +19,7 @@ public:
 
 	void		WasteStamina(int);
 	void		RecoverStamina();
+	void		ChangeColor(int);
 
 	SDL_Rect	move_rect;
 
