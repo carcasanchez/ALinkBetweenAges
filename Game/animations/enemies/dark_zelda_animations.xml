@@ -67,15 +67,18 @@
 
 		</CHARGE_BOW>
 
-  <UNCHARGE_BOW>
-    <name value = "7"  />
+  		<UNCHARGE_BOW>
+   			<name value = "7"  />
+
 			<DOWN> 
 				<values name = "1" x ="68" y = "111" w = "22" h = "36" frameNumber = "2" margin = "1" pivot_x = "12" pivot_y = "34" flip= "0"/>
 			</DOWN>
     
-    <loop value = "false" />
+   			<loop value = "false" />
+
 			<speed value = "0.1" />
-  </UNCHARGE_BOW>
+
+  		</UNCHARGE_BOW>
 
 		<TELEPORT>
 			<name value = "8"  />
@@ -109,5 +112,30 @@
 			<speed value = "0.1" />
 
 		</TELEPORT>
+		
+		<STAB>
+			<name value = "10"  />
+			
+			<DOWN>
+				<values name = "0" x ="1" y = "299" w = "32" h = "50" frameNumber = "10" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<UP>
+				<values name = "1" x ="1" y = "350" w = "32" h = "36" frameNumber = "10" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
+			</UP>
+
+			<RIGHT>
+				<values name = "2" x ="1" y = "387" w = "54" h = "37" frameNumber = "10" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
+			</RIGHT>
+
+			<LEFT>
+				<values name = "3" x ="1" y = "387" w = "54" h = "37" frameNumber = "10" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
+			</LEFT>
+		
+			<loop value = "true"  />
+
+			<speed value = "0.1"  />
+
+		</STAB>
 		
 </animations>
