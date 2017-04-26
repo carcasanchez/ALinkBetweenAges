@@ -24,6 +24,7 @@
 #include "j1GameLayer.h"
 #include "j1App.h"
 #include "DialogManager.h"
+#include "j1QuestManager.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -48,6 +49,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	collisions = new j1CollisionManager();
 	console = new j1Console();
 	dialog = new DialogManager();
+	quest = new j1QuestManager();
 	render = new j1Render();
 
 	// Ordered for awake / Start / Update
@@ -69,6 +71,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(collisions);
 	AddModule(console);
 	AddModule(dialog);
+	AddModule(quest);
 	// render last to swap buffer
 	AddModule(render);
 

@@ -28,6 +28,7 @@ class j1GameLayer;
 class j1Console;
 class j1Render;
 class DialogManager;
+class j1QuestManager;
 
 class j1App : public j1Module
 {
@@ -119,6 +120,9 @@ public:
 	j1Console*			console = NULL;
 	j1Render*			render = NULL;
 	DialogManager*      dialog = NULL;
+	j1QuestManager*		quest = NULL;
+
+
 private:
 
 	list<j1Module*>	modules;

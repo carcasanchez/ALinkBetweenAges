@@ -160,6 +160,9 @@
     <ClCompile Include="Tektite.cpp">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="j1QuestManager.cpp">
+      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1App.h">
@@ -338,6 +341,9 @@
     </ClInclude>
     <ClInclude Include="Tektite.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="j1QuestManager.h">
+      <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

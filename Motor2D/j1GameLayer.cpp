@@ -14,6 +14,7 @@
 #include "Scene.h"
 #include "j1Map.h"
 #include "HUD.h"
+#include "j1QuestManager.h"
 
 
 // just for temporal wall collider
@@ -410,6 +411,13 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		Object* obj = em->CreateObject(1, objPos.x, objPos.y, ((Chest*)c1->parent)->objectInside);
 		PickObject(obj);
 		return true;
+	}
+
+
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_EVENT)
+	{
+		if (App->quest->TriggerCollisionCallback(c2) == false)
+			App->quest->StepCollisionCallback(c2);
 	}
 		
 	return true;

@@ -136,4 +136,8 @@
     </dialogues>
   </dialogue>
 
+ <quest>
+ 	<data file = "quests/questData.xml"/>
+  </quest>
+
 </config>
