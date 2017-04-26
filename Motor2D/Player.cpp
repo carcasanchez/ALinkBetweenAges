@@ -85,6 +85,9 @@ bool Player::Spawn(std::string file, iPoint pos)
 		dodgeTax = node.attribute("staminaTax").as_int(25);
 		dodgeLimit = node.attribute("limit").as_int(50);
 
+		//max items
+		maxArrows = 10;
+		maxBombs = 5;
 	
 
 		invulnerable = false;

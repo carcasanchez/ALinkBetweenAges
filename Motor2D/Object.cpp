@@ -75,6 +75,12 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case HEART_CONTAINER:
 				attributes = attributes.child("heart_container");
 				break;
+			case ARROW_DROP:
+				attributes = attributes.child("arrow_drop");
+				break;
+			case BOMB_DROP:
+				attributes = attributes.child("bomb_drop");
+				break;
 		}		
 		LoadAttributes(attributes);
 
@@ -88,6 +94,10 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 				col->rect.h = 7;
 				col->rect.w = 15;
 			}
+			break;
+
+		case ARROW_DROP:
+			currentDir = D_UP;
 			break;
 		}
 

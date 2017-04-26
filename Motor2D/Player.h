@@ -78,6 +78,12 @@ public:
 	Object* pickedObject = nullptr;
 	j1PerfTimer showObjectTimer;
 
+
+	int maxArrows;
+	int maxBombs;
+	int arrows = 0;
+	int bombs = 0;
+
 private:
 	void Change_direction();
 	void ManageStamina(float dt);

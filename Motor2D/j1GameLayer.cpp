@@ -83,8 +83,9 @@ bool j1GameLayer::Update(float dt)
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		//	em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, HEART_CONTAINER);
+		em->CreateObject(1, mousePos.x, mousePos.y, BUSH);
+
+
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
@@ -158,6 +159,15 @@ void j1GameLayer::PickObject(Object* object)
 	case HEART_CONTAINER:
 		em->player->maxLife++;
 		em->player->life = em->player->maxLife;
+		break;
+	case BOMB_DROP:
+		if (em->player->bombs < em->player->maxBombs)
+			em->player->bombs++;
+		break;
+	case ARROW_DROP:
+		if (em->player->arrows < em->player->maxArrows)
+			em->player->arrows++;
+		break;
 	}
 	
 	if (em->player->pickedObject)

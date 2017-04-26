@@ -19,7 +19,9 @@ enum OBJECT_TYPE
 	CHEST,
 	MAGIC_SLASH,
 	BOMB,
-	HEART_CONTAINER
+	HEART_CONTAINER,
+	ARROW_DROP,
+	BOMB_DROP
 };
 
 class Object : public Entity
@@ -74,6 +76,7 @@ public:
 public:
 
 };
+
 
 class Rupee : public Object
 {

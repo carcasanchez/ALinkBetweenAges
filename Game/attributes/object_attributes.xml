@@ -14,6 +14,13 @@
  	 <texture file = "textures/Object_sprites/arrow.png"/>
    </arrow>
 
+   <arrow_drop>
+ 	 <base life = "1"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "15" type = "7"/>
+ 	 <animation file = "animations/objects/arrow_animations.xml"/>
+ 	 <texture file = "textures/Object_sprites/arrow.png"/>
+   </arrow_drop>
+
    <green_rupee>
  	 <base life = "1"/>
  	 <collider x = "8" y = "11" w = "7" h = "14" type = "7"/>
@@ -37,14 +44,14 @@
 
    <heart>
  	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "9" h = "8" type = "7"/>
+ 	 <collider x = "4" y = "4" w = "9" h = "8" type = "7"/>
  	 <animation file = "animations/objects/heart_animations.xml"/>
  	 <texture file = "textures/Object_sprites/heart.png"/>
    </heart>
 
    <bush>
  	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "16" h = "16" type = "8"/>
+ 	 <collider x = "8" y = "8" w = "16" h = "16" type = "8"/>
  	 <animation file = "animations/objects/bush_animations.xml"/>
  	 <texture file = "textures/Object_sprites/bush.png"/>
    </bush>
@@ -76,6 +83,13 @@
     <animation file = "animations/objects/bomb_animations.xml"/>
     <texture file = "textures/Object_sprites/bomb.png"/>
   </bomb>
+
+ <bomb_drop>
+    <base life = "1"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "7"/>
+    <animation file = "animations/objects/bomb_animations.xml"/>
+    <texture file = "textures/Object_sprites/bomb.png"/>
+  </bomb_drop>
 
 <heart_container>
     <base life = "1"/>
