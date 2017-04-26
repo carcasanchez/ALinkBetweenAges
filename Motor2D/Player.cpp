@@ -734,7 +734,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-
+				break;
 			case BOMB_SAC:
 				if (bombs > 0)
 				{
@@ -773,7 +773,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-
+				break;
 			case BOMB_SAC:
 				if (bombs > 0)
 				{
@@ -812,7 +812,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-
+				break;
 			case BOMB_SAC:
 				if (bombs > 0)
 				{
@@ -851,7 +851,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-
+				break;
 			case BOMB_SAC:
 				if (bombs > 0)
 				{
