@@ -721,7 +721,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				else
 				{
-					if (actionState != ATTACKING && playerState != EVENT)
+					if (actionState != ATTACKING && actionState != SPINNING && playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
@@ -760,7 +760,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				else
 				{
-					if (actionState != ATTACKING && playerState != EVENT)
+					if (actionState != ATTACKING && actionState != SPINNING && playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
@@ -799,7 +799,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				else
 				{
-					if (actionState != ATTACKING && playerState != EVENT)
+					if (actionState != ATTACKING && actionState != SPINNING && playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
@@ -838,7 +838,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				else
 				{
-					if (actionState != ATTACKING && playerState != EVENT)
+					if (actionState != ATTACKING && actionState != SPINNING && playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
@@ -882,7 +882,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		break;
 
 	case SPIN_TO_WIN:
-		if (actionState != SPINNING && stamina > spinTax)
+		if (actionState != SPINNING && actionState != ATTACKING && stamina > spinTax)
 		{
 			stamina -= spinTax;
 			actionState = SPINNING;
