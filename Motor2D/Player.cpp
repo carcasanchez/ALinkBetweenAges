@@ -188,15 +188,6 @@ bool Player::Update(float dt)
 		break;
 	}
 
-	//THRASH FOR VS
-
-	if (attack_vicente && swordCollider != nullptr && actionState == ACTION_STATE::DODGING)
-	{
-		attack_vicente = false;
-		resetSwordCollider();
-	}
-
-
 	return ret;
 }
 
@@ -725,7 +716,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 							createSwordCollider();
 							stamina -= attackTax;
 							App->game->hud->stamina_bar->WasteStamina(attackTax);
-							attack_vicente = true;
 						}
 						break;
 					}
@@ -761,7 +751,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 							createSwordCollider();
 							stamina -= attackTax;
 							App->game->hud->stamina_bar->WasteStamina(attackTax);
-							attack_vicente = true;
 						}
 						break;
 					}
@@ -797,7 +786,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 							createSwordCollider();
 							stamina -= attackTax;
 							App->game->hud->stamina_bar->WasteStamina(attackTax);
-							attack_vicente = true;
 						}
 						break;
 					}
@@ -834,7 +822,6 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 							createSwordCollider();
 							stamina -= attackTax;
 							App->game->hud->stamina_bar->WasteStamina(attackTax);
-							attack_vicente = true;
 						}
 						break;
 					}
@@ -851,12 +838,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 	case DODGE:
 		if (state == E_DOWN && (stamina - dodgeTax >= 0))
 		{
-			stamina -= dodgeTax;
-			App->game->hud->stamina_bar->WasteStamina(dodgeTax);
-			actionState = DODGING;
-			Change_direction();
-			dodging = true;
-			dodgeTimer.Start();
+			if (actionState != SPINNING && actionState != ATTACKING)
+			{
+				stamina -= dodgeTax;
+				App->game->hud->stamina_bar->WasteStamina(dodgeTax);
+				actionState = DODGING;
+				Change_direction();
+				dodging = true;
+				dodgeTimer.Start();
+			}
 		}
 		break;
 

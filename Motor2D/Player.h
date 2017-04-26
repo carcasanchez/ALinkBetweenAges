@@ -35,10 +35,6 @@ public:
 
 	void ChangeAge(LINK_AGE);
 
-	//THRASH VL
-	bool win_con = false;
-	bool attack_vicente = false;
-
 public:
 
 

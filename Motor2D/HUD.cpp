@@ -65,9 +65,6 @@ bool Hud::CleanUp()
 
 void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 {
-	if (App->game->em->player->win_con == false)
-	{
-
 	
 	switch (new_event)
 	{
@@ -143,8 +140,6 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		break;
 
 	}
-	}
-
 }
 
 bool Hud::LoadPause(string file)
