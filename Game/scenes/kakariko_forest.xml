@@ -46,6 +46,8 @@
 		<sample type = "7" x = "111" y = "156"> </sample >
 		
 		<sample type = "7" x = "175" y = "67"> </sample >
+		<sample type = "7" x = "66" y = "181"> </sample >
+
 	</enemies>
 
         <special>
