@@ -6,8 +6,8 @@
 #include "Bezier.h"
 #include "InputManager.h"
 #include "j1PerfTimer.h"
+#include "Object.h"
 
-class Object;
 
 
 
@@ -84,6 +84,10 @@ public:
 	int arrows = 0;
 	int bombs = 0;
 
+
+	std::list <OBJECT_TYPE> inventory;
+	int equippedObject = 0;
+
 private:
 	void Change_direction();
 	void ManageStamina(float dt);
@@ -102,8 +106,9 @@ private:
 
 
 	void ShowPickedObject();
+	void UseObject(float dt);
 
-
+	
 	//For Input callback
 	void OnInputCallback(INPUTEVENT, EVENTSTATE);
 

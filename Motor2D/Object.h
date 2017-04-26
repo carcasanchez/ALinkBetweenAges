@@ -21,7 +21,8 @@ enum OBJECT_TYPE
 	BOMB,
 	HEART_CONTAINER,
 	ARROW_DROP,
-	BOMB_DROP
+	BOMB_DROP,
+	LIFE_POTION
 };
 
 class Object : public Entity

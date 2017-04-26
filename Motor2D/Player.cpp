@@ -15,7 +15,6 @@
 #include "DialogManager.h"
 #include "j1SceneManager.h"
 #include "j1EntityManager.h"
-#include "Object.h"
 
 
 Player::Player() : Entity(LINK)
@@ -140,6 +139,10 @@ bool Player::Update(float dt)
 	ManageStamina(dt);	
 
 	ShowPickedObject();
+
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		UseObject(dt);
 
 	switch (playerState)
 	{
@@ -1051,4 +1054,31 @@ void Player::ManageStamina(float dt)
 		stamina += staminaRec*dt;
 	}
 	else stamina = maxStamina;
+}
+
+void Player::UseObject(float dt)
+{
+	if (inventory.size() <= 0)
+	{
+		return;
+	}
+
+	std::list<OBJECT_TYPE>::iterator currentItem;
+	int i = 0;
+	for (currentItem = inventory.begin() ; i < equippedObject ; currentItem++, i++)
+	{
+
+	}
+
+
+	switch ((*currentItem))
+	{
+	case LIFE_POTION:		
+		if(maxLife-life >=3)
+		life += 3;
+		else life = maxLife;
+		inventory.erase(currentItem);
+		break;
+	}
+
 }
