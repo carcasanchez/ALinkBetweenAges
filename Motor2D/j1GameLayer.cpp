@@ -220,6 +220,14 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 	player.append_attribute("direction") = em->player->currentDir;
 	player.append_attribute("age") = em->player->age;
 	player.append_attribute("rupees") = em->player->rupees;
+	player.append_attribute("arrows") = em->player->arrows;
+	player.append_attribute("bombs") = em->player->bombs;
+
+	pugi::xml_node inventory = player.append_child("inventory");
+	for (list<OBJECT_TYPE>::iterator it = em->player->inventory.begin(); it!= em->player->inventory.end(); it++)
+	{
+		inventory.append_child("item").append_attribute("type") = (*it);
+	}
 
 	//Save current map
 	data.append_child("current_map").append_attribute("name") = App->sceneM->currentScene->name.c_str();
@@ -237,6 +245,14 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 	em->player->rupees = data.child("player").attribute("rupees").as_int();
 
 	em->player->changeAge = data.child("player").attribute("age").as_int();
+
+
+	em->player->inventory.clear();
+
+	for (pugi::xml_node it = data.child("player").child("inventory").first_child(); it; it = it.next_sibling("item"))
+	{
+		em->player->inventory.push_back((OBJECT_TYPE)it.attribute("type").as_int());
+	}
 
 	string dest = data.child("current_map").attribute("name").as_string();
 

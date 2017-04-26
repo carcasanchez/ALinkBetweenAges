@@ -21,7 +21,8 @@ enum REWARD_TYPE
 {
 	//Rewards
 	CINEMATIC = 0,
-	CREATE_ENEMY
+	CREATE_ENEMY,
+	LOAD_MAP
 };
 
 
