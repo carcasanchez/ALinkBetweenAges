@@ -22,7 +22,6 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	LOG("Creating Collision Manager");
 	bool ret = true;
 
-	//TODO: LOAD DATA FROM CONFIG XML
 	
 	//Player collisions
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;

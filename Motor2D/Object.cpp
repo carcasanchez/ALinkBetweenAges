@@ -84,6 +84,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case LIFE_POTION:
 				attributes = attributes.child("life_potion");
 				break;
+			case BOMB_SAC:
+				attributes = attributes.child("bomb_sac");
+				break;
 		}		
 		LoadAttributes(attributes);
 

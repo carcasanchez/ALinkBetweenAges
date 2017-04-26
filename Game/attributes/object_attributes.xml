@@ -90,6 +90,13 @@
     <animation file = "animations/objects/bomb_animations.xml"/>
     <texture file = "textures/Object_sprites/bomb.png"/>
   </bomb_drop>
+ 
+<bomb_sac>
+    <base life = "1"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "7"/>
+    <animation file = "animations/objects/bomb_animations.xml"/>
+    <texture file = "textures/Object_sprites/bomb.png"/>
+  </bomb_sac>
 
 <heart_container>
     <base life = "1"/>

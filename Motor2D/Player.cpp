@@ -140,7 +140,7 @@ bool Player::Update(float dt)
 
 	ShowPickedObject();
 
-
+	//TODO: Move this to idle and walking
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		UseObject(dt);
 
@@ -1079,6 +1079,18 @@ void Player::UseObject(float dt)
 		else life = maxLife;
 		inventory.erase(currentItem);
 		break;
+
+	case BOMB_SAC:
+		if (bombs > 0)
+		{
+			iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+			bombs--;
+			App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
+		}
+		break;
+
 	}
+
+
 
 }

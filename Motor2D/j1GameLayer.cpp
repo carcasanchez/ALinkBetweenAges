@@ -83,7 +83,7 @@ bool j1GameLayer::Update(float dt)
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		em->CreateObject(1, mousePos.x, mousePos.y, LIFE_POTION);
+		em->CreateObject(1, mousePos.x, mousePos.y, BOMB_SAC);
 
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
@@ -171,6 +171,9 @@ void j1GameLayer::PickObject(Object * object)
 
 	case LIFE_POTION:
 		em->player->inventory.push_back(LIFE_POTION);
+		break;
+	case BOMB_SAC:
+		em->player->inventory.push_back(BOMB_SAC);
 		break;
 	}
 	

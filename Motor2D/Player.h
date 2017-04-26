@@ -82,7 +82,7 @@ public:
 	int maxArrows;
 	int maxBombs;
 	int arrows = 0;
-	int bombs = 0;
+	int bombs = 3;
 
 
 	std::list <OBJECT_TYPE> inventory;
