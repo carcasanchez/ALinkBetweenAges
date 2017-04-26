@@ -252,6 +252,23 @@ bool Player::Idle()
 		}
 	}
 
+	//Dodge
+	switch (currentDir)
+	{
+	case D_UP:
+		dodgeDir.y = -1;
+		break;
+	case D_DOWN:
+		dodgeDir.y = 1;
+		break;
+	case D_RIGHT:
+		dodgeDir.x = 1;
+		break;
+	case D_LEFT:
+		dodgeDir.x = -1;
+		break;
+	}
+
 	
 	return false;
 }
