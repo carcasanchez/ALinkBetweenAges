@@ -71,7 +71,7 @@ public:
 
 public:
 	// Position in Entity Manager
-	std::list<Entity*>::iterator id;
+	int id;
 
 	// Graphic Resources
 	Sprite* sprite;

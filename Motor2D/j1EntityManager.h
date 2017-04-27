@@ -34,9 +34,11 @@ public:
 	bool CleanUp();
 
 	Player* CreatePlayer(int, int, LINK_AGE);
-	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>);
-	Npc*	CreateNPC(int, NPC_TYPE, int, int, int);
-	Object* CreateObject(int, int, int, OBJECT_TYPE);
+	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>, int id = -1);
+	Npc*	CreateNPC(int, NPC_TYPE, int, int, int id = -1);
+	Object* CreateObject(int, int, int, OBJECT_TYPE, int id = -1);
+
+	Entity* GetEntityFromId(int);
 
 	bool CleanEntities();
 	void SetSectorRef(int*);

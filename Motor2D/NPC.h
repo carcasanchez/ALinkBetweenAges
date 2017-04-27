@@ -32,7 +32,6 @@ public:
 
 public:
 
-	int npcId;
 	int dialogState;
 
 	

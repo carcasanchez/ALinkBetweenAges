@@ -70,10 +70,6 @@ bool j1EntityManager::PreUpdate()
 		{
 			++item;
 		}
-
-		// reasign ids
-		if(item != entities[*sector].end())
-			(*item)->id = item;
 	}
 
 	return ret;
@@ -148,7 +144,7 @@ Player* j1EntityManager::CreatePlayer(int x, int y, LINK_AGE age)
 }
 
 //Entity factory methods (X and Y in Map Coordinates)
-Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, vector<iPoint> patrolPoints)
+Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, vector<iPoint> patrolPoints, int id)
 {
 	Enemy* ret = nullptr;
 
@@ -183,7 +179,7 @@ Enemy * j1EntityManager::CreateEnemy(int sector, ENEMY_TYPE type, int x, int y, 
 	{
 		ret->type = ENEMY;
 		entities[sector].push_back(ret);
-		ret->id = entities[sector].end();
+		ret->id = id;
 		ret->patrolPoints = patrolPoints;
 	}
 	else
@@ -236,10 +232,7 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 	{
 		ret->type = NPC;
 		entities[sector].push_back(ret);
-		ret->id = entities[sector].end();
-
-		//For dialog purposes
-		ret->npcId = id;
+		ret->id = id;
 	}
 	else
 	{
@@ -250,7 +243,7 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 	return ret;
 }
 
-Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE type)
+Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE type, int id)
 {
 	Object* ret;
 	switch (type)
@@ -292,7 +285,7 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	{
 		ret->type = OBJECT;
 		entities[sector].push_back(ret);
-		ret->id = entities[sector].end();
+		ret->id = id;
 		ret->UpdateCollider();
 
 	}
@@ -303,6 +296,21 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	}
 
 	return ret;
+}
+
+Entity * j1EntityManager::GetEntityFromId(int id)
+{
+	for (int i = 1; i <= App->sceneM->currentScene->maxSectors; i++)
+	{
+		for (std::list<Entity*>::iterator item = entities[i].begin(); item != entities[i].end(); item++)
+		{
+			if((*item)->id == id)
+				return (*item);			
+		}
+
+	}
+
+	return nullptr;
 }
 
 bool j1EntityManager::CleanEntities()

@@ -646,7 +646,7 @@ bool Player::Talking(float dt)
 	App->dialog->text_on_screen->Set_Active_state(true);
 	if (firstText == true)
 	{
-		App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState);
+		App->dialog->BlitDialog(toTalk->id, toTalk->dialogState);
 		firstText = false;
 	}
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
@@ -662,7 +662,7 @@ bool Player::Talking(float dt)
 			else
 			{
 				App->dialog->dialogueStep++;
-				if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
+				if (App->dialog->BlitDialog(toTalk->id, toTalk->dialogState) == false)
 				{
 					playerState = ACTIVE;
 					App->dialog->text_on_screen->Set_Active_state(false);
@@ -985,7 +985,7 @@ void Player::NextDialog()
 		else
 		{
 			App->dialog->dialogueStep++;
-			if (App->dialog->BlitDialog(toTalk->npcId, toTalk->dialogState) == false)
+			if (App->dialog->BlitDialog(toTalk->id, toTalk->dialogState) == false)
 			{
 				playerState = ACTIVE;
 				App->dialog->text_on_screen->Set_Active_state(false);

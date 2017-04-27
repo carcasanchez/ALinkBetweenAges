@@ -96,7 +96,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 					ENEMY_TYPE(enemy.attribute("type").as_int()),
 					enemy.attribute("x").as_int(),
 					enemy.attribute("y").as_int(),
-					points);
+					points,
+					enemy.attribute("id").as_int(-1));
 			}
 
 			entity = entities.child("special");
@@ -107,7 +108,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 					maxSectors,
 					special.attribute("x").as_int(),
 					special.attribute("y").as_int(), 
-					(OBJECT_TYPE)(special.attribute("object_type").as_int()));
+					(OBJECT_TYPE)(special.attribute("object_type").as_int()),
+					special.attribute("id").as_int(-1));
 
 				if (obj->objectType == CHEST)
 				{

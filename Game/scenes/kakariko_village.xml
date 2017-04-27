@@ -16,6 +16,7 @@
         </npcs>
 
         <enemies>
+		<sample type = "1" x = "120" y = "90" id="9"/>
         </enemies>
 
  	<special>
