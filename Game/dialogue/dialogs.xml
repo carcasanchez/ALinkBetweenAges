@@ -3,21 +3,21 @@
   
    <npc id="1">
      <dialogue state="0">
-       <text value=" Hi Link! We had problems with Ganon's soldiers. They came out of nowhere with pretending to kidnap Zelda,but she managed to escape into the forest."/>
+       <text value=" Hi Link! We had problems with Ganon's soldiers. They came out of nowhere wanting to kidnap Zelda, but she managed to escape to the forest."/>
 	<text value=" The forest is at the south-west, passing the village. We need your help. Bring Zelda back, please."/>
 	<text value=" I forgot! You can attack in four directions using ABXY, and dodge with RB. "/>
      </dialogue>
      <dialogue state="1">
-   	<text value=" Go to the forest, at south-west, and find Zelda.You are our last hope, good luck Link."/>
+   	<text value=" Go to the forest, south-west of the village, and find Zelda. You are our last hope, good luck Link."/>
      </dialogue>
    </npc>
   
    <npc id="2">
      <dialogue state="0">
-	<text value=" A close of eyes is enough to make a peaceful man a warrior."/>
+	<text value=" A blink is enough to make a peaceful man a warrior."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" I can see fear on your eyes. Be brave, Link."/>
+	<text value=" I can see fear in your eyes. Be brave, Link."/>
      </dialogue>
    </npc>
 
@@ -32,10 +32,10 @@
 
    <npc id="4">
      <dialogue state="0">
-	<text value=" A group of soldiers have gone to the forest, I don't know what they are looking for."/>
+	<text value=" A group of soldiers went to the forest, I don't know what they are looking for."/>
      </dialogue>
 <dialogue state="1">
-	<text value=" A group of soldiers have gone to the forest, I don't know what they are looking for."/>
+	<text value=" A group of soldiers went to the forest, I don't know what they are looking for."/>
      </dialogue>
    </npc>
 
@@ -52,7 +52,7 @@
 
    <npc id="6">
      <dialogue state="0">
-	<text value=" Hey! I think you don't talk so much. I like you."/>
+	<text value=" Hey! You don't talk that much. I like you."/>
 	<text value=" I like you."/>
      </dialogue>
 <dialogue state="1">
@@ -63,7 +63,7 @@
 
    <npc id="7">
      <dialogue state="0">
-	<text value=" I love turtles, but I can not find any one in this village."/>
+	<text value=" I love turtles, but I can't find any in this village."/>
      </dialogue>
      <dialogue state="1">
 	<text value=" I'm so sad. I want turtles."/>
@@ -72,13 +72,13 @@
 
    <npc id="8">
      <dialogue state="0">
-	<text value=" I'm glad to see you again Link. Thank you for rescue me. This morning, a group of soldiers came to kidnap me, but I managed to escape and hide here."/>
+	<text value=" I'm glad to see you again Link. Thank you for rescuing me. This morning, a group of soldiers came to kidnap me, but I managed to escape and hide here."/>
 	<text value=" I need your help, Link. Could you defeat all the soldiers of the castle?"/>
-	<text value=" The castle is at the north of Kakariko village, passing the bridge. It's dangerous to go alone, take the book behind me.This is the Book of Ages. It gives power to the owner."/>
+	<text value=" The castle is north of Kakariko village, passing the bridge. It's dangerous to go alone, take the book behind me. This is the Book of Ages. It gives power to its owner."/>
 	<text value=" You will become stronger and faster. Good luck, Link."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" Kakariko is on danger. Throw out all the soldiers of the castle, please."/>
+	<text value=" Kakariko is in danger. Throw out all the soldiers of the castle, please."/>
      </dialogue>
    </npc>
 
