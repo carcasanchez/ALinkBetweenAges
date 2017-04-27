@@ -106,7 +106,8 @@ public:
 	~j1QuestManager();
 
 	bool Awake(pugi::xml_node&);
-	bool Start();
+
+	void LoadQuests(pugi::xml_node&);
 	Event* createEvent(pugi::xml_node&);
 	Reward* createReward(pugi::xml_node&);
 

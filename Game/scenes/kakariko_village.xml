@@ -34,6 +34,26 @@
 	<exit destinyScene = "kakarikoForest" destinyExit = "0" x = "0" y = "221" w="1" h="12" direction = "2"/>
       </exits>
 
+
+	<quests>
+	  <quest id = "1" >
+
+		<reward type ="1">
+			<enemy type="1" x="120" y="120"/>
+		</reward >
+
+		<trigger type ="0">
+     			 <collider x = "125" y= "90" w="10" h="10"/>
+		</trigger>
+
+		<step type = "0">
+			<collider x = "120" y= "90" w="10" h="10"/>
+		</step>
+
+
+	  </quest>
+	</quests>
+
     </sector>
   </sectors>
 </scene>

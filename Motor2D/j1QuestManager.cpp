@@ -34,27 +34,12 @@ bool j1QuestManager::Awake(pugi::xml_node& config)
 	return true;
 }
 
-bool j1QuestManager::Start()
+
+
+void j1QuestManager::LoadQuests(pugi::xml_node & questDataFile)
 {
-	bool ret = true;
-
-
-	//Load QuestData File
-	pugi::xml_document	questDataFile;
-	char* buff;
-	int size = App->fs->Load(path.c_str(), &buff);
-	pugi::xml_parse_result result = questDataFile.load_buffer(buff, size);
-	RELEASE(buff);
-
-	if (result == NULL)
-	{
-		LOG("Could not load questData xml file. Pugi error: %s", result.description());
-		ret = false;
-	}
-
-
-	else for (pugi::xml_node quest = questDataFile.child("quests").first_child(); quest; quest = quest.next_sibling("quest"))
-	{
+	for (pugi::xml_node quest = questDataFile.first_child(); quest; quest = quest.next_sibling("quest"))
+	 {
 		//Load quest data from XML
 		Quest* new_quest = new Quest();
 		new_quest->id = quest.attribute("id").as_int();
@@ -64,7 +49,7 @@ bool j1QuestManager::Start()
 		{
 			new_quest->reward.push_back(createReward(reward));
 		}
-		
+
 
 		new_quest->trigger = createEvent(quest.child("trigger"));
 
@@ -74,12 +59,8 @@ bool j1QuestManager::Start()
 			new_quest->steps.push_back(createEvent(step));
 		}
 
-		sleepQuests.push_back(new_quest);	
-	}
-	
-
-
-	return ret;
+		sleepQuests.push_back(new_quest);
+	 }
 }
 
 Event * j1QuestManager::createEvent(pugi::xml_node &it)

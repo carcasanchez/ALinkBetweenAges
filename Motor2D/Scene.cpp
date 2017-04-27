@@ -8,6 +8,7 @@
 #include "Enemy.h"
 #include "Exit.h"
 #include "Object.h"
+#include "j1QuestManager.h"
 #include "p2Log.h"
 
 Scene::Scene()
@@ -70,6 +71,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 		{
 			pugi::xml_node entities = section.child("entities");
 
+
+			//Npc
 			pugi::xml_node entity = entities.child("npcs");
 			for (pugi::xml_node npc = entity.first_child(); npc != NULL; npc = npc.next_sibling())
 			{
@@ -82,6 +85,7 @@ bool Scene::Load(const char* path, const bool reloadMap)
 					npc.attribute("id").as_int());
 			}
 
+			//Enemies
 			entity = entities.child("enemies");
 			for (pugi::xml_node enemy = entity.first_child(); enemy != NULL; enemy = enemy.next_sibling())
 			{
@@ -100,6 +104,7 @@ bool Scene::Load(const char* path, const bool reloadMap)
 					enemy.attribute("id").as_int(-1));
 			}
 
+			//Items and objects
 			entity = entities.child("special");
 			for (pugi::xml_node special = entity.first_child(); special != NULL; special = special.next_sibling())
 			{
@@ -119,6 +124,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 
 			}
 
+
+			//Exits
 			pugi::xml_node exits = section.child("exits");
 			for (pugi::xml_node exit = exits.first_child(); exit != NULL; exit = exit.next_sibling())
 			{
@@ -142,6 +149,9 @@ bool Scene::Load(const char* path, const bool reloadMap)
 					this->exits[maxSectors].push_back(tmp);
 				}
 			}
+
+			//Quests
+			App->quest->LoadQuests(section.child("quests"));
 
 			maxSectors++;
 		}
