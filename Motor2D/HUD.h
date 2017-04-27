@@ -94,14 +94,12 @@ private:
 
 	//Pause methods
 	bool		LoadPause(string file);
-	void		SetPauseElements();
 	bool		IntoPause();
 	void		GonePause();
 	void		PauseOut(float);
 
 	//In game HUD methods
 	bool		LoadHud(string file);
-	void		SetHudElements();
 
 	//Life methods
 	int			active_hearts = 0;

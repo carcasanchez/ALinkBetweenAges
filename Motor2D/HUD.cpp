@@ -166,29 +166,19 @@ bool Hud::LoadPause(string file)
 	else
 	{
 		//Initialize images
-		main_menu = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		item_menu = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		resume = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		quit = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-
 		pugi::xml_node pause_node = pause_file.child("images");
 
-		main_menu->Set_Image_Texture(LoadRect(pause_node.child("main")));
-		item_menu->Set_Image_Texture(LoadRect(pause_node.child("item")));
+		main_menu = (UI_Image*)LoadUIElement(pause_node.child("main"), nullptr, IMAGE);
+		item_menu = (UI_Image*)LoadUIElement(pause_node.child("item"), main_menu, IMAGE);
+		resume = (UI_Image*)LoadUIElement(pause_node.child("resume"), main_menu, IMAGE);
+		quit = (UI_Image*)LoadUIElement(pause_node.child("quit"), main_menu, IMAGE);
 
 		//selecable items go into vector
-		resume->Set_Image_Texture(LoadRect(pause_node.child("selector")));
-		quit->Set_Image_Texture(LoadRect(pause_node.child("selector")));
-
 		pause_selectables.push_back(resume);
 		pause_selectables.push_back(quit);
 
-		SetPauseElements();
-
 		App->gui->CreateScreen(main_menu);
-		main_menu->AddChild(item_menu);
-		main_menu->AddChild(resume);
-		main_menu->AddChild(quit);
+
 	}
 
 	return ret;
@@ -264,18 +254,6 @@ UI_element* Hud::LoadUIElement(pugi::xml_node node, UI_element* screen, UI_TYPE 
 
 }
 
-void Hud::SetPauseElements()
-{
-	main_menu->Set_Interactive_Box({ 50, -650,0,0 });
-	item_menu->Set_Interactive_Box({ 720,0,0,0 });
-	resume->Set_Interactive_Box({ 72,86,0,0 });
-	quit->Set_Interactive_Box({ 72,528,0,0 });
-
-
-	quit->Set_Active_state(false);
-
-	main_menu->Set_Active_state(true);
-}
 
 bool Hud::IntoPause()
 {
