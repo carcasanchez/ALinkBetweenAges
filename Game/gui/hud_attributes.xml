@@ -1,23 +1,29 @@
 <!-- In Game HUD -->
 <images>
  <heart>
-    <empty x="272" y="399" w="14" h="14"/>
-    <mid   x="256" y="399" w="14" h="14"/>
-    <full  x="240" y="399" w="14" h="14"/>
+    <empty x="272" y="399" w="14" h="14" pos_x="0" pos_y="0" active="false"/>
+    <mid   x="256" y="399" w="14" h="14" pos_x="0" pos_y="0" active="false"/>
+    <full  x="240" y="399" w="14" h="14" pos_x="0" pos_y="0" active="false"/>
   </heart>
 
-  <numbers x="1" y="496" w="70" h="28"/>
+  <numbers x="1" y="496" w="70" h="28" pos_x="0" pos_y="0" active="false"/>
 
-  <life x="174" y="414" w="88" h="14"/>
+  <counters>
+    <rupees pos_x="-30" pos_y="40" active="true"/>
+    <bombs  pos_x="-30" pos_y="40" active="true"/>
+    <arrows pos_x="-30" pos_y="40" active="true"/>
+  </counters>
+
+  <life x="174" y="414" w="88" h="14" pos_x="700" pos_y="20" active="true"/>
 
   <little_items>
-    <rupees x="174" y="396" w="16"  h="16"/>
-    <bombs  x="192" y="396" w="16"  h="16"/>
-    <arrows x="210" y="396" w="28"  h="16"/>
+    <rupees x="174" y="396" w="16"  h="16" pos_x="175" pos_y="20" active="true"/>
+    <bombs  x="192" y="396" w="16"  h="16" pos_x="275" pos_y="20" active="true"/>
+    <arrows x="210" y="396" w="28"  h="16" pos_x="375" pos_y="20" active="true"/>
   </little_items>
   
   <items>
-    <frame        x="128"  y="396" w="44" h="44"/>
+    <frame        x="128"  y="396" w="44" h="44" pos_x="40" pos_y="20" active="true"/>
     <bow          x="3"  y="448" w="16" h="16"/>
     <bumerang     x="20" y="448" w="16" h="16"/>
     <bomb         x="37" y="448" w="16" h="16"/>
@@ -26,10 +32,11 @@
   </items>
 
   <stamina>
-    <bar          x="130"  y="442" w="172" h="22"/>
-    <sta_g        x="130"  y="465" w="162" h="12"/>
-    <sta_y        x="130"  y="478" w="162" h="12"/>
-    <sta_r        x="130"  y="491" w="162" h="12"/>
+    <bar	  pos_x="700" pos_y="90" draw_x="10" draw_y="10" active="true"/>
+    <container    x="130"  y="442" w="172" h="22" pos_x="0" pos_y="0" active="false"/>
+    <sta_g        x="130"  y="465" w="162" h="12" pos_x="0" pos_y="0" active="false"/>
+    <sta_y        x="130"  y="478" w="162" h="12" pos_x="0" pos_y="0" active="false"/>
+    <sta_r        x="130"  y="491" w="162" h="12" pos_x="0" pos_y="0" active="false"/>
 
   </stamina>
 

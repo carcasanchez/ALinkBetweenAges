@@ -89,7 +89,8 @@ public:
 
 private:
 
-	SDL_Rect	LoadRect(pugi::xml_node);
+	UI_element*		LoadUIElement(pugi::xml_node, UI_element*, UI_TYPE);
+	SDL_Rect		LoadRect(pugi::xml_node);
 
 	//Pause methods
 	bool		LoadPause(string file);

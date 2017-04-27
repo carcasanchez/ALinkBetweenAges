@@ -208,6 +208,62 @@ SDL_Rect Hud::LoadRect(pugi::xml_node node)
 	return ret;
 }
 
+UI_element* Hud::LoadUIElement(pugi::xml_node node, UI_element* screen, UI_TYPE type)
+{
+	UI_element* ret = App->gui->Add_element(type, App->game);
+
+	if (ret)
+	{
+		if (type == IMAGE)
+		{
+			UI_Image* tmp = (UI_Image*)ret;
+
+			tmp->Set_Image_Texture(LoadRect(node));
+			tmp->Set_Interactive_Box({ node.attribute("pos_x").as_int(), node.attribute("pos_y").as_int(), 0, 0 });
+			tmp->Set_Active_state(node.attribute("active").as_bool());
+
+			if (screen)
+				screen->AddChild(ret);
+
+			return ret;
+		}
+
+		if (type == COUNTER)
+		{
+			UI_Counter* tmp = (UI_Counter*)ret;
+
+			tmp->SetImage(numbers, 14, 14);
+			tmp->Set_Interactive_Box({ node.attribute("pos_x").as_int(), node.attribute("pos_y").as_int(), 0, 0 });
+			tmp->Set_Active_state(node.attribute("active").as_bool());
+
+			if (screen)
+				screen->AddChild(ret);
+
+			return ret;
+
+		}
+
+		if (type == STAMINA_BAR)
+		{
+			UI_Stamina* tmp = (UI_Stamina*)ret;
+
+			tmp->Set_Interactive_Box({ node.attribute("pos_x").as_int(), node.attribute("pos_y").as_int(), 0, 0 });
+			tmp->SetDrawRect({ node.attribute("draw_x").as_int() ,  node.attribute("draw_x").as_int() ,0,0 });
+			tmp->SetBackground(stamina_container);
+			tmp->SetStamina(stamina_green);
+
+			if (screen)
+				screen->AddChild(ret);
+
+			return ret;
+
+		}
+
+	}
+
+
+}
+
 void Hud::SetPauseElements()
 {
 	main_menu->Set_Interactive_Box({ 50, -650,0,0 });
@@ -273,76 +329,38 @@ bool Hud::LoadHud(string file)
 	}
 	else
 	{
-		numbers = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		rupees_counter  = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
-		bombs_counter = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
-		arrows_counter = (UI_Counter*)App->gui->Add_element(COUNTER, App->game);
-
-		Rupees = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		Bombs = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		Arrows = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-
-		items_frame = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-
-		life = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		empty_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		medium_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		full_heart = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-
-		stamina_container = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		stamina_green = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		stamina_yellow = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		stamina_red = (UI_Image*)App->gui->Add_element(IMAGE, App->game);
-		stamina_bar = (UI_Stamina*)App->gui->Add_element(STAMINA_BAR, App->game);
-
+	
 		pugi::xml_node hud_node = hud_file.child("images");
 
 		//Numbers counter image
-		numbers->Set_Image_Texture(LoadRect(hud_node.child("numbers")));
-
+		numbers = (UI_Image*)LoadUIElement(hud_node.child("numbers"), nullptr, IMAGE);
+		
 		//little items
-		Rupees->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("rupees")));
-		Bombs->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("bombs")));
-		Arrows->Set_Image_Texture(LoadRect(hud_node.child("little_items").child("arrows")));
+		Rupees = (UI_Image*)LoadUIElement(hud_node.child("little_items").child("rupees"), hud_screen, IMAGE);
+		rupees_counter = (UI_Counter*)LoadUIElement(hud_node.child("counters").child("rupees"), Rupees, COUNTER);
+
+		Bombs = (UI_Image*)LoadUIElement(hud_node.child("little_items").child("bombs"), hud_screen, IMAGE);
+		bombs_counter = (UI_Counter*)LoadUIElement(hud_node.child("counters").child("bombs"), Bombs, COUNTER);
+
+		Arrows = (UI_Image*)LoadUIElement(hud_node.child("little_items").child("arrows"), hud_screen, IMAGE);
+		arrows_counter = (UI_Counter*)LoadUIElement(hud_node.child("counters").child("arrows"), Arrows, COUNTER);
 
 		//items
-		items_frame->Set_Image_Texture(LoadRect(hud_node.child("items").child("frame")));
+		items_frame = (UI_Image*)LoadUIElement(hud_node.child("items").child("frame"), hud_screen, IMAGE);
 
 		//life
-		life->Set_Image_Texture(LoadRect(hud_node.child("life")));
-		empty_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("empty")));
-		medium_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("mid")));
-		full_heart->Set_Image_Texture(LoadRect(hud_node.child("heart").child("full")));
-
+		life = (UI_Image*)LoadUIElement(hud_node.child("life"), hud_screen, IMAGE);
+		empty_heart = (UI_Image*)LoadUIElement(hud_node.child("heart").child("empty"), hud_screen, IMAGE);
+		medium_heart = (UI_Image*)LoadUIElement(hud_node.child("heart").child("mid"), hud_screen, IMAGE);
+		full_heart = (UI_Image*)LoadUIElement(hud_node.child("heart").child("full"), hud_screen, IMAGE);
+ 
 		//stamina
-		stamina_container->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("bar")));
-		stamina_green->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("sta_g")));
-		stamina_yellow->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("sta_y")));
-		stamina_red->Set_Image_Texture(LoadRect(hud_node.child("stamina").child("sta_r")));
+		stamina_container = (UI_Image*)LoadUIElement(hud_node.child("stamina").child("container"), nullptr, IMAGE);
+		stamina_green = (UI_Image*)LoadUIElement(hud_node.child("stamina").child("sta_g"), nullptr, IMAGE);
+		stamina_yellow = (UI_Image*)LoadUIElement(hud_node.child("stamina").child("sta_y"), nullptr, IMAGE);
+		stamina_red = (UI_Image*)LoadUIElement(hud_node.child("stamina").child("sta_r"), nullptr, IMAGE);
+		stamina_bar = (UI_Stamina*)LoadUIElement(hud_node.child("stamina").child("bar"), hud_screen, STAMINA_BAR);
 
-		SetHudElements();
-
-		//RUPEES BOMBS ARROWS
-		hud_screen->AddChild(Rupees);
-		Rupees->AddChild(rupees_counter);
-
-		hud_screen->AddChild(Bombs);
-		Bombs->AddChild(bombs_counter);
-
-		hud_screen->AddChild(Arrows);
-		Arrows->AddChild(arrows_counter);
-
-		//ITEM FRAME
-		hud_screen->AddChild(items_frame);
-
-		//STAMINA
-		hud_screen->AddChild(stamina_bar);
-
-		//HEARTS
-		hud_screen->AddChild(life);
-		hud_screen->AddChild(empty_heart);
-		hud_screen->AddChild(medium_heart);
-		hud_screen->AddChild(full_heart);
 		LoadHearts();
 
 	}
@@ -350,37 +368,7 @@ bool Hud::LoadHud(string file)
 	return false;
 }
 
-void Hud::SetHudElements()
-{
-	numbers->Set_Active_state(false);
 
-	Rupees->Set_Interactive_Box({ 175,20,0,0 });
-	rupees_counter->Set_Interactive_Box({-30,40,0,0 });
-	rupees_counter->SetImage(numbers, 14, 14);
-
-	Bombs->Set_Interactive_Box({ 275,20,0,0 });
-	bombs_counter->Set_Interactive_Box({ -30,40,0,0 });
-	bombs_counter->SetImage(numbers, 14, 14);
-
-	Arrows->Set_Interactive_Box({ 375,20,0,0 });
-	arrows_counter->Set_Interactive_Box({ -30,40,0,0 });
-	arrows_counter->SetImage(numbers, 14, 14);
-
-	items_frame->Set_Interactive_Box({ 40, 20,0,0 });
-
-	life->Set_Interactive_Box({ 700, 20,0,0 });
-	empty_heart->Set_Active_state(false);
-	medium_heart->Set_Active_state(false);
-	full_heart->Set_Active_state(false);
-
-	stamina_bar->Set_Interactive_Box({ 700, 90,0,0 });
-	stamina_bar->SetDrawRect({ 10,10,0,0 });
-	stamina_bar->SetBackground(stamina_container);
-	stamina_bar->SetStamina(stamina_green);
-	stamina_container->Set_Active_state(false);
-	stamina_green->Set_Active_state(false);
-
-}
 
 void Hud::LoadHearts()
 {
