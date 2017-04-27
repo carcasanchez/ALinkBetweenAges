@@ -91,9 +91,7 @@ bool j1GameLayer::Update(float dt)
 	{
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
-		Entity* et = em->GetEntityFromId(9);
-		if(et)
-			et->MoveTo(mousePos.x, mousePos.y);
+		em->player->currentPos = mousePos;
 	}
 		
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)

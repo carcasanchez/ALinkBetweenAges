@@ -120,7 +120,6 @@ public:
 	void RewardCallback(vector <Reward*> reward);
 
 private:
-	string path;
 
 	list<Quest*> sleepQuests;
 	list<Quest*> activeQuests;

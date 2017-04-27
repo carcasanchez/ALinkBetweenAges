@@ -1,0 +1,22 @@
+<!-- Castle Inside -->
+<scene name = "bossRoom" map= "bossRoom.tmx">
+  <sectors>
+    <sector>
+      <!--sector 1-->
+      <entities>
+
+        <npcs>
+        </npcs>
+
+        <enemies>
+         
+        </enemies>
+      </entities>
+
+      <exits>
+        <exit destinyScene = "insideCastle" destinyExit = "1" x = "47" y = "111" w="2" h="1" direction = "0"/>
+      </exits>
+
+    </sector>
+  </sectors>
+</scene>

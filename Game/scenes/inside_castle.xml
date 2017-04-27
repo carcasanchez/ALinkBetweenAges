@@ -97,6 +97,7 @@
 
       <exits>
         <exit destinyScene = "outsideCastle" destinyExit = "0" x = "107" y = "237" w="2" h="1" direction = "0"/>
+	<exit destinyScene = "bossRoom" destinyExit = "0" x = "108" y = "102" w="2" h="1" direction = "1"/>
       </exits>
 
     </sector>

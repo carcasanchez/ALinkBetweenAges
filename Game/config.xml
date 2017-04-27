@@ -39,7 +39,7 @@
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="true"/>
-    <fullscreen_window value="false"/>
+    <fullscreen_window value="true"/>
   </window>
 
   <file_system>
@@ -60,6 +60,7 @@
       <scene name = "kakarikoForest" file = "kakariko_forest.xml"/>
       <scene name = "insideCastle" file = "inside_castle.xml"/>
       <scene name = "outsideCastle" file = "outside_castle.xml"/>
+      <scene name = "bossRoom" file = "boss_room.xml"/>
     </scenes>
   </sceneManager>
   
@@ -135,9 +136,5 @@
       <npc file = "dialogs.xml"/>
     </dialogues>
   </dialogue>
-
- <quest>
- 	<data file = "quests/questData.xml"/>
-  </quest>
 
 </config>

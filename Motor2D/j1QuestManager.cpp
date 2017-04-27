@@ -28,9 +28,7 @@ j1QuestManager::~j1QuestManager()
 
 bool j1QuestManager::Awake(pugi::xml_node& config)
 {
-	//Load the path of QuestData file from Config
-	LOG("Loading QuestManager data");
-	path = config.child("data").attribute("file").as_string();
+	LOG("Loading QuestManager ");
 	return true;
 }
 
