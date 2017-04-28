@@ -208,7 +208,7 @@ UI_element* Hud::LoadUIElement(pugi::xml_node node, UI_element* screen, UI_TYPE 
 		{
 			UI_Image* tmp = (UI_Image*)ret;
 
-			tmp->Set_Image_Texture(LoadRect(node));
+			tmp->SetImageRect(LoadRect(node));
 			tmp->Set_Interactive_Box({ node.attribute("pos_x").as_int(), node.attribute("pos_y").as_int(), 0, 0 });
 			tmp->Set_Active_state(node.attribute("active").as_bool());
 

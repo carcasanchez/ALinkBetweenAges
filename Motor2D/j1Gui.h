@@ -58,6 +58,7 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 	const SDL_Texture* Get_Other_Textures(uint id) const;
+	const SDL_Texture* GetUITexture(std::string) const;
 
 	UI_element* element_selected = nullptr;
 	UI_element* focus_element = nullptr;

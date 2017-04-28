@@ -44,9 +44,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
-	atlas = App->tex->Load(atlas_file_name.c_str());
-	//Other_images.add(App->tex->Load("gui/login_background.png"));
 
+	atlas = App->tex->Load(atlas_file_name.c_str());
 
 	return true;
 
@@ -177,6 +176,14 @@ const SDL_Texture* j1Gui::Get_Other_Textures(uint id) const
 	}
 
 	return nullptr;	
+}
+
+const SDL_Texture* j1Gui::GetUITexture(std::string name) const
+{
+	if (name == "atlas")
+		return atlas;
+
+	return nullptr;
 }
 
 

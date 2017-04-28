@@ -22,8 +22,8 @@ bool UI_Image::Update_Draw()
 		if (element_type == IMAGE)
 		{
 			if(!Parent)
-				App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image);
-			else App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + Interactive_box.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &Image);
+				App->render->Blit(image_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image);
+			else App->render->Blit(image_texture, ((Parent->Interactive_box.x + Interactive_box.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &Image);
 		}
 			
 
@@ -89,6 +89,9 @@ bool UI_Image::Handle_input()
 
 bool UI_Image::Update()
 {
+	if (!image_texture)
+		SetTexture((SDL_Texture*)App->gui->GetAtlas());
+
 	Handle_input();
 
 	LookAnimationTransition();
@@ -102,7 +105,12 @@ bool UI_Image::Update()
 	return true;
 }
 
-void UI_Image::Set_Image_Texture(SDL_Rect tex)
+void UI_Image::SetImageRect(SDL_Rect tex)
 {
 	Image = tex;
+}
+
+void UI_Image::SetTexture(SDL_Texture* tex)
+{
+	image_texture = tex;
 }

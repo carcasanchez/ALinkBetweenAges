@@ -4,6 +4,8 @@
 #include "UI_element.h"
 #include "SDL\include\SDL_rect.h"
 
+class SDL_Texture;
+
 class UI_Image : public UI_element
 {
 public:
@@ -20,7 +22,12 @@ public:
 	bool Update_Draw();
 	bool Handle_input();
 
-	void Set_Image_Texture(SDL_Rect);	//Changes the image rect, not his interactive box
+	void SetImageRect(SDL_Rect);	//Changes the image rect, not his interactive box
+	void SetTexture(SDL_Texture*);
+
+private:
+
+	SDL_Texture* image_texture = nullptr;
 
 };
 
