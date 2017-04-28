@@ -238,6 +238,20 @@
 			<speed value = "0.1"  />
 
 		</BOLT>
+
+		<BOLT_SWORD>
+
+			<name value = "16"  />
+
+			<DOWN>
+				<values name = "0" x ="1" y = "793" w = "32" h = "51" frameNumber = "9" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<loop value = "true"  />
+
+			<speed value = "0.1"  />
+
+		</BOLT_SWORD>
 			
 		
 </animations>
