@@ -9,13 +9,13 @@
         </npcs>
 
         <enemies>
-         		<zelda type = "3" x = "45" y = "15"/>
+         		<zelda type = "3" x = "48" y = "13"/>
 
         </enemies>
       </entities>
 
       <exits>
-        <exit destinyScene = "insideCastle" destinyExit = "1" x = "47" y = "385" w="2" h="1" direction = "0"/>
+        <exit destinyScene = "insideCastle" destinyExit = "1" x = "47" y = "224" w="2" h="1" direction = "0"/>
       </exits>
 
     </sector>
