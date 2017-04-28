@@ -15,6 +15,7 @@
 #include "DialogManager.h"
 #include "j1SceneManager.h"
 #include "j1EntityManager.h"
+#include "Brofiler\Brofiler.h"
 
 
 Player::Player() : Entity(LINK)
@@ -114,6 +115,7 @@ void Player::OnDeath()
 
 bool Player::Update(float dt)
 {
+	BROFILER_CATEGORY("PlayerUpdate", Profiler::Color::Black);
 	bool ret = true;
 	lastPos = currentPos;
 

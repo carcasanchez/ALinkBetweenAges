@@ -25,6 +25,7 @@
 #include "j1App.h"
 #include "DialogManager.h"
 #include "j1QuestManager.h"
+#include "Brofiler\Brofiler.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -97,7 +98,10 @@ void j1App::AddModule(j1Module* module)
 // Called before render is available
 bool j1App::Awake()
 {
+	
 	PERF_START(ptimer);
+
+	BROFILER_CATEGORY("Awake", Profiler::Color::Black);
 
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
@@ -191,6 +195,7 @@ bool j1App::Awake()
 // Called before the first frame
 bool j1App::Start()
 {
+	BROFILER_CATEGORY("Start", Profiler::Color::Black);
 	PERF_START(ptimer);
 	bool ret = true;
 
@@ -212,11 +217,13 @@ bool j1App::Start()
 // Called each loop iteration
 bool j1App::Update()
 {
+	BROFILER_CATEGORY("Update", Profiler::Color::Black);
 	bool ret = true;
 	PrepareUpdate();
 
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
+
 
 	if(ret == true)
 		ret = PreUpdate();
@@ -304,6 +311,8 @@ void j1App::FinishUpdate()
 // Call modules before each loop iteration
 bool j1App::PreUpdate()
 {
+	BROFILER_CATEGORY("PreUpdate", Profiler::Color::Black);
+
 	bool ret = true;
 
 	j1Module* pModule = nullptr;
