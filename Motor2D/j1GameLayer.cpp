@@ -335,12 +335,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		
 		if (c2->type == COLLIDER_LINK_SWORD)
 		{
-			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
+			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK && ((Enemy*)(c1->parent))->enemyState != DODGING_LINK)
 			{
-				c1->parent->life -= em->player->damage;
-				c1->parent->sprite->tint = { 255, 150, 150, 255 };
-				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
-				c1->parent->damagedTimer.Start();
+				((Enemy*)(c1->parent))->GetHit();
 			}
 			return true;
 		}

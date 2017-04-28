@@ -153,6 +153,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			//Quests
 			App->quest->LoadQuests(section.child("quests"));
 
+
+
 			maxSectors++;
 		}
 

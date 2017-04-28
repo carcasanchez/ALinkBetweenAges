@@ -317,20 +317,35 @@ Entity * j1EntityManager::GetEntityFromId(int id)
 
 bool j1EntityManager::CleanEntities()
 {
-	bool ret = true;
+	bool ret = true;	
+	std::vector<Entity*> keepAlive;
 
 	for (int i = 1; i <= App->sceneM->currentScene->maxSectors; i++)
 	{
 		for (std::list<Entity*>::iterator item = entities[i].begin(); item != entities[i].end(); item++)
 		{
-			delete (*item);
-			entities[i].erase(item);
+			if ((*item)->keepExisting)
+			{
+				(*item)->keepExisting = false;
+				keepAlive.push_back((*item));
+			}
+			else
+			{ 
+				delete (*item);
+				entities[i].erase(item);
+			}
 		}
 
 		entities[i].clear();
 	}
 
 	entities.clear();
+
+
+	for (std::vector<Entity*>::iterator it = keepAlive.begin(); it != keepAlive.end(); it++)
+	{
+		entities[1].push_back((*it));
+	}
 
 	return ret;
 }

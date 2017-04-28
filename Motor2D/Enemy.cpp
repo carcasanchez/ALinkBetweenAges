@@ -228,3 +228,13 @@ bool Enemy::Charging(float dt)
 
 	return ret;
 }
+
+bool Enemy::GetHit()
+{
+	life -= App->game->em->player->damage;
+	sprite->tint = { 255, 150, 150, 255 };
+	enemyState = STEP_BACK;
+	damagedTimer.Start();
+
+	return true;
+}

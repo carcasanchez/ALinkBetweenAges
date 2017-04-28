@@ -107,6 +107,7 @@ public:
 
 	//Marked to death
 	bool toDelete;
+	bool keepExisting = false;
 
 private:
 	int textureFile = 1;

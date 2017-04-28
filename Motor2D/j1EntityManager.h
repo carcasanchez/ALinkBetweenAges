@@ -49,9 +49,13 @@ public:
 	std::map<int, std::list<Entity*>> entities;
 	std::map<ENTITY_TYPE, std::string> dir;
 
+	
+
 private:
 
 	int* sector;
+
+
 
 };
 

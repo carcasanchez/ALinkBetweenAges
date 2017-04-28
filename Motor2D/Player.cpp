@@ -236,10 +236,10 @@ bool Player::Idle()
 
 
 	//Attack
-	else if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
+	else if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
-		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) && stamina - attackTax > 0)
 	{
 		if (toTalk != nullptr)
 		{
@@ -377,10 +377,10 @@ bool Player::Walking(float dt)
 	 
 
 	//Attack
-	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
+	if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
-		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN )&&  stamina - attackTax > 0)
 	{
 			stamina -= attackTax;
 			Change_direction();
@@ -912,16 +912,16 @@ void Player::createSwordCollider()
 		switch (currentDir)
 	{
 	case(D_UP):
-		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 26, 14 }, COLLIDER_LINK_SWORD);
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 30, 20 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_DOWN):
-		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 26, 14 }, COLLIDER_LINK_SWORD);
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 30, 20 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_RIGHT):
-		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 14, 26 }, COLLIDER_LINK_SWORD);
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 20, 30 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_LEFT):
-		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 14, 26 }, COLLIDER_LINK_SWORD);
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 20, 30 }, COLLIDER_LINK_SWORD);
 		break;
 	}
 

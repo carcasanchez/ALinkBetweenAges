@@ -16,6 +16,11 @@ public:
 
 	bool LateralWalk(float dt);
 	bool ChargeBow(float dt);
+	bool KeepDistance(float dt);
+	bool StepBack(float dt);
+	bool Chasing(float dt);
+	bool Dodging(float dt);
+	bool GetHit();
 	void OnDeath();
 
 private:
@@ -28,7 +33,12 @@ private:
 	int walkTimelimit;
 
 	j1PerfTimer chargeBowTimer;
-	int bowTenseLimit;
+
+	//phase 2
+	int dodgeSpeed;
+	int dodgeLimit;
+	j1PerfTimer dodgeTimer;
+
 
 };
 

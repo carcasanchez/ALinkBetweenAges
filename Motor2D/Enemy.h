@@ -28,7 +28,8 @@ enum ENEMY_STATE
 	UNCHARGE_BOW,
 	TELEPORT,
 	THROWING_ATTACK,
-	PREPARING_ATTACK
+	PREPARING_ATTACK,
+	DODGING_LINK
 };
 
 class Enemy : public Entity
@@ -51,6 +52,8 @@ public:
 	virtual bool KeepDistance(float dt);
 	virtual bool StepBack(float dt);
 	virtual bool Charging(float dt);
+
+	virtual bool GetHit();
 
 
 public:
