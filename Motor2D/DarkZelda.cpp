@@ -43,7 +43,7 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		actionState = WALKING;
 
 		speed = 10;
-		walkTimelimit = 2000;
+		walkTimelimit = 500;
 
 		bowTenseLimit = 2000;
 	}

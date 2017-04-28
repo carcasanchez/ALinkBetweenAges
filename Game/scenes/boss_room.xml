@@ -15,7 +15,7 @@
       </entities>
 
       <exits>
-        <exit destinyScene = "insideCastle" destinyExit = "1" x = "47" y = "111" w="2" h="1" direction = "0"/>
+        <exit destinyScene = "insideCastle" destinyExit = "1" x = "47" y = "385" w="2" h="1" direction = "0"/>
       </exits>
 
     </sector>

@@ -22,8 +22,8 @@
 	<dark_zelda>
 		<base life = "1" speed = "30" damage ="2"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "3"/>
-		<ranges hostile= "300" fight = "55" out="300" />
-		<ratios attack = "500" charge_time = "1000"/>  <!-- In Miliseconds -->
+		<ranges hostile= "1000" fight = "55" out="1000" />
+		<ratios attack = "200" charge_time = "1000"/>  <!-- In Miliseconds -->
 		<combat_speeds chase_speed = "50" flanking_speed = "40" attack_speed = "110"/>
 		<animation file = "animations/enemies/dark_zelda_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/DarkZelda.png"/>
