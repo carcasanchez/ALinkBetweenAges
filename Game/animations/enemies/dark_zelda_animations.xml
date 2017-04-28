@@ -224,6 +224,20 @@
 			<speed value = "0.1"  />
 
 		</SPIN_TO_WIN>
+
+		<BOLT>
+
+			<name value = "15"  />
+
+			<DOWN>
+				<values name = "0" x ="1" y = "756" w = "26" h = "36" frameNumber = "7" margin = "1" pivot_x = "13" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<loop value = "true"  />
+
+			<speed value = "0.1"  />
+
+		</BOLT>
 			
 		
 </animations>
