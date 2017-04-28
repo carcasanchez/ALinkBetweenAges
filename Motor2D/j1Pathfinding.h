@@ -45,6 +45,8 @@ public:
 
 	bool IsPlayerJumpable(const iPoint& pos) const;
 
+	bool CheckArrowCollision(const iPoint & pos) const;
+
 	// Utility: return the walkability value of a tile
 	uchar GetTileForPlayer(const iPoint& pos) const;
 	uchar GetTileForEnemy(const iPoint& pos) const;

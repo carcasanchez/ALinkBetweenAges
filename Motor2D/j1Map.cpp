@@ -84,7 +84,7 @@ void j1Map::Draw()
 		if (layer->properties.Get("Nodraw") != 0 && layer->properties.Get("Enemy") != 0 && debug_enemy_collisions == false)
 			continue;
 
-		if (layer->properties.Get("Paintover") || layer->properties.Get("Bush") || layer->properties.Get("Jump"))
+		if (layer->properties.Get("Paintover") || layer->properties.Get("Bush") || layer->properties.Get("Jump") || layer->properties.Get("Projectile"))
 			continue;
 					
 		for (int x = cameraSection.x; x < cameraSection.x + cameraSection.w; x++)
@@ -635,7 +635,6 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 
 	return ret;
 }
-
 
 bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** player_buffer, uchar** enemy_buffer) const
 {

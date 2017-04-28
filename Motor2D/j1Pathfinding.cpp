@@ -65,6 +65,7 @@ void j1PathFinding::SetEnemyMap(uint width, uint height, uchar * data)
 }
 
 
+
 // Utility: return true if pos is inside the map boundaries
 bool j1PathFinding::CheckBoundaries(const iPoint& pos) const
 {
@@ -95,6 +96,20 @@ bool j1PathFinding::IsPlayerJumpable(const iPoint & pos) const
 			if ((*item)->Get(pos.x, pos.y) > 0)
 				return true;
 			else return false;
+		}
+	}
+}
+
+
+bool j1PathFinding::CheckArrowCollision(const iPoint & pos) const
+{
+	for (list<MapLayer*>::iterator item = App->map->data->layers.begin(); item != App->map->data->layers.cend(); item++)
+	{
+		if ((*item)->properties.Get("Projectile"))
+		{
+			if ((*item)->Get(pos.x, pos.y) > 0)
+				return false;
+			else return true;
 		}
 	}
 }

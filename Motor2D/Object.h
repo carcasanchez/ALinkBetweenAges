@@ -24,7 +24,8 @@ enum OBJECT_TYPE
 	ARROW_DROP,
 	BOMB_DROP,
 	LIFE_POTION,
-	BOMB_SAC
+	BOMB_SAC,
+	ZELDA_ARROW
 };
 
 class Object : public Entity
@@ -51,7 +52,44 @@ public:
 	bool Update(float dt)
 	{ 
 		bool ret;
-		speed = 500;
+		switch (currentDir)
+		{
+		case D_UP:
+			ret = Move(0, -SDL_ceil(speed * dt));
+			break;
+		case D_DOWN:
+			ret = Move(0, SDL_ceil(speed * dt));
+			break;
+		case D_LEFT:
+			ret = Move(-SDL_ceil(speed * dt), 0);
+			break;
+		case D_RIGHT:
+			ret = Move(SDL_ceil(speed * dt), 0);
+			break;
+		}
+
+		if (!ret)
+		{
+			life = -1;
+		}
+
+		return ret;
+	};
+
+public:
+
+};
+
+
+class ZeldaArrow : public Object
+{
+public:
+
+	ZeldaArrow() {};
+
+	bool Update(float dt)
+	{
+		bool ret;
 		switch (currentDir)
 		{
 		case D_UP:

@@ -62,6 +62,7 @@ public:
 	COLLISION_ZONE CheckPlayerMapCollision();
 	COLLISION_ZONE CheckEnemyMapCollision();
 	COLLISION_ZONE CheckPlayerMapJump();
+	COLLISION_ZONE CheckArrowCollision();
 };
 
 

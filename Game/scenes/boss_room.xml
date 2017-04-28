@@ -9,7 +9,8 @@
         </npcs>
 
         <enemies>
-         
+         		<zelda type = "3" x = "45" y = "15"/>
+
         </enemies>
       </entities>
 

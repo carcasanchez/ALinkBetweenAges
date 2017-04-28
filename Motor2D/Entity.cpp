@@ -181,7 +181,7 @@ bool Entity::Move(int x, int y)
 		}
 	}
 	
-	else
+	else if (type == LINK)
 	{
 		currentPos.x += x;
 		UpdateCollider();
@@ -252,7 +252,25 @@ bool Entity::Move(int x, int y)
 			ret = false;
 		}
 	}
+	else if (type == OBJECT)
+	{
+		currentPos.x += x;
+		UpdateCollider();
 
+		if (col->CheckArrowCollision() != CZ_NONE)
+		{
+			currentPos.x -= x;
+			ret = false;
+		}
+
+		currentPos.y += y;
+		UpdateCollider();
+		if (col->CheckArrowCollision() != CZ_NONE)
+		{
+			currentPos.y -= y;
+			ret = false;
+		}
+	}
 	return ret;
 }
 

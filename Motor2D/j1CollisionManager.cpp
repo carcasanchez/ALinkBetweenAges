@@ -248,3 +248,27 @@ COLLISION_ZONE Collider::CheckPlayerMapJump()
 	
 	return ret;
 }
+
+
+COLLISION_ZONE Collider::CheckArrowCollision()
+{
+	COLLISION_ZONE ret = CZ_NONE;
+
+	iPoint up_left = App->map->WorldToMap(rect.x, rect.y);
+	iPoint up_right = App->map->WorldToMap(rect.x + rect.w, rect.y);
+	iPoint down_left = App->map->WorldToMap(rect.x, rect.y + rect.h);
+	iPoint down_right = App->map->WorldToMap(rect.x + rect.w, rect.y + rect.h);
+
+	if (App->pathfinding->CheckArrowCollision(up_left) == false ||
+		App->pathfinding->CheckArrowCollision(up_right) == false ||
+		App->pathfinding->CheckArrowCollision(down_left) == false ||
+		App->pathfinding->CheckArrowCollision(down_right) == false)
+	{
+		ret = CZ_UP_LEFT;
+
+	}
+	
+
+
+	return ret;
+}

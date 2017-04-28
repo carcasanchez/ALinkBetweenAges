@@ -88,11 +88,11 @@ bool j1EntityManager::Update(float dt)
 
 	for (std::list<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
 	{		
-		if (App->render->InsideCameraZone((*item)->col->rect))
-		{
+		//if (App->render->InsideCameraZone((*item)->col->rect))
+		//{
 			(*item)->Update(dt);
 			(*item)->UpdateCollider();
-		}
+		//}
 		
 	}
 
@@ -276,6 +276,8 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case BOMB:
 		ret = new Bomb();
 		break;
+	case ZELDA_ARROW:
+		ret = new ZeldaArrow;
 	}
 	
 

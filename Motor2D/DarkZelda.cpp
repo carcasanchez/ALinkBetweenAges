@@ -54,11 +54,13 @@ void DarkZelda::OnDeath()
 {
 	if(phase == 1)
 	{
+		sprite->tint = { 255, 255, 255, 255 };
 		phase = 2;
 		life = 5;	
+		enemyState = PATROLING;
 	}
 
-	if (phase == 2)
+	else if (phase == 2)
 	{
 		toDelete = true;
 	}
@@ -85,6 +87,9 @@ bool DarkZelda::Update(float dt)
 			break;
 		case CHARGE_BOW:
 			ChargeBow(dt);
+			break;
+		case STEP_BACK:
+			StepBack(dt);
 			break;
 		}
 		break;
@@ -114,17 +119,17 @@ bool DarkZelda::LateralWalk(float dt)
 	actionState = WALKING;
 
 	bool ret;
-	if (lateralDirection)
+	if (currentPos.x < App->game->em->player->currentPos.x)
 	{
 		ret = Move(SDL_ceil(speed*dt), 0);
 		
 	}
-	else ret = Move(-SDL_ceil(speed*dt), 0);
+	else if(currentPos.x > App->game->em->player->currentPos.x)
+		ret = Move(-SDL_ceil(speed*dt), 0);
 
-	if (!ret)
-		lateralDirection = !lateralDirection;
 
-	if (walkTimer.ReadMs() > walkTimelimit)
+
+	if (walkTimer.ReadMs() > walkTimelimit && abs (App->game->em->player->currentPos.x- currentPos.x) < 10 )
 	{
 		enemyState = CHARGE_BOW;
 		chargeBowTimer.Start();
@@ -135,17 +140,13 @@ bool DarkZelda::LateralWalk(float dt)
 
 bool DarkZelda::ChargeBow(float dt)
 {
-	actionState = IDLE;
+	actionState = SHOOTING_BOW;
 
-	if (chargeBowTimer.ReadMs() > bowTenseLimit)
+	if (currentAnim->isOver())
 	{
-		srand(time(NULL));
-		bool change = rand() % 2;
-		if (change)
-		{
-			lateralDirection = !lateralDirection;
-		}
-
+		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+		App->game->em->CreateObject(1, mapPos.x, mapPos.y, ZELDA_ARROW);
+		currentAnim->Reset();
 		enemyState = LATERAL_WALK;
 		walkTimer.Start();
 	}

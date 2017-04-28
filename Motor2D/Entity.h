@@ -23,7 +23,8 @@ enum ACTION_STATE
 	SPINNING,
 	OPEN,
 	CLOSE,
-	JUMPING
+	JUMPING,
+
 };
 
 

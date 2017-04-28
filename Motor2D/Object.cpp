@@ -87,7 +87,11 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case BOMB_SAC:
 				attributes = attributes.child("bomb_sac");
 				break;
+			case ZELDA_ARROW:
+				attributes = attributes.child("zelda_arrow");
+				break;
 		}		
+
 		LoadAttributes(attributes);
 
 		price = attributes.child("base").attribute("price").as_int();
@@ -104,6 +108,10 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 
 		case ARROW_DROP:
 			currentDir = D_UP;
+			break;
+
+		case ZELDA_ARROW:
+			currentDir = D_DOWN;
 			break;
 		}
 
