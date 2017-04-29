@@ -37,10 +37,12 @@ bool j1CutSceneManager::Awake(pugi::xml_node& config)
 	if (config != NULL)
 	{
 		ret = true;
-
 		//TODO 2: fill the paths list with the names of the config.xml file. 
-
+		for (pugi::xml_node cutscene = config.child("cutscene"); cutscene != NULL; cutscene = cutscene.next_sibling())
+			paths.push_back(cutscene.attribute("file").as_string());
 	}
+
+	
 
 	return ret;
 }
