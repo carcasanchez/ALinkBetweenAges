@@ -226,14 +226,7 @@ bool Player::Idle()
 		return true;
 	}
 
-	//Spin
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && age == YOUNG && (stamina - spinTax >= 0))
-	{
-		stamina -= spinTax;
-		actionState = SPINNING;
-		createSwordCollider();
-	}
-
+	
 
 	//Attack
 	else if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
@@ -357,27 +350,20 @@ bool Player::Walking(float dt)
 		return true;
 	}
 
-	/*if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >=0))
-	{	
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >= 0))
+	{
 		stamina -= dodgeTax;
+		App->game->hud->stamina_bar->WasteStamina(dodgeTax);
 		actionState = DODGING;
 		Change_direction();
 		dodging = true;
 		dodgeTimer.Start();
-		return true;
-	}*/
-
-	//Spin
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && age == YOUNG && (stamina - spinTax >= 0))
-	{
-		stamina -= spinTax;
-		actionState = SPINNING;
-		createSwordCollider();
 	}
 	 
 
 	//Attack
-	if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
+	else if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN )&&  stamina - attackTax > 0)

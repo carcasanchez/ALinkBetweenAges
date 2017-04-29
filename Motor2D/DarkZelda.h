@@ -20,6 +20,13 @@ public:
 	bool StepBack(float dt);
 	bool Chasing(float dt);
 	bool Dodging(float dt);
+	bool Charging(float dt);
+	bool Attack(float dt);
+
+
+	void SetSwordAttack();
+
+
 	bool GetHit();
 	void OnDeath();
 
@@ -38,6 +45,12 @@ private:
 	int dodgeSpeed;
 	int dodgeLimit;
 	j1PerfTimer dodgeTimer;
+	j1PerfTimer holdPosTimer;
+	int holdPosLimit;
+
+	iPoint lastPlayerPos;
+
+	
 
 
 };

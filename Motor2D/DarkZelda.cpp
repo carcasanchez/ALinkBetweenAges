@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "j1SceneManager.h"
 #include <time.h>
+#include <math.h>
 
 bool DarkZelda::Spawn(std::string file, iPoint pos)
 {
@@ -43,11 +44,15 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		enemyState = LATERAL_WALK;
 		actionState = WALKING;
 
-		speed = 10;
+		speed = 50;
 		walkTimelimit = 500;
 		fightRange = 50;
-		dodgeSpeed = 200;
+		dodgeSpeed = 150;
 		dodgeLimit = 200;
+		attackRatio = 1000;
+		attackSpeed = 250;
+
+		holdPosLimit = 600;
 	
 	}
 	return ret;
@@ -63,8 +68,9 @@ void DarkZelda::OnDeath()
 		currentPos = App->map->MapToWorld(75, 25);
 		sprite->tint = { 255, 255, 255, 255 };
 		phase = 2;
-		life = 75;	
+		life = 10;	
 		enemyState = KEEP_DISTANCE;
+		attackTimer.Start();
 
 	}
 
@@ -112,6 +118,12 @@ bool DarkZelda::Update(float dt)
 			break;
 		case DODGING_LINK:
 			Dodging(dt);
+			break;
+		case CHARGING:
+			Charging(dt);
+			break;
+		case THROWING_ATTACK:
+			Attack(dt);
 			break;
 		}
 		break;
@@ -170,9 +182,6 @@ bool DarkZelda::ChargeBow(float dt)
 	return false;
 }
 
-
-
-
 bool DarkZelda::KeepDistance(float dt)
 {
 	LookToPlayer();
@@ -191,16 +200,13 @@ bool DarkZelda::KeepDistance(float dt)
 	}
 
 	//Choose if attack or not if Link is aligned to enemy
-	/*if (attackTimer.ReadMs() > attackRatio)
+	if (attackTimer.ReadMs() > attackRatio )
 	{
-		srand(time(NULL));
-		bool attack = rand() % 2;
-		if (abs(currentPos.y - App->game->em->player->currentPos.y)<3 || abs(currentPos.x - App->game->em->player->currentPos.x)<3)
+		if (abs(currentPos.y - App->game->em->player->currentPos.y) < 3 || abs(currentPos.x - App->game->em->player->currentPos.x) < 3)
 		{
-			attackTimer.Start();
-			enemyState = CHARGING;
+			SetSwordAttack();
 		}
-	}*/
+	}
 
 
 	if (App->game->em->player->currentPos.DistanceTo(currentPos) > fightRange*1.5)
@@ -275,6 +281,13 @@ bool DarkZelda::Chasing(float dt)
 		flankingDir = rand() % 2;
 	}
 
+	 if (attackTimer.ReadMs() > attackRatio)
+	 {
+		 srand(time(NULL));
+		 bool attack = rand() % 2;
+		 SetSwordAttack();
+	 }
+
 	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 
 	GoTo(playerTile, speed, dt);
@@ -338,6 +351,91 @@ bool DarkZelda::Dodging(float dt)
 	return false;
 }
 
+bool DarkZelda::Charging(float dt)
+{
+	actionState = PREPARING_SWORD;
+	
+	bool stop = false;
+	bool ret = true;
+
+	switch (currentDir)
+	{
+	case D_UP:
+		ret = Move(0, -SDL_ceil(dt*attackSpeed));
+		if (App->map->WorldToMap(currentPos.x, currentPos.y).y < lastPlayerPos.y)
+			stop = true;
+		break;
+	case D_DOWN:
+		ret = Move(0, SDL_ceil(dt*attackSpeed));
+		if (App->map->WorldToMap(currentPos.x, currentPos.y).y > lastPlayerPos.y)
+			stop = true;
+		break;
+	case D_RIGHT:
+		ret = Move(SDL_ceil(dt*attackSpeed), 0);
+		if (App->map->WorldToMap(currentPos.x, currentPos.y).x > lastPlayerPos.x)
+			stop = true;
+		break;
+	case D_LEFT:
+		ret = Move(-SDL_ceil(dt*attackSpeed), 0);
+		if (App->map->WorldToMap(currentPos.x, currentPos.y).x < lastPlayerPos.x)
+			stop = true;
+		break;
+	}
+
+	if (stop || ret == false)
+
+	{
+		enemyState = THROWING_ATTACK;
+		switch (phase)
+		{
+		case 2:
+			actionState = ATTACKING;
+			break;
+		case 3:
+			actionState = SPECIAL_ATTACK;
+			break;
+		}
+	}
+	
+	return true;
+}
+
+bool DarkZelda::Attack(float dt)
+{
+	if (actionState != HOLDING_NORMAL_SWORD)
+	{
+		if (currentAnim->isOver())
+		{
+			currentAnim->Reset();
+			actionState = HOLDING_NORMAL_SWORD;
+			holdPosTimer.Start();
+		}
+	}
+
+	else 
+	{
+		if (holdPosTimer.ReadMs() > holdPosLimit)
+		{
+			actionState = WALKING;
+			enemyState = CHASING;
+			attackTimer.Start();
+		}
+	}
+
+	return true;
+}
+
+void DarkZelda::SetSwordAttack()
+{
+	srand(time(NULL));
+	bool attack = rand() % 2;
+
+	lastPlayerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
+	enemyState = CHARGING;
+
+	
+}
+
 bool DarkZelda::GetHit()
 {
 	switch (phase)
@@ -350,15 +448,25 @@ bool DarkZelda::GetHit()
 		break;
 
 	case 2:
-		enemyState = DODGING_LINK;
-		srand(time(NULL));
-		bool change = rand() % 2;
-		if (change)
-		{
-			flankingDir = true;
+		if(enemyState == KEEP_DISTANCE)
+			{ 
+			enemyState = DODGING_LINK;
+			srand(time(NULL));
+			bool change = rand() % 2;
+			if (change)
+			{
+				flankingDir = true;
+			}
+			else flankingDir = false;
+			dodgeTimer.Start();
 		}
-		else flankingDir = false;
-		dodgeTimer.Start();
+		else
+		{
+			life -= App->game->em->player->damage;
+			sprite->tint = { 255, 0, 0, 255 };
+			enemyState = STEP_BACK;
+			damagedTimer.Start();
+		}
 		break;
 	}
 
@@ -376,9 +484,9 @@ bool DarkZelda::StepBack(float dt)
 		movement.y = -1;
 	else movement.y = +1;
 
-	Move(SDL_ceil(movement.x*speed*dt * 5), SDL_ceil(movement.y*speed*dt * 5));
+	Move(SDL_ceil(movement.x*speed*dt * 3), SDL_ceil(movement.y*speed*dt * 3));
 
-	if (damagedTimer.ReadMs() > damagedLimit && pushedBackTimer.ReadMs() > 200)
+	if (damagedTimer.ReadMs() > damagedLimit && pushedBackTimer.ReadMs() > 300)
 	{
 		enemyState = KEEP_DISTANCE;
 		sprite->tint = { 255, 255, 255, 255 };

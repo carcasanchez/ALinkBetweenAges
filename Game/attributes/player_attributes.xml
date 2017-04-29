@@ -25,10 +25,10 @@
 
 <adult>
    <attributes>
-  	<base life = "5" stamina = "250"  damage ="2" staminaRec = "100" speed = "120"/>
+  	<base life = "5" stamina = "250"  damage ="2" staminaRec = "100" speed = "90"/>
   	<attack speed = "110" staminaTax = "70" spinTax = "100"/>
   	<damaged hitTime = "100" damagedTime = "2000" damagedSpeed = "180"/>
-  	<dodge speed = "320" staminaTax = "50" limit = "90"/>
+  	<dodge speed = "320" staminaTax = "50" limit = "50"/>
   	<collider x = "6" y = "9" w = "12" h = "10" type = "1"/>
   	<animation file = "animations/old_link_animations.xml"/>
   	<texture file = "textures/Link_sprites/Link_old.png"/>

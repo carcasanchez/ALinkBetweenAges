@@ -94,7 +94,7 @@
   		</WALK_BOW>
 
 		<TELEPORT_APPEAR>
-			<name value = "9"  />
+			<name value = "10"  />
 			
 			<DOWN> 
 				<values name = "0" x ="1" y = "186" w = "20" h = "36" frameNumber = "2" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
@@ -115,7 +115,7 @@
 		</TELEPORT_APPEAR>
 		
 		<TELEPORT_DISAPPEAR>
-			<name value = "10"  />
+			<name value = "11"  />
 
 			<DOWN>
 				<values name = "1" x ="1" y = "149" w = "20" h = "36" frameNumber = "8" margin = "1" pivot_x = "10" pivot_y = "34" flip= "0"/>
@@ -136,7 +136,7 @@
 		</TELEPORT_DISAPPEAR>
 		
 		<STAB>
-			<name value = "11"  />
+			<name value = "12"  />
 			
 			<DOWN>
 				<values name = "0" x ="1" y = "299" w = "32" h = "50" frameNumber = "10" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>
@@ -161,14 +161,14 @@
 		</STAB>
 
 		<NORMAL_SWORD>
-			<name value = "12"  />
+			<name value = "2"  />
 			
 			<DOWN>
-				<values name = "0" x ="1" y = "425" w = "34" h = "48" frameNumber = "8" margin = "1" pivot_x = "16" pivot_y = "34" flip= "0"/>
+				<values name = "1" x ="1" y = "425" w = "34" h = "48" frameNumber = "8" margin = "1" pivot_x = "16" pivot_y = "34" flip= "0"/>
 			</DOWN>
 
 			<UP>
-				<values name = "1" x ="1" y = "474" w = "43" h = "43" frameNumber = "8" margin = "1" pivot_x = "24" pivot_y = "41" flip= "0"/>
+				<values name = "0" x ="1" y = "474" w = "43" h = "43" frameNumber = "8" margin = "1" pivot_x = "24" pivot_y = "41" flip= "0"/>
 			</UP>
 
 			<RIGHT>
@@ -179,22 +179,72 @@
 				<values name = "3" x ="1" y = "518" w = "54" h = "42" frameNumber = "8" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
 			</LEFT>
 		
-			<loop value = "true"  />
+			<loop value = "false"  />
 
-			<speed value = "0.1"  />
+			<speed value = "0.8"  />
 
 		</NORMAL_SWORD>
+
+		<HOLDING_NORMAL_SWORD>
+			<name value = "17"  />
+			
+			<DOWN>
+				<values name = "1" x ="247" y = "425" w = "34" h = "48" frameNumber = "1" margin = "1" pivot_x = "16" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<UP>
+				<values name = "0" x ="1" y = "474" w = "43" h = "43" frameNumber = "1" margin = "1" pivot_x = "24" pivot_y = "41" flip= "0"/>
+			</UP>
+
+			<RIGHT>
+				<values name = "2" x ="1" y = "518" w = "54" h = "42" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
+			</RIGHT>
+
+			<LEFT>
+				<values name = "3" x ="1" y = "518" w = "54" h = "42" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
+			</LEFT>
+		
+			<loop value = "false"  />
+
+			<speed value = "0.5"  />
+
+		</HOLDING_NORMAL_SWORD>
+
+		<PREPARING_NORMAL_SWORD>
+			<name value = "16"  />
+			
+			<DOWN>
+				<values name = "1" x ="1" y = "425" w = "34" h = "48" frameNumber = "1" margin = "1" pivot_x = "16" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<UP>
+				<values name = "0" x ="1" y = "474" w = "43" h = "43" frameNumber = "1" margin = "1" pivot_x = "24" pivot_y = "41" flip= "0"/>
+			</UP>
+
+			<RIGHT>
+				<values name = "2" x ="1" y = "518" w = "54" h = "42" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
+			</RIGHT>
+
+			<LEFT>
+				<values name = "3" x ="1" y = "518" w = "54" h = "42" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
+			</LEFT>
+		
+			<loop value = "false"  />
+
+			<speed value = "0.9"  />
+
+		</PREPARING_NORMAL_SWORD>
 
 		<FIRE_SWORD>
 
 			<name value = "13"  />
 			
 			<DOWN>
-				<values name = "0" x ="1" y = "561" w = "44" h = "50" frameNumber = "8" margin = "1" pivot_x = "26" pivot_y = "34" flip= "0"/>
+				<values name = "1" x ="1" y = "561" w = "44" h = "50" frameNumber = "8" margin = "1" pivot_x = "26" pivot_y = "34" flip= "0"/>
 			</DOWN>
 
 			<UP>
-				<values name = "1" x ="1" y = "612" w = "55" h = "52" frameNumber = "8" margin = "1" pivot_x = "28" pivot_y = "45" flip= "0"/>
+				<values name = "0" x ="1" y = "612" w = "55" h = "52" frameNumber = "8" margin = "1" pivot_x = "28" pivot_y = "45" flip= "0"/>
 			</UP>
 
 			<RIGHT>
@@ -205,15 +255,15 @@
 				<values name = "3" x ="1" y = "665" w = "62" h = "45" frameNumber = "8" margin = "1" pivot_x = "31" pivot_y = "36" flip= "1"/>
 			</LEFT>
 		
-			<loop value = "true"  />
+			<loop value = "false"  />
 
-			<speed value = "0.1"  />
+			<speed value = "0.5"  />
 
 		</FIRE_SWORD>
 
 		<SPIN_TO_WIN>
 
-			<name value = "14"  />
+			<name value = "6"  />
 
 			<DOWN>
 				<values name = "0" x ="1" y = "711" w = "53" h = "44" frameNumber = "10" margin = "1" pivot_x = "26" pivot_y = "35" flip= "0"/>
@@ -227,7 +277,7 @@
 
 		<BOLT>
 
-			<name value = "15"  />
+			<name value = "14"  />
 
 			<DOWN>
 				<values name = "0" x ="1" y = "756" w = "26" h = "36" frameNumber = "7" margin = "1" pivot_x = "13" pivot_y = "34" flip= "0"/>
@@ -241,7 +291,7 @@
 
 		<BOLT_SWORD>
 
-			<name value = "16"  />
+			<name value = "15"  />
 
 			<DOWN>
 				<values name = "0" x ="1" y = "793" w = "32" h = "51" frameNumber = "9" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>
