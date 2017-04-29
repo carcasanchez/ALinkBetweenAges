@@ -29,6 +29,7 @@ class j1Console;
 class j1Render;
 class DialogManager;
 class j1QuestManager;
+class j1CutSceneManager;
 
 class j1App : public j1Module
 {
@@ -121,6 +122,7 @@ public:
 	j1Render*			render = NULL;
 	DialogManager*      dialog = NULL;
 	j1QuestManager*		quest = NULL;
+	j1CutSceneManager*	cutsceneM = NULL;
 
 
 private:

@@ -25,6 +25,7 @@
 #include "j1App.h"
 #include "DialogManager.h"
 #include "j1QuestManager.h"
+#include "j1CutSceneManager.h"
 #include "Brofiler\Brofiler.h"
 
 // Constructor
@@ -51,6 +52,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	console = new j1Console();
 	dialog = new DialogManager();
 	quest = new j1QuestManager();
+	cutsceneM = new j1CutSceneManager();
 	render = new j1Render();
 
 	// Ordered for awake / Start / Update
@@ -73,6 +75,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(console);
 	AddModule(dialog);
 	AddModule(quest);
+	AddModule(cutsceneM);
 	// render last to swap buffer
 	AddModule(render);
 
