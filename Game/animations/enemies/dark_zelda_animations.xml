@@ -193,15 +193,15 @@
 			</DOWN>
 
 			<UP>
-				<values name = "0" x ="1" y = "474" w = "43" h = "43" frameNumber = "1" margin = "1" pivot_x = "24" pivot_y = "41" flip= "0"/>
+				<values name = "0" x ="309" y = "474" w = "43" h = "43" frameNumber = "1" margin = "1" pivot_x = "24" pivot_y = "41" flip= "0"/>
 			</UP>
 
 			<RIGHT>
-				<values name = "2" x ="1" y = "518" w = "54" h = "42" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
+				<values name = "2" x ="387" y = "518" w = "54" h = "42" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
 			</RIGHT>
 
 			<LEFT>
-				<values name = "3" x ="1" y = "518" w = "54" h = "42" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
+				<values name = "3" x ="387" y = "518" w = "54" h = "42" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
 			</LEFT>
 		
 			<loop value = "false"  />
@@ -261,9 +261,35 @@
 
 		</FIRE_SWORD>
 
+		<HOLDING_FIRE_SWORD>
+
+			<name value = "14"  />
+			
+			<DOWN>
+				<values name = "1" x ="316" y = "561" w = "44" h = "50" frameNumber = "1" margin = "" pivot_x = "26" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<UP>
+				<values name = "0" x ="393" y = "612" w = "55" h = "52" frameNumber = "1" margin = "" pivot_x = "28" pivot_y = "45" flip= "0"/>
+			</UP>
+
+			<RIGHT>
+				<values name = "2" x ="442" y = "665" w = "62" h = "45" frameNumber = "1" margin = "" pivot_x = "31" pivot_y = "36" flip= "0"/>
+			</RIGHT>
+
+			<LEFT>
+				<values name = "3" x ="442" y = "665" w = "62" h = "45" frameNumber = "1" margin = "" pivot_x = "31" pivot_y = "36" flip= "1"/>
+			</LEFT>
+		
+			<loop value = "false"  />
+
+			<speed value = "0.5"  />
+
+		</HOLDING_FIRE_SWORD>
+
 		<SPIN_TO_WIN>
 
-			<name value = "6"  />
+			<name value = "15"  />
 
 			<DOWN>
 				<values name = "1" x ="1" y = "711" w = "53" h = "44" frameNumber = "10" margin = "1" pivot_x = "26" pivot_y = "35" flip= "0"/>
@@ -277,7 +303,7 @@
 
 		<BOLT>
 
-			<name value = "14"  />
+			<name value = "16"  />
 
 			<DOWN>
 				<values name = "1" x ="1" y = "756" w = "26" h = "36" frameNumber = "7" margin = "1" pivot_x = "13" pivot_y = "34" flip= "0"/>
@@ -291,7 +317,7 @@
 
 		<BOLT_SWORD>
 
-			<name value = "15"  />
+			<name value = "17"  />
 
 			<DOWN>
 				<values name = "1" x ="1" y = "793" w = "32" h = "51" frameNumber = "9" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>
@@ -315,9 +341,35 @@
 
 		</BOLT_SWORD>
 
+		<HOLDING_BOLT_SWORD>
+
+			<name value = "18"  />
+
+			<DOWN>
+				<values name = "1" x ="267" y = "793" w = "32" h = "51" frameNumber = "1" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<UP>
+				<values name = "0" x ="265" y = "845" w = "32" h = "38" frameNumber = "1" margin = "1" pivot_x = "10" pivot_y = "36" flip= "0"/>
+			</UP>
+
+			<RIGHT>
+				<values name = "2" x ="332" y = "884" w = "54" h = "37" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
+			</RIGHT>
+
+			<LEFT>
+				<values name = "3" x ="332" y = "884" w = "54" h = "37" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
+			</LEFT>
+
+			<loop value = "false"  />
+
+			<speed value = "0.1"  />
+
+		</HOLDING_BOLT_SWORD>
+
 		<DODGE_DOWN>
 		
-			<name value = "16"  />
+			<name value = "19"  />
 
 			<RIGHT>
 				<values name = "2" x ="28" y = "922" w = "26" h = "36" frameNumber = "1" margin = "" pivot_x = "13" pivot_y = "34" flip= "0"/>
@@ -335,7 +387,7 @@
 
 		<DODGE_RIGHT>
 		
-			<name value = "17"  />
+			<name value = "20"  />
 
 			<DOWN>
 				<values name = "1" x ="80" y = "922" w = "24" h = "36" frameNumber = "1" margin = "" pivot_x = "12" pivot_y = "34" flip= "0"/>
@@ -353,7 +405,7 @@
 
 		<DODGE_LEFT>
 		
-			<name value = "18"  />
+			<name value = "21"  />
 
 			<DOWN>
 				<values name = "1" x ="80" y = "922" w = "24" h = "36" frameNumber = "1" margin = "" pivot_x = "12" pivot_y = "34" flip= "1"/>
@@ -371,7 +423,7 @@
 		
 		<DODGE_UP>
 		
-			<name value = "19"  />
+			<name value = "22"  />
 
 			<RIGHT>
 				<values name = "2" x ="132" y = "922" w = "26" h = "36" frameNumber = "1" margin = "" pivot_x = "13" pivot_y = "34" flip= "0"/>
