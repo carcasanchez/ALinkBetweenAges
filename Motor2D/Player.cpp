@@ -977,7 +977,7 @@ void Player::NextDialog()
 			{
 				playerState = ACTIVE;
 				App->dialog->text_on_screen->Set_Active_state(false);
-				if (toTalk->dialogState == 0)
+				if (toTalk->dialogState == 0 && App->dialog->NumDialog(toTalk->id) == 2)
 				{
 					toTalk->dialogState++;
 				}

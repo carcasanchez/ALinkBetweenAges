@@ -35,10 +35,11 @@ class Dialog
 {
 public:
 
-	Dialog(int id);
+	Dialog(int id, uint num_states);
 	~Dialog();
 
 	uint id;
+	uint num_states;
 	std::vector<TextLine*> texts;
 };
 
@@ -50,8 +51,9 @@ public:
 	~DialogManager();
 	bool Awake(pugi::xml_node& config);
 	bool Start();
+	
 	bool BlitDialog(int id, int state);
-
+	uint NumDialog(int id);
 	int dialogueStep = 0; //Allows to order the conversarion correctly
 
 	/*--- UI elements to print dialogues on screen ---*/

@@ -46,7 +46,7 @@ bool DialogManager::Start()
 	for (pugi::xml_node npc = dialogueNode.child("npc"); npc != NULL; npc = npc.next_sibling(), i++)
 	{
 		//Allocate Dialog with his ID and State
-		Dialog* tmp = new Dialog(npc.attribute("id").as_int());
+		Dialog* tmp = new Dialog(npc.attribute("id").as_int(), npc.attribute("states").as_uint());
 		dialog.push_back(tmp);
 
 		//Allocate text
@@ -97,12 +97,17 @@ bool DialogManager::BlitDialog(int id, int state)
 	return false;
 }
 
+uint DialogManager::NumDialog(int id)
+{
+	return dialog[id-1]->num_states;
+}
+
 DialogManager::~DialogManager()
 {
 	dialog.clear();
 }
 
-Dialog::Dialog(int id) : id(id)
+Dialog::Dialog(int id, uint num_states) : id(id), num_states(num_states)
 {}
 
 Dialog::~Dialog()

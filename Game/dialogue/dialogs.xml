@@ -1,7 +1,7 @@
 <!-- Dialogues -->
 <npcs>
   
-   <npc id="1">
+   <npc id="1" states="2">
      <dialogue state="0">
        <text value=" Hi Link! We had problems with Ganon's soldiers. They came out of nowhere wanting to kidnap Zelda, but she managed to escape to the forest."/>
 	<text value=" The forest is at the south-west, passing the village. We need your help. Bring Zelda back, please."/>
@@ -12,16 +12,17 @@
      </dialogue>
    </npc>
   
-   <npc id="2">
+   <npc id="2" states="2">
      <dialogue state="0">
 	<text value=" A blink is enough to make a peaceful man a warrior."/>
      </dialogue>
      <dialogue state="1">
 	<text value=" I can see fear in your eyes. Be brave, Link."/>
      </dialogue>
+
    </npc>
 
-   <npc id="3">
+   <npc id="3" states="2">
      <dialogue state="0">
 	<text value=" The soldiers stole my chickens. I'm so sad. They are bad people."/>
      </dialogue>
@@ -30,30 +31,22 @@
      </dialogue>
    </npc>
 
-   <npc id="4">
-     <dialogue state="0">
-	<text value=" A group of soldiers went to the forest, I don't know what they are looking for."/>
-     </dialogue>
-<dialogue state="1">
+   <npc id="4" states="1">
+     <dialogue state="0" states="1">
 	<text value=" A group of soldiers went to the forest, I don't know what they are looking for."/>
      </dialogue>
    </npc>
 
-   <npc id="5">
+   <npc id="5" states="1">
      <dialogue state="0">
 	<text value=" To the left is the entrance to the forest. Be very careful if you are going to enter there."/>
 </dialogue>
-<dialogue state="1">
-	<text value=" To the left is the entrance to the forest. Be very careful if you are going to enter there."/>
-</dialogue>
-
-
    </npc>
 
-   <npc id="6">
+   <npc id="6" states="2">
      <dialogue state="0">
 	<text value=" Hey! You don't talk that much. I like you."/>
-	<text value=" I like you."/>
+	<text value=" That's my boy."/>
      </dialogue>
 <dialogue state="1">
 	<text value=" Good boy."/>
@@ -62,7 +55,7 @@
    </npc>
 
    <npc id="7">
-     <dialogue state="0">
+     <dialogue state="0" states="2">
 	<text value=" I love turtles, but I can't find any in this village."/>
      </dialogue>
      <dialogue state="1">
@@ -70,7 +63,7 @@
      </dialogue>
    </npc>
 
-   <npc id="8">
+   <npc id="8" states="2">
      <dialogue state="0">
 	<text value=" I'm glad to see you again Link. Thank you for rescuing me. This morning, a group of soldiers came to kidnap me, but I managed to escape and hide here."/>
 	<text value=" I need your help, Link. Could you defeat all the soldiers of the castle?"/>
