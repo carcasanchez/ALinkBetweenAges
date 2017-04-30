@@ -39,7 +39,7 @@
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="true"/>
-    <fullscreen_window value="true"/>
+    <fullscreen_window value="false"/>
   </window>
 
   <file_system>
@@ -123,6 +123,12 @@
       <!--PAUSE-->
       <action event="5" button="6"/>
   </context>
+
+    <!--CUTSCENE CONTEXT-->
+    <context value="2">
+      <!--NEXT-->
+      <action event="12" button="0"/>
+    </context>
   
   </inputManager>  
   <console>

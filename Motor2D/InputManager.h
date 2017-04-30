@@ -13,7 +13,8 @@
 enum GAMECONTEXT
 {
 	IN_GAME,
-	IN_MENU
+	IN_MENU,
+	IN_CUTSCENE
 };
 
 enum INPUTEVENT
@@ -33,6 +34,9 @@ enum INPUTEVENT
 	RIGHT,
 	CONFIRM,
 	DECLINE,
+
+	//Inside cutscenes
+	NEXT,
 
 	//No Button Asociated -> Joysticks
 	MUP,
