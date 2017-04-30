@@ -109,6 +109,8 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
 		{
 
+			
+
 			if ((*it)->active && (it + 1) != pause_selectables.end())
 			{
 				(*it)->active = false;
@@ -210,6 +212,19 @@ UI_element* Hud::LoadUIElement(pugi::xml_node node, UI_element* screen, UI_TYPE 
 
 			tmp->SetImageRect(LoadRect(node));
 			tmp->Set_Interactive_Box({ node.attribute("pos_x").as_int(), node.attribute("pos_y").as_int(), 0, 0 });
+			tmp->Set_Active_state(node.attribute("active").as_bool());
+
+			if (screen)
+				screen->AddChild(ret);
+
+			return ret;
+		}
+
+		if (type == STRING)
+		{
+			UI_String* tmp = (UI_String*)ret;
+			tmp->Set_Interactive_Box({ node.attribute("pos_x").as_int(),node.attribute("pos_y").as_int(), 390,0 });
+			tmp->Set_String((char*)node.attribute("text").as_string());
 			tmp->Set_Active_state(node.attribute("active").as_bool());
 
 			if (screen)

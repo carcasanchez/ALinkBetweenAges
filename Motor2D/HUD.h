@@ -25,12 +25,13 @@ class Hud : public InputListener
 public:
 	Hud();
 
-	bool Awake(pugi::xml_node& conf);
-	bool Start();
-	bool Update(float);
-	bool CleanUp();
+	bool		Awake(pugi::xml_node& conf);
+	bool		Start();
+	bool		Update(float);
+	bool		CleanUp();
 
-	void OnInputCallback(INPUTEVENT, EVENTSTATE);
+	void		OnInputCallback(INPUTEVENT, EVENTSTATE);
+	UI_element*	LoadUIElement(pugi::xml_node, UI_element*, UI_TYPE);
 
 public:
 	//In game HUD elements
@@ -89,7 +90,6 @@ public:
 
 private:
 
-	UI_element*		LoadUIElement(pugi::xml_node, UI_element*, UI_TYPE);
 	SDL_Rect		LoadRect(pugi::xml_node);
 
 	//Pause methods
