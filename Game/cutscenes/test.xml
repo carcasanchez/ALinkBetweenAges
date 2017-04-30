@@ -30,33 +30,39 @@
  <!--EXECUTE ALL STEPS IN ORDER-->
 
 	<steps>
-		<step  n="0" start="0" duration ="-1">
+		<step  n="0" start="0" duration ="-1" input="false">
 			<element name="tio_ben" action="move" dir="down">
 				<movement dest_x="0" dest_y="30" speed="10"/>
 			</element>
 		</step>
 
-    <step  n="1" start="-1" duration ="-1">
+    <step  n="1" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="right">
         <movement dest_x="100" dest_y="0" speed="10"/>
       </element>
     </step>
 
-    <step  n="2" start="-1" duration ="-1">
+    <step  n="2" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="down">
         <movement dest_x="0" dest_y="45" speed="10"/>
       </element>
     </step>
 
-    <step  n="3" start="-1" duration ="-1">
+    <step  n="3" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="right">
         <movement dest_x="215" dest_y="0" speed="10"/>
       </element>
     </step>
    
-		<step  n="4" start="-1" duration ="-1">
+		<step  n="4" start="-1" duration ="-1" input="true">
 			<element name="sida" action="enable"/>	
 		</step>
+
+    <step  n="5" start="-1" duration ="-1" input="true">
+      <element name="sida" action="setstring">
+        <text text="wow such cutscenes, very difficult such interesting u piece of crap, fran si lees esto date por aludido"/>
+      </element>
+    </step>
 
 	</steps>
 </Cutscene>

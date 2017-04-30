@@ -205,6 +205,17 @@ bool j1CutSceneManager::FinishCutscene()
 	return ret;
 }
 
+void j1CutSceneManager::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
+{
+	if (action == NEXT)
+	{
+		if (state == E_DOWN)
+		{
+
+		}
+	}
+}
+
 bool j1CutSceneManager::PostUpdate()
 {
 	if (active_cutscene != nullptr)
@@ -340,11 +351,12 @@ bool Cutscene::Update(float dt)
 		// 2) if the step isn't finished.
 		// 3) if the start time has been reached by the cutscene timer
 		
-		/*if (step->isWait() && step->isFinished() && temp._Ptr->_Next->_Myval->isActive() == false)
-			temp._Ptr->_Next->_Myval->StartStep();*/
 
 		if (temp != steps.begin() && temp._Ptr->_Prev->_Myval->isFinished() && temp._Ptr->_Prev->_Myval->isWait() && step->isActive() == false && step->isFinished() == false)
 		{
+			if (step->n == 5)
+				int buenas_atrdes = 0;
+
 			step->StartStep();
 		}
 		if (step->GetStartTime() != -1 && step->GetStartTime() <= timer.ReadSec() && step->isActive() == false && step->isFinished() == false)
@@ -485,7 +497,6 @@ bool Cutscene::LoadFx(pugi::xml_node& node)
 	return false;
 }
 
-
 bool Cutscene::LoadStep(pugi::xml_node& node, Cutscene* cutscene) //Pass the cutscene that it's involved to link the step with it
 {
 	bool ret = false;
@@ -584,6 +595,11 @@ bool CS_Step::DoAction(float dt)
 		action_name = "stop";
 		this->StopMusic();
 		break;
+		
+	case ACT_SET_STRING:
+		action_name = "setstring";
+		ChangeString();
+
 	default:
 		action_name = "none";
 		break;
@@ -617,6 +633,10 @@ void CS_Step::FinishStep()
 {
 	active = false;
 	finished = true;
+	
+	if (act_type == ACT_SET_STRING)
+		dynamic_cast<CS_Text*>(element)->Changed_string = false;
+
 	cutscene->StepDone(); //Increment the "steps done" counter
 	LOG("Step %i finished at %.3fs", n, cutscene->timer.ReadSec());
 }
@@ -650,6 +670,11 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	else if (action_type == "stop")
 	{
 		act_type = ACT_STOP;
+	}
+	else if (action_type == "setstring")
+	{
+		act_type = ACT_SET_STRING;
+		new_text = node.child("element").child("text").attribute("text").as_string();
 	}
 	else
 	{
@@ -816,6 +841,27 @@ void CS_Step::Play()
 	LOG("Step %i Playing %s", n, element->name.c_str());
 }
 
+void CS_Step::ChangeString()
+{
+	if (element->GetType() == CS_TEXT)
+	{
+		CS_Text* tmp = (CS_Text*)element;
+
+		if (!tmp->Changed_string)
+		{
+			tmp->GetText()->Set_String((char*)this->new_text.c_str());
+			tmp->Changed_string = true;
+		}
+
+		if (element->GetType() == CS_TEXT)
+		{
+			if (dynamic_cast<CS_Text*>(element)->GetText()->dialog_state == FINISHED_TEXT)
+				FinishStep();
+		}
+	}
+
+}
+
 void CS_Step::StopMusic()
 {
 	if (element->GetType() == CS_MUSIC)
@@ -835,10 +881,18 @@ void CS_Step::ActiveElement()
 		{
 			CS_Text* tmp = (CS_Text*)element;
 			tmp->GetText()->Set_Active_state(true);
+
 		}
 
 		LOG("Step %i Enabling %s", n, element->name.c_str());
 	}
+
+	if (element->GetType() == CS_TEXT)
+	{
+		if(dynamic_cast<CS_Text*>(element)->GetText()->dialog_state == FINISHED_TEXT)
+			FinishStep();
+	}
+
 }
 
 void CS_Step::DisableElement()

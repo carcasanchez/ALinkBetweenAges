@@ -2,6 +2,7 @@
 #define _CUTSCENE_MANAGER_H_
 
 #include "j1Module.h"
+#include "InputManager.h"
 #include "Bezier.h"
 #include <vector>
 #include <string>
@@ -9,7 +10,7 @@
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
 enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_NONE };
-enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE };
+enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE };
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, NO_DIR };
 
 class Entity;
@@ -86,7 +87,7 @@ public:
 	UI_String* GetText()const;
 	void SetPos(int, int);
 	void SetString(UI_String*);
-
+	bool Changed_string = false;
 
 	//void Move(float x, float y);
 	//---------------------------------
@@ -146,6 +147,7 @@ public:
 	bool DoMovement(float dt);
 	bool CheckMovementCompleted(iPoint curr_pos);
 	void Play();
+	void ChangeString();
 	void StopMusic();
 	void ActiveElement();
 	void DisableElement();
@@ -180,6 +182,9 @@ private:
 	iPoint dest = { 0, 0 };
 	int mov_speed = 0;
 	Dir_Type direction = NO_DIR;
+
+	//TEXTS ACIONS 
+	std::string new_text;
 
 };
 
@@ -235,7 +240,7 @@ private:
 };
 
 
-class j1CutSceneManager : public j1Module
+class j1CutSceneManager : public j1Module, public InputListener
 {
 public:
 	j1CutSceneManager();
@@ -252,6 +257,8 @@ public:
 	bool StartCutscene(uint id);
 	bool FinishCutscene();
 	//---------------------------
+
+	void OnInputCallback(INPUTEVENT action, EVENTSTATE state);
 
 	// Called before all Updates
 	bool PostUpdate();
