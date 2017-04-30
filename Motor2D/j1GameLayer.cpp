@@ -292,11 +292,12 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		//When link is adult, empuja enemigos
 		if (em->player->actionState == DODGING && em->player->age == ADULT )
 		{
-			if (((Enemy*)(c2->parent))->enemyState != STEP_BACK)
+			//TODO: Arrange this
+			/*if (((Enemy*)(c2->parent))->enemyState != STEP_BACK)
 			{ 
 				((Enemy*)(c2->parent))->enemyState = STEP_BACK;
 				c2->parent->pushedBackTimer.Start();
-			}
+			}*/
 		}
 		else if (em->player->invulnerable == false && em->player->dodging == false && em->player->life > 0)
 		{

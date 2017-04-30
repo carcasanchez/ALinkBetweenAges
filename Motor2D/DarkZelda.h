@@ -22,6 +22,9 @@ public:
 	bool Dodging(float dt);
 	bool Charging(float dt);
 	bool Attack(float dt);
+	bool Stab(float dt);
+
+	bool TeleportAndAttack(float dt);
 
 
 	void SetSwordAttack();
@@ -46,9 +49,15 @@ private:
 	int dodgeLimit;
 	j1PerfTimer dodgeTimer;
 	j1PerfTimer holdPosTimer;
+	j1PerfTimer holdStabTimer;
 	int holdPosLimit;
+	int holdStabLimit;
 
 	iPoint lastPlayerPos;
+
+	int teleportRange;
+
+	bool holdStab = false;
 
 	
 
