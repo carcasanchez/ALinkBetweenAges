@@ -138,7 +138,7 @@
   </dialogue>
 
 <cutscenemanager>
-	<cutscene file="VAYAVAYA"/>
+	<cutscene file="cutscenes/test.xml"/>
 	<cutscene file="AQUI NO HAY"/>
 	<cutscene file="PLAYA"/>
 </cutscenemanager>

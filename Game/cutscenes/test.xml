@@ -1,0 +1,62 @@
+<!-- TEST CUTSCENE -->
+
+<Cutscene name="Test" id="1">
+
+ <!--CUTSCENE ELEMENTS-->
+	<elements>
+		<MAP>
+		</MAP>
+
+		<NPC>
+			<npc n="0" name="tio_ben" active="true" type="0" x="93" y="85" entity_id="1"/>
+		</NPC>
+
+		<IMAGES>
+		</IMAGES>
+
+		<TEXTS>
+			<string n="1" name="sida" active="false" pos_x="150" pos_y="600" text="U are fucking thrash, suck my balls wubba lubba dub dub" />
+   		</TEXTS>
+
+		<MUSIC>
+		</MUSIC>
+
+		<FX>
+		</FX>
+
+
+	</elements>
+
+ <!--EXECUTE ALL STEPS IN ORDER-->
+
+	<steps>
+		<step  n="0" start="0" duration ="-1">
+			<element name="tio_ben" action="move" dir="down">
+				<movement dest_x="0" dest_y="30" speed="10"/>
+			</element>
+		</step>
+
+    <step  n="1" start="-1" duration ="-1">
+      <element name="tio_ben" action="move" dir="right">
+        <movement dest_x="100" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="2" start="-1" duration ="-1">
+      <element name="tio_ben" action="move" dir="down">
+        <movement dest_x="0" dest_y="45" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="3" start="-1" duration ="-1">
+      <element name="tio_ben" action="move" dir="right">
+        <movement dest_x="215" dest_y="0" speed="10"/>
+      </element>
+    </step>
+   
+		<step  n="4" start="-1" duration ="-1">
+			<element name="sida" action="enable"/>	
+		</step>
+
+	</steps>
+</Cutscene>

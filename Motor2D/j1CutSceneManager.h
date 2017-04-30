@@ -27,6 +27,7 @@ public:
 
 	//UTILITY FUNCTIONS ---------
 	CS_Type GetType() const;
+	virtual iPoint GetPos() { return iPoint(0, 0); };
 	// ------------------------
 
 	std::string name;
@@ -38,13 +39,18 @@ protected:
 	std::string path;			//auxiliar path (texture file name, animation, sound/music file...)
 };
 
-class CS_NPC : public CS_Element
+class CS_npc : public CS_Element
 {
-	CS_NPC(CS_Type type, int n, const char* name, bool active, const char* path, iPoint pos);
-	~CS_NPC();
+public:
+	CS_npc(CS_Type type, int n, const char* name, bool active, const char* path);
+	~CS_npc();
 
 	Entity* GetEntity(uint id) const;
+	Entity* GetMyEntity() const;
 	void LinkEntity(Entity* e);
+
+	void Move(float x, float y);
+	iPoint GetPos();
 
 private:
 	Entity*	entity;	//Pointer to the entity that forms part of the game elements (to modify its state, do actions, etc)
@@ -72,12 +78,16 @@ private:
 class CS_Text : public CS_Element
 {
 public:
-	CS_Text(CS_Type type, int n, const char* name, bool active, const char* path, iPoint pos, const char* text);
+	CS_Text(CS_Type type, int n, const char* name, bool active, const char* path);
 	~CS_Text();
 
 	//UTILITY FUNCTIONS ---------------
 	void SetText(const char* txt);
 	UI_String* GetText()const;
+	void SetPos(int, int);
+	void SetString(UI_String*);
+
+
 	//void Move(float x, float y);
 	//---------------------------------
 
@@ -146,18 +156,23 @@ public:
 	uint GetStartTime() const;
 	bool isActive() const;
 	bool isFinished() const;
+	bool isWait() const;
+	void SetWait(bool);
 	// --------------------------------
 
+	int n = -1;
 
 private:
 	Cutscene* cutscene = nullptr;		//Pointer to the cutscene that it is integrated
-	int n = -1;							//Number identifier to manage an order
+	//int n = -1;							//Number identifier to manage an order
 	float start = -1;					//Time to start the step
 	float duration = -1;				//Duration of the step
 	Action_Type act_type = ACT_NONE;		//Type of action that will be executed in this step
 	CS_Element*	element = nullptr;		//Element to apply the action
+
 	bool active = false;				//If step is reproducing.
 	bool finished = false;
+	bool wait_prev_step = false;
 
 	//ACTIONS VARIABLES
 	/*Movement*/
@@ -208,12 +223,12 @@ public:
 	uint id = 0;							//ID to locate when triggered
 	j1Timer	timer;							//To control reproducing time of the cutscene
 	int map_id = -1;						//Id to know wich map charge
+	UI_element* cutscene_screen = nullptr;	//For ui cutscene elements
 
 private:
 	std::list<CS_Element*> elements;		//Elements controlled by the cutscene
 	std::list<CS_Step*> steps;				//Steps to follow in order when reproduced
 	bool finished = false;					//To know if Cutscene has finished
-
 											//TO CONTROL WHEN THE CUTSCENE IS FINISHED
 	uint num_steps = 0;
 	uint steps_done = 0;
