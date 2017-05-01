@@ -90,6 +90,12 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case ZELDA_ARROW:
 				attributes = attributes.child("zelda_arrow");
 				break;
+			case SWORD_BOLT:
+				attributes = attributes.child("sword_bolt");
+				break;
+			case FALLING_BOLT:
+				attributes = attributes.child("falling_bolt");
+				break;
 		}		
 
 		LoadAttributes(attributes);
@@ -113,6 +119,7 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 		case ZELDA_ARROW:
 			currentDir = D_DOWN;
 			break;
+		
 		}
 
 		

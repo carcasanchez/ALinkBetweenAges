@@ -118,4 +118,11 @@
     <animation file = "animations/objects/life_potion_animations.xml"/>
     <texture file = "textures/Object_sprites/lifePotion.png"/>
   </life_potion>
+
+<sword_bolt>
+    <base life = "1"/>
+    <collider x = "18" y = "119" w = "36" h = "122" type = "16"/>
+    <animation file = "animations/objects/sword_bolt_animations.xml"/>
+    <texture file = "textures/Object_sprites/bolt.png"/>
+  </sword_bolt>
 </attributes>

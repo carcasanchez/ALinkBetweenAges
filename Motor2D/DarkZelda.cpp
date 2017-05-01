@@ -12,6 +12,7 @@
 #include "j1GameLayer.h"
 #include "Player.h"
 #include "j1SceneManager.h"
+#include "j1CollisionManager.h"
 #include <time.h>
 #include <math.h>
 
@@ -537,6 +538,36 @@ bool DarkZelda::Stab(float dt)
 		{
 			holdStab = true;
 			holdStabTimer.Start();
+
+			if (phase == 3)
+			{
+				iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+				bolt = App->game->em->CreateObject(1, mapPos.x, mapPos.y, SWORD_BOLT);
+				bolt->currentDir = currentDir;
+				switch (bolt->currentDir)
+				{
+				case D_DOWN:
+					bolt->colPivot.y = 0;
+					break;
+				case D_RIGHT:
+					bolt->colPivot.y = bolt->colPivot.x;
+					bolt->colPivot.x = 0;
+					break;
+				case D_LEFT:
+					int tmp = bolt->colPivot.x;
+					bolt->colPivot.x = bolt->colPivot.y;
+					bolt->colPivot.y = tmp;
+					break;
+				}
+
+
+				if (currentDir == D_RIGHT || currentDir == D_LEFT)
+				{
+					int tmp = bolt->col->rect.h;
+					bolt->col->rect.h = bolt->col->rect.w;
+					bolt->col->rect.w = tmp;
+				}
+			}
 		}
 	}
 

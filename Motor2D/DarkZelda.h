@@ -4,6 +4,7 @@
 #include "Enemy.h"
 
 class j1PerfTimer;
+class Object;
 
 class DarkZelda : public Enemy
 {
@@ -68,7 +69,7 @@ private:
 	//phase 3
 	int attackRatio_2;
 
-	
+	Object* bolt = nullptr;
 
 
 };
