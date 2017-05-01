@@ -709,7 +709,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				else
 				{
-					if (actionState != ATTACKING && actionState != SPINNING && playerState != EVENT)
+					if (actionState != ATTACKING && actionState != SPINNING && actionState != JUMPING && playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
@@ -748,7 +748,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				else
 				{
-					if (actionState != ATTACKING && actionState != SPINNING && playerState != EVENT)
+					if (actionState != ATTACKING && actionState != SPINNING && actionState != JUMPING &&  playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
@@ -787,7 +787,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				else
 				{
-					if (actionState != ATTACKING && actionState != SPINNING && playerState != EVENT)
+					if (actionState != ATTACKING && actionState != SPINNING && actionState != JUMPING && playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
@@ -826,7 +826,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				else
 				{
-					if (actionState != ATTACKING && actionState != SPINNING && playerState != EVENT)
+					if (actionState != ATTACKING && actionState != SPINNING && actionState != JUMPING && playerState != EVENT)
 					{
 						if (stamina - attackTax >= 0)
 						{
@@ -857,7 +857,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 	case DODGE:
 		if (state == E_DOWN && (stamina - dodgeTax >= 0))
 		{
-			if (actionState != SPINNING && actionState != ATTACKING)
+			if (actionState != SPINNING && actionState != ATTACKING && actionState != JUMPING)
 			{
 				stamina -= dodgeTax;
 				App->game->hud->stamina_bar->WasteStamina(dodgeTax);
@@ -870,7 +870,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		break;
 
 	case SPIN_TO_WIN:
-		if (actionState != SPINNING && actionState != ATTACKING && stamina > spinTax)
+		if (actionState != SPINNING && actionState != ATTACKING && actionState != JUMPING && stamina > spinTax)
 		{
 			stamina -= spinTax;
 			actionState = SPINNING;
