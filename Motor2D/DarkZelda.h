@@ -36,7 +36,7 @@ public:
 
 private:
 
-	int phase = 1;
+	int phase;
 
 	//phase 1 vars
 	bool lateralDirection = true;
@@ -60,6 +60,10 @@ private:
 	int teleportRange;
 
 	bool holdStab = false;
+	bool rage = false;
+	int rageLife;
+	j1PerfTimer rageTimer;
+	int rageLimit;
 
 	//phase 3
 	int attackRatio_2;
