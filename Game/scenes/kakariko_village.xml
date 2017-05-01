@@ -14,6 +14,9 @@
 	  <sample type = "5" x = "102" y = "191" id="6"/>
 	  <sample type = "6" x = "92" y = "228" id="7"/>
         <sample type = "8" x = "100" y = "40" id="9"/>
+	  <sample type = "8" x = "192" y = "229" id="10"/>
+	  <sample type = "8" x = "21" y = "227" id="11"/>
+
         </npcs>
 
         <enemies>

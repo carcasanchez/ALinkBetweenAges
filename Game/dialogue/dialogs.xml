@@ -78,10 +78,24 @@
 <npc id="9" states="1">
      <dialogue state="0" states="1">
 	<text value=" <-- Castle"/>
-<text value=" --> Kakariko"/>
-
+<text value=" --> Kakariko Village"/>
      </dialogue>
    </npc>
+
+<npc id="10" states="1">
+     <dialogue state="0" states="1">
+	<text value=" <-- Kakariko Village"/>
+<text value=" --> Wildlands"/>
+     </dialogue>
+   </npc>
+
+<npc id="11" states="1">
+     <dialogue state="0" states="1">
+	<text value=" <-- Forest"/>
+<text value=" --> Kakariko Village"/>
+     </dialogue>
+   </npc>
+
 
 
 </npcs>
