@@ -23,6 +23,10 @@ UI_element::~UI_element()
 	for (std::list<UI_element*>::iterator child = Childs.begin(); child != Childs.end(); child++)
 		RELEASE(*child);
 
+	if (into_render)
+		App->render->EraseUiElement(this);
+
+	Childs.clear();
 }
 
 UI_element* UI_element::AddChild(UI_element* new_child)

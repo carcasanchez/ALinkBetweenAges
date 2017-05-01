@@ -196,7 +196,7 @@ bool j1CutSceneManager::FinishCutscene()
 
 
 			//TODO 10: Clear the cutscene and set active_cutsene pointer to nullptr.
-			active_cutscene = nullptr;
+			RELEASE(active_cutscene);
 
 			//Return to INGAME state
 			App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
@@ -325,6 +325,13 @@ Cutscene::Cutscene()
 
 Cutscene::~Cutscene()
 {
+	for (std::list<CS_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
+		RELEASE((*it));
+
+	for (std::list<CS_Step*>::iterator it = steps.begin(); it != steps.end(); it++)
+		RELEASE((*it));
+
+	App->gui->EraseScreen(this->cutscene_screen);
 }
 
 bool Cutscene::Start()

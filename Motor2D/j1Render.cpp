@@ -555,6 +555,22 @@ void j1Render::DebugCamera()
 	DrawQuad(renderZone, 0, 255, 255, 80);
 }
 
+bool j1Render::EraseUiElement(UI_element* erased_element)
+{
+	bool ret = false;
+
+	for (std::list<UI_element*>::iterator it = ui_elements.begin(); it != ui_elements.end(); it++)
+	{
+		if ((*it) == erased_element)
+		{
+			ui_elements.erase(it);
+			ret = true;
+			break;
+		}
+	}
+	return ret;
+}
+
 bool j1Render::PrintUI()
 {
 	for (std::list<UI_element*>::iterator it = ui_elements.begin(); it != ui_elements.end(); it++)

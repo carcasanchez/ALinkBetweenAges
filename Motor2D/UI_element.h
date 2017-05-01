@@ -76,6 +76,9 @@ public:
 	j1Module* my_module;
 	bool into_render = false;
 
+	//for screens
+	bool to_delete = false;
+
 public:
 	
 	UI_element(UI_TYPE type, j1Module*);

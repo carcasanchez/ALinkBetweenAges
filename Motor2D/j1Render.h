@@ -97,6 +97,9 @@ public:
 	void CameraFollow(iPoint pos);
 	void DebugCamera();
 
+	//UI
+	bool EraseUiElement(UI_element*);
+
 private:
 
 	bool PrintUI();

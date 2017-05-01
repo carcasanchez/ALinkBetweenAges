@@ -82,6 +82,16 @@ bool j1Gui::PostUpdate()
 		if ((*item_screen)->active)
 			(*item_screen)->GoToRender();
 	}
+
+	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
+	{
+		if ((*item_screen)->to_delete)
+		{
+			RELEASE((*item_screen));
+			Screen_elements.erase(item_screen);
+		}
+	}
+
 	return true;
 }
 
@@ -116,6 +126,13 @@ UI_element * j1Gui::CreateScreen(UI_element * new_element)
 	}
 
 	return ret;
+}
+
+bool j1Gui::EraseScreen(UI_element* erase_element)
+{
+	erase_element->to_delete = true;
+
+	return true;
 }
 
 UI_element* j1Gui::Add_element(UI_TYPE TYPE, j1Module* element_module)

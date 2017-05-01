@@ -53,6 +53,7 @@ public:
 	// Gui creation functions
 
 	UI_element* CreateScreen(UI_element* new_element);
+	bool		EraseScreen(UI_element* erase_element);
 
 	UI_element* Add_element(UI_TYPE, j1Module*);
 
