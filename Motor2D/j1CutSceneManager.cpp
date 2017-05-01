@@ -51,6 +51,12 @@ bool j1CutSceneManager::Awake(pugi::xml_node& config)
 	return ret;
 }
 
+bool j1CutSceneManager::Start()
+{
+	App->inputM->AddListener(this);
+	return true;
+}
+
 bool j1CutSceneManager::LoadCutscene(uint id)
 {
 	if (id > paths.size())
@@ -213,7 +219,13 @@ void j1CutSceneManager::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 	{
 		if (state == E_DOWN)
 		{
+			if (active_cutscene != nullptr)
+			{
+				CS_Step* tmp = active_cutscene->GetInputStep();
 
+				if (tmp)
+					tmp->GetInput();
+			}
 		}
 	}
 }
@@ -317,6 +329,22 @@ uint Cutscene::GetNumElements()
 uint Cutscene::GetNumSteps()
 {
 	return steps.size();
+}
+
+CS_Step* Cutscene::GetInputStep()
+{
+	CS_Step* ret = nullptr;
+
+	for (std::list<CS_Step*>::iterator it = steps.begin(); it != steps.end(); it++)
+	{
+		if ((*it)->isActive() && (*it)->isInput())
+		{
+			ret = (*it);
+			break;
+		}
+	}
+
+	return ret;
 }
 
 Cutscene::Cutscene()
@@ -511,7 +539,7 @@ bool Cutscene::LoadStep(pugi::xml_node& node, Cutscene* cutscene) //Pass the cut
 	bool ret = false;
 	if (node != NULL && cutscene != nullptr)
 	{
-		CS_Step* temp_step = new CS_Step(node.attribute("n").as_int(-1), node.attribute("start").as_float(-1), node.attribute("duration").as_float(-1), cutscene);
+		CS_Step* temp_step = new CS_Step(node.attribute("n").as_int(-1), node.attribute("start").as_float(-1), node.attribute("duration").as_float(-1), node.attribute("input").as_bool(), cutscene);
 
 		if (node.attribute("duration").as_int() == -1)
 			temp_step->SetWait(true);
@@ -565,7 +593,7 @@ CS_Type CS_Element::GetType() const
 
 
 //CS STEPS ----------------------------------
-CS_Step::CS_Step(int n, float start, float duration, Cutscene* cutscene) :n(n), start(start), duration(duration), cutscene(cutscene)
+CS_Step::CS_Step(int n, float start, float duration, bool input, Cutscene* cutscene) :n(n), start(start), duration(duration),input(input), cutscene(cutscene)
 {
 }
 
@@ -862,7 +890,7 @@ void CS_Step::ChangeString()
 			tmp->Changed_string = true;
 		}
 
-		if (element->GetType() == CS_TEXT)
+		if (element->GetType() == CS_TEXT && input == false)
 		{
 			if (dynamic_cast<CS_Text*>(element)->GetText()->dialog_state == FINISHED_TEXT)
 				FinishStep();
@@ -898,7 +926,7 @@ void CS_Step::ActiveElement()
 
 	if (element->GetType() == CS_TEXT)
 	{
-		if(dynamic_cast<CS_Text*>(element)->GetText()->dialog_state == FINISHED_TEXT)
+		if(dynamic_cast<CS_Text*>(element)->GetText()->dialog_state == FINISHED_TEXT && !input)
 			FinishStep();
 	}
 
@@ -935,9 +963,24 @@ bool CS_Step::isWait() const
 	return wait_prev_step;
 }
 
+bool CS_Step::isInput() const
+{
+	return input;
+}
+
 void CS_Step::SetWait(bool wait)
 {
 	wait_prev_step = wait;
+}
+
+void CS_Step::GetInput()
+{
+	if (element->GetType() == CS_TEXT)
+	{
+		if (dynamic_cast<CS_Text*>(element)->GetText()->dialog_state != FINISHED_TEXT)
+			dynamic_cast<CS_Text*>(element)->GetText()->ForcedFinish();
+		else FinishStep();
+	}
 }
 
 // CS IMAGE -----------------

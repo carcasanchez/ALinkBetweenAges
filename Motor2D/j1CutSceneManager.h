@@ -129,7 +129,7 @@ private:
 class CS_Step
 {
 public:
-	CS_Step(int n, float start, float duration, Cutscene* cutscene);
+	CS_Step(int n, float start, float duration, bool input, Cutscene* cutscene);
 	virtual ~CS_Step();
 
 	//Perform the correct action according to the action type assigned
@@ -159,16 +159,19 @@ public:
 	bool isActive() const;
 	bool isFinished() const;
 	bool isWait() const;
+	bool isInput() const;
 	void SetWait(bool);
+	void GetInput();
 	// --------------------------------
 
 	int n = -1;
 
 private:
-	Cutscene* cutscene = nullptr;		//Pointer to the cutscene that it is integrated
+	Cutscene*	cutscene = nullptr;		//Pointer to the cutscene that it is integrated
 	//int n = -1;							//Number identifier to manage an order
-	float start = -1;					//Time to start the step
-	float duration = -1;				//Duration of the step
+	float		start = -1;					//Time to start the step
+	float		duration = -1;				//Duration of the step
+	bool		input = false;				//If this step requieres an input to finish
 	Action_Type act_type = ACT_NONE;		//Type of action that will be executed in this step
 	CS_Element*	element = nullptr;		//Element to apply the action
 
@@ -222,6 +225,7 @@ public:
 	bool isFinished() const;
 	uint GetNumElements();
 	uint GetNumSteps();
+	CS_Step* GetInputStep();
 	//----------------------------
 
 	std::string name;						//Name of the cutscenes
@@ -248,6 +252,7 @@ public:
 
 	// Called when before render is available
 	bool Awake(pugi::xml_node&);
+	bool Start();
 
 	// Called each loop iteration
 	bool Update(float dt);
