@@ -75,5 +75,13 @@
      </dialogue>
    </npc>
 
+<npc id="9" states="1">
+     <dialogue state="0" states="1">
+	<text value=" <-- Castle"/>
+<text value=" --> Kakariko"/>
+
+     </dialogue>
+   </npc>
+
 
 </npcs>

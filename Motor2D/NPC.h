@@ -14,7 +14,8 @@ enum NPC_TYPE
 	NPC_GRANDMA,
 	NPC_TAVERN_OLD_MAN,
 	NPC_LITTLE_KID,
-	NPC_ZELDA
+	NPC_ZELDA,
+	SIGN
 };
 
 
@@ -74,6 +75,13 @@ class Npc_Little_Kid : public Npc
 public:
 	Npc_Little_Kid() : Npc() { npcType = NPC_LITTLE_KID; };
 };
+
+class Npc_Sign : public Npc
+{
+public:
+	Npc_Sign() : Npc() { npcType = SIGN; };
+};
+
 
 class Npc_Tavern_Old_Man : public Npc
 {

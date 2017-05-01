@@ -64,6 +64,9 @@ bool Npc::Spawn(std::string file, iPoint pos, NPC_TYPE type)
 		case NPC_LITTLE_KID:
 			attributes = attributesFile.child("attributes").child("little_kid");
 			break;
+		case SIGN:
+			attributes = attributesFile.child("attributes").child("sign");
+			break;
 		}
 		
 		actionState = IDLE;

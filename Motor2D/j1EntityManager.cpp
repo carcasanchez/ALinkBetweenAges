@@ -222,6 +222,9 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 		ret = new Npc_Little_Kid();
 		break;
 
+	case SIGN:
+		ret = new Npc_Sign();
+		break;
 	default:
 		return nullptr;
 	}
