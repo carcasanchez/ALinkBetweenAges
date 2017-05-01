@@ -167,6 +167,32 @@
 			<speed value = "0.4"  />
 
 		</STAB>
+  
+    <BOLT_SWORD>
+
+			<name value = "15"  />
+
+			<DOWN>
+				<values name = "1" x ="1" y = "793" w = "32" h = "51" frameNumber = "9" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>
+			</DOWN>
+
+			<UP>
+				<values name = "0" x ="1" y = "845" w = "32" h = "38" frameNumber = "9" margin = "1" pivot_x = "10" pivot_y = "36" flip= "0"/>
+			</UP>
+
+			<RIGHT>
+				<values name = "2" x ="1" y = "884" w = "54" h = "37" frameNumber = "7" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
+			</RIGHT>
+
+			<LEFT>
+				<values name = "3" x ="1" y = "884" w = "54" h = "37" frameNumber = "7" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
+			</LEFT>
+
+			<loop value = "false"  />
+
+			<speed value = "0.4"  />
+
+		</BOLT_SWORD>
 
 		<NORMAL_SWORD>
 			<name value = "2"  />
@@ -271,7 +297,7 @@
 
 		<HOLDING_FIRE_SWORD>
 
-			<name value = "14"  />
+			<name value = "18"  />
 			
 			<DOWN>
 				<values name = "1" x ="316" y = "561" w = "44" h = "50" frameNumber = "1" margin = "" pivot_x = "26" pivot_y = "34" flip= "0"/>
@@ -297,15 +323,15 @@
 
 		<SPIN_TO_WIN>
 
-			<name value = "15"  />
+			<name value = "6"  />
 
 			<DOWN>
 				<values name = "1" x ="1" y = "711" w = "53" h = "44" frameNumber = "10" margin = "1" pivot_x = "26" pivot_y = "35" flip= "0"/>
 			</DOWN>
 
-			<loop value = "true"  />
+			<loop value = "false"  />
 
-			<speed value = "0.1"  />
+			<speed value = "0.6"  />
 
 		</SPIN_TO_WIN>
 
@@ -323,31 +349,7 @@
 
 		</BOLT>
 
-		<BOLT_SWORD>
-
-			<name value = "17"  />
-
-			<DOWN>
-				<values name = "1" x ="1" y = "793" w = "32" h = "51" frameNumber = "9" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>
-			</DOWN>
-
-			<UP>
-				<values name = "0" x ="1" y = "845" w = "32" h = "38" frameNumber = "9" margin = "1" pivot_x = "10" pivot_y = "36" flip= "0"/>
-			</UP>
-
-			<RIGHT>
-				<values name = "2" x ="1" y = "884" w = "54" h = "37" frameNumber = "7" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
-			</RIGHT>
-
-			<LEFT>
-				<values name = "3" x ="1" y = "884" w = "54" h = "37" frameNumber = "7" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
-			</LEFT>
-
-			<loop value = "true"  />
-
-			<speed value = "0.1"  />
-
-		</BOLT_SWORD>
+		
 
 		<HOLDING_BOLT_SWORD>
 

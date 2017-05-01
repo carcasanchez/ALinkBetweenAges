@@ -23,11 +23,12 @@ public:
 	bool Charging(float dt);
 	bool Attack(float dt);
 	bool Stab(float dt);
+	bool Spin(float dt);
 
 	bool TeleportAndAttack(float dt);
 
 
-	void SetSwordAttack();
+	void SetAttack();
 
 
 	bool GetHit();
@@ -50,6 +51,7 @@ private:
 	j1PerfTimer dodgeTimer;
 	j1PerfTimer holdPosTimer;
 	j1PerfTimer holdStabTimer;
+	
 	int holdPosLimit;
 	int holdStabLimit;
 
@@ -58,6 +60,9 @@ private:
 	int teleportRange;
 
 	bool holdStab = false;
+
+	//phase 3
+	int attackRatio_2;
 
 	
 
