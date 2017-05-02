@@ -16,6 +16,7 @@
 #include "j1SceneManager.h"
 #include "j1EntityManager.h"
 #include "Brofiler\Brofiler.h"
+#include "j1Audio.h"
 
 
 Player::Player() : Entity(LINK)
@@ -244,6 +245,7 @@ bool Player::Idle()
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
+			App->audio->PlayFx(1);
 		}
 	}
 
@@ -372,6 +374,7 @@ bool Player::Walking(float dt)
 			Change_direction();
 			actionState = ATTACKING;
 			createSwordCollider();
+			App->audio->PlayFx(1);
 	}
 
 	//Jump

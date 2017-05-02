@@ -10,6 +10,7 @@
 #include "j1Map.h"
 #include "j1CollisionManager.h"
 #include "j1Pathfinding.h"
+#include "j1Audio.h"
 
 j1SceneManager::j1SceneManager() : currentScene(nullptr)
 {
@@ -36,7 +37,8 @@ bool j1SceneManager::Awake(pugi::xml_node& config)
 }
 
 bool j1SceneManager::Start()
-{
+{	
+
 	currentScene = new Scene("kakarikoVillage");
 	currentScene->Load(data[currentScene->name].c_str());
 

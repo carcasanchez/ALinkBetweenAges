@@ -50,8 +50,29 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		active = false;
 		ret = true;
 	}
+	else
+	{
+		 fxFile = config.child("sounds").attribute("folder").as_string();
+		 fxFile += "/";
+		 fxFile += config.child("sounds").attribute("file").as_string();
+
+		 musicFile = config.child("songs").attribute("folder").as_string();
+		 musicFile += "/";
+		 musicFile += config.child("songs").attribute("file").as_string();
+	}
 
 	return ret;
+}
+
+bool j1Audio::Start()
+{
+	for ()
+	{
+
+	}
+	App->audio->LoadFx("audio/fx/fighter sword 1.wav");
+
+	return true;
 }
 
 // Called before quitting
@@ -167,7 +188,7 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 
 	if(id > 0 && id <= fx.size())
 	{
-		std::list<Mix_Chunk*>::iterator item;
+		std::list<Mix_Chunk*>::iterator item = fx.begin();
 		for(int index = 0; index < id; item++, index++)
 		Mix_PlayChannel(-1, (*item), repeat);
 	}

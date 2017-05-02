@@ -21,12 +21,8 @@
   </fonts>
 
   <audio>
-    <sounds folder = "audio/fx">
-      <file dir = "hello_man.wav"/>
-    </sounds>
-    <songs folder = "audio/music">
-      <file dir = "music_sadpiano.ogg"/>
-    </songs>
+    <sounds folder = "audio/fx" file ="allFx.xml"/>
+    <songs folder = "audio/music" file ="allMusic.xml"/>
   </audio>
 
   <gui>

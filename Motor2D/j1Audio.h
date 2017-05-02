@@ -20,6 +20,8 @@ public:
 	// Called before render is available
 	bool Awake(pugi::xml_node&);
 
+	bool Start();
+
 	// Called before quitting
 	bool CleanUp();
 
@@ -34,6 +36,8 @@ public:
 
 private:
 
+	string				fxFile;
+	string				musicFile;
 	_Mix_Music*			music = NULL;
 	list<Mix_Chunk*>	fx;
 };
