@@ -149,3 +149,14 @@ bool Bomb::ExplodeBomb()
 	else
 		return false;
 }
+
+bool BombExplosion::DeleteExplode()
+{
+	if (dead_counter.ReadMs() > dead_time)
+	{
+		this->life = -1;
+		return true;
+	}
+	else
+		return false;
+}

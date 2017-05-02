@@ -250,9 +250,19 @@ class BombExplosion : public Object
 public:
 
 	BombExplosion()
-	{};
+	{
+		
+	};
 
+	bool Update(float dt)
+	{
+		return DeleteExplode();
+	};
+
+	bool DeleteExplode();
 public:
+	int dead_time = 1000;
+	j1PerfTimer dead_counter;
 };
 
 
