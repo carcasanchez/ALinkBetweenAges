@@ -3,7 +3,7 @@
 #include "j1CollisionManager.h"
 #include "j1EntityManager.h"
 #include "Player.h"
-
+#include "j1Map.h"
 
 
 bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
@@ -142,8 +142,7 @@ bool Bomb::ExplodeBomb()
 {
 	if (explode_counter.ReadMs() > explode_time)
 	{
-		this;
-		App->game->em->CreateObject(1, this->currentPos.x, this->currentPos.y, BOMB_EXPLOSION);
+		App->game->em->CreateObject(1, (this->currentPos.x / (App->map->data->tile_width)), (this->currentPos.y) / (App->map->data->tile_height), BOMB_EXPLOSION);
 		this->life = -1;
 		return true;
 	}

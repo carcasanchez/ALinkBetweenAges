@@ -251,6 +251,7 @@ public:
 
 	BombExplosion()
 	{};
+
 public:
 };
 
