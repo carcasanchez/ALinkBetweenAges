@@ -112,6 +112,12 @@ bool j1GameLayer::Update(float dt)
 		em->CreateEnemy(1, EYEGORE, mousePos.x, mousePos.y, vector<iPoint>());
 	else if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
 		em->CreateEnemy(1, TEKTITE, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+	{
+		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
+
+	}
+		
 
 
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
@@ -432,7 +438,15 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		if (App->quest->TriggerCollisionCallback(c2) == false)
 			App->quest->StepCollisionCallback(c2);
+		return true;
 	}
-		
+
+	if (c1->type == COLLIDER_BOMB && c2->type == COLLIDER_ENEMY )
+	{
+		c1->parent->life = -1;
+		c2->parent->life -= c1->parent->damage;
+		return true;
+	}
+
 	return true;
 }

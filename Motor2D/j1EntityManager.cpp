@@ -278,6 +278,8 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 
 	case BOMB:
 		ret = new Bomb();
+
+
 		break;
 	case ZELDA_ARROW:
 		ret = new ZeldaArrow;
@@ -292,8 +294,10 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 		entities[sector].push_back(ret);
 		ret->id = id;
 		ret->UpdateCollider();
-
 	}
+	
+
+
 	else 
 	{
 		RELEASE(ret);
