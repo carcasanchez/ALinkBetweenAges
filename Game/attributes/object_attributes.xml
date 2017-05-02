@@ -9,7 +9,7 @@
 
    <arrow>
  	 <base life = "1" damage = "1" speed ="500"/>
- 	 <collider x = "0" y = "0" w = "7" h = "15" type = "14"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "15" type = "6"/>
  	 <animation file = "animations/objects/arrow_animations.xml"/>
  	 <texture file = "textures/Object_sprites/arrow.png"/>
    </arrow>
@@ -86,10 +86,17 @@
 
   <bomb>
     <base life = "1" damage = "1" speed = "200"/>
-    <collider x = "6" y = "10" w = "16" h = "16" type = "14"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "-1"/>
     <animation file = "animations/objects/bomb_animations.xml"/>
     <texture file = "textures/Object_sprites/bomb.png"/>
   </bomb>
+  
+  <bomb_explosion>
+    <base life = "1" damage = "5" speed = "200"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "14"/>
+    <animation file = "animations/objects/bomb_animations.xml"/>
+    <texture file = "textures/Object_sprites/bomb.png"/>
+  </bomb_explosion>
 
  <bomb_drop>
     <base life = "1"/>

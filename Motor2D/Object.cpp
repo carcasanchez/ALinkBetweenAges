@@ -72,6 +72,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case BOMB:
 				attributes = attributes.child("bomb");
 				break;
+			case BOMB_EXPLOSION:
+				attributes = attributes.child("bomb_explosion");
+				break;
 			case HEART_CONTAINER:
 				attributes = attributes.child("heart_container");
 				break;

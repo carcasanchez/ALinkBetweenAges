@@ -27,7 +27,8 @@ enum OBJECT_TYPE
 	BOMB_SAC,
 	ZELDA_ARROW,
 	SWORD_BOLT,
-	FALLING_BOLT
+	FALLING_BOLT,
+	BOMB_EXPLOSION
 };
 
 class Object : public Entity
