@@ -164,7 +164,7 @@
 		
 			<loop value = "false"  />
 
-			<speed value = "0.4"  />
+			<speed value = "0.3"  />
 
 		</STAB>
   
@@ -190,7 +190,7 @@
 
 			<loop value = "false"  />
 
-			<speed value = "0.4"  />
+			<speed value = "0.3"  />
 
 		</BOLT_SWORD>
 
@@ -215,7 +215,7 @@
 		
 			<loop value = "false"  />
 
-			<speed value = "0.8"  />
+			<speed value = "0.6"  />
 
 		</NORMAL_SWORD>
 
@@ -291,7 +291,7 @@
 		
 			<loop value = "false"  />
 
-			<speed value = "0.8"  />
+			<speed value = "0.6"  />
 
 		</FIRE_SWORD>
 
@@ -326,12 +326,12 @@
 			<name value = "6"  />
 
 			<DOWN>
-				<values name = "1" x ="1" y = "711" w = "53" h = "44" frameNumber = "10" margin = "1" pivot_x = "26" pivot_y = "35" flip= "0"/>
+				<values name = "1" x ="1" y = "711" w = "53" h = "44" frameNumber = "9" margin = "1" pivot_x = "26" pivot_y = "35" flip= "0"/>
 			</DOWN>
 
-			<loop value = "false"  />
+			<loop value = "true"  />
 
-			<speed value = "0.6"  />
+			<speed value = "0.9"  />
 
 		</SPIN_TO_WIN>
 

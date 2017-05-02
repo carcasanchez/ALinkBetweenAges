@@ -45,26 +45,30 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		enemyState = LATERAL_WALK;
 		actionState = WALKING;
 
+	
 		phase = 1;
 		speed = 50;
 		walkTimelimit = 500;
 		fightRange = 80;
 		dodgeSpeed = 200;
 		dodgeLimit = 300;
-		attackRatio = 1500;
-		attackRatio_2 = 1000;
+		attackRatio = 500;
+		attackRatio_2 = 200;
 		attackSpeed = 200;
 
 		holdPosLimit = 800;
 		holdStabLimit = 800;
 
-		teleportRange = 100;
-		chargeTime = 300;
+		teleportRange = 180;
+		stabRange = 60;
+		chargeTime = 700;
 
 		rageLife = 10;
 		rageLimit = 3000;
 
 		damagedLimit = 100;
+
+		spinLimit =3000;
 	
 	}
 	return ret;
@@ -189,6 +193,8 @@ bool DarkZelda::Update(float dt)
 		}
 		break;
 	}
+
+	
 	
 	return false;
 }
@@ -246,19 +252,19 @@ bool DarkZelda::KeepDistance(float dt)
 	LookToPlayer();
 	actionState = WALKING;
 
-	//Choose randomly if the flanking direction changes
+	/*//Choose randomly if the flanking direction changes
 	if (abs(App->game->em->player->currentPos.x - currentPos.x) == abs(App->game->em->player->currentPos.y - currentPos.y))
 	{
 		srand(time(NULL));
 		bool change = rand() % 2;
 		if (change)
 			flankingDir = !flankingDir;
-	}
+	}*/
 	
 	//Choose if attack or stab if Link is aligned to enemy
 	if (attackTimer.ReadMs() > attackRatio)
 	{
-		if (abs(currentPos.y - App->game->em->player->currentPos.y) < 24 || abs(currentPos.x - App->game->em->player->currentPos.x) < 24)
+		if (abs(currentPos.y - App->game->em->player->currentPos.y) < 16 || abs(currentPos.x - App->game->em->player->currentPos.x) < 16)
 		{
 			SetAttack();
 		}
@@ -279,7 +285,7 @@ bool DarkZelda::KeepDistance(float dt)
 
 	//Movement depending on the player relative direction
 	iPoint flankingMovement;
-	if (flankingDir)
+/*	if (flankingDir)
 	{
 		switch (currentDir)
 		{
@@ -312,8 +318,24 @@ bool DarkZelda::KeepDistance(float dt)
 		case D_LEFT:
 			flankingMovement = { 0, 1 };
 			break;
-		}
+		}*/
+	switch (currentDir)
+	{
+	case D_DOWN:
+	case D_UP:
+		if (App->game->em->player->currentPos.x < currentPos.x)
+			flankingMovement = {-1, 0};
+		else flankingMovement = { 1, 0 };
+		break;
+	case D_RIGHT:
+	case D_LEFT:
+		if (App->game->em->player->currentPos.y < currentPos.y)
+			flankingMovement = { 0, -1 };
+		else flankingMovement = { 0, 1 };
+		break;
 
+
+	}
 
 	//Change the flanking direction if the enemy hits something
 	if (Move(SDL_ceil(speed*dt)*flankingMovement.x, SDL_ceil(speed*dt)*flankingMovement.y) == false)
@@ -344,7 +366,7 @@ bool DarkZelda::Chasing(float dt)
 
 	 if (attackTimer.ReadMs() > attackRatio)
 	 {
-		 if (abs(currentPos.y - App->game->em->player->currentPos.y) < 32 || abs(currentPos.x - App->game->em->player->currentPos.x) < 32)	 
+		 if (abs(currentPos.y - App->game->em->player->currentPos.y) < 16 || abs(currentPos.x - App->game->em->player->currentPos.x) < 16)	 
 				 SetAttack();
 	 }
 
@@ -468,6 +490,7 @@ bool DarkZelda::Attack(float dt)
 	{
 		if (currentAnim->isOver())
 		{
+			invulnerable = false;
 			currentAnim->Reset();
 			holdPosTimer.Start();
 			if (rage)
@@ -538,28 +561,38 @@ bool DarkZelda::Stab(float dt)
 		{
 			holdStab = true;
 			holdStabTimer.Start();
+			invulnerable = false;
 
 			if (phase == 3)
 			{
 				iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 				bolt = App->game->em->CreateObject(1, mapPos.x, mapPos.y, SWORD_BOLT);
 				bolt->currentDir = currentDir;
+				bolt->currentPos = currentPos;
 				switch (bolt->currentDir)
 				{
+				case D_UP:
+					bolt->currentPos.x += 3;
+					bolt->currentPos.y -= 5;
+					break;
 				case D_DOWN:
+					bolt->currentPos.x += 3;
 					bolt->colPivot.y = 0;
 					break;
 				case D_RIGHT:
+					bolt->currentPos.x += 10;
+					bolt->currentPos.y -= 13;
 					bolt->colPivot.y = bolt->colPivot.x;
 					bolt->colPivot.x = 0;
 					break;
 				case D_LEFT:
+					bolt->currentPos.x -= 10;
+					bolt->currentPos.y -= 13;
 					int tmp = bolt->colPivot.x;
 					bolt->colPivot.x = bolt->colPivot.y;
 					bolt->colPivot.y = tmp;
 					break;
 				}
-
 
 				if (currentDir == D_RIGHT || currentDir == D_LEFT)
 				{
@@ -580,6 +613,12 @@ bool DarkZelda::Stab(float dt)
 			actionState = WALKING;
 			attackTimer.Start();
 			holdStab = false;
+
+			if (bolt)
+			{
+				bolt->life = -1;
+				bolt = nullptr;
+			}
 		}
 	}
 
@@ -629,11 +668,26 @@ bool DarkZelda::TeleportAndAttack(float dt)
 
 bool DarkZelda::Spin(float dt)
 {
-	if (currentAnim->isOver())
+
+	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
+
+	GoTo(playerTile, speed, dt);
+	currentDir = D_DOWN;
+	if (spinCollider)
+	{
+		spinCollider->rect.x = currentPos.x - spinCollider->rect.w / 2;
+		spinCollider->rect.y = currentPos.y - spinCollider->rect.h;
+
+	}
+
+	if (spinTimer.ReadMs() > spinLimit)
 	{
 		currentAnim->Reset();
+		spinCollider->to_delete = true;
+		spinCollider = nullptr;
 		enemyState = KEEP_DISTANCE;
 		attackTimer.Start();
+		invulnerable = false;
 	}
 
 	return true;
@@ -645,17 +699,17 @@ bool DarkZelda::Spin(float dt)
 void DarkZelda::SetAttack()
 {
 	srand(time(NULL));
-	int attack = rand() % 6;
-	if (attack == 1 || attack == 0)
+	int attack = rand()% 3;
+
+	if (App->game->em->player->currentPos.DistanceTo(currentPos) < stabRange)
 	{
 		lastPlayerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 		enemyState = CHARGING;
 	}
-	else if(attack == 3 || attack == 2)
+	else if(attack == 0 || attack == 1)
 	{
 		attackTimer.Start();
 		enemyState = FRONTAL_ATTACK;
-
 		switch (phase)
 		{
 		case 2:
@@ -667,14 +721,17 @@ void DarkZelda::SetAttack()
 
 		}
 	}
-	else if (App->game->em->player->currentPos.DistanceTo(currentPos) < 40)
+	else
 	{
 		currentDir = D_DOWN;
 		enemyState = CIRCULAR_ATTACK;
 		actionState = SPINNING;
+		spinCollider = App->collisions->AddCollider({0, 0, 40, 40}, COLLIDER_ENEMY, App->game);
+		spinCollider->parent = this;
+		spinTimer.Start();
 	}
 
-	
+	invulnerable = true;
 
 	
 }
@@ -705,7 +762,7 @@ bool DarkZelda::GetHit()
 			else flankingDir = false;
 			dodgeTimer.Start();
 		}
-		else if(enemyState != CHARGING && enemyState != SPINNING)
+		else if(!invulnerable)
 		{
 			currentAnim->Reset();
 			life -= App->game->em->player->damage;
@@ -713,6 +770,17 @@ bool DarkZelda::GetHit()
 			enemyState = STEP_BACK;
 			actionState = IDLE;
 			damagedTimer.Start();
+
+			if (bolt)
+			{
+				bolt->life = -1;
+				bolt = nullptr;
+			}
+			if (spinCollider)
+			{
+				spinCollider->to_delete = true;
+				spinCollider = nullptr;
+			}
 		}
 		break;
 
@@ -723,16 +791,19 @@ bool DarkZelda::GetHit()
 
 bool DarkZelda::StepBack(float dt)
 {
-	iPoint movement;
 
-	if (App->game->em->player->currentPos.x > currentPos.x)
-		movement.x = -1;
-	else movement.x = +1;
-	if (App->game->em->player->currentPos.y > currentPos.y)
-		movement.y = -1;
-	else movement.y = +1;
+	
+		iPoint movement;
 
-	Move(SDL_ceil(movement.x*speed*dt * 5), SDL_ceil(movement.y*speed*dt * 5));
+		if (App->game->em->player->currentPos.x > currentPos.x)
+			movement.x = -1;
+		else movement.x = +1;
+		if (App->game->em->player->currentPos.y > currentPos.y)
+			movement.y = -1;
+		else movement.y = +1;
+
+		Move(SDL_ceil(movement.x*speed*dt * 5), SDL_ceil(movement.y*speed*dt * 5));
+	
 
 	if (damagedTimer.ReadMs() > damagedLimit && pushedBackTimer.ReadMs() > 100)
 	{

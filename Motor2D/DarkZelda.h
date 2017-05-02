@@ -47,6 +47,7 @@ private:
 	j1PerfTimer chargeBowTimer;
 
 	//phase 2
+	bool invulnerable = false;
 	int dodgeSpeed;
 	int dodgeLimit;
 	j1PerfTimer dodgeTimer;
@@ -59,6 +60,7 @@ private:
 	iPoint lastPlayerPos;
 
 	int teleportRange;
+	int stabRange;
 
 	bool holdStab = false;
 	bool rage = false;
@@ -70,6 +72,11 @@ private:
 	int attackRatio_2;
 
 	Object* bolt = nullptr;
+
+	j1PerfTimer spinTimer;
+	int spinLimit;
+
+	Collider* spinCollider = nullptr;
 
 
 };
