@@ -113,9 +113,8 @@ bool j1GameLayer::Update(float dt)
 	else if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
 		em->CreateEnemy(1, TEKTITE, mousePos.x, mousePos.y, vector<iPoint>());
 	else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-	{
 		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
-	}
+
 		
 
 
@@ -444,6 +443,13 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		c1->parent->life = -1;
 		c2->parent->life -= c1->parent->damage;
+		return true;
+	}
+
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_BOMB_EXPLOSION)
+	{
+		c1->parent->life -= 1;
+		c2->parent->life = -1;
 		return true;
 	}
 
