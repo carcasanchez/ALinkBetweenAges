@@ -26,7 +26,7 @@
 	</hippie>
 	<little_kid>
 		<base life = "1" speed = "30"/>
-		<collider x = "9" y = "13" w = "4" h = "4" type = "2"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
 		<animation file = "animations/npc/npcLittleKid_animations.xml"/>
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</little_kid>

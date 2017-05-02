@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Scene.h"
+#include "j1CutSceneManager.h"
 #include "TestScene.h"
 #include "j1Map.h"
 #include "j1CollisionManager.h"
@@ -36,8 +37,12 @@ bool j1SceneManager::Awake(pugi::xml_node& config)
 
 bool j1SceneManager::Start()
 {
-	currentScene = new Scene("bossRoom");
-	return currentScene->Load(data[currentScene->name].c_str());
+	currentScene = new Scene("kakarikoVillage");
+	currentScene->Load(data[currentScene->name].c_str());
+
+	App->cutsceneM->StartCutscene(0);
+
+	return true;
 }
 
 bool j1SceneManager::Update(float dt)
