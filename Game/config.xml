@@ -20,11 +20,6 @@
     <default_font file="fonts/open_sans/OpenSans-Regular.ttf" size="12"/>
   </fonts>
 
-  <audio>
-    <sounds folder = "audio/fx" file ="allFx.xml"/>
-    <songs folder = "audio/music" file ="allMusic.xml"/>
-  </audio>
-
   <gui>
     <atlas file="gui/atlas.png"/>
   </gui>

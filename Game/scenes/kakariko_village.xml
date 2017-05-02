@@ -3,6 +3,9 @@
   <sectors>
     <sector>
       <!--sector 1-->
+
+       <music file="audio/music/kakariko_village.ogg"/>
+
       <entities>
 
         <npcs>

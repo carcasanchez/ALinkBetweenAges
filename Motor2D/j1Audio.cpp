@@ -51,14 +51,8 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		ret = true;
 	}
 	else
-	{
-		 fxFile = config.child("sounds").attribute("folder").as_string();
-		 fxFile += "/";
-		 fxFile += config.child("sounds").attribute("file").as_string();
-
-		 musicFile = config.child("songs").attribute("folder").as_string();
-		 musicFile += "/";
-		 musicFile += config.child("songs").attribute("file").as_string();
+	{		
+		// fxFile += config.child("sounds").attribute("file").as_string();
 	}
 
 	return ret;
@@ -66,11 +60,25 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 bool j1Audio::Start()
 {
-	for ()
-	{
+	pugi::xml_document	fx;
+	char* buff;
+	int size = App->fs->Load("audio/fx/allFx.xml", &buff);
+	pugi::xml_parse_result result = fx.load_buffer(buff, size);
+	RELEASE_ARRAY(buff);
 
+	if (result == NULL)
+	{
+		LOG("Could not load attributes xml file. Pugi error: %s", result.description());
 	}
-	App->audio->LoadFx("audio/fx/fighter sword 1.wav");
+
+	else
+	{
+		for (pugi::xml_node it = fx.first_child().first_child(); it; it = it.next_sibling("fx"))
+		{
+			App->audio->LoadFx(it.attribute("name").as_string());
+		}
+	}
+
 
 	return true;
 }

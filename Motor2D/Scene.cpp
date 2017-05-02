@@ -7,6 +7,7 @@
 #include "j1EntityManager.h"
 #include "Enemy.h"
 #include "Exit.h"
+#include "j1Audio.h"
 #include "Object.h"
 #include "j1QuestManager.h"
 #include "p2Log.h"
@@ -65,6 +66,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 				RELEASE_ARRAY(enemy_data);
 			}
 		}
+
+		
 
 		//Spawn Entities
 		for (pugi::xml_node section = node.first_child(); section != NULL; section = section.next_sibling())
@@ -153,10 +156,13 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			//Quests
 			App->quest->LoadQuests(section.child("quests"));
 
-
+			//Music
+			App->audio->PlayMusic(section.child("music").attribute("file").as_string());
 
 			maxSectors++;
 		}
+
+		
 
 		
 

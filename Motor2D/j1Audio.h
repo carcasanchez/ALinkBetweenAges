@@ -36,8 +36,7 @@ public:
 
 private:
 
-	string				fxFile;
-	string				musicFile;
+	
 	_Mix_Music*			music = NULL;
 	list<Mix_Chunk*>	fx;
 };
