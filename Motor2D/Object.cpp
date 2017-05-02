@@ -4,6 +4,8 @@
 #include "j1EntityManager.h"
 #include "Player.h"
 
+
+
 bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 {
 	bool ret = true;
@@ -134,4 +136,17 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 void Object::OnDeath()
 {
 	toDelete = true;
+}
+
+bool Bomb::ExplodeBomb()
+{
+	if (explode_counter.ReadMs() > explode_time)
+	{
+		this;
+		App->game->em->CreateObject(1, this->currentPos.x, this->currentPos.y, BOMB_EXPLOSION);
+		this->life = -1;
+		return true;
+	}
+	else
+		return false;
 }

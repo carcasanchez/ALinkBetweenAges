@@ -86,14 +86,14 @@
 
   <bomb>
     <base life = "1" damage = "1" speed = "200"/>
-    <collider x = "6" y = "10" w = "16" h = "16" type = "-1"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "14"/>
     <animation file = "animations/objects/bomb_animations.xml"/>
     <texture file = "textures/Object_sprites/bomb.png"/>
   </bomb>
   
   <bomb_explosion>
-    <base life = "1" damage = "5" speed = "200"/>
-    <collider x = "6" y = "10" w = "16" h = "16" type = "14"/>
+    <base life = "1" damage = "6" speed = "200"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "17"/>
     <animation file = "animations/objects/bomb_animations.xml"/>
     <texture file = "textures/Object_sprites/bomb.png"/>
   </bomb_explosion>

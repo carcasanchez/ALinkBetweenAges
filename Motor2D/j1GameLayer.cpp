@@ -115,7 +115,6 @@ bool j1GameLayer::Update(float dt)
 	else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 	{
 		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
-
 	}
 		
 
@@ -441,7 +440,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
-	if (c1->type == COLLIDER_BOMB && c2->type == COLLIDER_ENEMY )
+	if (c1->type == COLLIDER_BOMB_EXPLOSION && c2->type == COLLIDER_ENEMY )
 	{
 		c1->parent->life = -1;
 		c2->parent->life -= c1->parent->damage;

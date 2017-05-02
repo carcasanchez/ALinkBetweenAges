@@ -2,8 +2,10 @@
 #define _OBJECT_H_
 
 #include "Entity.h"
+#include "j1EntityManager.h"
 #include "InputManager.h"
 #include "j1PerfTimer.h"
+#include "j1GameLayer.h"
 
 enum OBJECT_TYPE
 {
@@ -39,7 +41,10 @@ public:
 	bool Spawn(std::string file, iPoint pos, OBJECT_TYPE type);
 	void OnDeath();
 
-	virtual bool Update(float dt) { return true; };
+	virtual bool Update(float dt) 
+	{ 
+		return true; 
+	};
 
 public:
 	OBJECT_TYPE objectType = BOOK;
@@ -224,10 +229,29 @@ class Bomb : public Object
 {
 public:
 
-	Bomb() {};
+	Bomb() 
+	{
+		explode_counter.Start();
+	};
+	bool Update(float dt) 
+	{ 
+		return ExplodeBomb(); 
+	};
+	
+	bool ExplodeBomb();
 
 public:
-	int timer;
+	int explode_time = 2000;
+	j1PerfTimer explode_counter;
+};
+
+class BombExplosion : public Object
+{
+public:
+
+	BombExplosion()
+	{};
+public:
 };
 
 

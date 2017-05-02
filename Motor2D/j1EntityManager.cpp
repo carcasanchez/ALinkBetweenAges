@@ -278,11 +278,14 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 
 	case BOMB:
 		ret = new Bomb();
-
-
 		break;
+
 	case ZELDA_ARROW:
 		ret = new ZeldaArrow;
+		break;
+	case BOMB_EXPLOSION:
+		ret = new BombExplosion;
+		break;
 	}
 	
 
