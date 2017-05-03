@@ -60,10 +60,13 @@ public:
 	int					space_between_hearts = 4;
 
 	//items images
-	UI_Image*		items_frame = nullptr;
+	UI_Image*		item_frame				= nullptr;
+	UI_Image*		items_frame_inactive	= nullptr;
+	UI_Image*		items_frame_using		= nullptr;
+	bool			item_active = false;
+
 	UI_Image*		items_bow;
 	UI_Image*		items_bomb;
-	UI_Image*		items_bumerang;
 	UI_Image*		items_potion_red;
 	UI_Image*		items_potion_green;
 
@@ -106,6 +109,9 @@ private:
 	void		LoadHearts();
 	void		LookLife();
 	void		LookNumHearts();
+
+	//items method
+	void		SetFrame();
 
 
 };

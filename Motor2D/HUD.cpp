@@ -146,6 +146,26 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		}
 		break;
 
+	case USE_ITEM:
+	{
+		if (!item_active)
+		{
+			item_frame->Image = items_frame_using->Image;
+			item_active = true;
+		}
+		break;
+	}
+
+	case STOP_ITEM:
+	{
+		if (item_active)
+		{
+			item_frame->Image = items_frame_inactive->Image;
+			item_active = false;
+		}
+		break;
+	}
+
 	}
 }
 
@@ -269,7 +289,6 @@ UI_element* Hud::LoadUIElement(pugi::xml_node node, UI_element* screen, UI_TYPE 
 
 }
 
-
 bool Hud::IntoPause()
 {
 	App->game->pause = true;
@@ -339,7 +358,9 @@ bool Hud::LoadHud(string file)
 		arrows_counter = (UI_Counter*)LoadUIElement(hud_node.child("counters").child("arrows"), Arrows, COUNTER);
 
 		//items
-		items_frame = (UI_Image*)LoadUIElement(hud_node.child("items").child("frame"), hud_screen, IMAGE);
+		item_frame = (UI_Image*)LoadUIElement(hud_node.child("items").child("frame"), hud_screen, IMAGE);
+		items_frame_inactive = (UI_Image*)LoadUIElement(hud_node.child("items").child("frame_y"), nullptr, IMAGE);
+		items_frame_using = (UI_Image*)LoadUIElement(hud_node.child("items").child("frame_r"), nullptr, IMAGE);
 
 		//life
 		life = (UI_Image*)LoadUIElement(hud_node.child("life"), hud_screen, IMAGE);
@@ -355,6 +376,7 @@ bool Hud::LoadHud(string file)
 		stamina_bar = (UI_Stamina*)LoadUIElement(hud_node.child("stamina").child("bar"), hud_screen, STAMINA_BAR);
 
 		LoadHearts();
+		SetFrame();
 
 	}
 
@@ -413,5 +435,11 @@ void Hud::LookNumHearts()
 			active_hearts++;
 		}
 	}
+}
+
+void Hud::SetFrame()
+{
+	item_frame->Image = items_frame_inactive->Image;
+	item_active = false;
 }
 
