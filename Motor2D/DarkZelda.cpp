@@ -732,7 +732,6 @@ bool DarkZelda::SummonBolt(float dt)
 
 
 
-
 void DarkZelda::SetAttack()
 {
 
@@ -784,6 +783,9 @@ void DarkZelda::SetAttack()
 			enemyState = SUMMON_BOLT;
 			actionState = SUMMONING;
 			currentDir = D_DOWN;
+
+			if (bolt)
+				bolt->life = -1;
 			iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 			bolt = App->game->em->CreateObject(1, mapPos.x, mapPos.y, FALLING_BOLT);
 			boltTimer.Start();
