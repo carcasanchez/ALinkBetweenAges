@@ -748,7 +748,7 @@ void DarkZelda::SetAttack()
 	
 }
 
-bool DarkZelda::GetHit()
+void DarkZelda::GetHit(Entity* agressor)
 {
 	switch (phase)
 	{
@@ -777,7 +777,7 @@ bool DarkZelda::GetHit()
 		else if(!invulnerable)
 		{
 			currentAnim->Reset();
-			life -= App->game->em->player->damage;
+			life -= agressor->damage;
 			sprite->tint = { 255, 0, 0, 255 };
 			enemyState = STEP_BACK;
 			actionState = IDLE;
@@ -798,7 +798,6 @@ bool DarkZelda::GetHit()
 
 	}
 
-	return true;
 }
 
 bool DarkZelda::StepBack(float dt)

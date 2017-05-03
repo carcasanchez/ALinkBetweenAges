@@ -43,6 +43,8 @@ public:
 	bool CleanEntities();
 	void SetSectorRef(int*);
 
+	
+
 public:
 
 	Player* player;

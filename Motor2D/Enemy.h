@@ -55,7 +55,7 @@ public:
 	virtual bool StepBack(float dt);
 	virtual bool Charging(float dt);
 
-	virtual bool GetHit(Entity* agressor);
+	virtual void GetHit(Entity* agressor);
 
 
 public:

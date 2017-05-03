@@ -79,6 +79,12 @@ public:
 	virtual bool GoTo(iPoint dest, int speed, float dt);
 	virtual bool LookToPlayer();
 
+	virtual void GetHit(Entity* agressor) 
+	{
+		life -= agressor->damage;
+		return; 
+	};
+
 public:
 	// Position in Entity Manager
 	int id;

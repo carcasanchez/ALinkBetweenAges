@@ -229,7 +229,7 @@ bool Enemy::Charging(float dt)
 	return ret;
 }
 
-bool Enemy::GetHit(Entity* agressor)
+void Enemy::GetHit(Entity* agressor)
 {
 	life -= agressor->damage;
 
@@ -247,5 +247,4 @@ bool Enemy::GetHit(Entity* agressor)
 	if (life < 0)
 		life = 0;
 
-	return true;
 }

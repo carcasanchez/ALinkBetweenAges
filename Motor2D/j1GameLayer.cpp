@@ -291,7 +291,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
- 	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE || c2->type == COLLIDER_MAGIC_SLASH || c2->type == COLLIDER_BOLT|| c2->type == COLLIDER_BOMB_EXPLOSION) )
+ 	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE || c2->type == COLLIDER_MAGIC_SLASH || c2->type == COLLIDER_BOLT|| c2->type == COLLIDER_BOMB_EXPLOSION || c2->type == COLLIDER_ZELDA_ARROW) )
 	{
 		//When link is adult, empuja enemigos
 		if (em->player->actionState == DODGING && em->player->age == ADULT )
@@ -329,9 +329,10 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		
 		if (c2->type == COLLIDER_LINK_SWORD)
 		{
+			
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK && ((Enemy*)(c1->parent))->enemyState != DODGING_LINK)
 			{
-				((Enemy*)(c1->parent))->GetHit(em->player);
+				c1->parent->GetHit(em->player);
 			}
 			return true;
 		}
@@ -369,7 +370,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
 			{
-				((Enemy*)(c1->parent))->GetHit(c2->parent);
+				c1->parent->GetHit(c2->parent);
 			}
 			return true;
 		}
@@ -423,7 +424,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_BOMB_EXPLOSION && c2->type == COLLIDER_ENEMY )
 	{
-		((Enemy*)(c2->parent))->GetHit(c1->parent);
+		c2->parent->GetHit(c1->parent);
 		return true;
 	}
 

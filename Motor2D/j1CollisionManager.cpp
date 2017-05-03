@@ -36,6 +36,7 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_PLAYER][COLLIDER_EVENT] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_BOLT] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_BOMB_EXPLOSION] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_ZELDA_ARROW] = true;
 
 	matrix[COLLIDER_BUYABLE_ITEM][COLLIDER_LINK_SWORD] = true; //	Shop
 	matrix[COLLIDER_BUSH][COLLIDER_LINK_SWORD] = true;

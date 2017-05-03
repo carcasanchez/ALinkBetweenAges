@@ -32,7 +32,7 @@ public:
 	void SetAttack();
 
 
-	bool GetHit();
+	void GetHit(Entity* agressor);
 	void OnDeath();
 
 private:
