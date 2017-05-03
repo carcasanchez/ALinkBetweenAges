@@ -54,6 +54,12 @@ private:
 	j1PerfTimer holdPosTimer;
 	j1PerfTimer holdStabTimer;
 	
+	int slashSpeed;
+	int stabSpeed;
+
+	int newStabSpeed;
+	int newSlashSpeed;
+
 	int holdPosLimit;
 	int holdStabLimit;
 
@@ -70,6 +76,9 @@ private:
 
 	//phase 3
 	int attackRatio_2;
+	int chargeTime_2;
+
+	
 
 	Object* bolt = nullptr;
 

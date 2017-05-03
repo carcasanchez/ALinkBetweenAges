@@ -54,14 +54,19 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		dodgeLimit = 300;
 		attackRatio = 500;
 		attackRatio_2 = 200;
-		attackSpeed = 200;
+		
+		slashSpeed = 220;
+		stabSpeed = 220;
+
+		newSlashSpeed = 500;
+		newStabSpeed = 500;
 
 		holdPosLimit = 800;
 		holdStabLimit = 800;
 
 		teleportRange = 180;
 		stabRange = 60;
-		chargeTime = 700;
+		chargeTime = 550;
 
 		rageLife = 10;
 		rageLimit = 3000;
@@ -96,6 +101,8 @@ void DarkZelda::OnDeath()
 		sprite->tint = { 255, 255, 255, 255 };
 		phase = 3;
 		life = 20;
+		stabSpeed = newStabSpeed;
+		slashSpeed = newSlashSpeed;
 		attackRatio = attackRatio_2;
 		enemyState = KEEP_DISTANCE;
 		attackTimer.Start();
@@ -109,6 +116,17 @@ void DarkZelda::OnDeath()
 
 bool DarkZelda::Update(float dt)
 {	
+
+	if (bolt)
+	{
+		if (bolt->currentAnim->isOver())
+		{
+			bolt->life = -1;
+			bolt = nullptr;
+		}
+		
+	}
+
 
 	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 
@@ -445,22 +463,22 @@ bool DarkZelda::Charging(float dt)
 	switch (currentDir)
 	{
 	case D_UP:
-		ret = Move(0, -SDL_ceil(dt*attackSpeed));
+		ret = Move(0, -SDL_ceil(dt*slashSpeed));
 		if (App->map->WorldToMap(currentPos.x, currentPos.y).y < lastPlayerPos.y)
 			stop = true;
 		break;
 	case D_DOWN:
-		ret = Move(0, SDL_ceil(dt*attackSpeed));
+		ret = Move(0, SDL_ceil(dt*slashSpeed));
 		if (App->map->WorldToMap(currentPos.x, currentPos.y).y > lastPlayerPos.y)
 			stop = true;
 		break;
 	case D_RIGHT:
-		ret = Move(SDL_ceil(dt*attackSpeed), 0);
+		ret = Move(SDL_ceil(dt*slashSpeed), 0);
 		if (App->map->WorldToMap(currentPos.x, currentPos.y).x > lastPlayerPos.x)
 			stop = true;
 		break;
 	case D_LEFT:
-		ret = Move(-SDL_ceil(dt*attackSpeed), 0);
+		ret = Move(-SDL_ceil(dt*slashSpeed), 0);
 		if (App->map->WorldToMap(currentPos.x, currentPos.y).x < lastPlayerPos.x)
 			stop = true;
 		break;
@@ -544,16 +562,16 @@ bool DarkZelda::Stab(float dt)
 		switch (currentDir)
 		{
 		case D_UP:
-			ret = Move(0, -SDL_ceil(dt*attackSpeed));
+			ret = Move(0, -SDL_ceil(dt*stabSpeed));
 			break;
 		case D_DOWN:
-			ret = Move(0, SDL_ceil(dt*attackSpeed));
+			ret = Move(0, SDL_ceil(dt*stabSpeed));
 			break;
 		case D_RIGHT:
-			ret = Move(SDL_ceil(dt*attackSpeed), 0);
+			ret = Move(SDL_ceil(dt*stabSpeed), 0);
 			break;
 		case D_LEFT:
-			ret = Move(-SDL_ceil(dt*attackSpeed), 0);
+			ret = Move(-SDL_ceil(dt*stabSpeed), 0);
 			break;
 		}
 		
@@ -572,22 +590,22 @@ bool DarkZelda::Stab(float dt)
 				switch (bolt->currentDir)
 				{
 				case D_UP:
-					bolt->currentPos.x += 3;
+					bolt->currentPos.x += 5;
 					bolt->currentPos.y -= 5;
 					break;
 				case D_DOWN:
-					bolt->currentPos.x += 3;
+					bolt->currentPos.x += 2;
 					bolt->colPivot.y = 0;
 					break;
 				case D_RIGHT:
 					bolt->currentPos.x += 10;
-					bolt->currentPos.y -= 13;
+					bolt->currentPos.y -= 12;
 					bolt->colPivot.y = bolt->colPivot.x;
 					bolt->colPivot.x = 0;
 					break;
 				case D_LEFT:
 					bolt->currentPos.x -= 10;
-					bolt->currentPos.y -= 13;
+					bolt->currentPos.y -= 12;
 					int tmp = bolt->colPivot.x;
 					bolt->colPivot.x = bolt->colPivot.y;
 					bolt->colPivot.y = tmp;
@@ -612,13 +630,7 @@ bool DarkZelda::Stab(float dt)
 			enemyState = KEEP_DISTANCE;
 			actionState = WALKING;
 			attackTimer.Start();
-			holdStab = false;
-
-			if (bolt)
-			{
-				bolt->life = -1;
-				bolt = nullptr;
-			}
+			holdStab = false;			
 		}
 	}
 
