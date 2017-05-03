@@ -343,7 +343,7 @@
 				<values name = "1" x ="1" y = "756" w = "26" h = "36" frameNumber = "7" margin = "1" pivot_x = "13" pivot_y = "34" flip= "0"/>
 			</DOWN>
 
-			<loop value = "true"  />
+			<loop value = "false"  />
 
 			<speed value = "0.3"  />
 

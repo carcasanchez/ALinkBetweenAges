@@ -252,32 +252,32 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	switch (type)
 	{
 	default:
-		ret = new Object();
+		ret = new Object;
 		break;
 
 	case LINK_ARROW:
-		ret = new Arrow();
+		ret = new Arrow;
 		break;
 
 	case OCTO_STONE:
-		ret = new Octostone();
+		ret = new Octostone;
 		break;
 
 	case GREEN_RUPEE:
 	case BLUE_RUPEE:
 	case RED_RUPEE:
-		ret = new Rupee();
+		ret = new Rupee;
 		break;
 
 	case CHEST:
-		ret = new Chest();
+		ret = new Chest;
 		break;
 	case MAGIC_SLASH:
-		ret = new MagicSlash();
+		ret = new MagicSlash;
 		break;
 
 	case BOMB:
-		ret = new Bomb();
+		ret = new Bomb;
 		break;
 
 	case ZELDA_ARROW:
@@ -285,6 +285,9 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 		break;
 	case BOMB_EXPLOSION:
 		ret = new BombExplosion;
+		break;
+	case FALLING_BOLT:
+		ret = new FallingBolt;
 		break;
 	}
 	

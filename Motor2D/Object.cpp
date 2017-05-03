@@ -1,10 +1,8 @@
 #include "Object.h"
 #include "j1GameLayer.h"
 #include "j1CollisionManager.h"
-#include "j1EntityManager.h"
 #include "Player.h"
 #include "j1Map.h"
-
 
 bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 {
@@ -155,4 +153,12 @@ bool BombExplosion::DeleteExplode()
 	}
 	else
 		return false;
+}
+
+bool FallingBolt::Update(float dt)
+{
+	iPoint playerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
+	GoTo(playerPos, speed, dt);
+	currentDir = D_DOWN;
+	return false;
 }

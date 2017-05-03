@@ -52,8 +52,8 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		fightRange = 80;
 		dodgeSpeed = 200;
 		dodgeLimit = 300;
-		attackRatio = 500;
-		attackRatio_2 = 200;
+		attackRatio = 1000;
+		attackRatio_2 = 500;
 		
 		slashSpeed = 220;
 		stabSpeed = 220;
@@ -71,7 +71,7 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		rageLife = 10;
 		rageLimit = 3000;
 
-		boltLifeTime = 4000000000000;
+		boltLifeTime = 4000;
 		spawnBolt = 10000;
 
 		damagedLimit = 100;
@@ -180,9 +180,7 @@ bool DarkZelda::Update(float dt)
 		case CIRCULAR_ATTACK:
 			Spin(dt);
 			break;
-		case SUMMON_BOLT:
-			SummonBolt(dt);
-			break;
+		
 		}
 		break;
 	case 3:
@@ -214,6 +212,9 @@ bool DarkZelda::Update(float dt)
 			break;
 		case CIRCULAR_ATTACK:
 			Spin(dt);
+			break;
+		case SUMMON_BOLT:
+			SummonBolt(dt);
 			break;
 		}
 		break;
@@ -715,6 +716,16 @@ bool DarkZelda::Spin(float dt)
 bool DarkZelda::SummonBolt(float dt)
 {
 	currentDir = D_DOWN;
+	invulnerable = false;
+		
+	if (boltTimer.ReadMs() > boltLifeTime)
+	{
+		bolt->life = -1;
+		bolt = nullptr;
+		boltTimer.Start();
+		enemyState = KEEP_DISTANCE;
+		attackTimer.Start();
+	}
 
 	return true;
 }
@@ -768,16 +779,17 @@ void DarkZelda::SetAttack()
 		int attack = rand() % 3;
 
 
-	/*	if (boltTimer.ReadMs() > spawnBolt)
+		if (boltTimer.ReadMs() > spawnBolt)
 		{
 			enemyState = SUMMON_BOLT;
 			actionState = SUMMONING;
 			currentDir = D_DOWN;
 			iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 			bolt = App->game->em->CreateObject(1, mapPos.x, mapPos.y, FALLING_BOLT);
+			boltTimer.Start();
 		}
 
-		else*/ if (App->game->em->player->currentPos.DistanceTo(currentPos) < stabRange)
+		else if (App->game->em->player->currentPos.DistanceTo(currentPos) < stabRange)
 		{
 			lastPlayerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 			enemyState = CHARGING;

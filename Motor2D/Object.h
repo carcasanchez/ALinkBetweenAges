@@ -7,6 +7,7 @@
 #include "j1PerfTimer.h"
 #include "j1GameLayer.h"
 
+
 enum OBJECT_TYPE
 {
 	NO_OBJECT,
@@ -267,6 +268,16 @@ public:
 public:
 	int dead_time = 1000;
 	j1PerfTimer dead_counter;
+};
+
+class FallingBolt : public Object
+{
+public:
+
+	FallingBolt() {};
+	bool Update(float dt);
+	
+
 };
 
 
