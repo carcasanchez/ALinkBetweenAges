@@ -96,7 +96,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="Collisions" width="32" height="26">
+ <layer name="Collisions" width="32" height="26" visible="0">
   <properties>
    <property name="Navigation" type="int" value="1"/>
    <property name="Nodraw" type="int" value="1"/>
@@ -131,7 +131,7 @@
 5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627,5627
 </data>
  </layer>
- <layer name="Collision enemies" width="32" height="26">
+ <layer name="Collision enemies" width="32" height="26" visible="0">
   <properties>
    <property name="Enemy" type="int" value="1"/>
    <property name="Navigation" type="int" value="1"/>
