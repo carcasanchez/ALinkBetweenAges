@@ -912,7 +912,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 		break;
 
+	case CHANGE_ITEM:
+		if (state == E_DOWN)
+		{
+			if (equippedObject >= inventory.size() - 1)
+				equippedObject = 0;
 
+			else equippedObject++;
+		}
+		break;
 	}
 }
 

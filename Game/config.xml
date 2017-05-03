@@ -52,7 +52,6 @@
       <scene name = "insideCastle" file = "inside_castle.xml"/>
       <scene name = "outsideCastle" file = "outside_castle.xml"/>
       <scene name = "bossRoom" file = "boss_room.xml"/>
-	  <scene name = "linkHouse" file = "link_house.xml"/>
     </scenes>
   </sceneManager>
   
@@ -90,27 +89,30 @@
 
       <!--PAUSE-->
       <action event="5" button="6"/>
+
+      <!--CHANGE ITEM-->
+      <action event="6" button="9"/>
     </context>
     
      <!--PAUSE CONTEXT-->
     <context value="1"> 
       <!--UP-->
-      <action event="6" button="11"/>
+      <action event="7" button="11"/>
     
       <!--DOWN-->
-      <action event="7" button="12"/>
+      <action event="8" button="12"/>
 
       <!--LEFT-->
-      <action event="8" button="13"/>
+      <action event="9" button="13"/>
     
       <!--RIGHT-->
-      <action event="9" button="14"/>
+      <action event="10" button="14"/>
 
       <!--CONFIRM-->
-      <action event="10" button="0"/>
+      <action event="11" button="0"/>
 
       <!--DECLINE-->
-      <action event="11" button="1"/>
+      <action event="12" button="1"/>
     
       <!--PAUSE-->
       <action event="5" button="6"/>
@@ -119,7 +121,7 @@
     <!--CUTSCENE CONTEXT-->
     <context value="2">
       <!--NEXT-->
-      <action event="12" button="0"/>
+      <action event="13" button="0"/>
     </context>
   
   </inputManager>  

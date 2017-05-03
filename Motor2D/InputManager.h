@@ -26,6 +26,7 @@ enum INPUTEVENT
 	ATTACK_RIGHT,
 	DODGE,
 	PAUSE,
+	CHANGE_ITEM,
 
 	//Inside Menus
 	UP,

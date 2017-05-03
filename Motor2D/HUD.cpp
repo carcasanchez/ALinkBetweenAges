@@ -456,7 +456,7 @@ void Hud::LookInventory()
 
 	int i = 0;
 	std::list<OBJECT_TYPE>::iterator it = App->game->em->player->inventory.begin();
-	for(; i < App->game->em->player->equippedObject; i++) {}
+	for (; i < App->game->em->player->equippedObject; i++) { it++; }
 
 	ActiveItem((*it));
 
