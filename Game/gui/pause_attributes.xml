@@ -1,7 +1,7 @@
 <!-- Pause HUD -->
 <images>
-  <main     x="524"  y="342" w="354" h="322" pos_x="50" pos_y="-650" active="true"/>
-  <item     x="688"  y="0"   w="133" h="322" pos_x="720" pos_y="0" active="true"/>
-  <resume   x="503"  y="399" w="20"  h="23"  pos_x="72" pos_y="86" active="true"/>
-  <quit     x="503"  y="399" w="20"  h="23"  pos_x="72" pos_y="528" active="false"/>
+  <main     x="1"    y="76"  w="354" h="322" pos_x="50"  pos_y="-650" active="true"/>
+  <item     x="407"  y="0"   w="133" h="322" pos_x="720" pos_y="0" active="true"/>
+  <resume   x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="86" active="true"/>
+  <quit     x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="528" active="false"/>
 </images>
