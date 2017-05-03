@@ -132,4 +132,10 @@
     <animation file = "animations/objects/sword_bolt_animations.xml"/>
     <texture file = "textures/Object_sprites/bolt.png"/>
   </sword_bolt>
+<falling_bolt>
+    <base life = "1" damage = "1"/>
+    <collider x = "9" y = "9" w = "18" h = "18" type = "16"/>
+    <animation file = "animations/objects/falling_bolt_animations.xml"/>
+    <texture file = "textures/Object_sprites/big_bolt.png"/>
+  </falling_bolt>
 </attributes>

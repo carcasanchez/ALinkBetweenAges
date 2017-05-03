@@ -71,6 +71,9 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		rageLife = 10;
 		rageLimit = 3000;
 
+		boltLifeTime = 4000000000000;
+		spawnBolt = 10000;
+
 		damagedLimit = 100;
 
 		spinLimit =3000;
@@ -106,6 +109,7 @@ void DarkZelda::OnDeath()
 		attackRatio = attackRatio_2;
 		enemyState = KEEP_DISTANCE;
 		attackTimer.Start();
+		boltTimer.Start();
 	}
 
 	else if (phase == 3)
@@ -175,6 +179,9 @@ bool DarkZelda::Update(float dt)
 			break;
 		case CIRCULAR_ATTACK:
 			Spin(dt);
+			break;
+		case SUMMON_BOLT:
+			SummonBolt(dt);
 			break;
 		}
 		break;
@@ -705,43 +712,102 @@ bool DarkZelda::Spin(float dt)
 	return true;
 }
 
+bool DarkZelda::SummonBolt(float dt)
+{
+	currentDir = D_DOWN;
+
+	return true;
+}
+
 
 
 
 void DarkZelda::SetAttack()
 {
-	srand(time(NULL));
-	int attack = rand()% 3;
 
-	if (App->game->em->player->currentPos.DistanceTo(currentPos) < stabRange)
+	if (phase == 2)
 	{
-		lastPlayerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
-		enemyState = CHARGING;
-	}
-	else if(attack == 0 || attack == 1)
-	{
-		attackTimer.Start();
-		enemyState = FRONTAL_ATTACK;
-		switch (phase)
+		srand(time(NULL));
+		int attack = rand() % 3;
+
+		if (App->game->em->player->currentPos.DistanceTo(currentPos) < stabRange)
 		{
-		case 2:
-			actionState = STABBING;
-			break;
-		case 3:
-			actionState = SPECIAL_STAB;
-			break;
+			lastPlayerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
+			enemyState = CHARGING;
+		}
+		else if (attack == 0 || attack == 1)
+		{
+			attackTimer.Start();
+			enemyState = FRONTAL_ATTACK;
+			switch (phase)
+			{
+			case 2:
+				actionState = STABBING;
+				break;
+			case 3:
+				actionState = SPECIAL_STAB;
+				break;
 
+			}
+		}
+		else
+		{
+			currentDir = D_DOWN;
+			enemyState = CIRCULAR_ATTACK;
+			actionState = SPINNING;
+			spinCollider = App->collisions->AddCollider({ 0, 0, 40, 40 }, COLLIDER_ENEMY, App->game);
+			spinCollider->parent = this;
+			spinTimer.Start();
 		}
 	}
-	else
+
+	else if (phase == 3)
 	{
-		currentDir = D_DOWN;
-		enemyState = CIRCULAR_ATTACK;
-		actionState = SPINNING;
-		spinCollider = App->collisions->AddCollider({0, 0, 40, 40}, COLLIDER_ENEMY, App->game);
-		spinCollider->parent = this;
-		spinTimer.Start();
+
+		srand(time(NULL));
+		int attack = rand() % 3;
+
+
+	/*	if (boltTimer.ReadMs() > spawnBolt)
+		{
+			enemyState = SUMMON_BOLT;
+			actionState = SUMMONING;
+			currentDir = D_DOWN;
+			iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+			bolt = App->game->em->CreateObject(1, mapPos.x, mapPos.y, FALLING_BOLT);
+		}
+
+		else*/ if (App->game->em->player->currentPos.DistanceTo(currentPos) < stabRange)
+		{
+			lastPlayerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
+			enemyState = CHARGING;
+		}
+		else if (attack == 0 || attack == 1)
+		{
+			attackTimer.Start();
+			enemyState = FRONTAL_ATTACK;
+			switch (phase)
+			{
+			case 2:
+				actionState = STABBING;
+				break;
+			case 3:
+				actionState = SPECIAL_STAB;
+				break;
+			}
+		}
+		else
+		{
+			currentDir = D_DOWN;
+			enemyState = CIRCULAR_ATTACK;
+			actionState = SPINNING;
+			spinCollider = App->collisions->AddCollider({ 0, 0, 40, 40 }, COLLIDER_ENEMY, App->game);
+			spinCollider->parent = this;
+			spinTimer.Start();
+		}
+
 	}
+	
 
 	invulnerable = true;
 

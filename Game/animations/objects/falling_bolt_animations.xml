@@ -1,13 +1,16 @@
+﻿<!--Bolt Animations -->
+<animations>
+	<BOLT>
 
-	<FALLING_BOLT>
-  		<name value = "1" />
+		<name value = "0" />
 		
 		<DOWN>
-			 <values name = "1" x ="0" y = "0" w = "36" h = "122" frameNumber = "8" margin = "1" pivot_x = "18" pivot_y = "119" flip= "0"/>
+			 <values name = "1" x ="1" y = "2" w = "36" h = "456" frameNumber = "10" margin = "1" pivot_x = "18" pivot_y = "452" flip= "0"/>
 		</DOWN>	
 	
-		<loop value = "false" />
+		<loop value = "true" />
 
-		<speed value = "0.15" />
+		<speed value = "0.8" />
 
-	</FALLING_BOLT>
+	</BOLT>
+</animations>

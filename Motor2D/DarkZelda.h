@@ -25,6 +25,7 @@ public:
 	bool Attack(float dt);
 	bool Stab(float dt);
 	bool Spin(float dt);
+	bool SummonBolt(float dt);
 
 	bool TeleportAndAttack(float dt);
 
@@ -81,6 +82,10 @@ private:
 	
 
 	Object* bolt = nullptr;
+
+	j1PerfTimer boltTimer;
+	int spawnBolt;
+	int boltLifeTime;
 
 	j1PerfTimer spinTimer;
 	int spinLimit;
