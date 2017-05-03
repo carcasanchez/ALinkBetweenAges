@@ -5,19 +5,19 @@
 		<name value = "0" />
 		
 		<DOWN>
-			 <values name = "1" x ="122" y = "1" w = "36" h = "122" frameNumber = "4" margin = "1" pivot_x = "18" pivot_y = "0" flip= "0"/>
+			 <values name = "1" x ="1" y = "2" w = "36" h = "121" frameNumber = "8" margin = "1" pivot_x = "18" pivot_y = "1" flip= "0"/>
 		</DOWN>	
 	
 		<UP>
-			 <values name = "0" x ="1" y = "124" w = "36" h = "122" frameNumber = "4" margin = "1" pivot_x = "18" pivot_y = "119" flip= "0"/>
+			 <values name = "0" x ="1" y = "124" w = "36" h = "119" frameNumber = "8" margin = "1" pivot_x = "18" pivot_y = "119" flip= "0"/>
 		</UP>
 
 		<RIGHT>
-			 <values name = "2" x ="1" y = "245" w = "118" h = "36" frameNumber = "4" margin = "1" pivot_x = "0" pivot_y = "20" flip= "0"/>
+			 <values name = "2" x ="1" y = "244" w = "118" h = "36" frameNumber = "7" margin = "1" pivot_x = "0" pivot_y = "20" flip= "0"/>
 		</RIGHT>
 
 		<LEFT>
-			 <values name = "3" x ="1" y = "245" w = "118" h = "36" frameNumber = "4" margin = "1" pivot_x = "119" pivot_y = "20" flip= "1"/>
+			 <values name = "3" x ="1" y = "244" w = "118" h = "36" frameNumber = "7" margin = "1" pivot_x = "118" pivot_y = "20" flip= "1"/>
 		</LEFT>
 		
 		<loop value = "false" />
