@@ -289,6 +289,9 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case FALLING_BOLT:
 		ret = new FallingBolt;
 		break;
+	case BOW:
+		ret = new Bow;
+		break;
 	}
 	
 

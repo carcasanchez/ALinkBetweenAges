@@ -114,6 +114,8 @@ bool j1GameLayer::Update(float dt)
 		em->CreateEnemy(1, TEKTITE, mousePos.x, mousePos.y, vector<iPoint>());
 	else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
+	else if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
+		em->CreateObject(1, mousePos.x, mousePos.y, BOW);
 
 		
 

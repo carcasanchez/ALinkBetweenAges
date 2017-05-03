@@ -139,5 +139,13 @@
     <animation file = "animations/objects/falling_bolt_animations.xml"/>
     <texture file = "textures/Object_sprites/big_bolt.png"/>
   </falling_bolt>
+
+<bow>
+    <base life = "1"/>
+    <collider x ="45" y = "8" w = "7" h = "16" type = "7"/>
+    <animation file = "animations/objects/bow_animations.xml"/>
+    <texture file = "textures/Object_sprites/42487.png"/>
+</bow>
+
   
 </attributes>

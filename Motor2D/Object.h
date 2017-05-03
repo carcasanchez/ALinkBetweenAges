@@ -31,7 +31,8 @@ enum OBJECT_TYPE
 	ZELDA_ARROW,
 	SWORD_BOLT,
 	FALLING_BOLT,
-	BOMB_EXPLOSION
+	BOMB_EXPLOSION,
+	BOW
 };
 
 class Object : public Entity
@@ -276,8 +277,13 @@ public:
 
 	FallingBolt() {};
 	bool Update(float dt);
-	
+};
 
+class Bow : public Object
+{
+public:
+
+	Bow() {};
 };
 
 
