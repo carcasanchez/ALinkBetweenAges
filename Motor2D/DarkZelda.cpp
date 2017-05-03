@@ -311,7 +311,7 @@ bool DarkZelda::KeepDistance(float dt)
 
 	//Movement depending on the player relative direction
 	iPoint flankingMovement;
-/*	if (flankingDir)
+	if (flankingDir)
 	{
 		switch (currentDir)
 		{
@@ -344,8 +344,8 @@ bool DarkZelda::KeepDistance(float dt)
 		case D_LEFT:
 			flankingMovement = { 0, 1 };
 			break;
-		}*/
-	switch (currentDir)
+		}
+	/*switch (currentDir)
 	{
 	case D_DOWN:
 	case D_UP:
@@ -361,7 +361,7 @@ bool DarkZelda::KeepDistance(float dt)
 		break;
 
 
-	}
+	}*/
 
 	//Change the flanking direction if the enemy hits something
 	if (Move(SDL_ceil(speed*dt)*flankingMovement.x, SDL_ceil(speed*dt)*flankingMovement.y) == false)
