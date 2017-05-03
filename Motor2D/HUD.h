@@ -111,6 +111,8 @@ private:
 	void		LookNumHearts();
 
 	//items method
+	void		LookInventory();
+	void		ActiveItem(OBJECT_TYPE);
 	void		SetFrame();
 
 

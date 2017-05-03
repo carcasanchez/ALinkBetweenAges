@@ -47,6 +47,7 @@ bool Hud::Update(float dt)
 	bombs_counter->LookNumber(App->game->em->player->bombs);
 	arrows_counter->LookNumber(App->game->em->player->arrows);
 
+	LookInventory();
 
 	return false;
 }
@@ -362,6 +363,11 @@ bool Hud::LoadHud(string file)
 		items_frame_inactive = (UI_Image*)LoadUIElement(hud_node.child("items").child("frame_y"), nullptr, IMAGE);
 		items_frame_using = (UI_Image*)LoadUIElement(hud_node.child("items").child("frame_r"), nullptr, IMAGE);
 
+		items_bow = (UI_Image*)LoadUIElement(hud_node.child("items").child("bow"), item_frame, IMAGE);
+		items_bomb = (UI_Image*)LoadUIElement(hud_node.child("items").child("bomb"), item_frame, IMAGE);
+		items_potion_red = (UI_Image*)LoadUIElement(hud_node.child("items").child("potion_red"), item_frame, IMAGE);
+		items_potion_green = (UI_Image*)LoadUIElement(hud_node.child("items").child("potion_green"), item_frame, IMAGE);
+
 		//life
 		life = (UI_Image*)LoadUIElement(hud_node.child("life"), hud_screen, IMAGE);
 		empty_heart = (UI_Image*)LoadUIElement(hud_node.child("heart").child("empty"), hud_screen, IMAGE);
@@ -435,6 +441,55 @@ void Hud::LookNumHearts()
 			active_hearts++;
 		}
 	}
+}
+
+void Hud::LookInventory()
+{
+	if (App->game->em->player->inventory.size() <= 0)
+	{
+		items_bomb->Set_Active_state(false);
+		items_bow->Set_Active_state(false);
+		items_potion_red->Set_Active_state(false);
+		items_potion_green->Set_Active_state(false);
+		return;
+	}
+
+	int i = 0;
+	std::list<OBJECT_TYPE>::iterator it = App->game->em->player->inventory.begin();
+	for(; i < App->game->em->player->equippedObject; i++) {}
+
+	ActiveItem((*it));
+
+	
+}
+
+void Hud::ActiveItem(OBJECT_TYPE item)
+{
+	switch (item)
+	{
+	case NO_OBJECT:
+		items_bomb->Set_Active_state(false);
+		items_bow->Set_Active_state(false);
+		items_potion_red->Set_Active_state(false);
+		items_potion_green->Set_Active_state(false);
+		break;
+
+	case BOMB_SAC:
+		items_bomb->Set_Active_state(true);
+		items_bow->Set_Active_state(false);
+		items_potion_red->Set_Active_state(false);
+		items_potion_green->Set_Active_state(false);
+		break;
+
+	case LIFE_POTION:
+
+		items_bomb->Set_Active_state(false);
+		items_bow->Set_Active_state(false);
+		items_potion_red->Set_Active_state(true);
+		items_potion_green->Set_Active_state(false);
+		break;
+	}
+
 }
 
 void Hud::SetFrame()
