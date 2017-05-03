@@ -1,0 +1,27 @@
+<!-- Link House -->
+<scene name = "linkHouse" map= "linkHouse.tmx">
+  <sectors>
+    <sector>
+      <!--sector 1-->
+      <entities>
+
+        <npcs>
+        </npcs>
+
+        <enemies>
+		
+
+        </enemies>
+
+        <special>
+          <!--rocks, grass, etc-->
+        </special>
+      </entities>
+
+      <exits>
+        <exit destinyScene = "kakarikoVillage" destinyExit = "2" x = "15" y = "24" w="2" h="1" direction = "0"/>
+      </exits>
+
+    </sector>
+  </sectors>
+</scene>

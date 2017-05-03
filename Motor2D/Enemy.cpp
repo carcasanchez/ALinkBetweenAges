@@ -176,10 +176,11 @@ bool Enemy::StepBack(float dt)
 		movement.y = -1;
 	else movement.y = +1;
 
-	Move(SDL_ceil(movement.x*speed*dt*5), SDL_ceil(movement.y*speed*dt*5));
+	Move(SDL_ceil(movement.x*200*dt), SDL_ceil(movement.y* 200 *dt));
 	
 	if (damagedTimer.ReadMs() > damagedLimit && pushedBackTimer.ReadMs() > 200)
 	{
+		damaged = false;
 		enemyState = PATROLING;
 		sprite->tint = { 255, 255, 255, 255 };
 		if (life == 0)
@@ -231,6 +232,10 @@ bool Enemy::Charging(float dt)
 
 void Enemy::GetHit(Entity* agressor)
 {
+
+	if (damaged)
+		return;
+
 	life -= agressor->damage;
 
 	if (agressor->type == OBJECT)
@@ -246,5 +251,7 @@ void Enemy::GetHit(Entity* agressor)
 
 	if (life < 0)
 		life = 0;
+
+	damaged = true;
 
 }

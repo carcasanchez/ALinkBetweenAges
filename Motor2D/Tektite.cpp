@@ -83,32 +83,7 @@ bool Tektite::Chasing(float dt)
 }
 
 
-//Go backwards when hit
-bool Tektite::StepBack(float dt)
-{
-	iPoint movement;
 
-	if (App->game->em->player->currentPos.x > currentPos.x)
-		movement.x = -1;
-	else movement.x = +1;
-	if (App->game->em->player->currentPos.y > currentPos.y)
-		movement.y = -1;
-	else movement.y = +1;
-
-	Move(SDL_ceil(movement.x*speed*dt * 15), SDL_ceil(movement.y*speed*dt * 15));
-
-	if (damagedTimer.ReadMs() > damagedLimit && pushedBackTimer.ReadMs() > 200)
-	{
-		enemyState = PATROLING;
-		sprite->tint = { 255, 255, 255, 255 };
-		if (life == 0)
-		{
-			life--;
-		}
-	}
-
-	return true;
-}
 
 void Tektite::OnDeath()
 {

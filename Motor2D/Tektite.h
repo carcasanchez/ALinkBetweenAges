@@ -14,7 +14,6 @@ public:
 	//void OnDeath();
 
 	bool Chasing(float dt);
-	bool StepBack(float dt);
 	void OnDeath();
 };
 

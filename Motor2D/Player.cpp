@@ -951,7 +951,7 @@ void Player::updateSwordCollider()
 	{
 	case(D_UP):
 		swordCollider->rect.x = currentPos.x - swordCollider->rect.w/2;
-		swordCollider->rect.y = currentPos.y - swordCollider->rect.h*2;
+		swordCollider->rect.y = currentPos.y - swordCollider->rect.h*1.5;
 		break;
 
 	case(D_DOWN):

@@ -39,10 +39,10 @@ bool j1SceneManager::Awake(pugi::xml_node& config)
 bool j1SceneManager::Start()
 {	
 
-	currentScene = new Scene("bossRoom");
+	currentScene = new Scene("kakarikoVillage");
 	currentScene->Load(data[currentScene->name].c_str());
 
-//	App->cutsceneM->StartCutscene(0);
+///	App->cutsceneM->StartCutscene(0);
 
 	return true;
 }

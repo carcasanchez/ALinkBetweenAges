@@ -115,6 +115,7 @@ bool Eyegore::StepBack(float dt)
 	if (life <= rageLife)
 		currentSpeed = rageSpeed;
 	else currentSpeed = speed;
+
 	GoTo(playerTile, currentSpeed, dt);
 
 	if (damagedTimer.ReadMs() > damagedLimit && pushedBackTimer.ReadMs() > 200)
@@ -125,6 +126,7 @@ bool Eyegore::StepBack(float dt)
 		{
 			life--;
 		}
+		damaged = false;
 	}
 
 	return true;
