@@ -115,7 +115,7 @@ bool j1GameLayer::Update(float dt)
 	else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
 		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
 	else if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
-		em->CreateObject(1, mousePos.x, mousePos.y, BOW);
+		em->CreateObject(1, mousePos.x, mousePos.y, STAMINA_POTION);
 
 		
 

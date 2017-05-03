@@ -292,6 +292,9 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case BOW:
 		ret = new Bow;
 		break;
+	case STAMINA_POTION:
+		ret = new StaminaPotion;
+		break;
 	}
 	
 

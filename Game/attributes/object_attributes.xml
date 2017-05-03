@@ -147,5 +147,12 @@
     <texture file = "textures/Object_sprites/bow.png"/>
 </bow>
 
+<stamina_potion>
+    <base life = "1"/>
+    <collider x = "7" y = "8" w = "14" h = "16" type = "7"/>
+    <animation file = "animations/objects/stamina_potion_animations.xml"/>
+    <texture file = "textures/Object_sprites/staminaPotion.png"/>
+</stamina_potion>
+
   
 </attributes>
