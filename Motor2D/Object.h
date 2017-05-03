@@ -235,7 +235,11 @@ public:
 	};
 	bool Update(float dt) 
 	{ 
-		return ExplodeBomb(); 
+
+		if (explode_counter.ReadMs() > explode_time)
+			ExplodeBomb(); 
+
+		return true;
 	};
 	
 	bool ExplodeBomb();

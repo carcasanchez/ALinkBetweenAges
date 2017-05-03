@@ -33,6 +33,8 @@ public:
 	bool Update(float dt);
 	void OnDeath();
 
+	void GetHit(Entity* agressor);
+
 	void ChangeAge(LINK_AGE);
 
 public:
@@ -100,6 +102,8 @@ private:
 	bool Jumping(float dt);
 
 	bool Talking(float dt);
+
+
 
 
 	void ShowPickedObject();

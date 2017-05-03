@@ -229,12 +229,23 @@ bool Enemy::Charging(float dt)
 	return ret;
 }
 
-bool Enemy::GetHit()
+bool Enemy::GetHit(Entity* agressor)
 {
-	life -= App->game->em->player->damage;
+	life -= agressor->damage;
+
+	if (agressor->type == OBJECT)
+	{
+		if (((Object*)(agressor))->objectType == LINK_ARROW && arrowWeakness)
+		{
+			life -= agressor->damage*2;
+		}
+	}
 	sprite->tint = { 255, 150, 150, 255 };
 	enemyState = STEP_BACK;
 	damagedTimer.Start();
+
+	if (life < 0)
+		life = 0;
 
 	return true;
 }

@@ -8,8 +8,17 @@
     <name value = "0"  />
    
     <DOWN>
-      <values name = "1" x ="0" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "8" flip= "0"/>
+      <values name = "0" x ="0" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "8" flip= "0"/>
     </DOWN>
+	<UP>
+      <values name = "1" x ="0" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "8" flip= "0"/>
+    </UP>
+	<LEFT>
+      <values name = "2" x ="0" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "8" flip= "0"/>
+    </LEFT>
+	<RIGTH>
+      <values name = "3" x ="0" y = "0" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "8" flip= "0"/>
+    </RIGTH>
    
     <loop value = "true" />
 

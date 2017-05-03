@@ -675,6 +675,27 @@ bool Player::Talking(float dt)
 	return false;
 }
 
+void Player::GetHit(Entity * agressor)
+{
+	damaged = invulnerable = true;
+	damagedTimer.Start();
+
+	if (agressor->col->type == COLLIDER_BOMB_EXPLOSION)
+		life -= 1;
+	else
+		life -= agressor->damage;
+	
+	sprite->tint = { 100, 0, 0, 255 };
+
+	if (col->rect.x < agressor->col->rect.x)
+		linearMovement.x = -1;
+	else linearMovement.x = 1;
+
+	if (col->rect.y < agressor->col->rect.y)
+		linearMovement.y = -1;
+	else linearMovement.y = 1;
+}
+
 void Player::ShowPickedObject()
 {
 	if (pickedObject)

@@ -291,7 +291,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
- 	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE || c2->type == COLLIDER_MAGIC_SLASH || c2->type == COLLIDER_BOLT))
+ 	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE || c2->type == COLLIDER_MAGIC_SLASH || c2->type == COLLIDER_BOLT|| c2->type == COLLIDER_BOMB_EXPLOSION) )
 	{
 		//When link is adult, empuja enemigos
 		if (em->player->actionState == DODGING && em->player->age == ADULT )
@@ -307,18 +307,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		{
   			if (em->player != nullptr && c2->parent != nullptr)
 			  {
-				  em->player->damaged = em->player->invulnerable = true;
-				  em->player->damagedTimer.Start();
-				  em->player->life -= c2->parent->damage;
-				  em->player->sprite->tint = { 100, 0, 0, 255 };
-
-				  if (c1->rect.x < c2->rect.x)
-					  em->player->linearMovement.x = -1;
-				  else em->player->linearMovement.x = 1;
-
-				  if (c1->rect.y < c2->rect.y)
-					  em->player->linearMovement.y = -1;
-				  else em->player->linearMovement.y = 1;
+				em->player->GetHit(c2->parent);
 			  }
 		}
 
@@ -342,7 +331,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		{
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK && ((Enemy*)(c1->parent))->enemyState != DODGING_LINK)
 			{
-				((Enemy*)(c1->parent))->GetHit();
+				((Enemy*)(c1->parent))->GetHit(em->player);
 			}
 			return true;
 		}
@@ -380,14 +369,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 			if (((Enemy*)(c1->parent))->enemyState != STEP_BACK)
 			{
-				if(((Enemy*)(c1->parent))->arrowWeakness)
-					c1->parent->life -= (c2->parent->damage*3);
-				else c1->parent->life -= c2->parent->damage;
-				
-
-				c1->parent->sprite->tint = { 255, 150, 150, 255 };
-				((Enemy*)(c1->parent))->enemyState = STEP_BACK;
-				c1->parent->damagedTimer.Start();
+				((Enemy*)(c1->parent))->GetHit(c2->parent);
 			}
 			return true;
 		}
@@ -441,15 +423,13 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_BOMB_EXPLOSION && c2->type == COLLIDER_ENEMY )
 	{
-		c1->parent->life = -1;
-		c2->parent->life -= c1->parent->damage;
+		((Enemy*)(c2->parent))->GetHit(c1->parent);
 		return true;
 	}
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_BOMB_EXPLOSION)
+	if (c1->type == COLLIDER_BOMB && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_PLAYER))
 	{
-		c1->parent->life -= 1;
-		c2->parent->life = -1;
+		((Bomb*)c1->parent)->ExplodeBomb();
 		return true;
 	}
 

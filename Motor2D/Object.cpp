@@ -140,14 +140,10 @@ void Object::OnDeath()
 
 bool Bomb::ExplodeBomb()
 {
-	if (explode_counter.ReadMs() > explode_time)
-	{
 		App->game->em->CreateObject(1, (this->currentPos.x / (App->map->data->tile_width)), (this->currentPos.y) / (App->map->data->tile_height), BOMB_EXPLOSION);
 		this->life = -1;
+
 		return true;
-	}
-	else
-		return false;
 }
 
 bool BombExplosion::DeleteExplode()
