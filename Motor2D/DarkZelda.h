@@ -40,6 +40,10 @@ private:
 
 	int phase;
 
+	int phase2Life;
+	int phase3Life;
+
+
 	//phase 1 vars
 	bool lateralDirection = true;
 	j1PerfTimer walkTimer;

@@ -47,36 +47,45 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 
 	
 		phase = 1;
-		speed = 50;
-		walkTimelimit = 500;
-		fightRange = 80;
-		dodgeSpeed = 200;
-		dodgeLimit = 300;
-		attackRatio = 1000;
-		attackRatio_2 = 500;
+
+		fightRange = attributes.child("ranges").attribute("fight").as_int();
+
+		phase2Life = attributes.child("base").attribute("life_2").as_int();
+		phase3Life = attributes.child("base").attribute("life_3").as_int();
+
+		walkTimelimit = attributes.child("limits").attribute("walk_time_limit").as_int();
+		dodgeLimit = attributes.child("limits").attribute("dodge_limit").as_int();
+
+
+		dodgeSpeed = attributes.child("combat_speeds").attribute("dodge_speed").as_int();
 		
-		slashSpeed = 220;
-		stabSpeed = 220;
+		attackRatio = attributes.child("ratios").attribute("attack").as_int();
+		attackRatio_2 = attributes.child("ratios").attribute("attack_2").as_int();
 
-		newSlashSpeed = 500;
-		newStabSpeed = 500;
 
-		holdPosLimit = 800;
-		holdStabLimit = 800;
+		
+		slashSpeed = attributes.child("combat_speeds").attribute("slash_speed").as_int();
+		stabSpeed = attributes.child("combat_speeds").attribute("stab_speed").as_int();
 
-		teleportRange = 180;
-		stabRange = 60;
-		chargeTime = 550;
+		newSlashSpeed = attributes.child("scnd_phase_speeds").attribute("slash_speed").as_int();
+		newStabSpeed = attributes.child("scnd_phase_speeds").attribute("slash_speed").as_int();
 
-		rageLife = 10;
-		rageLimit = 3000;
+		holdPosLimit = attributes.child("limits").attribute("hold_pos").as_int();
+		holdStabLimit = attributes.child("limits").attribute("hold_stab").as_int();
 
-		boltLifeTime = 4000;
-		spawnBolt = 10000;
+		teleportRange = attributes.child("ranges").attribute("teleport").as_int();
+		stabRange = attributes.child("ranges").attribute("stab").as_int();
+		chargeTime = attributes.child("ratios").attribute("charge_time").as_int();
+
+		rageLife = attributes.child("base").attribute("rage_life").as_int();
+		rageLimit = attributes.child("limits").attribute("rage_limit").as_int();
+
+		boltLifeTime = attributes.child("bolt").attribute("life_time").as_int();
+		spawnBolt = attributes.child("bolt").attribute("spawn").as_int();
 
 		damagedLimit = 100;
 
-		spinLimit =3000;
+		spinLimit = attributes.child("limits").attribute("spin_limit").as_int();
 	
 	}
 	return ret;
@@ -92,7 +101,7 @@ void DarkZelda::OnDeath()
 		currentPos = App->map->MapToWorld(75, 25);
 		sprite->tint = { 255, 255, 255, 255 };
 		phase = 2;
-		life = 20;	
+		life = phase2Life;	
 		enemyState = KEEP_DISTANCE;
 		attackTimer.Start();
 
@@ -103,7 +112,7 @@ void DarkZelda::OnDeath()
 		currentPos = App->map->MapToWorld(75, 25);
 		sprite->tint = { 255, 255, 255, 255 };
 		phase = 3;
-		life = 20;
+		life = phase3Life;
 		stabSpeed = newStabSpeed;
 		slashSpeed = newSlashSpeed;
 		attackRatio = attackRatio_2;
@@ -277,6 +286,7 @@ bool DarkZelda::KeepDistance(float dt)
 {
 	LookToPlayer();
 	actionState = WALKING;
+	invulnerable = true;
 
 	/*//Choose randomly if the flanking direction changes
 	if (abs(App->game->em->player->currentPos.x - currentPos.x) == abs(App->game->em->player->currentPos.y - currentPos.y))
@@ -374,6 +384,7 @@ bool DarkZelda::KeepDistance(float dt)
 
 bool DarkZelda::Chasing(float dt)
 {
+	invulnerable = true;
 	int playerDistance = App->game->em->player->currentPos.DistanceTo(currentPos);
 
 	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
