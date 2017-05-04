@@ -34,7 +34,8 @@ enum OBJECT_TYPE
 	BOMB_EXPLOSION,
 	BOW,
 	STAMINA_POTION,
-	PILLAR
+	PILLAR,
+	STONE
 };
 
 class Object : public Entity

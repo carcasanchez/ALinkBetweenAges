@@ -108,6 +108,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case PILLAR:
 				attributes = attributes.child("pillar");
 				break;
+			case STONE:
+				attributes = attributes.child("stone");
+				break;
 		}		
 
 		LoadAttributes(attributes);

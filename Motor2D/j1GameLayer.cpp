@@ -85,7 +85,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, PILLAR);
+		em->CreateObject(1, mousePos.x, mousePos.y, STONE);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
@@ -176,12 +176,13 @@ void j1GameLayer::PickObject(Object * object)
 			em->player->arrows++;
 		break;
 
-	case LIFE_POTION:
-		em->player->inventory.push_back(LIFE_POTION);
-		break;
+	case BOW:
 	case BOMB_SAC:
-		em->player->inventory.push_back(BOMB_SAC);
+	case LIFE_POTION:
+	case STAMINA_POTION:
+		em->player->inventory.push_back(object->objectType);
 		break;
+
 	}
 	
 	if (em->player->pickedObject)
@@ -288,6 +289,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 			else Movement = { -1, 0 };
 		}
 
+		if (c1->parent->actionState == DODGING)
+			em->player->dodgeDir.SetToZero();
+		
 		c1->parent->Move(SDL_ceil(c1->parent->speed*dt)*Movement.x, SDL_ceil(c1->parent->speed*dt)*Movement.y);
 				
 		return true;

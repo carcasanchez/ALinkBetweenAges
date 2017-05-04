@@ -39,6 +39,7 @@ public:
 
 public:
 
+	bool stopX, stopY = false;
 
 	PLAYER_STATE playerState = ACTIVE;
 	LINK_AGE age = YOUNG;

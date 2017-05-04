@@ -1118,10 +1118,7 @@ void Player::UseObject(float dt)
 
 	std::list<OBJECT_TYPE>::iterator currentItem;
 	int i = 0;
-	for (currentItem = inventory.begin() ; i < equippedObject ; currentItem++, i++)
-	{
-
-	}
+	for (currentItem = inventory.begin() ; i < equippedObject ; currentItem++, i++){}
 
 
 	switch ((*currentItem))
@@ -1133,12 +1130,21 @@ void Player::UseObject(float dt)
 		inventory.erase(currentItem);
 		break;
 
-	case BOMB_SAC:
+	case STAMINA_POTION:
+		stamina = maxStamina;
+		inventory.erase(currentItem);
+		break;
 
+	case BOMB_SAC:
 		if(bombs > 0)
 			holded_item = BOMB_SAC;
-
 		break;
+
+	case BOW:
+		if (arrows > 0)
+			holded_item = BOW;
+		break;
+
 
 	}
 

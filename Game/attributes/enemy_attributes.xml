@@ -22,7 +22,7 @@
 	<dark_zelda>
 		<base life = "1" life_2 = "20" life_3 = "20" speed = "50" damage ="1" rage_life="10"/>
 		<collider x = "9" y = "17" w = "20" h = "20" type = "3"/>
-		<ranges hostile= "1000" fight = "80" out="1000" teleport="180" stab="60"/>
+		<ranges hostile= "1000" fight = "80" teleport="180" stab="60"/>
 		<limits walk_time_limit="500" dodge_limit = "300" hold_pos="800" hold_stab="800" rage_limit="3000" spin_limit="3000"/>
 		<ratios attack = "1000" attack_2="500" charge_time = "550"/>  <!-- In Miliseconds -->
 		<combat_speeds dodge_speed = "200" attack_speed = "110" slash_speed="220" stab_speed="220"/>
