@@ -168,6 +168,12 @@
     <texture file = "textures/Object_sprites/stone.png"/>
 </stone>
 
+<boss_key>
+    <base life = "1"/>
+    <collider x = "7" y = "8" w = "14" h = "16" type = "7"/>
+    <animation file = "animations/objects/boss_key_animations.xml"/>
+    <texture file = "textures/Object_sprites/boss_key.png"/>
+</boss_key>
 
   
 </attributes>

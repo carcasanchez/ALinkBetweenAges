@@ -49,7 +49,7 @@ public:
 	float maxStamina;
 	float stamina;
 	float staminaRec;
-	int rupees = 20 ;
+	int rupees = 0 ;
 
 	//Attack
 	int attackSpeed;
@@ -81,7 +81,7 @@ public:
 	int maxArrows;
 	int maxBombs;
 	int arrows = 0;
-	int bombs = 3;
+	int bombs = 0;
 
 
 	std::list <OBJECT_TYPE> inventory;

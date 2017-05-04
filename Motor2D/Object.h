@@ -35,7 +35,8 @@ enum OBJECT_TYPE
 	BOW,
 	STAMINA_POTION,
 	PILLAR,
-	STONE
+	STONE,
+	BOSS_KEY
 };
 
 class Object : public Entity
