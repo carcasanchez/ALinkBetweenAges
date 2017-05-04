@@ -154,5 +154,12 @@
     <texture file = "textures/Object_sprites/staminaPotion.png"/>
 </stamina_potion>
 
+<pillar>
+    <base life = "1"/>
+    <collider x = "7" y = "25" w = "14" h = "30" type = "0"/>
+    <animation file = "animations/objects/pillar_animations.xml"/>
+    <texture file = "textures/Object_sprites/pillar.png"/>
+</pillar>
+
   
 </attributes>

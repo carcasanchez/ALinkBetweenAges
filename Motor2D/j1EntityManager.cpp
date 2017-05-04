@@ -295,6 +295,9 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case STAMINA_POTION:
 		ret = new StaminaPotion;
 		break;
+	case PILLAR:
+		ret = new Pillar;
+		break;
 	}
 	
 

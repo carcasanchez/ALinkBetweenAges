@@ -85,7 +85,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, FALLING_BOLT);
+		em->CreateObject(1, mousePos.x, mousePos.y, PILLAR);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
@@ -430,11 +430,16 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
-	if (c1->type == COLLIDER_BOMB && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_PLAYER))
+	if (c1->type == COLLIDER_BOMB && c2->type == COLLIDER_ENEMY)
 	{
 		((Bomb*)c1->parent)->ExplodeBomb();
 		return true;
 	}
 
+	if (c1->type == COLLIDER_ZELDA_ARROW && c2->type == COLLIDER_WALL)
+	{
+		c1->parent->life = -1;
+		return true;
+	}
 	return true;
 }

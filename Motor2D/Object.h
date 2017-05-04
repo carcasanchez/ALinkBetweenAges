@@ -33,7 +33,8 @@ enum OBJECT_TYPE
 	FALLING_BOLT,
 	BOMB_EXPLOSION,
 	BOW,
-	STAMINA_POTION
+	STAMINA_POTION,
+	PILLAR
 };
 
 class Object : public Entity
@@ -292,6 +293,16 @@ class StaminaPotion : public Object
 public:
 
 	StaminaPotion() {};
+};
+
+class Pillar : public Object
+{
+public:
+
+	Pillar() {};
+
+	bool Update(float dt);
+	
 };
 
 

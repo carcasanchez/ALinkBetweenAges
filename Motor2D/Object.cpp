@@ -105,6 +105,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case STAMINA_POTION:
 				attributes = attributes.child("stamina_potion");
 				break;
+			case PILLAR:
+				attributes = attributes.child("pillar");
+				break;
 		}		
 
 		LoadAttributes(attributes);
@@ -167,4 +170,13 @@ bool FallingBolt::Update(float dt)
 	GoTo(playerPos, speed, dt);
 	currentDir = D_DOWN;
 	return false;
+}
+
+bool Pillar::Update(float dt)
+{
+	if (App->render->InsideCameraZone(col->rect))
+		col->active = true;
+	else col->active = false;
+
+	return true;
 }
