@@ -222,14 +222,20 @@ iPoint j1Render::WorldToScreen(int x, int y) const
 	return ret;
 }
 
-void j1Render::CenterCamera(int x, int y)
+void j1Render::CenterCamera(iPoint pos)
 {
-	uint win_x;
-	uint win_y;
-	App->win->GetWindowSize(win_x, win_y);
+	int scale = App->win->GetScale();
+	uint w, h;
 
-	camera.x = (win_x / 2) - x;
-	camera.y = (win_y / 2) - y;
+	camera.x = -(pos.x * scale);
+	camera.y = -(pos.y * scale);
+	camera.x += SDL_ceil((camera.w)*0.5);
+	camera.y += SDL_ceil((camera.h)*0.5);
+
+	renderZone.x = pos.x;
+	renderZone.y = pos.y;
+	renderZone.x -= renderZone.w*0.5;
+	renderZone.y -= renderZone.h*0.5;
 }
 
 bool j1Render::Draw(Sprite* sprite)
@@ -503,27 +509,26 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 
 void j1Render::CameraFollow(iPoint pos)
 {
+	if (cameraLocked)
+		return;
+
 	int scale = App->win->GetScale();
 	uint w, h;
 
 
 	if (!freeCamera)
 	{
-
+		
 		camera.x = -(pos.x * scale);
 		camera.y = -(pos.y * scale);
 		camera.x += SDL_ceil((camera.w)*0.5);
 		camera.y += SDL_ceil((camera.h)*0.5);
-
 	
 		renderZone.x = pos.x;
 		renderZone.y = pos.y;
 		renderZone.x -= renderZone.w*0.5;
 		renderZone.y -= renderZone.h*0.5;
 
-
-
-		//renderZone.x -= App->win->isFullScreen() ? renderZone.w*0.25 : renderZone.w*0.5;
 
 		if (renderZone.x < 0)
 		{

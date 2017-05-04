@@ -30,7 +30,7 @@
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="true"/>
-    <fullscreen_window value="true"/>
+    <fullscreen_window value="false"/>
   </window>
 
   <file_system>
@@ -52,6 +52,7 @@
       <scene name = "insideCastle" file = "inside_castle.xml"/>
       <scene name = "outsideCastle" file = "outside_castle.xml"/>
       <scene name = "bossRoom" file = "boss_room.xml"/>
+      <scene name = "linkHouse" file = "link_house.xml"/>
     </scenes>
   </sceneManager>
   

@@ -79,7 +79,7 @@ public:
 	void ResetViewPort();
 	iPoint ScreenToWorld(int x, int y) const;
 	iPoint WorldToScreen(int x, int y) const;
-	void CenterCamera(int x, int y);
+	void CenterCamera(iPoint pos);
 	void SetBackgroundColor(SDL_Color color);
 	bool InsideCameraZone(SDL_Rect rect) const;
 
@@ -112,6 +112,10 @@ public:
 	SDL_Rect		renderZone;
 	SDL_Rect		viewport;
 	SDL_Color		background;
+
+	bool cameraLocked = false;
+	
+
 
 	std::map<spriteLayer, std::multimap<int, Sprite*>> spriteMap;
 

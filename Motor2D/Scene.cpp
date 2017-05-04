@@ -8,7 +8,9 @@
 #include "Enemy.h"
 #include "Exit.h"
 #include "j1Audio.h"
+#include "Player.h"
 #include "Object.h"
+#include "j1Render.h"
 #include "j1QuestManager.h"
 #include "p2Log.h"
 
@@ -158,6 +160,12 @@ bool Scene::Load(const char* path, const bool reloadMap)
 
 			//Music
 			App->audio->PlayMusic(section.child("music").attribute("file").as_string());
+
+			if (section.child("camera").attribute("locked").as_bool())
+				App->render->cameraLocked = true;
+
+			
+			else App->render->cameraLocked = false;
 
 			maxSectors++;
 		}

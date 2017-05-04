@@ -3,6 +3,7 @@
   <sectors>
     <sector>
       <!--sector 1-->
+      <camera locked="true"/>
       <entities>
 
         <npcs>

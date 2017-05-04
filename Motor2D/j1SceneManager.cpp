@@ -143,6 +143,7 @@ bool j1SceneManager::ChangeScene()
 		App->game->em->player->currentPos = destPos;
 		App->game->em->player->currentDir = dir;
 		changeRequest = false;
+		App->render->CenterCamera(destPos);
 	}
 
 	//temporal
