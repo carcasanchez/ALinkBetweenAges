@@ -184,6 +184,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 		App->game->em->SetSectorRef(&currentSector);
 	}
 
+
+
 	return ret;
 }
 

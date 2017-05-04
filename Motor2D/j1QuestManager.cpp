@@ -6,6 +6,7 @@
 #include "j1GameLayer.h"
 #include "j1EntityManager.h"
 #include "j1Map.h"
+#include "j1CutSceneManager.h"
 
 
 j1QuestManager::j1QuestManager() : j1Module()
@@ -114,7 +115,11 @@ Reward * j1QuestManager::createReward(pugi::xml_node & it)
 			   ((CreateEnemyReward*)ret)->mapPos.y = it.child("enemy").attribute("y").as_int();
 			   return ret;
 		   }
-		
+	   case CINEMATIC:
+		   ret = new CinematicReward();
+		   ((CinematicReward*)ret)->cinematicId = it.child("cinematic").attribute("id").as_int();
+		   return ret;
+
 	}
 
 
@@ -267,15 +272,25 @@ bool j1QuestManager::StepTalkToCallback(Npc * target)
 
 void j1QuestManager::RewardCallback(vector <Reward*> reward)
 {
+	iPoint pos = {0, 0};
+	ENEMY_TYPE type;
+
 	for (std::vector <Reward*>::iterator it = reward.begin(); it != reward.end(); it++)
 	{
+		
 		switch ((*it)->type)
-		{
+		{			
 		case CREATE_ENEMY:
-			iPoint pos= ((CreateEnemyReward*)*it)->mapPos;
-			ENEMY_TYPE type = ((CreateEnemyReward*)*it)->enemy;
+			pos = ((CreateEnemyReward*)*it)->mapPos;
+			type = ((CreateEnemyReward*)*it)->enemy;
 			
 			App->game->em->CreateEnemy(1, type, pos.x, pos.y, vector<iPoint>());
+			break;
+
+		case CINEMATIC:
+			pos = { 0, 0 };
+			App->cutsceneM->StartCutscene(((CinematicReward*)*it)->cinematicId);
+			return;
 			break;
 		}
 	}

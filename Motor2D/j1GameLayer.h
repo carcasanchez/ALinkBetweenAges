@@ -43,8 +43,8 @@ public:
 	bool        pause = false;
 	bool		quit_game = false;
 
-	int playerX = 123;
-	int playerY = 90;
+	int playerX = 9;
+	int playerY = 5;
 
 	j1Timer buy_timer; 
 };

@@ -39,9 +39,9 @@ bool j1SceneManager::Awake(pugi::xml_node& config)
 bool j1SceneManager::Start()
 {	
 
-	currentScene = new Scene("kakarikoVillage");
+	currentScene = new Scene("linkHouse");
 	currentScene->Load(data[currentScene->name].c_str());
-
+	
 ///	App->cutsceneM->StartCutscene(0);
 
 	return true;
@@ -143,8 +143,10 @@ bool j1SceneManager::ChangeScene()
 		App->game->em->player->currentPos = destPos;
 		App->game->em->player->currentDir = dir;
 		changeRequest = false;
-		App->render->CenterCamera(destPos);
+		
 	}
+
+	App->render->CenterCamera(App->game->em->player->currentPos);
 
 	//temporal
 	App->game->em->player->sceneOverride = false;

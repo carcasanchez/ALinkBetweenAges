@@ -46,15 +46,15 @@
 	<quests>
 	  <quest id = "1" >
 
-		<reward type ="1">
-			<enemy type="1" x="120" y="120"/>
+		<reward type ="0">
+			<cinematic id="0"/>
 		</reward >
     
 
 
 
-      <trigger type ="1">
-     			 <target id = "1"/>
+      <trigger type ="0">
+     			 <collider x = "113" y="86" w="30" h="30"/>
 		</trigger>
 
 	  </quest>
