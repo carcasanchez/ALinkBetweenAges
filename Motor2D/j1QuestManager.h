@@ -9,10 +9,13 @@
 #include "Enemy.h"
 
 class Collider;
+class Npc;
+
 enum EVENT_TYPE
 {
 	//Triggers
 	COLLISION_EVENT = 0,
+	TALK_TO_EVENT,
 
 };
 
@@ -45,6 +48,18 @@ public:
 	REWARD_TYPE type;
 };
 
+class TalkToEvent : public Event
+{
+public:
+	TalkToEvent() :Event(TALK_TO_EVENT) {};
+
+	~TalkToEvent() {};
+
+	Npc* target;
+
+};
+
+
 class CollisionEvent : public Event
 {
 public:
@@ -55,6 +70,7 @@ public:
 	Collider* col;
 
 };
+
 
 
 class CinematicReward : public Reward
@@ -111,15 +127,22 @@ public:
 	Event* createEvent(pugi::xml_node&);
 	Reward* createReward(pugi::xml_node&);
 
+	bool Update(float dt);
+
 	//Callbacks for each event type
 	bool TriggerCollisionCallback(Collider* c);
 	bool StepCollisionCallback(Collider* c);
+
+	bool TriggerTalkToCallback(Npc * target);
+	bool StepTalkToCallback(Npc * target);
 
 
 
 	void RewardCallback(vector <Reward*> reward);
 
 private:
+
+	Quest* completed = nullptr;
 
 	list<Quest*> sleepQuests;
 	list<Quest*> activeQuests;

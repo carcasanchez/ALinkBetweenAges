@@ -17,6 +17,7 @@
 #include "j1EntityManager.h"
 #include "Brofiler\Brofiler.h"
 #include "j1Audio.h"
+#include "j1QuestManager.h"
 
 
 Player::Player() : Entity(LINK)
@@ -417,6 +418,10 @@ bool Player::Attacking(float dt)
 		actionState = IDLE;
 		playerState = EVENT;
 		toTalk->LookToPlayer();
+
+		if (!App->quest->TriggerTalkToCallback(toTalk))
+			App->quest->StepTalkToCallback(toTalk);
+
 		return true;
 	}
 

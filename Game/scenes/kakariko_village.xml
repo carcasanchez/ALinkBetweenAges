@@ -49,15 +49,13 @@
 		<reward type ="1">
 			<enemy type="1" x="120" y="120"/>
 		</reward >
+    
 
-		<trigger type ="0">
-     			 <collider x = "125" y= "90" w="10" h="10"/>
+
+
+      <trigger type ="1">
+     			 <target id = "1"/>
 		</trigger>
-
-		<step type = "0">
-			<collider x = "120" y= "90" w="10" h="10"/>
-		</step>
-
 
 	  </quest>
 	</quests>

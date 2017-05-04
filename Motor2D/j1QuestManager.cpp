@@ -67,11 +67,12 @@ Event * j1QuestManager::createEvent(pugi::xml_node &it)
 	int type = it.attribute("type").as_int();
 	
 	Event* ret;
+	iPoint mapPos;
 
 	switch (type)
 	{		
 		case (COLLISION_EVENT):
-			 ret = new CollisionEvent();			
+			 ret = new CollisionEvent;			
 			//Take collider data from XML.
 			SDL_Rect rect;			
 			rect.x = it.child("collider").attribute("x").as_int();
@@ -79,12 +80,17 @@ Event * j1QuestManager::createEvent(pugi::xml_node &it)
 			rect.w = it.child("collider").attribute("w").as_int();
 			rect.h = it.child("collider").attribute("h").as_int();	
 			
-			iPoint mapPos = App->map->MapToWorld(rect.x, rect.y);
+			mapPos = App->map->MapToWorld(rect.x, rect.y);
 
 			rect.x = mapPos.x;
 			rect.y = mapPos.y;
 
 			((CollisionEvent*)ret)->col = App->collisions->AddCollider(rect, COLLIDER_EVENT);
+			return ret;
+
+		case (TALK_TO_EVENT):
+			ret = new TalkToEvent;
+			((TalkToEvent*)ret)->target = (Npc*)App->game->em->GetEntityFromId(it.child("target").attribute("id").as_int());
 			return ret;
 	}
 
@@ -129,12 +135,22 @@ bool j1QuestManager::TriggerCollisionCallback(Collider* c)
 
 			if (((CollisionEvent*)(*it)->trigger)->col == c)
 			{
-				activeQuests.push_back((*it));
-				sleepQuests.erase(it);
-
-				
+								
 				//Mark the collider c to delete in the next frame
 				c->to_delete=true;
+
+				if ((*it)->steps.size() == 0)
+				{
+					completed = (*it);
+					closedQuests.push_back((*it));
+					sleepQuests.erase(it);
+				}
+				else
+				{
+					activeQuests.push_back((*it));
+					sleepQuests.erase(it);
+				}
+
 				return true;
 			}
 		}
@@ -166,7 +182,7 @@ bool j1QuestManager::StepCollisionCallback(Collider * c)
 				//Close the quest if there's no more steps and add reward
 				if ((*it)->steps.size() == 0)
 				{
-					RewardCallback((*it)->reward);
+					completed = (*it);
 
 					closedQuests.push_back((*it));
 					activeQuests.erase(it);
@@ -179,6 +195,75 @@ bool j1QuestManager::StepCollisionCallback(Collider * c)
 	return false;
 }
 
+//=========== TalkTo Callback
+bool j1QuestManager::TriggerTalkToCallback(Npc * target)
+{
+	//Iterates all Triggers of sleep quests.
+	for (std::list <Quest*>::iterator it = sleepQuests.begin(); it != sleepQuests.end(); it++)
+	{
+
+
+		//Check if It is a CollisionEvent
+		if ((*it)->trigger->type == TALK_TO_EVENT)
+		{
+
+			if (((TalkToEvent*)(*it)->trigger)->target == target)
+			{
+				if ((*it)->steps.size() == 0)
+				{
+					completed = (*it);
+					closedQuests.push_back((*it));
+					sleepQuests.erase(it);
+				}
+				else
+				{
+					activeQuests.push_back((*it));
+					sleepQuests.erase(it);
+				}
+
+				return true;
+			}
+		}
+
+	}
+
+	return false;
+}
+
+bool j1QuestManager::StepTalkToCallback(Npc * target)
+{
+	//Iterates all Steps of all active quests
+	for (std::list <Quest*>::iterator it = activeQuests.begin(); it != activeQuests.end(); it++)
+	{
+		if ((*it)->steps.empty())
+			continue;
+		
+		//Check if It is a CollisionEvent
+		if ((*it)->steps[0]->type == TALK_TO_EVENT)
+		{
+			TalkToEvent* ev = ((TalkToEvent*)(*it)->steps[0]);
+			if (ev->target == target)
+			{
+								
+				//Erase the first step of the steps vector
+				(*it)->steps.erase((*it)->steps.begin());
+				
+				//Close the quest if there's no more steps and add reward
+				if ((*it)->steps.size() == 0)
+				{
+					completed = (*it);
+					closedQuests.push_back((*it));
+					activeQuests.erase(it);
+				}
+
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
 
 void j1QuestManager::RewardCallback(vector <Reward*> reward)
 {
@@ -187,20 +272,27 @@ void j1QuestManager::RewardCallback(vector <Reward*> reward)
 		switch ((*it)->type)
 		{
 		case CREATE_ENEMY:
-			iPoint pos;
-			pos = ((CreateEnemyReward*)*it)->mapPos;
-			App->game->em->CreateEnemy(1,((CreateEnemyReward*)*it)->enemy, pos.x, pos.y, vector<iPoint>());
+			iPoint pos= ((CreateEnemyReward*)*it)->mapPos;
+			ENEMY_TYPE type = ((CreateEnemyReward*)*it)->enemy;
+			
+			App->game->em->CreateEnemy(1, type, pos.x, pos.y, vector<iPoint>());
 			break;
 		}
-
 	}
-	
-
-
 }
 
 
-//BONUS: create more Trigger and Step callbacks for each type of Event. Search for the correct place to call them.
+bool j1QuestManager::Update(float dt)
+{
+	if (completed)
+	{
+		RewardCallback(completed->reward);
+		completed = nullptr;
+	}
+
+	return true;
+}
+
 
 //=============================================
 
