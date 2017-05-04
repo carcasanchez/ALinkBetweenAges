@@ -114,6 +114,10 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			case BOSS_KEY:
 				attributes = attributes.child("boss_key");
 				break;
+			case INTERRUPTOR:
+				attributes = attributes.child("interruptor");
+				actionState = OFF;
+				break;
 		}		
 
 		LoadAttributes(attributes);

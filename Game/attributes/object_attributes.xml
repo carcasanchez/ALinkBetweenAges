@@ -175,5 +175,13 @@
     <texture file = "textures/Object_sprites/boss_key.png"/>
 </boss_key>
 
-  
+  <interruptor>
+    <base life = "1"/>
+    <collider x = "5" y = "12" w = "10" h = "9" type = "19"/>
+    <animation file = "animations/objects/interruptor_animations.xml"/>
+    <texture file ="textures/Object_sprites/interruptor.png"/>
+  </interruptor>
+
+
+
 </attributes>

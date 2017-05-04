@@ -85,7 +85,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, BOSS_KEY);
+		em->CreateObject(1, mousePos.x, mousePos.y, INTERRUPTOR);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
@@ -94,6 +94,13 @@ bool j1GameLayer::Update(float dt)
 		em->player->currentPos = mousePos;
 	}
 		
+
+
+	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+		em->CreateObject(1, mousePos.x, mousePos.y, LINK_ARROW);
+
+
+
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		em->player->changeAge = 0;
 	else if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
@@ -447,6 +454,13 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		c1->parent->life = -1;
 		return true;
+	}
+
+	if(c1->type== COLLIDER_INTERRUPTOR && c2->type == COLLIDER_LINK_ARROW)
+	{
+		((Interruptor*)c1->parent)->on = true;
+		c1->parent->actionState = ON;
+		c2->parent->life = -1;
 	}
 	return true;
 }

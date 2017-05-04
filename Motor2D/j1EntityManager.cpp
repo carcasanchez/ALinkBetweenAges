@@ -298,6 +298,9 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case PILLAR:
 		ret = new Pillar;
 		break;
+	case INTERRUPTOR:
+		ret = new Interruptor;
+		break;
 	}
 	
 

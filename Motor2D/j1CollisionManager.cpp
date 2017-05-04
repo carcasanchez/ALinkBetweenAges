@@ -59,6 +59,8 @@ bool j1CollisionManager::Awake(pugi::xml_node & config)
 	matrix[COLLIDER_BOMB][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_BOMB][COLLIDER_ENEMY] = true;
 
+	matrix[COLLIDER_INTERRUPTOR][COLLIDER_LINK_ARROW] = true;
+
 	return false;
 }
 

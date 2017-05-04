@@ -36,7 +36,8 @@ enum OBJECT_TYPE
 	STAMINA_POTION,
 	PILLAR,
 	STONE,
-	BOSS_KEY
+	BOSS_KEY,
+	INTERRUPTOR
 };
 
 class Object : public Entity
@@ -305,6 +306,17 @@ public:
 
 	bool Update(float dt);
 	
+};
+
+class Interruptor : public Object
+{
+public:
+
+	Interruptor() {};
+
+	bool on = false;
+
+
 };
 
 
