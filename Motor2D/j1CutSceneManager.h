@@ -17,6 +17,7 @@ class Entity;
 class j1Timer;
 class Cutscene;
 class UI_String;
+class UI_Image;
 
 //Base class for elements of the cutscene
 class CS_Element
@@ -60,20 +61,17 @@ private:
 class CS_Image : public CS_Element
 {
 public:
-	CS_Image(CS_Type type, int n, const char* name, bool active, const char* path, SDL_Rect rect, iPoint pos);
+	CS_Image(CS_Type type, int n, const char* name, bool active, const char* path, const char* texture);
 	~CS_Image();
 	void Move(float x, float y);
 
 	//UTILITY FUNCTIONS -------------
-	SDL_Texture* GetTexture()const;
-	SDL_Rect GetRect()const;
-	iPoint GetPos()const;
+	string	texture_name;
+	iPoint GetPos();
 	//-------------------------------
 
-private:
-	SDL_Texture* tex = nullptr;
-	SDL_Rect rect = { 0, 0, 0, 0 };
-	iPoint pos = { 0, 0 };
+public:
+	UI_Image* img = nullptr;
 };
 
 class CS_Text : public CS_Element
@@ -171,6 +169,7 @@ private:
 	//int n = -1;							//Number identifier to manage an order
 	float		start = -1;					//Time to start the step
 	float		duration = -1;				//Duration of the step
+	int			bezier_time = 0;
 	bool		input = false;				//If this step requieres an input to finish
 	Action_Type act_type = ACT_NONE;		//Type of action that will be executed in this step
 	CS_Element*	element = nullptr;		//Element to apply the action
@@ -185,6 +184,7 @@ private:
 	iPoint dest = { 0, 0 };
 	int mov_speed = 0;
 	Dir_Type direction = NO_DIR;
+	bool	bezier_active = false;
 
 	//TEXTS ACIONS 
 	std::string new_text;

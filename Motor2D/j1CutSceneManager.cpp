@@ -105,10 +105,12 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 				temp_cutscene->LoadText(temp);
 			}
 
-			//TODO 5.2: Access the images node and load the data by calling the correct function.
-			//Do the same with music and sound fx.
-
 			//Load Images
+
+			for (temp = elements_node.child("IMAGES").child("image"); temp != NULL; temp = temp.next_sibling("image"))
+			{
+				temp_cutscene->LoadImg(temp);
+			}
 
 			//Load Music
 
@@ -391,7 +393,7 @@ bool Cutscene::Update(float dt)
 
 		if (temp != steps.begin() && temp._Ptr->_Prev->_Myval->isFinished() && temp._Ptr->_Prev->_Myval->isWait() && step->isActive() == false && step->isFinished() == false)
 		{
-			if (step->n == 5)
+			if (step->n == 1)
 				int buenas_atrdes = 0;
 
 			step->StartStep();
@@ -419,20 +421,7 @@ bool Cutscene::Update(float dt)
 
 bool Cutscene::DrawElements()
 {
-	//DRAW CUTSCENE EXTERNAL ELEMENTS ---------------------------------------
-	for (std::list<CS_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
-	{
-		if (it._Ptr->_Myval->GetType() == CS_IMAGE)
-		{
-			if (it._Ptr->_Myval->active == true)
-			{
-				CS_Image* image = dynamic_cast<CS_Image*>(*it);
-				App->render->Blit(image->GetTexture(), image->GetPos().x - App->render->camera.x, image->GetPos().y - App->render->camera.y, &image->GetRect(), NULL, false);
-			}
-		}
-	}
-	//--------------------------------------------------------------------
-	return false;
+	return true;
 }
 
 bool Cutscene::ClearScene()
@@ -486,10 +475,18 @@ bool Cutscene::LoadImg(pugi::xml_node& node)
 	bool ret = false;
 	if (node != NULL)
 	{
-		iPoint pos(node.attribute("x").as_int(0), node.attribute("y").as_int(0));
-		SDL_Rect rect = { node.attribute("tex_x").as_int(0), node.attribute("tex_y").as_int(0), node.attribute("tex_w").as_int(0), node.attribute("tex_h").as_int(0) };
-		elements.push_back(new CS_Image(CS_IMAGE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), rect, pos));
-		ret = true;
+		CS_Image* new_image = new CS_Image(CS_IMAGE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""), node.attribute("text").as_string());
+
+		if (new_image)
+		{
+			elements.push_back(new_image);
+			new_image->img = (UI_Image*)App->game->hud->LoadUIElement(node, cutscene_screen, IMAGE);
+
+			if (new_image->img)
+				new_image->img->SetTexture((SDL_Texture*)App->gui->GetUITexture(new_image->texture_name));
+			
+			ret = true;
+		}	
 	}
 	return false;
 }
@@ -697,6 +694,8 @@ void CS_Step::SetAction(pugi::xml_node& node)
 		iPoint destination = { node.child("element").child("movement").attribute("dest_x").as_int(0), node.child("element").child("movement").attribute("dest_y").as_int(0) };
 		std::string direction_type = node.child("element").attribute("dir").as_string("");
 
+		bezier_time = node.child("element").child("movement").attribute("bezier_time").as_int();
+
 		//Load the movement variables (origin, destination, speed, direction)
 		LoadMovement(destination, node.child("element").child("movement").attribute("speed").as_int(1), direction_type);
 	}
@@ -767,10 +766,15 @@ bool CS_Step::DoMovement(float dt)
 		switch (direction)
 		{
 		case CS_UP:
-			image->Move(0, -ceil(mov_speed*dt));
+			if (bezier_active == false)
+			{
+				image->img->SetAnimationTransition(ANIMATION_TRANSITION::T_MOVE_UP, bezier_time, this->dest);
+				bezier_active = true;
+			}
 			break;
 		case CS_DOWN:
-			image->Move(0, ceil(mov_speed*dt));
+			if (image->img->GetCurrentTransition() != ANIMATION_TRANSITION::T_MOVE_DOWN)
+				image->img->SetAnimationTransition(ANIMATION_TRANSITION::T_MOVE_DOWN, bezier_time, this->dest);
 			break;
 		case CS_LEFT:
 			image->Move(-ceil(mov_speed*dt), 0);
@@ -825,42 +829,57 @@ bool CS_Step::DoMovement(float dt)
 bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 {
 	bool ret = false;
-	switch (direction)
+
+	if (bezier_time)
 	{
-	case CS_UP:
-		if (curr_pos.y <= dest.y)
+		if (element->GetType() == CS_IMAGE)
 		{
-			ret = true;
-			FinishStep();
+			if (dynamic_cast<CS_Image*>(element)->img->GetCurrentTransition() == ANIMATION_TRANSITION::NO_AT)
+			{
+				FinishStep();
+				bezier_active = false;
+				return true;
+			}
 		}
-		break;
-	case CS_DOWN:
-		if (curr_pos.y >= dest.y)
+	}
+	else
+	{
+		switch (direction)
 		{
-			ret = true;
-			FinishStep();
+		case CS_UP:
+			if (curr_pos.y <= dest.y)
+			{
+				ret = true;
+				FinishStep();
+			}
+			break;
+		case CS_DOWN:
+			if (curr_pos.y >= dest.y)
+			{
+				ret = true;
+				FinishStep();
+			}
+			break;
+		case CS_LEFT:
+			if (curr_pos.x <= dest.x)
+			{
+				ret = true;
+				FinishStep();
+			}
+			break;
+		case CS_RIGHT:
+			if (curr_pos.x >= dest.x)
+			{
+				ret = true;
+				FinishStep();
+			}
+			break;
+		default:
+			break;
 		}
-		break;
-	case CS_LEFT:
-		if (curr_pos.x <= dest.x)
-		{
-			ret = true;
-			FinishStep();
-		}
-		break;
-	case CS_RIGHT:
-		if (curr_pos.x >= dest.x)
-		{
-			ret = true;
-			FinishStep();
-		}
-		break;
-	default:
-		break;
 	}
 	return ret;
 }
-
 
 void CS_Step::Play()
 {
@@ -920,6 +939,17 @@ void CS_Step::ActiveElement()
 			tmp->GetText()->Set_Active_state(true);
 
 		}
+
+		if (element->GetType() == CS_IMAGE)
+		{
+			CS_Image* tmp = (CS_Image*)element;
+			tmp->img->Set_Active_state(true);
+
+		}
+
+		//Means that when doned active it
+		if (duration == -1)
+			FinishStep();
 
 		LOG("Step %i Enabling %s", n, element->name.c_str());
 	}
@@ -984,35 +1014,23 @@ void CS_Step::GetInput()
 }
 
 // CS IMAGE -----------------
-CS_Image::CS_Image(CS_Type type, int n, const char* name, bool active, const char* path, SDL_Rect rect, iPoint pos) :
-	CS_Element(type, n, name, active, path), rect(rect), pos(pos)
-{
-	tex = App->tex->Load(path);
-}
+CS_Image::CS_Image(CS_Type type, int n, const char* name, bool active, const char* path, const char* texture) : CS_Element(type, n, name, active, path), texture_name(texture) {}
 
 CS_Image::~CS_Image()
 {
 }
 
-SDL_Texture* CS_Image::GetTexture() const
-{
-	return tex;
-}
-
-SDL_Rect CS_Image::GetRect() const
-{
-	return rect;
-}
-
-iPoint CS_Image::GetPos() const
-{
-	return pos;
-}
-
 void CS_Image::Move(float x, float y)
 {
-	pos.x += x;
-	pos.y += y;
+
+
+	//pos.x += x;
+	//pos.y += y;
+}
+
+iPoint CS_Image::GetPos()
+{
+	return { img->Interactive_box.x, img->Interactive_box.y };
 }
 
 //-----------------------------

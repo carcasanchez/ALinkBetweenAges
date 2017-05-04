@@ -59,7 +59,7 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 	const SDL_Texture* Get_Other_Textures(uint id) const;
-	const SDL_Texture* GetUITexture(std::string) const;
+	const SDL_Texture* GetUITexture(std::string);
 
 	UI_element* element_selected = nullptr;
 	UI_element* focus_element = nullptr;
@@ -76,7 +76,11 @@ public:
 private:
 
 	SDL_Texture* atlas;
+	SDL_Texture* start_screen;
+
 	string atlas_file_name;
+	string start_screen_name;
+
 	list<SDL_Texture*> Other_images;
 	list<UI_element*> Screen_elements;
 	

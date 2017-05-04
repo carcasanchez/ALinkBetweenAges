@@ -34,6 +34,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	bool ret = true;
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	start_screen_name = conf.child("main").attribute("file").as_string("");
+
 	scale_factor = scale_factor / App->win->GetScale();
 
 	bezier_curve = new CBeizier();
@@ -44,8 +46,11 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
+	if(!atlas)
+		atlas = App->tex->Load(atlas_file_name.c_str());
 
-	atlas = App->tex->Load(atlas_file_name.c_str());
+	if(!start_screen)
+		start_screen = App->tex->Load(start_screen_name.c_str());
 
 	return true;
 
@@ -195,11 +200,23 @@ const SDL_Texture* j1Gui::Get_Other_Textures(uint id) const
 	return nullptr;	
 }
 
-const SDL_Texture* j1Gui::GetUITexture(std::string name) const
+const SDL_Texture* j1Gui::GetUITexture(std::string name)
 {
 	if (name == "atlas")
-		return atlas;
+	{
+		if (!atlas)
+			atlas = App->tex->Load(atlas_file_name.c_str());
 
+		return atlas;
+	}
+
+	if (name == "title_screen")
+	{
+		if (!start_screen)
+			start_screen = App->tex->Load(start_screen_name.c_str());
+
+		return start_screen;
+	}
 	return nullptr;
 }
 
