@@ -434,7 +434,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		return true;
 	}
 
-	if (c1->type == COLLIDER_BOMB_EXPLOSION && c2->type == COLLIDER_WALL)
+	if (c1->type == COLLIDER_BOMB_EXPLOSION && (c2->type == COLLIDER_WALL||c2->type == COLLIDER_BUSH))
 	{
 		c2->parent->life = -1;
 		return true;

@@ -192,14 +192,24 @@
   <SPIN_TO_WIN>
     <name value = "6"  />
 
+    <UP>
+      <values name = "0" x ="314" y = "287" w = "42" h = "36" frameNumber = "10" margin = "1" pivot_x = "23" pivot_y = "26" flip= "0"/>
+    </UP>
     <DOWN>
       <values name = "1" x ="314" y = "287" w = "42" h = "36" frameNumber = "10" margin = "1" pivot_x = "23" pivot_y = "26" flip= "0"/>
     </DOWN>
+    <RIGHT>
+      <values name = "2" x ="314" y = "287" w = "42" h = "36" frameNumber = "10" margin = "1" pivot_x = "23" pivot_y = "26" flip= "0"/>
+    </RIGHT>
+    <LEFT>
+      <values name = "3" x ="314" y = "287" w = "42" h = "36" frameNumber = "10" margin = "1" pivot_x = "23" pivot_y = "26" flip= "0"/>
+    </LEFT>
 
     <loop value = "false" />
 
     <speed value = "0.9" />
 
-  </SPIN_TO_WIN>
+  
+</SPIN_TO_WIN>
 
 </animations>
