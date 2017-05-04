@@ -193,7 +193,7 @@
     <name value = "6"  />
 
     <DOWN>
-      <values name = "1" x ="314" y = "287" w = "42" h = "36" frameNumber = "10" margin = "" pivot_x = "23" pivot_y = "26" flip= "0"/>
+      <values name = "1" x ="314" y = "287" w = "42" h = "36" frameNumber = "10" margin = "1" pivot_x = "23" pivot_y = "26" flip= "0"/>
     </DOWN>
 
     <loop value = "false" />
