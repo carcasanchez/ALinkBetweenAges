@@ -634,6 +634,11 @@ bool CS_Step::DoAction(float dt)
 		action_name = "setstring";
 		ChangeString();
 
+	case ACT_FADE:
+		action_name = "fade";
+		Fade();
+		break;
+
 	default:
 		action_name = "none";
 		break;
@@ -711,6 +716,15 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	{
 		act_type = ACT_SET_STRING;
 		new_text = node.child("element").child("text").attribute("text").as_string();
+	}
+	else if (action_type == "fade")
+	{
+		act_type = ACT_FADE;
+		fade_black = node.child("element").child("fading").attribute("to_black").as_bool();
+		bezier_time = node.child("element").child("fading").attribute("bezier_time").as_int();
+
+		if (fade_black)
+			dynamic_cast<CS_Image*>(element)->img->alpha = 0;
 	}
 	else
 	{
@@ -979,6 +993,30 @@ void CS_Step::DisableElement()
 	{
 		element->active = false;
 		LOG("Step %i Disabling %s", n, element->name.c_str());
+	}
+}
+
+void CS_Step::Fade()
+{
+	if (element->GetType() == CS_IMAGE)
+	{
+		
+		CS_Image* tmp = (CS_Image*)element;
+
+		if (bezier_active == false)
+		{
+			if (tmp->img->active == false)
+				tmp->img->Set_Active_state(true);
+
+			tmp->img->SetAnimationTransition(T_FADE_TO , bezier_time, iPoint(0, 255));
+			bezier_active = true;
+		}
+
+		
+
+		
+
+
 	}
 }
 

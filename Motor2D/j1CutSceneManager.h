@@ -149,6 +149,7 @@ public:
 	void StopMusic();
 	void ActiveElement();
 	void DisableElement();
+	void Fade();
 	//---------------------------
 
 	//UTILITY FUNCTIONS ------------
@@ -185,6 +186,8 @@ private:
 	int mov_speed = 0;
 	Dir_Type direction = NO_DIR;
 	bool	bezier_active = false;
+	bool	fade_black = false;
+	
 
 	//TEXTS ACIONS 
 	std::string new_text;
