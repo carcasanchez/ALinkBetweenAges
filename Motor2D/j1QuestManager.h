@@ -28,7 +28,8 @@ enum REWARD_TYPE
 	//Rewards
 	CINEMATIC = 0,
 	CREATE_ENEMY,
-	LOAD_MAP
+	LOAD_MAP,
+	DELETE_E
 };
 
 
@@ -95,6 +96,17 @@ public:
 	~CinematicReward() {};
 
 	int cinematicId;
+
+};
+
+class DeleteEntityReward : public Reward
+{
+public:
+	DeleteEntityReward() :Reward(DELETE_E) {};
+
+	~DeleteEntityReward() {};
+
+	int entityId;
 
 };
 

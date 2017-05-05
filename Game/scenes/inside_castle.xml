@@ -95,7 +95,7 @@
         </enemies>
 
         <special>
-          <door object_type="27" x="377" y="147" direction="1"/>
+          <door object_type="27" x="37" y="147" direction="1" id="1"/>
         </special>
 
        
@@ -111,8 +111,8 @@
       <quests>
         <quest id = "1" >
 
-          <reward type ="0">
-            <cinematic id="0"/>
+          <reward type ="3">
+            <entity id="1"/>
           </reward >
 
           <trigger type ="2">

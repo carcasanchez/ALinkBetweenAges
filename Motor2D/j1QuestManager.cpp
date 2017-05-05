@@ -115,20 +115,23 @@ Reward * j1QuestManager::createReward(pugi::xml_node & it)
 
 	switch (type)
 	{
-	   case(CREATE_ENEMY):
+	   case CREATE_ENEMY:
 		   for (pugi::xml_node enemy = it.child("enemy"); enemy; enemy = enemy.next_sibling("enemy"))
 		   {
-			   ret = new CreateEnemyReward();
+			   ret = new CreateEnemyReward;
 			   ((CreateEnemyReward*)ret)->enemy = ((ENEMY_TYPE)it.child("enemy").attribute("type").as_int());
 			   ((CreateEnemyReward*)ret)->mapPos.x = it.child("enemy").attribute("x").as_int();
 			   ((CreateEnemyReward*)ret)->mapPos.y = it.child("enemy").attribute("y").as_int();
 			   return ret;
 		   }
 	   case CINEMATIC:
-		   ret = new CinematicReward();
+		   ret = new CinematicReward;
 		   ((CinematicReward*)ret)->cinematicId = it.child("cinematic").attribute("id").as_int();
 		   return ret;
-
+	   case DELETE_E:
+		   ret = new DeleteEntityReward;
+		   ((DeleteEntityReward*)ret)->entityId = it.child("entity").attribute("id").as_int();
+		   return ret;
 	}
 
 
@@ -384,7 +387,9 @@ void j1QuestManager::RewardCallback(vector <Reward*> reward)
 		case CINEMATIC:
 			pos = { 0, 0 };
 			App->cutsceneM->StartCutscene(((CinematicReward*)*it)->cinematicId);
-			return;
+			break;
+		case DELETE_E:
+			App->game->em->GetEntityFromId(((DeleteEntityReward*)*it)->entityId)->life = -1;
 			break;
 		}
 	}
