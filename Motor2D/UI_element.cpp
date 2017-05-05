@@ -351,6 +351,36 @@ void UI_element::SetAnimationTransition(ANIMATION_TRANSITION new_anim_trans, int
 	}
 }
 
+void UI_element::ForcedFinishTransition()
+{
+	switch (current_transition)
+	{
+	case T_FADE_TO:
+		alpha = 255;
+		current_trans_time = 0;
+		current_transition = NO_AT;
+
+		break;
+	case T_FADE_FROM:
+		alpha = 0;
+		current_trans_time = 0;
+		current_transition = NO_AT;
+		break;
+	case T_FLY_UP:
+		break;
+	case T_MOVE_UP:
+		break;
+	case T_MOVE_DOWN:
+		break;
+	case T_MOVE_LEFT:
+		break;
+	case T_MOVE_RIGHT:
+		break;
+	default:
+		break;
+	}
+}
+
 void UI_element::FadeTo()
 {
 	if (!doing_transition)

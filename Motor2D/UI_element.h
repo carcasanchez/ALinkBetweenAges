@@ -132,6 +132,7 @@ public:
 	void					LookAnimationTransition();
 	ANIMATION_TRANSITION	GetCurrentTransition() const;
 	void					SetAnimationTransition(ANIMATION_TRANSITION, int, iPoint);
+	void					ForcedFinishTransition();
 
 private:
 
