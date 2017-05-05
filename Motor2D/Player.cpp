@@ -100,7 +100,7 @@ bool Player::Spawn(std::string file, iPoint pos)
 }
 void Player::OnDeath()
 {
-
+	App->audio->PlayFx(4);
 	App->LoadGame("saves.xml");
 	damaged = invulnerable = false;
 	linearMovement = { 0, 0 };
@@ -699,6 +699,8 @@ void Player::GetHit(Entity * agressor)
 	if (col->rect.y < agressor->col->rect.y)
 		linearMovement.y = -1;
 	else linearMovement.y = 1;
+
+	App->audio->PlayFx(5);
 }
 
 void Player::ShowPickedObject()
