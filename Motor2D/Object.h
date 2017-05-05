@@ -37,7 +37,8 @@ enum OBJECT_TYPE
 	PILLAR,
 	STONE,
 	BOSS_KEY,
-	INTERRUPTOR
+	INTERRUPTOR,
+	STONE_DOOR
 };
 
 class Object : public Entity
@@ -45,7 +46,7 @@ class Object : public Entity
 public:
 
 	Object() {};
-	bool Spawn(std::string file, iPoint pos, OBJECT_TYPE type);
+	bool Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir);
 	void OnDeath();
 
 	virtual bool Update(float dt) 
@@ -318,6 +319,7 @@ public:
 
 
 };
+
 
 
 #endif // !_OBJECT_H_

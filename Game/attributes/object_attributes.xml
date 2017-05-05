@@ -182,6 +182,12 @@
     <texture file ="textures/Object_sprites/interruptor.png"/>
   </interruptor>
 
+  <stone_door>
+    <base life = "1"/>
+    <collider x = "17" y = "15" w = "32" h = "24" type = "0"/>
+    <animation file = "animations/objects/stone_door_animations.xml"/>
+    <texture file ="textures/Object_sprites/stoneDoor.png"/>
+  </stone_door>
 
 
 </attributes>

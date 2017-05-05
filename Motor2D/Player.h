@@ -83,6 +83,7 @@ public:
 	int arrows = 0;
 	int bombs = 0;
 
+	bool ableToSpin = false;
 
 	std::list <OBJECT_TYPE> inventory;
 	OBJECT_TYPE				holded_item = NO_OBJECT;

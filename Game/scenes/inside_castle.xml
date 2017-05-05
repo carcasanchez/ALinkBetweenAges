@@ -94,7 +94,9 @@
 
         </enemies>
 
-
+        <special>
+          <door object_type="27" x="37" y="147" direction="1"/>
+        </special>
 
 
       </entities>

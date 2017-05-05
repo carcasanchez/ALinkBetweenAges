@@ -47,7 +47,7 @@
 	  <quest id = "1" >
 
 		<reward type ="0">
-			<cinematic id="0"/>
+			<cinematic id="5"/>
 		</reward >
     
 

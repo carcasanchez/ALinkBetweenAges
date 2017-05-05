@@ -246,7 +246,7 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 	return ret;
 }
 
-Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE type, int id)
+Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE type, int id, int direction)
 {
 	Object* ret;
 	switch (type)
@@ -306,7 +306,7 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 
 	iPoint worldPos = App->map->MapToWorld(x, y);
 
-	if (ret->Spawn(dir[OBJECT], worldPos, type))
+	if (ret->Spawn(dir[OBJECT], worldPos, type, (DIRECTION)direction))
 	{
 		ret->type = OBJECT;
 		entities[sector].push_back(ret);

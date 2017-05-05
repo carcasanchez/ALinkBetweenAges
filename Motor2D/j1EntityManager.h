@@ -21,6 +21,8 @@ enum ENEMY_TYPE;
 enum NPC_TYPE;
 enum LINK_AGE;
 enum OBJECT_TYPE;
+enum DIRECTION;
+
 
 class j1EntityManager
 {
@@ -36,7 +38,7 @@ public:
 	Player* CreatePlayer(int, int, LINK_AGE);
 	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>, int id = -1);
 	Npc*	CreateNPC(int, NPC_TYPE, int, int, int id = -1);
-	Object* CreateObject(int, int, int, OBJECT_TYPE, int id = -1);
+	Object* CreateObject(int, int, int, OBJECT_TYPE, int id = -1, int dir = 1);
 
 	Entity* GetEntityFromId(int);
 

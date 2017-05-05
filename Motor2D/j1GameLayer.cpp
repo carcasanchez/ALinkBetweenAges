@@ -86,7 +86,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, INTERRUPTOR);
+		em->CreateObject(1, mousePos.x, mousePos.y, STONE_DOOR);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
@@ -187,6 +187,10 @@ void j1GameLayer::PickObject(Object * object)
 			em->player->arrows++;
 		break;
 
+	case BOOK:
+		em->player->ableToSpin = true;
+		break;
+
 	default:
 		em->player->inventory.push_back(object->objectType);
 		break;
@@ -206,16 +210,12 @@ void j1GameLayer::PickObject(Object * object)
 }
 
 void j1GameLayer::BuyObject(Object * object)
-{
-	switch (object->objectType)
+{	
+	if (buy_timer.Read() > 700 && em->player->rupees >= object->price)
 	{
-	case BOOK:
-		if (em->player->rupees >= object->price && buy_timer.Read() > 700)//Shop	
-		{
-			em->player->rupees -= object->price;
-			buy_timer.Start();
-		}
-		break;
+		PickObject(object);
+		em->player->rupees -= object->price;
+		buy_timer.Start();
 	}
 }
 
@@ -237,6 +237,7 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 	player.append_attribute("rupees") = em->player->rupees;
 	player.append_attribute("arrows") = em->player->arrows;
 	player.append_attribute("bombs") = em->player->bombs;
+	player.append_attribute("spin") = em->player->ableToSpin;
 
 	pugi::xml_node inventory = player.append_child("inventory");
 	for (list<OBJECT_TYPE>::iterator it = em->player->inventory.begin(); it!= em->player->inventory.end(); it++)
@@ -260,7 +261,7 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 	em->player->rupees = data.child("player").attribute("rupees").as_int();
 
 	em->player->changeAge = data.child("player").attribute("age").as_int();
-
+	em->player->ableToSpin = data.child("player").attribute("spin").as_bool();
 
 	em->player->inventory.clear();
 

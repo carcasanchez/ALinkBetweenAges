@@ -119,7 +119,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 					special.attribute("x").as_int(),
 					special.attribute("y").as_int(), 
 					(OBJECT_TYPE)(special.attribute("object_type").as_int()),
-					special.attribute("id").as_int(-1));
+					special.attribute("id").as_int(-1),
+					special.attribute("direction").as_int(1));
 
 				if (obj->objectType == CHEST)
 				{

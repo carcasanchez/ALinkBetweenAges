@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "j1Map.h"
 
-bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
+bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir)
 {
 	bool ret = true;
 
@@ -118,10 +118,14 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 				attributes = attributes.child("interruptor");
 				actionState = OFF;
 				break;
+			case STONE_DOOR:
+				attributes = attributes.child("stone_door");
+				break;
 		}		
 
 		LoadAttributes(attributes);
 
+		this->currentDir = dir;
 		price = attributes.child("base").attribute("price").as_int();
 
 		switch (type)
@@ -142,6 +146,14 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type)
 			currentDir = D_DOWN;
 			break;
 		
+		case STONE_DOOR:
+			if (currentDir == D_LEFT)
+			{
+				int tmp = col->rect.h;
+				col->rect.h = col->rect.w;
+				col->rect.w = tmp;
+			}
+				break;
 		}
 
 		
