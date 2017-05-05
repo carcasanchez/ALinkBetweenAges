@@ -7,15 +7,18 @@
 #include "p2Point.h"
 #include "j1CollisionManager.h"
 #include "Enemy.h"
+#include "Object.h"
 
 class Collider;
 class Npc;
+
 
 enum EVENT_TYPE
 {
 	//Triggers
 	COLLISION_EVENT = 0,
 	TALK_TO_EVENT,
+	INTERRUPTOR_EVENT
 
 };
 
@@ -68,6 +71,17 @@ public:
 	~CollisionEvent() {};
 
 	Collider* col;
+
+};
+
+class InterruptorEvent : public Event
+{
+public:
+	InterruptorEvent() :Event(INTERRUPTOR_EVENT) {};
+
+	~InterruptorEvent() {};
+
+	vector<Object*> targets;
 
 };
 
@@ -136,6 +150,8 @@ public:
 	bool TriggerTalkToCallback(Npc * target);
 	bool StepTalkToCallback(Npc * target);
 
+	bool TriggerInterruptorCallback(Object* interr);
+	bool StepInterruptorCallback(Object* interr);
 
 
 	void RewardCallback(vector <Reward*> reward);

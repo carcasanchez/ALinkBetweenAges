@@ -95,9 +95,10 @@
         </enemies>
 
         <special>
-          <door object_type="27" x="37" y="147" direction="1"/>
+          <door object_type="27" x="377" y="147" direction="1"/>
         </special>
 
+       
 
       </entities>
 
@@ -105,6 +106,22 @@
         <exit destinyScene = "outsideCastle" destinyExit = "0" x = "107" y = "237" w="2" h="1" direction = "0"/>
 	<exit destinyScene = "bossRoom" destinyExit = "0" x = "107" y = "102" w="4" h="1" direction = "1"/>
       </exits>
+
+
+      <quests>
+        <quest id = "1" >
+
+          <reward type ="0">
+            <cinematic id="0"/>
+          </reward >
+
+          <trigger type ="2">
+            <interruptor x = "29" y="148"/>
+            <interruptor x = "43" y="148"/>
+          </trigger>
+
+        </quest>
+      </quests>
 
     </sector>
   </sectors>

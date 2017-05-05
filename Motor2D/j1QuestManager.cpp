@@ -9,6 +9,7 @@
 #include "j1CutSceneManager.h"
 
 
+
 j1QuestManager::j1QuestManager() : j1Module()
 {
 	name = ("quest");
@@ -72,7 +73,7 @@ Event * j1QuestManager::createEvent(pugi::xml_node &it)
 
 	switch (type)
 	{		
-		case (COLLISION_EVENT):
+		case COLLISION_EVENT:
 			 ret = new CollisionEvent;			
 			//Take collider data from XML.
 			SDL_Rect rect;			
@@ -89,9 +90,17 @@ Event * j1QuestManager::createEvent(pugi::xml_node &it)
 			((CollisionEvent*)ret)->col = App->collisions->AddCollider(rect, COLLIDER_EVENT);
 			return ret;
 
-		case (TALK_TO_EVENT):
+		case TALK_TO_EVENT:
 			ret = new TalkToEvent;
 			((TalkToEvent*)ret)->target = (Npc*)App->game->em->GetEntityFromId(it.child("target").attribute("id").as_int());
+			return ret;
+	
+		case INTERRUPTOR_EVENT:
+			ret = new InterruptorEvent;
+			for (pugi::xml_node interr = it.child("interruptor"); interr; interr = interr.next_sibling("interruptor"))
+			{
+				((InterruptorEvent*)ret)->targets.push_back(App->game->em->CreateObject(1, interr.attribute("x").as_int(), interr.attribute("y").as_int(), INTERRUPTOR));
+			}
 			return ret;
 	}
 
@@ -267,7 +276,92 @@ bool j1QuestManager::StepTalkToCallback(Npc * target)
 	}
 	return false;
 }
+//============ InterruptorCallback
 
+bool j1QuestManager::TriggerInterruptorCallback(Object* interr)
+{
+	//Iterates all Triggers of sleep quests.
+	for (std::list <Quest*>::iterator it = sleepQuests.begin(); it != sleepQuests.end(); it++)
+	{
+		//Check if It is a CollisionEvent
+		if ((*it)->trigger->type == INTERRUPTOR_EVENT)
+		{
+			std::vector <Object*>::iterator k = ((InterruptorEvent*)(*it)->trigger)->targets.begin();
+			for (; k != ((InterruptorEvent*)(*it)->trigger)->targets.end(); k++)
+			{
+				if ((*k) == interr)
+				{
+					((InterruptorEvent*)(*it)->trigger)->targets.erase(k);
+					break;
+				}
+			}
+				
+				
+			if (((InterruptorEvent*)(*it)->trigger)->targets.empty())
+			{
+				if ((*it)->steps.size() == 0)
+				{
+					completed = (*it);
+					closedQuests.push_back((*it));
+					sleepQuests.erase(it);
+				}
+				else
+				{
+					activeQuests.push_back((*it));
+					sleepQuests.erase(it);
+				}
+
+				return true;
+			}
+		}
+
+	}
+
+	return false;
+}
+
+bool j1QuestManager::StepInterruptorCallback(Object* interr)
+{
+	//Iterates all Steps of all active quests
+	for (std::list <Quest*>::iterator it = activeQuests.begin(); it != activeQuests.end(); it++)
+	{
+		if ((*it)->steps.empty())
+			continue;
+
+		if ((*it)->steps[0]->type == INTERRUPTOR_EVENT)
+		{
+			std::vector <Object*>::iterator k = ((InterruptorEvent*)(*it)->steps[0])->targets.begin();
+			for (; k != ((InterruptorEvent*)(*it)->steps[0])->targets.end(); k++)
+			{
+				if ((*k) == interr)
+				{
+					((InterruptorEvent*)(*it)->steps[0])->targets.erase(k);
+					break;
+				}
+			}
+
+
+			if (((InterruptorEvent*)(*it)->steps[0])->targets.empty())
+			{
+				//Erase the first step of the steps vector
+				(*it)->steps.erase((*it)->steps.begin());
+
+				//Close the quest if there's no more steps and add reward
+				if ((*it)->steps.size() == 0)
+				{
+					completed = (*it);
+					closedQuests.push_back((*it));
+					activeQuests.erase(it);
+				}
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
+//====================
 
 
 void j1QuestManager::RewardCallback(vector <Reward*> reward)

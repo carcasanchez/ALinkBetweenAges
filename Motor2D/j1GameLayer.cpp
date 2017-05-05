@@ -466,6 +466,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 		((Interruptor*)c1->parent)->on = true;
 		c1->parent->actionState = ON;
 		c2->parent->life = -1;
+
+		if (!App->quest->TriggerInterruptorCallback((Object*)c1->parent))
+			App->quest->StepInterruptorCallback((Object*)c1->parent);
 	}
 	return true;
 }
