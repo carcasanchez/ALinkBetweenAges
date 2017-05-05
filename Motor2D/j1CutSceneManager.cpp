@@ -773,14 +773,25 @@ bool CS_Step::DoMovement(float dt)
 			}
 			break;
 		case CS_DOWN:
-			if (image->img->GetCurrentTransition() != ANIMATION_TRANSITION::T_MOVE_DOWN)
+			if (bezier_active == false)
+			{
 				image->img->SetAnimationTransition(ANIMATION_TRANSITION::T_MOVE_DOWN, bezier_time, this->dest);
+				bezier_active = true;
+			}
 			break;
 		case CS_LEFT:
-			image->Move(-ceil(mov_speed*dt), 0);
+			if (bezier_active == false)
+			{
+				image->img->SetAnimationTransition(ANIMATION_TRANSITION::T_MOVE_LEFT, bezier_time, this->dest);
+				bezier_active = true;
+			}
 			break;
 		case CS_RIGHT:
-			image->Move(ceil(mov_speed*dt), 0);
+			if (bezier_active == false)
+			{
+				image->img->SetAnimationTransition(ANIMATION_TRANSITION::T_MOVE_RIGHT, bezier_time, this->dest);
+				bezier_active = true;
+			}
 			break;
 		default:
 			break;

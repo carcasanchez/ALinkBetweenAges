@@ -49,7 +49,9 @@ enum ANIMATION_TRANSITION
 	T_FADE,
 	T_FLY_UP,
 	T_MOVE_UP,
-	T_MOVE_DOWN
+	T_MOVE_DOWN,
+	T_MOVE_LEFT,
+	T_MOVE_RIGHT,
 
 };
 
@@ -158,6 +160,8 @@ private:
 	void					Fade();
 	void					MoveUp();
 	void					MoveDown();
+	void					MoveLeft();
+	void					MoveRight();
 	void					FlyUp();
 
 
