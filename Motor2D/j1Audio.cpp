@@ -74,9 +74,8 @@ bool j1Audio::Start()
 	else
 	{
 		for (pugi::xml_node it = fx.first_child().first_child(); it; it = it.next_sibling("fx"))
-		{
 			App->audio->LoadFx(it.attribute("name").as_string());
-		}
+
 	}
 
 
@@ -197,7 +196,7 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	if(id > 0 && id <= fx.size())
 	{
 		std::list<Mix_Chunk*>::iterator item = fx.begin();
-		for(int index = 0; index < id; item++, index++)
+		for (int index = 1; index < id; item++, index++) {}
 		Mix_PlayChannel(-1, (*item), repeat);
 	}
 

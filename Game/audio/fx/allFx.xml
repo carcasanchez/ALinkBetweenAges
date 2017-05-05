@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <fx>
-  <fx name="audio/fx/fighter sword 1.wav"  id="1"/> 
+  <fx name="audio/fx/Player/attack.wav"  id="1"/> 
+  <fx name="audio/fx/Player/lifeRefill.wav"  id="2"/>
+  <fx name="audio/fx/Player/lift.wav"  id="3"/>
+  <fx name="audio/fx/Player/linkDie.wav"  id="4"/>
+  <fx name="audio/fx/Player/linkHurt.wav"  id="5"/>
+  <fx name="audio/fx/Player/masterSwordAttack.wav"  id="6"/>
+  <fx name="audio/fx/Player/putBomb.wav"  id="7"/>
+  <fx name="audio/fx/Player/spinAttack.wav"  id="8"/>
+  <fx name="audio/fx/Player/throwArrow.wav"  id="9"/>
+  <fx name="audio/fx/Player/walkingOnGrass.wav"  id="10"/>
 </fx>

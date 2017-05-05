@@ -15,6 +15,7 @@
 #include "j1Map.h"
 #include "HUD.h"
 #include "j1QuestManager.h"
+#include "j1Audio.h"
 
 
 // just for temporal wall collider
@@ -168,7 +169,10 @@ void j1GameLayer::PickObject(Object * object)
 
 	case LIFEHEART:
 		if (em->player->life < em->player->maxLife)
+		{
 			em->player->life++;
+			App->audio->PlayFx(2);
+		}
 		break;
 	case HEART_CONTAINER:
 		em->player->maxLife++;
