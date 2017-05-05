@@ -285,7 +285,7 @@ bool j1Render::DrawSprite(Sprite* sprite, float speed, double angle, int pivot_x
 }
 
 // Blit to screen
-bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y) const
+bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, int alpha, float speed, double angle, int pivot_x, int pivot_y) const
 {
 
 	bool ret = true;
@@ -317,6 +317,14 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 		pivot.y = pivot_y;
 		p = &pivot;
 	}
+
+	Uint8 currentAlpha;
+	SDL_GetTextureAlphaMod(texture, &currentAlpha);
+	if (alpha != currentAlpha)
+	{
+		SDL_SetTextureAlphaMod(texture, (Uint8)alpha);
+	}
+
 
 	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
 	{
