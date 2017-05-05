@@ -150,6 +150,7 @@ public:
 	void ActiveElement();
 	void DisableElement();
 	void Fade();
+	bool CheckFadeCompleted();
 	//---------------------------
 
 	//UTILITY FUNCTIONS ------------

@@ -859,7 +859,7 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 	{
 		if (element->GetType() == CS_IMAGE)
 		{
-			if (dynamic_cast<CS_Image*>(element)->img->GetCurrentTransition() == ANIMATION_TRANSITION::NO_AT)
+			if (dynamic_cast<CS_Image*>(element)->img->GetCurrentTransition() == NO_AT && input == false)
 			{
 				FinishStep();
 				bezier_active = false;
@@ -1011,13 +1011,25 @@ void CS_Step::Fade()
 			tmp->img->SetAnimationTransition(T_FADE_TO , bezier_time, iPoint(0, 255));
 			bezier_active = true;
 		}
-
-		
-
-		
-
-
+		CheckFadeCompleted();
+		return;
 	}
+
+
+}
+
+bool CS_Step::CheckFadeCompleted()
+{
+	if (bezier_time)
+	{
+		if (dynamic_cast<CS_Image*>(element)->img->GetCurrentTransition() == NO_AT && input == false)
+		{
+			FinishStep();
+			bezier_active = false;
+		}
+	}
+
+	return false;
 }
 
 //Link the element of the cutscene with the step
@@ -1060,6 +1072,19 @@ void CS_Step::GetInput()
 			dynamic_cast<CS_Text*>(element)->GetText()->ForcedFinish();
 		else FinishStep();
 	}
+
+	if (element->GetType() == CS_IMAGE)
+	{	
+		if (dynamic_cast<CS_Image*>(element)->img->GetCurrentTransition() != NO_AT)
+		{
+			dynamic_cast<CS_Image*>(element)->img->ForcedFinishTransition();
+		}
+		else
+		{
+			FinishStep();
+		}
+	}
+
 }
 
 // CS IMAGE -----------------
