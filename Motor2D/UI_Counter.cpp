@@ -120,7 +120,8 @@ void UI_Counter::BlitUnit()
 			tmp = { img->Image.x + (pos_x * width),  img->Image.y + (pos_y * height), width, height };
 
 
-		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + Interactive_box.x + (width * 4)) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &tmp);
+		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + Interactive_box.x + (width * 4)) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &tmp, alpha);
+		
 	}
 
 }
@@ -144,7 +145,7 @@ void UI_Counter::BlitDec()
 			tmp = { img->Image.x + (pos_x * width),  img->Image.y + (pos_y * height), width, height };
 
 
-		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + Interactive_box.x + (width * 2)) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &tmp);
+		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + Interactive_box.x + (width * 2)) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &tmp, alpha);
 	}
 }
 
@@ -167,7 +168,7 @@ void UI_Counter::BlitCent()
 			tmp = { img->Image.x + (pos_x * width),  img->Image.y + (pos_y * height), width, height };
 
 
-		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + Interactive_box.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &tmp);
+		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + Interactive_box.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &tmp, alpha);
 	}
 }
 

@@ -46,7 +46,8 @@ enum ANIMATION_TRANSITION
 	AT_SEPARATOR,
 
 	//transitions
-	T_FADE,
+	T_FADE_TO,
+	T_FADE_FROM,
 	T_FLY_UP,
 	T_MOVE_UP,
 	T_MOVE_DOWN,
@@ -63,6 +64,7 @@ public:
 
 	UI_TYPE element_type;
 	SDL_Rect Interactive_box = {0,0,0,0};
+	int alpha = 255;
 
 	INTERACTIVE_STATE state = INTERACTIVE_STATE::NOTHING;
 
@@ -157,7 +159,8 @@ private:
 	iPoint					trans_destiny = iPoint(0, 0);
 
 	//transitions
-	void					Fade();
+	void					FadeTo();
+	void					FadeFrom();
 	void					MoveUp();
 	void					MoveDown();
 	void					MoveLeft();

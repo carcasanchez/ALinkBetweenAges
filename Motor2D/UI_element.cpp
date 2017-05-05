@@ -298,8 +298,14 @@ void UI_element::LookAnimationTransition()
 	{
 		switch (current_transition)
 		{
-		case T_FADE:
+		case T_FADE_TO:
+			FadeTo();
 			break;
+
+		case T_FADE_FROM:
+			FadeFrom();
+			break;
+
 		case T_FLY_UP:
 			FlyUp();
 			break;
@@ -345,8 +351,56 @@ void UI_element::SetAnimationTransition(ANIMATION_TRANSITION new_anim_trans, int
 	}
 }
 
-void UI_element::Fade()
+void UI_element::FadeTo()
 {
+	if (!doing_transition)
+	{
+		transition_timer.Start();
+		current_trans_time = 0;
+		doing_transition = true;
+		alpha = 0;
+	}
+	current_trans_time = transition_timer.Read();
+
+	if (current_trans_time < trans_duration)
+	{
+		float change_alpha = App->gui->bezier_curve->GetActualX(trans_duration, current_trans_time, CB_SLOW_MIDDLE);
+		change_alpha = CLAMP01(change_alpha);
+		alpha = 255 * change_alpha;
+	}
+	else
+	{
+		current_trans_time = 0;
+		current_transition = NO_AT;
+	
+		return;
+	}
+}
+
+void UI_element::FadeFrom()
+{
+	if (!doing_transition)
+	{
+		transition_timer.Start();
+		current_trans_time = 0;
+		doing_transition = true;
+		alpha = 0;
+	}
+	current_trans_time = transition_timer.Read();
+
+	if (current_trans_time < trans_duration)
+	{
+		float change_alpha = App->gui->bezier_curve->GetActualX(trans_duration, current_trans_time, CB_SLOW_MIDDLE);
+		change_alpha = CLAMP01(change_alpha);
+		alpha = 255 * (1 - change_alpha);
+	}
+	else
+	{
+		current_trans_time = 0;
+		current_transition = NO_AT;
+
+		return;
+	}
 }
 
 void UI_element::MoveUp()
