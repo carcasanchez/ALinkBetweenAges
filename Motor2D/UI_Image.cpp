@@ -22,12 +22,12 @@ bool UI_Image::Update_Draw()
 		if (element_type == IMAGE)
 		{
 			if(!Parent)
-				App->render->Blit(image_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image);
-			else App->render->Blit(image_texture, ((Parent->Interactive_box.x + Interactive_box.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &Image);
+				App->render->Blit(image_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image, alpha);
+			else App->render->Blit(image_texture, ((Parent->Interactive_box.x + Interactive_box.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + Interactive_box.y) - App->render->camera.y) * App->gui->scale_factor, &Image, alpha);
 		}
 			
 
-		else App->render->Blit((SDL_Texture*)App->gui->Get_Other_Textures(id), (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image);
+		else App->render->Blit((SDL_Texture*)App->gui->Get_Other_Textures(id), (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor, &Image, alpha);
 	}
 
 	Child_Update_Draw();

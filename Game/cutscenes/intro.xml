@@ -35,13 +35,15 @@
 		</step>
 
                 <step  n="1" start="-1" duration ="-1" input="false">
-			<element name="Z" action="move" dir="up">
-                          <movement dest_x="0" dest_y="-100" bezier_time="1000"/>
+			<element name="Z" action="move" dir="left">
+                          <movement dest_x="200" dest_y="0" bezier_time="1000"/>
 			</element>			
 		</step>
 
-		<step  n="2" start="-1" duration ="10" input="false">
-			<element name="legend" action="enable"/>			
+		<step  n="2" start="-1" duration ="-1" input="true">
+			<element name="legend" action="fade">
+				<fading to_black="true" bezier_time="2500"/>
+			</element>			
 		</step>
 	</steps>
 </Cutscene>
