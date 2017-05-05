@@ -101,6 +101,7 @@ bool Player::Spawn(std::string file, iPoint pos)
 void Player::OnDeath()
 {
 
+	App->audio->PlayFx(4);
 	App->LoadGame("saves.xml");
 	damaged = invulnerable = false;
 	linearMovement = { 0, 0 };

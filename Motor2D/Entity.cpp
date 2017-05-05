@@ -12,6 +12,7 @@
 #include "j1GameLayer.h"
 #include "j1EntityManager.h"
 #include "Player.h"
+#include "j1Audio.h"
 
 Entity::Entity() :
 	sprite(nullptr),
@@ -197,6 +198,7 @@ bool Entity::Move(int x, int y)
 				{
 					tmpPos.x++;
 					App->game->em->player->toJump = tmpPos;
+					App->audio->PlayFx(3);
 					break;
 				}
 			}
@@ -212,6 +214,7 @@ bool Entity::Move(int x, int y)
 					{
 						tmpPos.x--;
 						App->game->em->player->toJump = tmpPos;
+						App->audio->PlayFx(3);
 						break;
 					}
 				}
@@ -240,6 +243,7 @@ bool Entity::Move(int x, int y)
 				{
 					tmpPos.y++;
 					App->game->em->player->toJump = tmpPos;
+					App->audio->PlayFx(3);
 					break;
 				}
 			}
