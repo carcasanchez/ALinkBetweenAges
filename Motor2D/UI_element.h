@@ -60,7 +60,7 @@ class UI_element
 public:
 
 	UI_TYPE element_type;
-	SDL_Rect Interactive_box;
+	SDL_Rect Interactive_box = {0,0,0,0};
 
 	INTERACTIVE_STATE state = INTERACTIVE_STATE::NOTHING;
 
@@ -70,10 +70,10 @@ public:
 	uint layer = 1;
 	int tab_order = 0;
 
-	bool active;
+	bool active = true;
 	SCROLL_TYPE draggable;
 
-	j1Module* my_module;
+	j1Module* my_module = nullptr;
 	bool into_render = false;
 
 	//for screens

@@ -75,8 +75,8 @@ public:
 
 private:
 
-	SDL_Texture* atlas;
-	SDL_Texture* start_screen;
+	SDL_Texture* atlas = nullptr;
+	SDL_Texture* start_screen = nullptr;
 
 	string atlas_file_name;
 	string start_screen_name;
