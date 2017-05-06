@@ -58,4 +58,11 @@
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</sign>
 
+  <ganon>
+    <base life = "1" speed = "30"/>
+    <collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+    <animation file = "animations/npc/npcGanon_animations.xml"/>
+    <texture file = "textures/Npc_sprites/Ganon.png"/>
+  </ganon>
+
 </attributes>

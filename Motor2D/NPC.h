@@ -15,7 +15,8 @@ enum NPC_TYPE
 	NPC_TAVERN_OLD_MAN,
 	NPC_LITTLE_KID,
 	NPC_ZELDA,
-	SIGN
+	SIGN,
+	NPC_GANON
 };
 
 
@@ -99,5 +100,11 @@ class Npc_Woman : public Npc
 {
 public:
 	Npc_Woman() : Npc() { npcType = NPC_WOMAN; };
+};
+
+class Npc_Ganon : public Npc
+{
+public:
+	Npc_Ganon() : Npc() { npcType = NPC_GANON; };
 };
 #endif // !_PLAYER_H_

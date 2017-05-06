@@ -1,7 +1,7 @@
-﻿<!-- Npc1 Animations -->
+﻿<!-- Zelda Animations -->
 <animations>
 
-  <name value = "7" />
+  <name value = "8" />
 
   <IDLE>
     <!-- Idle -->

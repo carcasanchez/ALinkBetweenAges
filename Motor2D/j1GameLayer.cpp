@@ -88,8 +88,7 @@ bool j1GameLayer::Update(float dt)
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		//em->CreateEnemy(1, DARK_ZELDA, mousePos.x, mousePos.y, vector<iPoint>());
-		em->CreateObject(1, mousePos.x, mousePos.y, STONE_DOOR);
+		em->CreateNPC(1, NPC_GANON, mousePos.x, mousePos.y);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{

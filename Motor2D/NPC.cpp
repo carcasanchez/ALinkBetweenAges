@@ -67,6 +67,9 @@ bool Npc::Spawn(std::string file, iPoint pos, NPC_TYPE type)
 		case SIGN:
 			attributes = attributesFile.child("attributes").child("sign");
 			break;
+		case NPC_GANON:
+			attributes = attributesFile.child("attributes").child("ganon");
+			break;
 		}
 		
 		actionState = IDLE;
