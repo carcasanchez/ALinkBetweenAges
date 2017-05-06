@@ -25,10 +25,10 @@
     <frame 	    pos_x="40" pos_y="20" active="true"/>
     <frame_y        x="356"  y="144" w="44" h="44" pos_x="40" pos_y="20" active="false"/>
     <frame_r        x="356"  y="189" w="44" h="44" pos_x="40" pos_y="20" active="false"/>
-    <bow            x="642"  y="202" w="32" h="32"  pos_x="11" pos_y="11" active="false"/>
-    <bomb           x="675"  y="202" w="32" h="32"  pos_x="11" pos_y="11" active="false"/>
-    <potion_red     x="642"  y="235" w="32" h="32"  pos_x="11" pos_y="11" active="false"/>
-    <potion_green   x="675"  y="235" w="32" h="32"  pos_x="11" pos_y="11" active="false"/>
+    <bow            x="642"  y="202" w="32" h="32"  pos_x="12" pos_y="12" active="false"/>
+    <bomb           x="675"  y="202" w="32" h="32"  pos_x="12" pos_y="12" active="false"/>
+    <potion_red     x="642"  y="235" w="32" h="32"  pos_x="12" pos_y="12" active="false"/>
+    <potion_green   x="675"  y="235" w="32" h="32"  pos_x="12" pos_y="12" active="false"/>
   </items>
 
   <stamina>

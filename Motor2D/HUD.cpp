@@ -495,6 +495,13 @@ void Hud::ActiveItem(OBJECT_TYPE item)
 		items_potion_red->Set_Active_state(false);
 		items_potion_green->Set_Active_state(false);
 		break;
+
+	case STAMINA_POTION:
+		items_bomb->Set_Active_state(false);
+		items_bow->Set_Active_state(false);
+		items_potion_red->Set_Active_state(false);
+		items_potion_green->Set_Active_state(true);
+		break;
 	}
 
 }
