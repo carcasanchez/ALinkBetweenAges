@@ -172,6 +172,7 @@ bool Bomb::ExplodeBomb()
 {
 		App->game->em->CreateObject(1, (this->currentPos.x / (App->map->data->tile_width)), (this->currentPos.y) / (App->map->data->tile_height), BOMB_EXPLOSION);
 		this->life = -1;
+		this->col->active = false;
 
 		App->audio->PlayFx(13);
 
