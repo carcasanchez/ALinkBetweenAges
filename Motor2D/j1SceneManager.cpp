@@ -39,7 +39,7 @@ bool j1SceneManager::Awake(pugi::xml_node& config)
 bool j1SceneManager::Start()
 {	
 
-	currentScene = new Scene("linkHouse");
+	currentScene = new Scene("introScene");
 	currentScene->Load(data[currentScene->name].c_str());
 	
 ///	App->cutsceneM->StartCutscene(0);
@@ -85,7 +85,9 @@ void j1SceneManager::RequestSceneChange(Exit* exit)
 
 void j1SceneManager::RequestSceneChange(iPoint dest, const char * scene, DIRECTION dir)
 {
-	App->game->em->player->sceneOverride = true;
+	if(App->game->em->player)
+		App->game->em->player->sceneOverride = true;
+	
 	changeRequest = true;
 
 	destiny = scene;
