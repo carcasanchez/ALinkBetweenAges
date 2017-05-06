@@ -9,6 +9,7 @@
 #include "Animation.h"
 #include "j1EntityManager.h"
 #include "Player.h"
+#include "j1Audio.h"
 
 bool Tektite::Spawn(std::string file, iPoint pos)
 {
@@ -94,4 +95,7 @@ void Tektite::OnDeath()
 	{
 		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
 	}
+
+	App->audio->PlayFx(11);
+
 }

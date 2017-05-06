@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Animation.h"
 #include "HUD.h"
+#include "j1Audio.h"
 
 
 
@@ -232,7 +233,6 @@ bool Enemy::Charging(float dt)
 
 void Enemy::GetHit(Entity* agressor)
 {
-
 	if (damaged)
 		return;
 
@@ -253,5 +253,8 @@ void Enemy::GetHit(Entity* agressor)
 		life = 0;
 
 	damaged = true;
+
+	if(agressor->col->type==COLLIDER_LINK_SWORD)
+		App->audio->PlayFx(12);
 
 }

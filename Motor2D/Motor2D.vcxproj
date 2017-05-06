@@ -80,7 +80,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Bezier.cpp" />
     <ClCompile Include="Eyegore.cpp" />
     <ClCompile Include="j1CutSceneManager.cpp" />
@@ -137,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="Audio.h" />
     <ClInclude Include="Bezier.h" />
     <ClInclude Include="CVar_Com.h" />
     <ClInclude Include="DarkZelda.h" />

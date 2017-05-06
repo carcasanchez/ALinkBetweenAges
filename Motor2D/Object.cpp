@@ -3,6 +3,7 @@
 #include "j1CollisionManager.h"
 #include "Player.h"
 #include "j1Map.h"
+#include "j1Audio.h"
 
 bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir)
 {
@@ -171,6 +172,8 @@ bool Bomb::ExplodeBomb()
 {
 		App->game->em->CreateObject(1, (this->currentPos.x / (App->map->data->tile_width)), (this->currentPos.y) / (App->map->data->tile_height), BOMB_EXPLOSION);
 		this->life = -1;
+
+		App->audio->PlayFx(13);
 
 		return true;
 }

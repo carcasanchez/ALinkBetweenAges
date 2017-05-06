@@ -11,4 +11,7 @@
   <fx name="audio/fx/Player/spinAttack.wav"  id="8"/>
   <fx name="audio/fx/Player/throwArrow.wav"  id="9"/>
   <fx name="audio/fx/Player/walkingOnGrass.wav"  id="10"/>
+  <fx name="audio/fx/Enemy/General/enemyDies.wav"  id="11"/>
+  <fx name="audio/fx/Enemy/General/enemyHit.wav"  id="12"/>
+  <fx name="audio/fx/Objects/bombExplode.wav"  id="13"/>
 </fx>

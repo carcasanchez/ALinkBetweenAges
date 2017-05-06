@@ -274,7 +274,7 @@ public:
 
 	bool DeleteExplode();
 public:
-	int dead_time = 1000;
+	int dead_time = 500;
 	j1PerfTimer dead_counter;
 };
 

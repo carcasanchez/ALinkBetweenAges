@@ -9,7 +9,7 @@
 #include "GreenSoldier.h"
 #include "j1EntityManager.h"
 #include "Object.h"
-
+#include "j1Audio.h"
 
 bool GreenSoldier::Spawn(std::string file, iPoint pos)
 {
@@ -93,6 +93,8 @@ void GreenSoldier::OnDeath()
 		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
 	}
+
+		App->audio->PlayFx(11);
 }
 
 

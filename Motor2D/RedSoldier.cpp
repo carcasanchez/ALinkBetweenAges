@@ -9,6 +9,7 @@
 #include "RedSoldier.h"
 #include "j1EntityManager.h"
 #include "Object.h"
+#include "j1Audio.h"
 
 
 bool RedSoldier::Spawn(std::string file, iPoint pos)
@@ -83,5 +84,5 @@ void RedSoldier::OnDeath()
 	toDelete = true;
 	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 	App->game->em->CreateObject(1, mapPos.x, mapPos.y, RED_RUPEE);
-
+	App->audio->PlayFx(11);
 }
