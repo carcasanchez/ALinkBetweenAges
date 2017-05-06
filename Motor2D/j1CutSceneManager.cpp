@@ -1075,14 +1075,12 @@ void CS_Step::GetInput()
 
 	if (element->GetType() == CS_IMAGE)
 	{	
-		if (dynamic_cast<CS_Image*>(element)->img->GetCurrentTransition() != NO_AT)
+		if(act_type == ACT_FADE)
 		{
-			dynamic_cast<CS_Image*>(element)->img->ForcedFinishTransition();
-		}
-		else
-		{
-			FinishStep();
-		}
+			if (dynamic_cast<CS_Image*>(element)->img->GetCurrentTransition() != NO_AT)
+				dynamic_cast<CS_Image*>(element)->img->ForcedFinishTransition();
+			else FinishStep();
+		}	
 	}
 
 }
