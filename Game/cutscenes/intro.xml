@@ -31,18 +31,20 @@
 
 	<steps>
 		<step  n="0" start="0" duration ="-1" input="false">
-			<element name="Z" action="enable"/>			
+			<element name="Z" action="fade">
+				<fading to_black="true" bezier_time="2500"/>	
+      </element>		
 		</step>
 
-                <step  n="1" start="-1" duration ="-1" input="false">
+     <step  n="1" start="-1" duration ="-1" input="false">
 			<element name="Z" action="move" dir="left">
-                          <movement dest_x="200" dest_y="0" bezier_time="1000"/>
+          <movement dest_x="200" dest_y="0" bezier_time="1000"/>
 			</element>			
 		</step>
 
 		<step  n="2" start="-1" duration ="-1" input="true">
 			<element name="legend" action="fade">
-				<fading to_black="true" bezier_time="2500"/>
+				<fading to_black="true" bezier_time="10000"/>
 			</element>			
 		</step>
 	</steps>
