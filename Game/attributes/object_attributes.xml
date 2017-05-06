@@ -85,17 +85,17 @@
    </magic_slash>
 
   <bomb>
-    <base life = "1" damage = "1" speed = "200"/>
+    <base life = "1"/>
     <collider x = "6" y = "10" w = "16" h = "16" type = "14"/>
     <animation file = "animations/objects/bomb_animations.xml"/>
     <texture file = "textures/Object_sprites/bomb.png"/>
   </bomb>
   
   <bomb_explosion>
-    <base life = "1" damage = "6" speed = "200"/>
-    <collider x = "10" y = "13" w = "25" h = "25" type = "17"/>
-    <animation file = "animations/objects/bomb_animations.xml"/>
-    <texture file = "textures/Object_sprites/bomb.png"/>
+    <base life = "1" damage = "6"/>
+    <collider x = "23" y = "23" w = "46" h = "46" type = "17"/>
+    <animation file = "animations/objects/explosion_animations.xml"/>
+    <texture file = "textures/Object_sprites/explosion.png"/>
   </bomb_explosion>
 
  <bomb_drop>

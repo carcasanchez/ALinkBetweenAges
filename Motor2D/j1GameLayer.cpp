@@ -88,7 +88,7 @@ bool j1GameLayer::Update(float dt)
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		em->CreateNPC(1, NPC_GANON, mousePos.x, mousePos.y);
+		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
@@ -441,7 +441,8 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_BOMB_EXPLOSION && c2->type == COLLIDER_ENEMY )
 	{
-		c2->parent->GetHit(c1->parent);
+		if(c2->parent && c1->parent)
+			c2->parent->GetHit(c1->parent);
 		return true;
 	}
 

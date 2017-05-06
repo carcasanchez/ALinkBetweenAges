@@ -38,7 +38,8 @@ enum OBJECT_TYPE
 	STONE,
 	BOSS_KEY,
 	INTERRUPTOR,
-	STONE_DOOR
+	STONE_DOOR,
+	EXPLOSION
 };
 
 class Object : public Entity
