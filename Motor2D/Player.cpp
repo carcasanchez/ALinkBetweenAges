@@ -535,7 +535,7 @@ bool Player::ShootingBow(float dt)
 		currentAnim->Reset();
 		actionState = IDLE;
 		iPoint pos = App->map->WorldToMap(currentPos.x, currentPos.y);
-		App->game->em->CreateObject(1, pos.x, pos.y, LINK_ARROW);
+		App->game->em->CreateObject(1, pos.x, pos.y, LINK_ARROW, -1, currentDir);
 	}
 	return true;
 }
@@ -763,6 +763,14 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				}
 				break;
 
+			case BOW:
+				if (arrows > 0)
+				{
+					currentDir = DIRECTION::D_UP;
+					arrows--;
+					actionState = SHOOTING_BOW;
+				}
+				break;
 			}
 		}
 		break;
@@ -802,6 +810,14 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				}
 				break;
 
+			case BOW:
+				if (arrows > 0)
+				{
+					currentDir = DIRECTION::D_DOWN;
+					arrows--;
+					actionState = SHOOTING_BOW;
+				}
+				break;
 			}
 		}
 		break;
@@ -841,6 +857,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				}
 				break;
 
+			case BOW:
+				if (arrows > 0)
+				{
+					currentDir = DIRECTION::D_LEFT;
+					arrows--;
+					actionState = SHOOTING_BOW;
+				}
+				
+				break;
 			}
 		}
 		break;
@@ -880,6 +905,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 				}
 				break;
 
+			case BOW:
+
+				if (arrows > 0)
+				{
+					currentDir = DIRECTION::D_RIGHT;
+					arrows--;
+					actionState = SHOOTING_BOW;
+				}
+				break;
 			}
 		}
 		break;
@@ -1134,11 +1168,21 @@ void Player::UseObject(float dt)
 		if(maxLife-life >=3)
 		life += 3;
 		else life = maxLife;
+
+		if (equippedObject == inventory.size() - 1)
+			equippedObject = 0;
+		else equippedObject++;
+
 		inventory.erase(currentItem);
 		break;
 
 	case STAMINA_POTION:
 		stamina = maxStamina;
+
+		if(equippedObject == inventory.size() - 1)
+			equippedObject = 0;
+		else equippedObject++;
+
 		inventory.erase(currentItem);
 		break;
 
