@@ -944,13 +944,15 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		break;
 
 	case USE_ITEM:
-		UseObject();
+
+		if(!only_one_time)
+			UseObject();
 
 		break;
 
 	case STOP_ITEM:
 		holded_item = NO_OBJECT;
-
+		only_one_time = false;
 		break;
 
 	case CHANGE_ITEM:
@@ -1171,9 +1173,9 @@ void Player::UseObject(float dt)
 
 		if (equippedObject == inventory.size() - 1)
 			equippedObject = 0;
-		else equippedObject++;
 
 		inventory.erase(currentItem);
+		only_one_time = true;
 		break;
 
 	case STAMINA_POTION:
@@ -1181,9 +1183,9 @@ void Player::UseObject(float dt)
 
 		if(equippedObject == inventory.size() - 1)
 			equippedObject = 0;
-		else equippedObject++;
-
+	
 		inventory.erase(currentItem);
+		only_one_time = true;
 		break;
 
 	case BOMB_SAC:
@@ -1195,8 +1197,6 @@ void Player::UseObject(float dt)
 		if (arrows > 0)
 			holded_item = BOW;
 		break;
-
-
 	}
 
 

@@ -136,11 +136,13 @@ private:
 
 
 	//For jumping
-
 	CBeizier jumpCurve;
 	j1PerfTimer jumpTimer;
 	
 	float forceUp = 0, forceDown = 0;
+
+	//For stamina and potions
+	bool only_one_time = false;
 
 };
 

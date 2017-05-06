@@ -226,8 +226,16 @@ bool j1Input::PreUpdate()
 				else
 				{
 					if (event.caxis.value > DEAD_ZONE)
-						controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_POSITIVE;
-					
+					{
+						if (event.caxis.axis != SDL_CONTROLLER_AXIS_TRIGGERLEFT && event.caxis.axis != SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
+							controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_POSITIVE;
+						else
+						{
+							if(event.caxis.value > TRIGGER_ZONE)
+								controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_POSITIVE;
+						}
+					}
+						
 					else
 					{
 						controller_axis[event.caxis.axis] = j1JoystickState::JOYSTICK_NOTHING;
