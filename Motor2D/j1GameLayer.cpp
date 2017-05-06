@@ -49,11 +49,8 @@ bool j1GameLayer::Start()
 	bool ret = true;
 
 	active = true;
-	em->player = em->CreatePlayer(playerX, playerY, YOUNG);
-
 	hud->Start();
-	
-	ret = em->player != NULL;
+
 
 	return ret;
 }
@@ -61,7 +58,7 @@ bool j1GameLayer::Start()
 //preUpdate
 bool j1GameLayer::PreUpdate()
 {
-	if (!pause)
+	if (!pause && App->sceneM->currentScene->inGame)
 		em->PreUpdate();
 	//hud->PreUpdate();
 
@@ -72,6 +69,12 @@ bool j1GameLayer::PreUpdate()
 bool j1GameLayer::Update(float dt)
 {
 	bool ret = true;
+	
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		App->sceneM->RequestSceneChange({playerX, playerY}, "linkHouse", D_DOWN);
+
+	if (!App->sceneM->currentScene->inGame)
+		return ret;
 
 	if(!pause)
 		em->Update(dt);
@@ -139,7 +142,7 @@ bool j1GameLayer::Update(float dt)
 //postUpdate
 bool j1GameLayer::PostUpdate()
 {
-	
+	if (App->sceneM->currentScene->inGame)
 	em->PostUpdate(); 
 	//hud->PostUpdate();
 

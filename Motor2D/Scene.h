@@ -35,6 +35,8 @@ public:
 	int currentSector;
 	int maxSectors;
 
+	bool inGame = false;
+
 private:
 
 	std::map<int, std::list<Exit*>> exits;

@@ -13,6 +13,7 @@
 #include "j1Render.h"
 #include "j1QuestManager.h"
 #include "p2Log.h"
+#include "HUD.h"
 
 Scene::Scene()
 {
@@ -49,6 +50,19 @@ bool Scene::Load(const char* path, const bool reloadMap)
 
 		pugi::xml_node node = data.child("sectors");
 
+
+
+		if (map.empty())
+		{			
+		 inGame = false;
+		 App->game->hud->hud_screen->active = false;
+		 App->game->em->CleanUp();
+		 return true;
+		}
+
+		App->game->hud->hud_screen->active = true;
+		inGame = true;		
+		
 		if (reloadMap)
 		{
 			//IMPORTANT: CREATE THE WALKABILITY MAP BEFORE SPAWN ENTITIES
@@ -69,7 +83,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			}
 		}
 
-		
+		if (App->game->em->player == nullptr)
+			App->game->em->player = App->game->em->CreatePlayer(App->game->playerX, App->game->playerY, YOUNG);
 
 		//Spawn Entities
 		for (pugi::xml_node section = node.first_child(); section != NULL; section = section.next_sibling())

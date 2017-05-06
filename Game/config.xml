@@ -31,7 +31,7 @@
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="true"/>
-    <fullscreen_window value="true"/>
+    <fullscreen_window value="false"/>
   </window>
 
   <file_system>
@@ -48,6 +48,7 @@
 
   <sceneManager>
     <scenes folder = "scenes/">
+      <scene name = "introScene" file ="intro_scene.xml"/>
       <scene name = "kakarikoVillage" file = "kakariko_village.xml"/>
       <scene name = "kakarikoForest" file = "kakariko_forest.xml"/>
       <scene name = "insideCastle" file = "inside_castle.xml"/>
