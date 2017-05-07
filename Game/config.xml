@@ -55,6 +55,7 @@
       <scene name = "outsideCastle" file = "outside_castle.xml"/>
       <scene name = "bossRoom" file = "boss_room.xml"/>
       <scene name = "linkHouse" file = "link_house.xml"/>
+      <scene name = "shop" file = "shop.xml"/>
     </scenes>
   </sceneManager>
   

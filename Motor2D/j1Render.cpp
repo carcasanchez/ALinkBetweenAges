@@ -517,8 +517,6 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 
 void j1Render::CameraFollow(iPoint pos)
 {
-	if (cameraLocked)
-		return;
 
 	int scale = App->win->GetScale();
 	uint w, h;
@@ -537,6 +535,8 @@ void j1Render::CameraFollow(iPoint pos)
 		renderZone.x -= renderZone.w*0.5;
 		renderZone.y -= renderZone.h*0.5;
 
+		if (cameraLocked)
+			return;
 
 		if (renderZone.x < 0)
 		{

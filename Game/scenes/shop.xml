@@ -1,8 +1,9 @@
-<!-- Castle Outside -->
-<scene name = "outsideCastle" map= "outsideCastle.tmx">
+<!-- shop -->
+<scene name = "shop" map= "shop.tmx">
   <sectors>
     <sector>
       <!--sector 1-->
+      <camera locked="true"/>
       <entities>
 
         <npcs>
@@ -19,8 +20,7 @@
       </entities>
 
       <exits>
-        <exit destinyScene = "insideCastle" destinyExit = "0" x = "74" y = "55" w="4" h="1" direction = "1"/>
-	<exit destinyScene = "kakarikoVillage" destinyExit = "0" x = "70" y = "142" w="12" h="1" direction = "0"/>
+        <exit destinyScene = "kakarikoVillage" destinyExit = "2" x = "15" y = "29" w="2" h="1" direction = "0"/>
       </exits>
 
     </sector>

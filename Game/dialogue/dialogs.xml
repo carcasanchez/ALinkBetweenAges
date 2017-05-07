@@ -96,6 +96,20 @@
      </dialogue>
    </npc>
 
+  <npc id="12" states="1">
+    <dialogue state="0">
+      <text value=" Sorry, pal, but you are too small to go to the Castle alone. "/>
+      <text value=" Why don't you play in the forest? "/>
+    </dialogue>
+  </npc>
 
+  <npc id="13" states="1">
+    <dialogue state="0">
+      <text value=" Hey, kid! Don't go in that direction! "/>
+      <text value=" This is the way to the wildlands. The entrance is forbidden. "/>
+      <text value=" These are hostile lands, full of monsters. It's too dangerous. "/>
+      <text value=" Make a favor to yourself, and stay safe in the village. "/>
+    </dialogue>
+  </npc>
 
 </npcs>
