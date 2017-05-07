@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1GameLayer.h"
 #include "HUD.h"
+#include "j1SceneManager.h"
 #include "j1EntityManager.h"
 #include "j1Render.h"
 #include "p2Log.h"
@@ -90,27 +91,24 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 																					//LOAD ELEMENTS INVOLVED IN THE CUTSCENE --------------------------------------------------------------
 			elements_node = cutscene_node.child("elements");
 
-			//Load map to change when cutscene is finished
-			temp_cutscene->SetMap(elements_node);
+			//Load Scenes
+			for (temp = elements_node.child("MAP").child("scene"); temp != NULL; temp = temp.next_sibling("npc"))
+				temp_cutscene->LoadSceneName(temp);
 
 			//Load NPCs
 			for (temp = elements_node.child("NPC").child("npc"); temp != NULL; temp = temp.next_sibling("npc"))
-			{
 				temp_cutscene->LoadNPC(temp);
-			}
+			
 
 			//Load Texts
 			for (temp = elements_node.child("TEXTS").child("string"); temp != NULL; temp = temp.next_sibling("text"))
-			{
 				temp_cutscene->LoadText(temp);
-			}
+			
 
 			//Load Images
-
 			for (temp = elements_node.child("IMAGES").child("image"); temp != NULL; temp = temp.next_sibling("image"))
-			{
 				temp_cutscene->LoadImg(temp);
-			}
+			
 
 			//Load Music
 
@@ -445,6 +443,26 @@ bool Cutscene::ClearScene()
 	return true;
 }
 
+bool Cutscene::LoadSceneName(pugi::xml_node& node)
+{
+	bool ret = false;
+
+	if (node != NULL)
+	{
+		CS_Scene* tmp = new CS_Scene(CS_SCENE, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), nullptr);
+
+		if (tmp)
+		{
+			elements.push_back(tmp);
+			tmp->scene_name = node.attribute("scene_name").as_string();
+			ret = true;
+		}
+
+	}
+
+	return ret;
+}
+
 bool Cutscene::LoadNPC(pugi::xml_node& node)
 {
 	bool ret = false;
@@ -452,8 +470,9 @@ bool Cutscene::LoadNPC(pugi::xml_node& node)
 	{
 		CS_npc* tmp = new CS_npc(CS_NPC, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), nullptr);
 		this->elements.push_back(tmp);
-
+		int id = node.attribute("entity_id").as_int();
 		Entity* tmp_ent = tmp->GetEntity(node.attribute("entity_id").as_int());
+
 		if (tmp_ent)
 		{
 			tmp->LinkEntity(tmp_ent);
@@ -462,7 +481,7 @@ bool Cutscene::LoadNPC(pugi::xml_node& node)
 		}
 		else
 		{
-			tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)node.attribute("type").as_int(), node.attribute("x").as_int(), node.attribute("y").as_int(), node.attribute("id").as_int()));
+			tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)node.attribute("type").as_int(), node.attribute("x").as_int(), node.attribute("y").as_int(), node.attribute("entity_id").as_int()));
 		}
 
 		ret = true;
@@ -639,6 +658,11 @@ bool CS_Step::DoAction(float dt)
 		Fade();
 		break;
 
+	case ACT_LOAD:
+		action_name = "load";
+		LoadScene();
+		break;
+
 	default:
 		action_name = "none";
 		break;
@@ -726,6 +750,10 @@ void CS_Step::SetAction(pugi::xml_node& node)
 		if (fade_black)
 			dynamic_cast<CS_Image*>(element)->img->alpha = 0;
 	}
+	else if(action_type == "load")
+	{
+		act_type = ACT_LOAD;
+	}
 	else
 	{
 		act_type = ACT_NONE;
@@ -767,6 +795,25 @@ void CS_Step::LoadMovement(iPoint destination, int speed, const std::string& dir
 
 	LOG("Movement Loaded-> oX:%i oY:%i dX:%i dY:%i speed:%i dir:%i", origin.x, origin.y, dest.x, dest.y, speed, direction);
 
+}
+
+void CS_Step::LoadScene()
+{
+	if (!loading)
+	{
+		App->sceneM->RequestSceneChange({ 0,0 }, dynamic_cast<CS_Scene*>(element)->scene_name.c_str(), D_DOWN);
+		loading = true;
+	}
+
+	if (App->sceneM->currentScene)
+	{
+		if (App->sceneM->currentScene->name == dynamic_cast<CS_Scene*>(element)->scene_name)
+		{
+			FinishStep();
+			loading = false;
+		}
+	}
+		
 }
 
 bool CS_Step::DoMovement(float dt)
@@ -839,7 +886,6 @@ bool CS_Step::DoMovement(float dt)
 		default:
 			break;
 		}
-
 		curr_pos = element->GetPos();
 	}
 
@@ -1204,8 +1250,16 @@ CS_npc::~CS_npc()
 
 Entity* CS_npc::GetEntity(uint id) const
 {
+	if (id == -1)
+	{
+		if (Entity* tmp = App->game->em->player)
+			return tmp;
+		else return App->game->em->player = App->game->em->CreatePlayer(0, 0, LINK_AGE::YOUNG);
+	}
+
 	if (Entity* tmp = App->game->em->GetEntityFromId(id))
 		return tmp;
+
 	else 
 	{
 		//Create the entity
@@ -1235,3 +1289,11 @@ iPoint CS_npc::GetPos()
 	return entity->currentPos;
 }
 // ------------------------------------------------------
+
+CS_Scene::CS_Scene(CS_Type type, int n, const char * name, bool active, const char * path) : CS_Element(type, n, name, active, path)
+{
+}
+
+CS_Scene::~CS_Scene()
+{
+}

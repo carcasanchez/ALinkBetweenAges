@@ -9,8 +9,8 @@
 
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
-enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_NONE };
-enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE };
+enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_SCENE, CS_NONE };
+enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_LOAD, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE };
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, NO_DIR };
 
 class Entity;
@@ -123,6 +123,16 @@ private:
 	uint loops = 0;
 };
 
+class CS_Scene : public CS_Element
+{
+public:
+	CS_Scene(CS_Type type, int n, const char* name, bool active, const char* path);
+	~CS_Scene();
+
+public:
+
+	string scene_name;
+};
 
 class CS_Step
 {
@@ -142,6 +152,7 @@ public:
 
 	//ACTION FUNCTIONS ----------
 	void LoadMovement(iPoint dest, int speed, const std::string& dir);
+	void LoadScene();
 	bool DoMovement(float dt);
 	bool CheckMovementCompleted(iPoint curr_pos);
 	void Play();
@@ -189,6 +200,8 @@ private:
 	bool	bezier_active = false;
 	bool	fade_black = false;
 	
+	//Load functionality
+	bool loading = false;
 
 	//TEXTS ACIONS 
 	std::string new_text;
@@ -207,6 +220,7 @@ public:
 	bool ClearScene();
 
 	//LOAD ELEMENTS FUNCTIONS -------
+	bool LoadSceneName(pugi::xml_node&);
 	bool LoadNPC(pugi::xml_node&);
 	bool LoadImg(pugi::xml_node&);
 	bool LoadText(pugi::xml_node&);

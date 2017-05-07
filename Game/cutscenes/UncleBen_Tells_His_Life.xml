@@ -5,7 +5,7 @@
   <!--CUTSCENE ELEMENTS-->
   <elements>
     <MAP>
-      <scene n="0" name="house" active="true" scene_name="linkHouse"/>
+      <scene n="0" name="house" active="true" scene_name="linkHouse" load="true"/>
     </MAP>
 
     <NPC>
