@@ -70,8 +70,8 @@ bool j1GameLayer::Update(float dt)
 {
 	bool ret = true;
 	
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		App->sceneM->RequestSceneChange({playerX, playerY}, "linkHouse", D_DOWN);
+	//if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	//	App->sceneM->RequestSceneChange({playerX, playerY}, "linkHouse", D_DOWN);
 
 	if (!App->sceneM->currentScene->inGame)
 		return ret;
@@ -87,7 +87,7 @@ bool j1GameLayer::Update(float dt)
 	App->input->GetMousePosition(mousePos.x, mousePos.y);
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
@@ -171,10 +171,9 @@ void j1GameLayer::PickObject(Object * object)
 
 	case LIFEHEART:
 		if (em->player->life < em->player->maxLife)
-		{
-			em->player->life++;
-			App->audio->PlayFx(2);
-		}
+				em->player->life++;
+		App->audio->PlayFx(2);
+		
 		break;
 	case HEART_CONTAINER:
 		em->player->maxLife++;

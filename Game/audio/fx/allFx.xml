@@ -14,4 +14,14 @@
   <fx name="audio/fx/Enemy/General/enemyDies.wav"  id="11"/>
   <fx name="audio/fx/Enemy/General/enemyHit.wav"  id="12"/>
   <fx name="audio/fx/Objects/bombExplode.wav"  id="13"/>
+  <fx name="audio/fx/Enemy/Zelda/attackZelda.wav"  id="14"/>
+  <fx name="audio/fx/Enemy/Zelda/boltStab.wav"  id="15"/>
+  <fx name="audio/fx/Enemy/Zelda/fallingBolt.wav"  id="16"/>
+  <fx name="audio/fx/Enemy/Zelda/normalStab.wav"  id="17"/>
+  <fx name="audio/fx/Enemy/Zelda/shotArrow.wav"  id="18"/>
+  <fx name="audio/fx/Enemy/Zelda/teleport.wav"  id="19"/>
+  <fx name="audio/fx/Enemy/Zelda/zeldaDodge.wav"  id="20"/>
+  <fx name="audio/fx/Enemy/Zelda/zeldaShout.wav"  id="21"/>
+  <fx name="audio/fx/Objects/Rupee/rupee.wav"  id="21"/>
+
 </fx>

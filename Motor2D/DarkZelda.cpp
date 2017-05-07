@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "j1SceneManager.h"
 #include "j1CollisionManager.h"
+#include "j1Audio.h"
 #include <time.h>
 #include <math.h>
 
@@ -122,6 +123,8 @@ void DarkZelda::OnDeath()
 
 	else if (phase == 3)
 	{
+		App->audio->PlayFx(11);
+		App->audio->StopMusic();
 		toDelete = true;
 	}
 }
@@ -268,6 +271,7 @@ bool DarkZelda::ChargeBow(float dt)
 
 	if (currentAnim->isOver())
 	{
+		App->audio->PlayFx(18);
 		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 		App->game->em->CreateObject(1, mapPos.x, mapPos.y, ZELDA_ARROW);
 		currentAnim->Reset();
@@ -313,6 +317,7 @@ bool DarkZelda::KeepDistance(float dt)
 
 	if (rage)
 	{
+		App->audio->PlayFx(19);
 		enemyState = TELEPORT;
 		actionState = DISAPPEARING;
 	}
@@ -408,6 +413,7 @@ bool DarkZelda::Chasing(float dt)
 
 	  if (playerDistance > teleportRange || rage == true)
 	 {
+		 App->audio->PlayFx(19);
 		 enemyState = TELEPORT;
 		 actionState = DISAPPEARING;
 	 }
@@ -529,6 +535,7 @@ bool DarkZelda::Attack(float dt)
 			invulnerable = false;
 			currentAnim->Reset();
 			holdPosTimer.Start();
+			App->audio->PlayFx(14);
 			if (rage)
 			{
 				if (rageTimer.ReadMs() > rageLimit)
@@ -575,7 +582,7 @@ bool DarkZelda::Stab(float dt)
 		if (currentAnim->isOver())
 		{
 			attackTimer.Start();
-			preparingStab = false;
+			preparingStab = false;			
 		}
 		return true;
 	}
@@ -625,6 +632,7 @@ bool DarkZelda::Stab(float dt)
 				bolt = App->game->em->CreateObject(1, mapPos.x, mapPos.y, SWORD_BOLT);
 				bolt->currentDir = currentDir;
 				bolt->currentPos = currentPos;
+				App->audio->PlayFx(15);
 				switch (bolt->currentDir)
 				{
 				case D_UP:
@@ -770,6 +778,7 @@ void DarkZelda::SetAttack()
 			attackTimer.Start();
 			enemyState = FRONTAL_ATTACK;
 			preparingStab = true;
+			App->audio->PlayFx(17);
 			switch (phase)
 			{
 			case 2:
@@ -864,7 +873,9 @@ void DarkZelda::GetHit(Entity* agressor)
 
 	case 3:
 		if(enemyState == KEEP_DISTANCE)
-			{ 
+		{ 
+
+			App->audio->PlayFx(20);
 			enemyState = DODGING_LINK;
 			srand(time(NULL));
 			bool change = rand() % 2;
@@ -886,7 +897,8 @@ void DarkZelda::GetHit(Entity* agressor)
 			enemyState = STEP_BACK;
 			actionState = IDLE;
 			damagedTimer.Start();
-
+			App->audio->PlayFx(21);
+			App->audio->PlayFx(12);
 			if (bolt)
 			{
 				bolt->life = -1;

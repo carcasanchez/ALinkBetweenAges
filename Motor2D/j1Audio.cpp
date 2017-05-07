@@ -74,8 +74,7 @@ bool j1Audio::Start()
 	else
 	{
 		for (pugi::xml_node it = fx.first_child().first_child(); it; it = it.next_sibling("fx"))
-			App->audio->LoadFx(it.attribute("name").as_string());
-
+			App->audio->LoadFx(it.attribute("name").as_string());		
 	}
 
 
@@ -201,4 +200,9 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	}
 
 	return ret;
+}
+
+void j1Audio::StopMusic()
+{
+	Mix_HaltMusic(); 
 }

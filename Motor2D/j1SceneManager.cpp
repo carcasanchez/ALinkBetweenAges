@@ -39,7 +39,7 @@ bool j1SceneManager::Awake(pugi::xml_node& config)
 bool j1SceneManager::Start()
 {	
 
-	currentScene = new Scene("introScene");
+	currentScene = new Scene("linkHouse");
 	currentScene->Load(data[currentScene->name].c_str());
 	
 ///	App->cutsceneM->StartCutscene(0);
