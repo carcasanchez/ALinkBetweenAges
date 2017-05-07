@@ -61,14 +61,12 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		
 		attackRatio = attributes.child("ratios").attribute("attack").as_int();
 		attackRatio_2 = attributes.child("ratios").attribute("attack_2").as_int();
-
-
-		
+				
 		slashSpeed = attributes.child("combat_speeds").attribute("slash_speed").as_int();
 		stabSpeed = attributes.child("combat_speeds").attribute("stab_speed").as_int();
 
 		newSlashSpeed = attributes.child("scnd_phase_speeds").attribute("slash_speed").as_int();
-		newStabSpeed = attributes.child("scnd_phase_speeds").attribute("slash_speed").as_int();
+		newStabSpeed = attributes.child("scnd_phase_speeds").attribute("stab_speed").as_int();
 
 		holdPosLimit = attributes.child("limits").attribute("hold_pos").as_int();
 		holdStabLimit = attributes.child("limits").attribute("hold_stab").as_int();
@@ -96,6 +94,7 @@ void DarkZelda::OnDeath()
 	if(phase == 1)
 	{
 		keepExisting = true;
+		App->sceneM->keepMusic = true;
 		App->sceneM->RequestSceneChange(App->map->MapToWorld(75, 35), "outsideCastle", D_UP);
 	
 		currentPos = App->map->MapToWorld(75, 25);
@@ -570,8 +569,28 @@ bool DarkZelda::Attack(float dt)
 
 bool DarkZelda::Stab(float dt)
 {
-	
-	if (currentAnim->CurrentFrame() > 2 && !holdStab)
+
+	if(preparingStab)
+	{
+		if (currentAnim->isOver())
+		{
+			attackTimer.Start();
+			preparingStab = false;
+		}
+		return true;
+	}
+	else if (holdStab)
+	{
+		if (holdStabTimer.ReadMs() > holdStabLimit)
+		{
+			currentAnim->Reset();
+			enemyState = KEEP_DISTANCE;
+			actionState = WALKING;
+			attackTimer.Start();
+			holdStab = false;
+		}
+	}
+	else
 	{
 		bool stop = false;
 		bool ret = true;
@@ -641,17 +660,7 @@ bool DarkZelda::Stab(float dt)
 		}
 	}
 
-	else if (holdStab)
-	{
-		if (holdStabTimer.ReadMs() > holdStabLimit)
-		{
-			currentAnim->Reset();
-			enemyState = KEEP_DISTANCE;
-			actionState = WALKING;
-			attackTimer.Start();
-			holdStab = false;			
-		}
-	}
+	
 
 
 	return true;
@@ -749,17 +758,18 @@ void DarkZelda::SetAttack()
 	if (phase == 2)
 	{
 		srand(time(NULL));
-		int attack = rand() % 3;
+		int attack = rand() % 5;
 
-		if (App->game->em->player->currentPos.DistanceTo(currentPos) < stabRange)
+		if (attack==0 || attack==1)
 		{
 			lastPlayerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 			enemyState = CHARGING;
 		}
-		else if (attack == 0 || attack == 1)
+		else if (attack == 2 || attack == 3)
 		{
 			attackTimer.Start();
 			enemyState = FRONTAL_ATTACK;
+			preparingStab = true;
 			switch (phase)
 			{
 			case 2:
@@ -786,7 +796,7 @@ void DarkZelda::SetAttack()
 	{
 
 		srand(time(NULL));
-		int attack = rand() % 3;
+		int attack = rand() % 5;
 
 
 		if (boltTimer.ReadMs() > spawnBolt)
@@ -802,12 +812,12 @@ void DarkZelda::SetAttack()
 			boltTimer.Start();
 		}
 
-		else if (App->game->em->player->currentPos.DistanceTo(currentPos) < stabRange)
+		else if (attack == 0 || attack == 1)
 		{
 			lastPlayerPos = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 			enemyState = CHARGING;
 		}
-		else if (attack == 0 || attack == 1)
+		else if (attack == 2|| attack == 3)
 		{
 			attackTimer.Start();
 			enemyState = FRONTAL_ATTACK;
@@ -867,7 +877,10 @@ void DarkZelda::GetHit(Entity* agressor)
 		}
 		else if(!invulnerable)
 		{
+			preparingStab = false;
+			holdStab = false;
 			currentAnim->Reset();
+			attackTimer.Start();
 			life -= agressor->damage;
 			sprite->tint = { 255, 0, 0, 255 };
 			enemyState = STEP_BACK;

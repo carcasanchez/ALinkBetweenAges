@@ -73,6 +73,7 @@ private:
 	int teleportRange;
 	int stabRange;
 
+	bool preparingStab = false;
 	bool holdStab = false;
 	bool rage = false;
 	int rageLife;
@@ -83,6 +84,8 @@ private:
 	int attackRatio_2;
 	int chargeTime_2;
 
+
+	
 	
 
 	Object* bolt = nullptr;

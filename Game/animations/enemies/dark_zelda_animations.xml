@@ -164,7 +164,7 @@
 		
 			<loop value = "false"  />
 
-			<speed value = "0.3"  />
+			<speed value = "0.6"  />
 
 		</STAB>
   
@@ -190,7 +190,7 @@
 
 			<loop value = "false"  />
 
-			<speed value = "0.3"  />
+			<speed value = "0.6"  />
 
 		</BOLT_SWORD>
 
@@ -349,11 +349,35 @@
 
 		</BOLT>
 
-		
+  <HOLDING_STAB>
+
+    <name value = "22"  />
+
+    <DOWN>
+      <values name = "1" x ="273" y = "300" w = "29" h = "49" frameNumber = "1" margin = "1" pivot_x = "15" pivot_y = "33" flip= "0"/>
+    </DOWN>
+
+    <UP>
+      <values name = "0" x ="265" y = "845" w = "32" h = "38" frameNumber = "1" margin = "1" pivot_x = "10" pivot_y = "36" flip= "0"/>
+    </UP>
+
+    <RIGHT>
+      <values name = "2" x ="332" y = "884" w = "54" h = "37" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="332" y = "884" w = "54" h = "37" frameNumber = "1" margin = "1" pivot_x = "27" pivot_y = "35" flip= "1"/>
+    </LEFT>
+
+    <loop value = "false"  />
+
+    <speed value = "0.1"  />
+
+  </HOLDING_STAB>
 
 		<HOLDING_BOLT_SWORD>
 
-			<name value = "18"  />
+			<name value = "23"  />
 
 			<DOWN>
 				<values name = "1" x ="267" y = "793" w = "32" h = "51" frameNumber = "1" margin = "1" pivot_x = "22" pivot_y = "34" flip= "0"/>

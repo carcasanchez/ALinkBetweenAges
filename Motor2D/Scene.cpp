@@ -14,6 +14,7 @@
 #include "j1QuestManager.h"
 #include "p2Log.h"
 #include "HUD.h"
+#include "j1SceneManager.h"
 
 Scene::Scene()
 {
@@ -172,7 +173,9 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			App->quest->LoadQuests(section.child("quests"));
 
 			//Music
-			App->audio->PlayMusic(section.child("music").attribute("file").as_string());
+			if(!App->sceneM->keepMusic)
+				App->audio->PlayMusic(section.child("music").attribute("file").as_string());
+			App->sceneM->keepMusic = false;
 
 			if (section.child("camera").attribute("locked").as_bool())
 				App->render->cameraLocked = true;

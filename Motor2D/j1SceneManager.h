@@ -53,6 +53,7 @@ public:
 	std::map<std::string, std::string> data;
 
 	bool changeRequest = false;
+	bool keepMusic = false;
 
 private:
 

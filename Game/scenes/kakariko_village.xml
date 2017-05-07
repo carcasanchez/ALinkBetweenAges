@@ -37,9 +37,10 @@
       </entities>
 
       <exits>
-    		<exit destinyScene = "kakarikoForest" destinyExit = "0" x = "0" y = "221" w="1" h="12" direction = "2"/>
+    		<exit destinyScene = "kakarikoForest" destinyExit = "0" x = "0" y = "221" w="1" h="21" direction = "2"/>
        	<exit destinyScene = "linkHouse" destinyExit = "0" x = "113" y = "85" w="2" h="1" direction = "1"/>
         <exit destinyScene = "shop" destinyExit = "0" x = "60" y = "97" w="2" h="1" direction = "1"/>
+        <exit destinyScene = "outsideCastle" destinyExit = "1" x = "87" y = "1" w="16" h="1" direction = "1"/>
 
       </exits>
 

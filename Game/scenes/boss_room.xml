@@ -3,6 +3,8 @@
   <sectors>
     <sector>
       <!--sector 1-->
+
+      <music file="audio/music/final_battle.ogg"/>
       <entities>
 
         <npcs>
@@ -10,7 +12,6 @@
 
         <enemies>
          		<zelda type = "3" x = "48" y = "13"/>
-
         </enemies>
 
 	<special>
