@@ -52,6 +52,7 @@
 
         <special>
           <!--rocks, grass, etc-->
+          <chest object_type="9" x="77" y="88" item_inside="4"/>
         </special>
       </entities>
 
