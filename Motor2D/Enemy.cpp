@@ -254,7 +254,7 @@ void Enemy::GetHit(Entity* agressor)
 
 	damaged = true;
 
-	if(agressor->col->type==COLLIDER_LINK_SWORD)
+	if(agressor->col->type==COLLIDER_PLAYER)
 		App->audio->PlayFx(12);
 
 }
