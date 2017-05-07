@@ -87,7 +87,7 @@ bool j1GameLayer::Update(float dt)
 	App->input->GetMousePosition(mousePos.x, mousePos.y);
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
