@@ -10,7 +10,7 @@
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
 enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_SCENE, CS_NONE };
-enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_LOAD, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_PLAY, ACT_STOP, ACT_NONE };
+enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_LOAD, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_CREATE, ACT_PLAY, ACT_STOP, ACT_NONE };
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, NO_DIR };
 
 class Entity;
@@ -153,6 +153,8 @@ public:
 	//ACTION FUNCTIONS ----------
 	void LoadMovement(iPoint dest, int speed, const std::string& dir);
 	void LoadScene();
+	void LoadCharacter(pugi::xml_node&);
+	void CreateCharacter();
 	bool DoMovement(float dt);
 	bool CheckMovementCompleted(iPoint curr_pos);
 	void Play();
@@ -202,6 +204,11 @@ private:
 	
 	//Load functionality
 	bool loading = false;
+
+	//Character things
+	iPoint pos = { 0,0 };
+	int type = 0;
+	int id = 0;
 
 	//TEXTS ACIONS 
 	std::string new_text;

@@ -663,6 +663,11 @@ bool CS_Step::DoAction(float dt)
 		LoadScene();
 		break;
 
+	case ACT_CREATE:
+		action_name = "create";
+		CreateCharacter();
+		break;
+
 	default:
 		action_name = "none";
 		break;
@@ -754,6 +759,11 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	{
 		act_type = ACT_LOAD;
 	}
+	else if (action_type == "create")
+	{
+		act_type = ACT_CREATE;
+		LoadCharacter(node.child("element").child("character"));
+	}
 	else
 	{
 		act_type = ACT_NONE;
@@ -814,6 +824,28 @@ void CS_Step::LoadScene()
 		}
 	}
 		
+}
+
+void CS_Step::LoadCharacter(pugi::xml_node& node)
+{
+	pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
+	type = node.attribute("type_id").as_int();
+	id = node.attribute("id").as_int();
+}
+
+void CS_Step::CreateCharacter()
+{
+	if (GetElementType() == CS_NPC)
+	{
+		if (dynamic_cast<CS_npc*>(element)->GetMyEntity()->sprite == nullptr)
+		{
+			if (type == -1)
+				dynamic_cast<CS_npc*>(element)->LinkEntity(App->game->em->CreatePlayer(pos.x, pos.y, YOUNG));
+			else dynamic_cast<CS_npc*>(element)->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)type, pos.x, pos.y, id));
+		}
+		FinishStep();
+	}
+	return;
 }
 
 bool CS_Step::DoMovement(float dt)
