@@ -13,8 +13,6 @@ j1PathFinding::j1PathFinding() : j1Module(), player_map(NULL), enemy_map(NULL), 
 // Destructor
 j1PathFinding::~j1PathFinding()
 {
-	RELEASE_ARRAY(player_map);
-	RELEASE_ARRAY(enemy_map);
 }
 
 // Called before quitting
@@ -23,8 +21,6 @@ bool j1PathFinding::CleanUp()
 	LOG("Freeing pathfinding library");
 
 	last_path.clear();
-	RELEASE_ARRAY(player_map);
-	RELEASE_ARRAY(enemy_map);
 	RELEASE_ARRAY(node_map);
 
 	return true;
@@ -32,35 +28,31 @@ bool j1PathFinding::CleanUp()
 
 
 // Sets up the walkability map
-void j1PathFinding::SetPlayerMap(uint width, uint height, uchar* data)
+void j1PathFinding::SetPlayerMap(uint width, uint height, vector<int> data)
 {
-	if (data == nullptr)
+	if (data.empty())
 		return;
 
 	this->width = width;
 	this->height = height;
 
-	RELEASE_ARRAY(player_map);
-	player_map = new uchar[width*height];
-	memcpy(player_map, data, width*height);
+	player_map.clear();
+	player_map = data;
 
 }
 
-void j1PathFinding::SetEnemyMap(uint width, uint height, uchar * data)
+void j1PathFinding::SetEnemyMap(uint width, uint height, vector<int> data)
 {
-
-	if (data == nullptr)
+	if (data.empty())
 		return;
 
 	this->width = width;
 	this->height = height;
 
-	RELEASE_ARRAY(enemy_map);
-	enemy_map = new uchar[width*height];
-	memcpy(enemy_map, data, width*height);
+	enemy_map = data;
 
 	RELEASE_ARRAY(node_map);
-	node_map = new PathNode[width*height];
+	//node_map = new PathNode[width*height];
 	
 }
 
@@ -77,13 +69,13 @@ bool j1PathFinding::CheckBoundaries(const iPoint& pos) const
 bool j1PathFinding::IsPlayerWalkable(const iPoint& pos) const
 {
 	uchar t = GetTileForPlayer(pos);
-	return t != INVALID_WALK_CODE && t != 0;
+	return t == 0;
 }
 
 bool j1PathFinding::IsEnemyWalkable(const iPoint& pos) const
 {
 	uchar t = GetTileForEnemy(pos);
-	return t != INVALID_WALK_CODE && t != 0;
+	return t == 0;
 
 }
 
@@ -117,16 +109,16 @@ bool j1PathFinding::CheckArrowCollision(const iPoint & pos) const
 // Utility: return the walkability value of a tile
 uchar j1PathFinding::GetTileForPlayer(const iPoint& pos) const
 {
-	if (CheckBoundaries(pos))
-		return player_map[(pos.y*width) + pos.x];
+	if (((pos.y*width) + pos.x)<player_map.size())
+		return player_map.at((pos.y*width) + pos.x);
 
 	return INVALID_WALK_CODE;
 }
 
 uchar j1PathFinding::GetTileForEnemy(const iPoint & pos) const
 {
-	if(CheckBoundaries(pos))
-		return enemy_map[(pos.y*width) + pos.x];
+	if (((pos.y*width) + pos.x)<enemy_map.size())
+		return enemy_map.at((pos.y*width) + pos.x);
 
 	return INVALID_WALK_CODE;
 }

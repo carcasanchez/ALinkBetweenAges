@@ -29,8 +29,8 @@ public:
 	bool CleanUp();
 
 	// Sets up the walkability map
-	void SetPlayerMap(uint width, uint height, uchar* data);
-	void SetEnemyMap(uint width, uint height, uchar* data);
+	void SetPlayerMap(uint width, uint height, vector<int> data);
+	void SetEnemyMap(uint width, uint height, vector<int> data);
 
 	// Main function to request a path from A to B
 	int CreatePath(const iPoint& origin, const iPoint& destination);
@@ -69,8 +69,8 @@ private:
 	uint width;
 	uint height;
 	// all map walkability values [0..255]
-	uchar* player_map;
-	uchar* enemy_map;
+	vector<int> player_map;
+	vector<int> enemy_map;
 	// we store the created path here
 	vector<iPoint> last_path;
 };

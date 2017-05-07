@@ -582,9 +582,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	}
 	else
 	{
-		layer->data = new uint[layer->width*layer->height];
-		memset(layer->data, 0, layer->width*layer->height);
-
+		
 		string lol = layer_data.first_child().value();
 
 		int bookmark = 1;
@@ -592,14 +590,14 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		{
 			int coma = lol.find_first_of(",", bookmark);
 			string temp = lol.substr(bookmark, (coma-bookmark)).c_str();
-			layer->data[i] = atoi(temp.c_str());
+			layer->data.push_back(atoi(temp.c_str()));
 			bookmark = coma + 1;
 		}
 
 		int i = 0;
 		for(pugi::xml_node tile = layer_data.child("tile"); tile; tile = tile.next_sibling("tile"))
 		{
-			layer->data[i++] = tile.attribute("gid").as_int(0);
+			layer->data.push_back(tile.attribute("gid").as_int(0));
 		}
 	}
 
@@ -636,7 +634,7 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	return ret;
 }
 
-bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** player_buffer, uchar** enemy_buffer) const
+bool j1Map::CreateWalkabilityMap(int& width, int& height, vector<int>& player_buffer, vector<int>& enemy_buffer) const
 {
 	bool ret = false;
 	
@@ -647,32 +645,24 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** player_buffer,
 		
 		//Player map
 		if (layer->properties.Get("Navigation", 0) && layer->properties.Get("Player", 0))
-		{
-			uchar* map = new uchar[layer->width*layer->height];
-			memset(map, 1, layer->width*layer->height);
+		{		
 
 			for (int y = 0; y < data->height; ++y)
 			{
 				for (int x = 0; x < data->width; ++x)
 				{
-					int i = (y*layer->width) + x;
-
+					
 					int tile_id = layer->Get(x, y);
 					TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
 
 					if (tileset != NULL)
 					{
-						map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
-						/*TileType* ts = tileset->GetTileType(tile_id);
-						if(ts != NULL)
-						{
-						map[i] = ts->properties.Get("walkable", 1);
-						}*/
+						player_buffer.push_back(tile_id);
 					}
+					else player_buffer.push_back(0);
 				}
 			}
 
-			*player_buffer = map;
 			width = data->width;
 			height = data->height;
 			ret = true;
@@ -681,31 +671,21 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** player_buffer,
 		//Enemy_map
 		if (layer->properties.Get("Navigation", 0) && layer->properties.Get("Enemy", 0))
 		{
-			uchar* map = new uchar[layer->width*layer->height];
-			memset(map, 1, layer->width*layer->height);
 
 			for (int y = 0; y < data->height; ++y)
 			{
 				for (int x = 0; x < data->width; ++x)
 				{
-					int i = (y*layer->width) + x;
-
 					int tile_id = layer->Get(x, y);
 					TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
 
 					if (tileset != NULL)
 					{
-						map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
-						/*TileType* ts = tileset->GetTileType(tile_id);
-						if(ts != NULL)
-						{
-						map[i] = ts->properties.Get("walkable", 1);
-						}*/
+						enemy_buffer.push_back(tile_id);
 					}
+					else enemy_buffer.push_back(0);
 				}
 			}
-
-			*enemy_buffer = map;
 			width = data->width;
 			height = data->height;
 			ret = true;

@@ -69,17 +69,14 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			if (ret = (App->map->Load(map.c_str())))
 			{
 				int w, h;
-				uchar* player_data = NULL;
-				uchar* enemy_data = NULL;
+				vector<int> player_data;
+				vector<int> enemy_data;
 
-				if (App->map->CreateWalkabilityMap(w, h, &player_data, &enemy_data))
+				if (App->map->CreateWalkabilityMap(w, h, player_data, enemy_data))
 				{
 					App->pathfinding->SetPlayerMap(w, h, player_data);
 					App->pathfinding->SetEnemyMap(w, h, enemy_data);
 				}
-
-				RELEASE_ARRAY(player_data);
-				RELEASE_ARRAY(enemy_data);
 			}
 		}
 

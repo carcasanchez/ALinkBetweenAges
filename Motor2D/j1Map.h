@@ -38,7 +38,7 @@ struct MapLayer
 	string	name;
 	int			width;
 	int			height;
-	uint*		data;
+	vector<int>		data;
 	Properties	properties;
 
 	MapLayer() : data(NULL)
@@ -46,15 +46,14 @@ struct MapLayer
 
 	~MapLayer()
 	{
-		RELEASE_ARRAY(data);
 	}
 
 	inline uint Get(int x, int y) const
 	{
-		if (x < 0 || y < 0)
+		if (x < 0 || y < 0 || ((y*width) + x)>=data.size())
 			return 0;
-
-		return data[(y*width) + x];
+		
+		return data.at((y*width) + x);
 	}
 };
 
@@ -137,7 +136,7 @@ public:
 	iPoint WorldToMapMouse(int x, int y) const;
 	iPoint GetTileCenter(iPoint);
 
-	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer, uchar** buffer2) const;
+	bool CreateWalkabilityMap(int& width, int& height, vector<int>& buffer, vector<int>& buffer2) const;
 
 	bool LoadSmallDataMap(const char* path);
 	void UnloadSmallDataMap();
