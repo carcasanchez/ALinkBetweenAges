@@ -1,0 +1,71 @@
+<!-- TEST CUTSCENE -->
+
+<Cutscene name="Test" id="1">
+
+  <!--CUTSCENE ELEMENTS-->
+  <elements>
+    <MAP>
+      <scene n="0" name="house" active="true" scene_name="linkHouse"/>
+    </MAP>
+
+    <NPC>
+      <npc n="0" name="tio_ben" active="true" type="0" x="70" y="55" entity_id="1"/>
+      <npc n="1" name="Link" active="true" type="0" x="72" y="40" entity_id="-1"/>
+    </NPC>
+
+    <ENEMIES>
+    </ENEMIES>
+
+    <IMAGES>
+    </IMAGES>
+
+    <TEXTS>
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Inserte Texto 1" />
+    </TEXTS>
+
+    <MUSIC>
+    </MUSIC>
+
+    <FX>
+    </FX>
+
+
+  </elements>
+
+  <!--EXECUTE ALL STEPS IN ORDER-->
+
+  <steps>
+    <step  n="1" start="0" duration ="-1" input="false">
+      <element name="house" action="load"/>
+    </step>
+
+    <step  n="2" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="right">
+        <movement dest_x="100" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="3" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="down">
+        <movement dest_x="0" dest_y="45" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="4" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="right">
+        <movement dest_x="215" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="5" start="-1" duration ="-1" input="true">
+      <element name="Text" action="enable"/>
+    </step>
+
+    <step  n="6" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="wow such cutscenes, very difficult such interesting u piece of crap, fran si lees esto date por aludido"/>
+      </element>
+    </step>
+
+  </steps>
+</Cutscene>
