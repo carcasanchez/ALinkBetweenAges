@@ -53,9 +53,16 @@ public:
 
 	void Move(float x, float y);
 	iPoint GetPos();
+	bool empty = false;
+
+	//If empty
+	iPoint pos = { 0,0 };
+	int entity_id = 0;
+	int entity_type = -1;
 
 private:
-	Entity*	entity;	//Pointer to the entity that forms part of the game elements (to modify its state, do actions, etc)
+
+	Entity*	entity = nullptr;	//Pointer to the entity that forms part of the game elements (to modify its state, do actions, etc)
 };
 
 class CS_Image : public CS_Element

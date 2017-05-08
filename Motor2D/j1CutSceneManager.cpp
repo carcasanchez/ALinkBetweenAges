@@ -470,20 +470,30 @@ bool Cutscene::LoadNPC(pugi::xml_node& node)
 	{
 		CS_npc* tmp = new CS_npc(CS_NPC, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), nullptr);
 		this->elements.push_back(tmp);
-		int id = node.attribute("entity_id").as_int();
-		Entity* tmp_ent = tmp->GetEntity(node.attribute("entity_id").as_int());
 
-		if (tmp_ent)
+		Entity* tmp_ent = tmp->GetEntity(node.attribute("entity_id").as_int());
+		tmp->empty = node.attribute("empty").as_bool();
+
+		if (tmp->empty == false)
 		{
-			tmp->LinkEntity(tmp_ent);
-			iPoint new_pos = App->map->GetTileCenter({ node.attribute("x").as_int(), node.attribute("y").as_int() });
-			tmp_ent->MoveTo(new_pos.x, new_pos.y);
+			if (tmp_ent)
+			{
+				tmp->LinkEntity(tmp_ent);
+				iPoint new_pos = App->map->GetTileCenter({ node.attribute("x").as_int(), node.attribute("y").as_int() });
+				tmp_ent->MoveTo(new_pos.x, new_pos.y);
+			}
+			else
+			{
+				tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)node.attribute("type").as_int(), node.attribute("x").as_int(), node.attribute("y").as_int(), node.attribute("entity_id").as_int()));
+			}
 		}
 		else
 		{
-			tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)node.attribute("type").as_int(), node.attribute("x").as_int(), node.attribute("y").as_int(), node.attribute("entity_id").as_int()));
+			//If is empty later will load, and need those variablos
+			tmp->pos = App->map->GetTileCenter({ node.attribute("x").as_int(), node.attribute("y").as_int() });
+			tmp->entity_id = node.attribute("entity_id").as_int();
+			tmp->entity_type = node.attribute("type").as_int();
 		}
-
 		ret = true;
 	}
 	return ret;
@@ -828,6 +838,7 @@ void CS_Step::LoadScene()
 
 void CS_Step::LoadCharacter(pugi::xml_node& node)
 {
+	//si funsiona lo borro
 	pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
 	type = node.attribute("type_id").as_int();
 	id = node.attribute("id").as_int();
@@ -837,12 +848,26 @@ void CS_Step::CreateCharacter()
 {
 	if (GetElementType() == CS_NPC)
 	{
-		if (dynamic_cast<CS_npc*>(element)->GetMyEntity()->sprite == nullptr)
+		CS_npc* tmp = (CS_npc*)element;
+
+		if (tmp->entity_id != -1)
 		{
-			if (type == -1)
-				dynamic_cast<CS_npc*>(element)->LinkEntity(App->game->em->CreatePlayer(pos.x, pos.y, YOUNG));
-			else dynamic_cast<CS_npc*>(element)->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)type, pos.x, pos.y, id));
+			Entity* ent = App->game->em->GetEntityFromId(tmp->entity_id);
+
+			if (ent)
+				tmp->LinkEntity(ent);
+			else tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)tmp->entity_type, pos.x, pos.y, tmp->entity_id));
+			
 		}
+		else
+		{
+			if (App->game->em->player)
+				tmp->LinkEntity(App->game->em->player);
+			else tmp->LinkEntity(App->game->em->CreatePlayer(pos.x, pos.y, YOUNG));
+			
+		}
+
+		tmp->empty = false;
 		FinishStep();
 	}
 	return;
@@ -1051,7 +1076,7 @@ void CS_Step::ActiveElement()
 		}
 
 		//Means that when doned active it
-		if (duration == -1)
+		if (duration == -1 && input == false)
 			FinishStep();
 
 		LOG("Step %i Enabling %s", n, element->name.c_str());
@@ -1311,14 +1336,18 @@ void CS_npc::LinkEntity(Entity* e)
 {
 	entity = e; //Set the pointer to the entity of the game to take control of it
 }
+
 void CS_npc::Move(float x, float y)
 {
 	entity->currentPos.x += x;
 	entity->currentPos.y += y;
 }
+
 iPoint CS_npc::GetPos()
 {
-	return entity->currentPos;
+	if (empty)
+		return pos;
+	else return entity ? entity->currentPos : iPoint(0,0);
 }
 // ------------------------------------------------------
 

@@ -9,8 +9,8 @@
     </MAP>
 
     <NPC>
-      <npc n="0" name="tio_ben" active="true" type="0" x="70" y="55" entity_id="1"/>
-      <npc n="1" name="Link" active="true" type="0" x="72" y="40" entity_id="-1"/>
+      <npc n="0" name="tio_ben" active="true" type="0" x="70" y="55" entity_id="1" empty="true"/>
+      <npc n="1" name="Link" active="true" type="0" x="72" y="40" entity_id="-1" empty="true"/>
     </NPC>
 
     <ENEMIES>
@@ -75,7 +75,7 @@
 
     <step  n="7" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="wow such cutscenes, very difficult such interesting u piece of crap, fran si lees esto date por aludido"/>
+        <text text="Inserte Texto 2"/>
       </element>
     </step>
 
