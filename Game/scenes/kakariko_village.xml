@@ -30,6 +30,8 @@
 	 <chest object_type = "9" x = "73" y = "80" item_inside = "14"/>
 	<chest object_type = "9" x = "69" y = "80" item_inside = "16"/>
 	<chest object_type = "9" x = "64" y = "80" item_inside = "15"/>
+    <chest object_type = "9" x = "77" y = "80" item_inside = "21"/>
+    <chest object_type = "9" x = "77" y = "90" item_inside = "13"/>
 <book object_type = "0" x = "73" y = "86"/>
 
         </special>

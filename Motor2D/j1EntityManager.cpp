@@ -303,6 +303,9 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	case INTERRUPTOR:
 		ret = new Interruptor;
 		break;
+	case BUSH:
+		ret = new Bush;
+		break;
 	}
 	
 

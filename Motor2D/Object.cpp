@@ -210,3 +210,9 @@ bool Pillar::Update(float dt)
 
 	return true;
 }
+
+void Bush::OnDeath()
+{
+	toDelete = true;
+	App->audio->PlayFx(24);
+}

@@ -22,6 +22,8 @@
   <fx name="audio/fx/Enemy/Zelda/teleport.wav"  id="19"/>
   <fx name="audio/fx/Enemy/Zelda/zeldaDodge.wav"  id="20"/>
   <fx name="audio/fx/Enemy/Zelda/zeldaShout.wav"  id="21"/>
-  <fx name="audio/fx/Objects/Rupee/rupee.wav"  id="21"/>
-
+  <fx name="audio/fx/Objects/Rupee/rupee.wav"  id="22"/>
+  <fx name="audio/fx/Objects/General/itemGet1.wav"  id="23"/>
+  <fx name="audio/fx/Special/Grass/grassDestroyed.wav"  id="24"/>
+  <fx name="audio/fx/Player/linkDodge.wav"  id="25"/>
 </fx>
