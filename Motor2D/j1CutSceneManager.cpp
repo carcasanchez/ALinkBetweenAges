@@ -855,15 +855,21 @@ void CS_Step::CreateCharacter()
 			Entity* ent = App->game->em->GetEntityFromId(tmp->entity_id);
 
 			if (ent)
+			{
 				tmp->LinkEntity(ent);
-			else tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)tmp->entity_type, pos.x, pos.y, tmp->entity_id));
+				tmp->GetMyEntity()->MoveTo(tmp->pos.x, tmp->pos.y);
+			}
+			else tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)tmp->entity_type, tmp->pos.x, tmp->pos.y, tmp->entity_id));
 			
 		}
 		else
 		{
 			if (App->game->em->player)
+			{
 				tmp->LinkEntity(App->game->em->player);
-			else tmp->LinkEntity(App->game->em->CreatePlayer(pos.x, pos.y, YOUNG));
+				App->game->em->player->MoveTo(tmp->pos.x, tmp->pos.y);
+			}
+			else tmp->LinkEntity(App->game->em->CreatePlayer(tmp->pos.x, tmp->pos.y, YOUNG));
 			
 		}
 

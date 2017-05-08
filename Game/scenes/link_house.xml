@@ -9,6 +9,7 @@
       <entities>
 
         <npcs>
+ 		<sample type = "0" x = "6" y = "16" id="1"/>
         </npcs>
 
         <enemies>
