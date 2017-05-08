@@ -36,7 +36,7 @@
 		<base life = "1" speed = "30" damage ="2"/>
 		<collider x = "5" y = "7" w = "10" h = "15" type = "3"/>
 		<ranges hostile= "185" out="185" />
-		<ratios attack = "600"/>  <!-- In Miliseconds -->
+		<ratios attack = "660"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/octorok_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</octorok>
