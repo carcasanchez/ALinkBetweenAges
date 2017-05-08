@@ -88,7 +88,7 @@ bool j1GameLayer::Update(float dt)
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
+		em->CreateObject(1, mousePos.x, mousePos.y, ARROW_DROP);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
@@ -167,6 +167,7 @@ void j1GameLayer::PickObject(Object * object)
 	case BLUE_RUPEE:
 	case RED_RUPEE:
 		em->player->rupees += ((Rupee*)object)->rupeeValue;
+		App->audio->PlayFx(22);
 		break;
 
 	case LIFEHEART:
@@ -185,7 +186,7 @@ void j1GameLayer::PickObject(Object * object)
 		break;
 	case ARROW_DROP:
 		if (em->player->arrows < em->player->maxArrows)
-			em->player->arrows++;
+			em->player->arrows+=5;
 		break;
 
 	case BOOK:
@@ -194,6 +195,7 @@ void j1GameLayer::PickObject(Object * object)
 
 	default:
 		em->player->inventory.push_back(object->objectType);
+		App->audio->PlayFx(23);
 		break;
 
 	}

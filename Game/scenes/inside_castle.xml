@@ -116,8 +116,8 @@
           </reward >
 
           <trigger type ="2">
-            <interruptor x = "29" y="148"/>
-            <interruptor x = "43" y="148"/>
+            <interruptor x = "30" y="149"/>
+            <interruptor x = "44" y="149"/>
           </trigger>
 
         </quest>

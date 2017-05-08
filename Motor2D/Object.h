@@ -97,6 +97,17 @@ public:
 
 };
 
+class Bush : public Object
+{
+public:
+
+	Bush() {};
+
+	void OnDeath();
+
+
+
+};
 
 class ZeldaArrow : public Object
 {

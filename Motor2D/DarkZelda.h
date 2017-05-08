@@ -99,6 +99,8 @@ private:
 
 	Collider* spinCollider = nullptr;
 
+	j1PerfTimer soundTimer;
+
 
 };
 

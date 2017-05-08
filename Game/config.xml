@@ -31,7 +31,7 @@
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="true"/>
-    <fullscreen_window value="FALSE"/>
+    <fullscreen_window value="false"/>
   </window>
 
   <file_system>
@@ -56,6 +56,7 @@
       <scene name = "bossRoom" file = "boss_room.xml"/>
       <scene name = "linkHouse" file = "link_house.xml"/>
       <scene name = "shop" file = "shop.xml"/>
+      <scene name = "kakarikoDestroyed" file = "kakariko_destroyed.xml"/>
     </scenes>
   </sceneManager>
   

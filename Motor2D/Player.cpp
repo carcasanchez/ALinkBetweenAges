@@ -744,6 +744,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 					{
 						if (stamina - attackTax >= 0)
 						{
+							App->audio->PlayFx(1);
 							actionState = ATTACKING;
 							currentDir = DIRECTION::D_UP;
 							createSwordCollider();
@@ -766,6 +767,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			case BOW:
 				if (arrows > 0)
 				{
+					App->audio->PlayFx(18);
 					currentDir = DIRECTION::D_UP;
 					arrows--;
 					actionState = SHOOTING_BOW;
@@ -791,6 +793,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 					{
 						if (stamina - attackTax >= 0)
 						{
+							App->audio->PlayFx(1);
 							actionState = ATTACKING;
 							currentDir = DIRECTION::D_DOWN;
 							createSwordCollider();
@@ -813,6 +816,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			case BOW:
 				if (arrows > 0)
 				{
+					App->audio->PlayFx(18);
 					currentDir = DIRECTION::D_DOWN;
 					arrows--;
 					actionState = SHOOTING_BOW;
@@ -838,6 +842,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 					{
 						if (stamina - attackTax >= 0)
 						{
+							App->audio->PlayFx(1);
+
 							actionState = ATTACKING;
 							currentDir = DIRECTION::D_LEFT;
 							createSwordCollider();
@@ -860,6 +866,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			case BOW:
 				if (arrows > 0)
 				{
+					App->audio->PlayFx(18);
 					currentDir = DIRECTION::D_LEFT;
 					arrows--;
 					actionState = SHOOTING_BOW;
@@ -886,6 +893,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 					{
 						if (stamina - attackTax >= 0)
 						{
+							App->audio->PlayFx(1);
+
 							actionState = ATTACKING;
 							currentDir = DIRECTION::D_RIGHT;
 							createSwordCollider();
@@ -909,6 +918,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 
 				if (arrows > 0)
 				{
+					App->audio->PlayFx(18);
 					currentDir = DIRECTION::D_RIGHT;
 					arrows--;
 					actionState = SHOOTING_BOW;
@@ -924,6 +934,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		{
 			if (actionState != SPINNING && actionState != ATTACKING && actionState != JUMPING)
 			{
+				App->audio->PlayFx(25);
+
 				stamina -= dodgeTax;
 				App->game->hud->stamina_bar->WasteStamina(dodgeTax);
 				actionState = DODGING;
@@ -937,6 +949,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 	case SPIN_TO_WIN:
 		if (actionState != SPINNING && actionState != ATTACKING && actionState != JUMPING && stamina > spinTax)
 		{
+			App->audio->PlayFx(1);
 			stamina -= spinTax;
 			actionState = SPINNING;
 			createSwordCollider();
