@@ -9,7 +9,6 @@
       <entities>
 
         <npcs>
-          <sample type = "0" x = "93" y = "85" id="1"/>
 	        <sample type = "1" x = "107" y = "147" id="2"/>
 	        <sample type = "2" x = "142" y = "192" id="3"/>
 	        <sample type = "3" x = "55" y = "191" id="4"/>
