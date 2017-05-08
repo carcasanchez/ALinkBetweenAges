@@ -65,7 +65,7 @@
 
    <octo_stone>
  	 <base life = "1" damage = "1" speed = "200"/>
- 	 <collider x = "0" y = "0" w = "8" h = "8" type = "9"/>
+ 	 <collider x = "0" y = "0" w = "6" h = "6" type = "9"/>
  	 <animation file = "animations/objects/octostone_animations.xml"/>
  	 <texture file = "textures/Enemy_sprites/Enemy.png"/>
    </octo_stone>

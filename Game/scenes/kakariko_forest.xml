@@ -29,30 +29,40 @@
 		<sample type = "7" x = "171" y = "165"> </sample >
 		<sample type = "7" x = "132" y = "99"> </sample >
 		<sample type = "7" x = "142" y = "80"> </sample >
+
+		<sample type = "7" x = "160" y = "325"> </sample >
+		<sample type = "7" x = "167" y = "274"> </sample >
+		<sample type = "7" x = "117" y = "270"> </sample >
+		<sample type = "7" x = "120" y = "248"> </sample >
+		<sample type = "7" x = "72" y = "175"> </sample >
+		<sample type = "7" x = "109" y = "185"> </sample >
+		<sample type = "7" x = "67" y = "97"> </sample >
+		<sample type = "7" x = "86" y = "97"> </sample >
+		<sample type = "7" x = "168" y = "263"> </sample >
+		<sample type = "7" x = "111" y = "159"> </sample >
+
+
+
+		<sample type = "4" x = "139" y = "254"> </sample >
+		<sample type = "4" x = "135" y = "212"> </sample >
+		<sample type = "4" x = "88" y = "115"> </sample >
+		<sample type = "4" x = "165" y = "118"> </sample >
+		<sample type = "4" x = "182" y = "70"> </sample >
+
 		
-		<sample type = "7" x = "156" y = "324"> </sample >
-		<sample type = "7" x = "108" y = "271"> </sample >
-		
-		<sample type = "7" x = "127" y = "257"> </sample >
-		
-		<sample type = "7" x = "162" y = "282"> </sample >
-		<sample type = "7" x = "136" y = "244"> </sample >
-		
-		<sample type = "7" x = "161" y = "258"> </sample >
-		<sample type = "7" x = "112" y = "180"> </sample >
-		<sample type = "7" x = "99" y = "184"> </sample >
-		
-		<sample type = "7" x = "165" y = "110"> </sample >
-		<sample type = "7" x = "111" y = "156"> </sample >
-		
-		<sample type = "7" x = "175" y = "67"> </sample >
-		<sample type = "7" x = "66" y = "181"> </sample >
+	
 
 	</enemies>
 
         <special>
           <!--rocks, grass, etc-->
-          <chest object_type="9" x="77" y="88" item_inside="4"/>
+          <chest object_type="9" x="82" y="90" item_inside="4"/>
+
+          <chest object_type="0" x="72" y="91" item_inside="0"/>
+
+          <chest object_type="9" x="206" y="70" item_inside="12"/>
+
+
         </special>
       </entities>
 
