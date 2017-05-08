@@ -717,6 +717,11 @@ bool DarkZelda::TeleportAndAttack(float dt)
 bool DarkZelda::Spin(float dt)
 {
 
+	if (soundTimer.ReadMs() > 500)
+	{
+		App->audio->PlayFx(14);
+		soundTimer.Start();
+	}
 	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 
 	GoTo(playerTile, speed, dt);
@@ -745,6 +750,12 @@ bool DarkZelda::SummonBolt(float dt)
 {
 	currentDir = D_DOWN;
 	invulnerable = false;
+
+	if (soundTimer.ReadMs() > 500)
+	{
+		App->audio->PlayFx(16);
+		soundTimer.Start();
+	}
 		
 	if (boltTimer.ReadMs() > boltLifeTime)
 	{

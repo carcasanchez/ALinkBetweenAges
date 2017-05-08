@@ -949,6 +949,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 	case SPIN_TO_WIN:
 		if (actionState != SPINNING && actionState != ATTACKING && actionState != JUMPING && stamina > spinTax)
 		{
+			App->audio->PlayFx(1);
 			stamina -= spinTax;
 			actionState = SPINNING;
 			createSwordCollider();
