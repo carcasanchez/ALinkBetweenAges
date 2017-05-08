@@ -608,7 +608,7 @@ Sprite::Sprite(SDL_Texture* texture, iPoint position, spriteLayer layer, SDL_Rec
 
 Sprite::~Sprite()
 {
-	SDL_DestroyTexture(texture);
+	App->tex->UnLoad(texture);
 }
 
 void Sprite::updateSprite(SDL_Texture* tex, iPoint& p, iPoint& piv, SDL_Rect& section, SDL_RendererFlip flip)

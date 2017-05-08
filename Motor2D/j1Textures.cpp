@@ -78,7 +78,9 @@ bool j1Textures::CleanUp()
 	LOG("Freeing textures and Image library");
 
 	for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end(); item++)
-		SDL_DestroyTexture((*item));
+	{
+			SDL_DestroyTexture((*item));
+	}
 
 	textures.clear();
 	IMG_Quit();

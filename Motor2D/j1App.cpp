@@ -428,6 +428,8 @@ bool j1App::CleanUp()
 	//p2List_item<j1Module*>* item;
 	//item = modules.end;
 
+
+
 	std::list<j1Module*>::reverse_iterator item = modules.rbegin();
 	
 	for (std::list<j1Module*>::reverse_iterator item = modules.rbegin(); item != modules.crend() && ret == true; item++)

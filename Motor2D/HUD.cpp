@@ -135,6 +135,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		if (quit->active)
 		{
 			App->game->quit_game = true;
+			App->game->pause = false;
 		}
 
 		break;
