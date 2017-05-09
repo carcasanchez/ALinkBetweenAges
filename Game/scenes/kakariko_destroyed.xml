@@ -13,6 +13,26 @@
         </npcs>
 
         <enemies>
+<sample type = "1" x = "176" y = "221"/>
+<sample type = "1" x = "145" y = "206"/>
+<sample type = "1" x = "121" y = "228"/>
+<sample type = "2" x = "110" y = "227"/>
+<sample type = "1" x = "92" y = "219"/>
+<sample type = "1" x = "83" y = "232"/>
+<sample type = "2" x = "43" y = "217"/>
+<sample type = "1" x = "42" y = "225"/>
+<sample type = "1" x = "53" y = "218"/>
+<sample type = "1" x = "117" y = "232"/>
+<sample type = "1" x = "49" y = "222"/>
+
+<sample type = "1" x = "62" y = "204"/>
+<sample type = "1" x = "43" y = "195"/>
+<sample type = "1" x = "70" y = "200"/>
+<sample type = "1" x = "90" y = "197"/>
+<sample type = "1" x = "91" y = "203"/>
+<sample type = "1" x = "99" y = "199"/>
+
+
         </enemies>
 
   	<special>	
