@@ -104,6 +104,10 @@ uint DialogManager::NumDialog(int id)
 
 DialogManager::~DialogManager()
 {
+	for (std::vector <Dialog*>::iterator it = dialog.begin(); it != dialog.end(); it++)
+	{
+		RELEASE((*it));
+	}
 	dialog.clear();
 }
 
@@ -112,6 +116,10 @@ Dialog::Dialog(int id, uint num_states) : id(id), num_states(num_states)
 
 Dialog::~Dialog()
 {
+	for (std::vector <TextLine*>::iterator it = texts.begin(); it != texts.end(); it++)
+	{
+		RELEASE((*it));
+	}
 	texts.clear();
 }
 

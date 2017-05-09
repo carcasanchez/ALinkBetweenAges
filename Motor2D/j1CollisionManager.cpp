@@ -74,6 +74,7 @@ bool j1CollisionManager::PreUpdate()
 	{	
 		if ((*it)->to_delete)
 		{
+			delete (*it);
 			colliders.erase(it);
 		}
 	}
@@ -121,9 +122,10 @@ bool j1CollisionManager::CleanUp()
 	LOG("Freeing all colliders");
 	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
 	{
-		colliders.erase(it);
+		delete (*it);
 	}
 
+	colliders.clear();
 	return true;
 }
 

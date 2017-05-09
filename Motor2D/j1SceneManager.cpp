@@ -66,6 +66,7 @@ bool j1SceneManager::Update(float dt)
 
 bool j1SceneManager::CleanUp()
 {
+	currentScene->CleanUp();
 	RELEASE(currentScene);
 	return true;
 }

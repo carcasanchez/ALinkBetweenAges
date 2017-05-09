@@ -10,6 +10,11 @@ UI_String::UI_String(UI_TYPE type, j1Module* callback) : UI_element(type, callba
 
 UI_String::UI_String(UI_TYPE type, SDL_Rect detection_box, char* new_text, bool act, SCROLL_TYPE drag) : UI_element(type, detection_box, act, drag), text(new_text) {}
 
+UI_String::~UI_String()
+{
+	App->font->CleanUp;
+}
+
 bool UI_String::Update_Draw()
 {
 	if (active)

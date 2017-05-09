@@ -19,13 +19,16 @@ j1QuestManager::~j1QuestManager()
 {
 	
 	for (std::list <Quest*>::iterator it = sleepQuests.begin(); it != sleepQuests.end(); it++)
-		sleepQuests.erase(it);
+		RELEASE((*it));
+	sleepQuests.clear();
 
 	for (std::list <Quest*>::iterator it = activeQuests.begin(); it != activeQuests.end(); it++)
-		activeQuests.erase(it);
+		RELEASE((*it));
+		activeQuests.clear();
 	
 	for (std::list <Quest*>::iterator it = closedQuests.begin(); it != closedQuests.end(); it++)
-		closedQuests.erase(it);
+		RELEASE((*it));
+	closedQuests.clear();
 }
 
 bool j1QuestManager::Awake(pugi::xml_node& config)
@@ -413,22 +416,21 @@ bool j1QuestManager::Update(float dt)
 Quest::~Quest()
 {
 	//Destroy each event of each quest
-	delete trigger;
+	RELEASE(trigger);
 
 
 	for (vector <Reward*>::iterator it = reward.begin(); it != reward.end(); it++)
 	{
-		delete (*it);
-		reward.erase(it);
+		RELEASE (*it);
 	}
-
+	reward.clear();
 
 	for (vector <Event*>::iterator it = steps.begin(); it != steps.end(); it++)
 	{
-		delete (*it);
-		steps.erase(it);
+		RELEASE (*it);
 	}
-	
+	steps.clear();
+
 }
 
 

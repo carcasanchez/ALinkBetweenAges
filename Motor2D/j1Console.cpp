@@ -93,10 +93,10 @@ bool j1Console::PostUpdate()
 
 bool j1Console::CleanUp()
 {
-	UI_String* result;
+	for (std::vector <UI_String*>::iterator it = Labels.begin(); it != Labels.end(); it++)
+		RELEASE((*it));
+	Labels.clear();
 
-	for (; labels_loaded >= 0; labels_loaded--)
-		Labels.pop_back();
 
 	delete Input_text;
 	return true;

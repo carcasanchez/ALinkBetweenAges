@@ -247,6 +247,7 @@ bool j1CutSceneManager::CleanUp()
 	{
 		//CLEAR STEPS & ELEMENTS OF THE CUTSCENE
 		active_cutscene->ClearScene();
+		RELEASE(active_cutscene);
 	}
 
 	//Clear paths list
@@ -429,7 +430,6 @@ bool Cutscene::ClearScene()
 	for (std::list<CS_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
 		RELEASE(it._Ptr->_Myval);
-		elements.erase(it);
 	}
 	elements.clear();
 
@@ -437,7 +437,6 @@ bool Cutscene::ClearScene()
 	for (std::list<CS_Step*>::iterator it = steps.begin(); it != steps.end(); it++)
 	{
 		RELEASE(it._Ptr->_Myval);
-		steps.erase(it);
 	}
 	steps.clear();
 

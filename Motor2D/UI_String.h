@@ -21,7 +21,7 @@ public:
 	int				text_size;
 	_TTF_Font*		text_font = nullptr;
 	SDL_Texture*	text_texture = nullptr;
-	
+
 	TEXTSTATE		dialog_state = FINISHED_TEXT;
 	int				blit_time = 0;
 
@@ -30,6 +30,8 @@ public:
 	UI_String(UI_TYPE, j1Module*);
 	UI_String(UI_TYPE type, SDL_Rect detection_box, char* new_text, bool active = true, SCROLL_TYPE draggable = FREE_SCROLL);
 	UI_String(const UI_String* other);
+
+	~UI_String();
 
 	
 	bool Set_String(char* new_text);				//Changes the string

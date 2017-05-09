@@ -236,6 +236,7 @@ bool Scene::CleanUp()
 		}
 
 		exits[sector].clear();
+		
 	}
 
 	exits.clear();
