@@ -16,7 +16,8 @@ enum NPC_TYPE
 	NPC_LITTLE_KID,
 	NPC_ZELDA,
 	SIGN,
-	NPC_GANON
+	NPC_GANON,
+	NPC_SOLDIER
 };
 
 
@@ -106,5 +107,12 @@ class Npc_Ganon : public Npc
 {
 public:
 	Npc_Ganon() : Npc() { npcType = NPC_GANON; };
+};
+
+
+class Npc_Soldier : public Npc
+{
+public:
+	Npc_Soldier() : Npc() { npcType = NPC_SOLDIER; };
 };
 #endif // !_PLAYER_H_

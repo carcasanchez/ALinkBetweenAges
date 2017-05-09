@@ -227,6 +227,9 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 	case SIGN:
 		ret = new Npc_Sign();
 		break;
+	case NPC_SOLDIER:
+		ret = new Npc_Soldier();
+		break;
 	default:
 		return nullptr;
 	}

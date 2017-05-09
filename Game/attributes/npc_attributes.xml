@@ -58,6 +58,13 @@
   		<texture file = "textures/Npc_sprites/Npc.png"/>
 	</sign>
 
+	<soldier>
+		<base life = "1" speed = "30"/>
+		<collider x = "15" y = "27" w = "32" h = "32" type = "2"/>
+		<animation file = "animations/enemies/green_soldier_animations.xml"/>
+  		<texture file = "textures/Enemy_sprites/Enemy.png"/>
+	</soldier>
+
   <ganon>
     <base life = "1" speed = "30"/>
     <collider x = "9" y = "13" w = "16" h = "15" type = "2"/>

@@ -88,7 +88,7 @@ bool j1GameLayer::Update(float dt)
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		em->CreateObject(1, mousePos.x, mousePos.y, ARROW_DROP);
+		em->CreateNPC(1, NPC_SOLDIER, mousePos.x, mousePos.y);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{

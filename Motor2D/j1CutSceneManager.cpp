@@ -12,6 +12,7 @@
 #include "j1SceneManager.h"
 #include "j1EntityManager.h"
 #include "j1Render.h"
+#include "j1Audio.h"
 #include "p2Log.h"
 
 //TODO 5.1: open the IntroCutscene.xml (in data.zip, in cutscenes folder) and fill THESE ELEMENTS correctly with this info:
@@ -1228,7 +1229,7 @@ CS_Music::~CS_Music()
 
 void CS_Music::Play()
 {
-	//App->audio->PlayMusic(path.c_str());
+	App->audio->PlayMusic(path.c_str());
 }
 //----------------------------------------
 
