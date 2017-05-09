@@ -4,7 +4,7 @@
     <sector>
       <!--sector 1-->
 
-       <music file="audio/music/kakariko_village.ogg"/>
+       <music file="audio/music/kakarikoDestroyed.ogg"/>
 
       <entities>
 

@@ -3,6 +3,8 @@
   <sectors>
     <sector>
       <!--sector 1-->
+      <music file="audio/music/forest.ogg"/>
+
       <entities>
  
 	  <npcs>

@@ -4,7 +4,7 @@
     <sector>
       <!--sector 1-->
 
-      <music file="audio/music/final_battle.ogg"/>
+      <music file="audio/music/finalBoss.ogg"/>
       <entities>
 
         <npcs>

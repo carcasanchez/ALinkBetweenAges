@@ -4,6 +4,8 @@
     <sector>
       <!--sector 1-->
       <camera locked="true"/>
+      <music file="audio/music/kakarikoVillage.ogg"/>
+
       <entities>
 
         <npcs>

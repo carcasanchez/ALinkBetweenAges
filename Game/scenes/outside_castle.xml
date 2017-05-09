@@ -3,6 +3,9 @@
   <sectors>
     <sector>
       <!--sector 1-->
+
+      <music file="audio/music/kakarikoDestroyed.ogg"/>
+
       <entities>
 
         <npcs>
@@ -22,7 +25,7 @@
 
       <exits>
         <exit destinyScene = "insideCastle" destinyExit = "0" x = "74" y = "55" w="4" h="1" direction = "1"/>
-	<exit destinyScene = "kakarikoVillage" destinyExit = "3" x = "70" y = "142" w="12" h="1" direction = "0"/>
+	<exit destinyScene = "kakarikoDestroyed" destinyExit = "0" x = "70" y = "142" w="12" h="1" direction = "0"/>
       </exits>
 
     </sector>
