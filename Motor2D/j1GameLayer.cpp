@@ -16,6 +16,7 @@
 #include "HUD.h"
 #include "j1QuestManager.h"
 #include "j1Audio.h"
+#include "j1CutSceneManager.h"
 
 
 // just for temporal wall collider
@@ -88,7 +89,8 @@ bool j1GameLayer::Update(float dt)
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		em->CreateNPC(1, NPC_SOLDIER, mousePos.x, mousePos.y);
+		//em->CreateNPC(1, NPC_SOLDIER, mousePos.x, mousePos.y);
+		App->cutsceneM->StartCutscene(2);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{

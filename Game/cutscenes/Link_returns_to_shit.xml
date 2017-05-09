@@ -1,0 +1,75 @@
+<!-- LINK RETURNS CUTSCENE -->
+
+<Cutscene name="Returns" id="3">
+
+  <!--CUTSCENE ELEMENTS-->
+  <elements>
+    <MAP>
+      <scene n="0" name="kakarikoDestroyed" active="true" scene_name="kakarikoDestroyed" load="true"/>
+    </MAP>
+
+    <NPC>
+	<npc n="0" name="soldier2" active="true" type="10" x="45" y="45" entity_id="2" empty="true"/>
+      <npc n="0" name="soldier1" active="true" type="10" x="45" y="42" entity_id="1" empty="true"/>
+      <npc n="1" name="Link" active="true" type="0" x="47" y="41" entity_id="-1" empty="true"/>
+    </NPC>
+
+    <ENEMIES>
+    </ENEMIES>
+
+    <IMAGES>
+    </IMAGES>
+
+    <TEXTS>
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Wake up you pussy licker" />
+    </TEXTS>
+
+    <MUSIC>
+    </MUSIC>
+
+    <FX>
+    </FX>
+
+
+  </elements>
+
+  <!--EXECUTE ALL STEPS IN ORDER-->
+
+  <steps>
+    <step  n="0" start="0" duration ="-1" input="false">
+      <element name="kakarikoDestroyed" action="load"/>
+    </step>
+
+    <step  n="1" start="-1" duration ="-1" input="false">
+      <element name="Link" action="create">
+        <character x="72" y="100" type_id="-1" id="-1"/>
+      </element>
+    </step>
+
+  <step  n="2" start="-1" duration ="-1" input="false">
+      <element name="soldier1" action="create">
+        <character x="21" y="11" type_id="0" id="1"/>
+      </element>
+    </step>
+
+    <step  n="3" start="-1" duration ="-1" input="false">
+      <element name="soldier2" action="create">
+        <character x="21" y="14" type_id="0" id="1"/>
+      </element>
+    </step>
+
+    <step  n="4" start="-1" duration ="-1" input="false">
+      <element name="soldier2" action="move">
+        <movement dest_x="25" dest_y="0" speed="40"/>
+      </element>
+    </step>
+
+   
+    <step  n="10" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="And get a fucki'n job"/>
+      </element>
+    </step>
+
+  </steps>
+</Cutscene>

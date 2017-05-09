@@ -480,7 +480,7 @@ bool Cutscene::LoadNPC(pugi::xml_node& node)
 			if (tmp_ent)
 			{
 				tmp->LinkEntity(tmp_ent);
-				iPoint new_pos = App->map->GetTileCenter({ node.attribute("x").as_int(), node.attribute("y").as_int() });
+				iPoint new_pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
 				tmp_ent->MoveTo(new_pos.x, new_pos.y);
 			}
 			else
@@ -491,7 +491,7 @@ bool Cutscene::LoadNPC(pugi::xml_node& node)
 		else
 		{
 			//If is empty later will load, and need those variablos
-			tmp->pos = App->map->GetTileCenter({ node.attribute("x").as_int(), node.attribute("y").as_int() });
+			tmp->pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
 			tmp->entity_id = node.attribute("entity_id").as_int();
 			tmp->entity_type = node.attribute("type").as_int();
 		}
