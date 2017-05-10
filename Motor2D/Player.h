@@ -46,6 +46,7 @@ public:
 
 	//Base
 	int maxLife;
+	int bonusLife = 0;
 	float maxStamina;
 	float stamina;
 	float staminaRec;

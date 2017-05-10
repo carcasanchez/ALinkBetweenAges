@@ -1099,6 +1099,7 @@ void Player::ChangeAge(LINK_AGE new_age)
 	else
 	{
 		age = new_age;
+		int tmp = life;
 		pugi::xml_node attributes;
 
 		switch (age)
@@ -1119,7 +1120,9 @@ void Player::ChangeAge(LINK_AGE new_age)
 
 		// base stats
 		pugi::xml_node node = attributes.child("base");
-		maxLife = life;
+	
+		maxLife = life + bonusLife;
+		life = tmp;
 		maxStamina = stamina = node.attribute("stamina").as_int(100);
 		staminaRec = node.attribute("staminaRec").as_float();
 

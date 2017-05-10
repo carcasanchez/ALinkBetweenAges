@@ -182,6 +182,7 @@ void j1GameLayer::PickObject(Object * object)
 	case HEART_CONTAINER:
 		em->player->maxLife++;
 		em->player->life = em->player->maxLife;
+		em->player->bonusLife++;
 		break;
 	case BOMB_DROP:
 		if (em->player->bombs < em->player->maxBombs)
@@ -250,13 +251,14 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 	pos.append_attribute("x") = em->player->currentPos.x;
 	pos.append_attribute("y") = em->player->currentPos.y;
 	player.append_attribute("life") = em->player->life;
-	player.append_attribute("max_life") = em->player->maxLife;
+	player.append_attribute("maxLife") = em->player->maxLife;
 	player.append_attribute("direction") = em->player->currentDir;
 	player.append_attribute("age") = em->player->age;
 	player.append_attribute("rupees") = em->player->rupees;
 	player.append_attribute("arrows") = em->player->arrows;
 	player.append_attribute("bombs") = em->player->bombs;
 	player.append_attribute("spin") = em->player->ableToSpin;
+	player.append_attribute("bonus") = em->player->bonusLife;
 
 	pugi::xml_node inventory = player.append_child("inventory");
 	for (list<OBJECT_TYPE>::iterator it = em->player->inventory.begin(); it!= em->player->inventory.end(); it++)
@@ -277,11 +279,13 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 	em->player->currentPos.x = data.child("player").child("position").attribute("x").as_int();
 	em->player->currentPos.y = data.child("player").child("position").attribute("y").as_int();
 	em->player->life = data.child("player").attribute("life").as_int();
-	em->player->maxLife = data.child("player").attribute("max_life").as_int();
 	em->player->rupees = data.child("player").attribute("rupees").as_int();
+	em->player->maxLife = data.child("player").attribute("maxLife").as_int();
 
 	em->player->changeAge = data.child("player").attribute("age").as_int();
 	em->player->ableToSpin = data.child("player").attribute("spin").as_bool();
+	em->player->bonusLife = data.child("player").attribute("bonus").as_int();
+
 
 	em->player->inventory.clear();
 
@@ -304,6 +308,8 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {
 	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC || c2->type == COLLIDER_BUSH || c2->type == COLLIDER_CHEST))
 	{
+		if (!c1->parent)
+			return false;
 		iPoint Movement;
 		if (abs(c1->rect.x - c2->rect.x) < abs(c1->rect.y - c2->rect.y))
 		{
