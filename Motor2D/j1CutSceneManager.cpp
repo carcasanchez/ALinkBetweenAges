@@ -110,6 +110,9 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 			for (temp = elements_node.child("IMAGES").child("image"); temp != NULL; temp = temp.next_sibling("image"))
 				temp_cutscene->LoadImg(temp);
 			
+			//Load Camera
+			for (temp = elements_node.child("CAMERA").child("cam"); temp != NULL; temp = temp.next_sibling("cam"))
+				temp_cutscene->LoadCam(temp);
 
 			//Load Music
 
@@ -520,6 +523,24 @@ bool Cutscene::LoadImg(pugi::xml_node& node)
 	return false;
 }
 
+bool Cutscene::LoadCam(pugi::xml_node& node)
+{
+	bool ret = false;
+
+	if (node != NULL)
+	{
+		CS_Element* new_cam = new CS_Element(CS_CAM, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), node.attribute("file").as_string(""));
+
+		if (new_cam)
+		{
+			elements.push_back(new_cam);
+			ret = true;
+		}
+	}
+
+	return ret;
+}
+
 bool Cutscene::LoadText(pugi::xml_node& node)
 {
 	bool ret = false;
@@ -678,6 +699,16 @@ bool CS_Step::DoAction(float dt)
 		CreateCharacter();
 		break;
 
+	case ACT_FREE_CAM:
+		action_name = "free";
+		FreeCamera();
+		break;
+
+	case ACT_LOCK_CAM:
+		action_name = "lock";
+		LockCamera();
+		break;
+
 	default:
 		action_name = "none";
 		break;
@@ -713,7 +744,10 @@ void CS_Step::FinishStep()
 	finished = true;
 	
 	if (act_type == ACT_SET_STRING)
-		dynamic_cast<CS_Text*>(element)->Changed_string = false;
+	{
+		CS_Text* tmp = (CS_Text*)element;
+		tmp->Changed_string = false;
+	}
 
 	cutscene->StepDone(); //Increment the "steps done" counter
 	LOG("Step %i finished at %.3fs", n, cutscene->timer.ReadSec());
@@ -773,6 +807,14 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	{
 		act_type = ACT_CREATE;
 	}
+	else if (action_type == "free")
+	{
+		act_type = ACT_FREE_CAM;
+	}
+	else if (action_type == "lock")
+	{
+		act_type = ACT_LOCK_CAM;
+	}
 	else
 	{
 		act_type = ACT_NONE;
@@ -798,6 +840,10 @@ void CS_Step::LoadMovement(iPoint destination, int speed, const std::string& dir
 	{
 		direction = CS_RIGHT;
 	}
+	else if (dir == "teleport")
+	{
+		direction = CS_TELEPORT;
+	}
 	else
 	{
 		direction = NO_DIR;
@@ -807,7 +853,9 @@ void CS_Step::LoadMovement(iPoint destination, int speed, const std::string& dir
 	origin = element->GetPos();
 
 	//Set the destination that will reach the linked element
-	dest = origin + destination;
+	if (direction == CS_TELEPORT)
+		dest = App->map->GetTileCenter(destination);
+	else dest = origin + destination;
 
 	//Set the movement speed
 	mov_speed = speed;
@@ -941,6 +989,14 @@ bool CS_Step::DoMovement(float dt)
 			tmp->Move(ceil(mov_speed*dt), 0);
 			tmp->GetMyEntity()->currentDir = DIRECTION::D_RIGHT;
 			break;
+
+		case CS_TELEPORT:
+			if (tmp->GetMyEntity())
+			{
+				tmp->GetMyEntity()->currentPos = { dest.x, dest.y };
+			}
+			break;
+
 		case NO_DIR:
 			break;
 		default:
@@ -1004,6 +1060,10 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 				ret = true;
 				FinishStep();
 			}
+			break;
+		case CS_TELEPORT:
+			ret = true;
+			FinishStep();
 			break;
 		default:
 			break;
@@ -1100,6 +1160,35 @@ void CS_Step::DisableElement()
 		element->active = false;
 		LOG("Step %i Disabling %s", n, element->name.c_str());
 	}
+
+	if (element->GetType() == CS_TEXT)
+	{
+
+		CS_Text* tmp = (CS_Text*)element;
+		tmp->GetText()->Set_Active_state(false);
+		//element->active = false;
+		LOG("Step %i Disabling %s", n, element->name.c_str());
+		FinishStep();
+	}
+}
+
+void CS_Step::FreeCamera()
+{
+	if (element->GetType() == CS_CAM)
+	{
+		App->render->freeCamera = true;
+		FinishStep();
+	}
+	
+}
+
+void CS_Step::LockCamera()
+{
+	if (element->GetType() == CS_CAM)
+	{
+		App->render->freeCamera = false;
+		FinishStep();
+	}
 }
 
 void CS_Step::Fade()
@@ -1176,6 +1265,7 @@ void CS_Step::GetInput()
 	{
 		if (dynamic_cast<CS_Text*>(element)->GetText()->dialog_state != FINISHED_TEXT)
 			dynamic_cast<CS_Text*>(element)->GetText()->ForcedFinish();
+		
 		else FinishStep();
 	}
 

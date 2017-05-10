@@ -9,8 +9,11 @@
     </MAP>
 
     <NPC>
-      <npc n="0" name="Zelda" active="true" type="7" x ="75" y ="70" entity_id="8" empty="true"/>
-      <npc n="1" name="Link" active="true" type="0" x="75" y="72" entity_id="-1" empty="true"/>
+      <npc n="0" name="Zelda" active="true"         type="7" x ="75" y ="70" entity_id="8" empty="true"/>
+      <npc n="1" name="Link" active="true"          type="0" x="75" y="72" entity_id="-1" empty="true"/>
+      <npc n="2" name="tio_ben" active="true"       type="0" x ="75" y ="70" entity_id="1" empty="true"/>
+      <npc n="3" name="ansiana" active="true"       type="4" x="75" y="72" entity_id="5" empty="true"/>
+      <npc n="4" name="npse_generico" active="true" type="2" x ="75" y ="70" entity_id="13" empty="true"/>
     </NPC>
 
     <ENEMIES>
@@ -29,6 +32,9 @@
     <FX>
     </FX>
 
+    <CAMERA>
+      <cam n="0" name="camera" active="true"/>
+    </CAMERA>
 
   </elements>
 
@@ -54,7 +60,7 @@
 
     <step  n="4" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
-        <movement dest_x="200" dest_y="0" speed="25"/>
+        <movement dest_x="200" dest_y="0" speed="200"/>
       </element>
     </step>
 
@@ -64,21 +70,103 @@
       </element>
     </step>
 
-    <step  n="6" start="-1" duration ="-1" input="true">
+     <step n="6" start ="-1" duration="-1" input="false">
+      <element name="camera" action="free"/>
+    </step>
+    
+    <step  n="7" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text="Inserte Text 3"/>
       </element>
     </step>
 
-    <step  n="7" start="-1" duration ="-1" input="false">
+    <step  n="8" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
-        <movement dest_x="280" dest_y="0" speed="25"/>
+        <movement dest_x="300" dest_y="0" speed="200"/>
       </element>
     </step>
 
-    <step  n="8" start="-1" duration ="-1" input="false">
+    <step  n="9" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="250" dest_y="0" speed="15"/>
+        <movement dest_x="300" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="10" start="-1" duration ="-1" input="false">
+      <element name="village" action="load"/>
+    </step>
+
+    <step  n="11" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="teleport">
+        <movement dest_x="5" dest_y="230" speed="50"/>
+      </element>
+    </step>
+
+    <step n="12" start ="-1" duration="-1" input="false">
+      <element name="camera" action="lock"/>
+    </step>
+
+    <step  n="13" start="-1" duration ="-1" input="false">
+      <element name="ansiana" action="create"/>
+    </step>
+
+    <step  n="14" start="-1" duration ="-1" input="false">
+      <element name="ansiana" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="15" start="-1" duration ="-1" input="false">
+      <element name="npse_generico" action="create"/>
+    </step>
+
+    <step  n="16" start="-1" duration ="-1" input="false">
+      <element name="npse_generico" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="17" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="create"/>
+    </step>
+
+    <step  n="18" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="teleport">
+        <movement dest_x="100" dest_y="228" speed="50"/>
+      </element>
+    </step>
+        
+    <step  n="19" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="create"/>
+    </step>
+
+    <step  n="20" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="teleport">
+        <movement dest_x="5" dest_y="228" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="21" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Debemos darnos prisa, mierda"/>
+      </element>
+    </step>
+    
+    <step  n="22" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="right">
+        <movement dest_x="-150" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="23" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="left">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="24" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="right">
+        <movement dest_x="-220" dest_y="0" speed="200"/>
       </element>
     </step>
 

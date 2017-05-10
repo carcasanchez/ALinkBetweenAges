@@ -82,6 +82,7 @@ public:
 	void CenterCamera(iPoint pos);
 	void SetBackgroundColor(SDL_Color color);
 	bool InsideCameraZone(SDL_Rect rect) const;
+	bool freeCamera = false;
 
 	// Sprite handling
 	bool Draw(Sprite* sprite);
@@ -103,7 +104,7 @@ public:
 private:
 
 	bool PrintUI();
-	bool freeCamera = false;
+	
 
 public:
 
