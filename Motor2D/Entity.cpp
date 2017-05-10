@@ -289,6 +289,20 @@ bool Entity::MoveTo(int x, int y)
 	return ret;
 }
 
+bool Entity::MoveToTile(int x, int y)
+{
+
+	if (x <= App->map->data->width && y <= App->map->data->height)
+	{
+		iPoint new_pos = App->map->GetTileCenter({ x,y });
+		currentPos.x = new_pos.x;
+		currentPos.y = new_pos.y;
+		return true;
+	}
+
+	return false;
+}
+
 void Entity::UpdateCollider()
 {
 	col->rect.x = currentPos.x - colPivot.x;

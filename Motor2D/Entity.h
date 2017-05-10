@@ -79,6 +79,7 @@ public:
 
 	virtual bool Move(int x, int y);
 	virtual bool MoveTo(int, int);
+	virtual bool MoveToTile(int x, int y);
 	virtual void UpdateCollider();
 
 	virtual bool GoTo(iPoint dest, int speed, float dt);

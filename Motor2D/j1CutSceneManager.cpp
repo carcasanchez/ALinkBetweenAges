@@ -772,7 +772,6 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	else if (action_type == "create")
 	{
 		act_type = ACT_CREATE;
-		LoadCharacter(node.child("element").child("character"));
 	}
 	else
 	{
@@ -839,9 +838,7 @@ void CS_Step::LoadScene()
 void CS_Step::LoadCharacter(pugi::xml_node& node)
 {
 	//si funsiona lo borro
-	pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
-	type = node.attribute("type_id").as_int();
-	id = node.attribute("id").as_int();
+	
 }
 
 void CS_Step::CreateCharacter()
@@ -857,7 +854,7 @@ void CS_Step::CreateCharacter()
 			if (ent)
 			{
 				tmp->LinkEntity(ent);
-				tmp->GetMyEntity()->MoveTo(tmp->pos.x, tmp->pos.y);
+				tmp->GetMyEntity()->MoveToTile(tmp->pos.x, tmp->pos.y);
 			}
 			else tmp->LinkEntity(App->game->em->CreateNPC(1, (NPC_TYPE)tmp->entity_type, tmp->pos.x, tmp->pos.y, tmp->entity_id));
 			
@@ -867,7 +864,7 @@ void CS_Step::CreateCharacter()
 			if (App->game->em->player)
 			{
 				tmp->LinkEntity(App->game->em->player);
-				App->game->em->player->MoveTo(tmp->pos.x, tmp->pos.y);
+				App->game->em->player->MoveToTile(tmp->pos.x, tmp->pos.y);
 			}
 			else tmp->LinkEntity(App->game->em->CreatePlayer(tmp->pos.x, tmp->pos.y, YOUNG));
 			
@@ -1352,7 +1349,7 @@ void CS_npc::Move(float x, float y)
 iPoint CS_npc::GetPos()
 {
 	if (empty)
-		return pos;
+		return App->map->GetTileCenter(pos);
 	else return entity ? entity->currentPos : iPoint(0,0);
 }
 // ------------------------------------------------------
