@@ -3,29 +3,43 @@
 
   <name value = "0" />
 
-  <IDLE>
-    <!-- Idle -->
+   <IDLE>
+   <!-- Idle -->
     <name value = "0"  />
 
-    <UP>
-      <values name = "0" x ="22" y = "53" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
-    </UP>
-
     <DOWN>
-      <values name = "1" x ="1" y = "53" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+      <values name = "1" x ="123" y = "53" w = "16" h = "23" frameNumber = "1" margin = "" pivot_x = "8" pivot_y = "20" flip= "0"/>
     </DOWN>
-
-    <RIGHT>
-      <values name = "2" x ="43" y = "53" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
-    </RIGHT>
-
-    <LEFT>
-      <values name = "3" x ="64" y = "53" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
-    </LEFT>
 
     <loop value = "true" />
 
     <speed value = "0.15" />
 
   </IDLE>
+
+  <WALKING>
+     <name value = "1"  />
+	
+	<DOWN>
+		<values name = "1" x ="3" y = "55" w = "16" h = "23" frameNumber = "2" margin = "1" pivot_x = "8" pivot_y = "20" flip= "0"/>
+	</DOWN>
+
+	<UP>
+		<values name = "0" x ="84" y = "55" w = "16" h = "23" frameNumber = "2" margin = "1" pivot_x = "8" pivot_y = "20" flip= "0"/>
+	</UP>
+
+	<RIGHT>
+		<values name = "2" x ="46" y = "55" w = "13" h = "23" frameNumber = "2" margin = "1" pivot_x = "7" pivot_y = "21" flip= "0"/>
+	</RIGHT>
+
+	<LEFT>
+		<values name = "2" x ="46" y = "55" w = "13" h = "23" frameNumber = "2" margin = "1" pivot_x = "7" pivot_y = "21" flip= "0"/>
+	</LEFT>
+
+	<loop value = "true"  />
+	
+	<speed value = "0.3"  />
+
+  </WALKING>
+
 </animations>
