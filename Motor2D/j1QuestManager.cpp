@@ -19,17 +19,7 @@ j1QuestManager::j1QuestManager() : j1Module()
 j1QuestManager::~j1QuestManager()
 {
 	
-	for (std::list <Quest*>::iterator it = sleepQuests.begin(); it != sleepQuests.end(); it++)
-		RELEASE((*it));
-	sleepQuests.clear();
-
-	for (std::list <Quest*>::iterator it = activeQuests.begin(); it != activeQuests.end(); it++)
-		RELEASE((*it));
-	activeQuests.clear();
 	
-	for (std::list <Quest*>::iterator it = closedQuests.begin(); it != closedQuests.end(); it++)
-		RELEASE((*it));
-	closedQuests.clear();
 }
 
 bool j1QuestManager::Awake(pugi::xml_node& config)
@@ -42,11 +32,16 @@ bool j1QuestManager::Awake(pugi::xml_node& config)
 
 void j1QuestManager::LoadQuests(pugi::xml_node & questDataFile)
 {
+
+	CleanUp();
+
 	for (pugi::xml_node quest = questDataFile.first_child(); quest; quest = quest.next_sibling("quest"))
 	 {
 		//Load quest data from XML
 		Quest* new_quest = new Quest();
 		new_quest->id = quest.attribute("id").as_int();
+
+
 
 		pugi::xml_node reward;
 		for (reward = quest.child("reward"); reward; reward = reward.next_sibling("reward"))
@@ -408,6 +403,23 @@ bool j1QuestManager::Update(float dt)
 		RewardCallback(completed->reward);
 		completed = nullptr;
 	}
+
+	return true;
+}
+
+bool j1QuestManager::CleanUp()
+{
+	for (std::list <Quest*>::iterator it = sleepQuests.begin(); it != sleepQuests.end(); it++)
+		RELEASE((*it));
+	sleepQuests.clear();
+
+	for (std::list <Quest*>::iterator it = activeQuests.begin(); it != activeQuests.end(); it++)
+		RELEASE((*it));
+	activeQuests.clear();
+
+	for (std::list <Quest*>::iterator it = closedQuests.begin(); it != closedQuests.end(); it++)
+		RELEASE((*it));
+	closedQuests.clear();
 
 	return true;
 }

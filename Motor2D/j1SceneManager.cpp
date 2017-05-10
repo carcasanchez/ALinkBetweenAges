@@ -12,6 +12,7 @@
 #include "j1Pathfinding.h"
 #include "j1Audio.h"
 
+
 j1SceneManager::j1SceneManager() : currentScene(nullptr)
 {
 	name = ("sceneManager");
@@ -107,6 +108,7 @@ bool j1SceneManager::ChangeScene()
 
 	if (ret)
 	{
+
 		App->pathfinding->CleanUp();
 		App->game->em->CleanEntities();
 		RELEASE(currentScene);

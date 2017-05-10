@@ -148,6 +148,7 @@ public:
 	~j1QuestManager();
 
 	bool Awake(pugi::xml_node&);
+	bool CleanUp();
 
 	void LoadQuests(pugi::xml_node&);
 	Event* createEvent(pugi::xml_node&);

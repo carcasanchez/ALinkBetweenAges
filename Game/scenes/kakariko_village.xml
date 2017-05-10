@@ -51,12 +51,9 @@
 		<reward type ="0">
 			<cinematic id="5"/>
 		</reward >
-    
-
-
-
+      
       <trigger type ="0">
-     			 <collider x = "113" y="86" w="30" h="30"/>
+     			 <collider x = "113" y="1120" w="30" h="30"/>
 		</trigger>
 
 	  </quest>
