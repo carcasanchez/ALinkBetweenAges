@@ -57,6 +57,7 @@
       <scene name = "linkHouse" file = "link_house.xml"/>
       <scene name = "shop" file = "shop.xml"/>
       <scene name = "kakarikoDestroyed" file = "kakariko_destroyed.xml"/>
+      <scene name = "shopDestroyed" file = "shop_destroyed.xml"/>
     </scenes>
   </sceneManager>
   

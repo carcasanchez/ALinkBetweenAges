@@ -1,0 +1,30 @@
+<!-- shop -->
+<scene name = "shopDestroyed" map= "shop.tmx">
+  <sectors>
+    <sector>
+      <!--sector 1-->
+      <camera locked="true"/>
+      <music file="audio/music/kakarikoDestroyed.ogg"/>
+
+      <entities>
+
+        <npcs>
+        </npcs>
+
+        <enemies>
+		
+
+        </enemies>
+
+        <special>
+          <!--rocks, grass, etc-->
+        </special>
+      </entities>
+
+      <exits>
+        <exit destinyScene = "kakarikoVillage" destinyExit = "2" x = "15" y = "29" w="2" h="1" direction = "0"/>
+      </exits>
+
+    </sector>
+  </sectors>
+</scene>
