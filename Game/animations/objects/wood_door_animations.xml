@@ -1,0 +1,17 @@
+﻿<!--Wood Door Animations -->
+<animations>
+	<IDLE>
+
+		<name value = "0" />
+		
+		<DOWN>
+			 <values name = "1" x ="0" y = "0" w = "30" h = "16" frameNumber = "1" margin = "1" pivot_x = "15" pivot_y = "14" flip= "0"/>
+		</DOWN>	
+
+		
+		<loop value = "false" />
+
+		<speed value = "0.6" />
+
+	</IDLE>
+</animations>

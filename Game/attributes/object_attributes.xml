@@ -188,6 +188,14 @@
     <animation file = "animations/objects/stone_door_animations.xml"/>
     <texture file ="textures/Object_sprites/stoneDoor.png"/>
   </stone_door>
+  
+  
+  <wood_door>
+    <base life = "1"/>
+    <collider x = "15" y = "14" w = "30" h = "16" type = "20"/>
+    <animation file = "animations/objects/wood_door_animations.xml"/>
+    <texture file ="textures/Object_sprites/woodDoor.png"/>
+  </wood_door>
 
 
 </attributes>

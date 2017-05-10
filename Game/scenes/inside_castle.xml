@@ -3,6 +3,10 @@
   <sectors>
     <sector>
       <!--sector 1-->
+
+      <music file="audio/music/kakarikoDestroyed.ogg"/>
+
+      
       <entities>
 
         <npcs>

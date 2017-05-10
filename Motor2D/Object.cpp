@@ -122,6 +122,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir
 			case STONE_DOOR:
 				attributes = attributes.child("stone_door");
 				break;
+			case WOOD_DOOR:
+				attributes = attributes.child("wood_door");
+				break;
 		}		
 
 		LoadAttributes(attributes);
