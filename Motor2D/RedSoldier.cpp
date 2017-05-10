@@ -57,6 +57,10 @@ bool RedSoldier::Spawn(std::string file, iPoint pos)
 
 bool RedSoldier::Update(float dt)
 {
+	if (dt > 0.1)
+	{
+		dt = 0;
+	}
 	switch (enemyState)
 	{
 	case(PATROLING):

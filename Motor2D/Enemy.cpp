@@ -25,6 +25,8 @@ void Enemy::OnDeath()
 //Move between different points
 bool Enemy::Patroling(float dt)
 {
+
+
 	actionState = WALKING;
 	if (App->game->em->player->currentPos.DistanceTo(currentPos) < hostileRange)
 	{
