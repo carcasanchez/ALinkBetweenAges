@@ -10,11 +10,11 @@
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</green_soldier>
 	<red_soldier>
-		<base life = "4" speed = "30" damage ="2"/>
+		<base life = "5" speed = "35" damage ="2"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "3"/>
 		<ranges hostile= "185" fight = "55" out="60" />
 		<ratios attack = "500" charge_time = "1000"/>  <!-- In Miliseconds -->
-		<combat_speeds chase_speed = "50" flanking_speed = "40" attack_speed = "110"/>
+		<combat_speeds chase_speed = "55" flanking_speed = "40" attack_speed = "120"/>
 		<animation file = "animations/enemies/red_soldier_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</red_soldier>
@@ -44,14 +44,14 @@
 	<wizdrove>
 		<base life = "2" speed = "30" damage ="1"/>
 		<collider x = "9" y = "22" w = "15" h = "18" type = "3"/>
-		<ranges hostile= "185" out="185" />
+		<ranges hostile= "280" out="280" />
 		<ratios attack = "1000"/>  <!-- In Miliseconds -->
 		<animation file = "animations/enemies/wizdrove_animations.xml"/>
   		<texture file = "textures/Enemy_sprites/Enemy.png"/>
 	</wizdrove>
 
 	<eyegore>
-		<base life = "9" speed = "1" rage_speed="60" rage_life ="3" damage ="1"/>
+		<base life = "9" speed = "1" rage_speed="50" rage_life ="3" damage ="1"/>
 		<collider x = "12" y = "22" w = "20" h = "20" type = "3"/>
   		<ranges hostile= "185" out="185" />
 		<ratios attack = "1000"/>  <!-- In Miliseconds -->

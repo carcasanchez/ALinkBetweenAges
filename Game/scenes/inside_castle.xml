@@ -96,6 +96,22 @@
 		<sample type = "1" x = "36" y = "129"/>
 		<sample type = "1" x = "184" y = "138"/>
 
+
+
+
+	<sample type = "2" x = "106" y = "191"/>
+	<sample type = "2" x = "108" y = "116"/>
+	<sample type = "2" x = "19" y = "165"/>
+	<sample type = "2" x = "246" y = "188"/>
+
+	<sample type = "5" x = "215" y = "159"/>
+	<sample type = "5" x = "216" y = "146"/>
+	<sample type = "5" x = "216" y = "128"/>
+	<sample type = "5" x = "216" y = "118"/>
+
+	<sample type = "6" x = "250" y = "63"/>
+	<sample type = "6" x = "235" y = "36"/>
+	<sample type = "6" x = "265" y = "36"/>
         </enemies>
 
         <special>
