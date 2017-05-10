@@ -1,0 +1,86 @@
+<!-- RUNNING OUT OF THE FOREST CUTSCENE -->
+
+<Cutscene name="running forest" id="2">
+
+  <!--CUTSCENE ELEMENTS-->
+  <elements>
+    <MAP>
+      <scene n="0" name="village" active="true" scene_name="kakarikoVillage"  load="true"/>
+    </MAP>
+
+    <NPC>
+      <npc n="0" name="Zelda" active="true" type="7" x ="75" y ="70" entity_id="8" empty="true"/>
+      <npc n="1" name="Link" active="true" type="0" x="75" y="72" entity_id="-1" empty="true"/>
+    </NPC>
+
+    <ENEMIES>
+    </ENEMIES>
+
+    <IMAGES>
+    </IMAGES>
+
+    <TEXTS>
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Texto 1" />
+    </TEXTS>
+
+    <MUSIC>
+    </MUSIC>
+
+    <FX>
+    </FX>
+
+
+  </elements>
+
+  <!--EXECUTE ALL STEPS IN ORDER-->
+  <steps>
+    <step  n="0" start="0" duration ="-1" input="false">
+      <element name="Zelda" action="create"/>    
+    </step>
+
+  <step  n="1" start="-1" duration ="-1" input="false">
+      <element name="Link" action="create"/>  
+    </step>
+
+    <step  n="2" start="-1" duration ="-1" input="true">
+      <element name="Text" action="enable"/>
+    </step>
+
+    <step  n="3" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Inserte Text 2"/>
+      </element>
+    </step>
+
+    <step  n="4" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="right">
+        <movement dest_x="200" dest_y="0" speed="25"/>
+      </element>
+    </step>
+
+    <step  n="5" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="left">
+        <movement dest_x="200" dest_y="0" speed="15"/>
+      </element>
+    </step>
+
+    <step  n="6" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Inserte Text 3"/>
+      </element>
+    </step>
+
+    <step  n="7" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="right">
+        <movement dest_x="280" dest_y="0" speed="25"/>
+      </element>
+    </step>
+
+    <step  n="8" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="right">
+        <movement dest_x="250" dest_y="0" speed="15"/>
+      </element>
+    </step>
+
+  </steps>
+</Cutscene>
