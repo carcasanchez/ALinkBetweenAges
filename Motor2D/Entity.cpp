@@ -160,7 +160,7 @@ bool Entity::LoadAnimations(std::string file)
 bool Entity::Move(int x, int y)
 {
 	bool ret = true;
-	
+	lastPos = currentPos;
 
 	if (type == ENEMY)
 	{
@@ -273,6 +273,8 @@ bool Entity::Move(int x, int y)
 			ret = false;
 		}
 	}
+
+	
 	return ret;
 }
 

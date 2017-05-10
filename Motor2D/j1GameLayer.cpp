@@ -423,6 +423,12 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 			}
 			return true;
 		}
+
+		if (c2->type == COLLIDER_WALL || c2->type == COLLIDER_WOOD_DOOR)
+		{
+			c1->parent->currentPos = c1->parent->lastPos;
+			return true;
+		}
 	}
 
 	if (c1->type == COLLIDER_NPC)
