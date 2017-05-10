@@ -100,6 +100,7 @@
 
         <special>
           <door object_type="27" x="37" y="147" direction="1" id="1"/>
+          <door object_type="29" x="109" y="103" direction="1" id="1"/>
         </special>
 
        
@@ -108,7 +109,7 @@
 
       <exits>
         <exit destinyScene = "outsideCastle" destinyExit = "0" x = "107" y = "237" w="2" h="1" direction = "0"/>
-	<exit destinyScene = "bossRoom" destinyExit = "0" x = "107" y = "102" w="4" h="1" direction = "1"/>
+	<exit destinyScene = "bossRoom" destinyExit = "0" x = "107" y = "101" w="4" h="1" direction = "1"/>
       </exits>
 
 

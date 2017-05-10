@@ -113,6 +113,8 @@ bool UI_String::Update()
 bool UI_String::Set_String(char* new_text)
 {
 	text = new_text;
+
+
 	blit_text.clear();
 
 	if (text_texture)

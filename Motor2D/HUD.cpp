@@ -65,6 +65,8 @@ bool Hud::CleanUp()
 	RELEASE(stamina_green);
 	RELEASE(stamina_yellow);
 	RELEASE(stamina_red);
+	RELEASE(items_frame_inactive);
+	RELEASE(items_frame_using);
 
 	return true;
 }

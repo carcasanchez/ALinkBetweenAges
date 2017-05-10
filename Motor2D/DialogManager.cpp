@@ -129,6 +129,6 @@ TextLine::TextLine(int NPCstate, std::string text) : state(NPCstate)
 
 TextLine::~TextLine()
 {
-	delete line;
+	RELEASE(line);
 }
 
