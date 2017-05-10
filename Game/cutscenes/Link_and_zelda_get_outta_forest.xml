@@ -11,9 +11,28 @@
     <NPC>
       <npc n="0" name="Zelda" active="true"         type="7" x ="75" y ="70" entity_id="8" empty="true"/>
       <npc n="1" name="Link" active="true"          type="0" x="75" y="72" entity_id="-1" empty="true"/>
-      <npc n="2" name="tio_ben" active="true"       type="0" x ="75" y ="70" entity_id="1" empty="true"/>
+      <npc n="2" name="tio_ben" active="true"       type="0" x ="50" y ="70" entity_id="1" empty="true"/>
       <npc n="3" name="ansiana" active="true"       type="4" x="75" y="72" entity_id="5" empty="true"/>
       <npc n="4" name="npse_generico" active="true" type="2" x ="75" y ="70" entity_id="13" empty="true"/>
+
+      <npc n="4" name="soldier_1" active="true" type="10" x ="148" y ="227" entity_id="20" empty="true"/>
+      <npc n="4" name="soldier_2" active="true" type="10" x ="148" y ="230" entity_id="21" empty="true"/>
+      <npc n="4" name="soldier_3" active="true" type="10" x ="152" y ="225" entity_id="22" empty="true"/>
+      <npc n="4" name="soldier_4" active="true" type="10" x ="152" y ="230" entity_id="23" empty="true"/>
+      <npc n="4" name="soldier_5" active="true" type="10" x ="156" y ="225" entity_id="24" empty="true"/>
+      <npc n="4" name="soldier_6" active="true" type="10" x ="156" y ="230" entity_id="25" empty="true"/>
+      <npc n="4" name="soldier_7" active="true" type="10" x ="160" y ="225" entity_id="26" empty="true"/>
+      <npc n="4" name="soldier_8" active="true" type="10" x ="160" y ="230" entity_id="27" empty="true"/>
+      <npc n="4" name="soldier_9" active="true" type="10" x ="148" y ="225" entity_id="28" empty="true"/>
+      <npc n="4" name="soldier_10" active="true" type="10" x ="164" y ="225" entity_id="30" empty="true"/>
+      <npc n="4" name="soldier_11" active="true" type="10" x ="164" y ="230" entity_id="31" empty="true"/>
+      <npc n="4" name="soldier_12" active="true" type="10" x ="168" y ="225" entity_id="32" empty="true"/>
+      <npc n="4" name="soldier_13" active="true" type="10" x ="168" y ="230" entity_id="33" empty="true"/>
+      <npc n="4" name="soldier_14" active="true" type="10" x ="172" y ="225" entity_id="34" empty="true"/>
+      <npc n="4" name="soldier_15" active="true" type="10" x ="172" y ="230" entity_id="35" empty="true"/>
+      <npc n="4" name="soldier_16" active="true" type="10" x ="176" y ="225" entity_id="36" empty="true"/>
+      <npc n="4" name="soldier_17" active="true" type="10" x ="176" y ="230" entity_id="37" empty="true"/>
+      <npc n="4" name="GANON" active="true" type="9" x ="176" y ="227" entity_id="29" empty="true"/>
     </NPC>
 
     <ENEMIES>
@@ -132,7 +151,7 @@
 
     <step  n="18" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="teleport">
-        <movement dest_x="100" dest_y="228" speed="50"/>
+        <movement dest_x="80" dest_y="228" speed="50"/>
       </element>
     </step>
         
@@ -159,15 +178,361 @@
     </step>
 
     <step  n="23" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="right">
+        <movement dest_x="-150" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="24" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Porfin os encuentro, seldu debes ir al castillo, selda 2 tu ven conmigo"/>
+      </element>
+    </step>
+
+    <step  n="25" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="right">
+        <movement dest_x="-220" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="26" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="right">
+        <movement dest_x="200" dest_y="0" speed="100"/>
+      </element>
+    </step>
+
+    <step  n="27" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="left">
+        <movement dest_x="-160" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="28" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Adios link, nos vemos :D"/>
+      </element>
+    </step>
+    
+    <step  n="29" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="right">
+        <movement dest_x="-100" dest_y="0" speed="200"/>
+      </element>
+    </step>
+    
+    <step  n="30" start="-1" duration ="-1" input="false">
+      <element name="Zelda" action="move" dir="up">
+        <movement dest_x="0" dest_y="920" speed="200"/>
+      </element>
+    </step>
+
+    <step n="31" start ="-1" duration="-1" input="false">
+      <element name="camera" action="free"/>
+    </step>
+
+    <step  n="32" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Demonos prisa, no hay tiempo que perder"/>
+      </element>
+    </step>
+
+    <step  n="33" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="right">
+        <movement dest_x="300" dest_y="0" speed="100"/>
+      </element>
+    </step>
+    
+    <step  n="34" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="right">
+        <movement dest_x="70" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="35" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="teleport">
+        <movement dest_x="142" dest_y="228" speed="100"/>
+      </element>
+    </step>
+
+    <step  n="36" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="teleport">
+        <movement dest_x="140" dest_y="228" speed="200"/>
+      </element>
+    </step>
+
+    <step n="37" start ="-1" duration="-1" input="false">
+      <element name="camera" action="lock"/>
+    </step>
+
+    <step  n="38" start="-1" duration ="-1" input="false">
+      <element name="soldier_9" action="create"/>
+    </step>
+
+    <step  n="39" start="-1" duration ="-1" input="false">
+      <element name="soldier_8" action="create"/>
+    </step>
+
+    <step  n="40" start="-1" duration ="-1" input="false">
+      <element name="soldier_7" action="create"/>
+    </step>
+
+    <step  n="41" start="-1" duration ="-1" input="false">
+      <element name="soldier_6" action="create"/>
+    </step>
+
+    <step  n="42" start="-1" duration ="-1" input="false">
+      <element name="soldier_5" action="create"/>
+    </step>
+
+    <step  n="43" start="-1" duration ="-1" input="false">
+      <element name="soldier_4" action="create"/>
+    </step>
+
+    <step  n="44" start="-1" duration ="-1" input="false">
+      <element name="soldier_3" action="create"/>
+    </step>
+
+    <step  n="45" start="-1" duration ="-1" input="false">
+      <element name="soldier_2" action="create"/>
+    </step>
+
+    <step  n="46" start="-1" duration ="-1" input="false">
+      <element name="soldier_1" action="create"/>
+    </step>
+
+    <step  n="47" start="-1" duration ="-1" input="false">
+      <element name="soldier_10" action="create"/>
+    </step>
+
+    <step  n="48" start="-1" duration ="-1" input="false">
+      <element name="soldier_11" action="create"/>
+    </step>
+
+    <step  n="49" start="-1" duration ="-1" input="false">
+      <element name="soldier_12" action="create"/>
+    </step>
+
+    <step  n="50" start="-1" duration ="-1" input="false">
+      <element name="soldier_13" action="create"/>
+    </step>
+
+    <step  n="51" start="-1" duration ="-1" input="false">
+      <element name="soldier_14" action="create"/>
+    </step>
+
+    <step  n="52" start="-1" duration ="-1" input="false">
+      <element name="soldier_15" action="create"/>
+    </step>
+
+    <step  n="53" start="-1" duration ="-1" input="false">
+      <element name="soldier_16" action="create"/>
+    </step>
+
+    <step  n="54" start="-1" duration ="-1" input="false">
+      <element name="soldier_17" action="create"/>
+    </step>
+
+    <step  n="55" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="DEJEN PASO AL GENERALISIMO, VIVA ESPAÑA Y VIVA EL VINO"/>
+      </element>
+    </step>
+
+    <step n="56" start ="-1" duration="-1" input="false">
+      <element name="camera" action="free"/>
+    </step>
+
+    <step  n="57" start="-1" duration ="-1" input="false">
+      <element name="soldier_1" action="move" dir="left">
+        <movement dest_x="-20" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="58" start="-1" duration ="-1" input="false">
+      <element name="soldier_1" action="move" dir="up">
+        <movement dest_x="0" dest_y="-17" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="59" start="-1" duration ="-1" input="false">
+      <element name="soldier_1" action="move" dir="down">
+        <movement dest_x="0" dest_y="-20" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="60" start="-1" duration ="-1" input="false">
+      <element name="GANON" action="create"/>
+    </step>
+
+    <step  n="61" start="-1" duration ="-1" input="false">
+      <element name="GANON" action="move" dir="left">
+        <movement dest_x="-100" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="62" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Corre link escondete, deprisa!!!"/>
+      </element>
+    </step>
+
+    <step  n="63" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="left">
+        <movement dest_x="390" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="64" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="up">
+        <movement dest_x="0" dest_y="1200" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="65" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="right">
+        <movement dest_x="420" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="61" start="-1" duration ="-1" input="false">
+      <element name="GANON" action="move" dir="left">
+        <movement dest_x="-230" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="62" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="ANCIANO, DIRIGETE HACIA EL CASTILLO SI NO QUIERES MORIR"/>
+      </element>
+    </step>
+
+    <step  n="63" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="left">
+        <movement dest_x="300" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="64" start="-1" duration ="-1" input="false">
+      <element name="GANON" action="move" dir="left">
+        <movement dest_x="-600" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="62" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="FOOOOORMACION, VAMONOS"/>
+      </element>
+    </step>
+    
+    <step  n="65" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="teleport">
+        <movement dest_x="190" dest_y="232" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="66" start="-1" duration ="-1" input="false">
+      <element name="soldier_10" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="24" start="-1" duration ="-1" input="false">
-      <element name="Link" action="move" dir="right">
-        <movement dest_x="-220" dest_y="0" speed="200"/>
+    <step  n="67" start="-1" duration ="-1" input="false">
+      <element name="soldier_11" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
+    </step>
+
+    <step  n="68" start="-1" duration ="-1" input="false">
+      <element name="soldier_12" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="69" start="-1" duration ="-1" input="false">
+      <element name="soldier_13" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="70" start="-1" duration ="-1" input="false">
+      <element name="soldier_14" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="71" start="-1" duration ="-1" input="false">
+      <element name="soldier_15" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="72" start="-1" duration ="-1" input="false">
+      <element name="soldier_16" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="73" start="-1" duration ="-1" input="false">
+      <element name="soldier_17" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="74" start="-1" duration ="-1" input="false">
+      <element name="soldier_9" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="75" start="-1" duration ="-1" input="false">
+      <element name="soldier_8" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="76" start="-1" duration ="-1" input="false">
+      <element name="soldier_7" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="77" start="-1" duration ="-1" input="false">
+      <element name="soldier_6" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="78" start="-1" duration ="-1" input="false">
+      <element name="soldier_5" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="79" start="-1" duration ="-1" input="false">
+      <element name="soldier_4" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="80" start="-1" duration ="-1" input="false">
+      <element name="soldier_3" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="81" start="-1" duration ="-1" input="false">
+      <element name="soldier_2" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="82" start="-1" duration ="-1" input="false">
+      <element name="soldier_1" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step n="83" start ="-1" duration="-1" input="false">
+      <element name="camera" action="lock"/>
     </step>
 
   </steps>
