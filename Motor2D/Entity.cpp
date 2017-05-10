@@ -52,8 +52,6 @@ Entity::Entity(ENTITY_TYPE type) :
 Entity::~Entity()
 {
 	RELEASE(sprite);
-	col->to_delete = true;
-	col->parent = nullptr;
 	anim.clear();
 }
 
@@ -160,10 +158,11 @@ bool Entity::LoadAnimations(std::string file)
 bool Entity::Move(int x, int y)
 {
 	bool ret = true;
-	lastPos = currentPos;
+	
 
 	if (type == ENEMY)
 	{
+		lastPos = currentPos;
 		currentPos.x += x;
 		UpdateCollider();
 
