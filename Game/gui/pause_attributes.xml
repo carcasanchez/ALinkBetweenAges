@@ -1,7 +1,14 @@
 <!-- Pause HUD -->
 <images>
-  <main     x="1"    y="76"  w="354" h="322" pos_x="50"  pos_y="-650" active="true"/>
-  <item     x="407"  y="0"   w="133" h="322" pos_x="720" pos_y="0" active="true"/>
-  <resume   x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="86" active="true"/>
-  <quit     x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="528" active="false"/>
+  <main       x="1"    y="76"  w="354" h="322" pos_x="50"  pos_y="-650" active="true"/>
+  <item       x="407"  y="0"   w="133" h="322" pos_x="720" pos_y="0" active="true"/>
+
+  <saved_game  x="356"  y="399"   w="354" h="73" pos_x="720" pos_y="0" active="false"/>
+  <loaded_game x="1"    y="399"   w="354" h="73" pos_x="720" pos_y="0" active="false"/>
+
+  <resume     x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="86" active="true"/>
+  <save       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="186" active="false"/>
+  <load       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="295" active="false"/>
+  <controls   x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="410" active="false"/>
+  <quit       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="528" active="false"/>
 </images>

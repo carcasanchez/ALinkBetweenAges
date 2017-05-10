@@ -84,7 +84,11 @@ public:
 	//main menu works as screen
 	UI_Image*		main_menu = nullptr;
 	UI_Image*		item_menu = nullptr;
+
 	UI_Image*		resume = nullptr;
+	UI_Image*		save = nullptr;
+	UI_Image*		load = nullptr;
+	UI_Image*		controls = nullptr;
 	UI_Image*		quit = nullptr;
 
 	std::vector<UI_Image*> pause_selectables;

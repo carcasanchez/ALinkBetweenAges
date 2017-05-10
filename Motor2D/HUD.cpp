@@ -91,30 +91,34 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		break;
 
 	case UP:
-		for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
+
+		if (state == E_DOWN)
 		{
-
-			if ((*it)->active && (it + 1) != pause_selectables.rend())
+			for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
 			{
-				(*it)->active = false;
-				(*(it + 1))->Set_Active_state(true);
-				break;
-			}
 
+				if ((*it)->active && (it + 1) != pause_selectables.rend())
+				{
+					(*it)->active = false;
+					(*(it + 1))->Set_Active_state(true);
+					break;
+				}
+
+			}
 		}
 		break;
 
 	case DOWN:
-		for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
+		if (state == E_DOWN)
 		{
-
-			
-
-			if ((*it)->active && (it + 1) != pause_selectables.end())
+			for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
 			{
-				(*it)->active = false;
-				(*(it + 1))->Set_Active_state(true);
-				break;
+				if ((*it)->active && (it + 1) != pause_selectables.end())
+				{
+					(*it)->active = false;
+					(*(it + 1))->Set_Active_state(true);
+					break;
+				}
 			}
 		}
 		break;
@@ -130,11 +134,28 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			}
 		}
 
+		if (save->active)
+		{
+			App->SaveGame("saves.xml");
+		}
+
+		if (load->active)
+		{
+			App->LoadGame("saves.xml");
+		}
+
+		if (controls->active)
+		{
+
+		}
+
 		if (quit->active)
 		{
 			App->game->quit_game = true;
 			App->game->pause = false;
 		}
+
+		
 
 		break;
 
@@ -192,11 +213,18 @@ bool Hud::LoadPause(string file)
 
 		main_menu = (UI_Image*)LoadUIElement(pause_node.child("main"), nullptr, IMAGE);
 		item_menu = (UI_Image*)LoadUIElement(pause_node.child("item"), main_menu, IMAGE);
+
 		resume = (UI_Image*)LoadUIElement(pause_node.child("resume"), main_menu, IMAGE);
+		save = (UI_Image*)LoadUIElement(pause_node.child("save"), main_menu, IMAGE);
+		load = (UI_Image*)LoadUIElement(pause_node.child("load"), main_menu, IMAGE);
+		controls = (UI_Image*)LoadUIElement(pause_node.child("controls"), main_menu, IMAGE);
 		quit = (UI_Image*)LoadUIElement(pause_node.child("quit"), main_menu, IMAGE);
 
 		//selecable items go into vector
 		pause_selectables.push_back(resume);
+		pause_selectables.push_back(save);
+		pause_selectables.push_back(load);
+		pause_selectables.push_back(controls);
 		pause_selectables.push_back(quit);
 
 		App->gui->CreateScreen(main_menu);
@@ -297,8 +325,10 @@ bool Hud::IntoPause()
 
 	main_menu->Set_Active_state(true);
 	resume->Set_Active_state(true);
-
-	quit->active = false;
+	save->Set_Active_state(false);
+	load->Set_Active_state(false);
+	controls->Set_Active_state(false);
+	quit->Set_Active_state(false);
 
 	return true;
 }
