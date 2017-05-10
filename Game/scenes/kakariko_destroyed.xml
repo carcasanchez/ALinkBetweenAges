@@ -55,26 +55,12 @@
       <exits>
         <exit destinyScene = "outsideCastle" destinyExit = "1" x = "87" y = "1" w="16" h="1" direction = "1"/>
         <exit destinyScene = "kakarikoVillage" destinyExit = "3" x = "218" y = "229" w="1" h="10" direction = "3"/>
+        <exit destinyScene = "shopDestroyed" destinyExit = "0" x = "60" y = "96" w="2" h="1" direction = "1"/>
 
       </exits>
 
 
-	<quests>
-	  <quest id = "1" >
-
-		<reward type ="0">
-			<cinematic id="5"/>
-		</reward >
-    
-
-
-
-      <trigger type ="0">
-     			 <collider x = "113" y="86" w="30" h="30"/>
-		</trigger>
-
-	  </quest>
-	</quests>
+	
 
     </sector>
   </sectors>
