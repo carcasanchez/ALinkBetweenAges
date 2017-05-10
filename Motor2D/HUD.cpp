@@ -56,9 +56,11 @@ bool Hud::CleanUp()
 {
 		
 	//RELEASE(empty_heart);
-	//delete medium_heart;
+	//RELEASE (medium_heart);
 	//delete full_heart;
 
+
+	RELEASE(numbers);
 	RELEASE(stamina_container);
 	RELEASE(stamina_green);
 	RELEASE(stamina_yellow);

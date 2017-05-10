@@ -12,7 +12,8 @@ UI_String::UI_String(UI_TYPE type, SDL_Rect detection_box, char* new_text, bool 
 
 UI_String::~UI_String()
 {
-
+	if (text_texture)
+		App->tex->UnLoad(text_texture);
 }
 
 bool UI_String::Update_Draw()
