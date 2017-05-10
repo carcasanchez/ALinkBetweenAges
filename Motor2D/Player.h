@@ -89,6 +89,10 @@ public:
 	OBJECT_TYPE				holded_item = NO_OBJECT;
 	int equippedObject = 0;
 
+
+
+	vector <int> completedQuests;
+
 private:
 	void Change_direction();
 	void ManageStamina(float dt);

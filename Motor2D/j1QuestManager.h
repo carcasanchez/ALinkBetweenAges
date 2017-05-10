@@ -37,7 +37,7 @@ class Event
 {
 public:
 	Event(EVENT_TYPE type) : type(type) {};
-	~Event() {};
+	virtual ~Event() {};
 
 	EVENT_TYPE type;
 };
@@ -80,7 +80,7 @@ class InterruptorEvent : public Event
 public:
 	InterruptorEvent() :Event(INTERRUPTOR_EVENT) {};
 
-	~InterruptorEvent() {};
+	~InterruptorEvent() { targets.clear(); };
 
 	vector<Object*> targets;
 

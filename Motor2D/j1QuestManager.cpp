@@ -7,6 +7,7 @@
 #include "j1EntityManager.h"
 #include "j1Map.h"
 #include "j1CutSceneManager.h"
+#include "Player.h"
 
 
 
@@ -24,7 +25,7 @@ j1QuestManager::~j1QuestManager()
 
 	for (std::list <Quest*>::iterator it = activeQuests.begin(); it != activeQuests.end(); it++)
 		RELEASE((*it));
-		activeQuests.clear();
+	activeQuests.clear();
 	
 	for (std::list <Quest*>::iterator it = closedQuests.begin(); it != closedQuests.end(); it++)
 		RELEASE((*it));
@@ -403,6 +404,7 @@ bool j1QuestManager::Update(float dt)
 {
 	if (completed)
 	{
+		App->game->em->player->completedQuests.push_back(completed->id);
 		RewardCallback(completed->reward);
 		completed = nullptr;
 	}

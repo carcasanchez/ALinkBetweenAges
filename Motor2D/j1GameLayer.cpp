@@ -228,7 +228,6 @@ void j1GameLayer::BuyObject(Object * object)
 //Save game
 bool j1GameLayer::Save(pugi::xml_node &data) const
 {
-
 	//Save player data
 	pugi::xml_node player = data.append_child("player");
 	
@@ -252,6 +251,7 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 
 	//Save current map
 	data.append_child("current_map").append_attribute("name") = App->sceneM->currentScene->name.c_str();
+	
 	
 	return true;
 }

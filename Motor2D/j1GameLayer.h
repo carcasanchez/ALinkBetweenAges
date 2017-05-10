@@ -47,6 +47,7 @@ public:
 	int playerY = 5;
 
 	j1Timer buy_timer; 
+
 };
 
 
