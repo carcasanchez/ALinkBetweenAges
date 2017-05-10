@@ -196,6 +196,10 @@ void j1GameLayer::PickObject(Object * object)
 		em->player->ableToSpin = true;
 		break;
 
+	case BOSS_KEY:
+		em->player->bossKeyEquipped = true;
+		break;
+
 	default:
 		em->player->inventory.push_back(object->objectType);
 		App->audio->PlayFx(23);
@@ -298,7 +302,7 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 
 bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {
-	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC || c2->type == COLLIDER_BUSH || c2->type == COLLIDER_CHEST || c2->type == COLLIDER_WOOD_DOOR))
+	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC || c2->type == COLLIDER_BUSH || c2->type == COLLIDER_CHEST))
 	{
 		iPoint Movement;
 		if (abs(c1->rect.x - c2->rect.x) < abs(c1->rect.y - c2->rect.y))
@@ -321,7 +325,15 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 				
 		return true;
 	}
-
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WOOD_DOOR)
+	{
+		if (em->player->bossKeyEquipped)
+		{
+			c2->parent->life = -1;
+		}
+		else c1->parent->currentPos = c1->parent->lastPos;
+		return true;
+	}
  	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE || c2->type == COLLIDER_MAGIC_SLASH || c2->type == COLLIDER_BOLT|| c2->type == COLLIDER_BOMB_EXPLOSION || c2->type == COLLIDER_ZELDA_ARROW) )
 	{
 		//When link is adult, empuja enemigos

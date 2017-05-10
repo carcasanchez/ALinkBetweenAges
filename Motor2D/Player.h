@@ -93,6 +93,8 @@ public:
 
 	vector <int> completedQuests;
 
+	bool bossKeyEquipped = false;
+
 private:
 	void Change_direction();
 	void ManageStamina(float dt);

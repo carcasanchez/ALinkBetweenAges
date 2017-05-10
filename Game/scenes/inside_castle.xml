@@ -100,7 +100,20 @@
 
         <special>
           <door object_type="27" x="37" y="147" direction="1" id="1"/>
-          <door object_type="29" x="109" y="103" direction="1" id="1"/>
+          <door object_type="27" x="225" y="102" direction="3" id="2"/>
+
+          <door object_type="29" x="109" y="103"/>
+          <chest object_type="9" x="250" y="29" item_inside="25"/>
+          <stone object_type="24" x="181" y="138"/>
+          <stone object_type="24" x="183" y="138"/>
+          <stone object_type="24" x="185" y="138"/>
+          <stone object_type="24" x="187" y="138"/>
+          <stone object_type="24" x="189" y="138"/>
+          <stone object_type="24" x="181" y="140"/>
+          <stone object_type="24" x="183" y="140"/>
+          <stone object_type="24" x="185" y="140"/>
+          <stone object_type="24" x="187" y="140"/>
+          <stone object_type="24" x="189" y="140"/>
         </special>
 
        
@@ -123,6 +136,17 @@
           <trigger type ="2">
             <interruptor x = "30" y="149"/>
             <interruptor x = "44" y="149"/>
+          </trigger>
+
+        </quest>
+        <quest id = "2" >
+
+          <reward type ="3">
+            <entity id="2"/>
+          </reward >
+
+          <trigger type ="2">
+            <interruptor x = "211" y="167"/>
           </trigger>
 
         </quest>
