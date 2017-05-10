@@ -129,6 +129,8 @@ bool j1GameLayer::Update(float dt)
 		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
 	else if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 		em->CreateObject(1, mousePos.x, mousePos.y, STAMINA_POTION);
+	else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+		em->player->rupees += 5;
 
 		
 
@@ -206,6 +208,11 @@ void j1GameLayer::PickObject(Object * object)
 		App->audio->PlayFx(23);
 		break;
 
+	}
+	
+	if (object->price > 0)
+	{
+		return;
 	}
 	
 	if (em->player->pickedObject)

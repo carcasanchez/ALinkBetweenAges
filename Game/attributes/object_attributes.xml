@@ -2,7 +2,7 @@
 <attributes>
    <book>
  	 <base life = "1" price = "10"/>
- 	 <collider x = "7" y = "7" w = "10" h = "10" type = "12"/>
+ 	 <collider x = "7" y = "7" w = "10" h = "10" type = "7"/>
  	 <animation file = "animations/objects/book_animations.xml"/>
  	 <texture file = "textures/Object_sprites/book.png"/>
    </book>
@@ -22,8 +22,8 @@
    </zelda_arrow>
 
    <arrow_drop>
- 	 <base life = "1"/>
- 	 <collider x = "0" y = "0" w = "7" h = "15" type = "7"/>
+ 	 <base life = "1" price = "15"/>
+ 	 <collider x = "0" y = "0" w = "7" h = "15" type = "12"/>
  	 <animation file = "animations/objects/arrow_animations.xml"/>
  	 <texture file = "textures/Object_sprites/arrow.png"/>
    </arrow_drop>
@@ -99,8 +99,8 @@
   </bomb_explosion>
 
  <bomb_drop>
-    <base life = "1"/>
-    <collider x = "6" y = "10" w = "16" h = "16" type = "7"/>
+    <base life = "1" price="20"/>
+    <collider x = "6" y = "10" w = "16" h = "16" type = "12"/>
     <animation file = "animations/objects/bomb_animations.xml"/>
     <texture file = "textures/Object_sprites/bomb.png"/>
   </bomb_drop>
@@ -120,8 +120,8 @@
   </heart_container>
 
 <life_potion>
-    <base life = "1"/>
-    <collider x = "7" y = "8" w = "14" h = "16" type = "7"/>
+    <base life = "1" price = "25"/>
+    <collider x = "7" y = "8" w = "14" h = "16" type = "12"/>
     <animation file = "animations/objects/life_potion_animations.xml"/>
     <texture file = "textures/Object_sprites/lifePotion.png"/>
   </life_potion>
@@ -148,8 +148,8 @@
 </bow>
 
 <stamina_potion>
-    <base life = "1"/>
-    <collider x = "7" y = "8" w = "14" h = "16" type = "7"/>
+    <base life = "1" price = "10"/>
+    <collider x = "7" y = "8" w = "14" h = "16" type = "12"/>
     <animation file = "animations/objects/stamina_potion_animations.xml"/>
     <texture file = "textures/Object_sprites/staminaPotion.png"/>
 </stamina_potion>
