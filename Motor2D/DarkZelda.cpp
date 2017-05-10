@@ -17,6 +17,12 @@
 #include <time.h>
 #include <math.h>
 
+DarkZelda::~DarkZelda()
+{
+	if (spinCollider)
+	spinCollider->to_delete = true;
+}
+
 bool DarkZelda::Spawn(std::string file, iPoint pos)
 {
 	bool ret = true;
@@ -961,3 +967,6 @@ bool DarkZelda::StepBack(float dt)
 
 	return true;
 }
+
+
+

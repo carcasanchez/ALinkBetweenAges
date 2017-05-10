@@ -10,7 +10,7 @@ class DarkZelda : public Enemy
 {
 public:
 	DarkZelda() :Enemy() {};
-	~DarkZelda() {};
+	~DarkZelda();
 
 	bool Spawn(std::string file, iPoint pos);
 	bool Update(float dt);
