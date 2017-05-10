@@ -12,7 +12,7 @@ UI_String::UI_String(UI_TYPE type, SDL_Rect detection_box, char* new_text, bool 
 
 UI_String::~UI_String()
 {
-	App->font->CleanUp;
+
 }
 
 bool UI_String::Update_Draw()
@@ -81,13 +81,7 @@ bool UI_String::Handle_input()
 	
 }
 
-bool UI_String::Draw_console(int height)
-{
-	if(active)
-		App->render->Blit(text_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, Interactive_box.y - App->render->camera.y + height);
 
-	return true;
-}
 
 void UI_String::SetBlitTimeMS(int time)
 {

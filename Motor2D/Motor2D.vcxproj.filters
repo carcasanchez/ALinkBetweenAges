@@ -40,9 +40,6 @@
     <ClCompile Include="j1Audio.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
-    <ClCompile Include="j1Console.cpp">
-      <Filter>Desenvolupament  ========\Modules\CPP</Filter>
-    </ClCompile>
     <ClCompile Include="j1FileSystem.cpp">
       <Filter>Desenvolupament  ========\Modules\CPP</Filter>
     </ClCompile>
@@ -210,9 +207,6 @@
     <ClInclude Include="j1Audio.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
-    <ClInclude Include="j1Console.h">
-      <Filter>Desenvolupament  ========\Modules\H</Filter>
-    </ClInclude>
     <ClInclude Include="j1FileSystem.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
@@ -235,9 +229,6 @@
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
     <ClInclude Include="j1Window.h">
-      <Filter>Desenvolupament  ========\Modules\H</Filter>
-    </ClInclude>
-    <ClInclude Include="CVar_Com.h">
       <Filter>Desenvolupament  ========\Modules\H</Filter>
     </ClInclude>
     <ClInclude Include="j1CollisionManager.h">

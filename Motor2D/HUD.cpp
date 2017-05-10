@@ -54,9 +54,7 @@ bool Hud::Update(float dt)
 
 bool Hud::CleanUp()
 {
-	RELEASE(numbers);
-
-	
+		
 	//RELEASE(empty_heart);
 	//delete medium_heart;
 	//delete full_heart;

@@ -16,7 +16,6 @@
 #include "j1Pathfinding.h"
 #include "j1Fonts.h"
 #include "j1Gui.h"
-#include "j1Console.h"
 #include "InputManager.h"
 #include "j1ParticleManager.h"
 #include "j1SceneManager.h"
@@ -49,7 +48,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	sceneM = new j1SceneManager();
 	game = new j1GameLayer();
 	collisions = new j1CollisionManager();
-	console = new j1Console();
 	dialog = new DialogManager();
 	quest = new j1QuestManager();
 	cutsceneM = new j1CutSceneManager();
@@ -72,7 +70,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(particles);
 	AddModule(gui);
 	AddModule(collisions);
-	AddModule(console);
 	AddModule(dialog);
 	AddModule(quest);
 	AddModule(cutsceneM);
@@ -141,54 +138,7 @@ bool j1App::Awake()
 	}
 	
 
-	//load config cvars
-	pugi::xml_node start = config.child("app");
-	while (start != NULL)
-	{
-		pugi::xml_node cvar = start.child("cvars").first_child();
-
-		while (cvar != NULL)
-		{
-
-			string name = cvar.attribute("name").as_string();
-			name.insert(0, ".");
-			name.insert(0, start.name());
-
-			string description = cvar.attribute("description").as_string();
-			string value = cvar.attribute("value").as_string();
-
-			string cv_module = start.name();
-			j1Module* callback = Find_module(cv_module.c_str());
-
-			int min_v = cvar.attribute("min").as_int();
-			int max_v = cvar.attribute("max").as_int();
-
-			ARGUMENTS_TYPE type;
-			string type_v = cvar.attribute("type").as_string();
-
-			if (type_v == "int")
-				type = INT_VAR;
-
-			if (type_v == "char")
-				type = CHAR_VAR;
-
-			if (type_v == "bool")
-				type = BOOL_VAR;
-
-			bool read_only = cvar.attribute("read_only").as_bool();
-
-			CVar* new_cvar = console->Add_CVar(name.c_str(), description.c_str(), value.c_str(), min_v, max_v, callback, type, read_only);
-
-			LOG("Loaded CVAR: %s, in Module: %s", new_cvar->Get_name(), callback->name.c_str());
-
-			cvar = cvar.next_sibling();
-		}
-
-		start = start.next_sibling();
-
-	}
-
-
+	
 
 	PERF_PEEK(ptimer);
 
@@ -211,7 +161,6 @@ bool j1App::Start()
 
 	PERF_PEEK(ptimer);
 
-	quit = console->Add_Command("quit", this, 0, 0, ARGUMENTS_TYPE::NONE);
 
 
 	return ret;
@@ -394,31 +343,7 @@ j1Module* j1App::Find_module(const char* mod_name)
 	return nullptr;
 }
 
-bool j1App::On_Console_Callback(command* com)
-{
 
-	if (com == quit)
-	{
-		//LOG("Quit");
-		update_stop = false;
-	}
-
-	
-
-	return true;
-}
-
-bool j1App::On_Console_Callback(CVar* cvar)
-{
-
-	if (strcmp(cvar->Get_name(), "app.max_fps") == 0)
-	{
-		if (cvar->Cvar_type == INT_VAR)
-			capped_ms = 1000 / cvar->Get_value_Int();
-	}
-
-	return true;
-}
 
 // Called before quitting
 bool j1App::CleanUp()

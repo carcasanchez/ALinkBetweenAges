@@ -88,13 +88,6 @@ public:
 	}
 
 	virtual bool On_GUI_Callback(UI_element*, GUI_INPUT) { return true; }
-	//THHIS TWO ARE THRASH
-	virtual bool On_Console_Callback(command*, int*) { return true; };
-	virtual bool On_Console_Callback(command*, char*) { return true; };
-
-
-	virtual bool On_Console_Callback(CVar*) { return true; };
-	virtual bool On_Console_Callback(command*) { return true; };
 	virtual bool On_Collision_Callback(Collider*, Collider*, float dt) { return true; };
 
 public:

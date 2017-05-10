@@ -2,7 +2,6 @@
 #include "j1Input.h"
 #include "j1Render.h"
 #include "j1Gui.h"
-#include "j1Console.h"
 #include "j1App.h"
 
 

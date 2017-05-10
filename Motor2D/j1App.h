@@ -25,7 +25,6 @@ class j1Gui;
 class j1SceneManager;
 class j1CollisionManager;
 class j1GameLayer;
-class j1Console;
 class j1Render;
 class DialogManager;
 class j1QuestManager;
@@ -89,10 +88,6 @@ private:
 
 	j1Module* Find_module(const char*);
 
-	//bool On_Console_Callback(command*, int*);
-	bool On_Console_Callback(CVar*);
-	bool On_Console_Callback(command*);
-
 	// Load / Save
 	bool LoadGameNow();
 	bool SavegameNow() const;
@@ -118,7 +113,6 @@ public:
 	j1SceneManager*		sceneM = NULL;
 	j1CollisionManager*	collisions = NULL;
 	j1GameLayer*		game = NULL;
-	j1Console*			console = NULL;
 	j1Render*			render = NULL;
 	DialogManager*      dialog = NULL;
 	j1QuestManager*		quest = NULL;

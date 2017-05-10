@@ -5,7 +5,6 @@
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Window.h"
-#include "j1Console.h"
 #include "UI_Text_Box.h"
 #include "j1Render.h"
 #include "j1Gui.h"

@@ -110,6 +110,7 @@ bool j1Gui::CleanUp()
 
 	Screen_elements.clear();
 
+	RELEASE(bezier_curve);
 
 	return true;
 }

@@ -40,9 +40,7 @@ public:
 	bool Update();
 	bool Update_Draw();
 	bool Handle_input();
-	
-	bool Draw_console(int height);					//Blits the string in the console [takes into account the height where it is the string]
-	
+		
 	void SetBlitTimeMS(int);
 	void ForcedFinish();
 
