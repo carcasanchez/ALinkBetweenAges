@@ -225,6 +225,16 @@ void j1GameLayer::BuyObject(Object * object)
 	}
 }
 
+void j1GameLayer::StopSaving()
+{
+	hud->saved_game->Set_Active_state(false);
+}
+
+void j1GameLayer::StopLoading()
+{
+	hud->loaded_game->Set_Active_state(false);
+}
+
 
 //Save game
 bool j1GameLayer::Save(pugi::xml_node &data) const

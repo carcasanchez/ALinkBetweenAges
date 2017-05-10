@@ -343,8 +343,6 @@ j1Module* j1App::Find_module(const char* mod_name)
 	return nullptr;
 }
 
-
-
 // Called before quitting
 bool j1App::CleanUp()
 {
@@ -465,6 +463,8 @@ bool j1App::LoadGameNow()
 	else LOG("Could not load game state from xml file");
 
 	want_to_load = false;
+	game->StopLoading();
+
 	return ret;
 }
 
@@ -505,5 +505,8 @@ bool j1App::SavegameNow() const
 
 	data.reset();
 	want_to_save = false;
+	
+	game->StopSaving();
+
 	return ret;
 }

@@ -137,11 +137,13 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		if (save->active)
 		{
 			App->SaveGame("saves.xml");
+			saved_game->Set_Active_state(true);
 		}
 
 		if (load->active)
 		{
 			App->LoadGame("saves.xml");
+			loaded_game->Set_Active_state(true);
 		}
 
 		if (controls->active)
@@ -219,6 +221,9 @@ bool Hud::LoadPause(string file)
 		load = (UI_Image*)LoadUIElement(pause_node.child("load"), main_menu, IMAGE);
 		controls = (UI_Image*)LoadUIElement(pause_node.child("controls"), main_menu, IMAGE);
 		quit = (UI_Image*)LoadUIElement(pause_node.child("quit"), main_menu, IMAGE);
+
+		saved_game = (UI_Image*)LoadUIElement(pause_node.child("saved_game"), main_menu, IMAGE);
+		loaded_game = (UI_Image*)LoadUIElement(pause_node.child("loaded_game"), main_menu, IMAGE);
 
 		//selecable items go into vector
 		pause_selectables.push_back(resume);
@@ -417,8 +422,6 @@ bool Hud::LoadHud(string file)
 
 	return false;
 }
-
-
 
 void Hud::LoadHearts()
 {

@@ -91,6 +91,9 @@ public:
 	UI_Image*		controls = nullptr;
 	UI_Image*		quit = nullptr;
 
+	UI_Image*		saved_game = nullptr;
+	UI_Image*		loaded_game = nullptr;
+
 	std::vector<UI_Image*> pause_selectables;
 
 	
