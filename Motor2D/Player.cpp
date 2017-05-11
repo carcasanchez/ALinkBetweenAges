@@ -18,6 +18,7 @@
 #include "Brofiler\Brofiler.h"
 #include "j1Audio.h"
 #include "j1QuestManager.h"
+#include "Player.h"
 
 
 Player::Player() : Entity(LINK)
@@ -957,7 +958,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 		break;
 
 	case SPIN_TO_WIN:
-		if (actionState != SPINNING && actionState != ATTACKING && actionState != JUMPING && stamina > spinTax)
+		if (actionState != SPINNING && actionState != ATTACKING && actionState != JUMPING && stamina > spinTax && App->game->em->player->ableToSpin == true)
 		{
 			App->audio->PlayFx(1);
 			stamina -= spinTax;
