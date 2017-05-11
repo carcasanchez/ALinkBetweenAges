@@ -746,6 +746,7 @@ void CS_Step::FinishStep()
 	if (act_type == ACT_SET_STRING)
 	{
 		CS_Text* tmp = (CS_Text*)element;
+		tmp->GetText()->Set_Active_state(false);
 		tmp->Changed_string = false;
 	}
 
@@ -1096,6 +1097,7 @@ void CS_Step::ChangeString()
 
 		if (!tmp->Changed_string)
 		{
+			tmp->GetText()->Set_Active_state(true);
 			tmp->GetText()->Set_String((char*)this->new_text.c_str());
 			tmp->Changed_string = true;
 		}
