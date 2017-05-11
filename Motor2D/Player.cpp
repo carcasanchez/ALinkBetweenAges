@@ -413,14 +413,18 @@ bool Player::Attacking(float dt)
 
 	else if (toTalk != nullptr)
 	{
-		resetSwordCollider();
-		currentAnim->Reset();
-		actionState = IDLE;
-		playerState = EVENT;
-		toTalk->LookToPlayer();
-
 		if (!App->quest->TriggerTalkToCallback(toTalk))
 			App->quest->StepTalkToCallback(toTalk);
+
+		toTalk->LookToPlayer();
+		resetSwordCollider();
+		currentAnim->Reset();
+
+		if (toTalk->dialogState != -1)
+		{
+			actionState = IDLE;
+			playerState = EVENT;
+		}
 
 		return true;
 	}

@@ -80,6 +80,8 @@ bool Npc::Spawn(std::string file, iPoint pos, NPC_TYPE type)
 		
 		actionState = IDLE;
 		LoadAttributes(attributes);
+
+		dialogState = attributes.child("base").attribute("dialog_state").as_int(0);
 	}
 
 	return ret;

@@ -1,7 +1,7 @@
 <!-- Npc Attributes -->
 <attributes>
 	<zelda>
-		<base life = "1" speed = "30"/>
+		<base life = "1" speed = "30" dialog_state="-1"/>
 		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
 		<animation file = "animations/npc/npcZelda_animations.xml"/>
   	<texture file = "textures/Npc_sprites/Npc.png"/>
