@@ -96,7 +96,13 @@ public:
 
 	std::vector<UI_Image*> pause_selectables;
 
+	//Start Menu
+	UI_Image*		start_menu_screen = nullptr;
+	UI_Image*		start_continue = nullptr;
+	UI_Image*		start_new_game = nullptr;
+	UI_Image*		start_quit = nullptr;
 	
+	std::vector<UI_Image*> start_menu_selectables;
 
 private:
 

@@ -229,6 +229,16 @@ bool Hud::LoadPause(string file)
 		saved_game = (UI_Image*)LoadUIElement(pause_node.child("saved_game"), main_menu, IMAGE);
 		loaded_game = (UI_Image*)LoadUIElement(pause_node.child("loaded_game"), main_menu, IMAGE);
 
+		//Main menu
+		start_menu_screen = (UI_Image*)LoadUIElement(pause_node.child("start_menu"), nullptr, IMAGE);
+		start_continue = (UI_Image*)LoadUIElement(pause_node.child("continue"), start_menu_screen, IMAGE);
+		start_new_game = (UI_Image*)LoadUIElement(pause_node.child("new"), start_menu_screen, IMAGE);
+		start_quit = (UI_Image*)LoadUIElement(pause_node.child("start_quit"), start_menu_screen, IMAGE);
+
+		start_menu_selectables.push_back(start_continue);
+		start_menu_selectables.push_back(start_new_game);
+		start_menu_selectables.push_back(start_quit);
+
 		//selecable items go into vector
 		pause_selectables.push_back(resume);
 		pause_selectables.push_back(save);
@@ -237,7 +247,9 @@ bool Hud::LoadPause(string file)
 		pause_selectables.push_back(quit);
 
 		App->gui->CreateScreen(main_menu);
-
+		App->gui->CreateScreen(start_menu_screen);
+	
+		
 	}
 
 	return ret;
