@@ -20,7 +20,7 @@
 
         <special>
           <!--rocks, grass, etc-->
-<chest object_type="9" x="102" y="50" item_inside="11"/>
+<chest object_type="9" x="102" y="50" item_inside="14"/>
 
         </special>
       </entities>

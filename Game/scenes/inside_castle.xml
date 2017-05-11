@@ -71,8 +71,6 @@
 		<sample type = "1" x = "102" y = "117"/>
 		<sample type = "1" x = "115" y = "117"/>
 
-		<sample type = "1" x = "34" y = "172"/>
-		<sample type = "1" x = "33" y = "167"/>
 
 		<sample type = "1" x = "108" y = "144"/>
 
@@ -88,6 +86,8 @@
 		<sample type = "1" x = "248" y = "141"/>
 		<sample type = "1" x = "264" y = "103"/>
 		<sample type = "1" x = "236" y = "102"/>
+
+		<sample type = "1" x = "33" y = "167"/>
 
 		<sample type = "1" x = "184" y = "154"/>
 
