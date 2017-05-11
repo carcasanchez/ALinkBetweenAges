@@ -63,17 +63,6 @@
      </dialogue>
    </npc>
 
-   <npc id="8" states="2">
-     <dialogue state="0">
-	<text value=" I'm glad to see you again Link. Thank you for rescuing me. This morning, a group of soldiers came to kidnap me, but I managed to escape and hide here."/>
-	<text value=" I need your help, Link. Could you defeat all the soldiers of the castle?"/>
-	<text value=" The castle is north of Kakariko village, passing the bridge. It's dangerous to go alone, take the book behind me. This is the Book of Ages. It gives power to its owner."/>
-	<text value=" You will become stronger and faster. Good luck, Link."/>
-     </dialogue>
-     <dialogue state="1">
-	<text value=" Kakariko is in danger. Throw out all the soldiers of the castle, please."/>
-     </dialogue>
-   </npc>
 
 <npc id="9" states="1">
      <dialogue state="0" states="1">

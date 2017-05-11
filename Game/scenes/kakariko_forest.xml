@@ -72,6 +72,21 @@
         <exit destinyScene = "kakarikoVillage" destinyExit = "0" x = "255" y = "320" w="1" h="20" direction = "3"/>
       </exits>
 
+      <quests>
+        <quest id = "1" >
+
+          <reward type ="0">
+            <cinematic id="2"/>
+          </reward >
+
+          <trigger type ="1">
+            <target id="8"/>
+          </trigger>
+
+        </quest>
+      </quests>
+
+
     </sector>
   </sectors>
 </scene>
