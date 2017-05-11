@@ -20,7 +20,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Wake up you pussy licker" />
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="It's time to wake up. No more Link, don't be lazy." />
     </TEXTS>
 
     <MUSIC>
@@ -89,7 +89,7 @@
 
     <step  n="10" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="And get a fucki'n job"/>
+        <text text="Zelda was looking for you to play, She went to the forest, maybe you should look for her"/>
       </element>
     </step>
 

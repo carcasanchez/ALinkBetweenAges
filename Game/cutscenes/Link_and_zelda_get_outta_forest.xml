@@ -42,7 +42,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Texto 1" />
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Hi Link... I'm glad you are here. I get lost while training my skills with the sword to prepare for the trip We talk yesterday, do you remember? The WildLands seems a place very beautiful but so dangerous." />
     </TEXTS>
 
     <MUSIC>
@@ -73,7 +73,7 @@
 
     <step  n="3" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Inserte Text 2"/>
+        <text text="I don't think that would be possible for me to prepare. It feels very upset trying things so hard and keeping up feeling useless like this, look at me, I went alone for ten minutes and get lost, I'm a mess."/>
       </element>
     </step>
 
@@ -95,7 +95,7 @@
     
     <step  n="7" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Inserte Text 3"/>
+        <text text="Let It be Link, let's back to Kakariko."/>
       </element>
     </step>
 
@@ -167,7 +167,7 @@
 
     <step  n="21" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Debemos darnos prisa, mierda"/>
+        <text text="Sorry for what happened on the forest Link, I'm very shamed."/>
       </element>
     </step>
     
@@ -185,7 +185,7 @@
 
     <step  n="24" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Porfin os encuentro, seldu debes ir al castillo, selda 2 tu ven conmigo"/>
+        <text text="Finally find you guys! Where were you?"/>
       </element>
     </step>
 
@@ -209,7 +209,7 @@
 
     <step  n="28" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Adios link, nos vemos :D"/>
+        <text text="I need to be alone, see you tomorrow Link..."/>
       </element>
     </step>
     
