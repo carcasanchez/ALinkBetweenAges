@@ -94,7 +94,7 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 			elements_node = cutscene_node.child("elements");
 
 			//Load Scenes
-			for (temp = elements_node.child("MAP").child("scene"); temp != NULL; temp = temp.next_sibling("npc"))
+			for (temp = elements_node.child("MAP").child("scene"); temp != NULL; temp = temp.next_sibling("scene"))
 				temp_cutscene->LoadSceneName(temp);
 
 			//Load NPCs

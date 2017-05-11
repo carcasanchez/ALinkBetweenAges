@@ -168,13 +168,13 @@
         <movement dest_x="5" dest_y="228" speed="50"/>
       </element>
     </step>
-    
+
     <step  n="21" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text="Sorry for what happened on the forest Link, I'm very shamed."/>
       </element>
     </step>
-    
+
     <step  n="22" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
         <movement dest_x="62" dest_y="0" speed="200"/>
@@ -192,7 +192,7 @@
         <text text="Finally find you guys! Where were you?"/>
       </element>
     </step>
-    
+
     <step  n="25" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
         <movement dest_x="50" dest_y="0" speed="200"/>
@@ -216,13 +216,13 @@
         <text text="I need to be alone, see you tomorrow Link..."/>
       </element>
     </step>
-    
+
     <step  n="29" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="left">
         <movement dest_x="62" dest_y="0" speed="200"/>
       </element>
     </step>
-    
+
     <step  n="30" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="up">
         <movement dest_x="0" dest_y="180" speed="200"/>
@@ -244,7 +244,7 @@
         <movement dest_x="90" dest_y="0" speed="100"/>
       </element>
     </step>
-    
+
     <step  n="34" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
         <movement dest_x="90" dest_y="0" speed="200"/>
@@ -278,7 +278,7 @@
     <step  n="40" start="-1" duration ="-1" input="false">
       <element name="soldier_7" action="create"/>
     </step>
-    
+
     <step  n="41" start="-1" duration ="-1" input="false">
       <element name="soldier_6" action="create"/>
     </step>
@@ -344,7 +344,7 @@
     <step n="56" start ="-1" duration="-1" input="false">
       <element name="camera" action="free"/>
     </step>
-    
+
     <step  n="57" start="-1" duration ="-1" input="false">
       <element name="soldier_1" action="move" dir="left">
         <movement dest_x="144" dest_y="0" speed="200"/>
@@ -396,7 +396,7 @@
         <movement dest_x="126" dest_y="0" speed="200"/>
       </element>
     </step>
-    
+
     <step  n="66" start="-1" duration ="-1" input="false">
       <element name="GANON" action="move" dir="left">
         <movement dest_x="150" dest_y="0" speed="50"/>
@@ -426,13 +426,13 @@
         <text text="Group up! Go!"/>
       </element>
     </step>
-    
+
     <step  n="71" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="teleport">
         <movement dest_x="190" dest_y="232" speed="50"/>
       </element>
     </step>
-    
+
     <step n="72" start ="-1" duration="-1" input="false">
       <element name="camera" action="lock"/>
     </step>
@@ -538,7 +538,7 @@
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
-                                                                                   
+
     <step  n="90" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
         <movement dest_x="240" dest_y="0" speed="50"/>
@@ -551,7 +551,7 @@
 
     <step  n="92" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="teleport">
-        <movement dest_x="205" dest_y="232" speed="0"/>
+        <movement dest_x="215" dest_y="232" speed="0"/>
       </element>
     </step>
 
@@ -572,19 +572,19 @@
 
     <step  n="96" start="-1" duration ="-1" input="false">
       <element name="dumber" action="move" dir="up">
-        <movement dest_x="0" dest_y="231" speed="10"/>
+        <movement dest_x="0" dest_y="235" speed="10"/>
       </element>
     </step>
 
     <step  n="97" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="left">
-        <movement dest_x="205" dest_y="0" speed="10"/>
+        <movement dest_x="215" dest_y="0" speed="10"/>
       </element>
     </step>
 
     <step  n="98" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="?¿"/>
+        <text text="Who's that guy?"/>
       </element>
     </step>
 
@@ -602,7 +602,7 @@
 
     <step  n="101" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Who are you?"/>
+        <text text="Hey! Who are you?"/>
       </element>
     </step>
 
@@ -644,13 +644,13 @@
 
     <step  n="108" start="-1" duration ="-1" input="false">
       <element name="dumber" action="move" dir="up">
-        <movement dest_x="0" dest_y="220" speed="100"/>
+        <movement dest_x="0" dest_y="227" speed="100"/>
       </element>
     </step>
 
     <step  n="109" start="-1" duration ="-1" input="false">
       <element name="dumber" action="move" dir="left">
-        <movement dest_x="200" dest_y="0" speed="100"/>
+        <movement dest_x="140" dest_y="0" speed="100"/>
       </element>
     </step>
 
@@ -674,13 +674,13 @@
 
     <step  n="113" start="-1" duration ="-1" input="false">
       <element name="dumb" action="move" dir="up">
-        <movement dest_x="0" dest_y="220" speed="200"/>
+        <movement dest_x="0" dest_y="227" speed="200"/>
       </element>
     </step>
 
     <step  n="114" start="-1" duration ="-1" input="false">
       <element name="dumb" action="move" dir="left">
-        <movement dest_x="200" dest_y="0" speed="200"/>
+        <movement dest_x="140" dest_y="0" speed="200"/>
       </element>
     </step>
 
