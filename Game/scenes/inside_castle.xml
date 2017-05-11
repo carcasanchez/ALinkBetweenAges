@@ -67,8 +67,6 @@
 		<sample type = "1" x = "232" y = "145"/>
 		<sample type = "1" x = "250" y = "105"/>
 
-		<sample type = "1" x = "242" y = "29"/>
-		<sample type = "1" x = "260" y = "29"/>
 
 		<sample type = "1" x = "102" y = "117"/>
 		<sample type = "1" x = "115" y = "117"/>
@@ -91,7 +89,7 @@
 		<sample type = "1" x = "248" y = "137"/>
 		<sample type = "1" x = "248" y = "141"/>
 		<sample type = "1" x = "264" y = "103"/>
-		<sample type = "1" x = "236" y = "104"/>
+		<sample type = "1" x = "236" y = "102"/>
 
 		<sample type = "1" x = "36" y = "129"/>
 		<sample type = "1" x = "184" y = "138"/>
