@@ -867,7 +867,7 @@ void CS_Step::LoadMovement(iPoint destination, int speed, const std::string& dir
 	//Set the destination that will reach the linked element
 	if (direction == CS_TELEPORT)
 		dest = App->map->GetTileCenter(destination);
-	else dest = App->map->GetTileCenter(destination);
+	else dest = destination;
 
 	//Set the movement speed
 	mov_speed = speed;
@@ -880,7 +880,9 @@ void CS_Step::LoadScene()
 {
 	if (!loading)
 	{
-		App->sceneM->RequestSceneChange({ 0,0 }, dynamic_cast<CS_Scene*>(element)->scene_name.c_str(), D_DOWN);
+		CS_Scene* tmp = (CS_Scene*)element;
+		const char* lol = tmp->scene_name.c_str();
+		App->sceneM->RequestSceneChange({ 0,0 }, lol, D_DOWN);
 		loading = true;
 	}
 
