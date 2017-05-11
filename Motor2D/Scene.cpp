@@ -8,6 +8,7 @@
 #include "Enemy.h"
 #include "Exit.h"
 #include "j1Audio.h"
+#include "j1CutSceneManager.h"
 #include "Player.h"
 #include "Object.h"
 #include "j1Render.h"
@@ -208,6 +209,11 @@ bool Scene::Load(const char* path, const bool reloadMap)
 bool Scene::Update(float dt)
 {
 	bool ret = true;
+
+	//Siento a visente en mi interior
+	if (this->name == "introScene" && App->cutsceneM->CutsceneReproducing() == false)
+		App->game->hud->start_menu_screen->Set_Active_state(true);
+	
 
 	std::list<Exit*>::iterator exit = exits[currentSector].begin();
 	for (; exit != exits[currentSector].cend() && ret; exit++)
