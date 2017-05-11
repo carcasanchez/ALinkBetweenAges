@@ -867,7 +867,7 @@ void CS_Step::LoadMovement(iPoint destination, int speed, const std::string& dir
 	//Set the destination that will reach the linked element
 	if (direction == CS_TELEPORT)
 		dest = App->map->GetTileCenter(destination);
-	else dest = origin + destination;
+	else dest = App->map->GetTileCenter(destination);
 
 	//Set the movement speed
 	mov_speed = speed;
@@ -1057,28 +1057,28 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 		switch (direction)
 		{
 		case CS_UP:
-			if (curr_pos.y <= dest.y)
+			if (App->map->WorldToMap(curr_pos.x, curr_pos.y).y <= dest.y)
 			{
 				ret = true;
 				FinishStep();
 			}
 			break;
 		case CS_DOWN:
-			if (curr_pos.y >= dest.y)
+			if (App->map->WorldToMap(curr_pos.x, curr_pos.y).y >= dest.y)
 			{
 				ret = true;
 				FinishStep();
 			}
 			break;
 		case CS_LEFT:
-			if (curr_pos.x <= dest.x)
+			if (App->map->WorldToMap(curr_pos.x, curr_pos.y).x <= dest.x)
 			{
 				ret = true;
 				FinishStep();
 			}
 			break;
 		case CS_RIGHT:
-			if (curr_pos.x >= dest.x)
+			if (App->map->WorldToMap(curr_pos.x, curr_pos.y).x >= dest.x)
 			{
 				ret = true;
 				FinishStep();
