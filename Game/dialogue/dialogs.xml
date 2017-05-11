@@ -44,7 +44,7 @@
 
    <npc id="6" states="2">
      <dialogue state="0">
-	<text value=" Hey! You don't talk that much. I like you."/>
+	<text value=" Hey! You don't talk much. I like you."/>
      </dialogue>
 <dialogue state="1">
 	<text value=" Good boy."/>
@@ -91,15 +91,34 @@
 
   <npc id="13" states="1">
     <dialogue state="0">
-    <text value=" This is the way to the Wildlands. The entrance is forbidden, It's so dangerous to go alone."/>
-      <text value=" Make a favor to yourself, and stay safe in the village. "/>
+    <text value=" This is the way to the Wildlands. The entrance is forbidden, It's dangerous to go alone."/>
+      <text value=" Make a favour to yourself, and stay safe in the village. "/>
     </dialogue>
   </npc>
 
+
 <npc id="14" states="1">
+     <dialogue state="0" states="1">
+	<text value="Hello! I'm the shopman. The prices are:"/>
+	<text value="25 rupees x1 life potion."/>
+	<text value="10 rupees x1 stamina potion."/>
+     </dialogue>
+   </npc>
+
+<npc id="15" states="1">
+     <dialogue state="0" states="1">
+	<text value="Hello! I'm the shopman. The prices are:"/>
+	<text value="25 rupees x1 life potion."/>
+	<text value="10 rupees x1 stamina potion."/>
+	<text value="10 rupees x1 bombs."/>
+	<text value="15 rupees x5 arrows."/>
+     </dialogue>
+   </npc>
+
+
+<npc id="16" states="1">
     <dialogue state="0">
-    <text value=" This is the way to the Wildlands. The entrance is forbidden, It's so dangerous to go alone."/>
-      <text value=" Make a favor to yourself, and stay safe in the village. "/>
+    <text value=""/>
     </dialogue>
   </npc>
 

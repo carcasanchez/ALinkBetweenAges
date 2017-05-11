@@ -9,6 +9,7 @@
       <entities>
 
         <npcs>
+	 <sample type = "1" x = "15" y = "21" id="15"/>
         </npcs>
 
         <enemies>
@@ -22,6 +23,11 @@
 		<bomb_drop object_type = "14" x = "18" y = "16"/>
 		<life_potion object_type = "15" x = "10" y = "16"/>
 		<stamina_potion object_type = "22" x = "14" y = "16"/>
+
+
+<bomb_sac object_type = "16" x = "8" y = "22"/>
+<bow object_type = "21" x = "9" y = "24"/>
+
 
         </special>
       </entities>
