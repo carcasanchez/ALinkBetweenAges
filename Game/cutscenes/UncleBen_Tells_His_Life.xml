@@ -49,13 +49,13 @@
 
     <step  n="3" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="up">
-        <movement dest_x="0" dest_y="-50" speed="10"/>
+        <movement dest_x="0" dest_y="5" speed="10"/>
       </element>
     </step>
 
     <step  n="4" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="left">
-        <movement dest_x="-100" dest_y="0" speed="10"/>
+        <movement dest_x="9" dest_y="0" speed="10"/>
       </element>
     </step>
 
@@ -65,25 +65,25 @@
 
     <step  n="6" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="0" dest_y="0" speed="10"/>
+        <movement dest_x="5" dest_y="5" speed="10"/>
       </element>
     </step>
 
     <step  n="7" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="down">
-        <movement dest_x="0" dest_y="-25" speed="10"/>
+        <movement dest_x="0" dest_y="7" speed="10"/>
       </element>
     </step>
 
     <step  n="8" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="right">
-        <movement dest_x="0" dest_y="0" speed="10"/>
+        <movement dest_x="22" dest_y="0" speed="10"/>
       </element>
     </step>
 
     <step  n="9" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="down">
-        <movement dest_x="0" dest_y="0" speed="10"/>
+        <movement dest_x="0" dest_y="11" speed="10"/>
       </element>
     </step>
 
