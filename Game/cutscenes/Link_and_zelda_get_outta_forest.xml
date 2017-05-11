@@ -389,7 +389,7 @@
 
     <step  n="65" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="420" dest_y="0" speed="200"/>
+        <movement dest_x="405" dest_y="0" speed="200"/>
       </element>
     </step>
 
@@ -429,111 +429,119 @@
       </element>
     </step>
 
-    <step  n="66" start="-1" duration ="-1" input="false">
+    <step n="66" start ="-1" duration="-1" input="false">
+      <element name="camera" action="lock"/>
+    </step>
+
+    <step  n="67" start="-1" duration ="-1" input="false">
       <element name="soldier_10" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="67" start="-1" duration ="-1" input="false">
+    <step  n="68" start="-1" duration ="-1" input="false">
       <element name="soldier_11" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="68" start="-1" duration ="-1" input="false">
+    <step  n="69" start="-1" duration ="-1" input="false">
       <element name="soldier_12" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="69" start="-1" duration ="-1" input="false">
+    <step  n="70" start="-1" duration ="-1" input="false">
       <element name="soldier_13" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="70" start="-1" duration ="-1" input="false">
+    <step  n="71" start="-1" duration ="-1" input="false">
       <element name="soldier_14" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="71" start="-1" duration ="-1" input="false">
+    <step  n="72" start="-1" duration ="-1" input="false">
       <element name="soldier_15" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="72" start="-1" duration ="-1" input="false">
+    <step  n="73" start="-1" duration ="-1" input="false">
       <element name="soldier_16" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="73" start="-1" duration ="-1" input="false">
+    <step  n="74" start="-1" duration ="-1" input="false">
       <element name="soldier_17" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="74" start="-1" duration ="-1" input="false">
+    <step  n="75" start="-1" duration ="-1" input="false">
       <element name="soldier_9" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="75" start="-1" duration ="-1" input="false">
+    <step  n="76" start="-1" duration ="-1" input="false">
       <element name="soldier_8" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="76" start="-1" duration ="-1" input="false">
+    <step  n="77" start="-1" duration ="-1" input="false">
       <element name="soldier_7" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="77" start="-1" duration ="-1" input="false">
+    <step  n="78" start="-1" duration ="-1" input="false">
       <element name="soldier_6" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="78" start="-1" duration ="-1" input="false">
+    <step  n="79" start="-1" duration ="-1" input="false">
       <element name="soldier_5" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="79" start="-1" duration ="-1" input="false">
+    <step  n="80" start="-1" duration ="-1" input="false">
       <element name="soldier_4" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="80" start="-1" duration ="-1" input="false">
+    <step  n="81" start="-1" duration ="-1" input="false">
       <element name="soldier_3" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="81" start="-1" duration ="-1" input="false">
+    <step  n="82" start="-1" duration ="-1" input="false">
       <element name="soldier_2" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="82" start="-1" duration ="-1" input="false">
+    <step  n="83" start="-1" duration ="-1" input="false">
       <element name="soldier_1" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
+                                                                                   
+ 
 
-    <step n="83" start ="-1" duration="-1" input="false">
-      <element name="camera" action="lock"/>
+    <step  n="84" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="right">
+        <movement dest_x="1200" dest_y="0" speed="50"/>
+      </element>
     </step>
-
+    
   </steps>
 </Cutscene>

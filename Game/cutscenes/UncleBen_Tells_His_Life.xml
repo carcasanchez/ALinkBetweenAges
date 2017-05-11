@@ -9,8 +9,8 @@
     </MAP>
 
     <NPC>
-      <npc n="0" name="tio_ben" active="true" type="0" x="175" y="92" entity_id="1" empty="true"/>
-      <npc n="1" name="Link" active="true" type="0" x="47" y="41" entity_id="-1" empty="true"/>
+      <npc n="0" name="tio_ben" active="true" type="0" x="22" y="11" entity_id="1" empty="true"/>
+      <npc n="1" name="Link" active="true" type="0" x="5" y="5" entity_id="-1" empty="true"/>
     </NPC>
 
     <ENEMIES>
@@ -40,15 +40,11 @@
     </step>
 
     <step  n="1" start="-1" duration ="-1" input="false">
-      <element name="Link" action="create">
-        <character x="72" y="100" type_id="-1" id="-1"/>
-      </element>
+      <element name="Link" action="create"/>
     </step>
 
   <step  n="2" start="-1" duration ="-1" input="false">
-      <element name="tio_ben" action="create">
-        <character x="21" y="11" type_id="0" id="1"/>
-      </element>
+    <element name="tio_ben" action="create"/>
     </step>
 
     <step  n="3" start="-1" duration ="-1" input="false">
