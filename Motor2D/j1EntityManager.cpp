@@ -61,8 +61,8 @@ bool j1EntityManager::PreUpdate()
 			(*item)->OnDeath();
 			if ((*item)->toDelete)
 			{
-				(*item)->col->to_delete = true;
-				(*item)->col->parent = nullptr;
+				(*item)->col->to_delete = true;			
+				(*item)->col->parent->col = nullptr;
 				RELEASE(*item);
 				item = entities[*sector].erase(item); //calls destroyer
 			}
@@ -366,7 +366,12 @@ bool j1EntityManager::CleanEntities()
 			}
 			else
 			{ 
-				delete (*item);
+				if ((*item)->col)
+				{
+					(*item)->col->to_delete = true; 
+					(*item)->col->parent->col = nullptr;
+				}
+				RELEASE(*item);
 				entities[i].erase(item);
 			}
 		}

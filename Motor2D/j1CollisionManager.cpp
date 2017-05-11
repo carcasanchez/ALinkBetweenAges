@@ -76,7 +76,7 @@ bool j1CollisionManager::PreUpdate()
 	{	
 		if ((*it)->to_delete)
 		{
-			delete (*it);
+			RELEASE (*it);
 			colliders.erase(it);
 		}
 	}

@@ -682,8 +682,14 @@ bool Player::Talking(float dt)
 
 void Player::GetHit(Entity * agressor)
 {
+
+	if (!agressor->col)
+		return;
+
 	damaged = invulnerable = true;
 	damagedTimer.Start();
+
+	
 
 	if (agressor->col->type == COLLIDER_BOMB_EXPLOSION)
 		life -= 1;
