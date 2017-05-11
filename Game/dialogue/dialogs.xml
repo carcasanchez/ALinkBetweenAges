@@ -3,12 +3,11 @@
   
    <npc id="1" states="2">
      <dialogue state="0">
-       <text value=" Hi Link! We had problems with Ganon's soldiers. They came out of nowhere wanting to kidnap Zelda, but she managed to escape to the forest."/>
-	<text value=" The forest is at the south-west, passing the village. We need your help. Bring Zelda back, please."/>
-	<text value=" I forgot! You can attack in four directions using ABXY, and dodge with RB. "/>
+       <text value=" "/>
+	<text value=" If you go to the forest remember you can attack in four directions using ABXY, and dodge with RB."/>
      </dialogue>
      <dialogue state="1">
-   	<text value=" Go to the forest, south-west of the village, and find Zelda. You are our last hope, good luck Link."/>
+   	<text value=" Forest is south-west of the village, Zelda told me she will be there."/>
      </dialogue>
    </npc>
   
@@ -17,36 +16,35 @@
 	<text value=" A blink is enough to make a peaceful man a warrior."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" I can see fear in your eyes. Be brave, Link."/>
+	<text value=" In for a green rupee in for a red rupee."/>
      </dialogue>
 
    </npc>
 
    <npc id="3" states="2">
      <dialogue state="0">
-	<text value=" The soldiers stole my chickens. I'm so sad. They are bad people."/>
+	<text value="I love playing banjo in my free time, my grandpa Pete Seeger was a good teacher."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" Bring my chickens back, please."/>
+	<text value="I think everybody can be happy with a banjo in their lives. Isn't It?"/>
      </dialogue>
    </npc>
 
    <npc id="4" states="1">
      <dialogue state="0" states="1">
-	<text value=" A group of soldiers went to the forest, I don't know what they are looking for."/>
+	<text value="Hi Link! Did you see my grandma? She wasn't on the bed this morning."/>
      </dialogue>
    </npc>
 
    <npc id="5" states="1">
      <dialogue state="0">
-	<text value=" To the left is the entrance to the forest. Be very careful if you are going to enter there."/>
+	<text value="It is the early bird that catches the worm."/>
 </dialogue>
    </npc>
 
    <npc id="6" states="2">
      <dialogue state="0">
 	<text value=" Hey! You don't talk that much. I like you."/>
-	<text value=" That's my boy."/>
      </dialogue>
 <dialogue state="1">
 	<text value=" Good boy."/>
@@ -56,10 +54,10 @@
 
    <npc id="7">
      <dialogue state="0" states="2">
-	<text value=" I love turtles, but I can't find any in this village."/>
+	<text value="Appearances can be deceptive Link, I will become a strong warrior."/>
      </dialogue>
      <dialogue state="1">
-	<text value=" I'm so sad. I want turtles."/>
+	<text value="And remember, a bad writer blames his pen.  "/>
      </dialogue>
    </npc>
 
@@ -87,18 +85,23 @@
 
   <npc id="12" states="1">
     <dialogue state="0">
-      <text value=" Sorry, pal, but you are too small to go to the Castle alone. "/>
-      <text value=" Why don't you play in the forest? "/>
+      <text value=" Sorry boy, but you are too small to go to the Castle alone. "/>
     </dialogue>
   </npc>
 
   <npc id="13" states="1">
     <dialogue state="0">
-      <text value=" Hey, kid! Don't go in that direction! "/>
-      <text value=" This is the way to the wildlands. The entrance is forbidden. "/>
-      <text value=" These are hostile lands, full of monsters. It's too dangerous. "/>
+    <text value=" This is the way to the Wildlands. The entrance is forbidden, It's so dangerous to go alone."/>
       <text value=" Make a favor to yourself, and stay safe in the village. "/>
     </dialogue>
   </npc>
+
+<npc id="14" states="1">
+    <dialogue state="0">
+    <text value=" This is the way to the Wildlands. The entrance is forbidden, It's so dangerous to go alone."/>
+      <text value=" Make a favor to yourself, and stay safe in the village. "/>
+    </dialogue>
+  </npc>
+
 
 </npcs>
