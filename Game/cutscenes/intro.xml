@@ -4,7 +4,7 @@
 
  <!--CUTSCENE ELEMENTS-->
 	<elements>
-		<MAP>
+		<MAP>       
 		</MAP>
 
 		<NPC>
@@ -44,7 +44,7 @@
 
 		<step  n="2" start="-1" duration ="-1" input="true">
 			<element name="legend" action="fade">
-				<fading to_black="true" bezier_time="10000"/>
+				<fading to_black="true" bezier_time="1500"/>
 			</element>			
 		</step>
 	</steps>
