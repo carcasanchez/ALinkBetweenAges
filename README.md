@@ -1,4 +1,4 @@
-# A Link Between Ages Vertical Slice (v0.4)
+# A Link Between Ages (Alpha)
 
 https://github.com/carcasanchez/TheLinkedProject/releases
 https://twitter.com/DuckDevv
@@ -7,39 +7,66 @@ https://twitter.com/DuckDevv
 
 A Link Between Ages is not a reboot nor a remake: it's a complete new game, based in the world and premise of A link to the Past, 
 that preserves the spirit of the original game, but with a new gameplay and plot.
- In our Vertical Slice, you can check out four different
-maps: the Kakariko Village and its forest, and Kakariko's Castle both inside and outside.
+ This is the Alpha release: all the in-game content is implemented.
 
-The Ganon army has taken the castle! But Zelda manages to escape to the forest. Probably, she will offer you her help.
+Link has a quiet life in the Kakariko village. One day, the princess Zelda goes to the western forest, and Link follows her...
 
-Get rid of all the soldiers to win! You have three lives to succeed: if not, you'll start again. But be aware, 
-actions consume stamina! Use it carefully.
-The number of defeated enemies is displayed in screen.
-Talk to the NPCs to know where the evil soldiers are hiding!
 
-Controls (keyboard):
-- WASD: move
-- Arrows: attack / talk to NPC
-- Spacebar: dodge
-
+The game is meant to be played with Game Controller
 
 Controls (gamepad):
 - Left joystick: move
-- Right joystick / ABXY: attack
-- Right button: dodge
+- ABXY: attack/talk with NPC
+- Right bumper: dodge
+- Left bumper: change between inventory items
+- Left Trigger: use equipped item (hold it and press ABXY to use the bow and the bomb sac)
+- Right Trigger: use Spin Attack (you need a special book to learn this movement)
+- Start: Open pause menu
 
-Debug functionality:
-- Left mouse button: teleport to cursor position
-- Right mouse button: teleport to cursor position
-- Keynumber 1: change Link's age
-- F1: display collisions
 
-###Changelog from previous versions
--Full four maps implemented
--Enemies and NPC located (w/ dialogs)
--Game loop: win and lose conditions
--Link change between kid and adul
--Balanced gameplay
--Fixed bugs
+
+### Changelog:
+
+## Alpha (v0.9)
+
+-All cinematics (primitive version)
+-All enemies, maps and items
+-All dialogues
+-Game is fully playable
+-Polished art and fixed bugs
+-Removed all debug functionality
+
+
+## v0.8
+-Boss polish (life set to 10 in each phase)
+-Added music and Fx to some areas
+-Polished bugs and art
+-Bomb item full working
+-Spin movement added to adult Link
+
+## v0.6
+-New enemy types (spawn them with keynumbers 4 to 7)
+-Rupee, chest and lifeheart system
+-Polished bugs and art
+-Added three ages of link (change them with keynumbers 1 to 3)
+-Fullscreen mode operative
+
+## v0.3
+-Castle Interior map added
+-Stamina and life display
+-Dialog and NPC system
+-Polished IA
+-Framerate optimization: fixed to 60 fps
+-Full game controller integration
+
+
+## v0.2
+-Combat balanced and polished IA
+-Implemented NPC system
+-Polished Collisions
+-Animation bugs solved
+
+
+
 
 
