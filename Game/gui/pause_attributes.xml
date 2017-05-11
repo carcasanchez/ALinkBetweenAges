@@ -13,8 +13,8 @@
   <quit       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="528" active="false"/>
 
  <start_menu  x="742"  y="0"   w="552" h="448" pos_x="0"  pos_y="0" active="false"/>
- <continue    x="357"  y="78"  w="20"  h="23"  pos_x="0"  pos_y="528" active="true"/>
- <new         x="357"  y="78"  w="20"  h="23"  pos_x="30"  pos_y="528" active="true"/>
- <start_quit  x="357"  y="78"  w="20"  h="23"  pos_x="60"  pos_y="528" active="true"/>
+ <continue    x="357"  y="78"  w="20"  h="23"  pos_x="125"  pos_y="285" active="true"/>
+ <new         x="357"  y="78"  w="20"  h="23"  pos_x="125"  pos_y="425" active="true"/>
+ <start_quit  x="357"  y="78"  w="20"  h="23"  pos_x="125"  pos_y="570" active="true"/>
 
 </images>
