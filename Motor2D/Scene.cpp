@@ -212,7 +212,10 @@ bool Scene::Update(float dt)
 
 	//Siento a visente en mi interior
 	if (this->name == "introScene" && App->cutsceneM->CutsceneReproducing() == false)
+	{
+		App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
 		App->game->hud->start_menu_screen->Set_Active_state(true);
+	}
 	
 
 	std::list<Exit*>::iterator exit = exits[currentSector].begin();

@@ -90,7 +90,7 @@ bool j1GameLayer::Update(float dt)
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateNPC(1, NPC_DARK_ZELDA, mousePos.x, mousePos.y);
-		App->cutsceneM->StartCutscene(3);
+		App->cutsceneM->StartCutscene(2);
 		//em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)

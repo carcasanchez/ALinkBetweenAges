@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "j1Gui.h"
 #include "j1FileSystem.h"
+#include "j1CutSceneManager.h"
 #include "j1GameLayer.h"
 #include "j1EntityManager.h"
 #include "p2Log.h"
@@ -73,13 +74,65 @@ bool Hud::CleanUp()
 
 void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 {
-	
-	switch (new_event)
+
+	if (!start_menu_screen->active)
 	{
-	case PAUSE:
-		if (state == E_DOWN)
+		switch (new_event)
 		{
-			if (App->game->pause)
+		case PAUSE:
+			if (state == E_DOWN)
+			{
+				if (App->game->pause)
+				{
+					if (pause_transition == PAUSE_NO_MOVE)
+					{
+						pause_transition = PAUSE_UP;
+						main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+					}
+				}
+				else
+				{
+					IntoPause();
+				}
+			}
+			break;
+
+		case UP:
+
+			if (state == E_DOWN)
+			{
+				for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
+				{
+
+					if ((*it)->active && (it + 1) != pause_selectables.rend())
+					{
+						(*it)->active = false;
+						(*(it + 1))->Set_Active_state(true);
+						break;
+					}
+
+				}
+			}
+			break;
+
+		case DOWN:
+			if (state == E_DOWN)
+			{
+				for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
+				{
+					if ((*it)->active && (it + 1) != pause_selectables.end())
+					{
+						(*it)->active = false;
+						(*(it + 1))->Set_Active_state(true);
+						break;
+					}
+				}
+			}
+			break;
+
+		case CONFIRM:
+
+			if (resume->active)
 			{
 				if (pause_transition == PAUSE_NO_MOVE)
 				{
@@ -87,113 +140,126 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 					main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
 				}
 			}
-			else
+
+			if (save->active)
 			{
-				IntoPause();
+				App->SaveGame("saves.xml");
+				saved_game->Set_Active_state(true);
 			}
-		}
-		break;
 
-	case UP:
-
-		if (state == E_DOWN)
-		{
-			for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
+			if (load->active)
 			{
+				App->LoadGame("saves.xml");
+				loaded_game->Set_Active_state(true);
+			}
 
-				if ((*it)->active && (it + 1) != pause_selectables.rend())
-				{
-					(*it)->active = false;
-					(*(it + 1))->Set_Active_state(true);
-					break;
-				}
+			if (controls->active)
+			{
 
 			}
-		}
-		break;
 
-	case DOWN:
-		if (state == E_DOWN)
-		{
-			for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
+			if (quit->active)
 			{
-				if ((*it)->active && (it + 1) != pause_selectables.end())
-				{
-					(*it)->active = false;
-					(*(it + 1))->Set_Active_state(true);
-					break;
-				}
+				App->game->quit_game = true;
+				App->game->pause = false;
 			}
-		}
-		break;
 
-	case CONFIRM:
 
-		if (resume->active)
-		{
+
+			break;
+
+		case DECLINE:
 			if (pause_transition == PAUSE_NO_MOVE)
 			{
 				pause_transition = PAUSE_UP;
 				main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
 			}
-		}
+			break;
 
-		if (save->active)
+		case USE_ITEM:
 		{
-			App->SaveGame("saves.xml");
-			saved_game->Set_Active_state(true);
+			if (!item_active)
+			{
+				item_frame->Image = items_frame_using->Image;
+				item_active = true;
+			}
+			break;
 		}
 
-		if (load->active)
+		case STOP_ITEM:
 		{
-			App->LoadGame("saves.xml");
-			loaded_game->Set_Active_state(true);
+			if (item_active)
+			{
+				item_frame->Image = items_frame_inactive->Image;
+				item_active = false;
+			}
+			break;
 		}
 
-		if (controls->active)
-		{
-
 		}
+	}
 
-		if (quit->active)
-		{
-			App->game->quit_game = true;
-			App->game->pause = false;
-		}
-
-		
-
-		break;
-
-	case DECLINE:
-		if (pause_transition == PAUSE_NO_MOVE)
-		{
-			pause_transition = PAUSE_UP;
-			main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
-		}
-		break;
-
-	case USE_ITEM:
+	else
 	{
-		if (!item_active)
-		{
-			item_frame->Image = items_frame_using->Image;
-			item_active = true;
-		}
-		break;
-	}
 
-	case STOP_ITEM:
-	{
-		if (item_active)
+		switch (new_event)
 		{
-			item_frame->Image = items_frame_inactive->Image;
-			item_active = false;
-		}
-		break;
-	}
+		case UP:
 
-	}
+			if (state == E_DOWN)
+			{
+				for (std::vector<UI_Image*>::reverse_iterator it = start_menu_selectables.rbegin(); it != start_menu_selectables.rend(); it++)
+				{
+
+					if ((*it)->active && (it + 1) != start_menu_selectables.rend())
+					{
+						(*it)->active = false;
+						(*(it + 1))->Set_Active_state(true);
+						break;
+					}
+
+				}
+			}
+			break;
+
+		case DOWN:
+			if (state == E_DOWN)
+			{
+				for (std::vector<UI_Image*>::iterator it = start_menu_selectables.begin(); it != start_menu_selectables.end(); it++)
+				{
+					if ((*it)->active && (it + 1) != start_menu_selectables.end())
+					{
+						(*it)->active = false;
+						(*(it + 1))->Set_Active_state(true);
+						break;
+					}
+				}
+			}
+			break;
+
+		case CONFIRM:
+
+			if (start_continue->active)
+			{
+				//App->LoadGame("saves.xml");
+				//App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
+			}
+
+			if (start_new_game->active)
+			{
+				StartGame();
+				App->cutsceneM->StartCutscene(1);
+			}
+
+			if (start_quit->active)
+			{
+				App->game->quit_game = true;
+				App->game->pause = false;
+			}
+
+			break;	
+		}
+	}	
 }
 
 bool Hud::LoadPause(string file)
@@ -372,6 +438,12 @@ void Hud::PauseOut(float dt)
 		GonePause();
 		pause_transition = PAUSE_NO_MOVE;
 	}
+}
+
+void Hud::StartGame()
+{
+	start_menu_screen->Set_Active_state(false);
+	start_menu_screen->QuitFromRender();
 }
 
 bool Hud::LoadHud(string file)
