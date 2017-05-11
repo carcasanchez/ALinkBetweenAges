@@ -337,7 +337,15 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 			em->player->dodgeDir.SetToZero();
 		
 		c1->parent->Move(SDL_ceil(c1->parent->speed*dt)*Movement.x, SDL_ceil(c1->parent->speed*dt)*Movement.y);
-				
+			
+
+		if (c2->type == COLLIDER_NPC && App->cutsceneM->CutsceneReproducing() == false)
+		{
+			Npc* tmp = (Npc*)c2->parent;
+			if (tmp->npcType == NPC_ZELDA)
+				App->cutsceneM->StartCutscene(2);
+		}
+
 		return true;
 	}
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WOOD_DOOR)
@@ -444,7 +452,9 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		if (c2->type == COLLIDER_LINK_SWORD && em->player->actionState == ATTACKING)
 		{
-			em->player->toTalk = (Npc*)c1->parent;
+			Npc* tmp = (Npc*)c1->parent;
+			if (tmp->npcType != NPC_ZELDA)
+			  em->player->toTalk = (Npc*)c1->parent;
 		}
 		return true;
 	}
