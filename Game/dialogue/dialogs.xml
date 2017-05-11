@@ -44,7 +44,7 @@
 
    <npc id="6" states="2">
      <dialogue state="0">
-	<text value=" Hey! You don't talk that much. I like you."/>
+	<text value=" Hey! You don't talk much. I like you."/>
      </dialogue>
 <dialogue state="1">
 	<text value=" Good boy."/>
@@ -91,8 +91,8 @@
 
   <npc id="13" states="1">
     <dialogue state="0">
-    <text value=" This is the way to the Wildlands. The entrance is forbidden, It's so dangerous to go alone."/>
-      <text value=" Make a favor to yourself, and stay safe in the village. "/>
+    <text value=" This is the way to the Wildlands. The entrance is forbidden, It's dangerous to go alone."/>
+      <text value=" Make a favour to yourself, and stay safe in the village. "/>
     </dialogue>
   </npc>
 

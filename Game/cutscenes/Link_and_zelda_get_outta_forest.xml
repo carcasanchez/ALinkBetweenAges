@@ -42,7 +42,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Hi Link... I'm glad you are here. I get lost while training my skills with the sword to prepare for the trip We talk yesterday, do you remember? The WildLands seems a place very beautiful but so dangerous." />
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Hi Link... I'm glad you are here. I got lost while training with my sword to prepare for the trip we talked about yesterday, do you remember? The WildLands look like a beautiful place but they are dangerous." />
     </TEXTS>
 
     <MUSIC>
@@ -73,7 +73,7 @@
 
     <step  n="3" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="I don't think that would be possible for me to prepare. It feels very upset trying things so hard and keeping up feeling useless like this, look at me, I went alone for ten minutes and get lost, I'm a mess."/>
+        <text text="I don't think that would be possible for me to prepare. It's so upsetting trying things so hard and keep feeling useless like this, look at me, I walked alone for ten minutes and I got lost, I'm a mess."/>
       </element>
     </step>
 
@@ -167,7 +167,7 @@
 
     <step  n="21" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Sorry for what happened on the forest Link, I'm very shamed."/>
+        <text text="Sorry for what happened in the forest Link, I'm very ashamed."/>
       </element>
     </step>
     
@@ -231,7 +231,7 @@
 
     <step  n="32" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="We have a really big problem. Ganon is coming to take the castle and will enslave everyone in our village. We have to scape into the Wildlands, hurry up!"/>
+        <text text="We have a really big problem. Ganon is coming to take the castle and will enslave everyone in our village. We have to escape into the Wildlands, hurry up!"/>
       </element>
     </step>
 
