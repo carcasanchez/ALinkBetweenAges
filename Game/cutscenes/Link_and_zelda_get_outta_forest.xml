@@ -231,7 +231,7 @@
 
     <step  n="32" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Demonos prisa, no hay tiempo que perder"/>
+        <text text="We have a really big problem. Ganon is coming to take the castle and will enslave everyone in our village. We have to scape into the Wildlands, hurry up!"/>
       </element>
     </step>
 
@@ -333,7 +333,7 @@
 
     <step  n="55" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="DEJEN PASO AL GENERALISIMO, VIVA ESPAÃ‘A Y VIVA EL VINO"/>
+        <text text="Give way to our great master and lord of Hyrule."/>
       </element>
     </step>
 
@@ -371,7 +371,7 @@
 
     <step  n="62" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Corre link escondete, deprisa!!!"/>
+        <text text="Hide behind that bush Link, I will distract them! HURRY UP!"/>
       </element>
     </step>
 
@@ -401,7 +401,7 @@
 
     <step  n="62" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="ANCIANO, DIRIGETE HACIA EL CASTILLO SI NO QUIERES MORIR"/>
+        <text text="This village is mine now, go to the castle if you don´t wanna be executed!"/>
       </element>
     </step>
 
@@ -419,7 +419,7 @@
 
     <step  n="62" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="FOOOOORMACION, VAMONOS"/>
+        <text text="Group up! Go!"/>
       </element>
     </step>
     
