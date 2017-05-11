@@ -10,8 +10,10 @@
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
 enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_SCENE, CS_CAM, CS_NONE };
-enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_LOAD, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_CREATE, ACT_PLAY, ACT_STOP, ACT_FREE_CAM, ACT_LOCK_CAM, ACT_NONE };
+enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_LOAD, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_CREATE, ACT_PLAY, ACT_STOP, ACT_FREE_CAM, ACT_LOCK_CAM, ACT_CHANGE_AGE, ACT_NONE };
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, CS_TELEPORT, NO_DIR };
+
+enum LINK_AGE;
 
 class Entity;
 class j1Timer;
@@ -173,6 +175,7 @@ public:
 	void LockCamera();
 	void Fade();
 	bool CheckFadeCompleted();
+	bool ChangeAge();
 	//---------------------------
 
 	//UTILITY FUNCTIONS ------------
@@ -218,6 +221,8 @@ private:
 	iPoint pos = { 0,0 };
 	int type = 0;
 	int id = 0;
+
+	LINK_AGE age = (LINK_AGE)0;
 
 	//TEXTS ACIONS 
 	std::string new_text;

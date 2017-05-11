@@ -11,6 +11,7 @@
 #include "HUD.h"
 #include "j1SceneManager.h"
 #include "j1EntityManager.h"
+#include "Player.h"
 #include "j1Render.h"
 #include "j1Audio.h"
 #include "p2Log.h"
@@ -709,6 +710,11 @@ bool CS_Step::DoAction(float dt)
 		LockCamera();
 		break;
 
+	case ACT_CHANGE_AGE:
+		action_name = "change age";
+		ChangeAge();
+		break;
+
 	default:
 		action_name = "none";
 		break;
@@ -815,6 +821,11 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	else if (action_type == "lock")
 	{
 		act_type = ACT_LOCK_CAM;
+	} 
+	else if (action_type == "setage")
+	{
+		act_type = ACT_CHANGE_AGE;
+		LoadCharacter(node.child("element").child("age"));
 	}
 	else
 	{
@@ -886,8 +897,19 @@ void CS_Step::LoadScene()
 
 void CS_Step::LoadCharacter(pugi::xml_node& node)
 {
-	//si funsiona lo borro
-	
+	string tmp = node.attribute("state").as_string();
+
+	if (tmp == "young")
+	{
+		age = YOUNG;
+		return;
+	}
+		
+	if (tmp == "adult")
+	{
+		age = ADULT;
+		return;
+	}
 }
 
 void CS_Step::CreateCharacter()
@@ -1227,6 +1249,28 @@ bool CS_Step::CheckFadeCompleted()
 	}
 
 	return false;
+}
+
+bool CS_Step::ChangeAge()
+{
+	bool ret = false;
+
+	if (element->GetType() == CS_NPC)
+	{
+		CS_npc* tmp = (CS_npc*)element;
+
+		if (tmp->GetMyEntity() != nullptr)
+		{
+			if (tmp->GetMyEntity() == App->game->em->player)
+			{
+				App->game->em->player->ChangeAge(age);
+				FinishStep();
+				ret = true;
+			}
+		}
+
+	}
+	return ret;
 }
 
 //Link the element of the cutscene with the step
