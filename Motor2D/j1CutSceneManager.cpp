@@ -1264,6 +1264,7 @@ bool CS_Step::ChangeAge()
 			if (tmp->GetMyEntity() == App->game->em->player)
 			{
 				App->game->em->player->ChangeAge(age);
+				App->game->em->player->life = App->game->em->player->maxLife;
 				FinishStep();
 				ret = true;
 			}
