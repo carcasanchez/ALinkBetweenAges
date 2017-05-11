@@ -73,6 +73,9 @@ bool Npc::Spawn(std::string file, iPoint pos, NPC_TYPE type)
 		case NPC_SOLDIER:
 			attributes = attributesFile.child("attributes").child("soldier");
 			break;
+		case NPC_DARK_ZELDA:
+			attributes = attributesFile.child("attributes").child("dark_zelda");
+			break;
 		}
 		
 		actionState = IDLE;

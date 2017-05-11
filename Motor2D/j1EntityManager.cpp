@@ -232,6 +232,9 @@ Npc * j1EntityManager::CreateNPC(int sector, NPC_TYPE type , int x, int y, int i
 	case NPC_SOLDIER:
 		ret = new Npc_Soldier();
 		break;
+	case NPC_DARK_ZELDA:
+		ret = new Npc_Dark_Zelda();
+		break;
 	default:
 		return nullptr;
 	}

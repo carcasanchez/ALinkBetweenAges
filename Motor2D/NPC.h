@@ -17,7 +17,8 @@ enum NPC_TYPE
 	NPC_ZELDA,
 	SIGN,
 	NPC_GANON,
-	NPC_SOLDIER
+	NPC_SOLDIER,
+	NPC_DARK_ZELDA
 };
 
 
@@ -114,5 +115,11 @@ class Npc_Soldier : public Npc
 {
 public:
 	Npc_Soldier() : Npc() { npcType = NPC_SOLDIER; };
+};
+
+class Npc_Dark_Zelda: public Npc
+{
+public:
+	Npc_Dark_Zelda() : Npc() { npcType = NPC_DARK_ZELDA; };
 };
 #endif // !_PLAYER_H_
