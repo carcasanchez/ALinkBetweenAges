@@ -61,8 +61,10 @@ bool j1EntityManager::PreUpdate()
 			(*item)->OnDeath();
 			if ((*item)->toDelete)
 			{
-				(*item)->col->to_delete = true;			
-				(*item)->col->parent->col = nullptr;
+				if ((*item)->col)
+				{
+					(*item)->col->to_delete = true;
+				}
 				RELEASE(*item);
 				item = entities[*sector].erase(item); //calls destroyer
 			}
@@ -358,9 +360,8 @@ bool j1EntityManager::CleanEntities()
 	bool ret = true;	
 	std::vector<Entity*> keepAlive;
 
-	for (int i = 1; i <= App->sceneM->currentScene->maxSectors; i++)
-	{
-		for (std::list<Entity*>::iterator item = entities[i].begin(); item != entities[i].end(); item++)
+	
+		for (std::list<Entity*>::iterator item = entities[1].begin(); item != entities[1].end(); item++)
 		{
 			if ((*item)->keepExisting)
 			{
@@ -369,18 +370,13 @@ bool j1EntityManager::CleanEntities()
 			}
 			else
 			{ 
-				if ((*item)->col)
-				{
-					(*item)->col->to_delete = true; 
-					(*item)->col->parent->col = nullptr;
-				}
 				RELEASE(*item);
-				entities[i].erase(item);
+				entities[1].erase(item);
 			}
 		}
 
-		entities[i].clear();
-	}
+		entities[1].clear();
+	
 
 	entities.clear();
 

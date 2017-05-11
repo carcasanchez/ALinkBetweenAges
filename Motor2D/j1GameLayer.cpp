@@ -91,7 +91,7 @@ bool j1GameLayer::Update(float dt)
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateNPC(1, NPC_DARK_ZELDA, mousePos.x, mousePos.y);
 		App->cutsceneM->StartCutscene(3);
-		//em->CreateObject(1, mousePos.x, mousePos.y, WOOD_DOOR);
+		//em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);
 
 	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
@@ -210,19 +210,21 @@ void j1GameLayer::PickObject(Object * object)
 
 	}
 	
-	if (object->price > 0)
+		if (object->price > 0)
 	{
 		return;
 	}
+
+		object->life = -1;
 	
-	if (em->player->pickedObject)
+	/*if (em->player->pickedObject)
 	{
 		em->player->pickedObject->life = -1;
 	}
 
 	em->player->pickedObject = object;
 	em->player->pickedObject->col->active = false;
-	em->player->showObjectTimer.Start();
+	em->player->showObjectTimer.Start();*/
 	
 	
 }

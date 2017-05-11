@@ -111,6 +111,7 @@ bool j1SceneManager::ChangeScene()
 
 		App->pathfinding->CleanUp();
 		App->game->em->CleanEntities();
+		App->collisions->ChangeScene();
 		RELEASE(currentScene);
 		currentScene = new Scene(destiny.c_str());
 		currentScene->Load(data[currentScene->name].c_str());

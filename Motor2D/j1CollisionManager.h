@@ -83,6 +83,8 @@ public:
 	bool PreUpdate();
 	bool Update(float dt);
 	bool CleanUp();
+	bool ChangeScene();
+
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
 	bool DrawDebug();

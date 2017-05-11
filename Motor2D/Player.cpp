@@ -143,12 +143,9 @@ bool Player::Update(float dt)
 
 	ManageStamina(dt);	
 
-	ShowPickedObject();
+	//ShowPickedObject();
 
-	//TODO: Move this to idle and walking
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		UseObject(dt);
-
+	
 	switch (playerState)
 	{
 	case ACTIVE:

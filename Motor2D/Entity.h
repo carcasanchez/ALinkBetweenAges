@@ -109,7 +109,7 @@ public:
 	iPoint currentPos;
 
 	// Collider
-	Collider* col;
+	Collider* col = nullptr;
 	iPoint colPivot;
 	iPoint linearMovement;
 
