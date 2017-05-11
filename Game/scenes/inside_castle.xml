@@ -61,7 +61,7 @@
 		<sample type = "1" x = "41" y = "158"/>
 		<sample type = "1" x = "31" y = "158"/>
 
-		<sample type = "1" x = "186" y = "173"/>
+		<sample type = "1" x = "186" y = "178"/>
 
 		<sample type = "1" x = "246" y = "176"/>
 		<sample type = "1" x = "232" y = "145"/>
@@ -79,8 +79,6 @@
 		<sample type = "1" x = "249" y = "165"/>
 		<sample type = "1" x = "241" y = "164"/>
 
-		<sample type = "1" x = "246" y = "57"/>
-		<sample type = "1" x = "255" y = "57"/>
 		<sample type = "1" x = "240" y = "67"/>
 		<sample type = "1" x = "260" y = "67"/>
 
@@ -91,8 +89,7 @@
 		<sample type = "1" x = "264" y = "103"/>
 		<sample type = "1" x = "236" y = "102"/>
 
-		<sample type = "1" x = "36" y = "129"/>
-		<sample type = "1" x = "184" y = "138"/>
+		<sample type = "1" x = "184" y = "154"/>
 
 
 
@@ -118,6 +115,11 @@
 
           <door object_type="29" x="109" y="103"/>
           <chest object_type="9" x="250" y="29" item_inside="25"/>
+
+<chest object_type="9" x="37" y="129" item_inside="12"/>
+<chest object_type="9" x="31" y="129" item_inside="14"/>
+<chest object_type="9" x="42" y="129" item_inside="13"/>
+
           <stone object_type="24" x="181" y="138"/>
           <stone object_type="24" x="183" y="138"/>
           <stone object_type="24" x="185" y="138"/>
