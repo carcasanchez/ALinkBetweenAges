@@ -12,7 +12,7 @@
 
 		<IMAGES>
 		   <image n="0" name="Z" active="false" x="258" y="691" w="86" h="128" pos_x="250" pos_y="250" text="title_screen"/>
-		   <image n="1" name="legend" active="false" x="78" y="0" w="271" h="168" pos_x="172" pos_y="222" text="title_screen"/>
+		   <image n="1" name="legend" active="false" x="78" y="0" w="302" h="164" pos_x="172" pos_y="222" text="title_screen"/>
 		</IMAGES>
 
 		<TEXTS>
