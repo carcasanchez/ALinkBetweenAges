@@ -466,6 +466,17 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	if (c1->type == COLLIDER_BUSH && c2->type == COLLIDER_LINK_SWORD)
 	{
 		c1->parent->life = -1;
+		iPoint mapPos = App->map->WorldToMap(c1->parent->currentPos.x, c1->parent->currentPos.y);
+		int drop_rupee = rand() % 7;
+		int drop_lifeheart = rand() % 20;
+		if (drop_rupee == 1)
+		{
+			App->game->em->CreateObject(1, mapPos.x, mapPos.y, GREEN_RUPEE);
+		}
+		else if (drop_lifeheart == 2)
+		{
+			App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
+		}
 		return true;
 	}
 
