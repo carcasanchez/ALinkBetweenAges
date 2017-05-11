@@ -6,6 +6,7 @@
   <elements>
     <MAP>
       <scene n="0" name="village" active="true" scene_name="kakarikoVillage"  load="true"/>
+      <scene n="1" name="destroyed" active="true" scene_name="kakarikoDestroyed" load="true"/>
     </MAP>
 
     <NPC>
@@ -33,6 +34,9 @@
       <npc n="4" name="soldier_16" active="true" type="10" x ="176" y ="225" entity_id="36" empty="true"/>
       <npc n="4" name="soldier_17" active="true" type="10" x ="176" y ="230" entity_id="37" empty="true"/>
       <npc n="4" name="GANON" active="true" type="9" x ="176" y ="227" entity_id="29" empty="true"/>
+
+      <npc n="5" name="dumb" active="true" type="10" x="200" y="231" entity_id="50" empty="true"/>
+      <npc n="5" name="dumber" active="true" type="10" x="200" y="235" entity_id="51" empty="true"/>
     </NPC>
 
     <ENEMIES>
@@ -42,7 +46,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Hi Link... I'm glad you are here. I get lost while training my skills with the sword to prepare for the trip We talk yesterday, do you remember? The WildLands seems a place very beautiful but so dangerous." />
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Hi Link... I get lost while training my skills with the sword to prepare for the trip We talk yesterday, do you remember? The WildLands seems a place very beautiful but so dangerous." />
     </TEXTS>
 
     <MUSIC>
@@ -60,11 +64,11 @@
   <!--EXECUTE ALL STEPS IN ORDER-->
   <steps>
     <step  n="0" start="0" duration ="-1" input="false">
-      <element name="Zelda" action="create"/>    
+      <element name="Zelda" action="create"/>
     </step>
 
-  <step  n="1" start="-1" duration ="-1" input="false">
-      <element name="Link" action="create"/>  
+    <step  n="1" start="-1" duration ="-1" input="false">
+      <element name="Link" action="create"/>
     </step>
 
     <step  n="2" start="-1" duration ="-1" input="true">
@@ -79,20 +83,20 @@
 
     <step  n="4" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
-        <movement dest_x="200" dest_y="0" speed="200"/>
+        <movement dest_x="100" dest_y="0" speed="200"/>
       </element>
     </step>
 
     <step  n="5" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="left">
-        <movement dest_x="200" dest_y="0" speed="15"/>
+        <movement dest_x="100" dest_y="0" speed="15"/>
       </element>
     </step>
 
-     <step n="6" start ="-1" duration="-1" input="false">
+    <step n="6" start ="-1" duration="-1" input="false">
       <element name="camera" action="free"/>
     </step>
-    
+
     <step  n="7" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text="Let It be Link, let's back to Kakariko."/>
@@ -101,13 +105,13 @@
 
     <step  n="8" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
-        <movement dest_x="300" dest_y="0" speed="200"/>
+        <movement dest_x="150" dest_y="0" speed="200"/>
       </element>
     </step>
 
     <step  n="9" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="300" dest_y="0" speed="200"/>
+        <movement dest_x="150" dest_y="0" speed="200"/>
       </element>
     </step>
 
@@ -154,7 +158,7 @@
         <movement dest_x="80" dest_y="228" speed="50"/>
       </element>
     </step>
-        
+
     <step  n="19" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="create"/>
     </step>
@@ -164,7 +168,7 @@
         <movement dest_x="5" dest_y="228" speed="50"/>
       </element>
     </step>
-
+    
     <step  n="21" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text="Sorry for what happened on the forest Link, I'm very shamed."/>
@@ -173,13 +177,13 @@
     
     <step  n="22" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
-        <movement dest_x="-150" dest_y="0" speed="200"/>
+        <movement dest_x="62" dest_y="0" speed="200"/>
       </element>
     </step>
 
     <step  n="23" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
-        <movement dest_x="-150" dest_y="0" speed="50"/>
+        <movement dest_x="62" dest_y="0" speed="50"/>
       </element>
     </step>
 
@@ -188,22 +192,22 @@
         <text text="Finally find you guys! Where were you?"/>
       </element>
     </step>
-
+    
     <step  n="25" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="-220" dest_y="0" speed="200"/>
+        <movement dest_x="50" dest_y="0" speed="200"/>
       </element>
     </step>
 
     <step  n="26" start="-1" duration ="-1" input="false">
-      <element name="tio_ben" action="move" dir="right">
-        <movement dest_x="200" dest_y="0" speed="100"/>
+      <element name="tio_ben" action="move" dir="left">
+        <movement dest_x="75" dest_y="0" speed="100"/>
       </element>
     </step>
 
     <step  n="27" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="left">
-        <movement dest_x="-160" dest_y="0" speed="200"/>
+        <movement dest_x="62" dest_y="0" speed="200"/>
       </element>
     </step>
 
@@ -214,14 +218,14 @@
     </step>
     
     <step  n="29" start="-1" duration ="-1" input="false">
-      <element name="Zelda" action="move" dir="right">
-        <movement dest_x="-100" dest_y="0" speed="200"/>
+      <element name="Zelda" action="move" dir="left">
+        <movement dest_x="62" dest_y="0" speed="200"/>
       </element>
     </step>
     
     <step  n="30" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="up">
-        <movement dest_x="0" dest_y="920" speed="200"/>
+        <movement dest_x="0" dest_y="180" speed="200"/>
       </element>
     </step>
 
@@ -231,19 +235,19 @@
 
     <step  n="32" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="We have a really big problem. Ganon is coming to take the castle and will enslave everyone in our village. We have to scape into the Wildlands, hurry up!"/>
+        <text text="We have a really big problem. Ganon is coming to take the castle and will enslave everyone in our village. We have to escape into the Wildlands, hurry up!"/>
       </element>
     </step>
 
     <step  n="33" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="right">
-        <movement dest_x="300" dest_y="0" speed="100"/>
+        <movement dest_x="90" dest_y="0" speed="100"/>
       </element>
     </step>
     
     <step  n="34" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="70" dest_y="0" speed="200"/>
+        <movement dest_x="90" dest_y="0" speed="200"/>
       </element>
     </step>
 
@@ -274,7 +278,7 @@
     <step  n="40" start="-1" duration ="-1" input="false">
       <element name="soldier_7" action="create"/>
     </step>
-
+    
     <step  n="41" start="-1" duration ="-1" input="false">
       <element name="soldier_6" action="create"/>
     </step>
@@ -340,22 +344,22 @@
     <step n="56" start ="-1" duration="-1" input="false">
       <element name="camera" action="free"/>
     </step>
-
+    
     <step  n="57" start="-1" duration ="-1" input="false">
       <element name="soldier_1" action="move" dir="left">
-        <movement dest_x="-20" dest_y="0" speed="200"/>
+        <movement dest_x="144" dest_y="0" speed="200"/>
       </element>
     </step>
 
     <step  n="58" start="-1" duration ="-1" input="false">
       <element name="soldier_1" action="move" dir="up">
-        <movement dest_x="0" dest_y="-17" speed="200"/>
+        <movement dest_x="0" dest_y="225" speed="200"/>
       </element>
     </step>
 
     <step  n="59" start="-1" duration ="-1" input="false">
       <element name="soldier_1" action="move" dir="down">
-        <movement dest_x="0" dest_y="-20" speed="200"/>
+        <movement dest_x="0" dest_y="225" speed="200"/>
       </element>
     </step>
 
@@ -365,7 +369,7 @@
 
     <step  n="61" start="-1" duration ="-1" input="false">
       <element name="GANON" action="move" dir="left">
-        <movement dest_x="-100" dest_y="0" speed="50"/>
+        <movement dest_x="160" dest_y="0" speed="50"/>
       </element>
     </step>
 
@@ -377,171 +381,321 @@
 
     <step  n="63" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="left">
-        <movement dest_x="390" dest_y="0" speed="200"/>
+        <movement dest_x="122" dest_y="0" speed="200"/>
       </element>
     </step>
 
     <step  n="64" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="up">
-        <movement dest_x="0" dest_y="1200" speed="200"/>
+        <movement dest_x="0" dest_y="222" speed="200"/>
       </element>
     </step>
 
     <step  n="65" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="405" dest_y="0" speed="200"/>
+        <movement dest_x="126" dest_y="0" speed="200"/>
       </element>
     </step>
-
-    <step  n="61" start="-1" duration ="-1" input="false">
+    
+    <step  n="66" start="-1" duration ="-1" input="false">
       <element name="GANON" action="move" dir="left">
-        <movement dest_x="-230" dest_y="0" speed="50"/>
+        <movement dest_x="150" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="62" start="-1" duration ="-1" input="true">
+    <step  n="67" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="This village is mine now, go to the castle if you don´t wanna be executed!"/>
+        <text text="This village is mine now, go to the castle if you donï¿½t wanna be executed!"/>
       </element>
     </step>
 
-    <step  n="63" start="-1" duration ="-1" input="false">
+    <step  n="68" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="left">
-        <movement dest_x="300" dest_y="0" speed="200"/>
+        <movement dest_x="80" dest_y="0" speed="200"/>
       </element>
     </step>
 
-    <step  n="64" start="-1" duration ="-1" input="false">
+    <step  n="69" start="-1" duration ="-1" input="false">
       <element name="GANON" action="move" dir="left">
-        <movement dest_x="-600" dest_y="0" speed="50"/>
+        <movement dest_x="80" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="62" start="-1" duration ="-1" input="true">
+    <step  n="70" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text="Group up! Go!"/>
       </element>
     </step>
     
-    <step  n="65" start="-1" duration ="-1" input="false">
+    <step  n="71" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="teleport">
         <movement dest_x="190" dest_y="232" speed="50"/>
       </element>
     </step>
-
-    <step n="66" start ="-1" duration="-1" input="false">
+    
+    <step n="72" start ="-1" duration="-1" input="false">
       <element name="camera" action="lock"/>
     </step>
 
-    <step  n="67" start="-1" duration ="-1" input="false">
+    <step  n="73" start="-1" duration ="-1" input="false">
       <element name="soldier_10" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="68" start="-1" duration ="-1" input="false">
+    <step  n="74" start="-1" duration ="-1" input="false">
       <element name="soldier_11" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="69" start="-1" duration ="-1" input="false">
+    <step  n="75" start="-1" duration ="-1" input="false">
       <element name="soldier_12" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="70" start="-1" duration ="-1" input="false">
+    <step  n="76" start="-1" duration ="-1" input="false">
       <element name="soldier_13" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="71" start="-1" duration ="-1" input="false">
+    <step  n="77" start="-1" duration ="-1" input="false">
       <element name="soldier_14" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="72" start="-1" duration ="-1" input="false">
+    <step  n="78" start="-1" duration ="-1" input="false">
       <element name="soldier_15" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="73" start="-1" duration ="-1" input="false">
+    <step  n="79" start="-1" duration ="-1" input="false">
       <element name="soldier_16" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="74" start="-1" duration ="-1" input="false">
+    <step  n="80" start="-1" duration ="-1" input="false">
       <element name="soldier_17" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="75" start="-1" duration ="-1" input="false">
+    <step  n="81" start="-1" duration ="-1" input="false">
       <element name="soldier_9" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="76" start="-1" duration ="-1" input="false">
+    <step  n="82" start="-1" duration ="-1" input="false">
       <element name="soldier_8" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="77" start="-1" duration ="-1" input="false">
+    <step  n="83" start="-1" duration ="-1" input="false">
       <element name="soldier_7" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="78" start="-1" duration ="-1" input="false">
+    <step  n="84" start="-1" duration ="-1" input="false">
       <element name="soldier_6" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="79" start="-1" duration ="-1" input="false">
+    <step  n="85" start="-1" duration ="-1" input="false">
       <element name="soldier_5" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="80" start="-1" duration ="-1" input="false">
+    <step  n="86" start="-1" duration ="-1" input="false">
       <element name="soldier_4" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="81" start="-1" duration ="-1" input="false">
+    <step  n="87" start="-1" duration ="-1" input="false">
       <element name="soldier_3" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="82" start="-1" duration ="-1" input="false">
+    <step  n="88" start="-1" duration ="-1" input="false">
       <element name="soldier_2" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="83" start="-1" duration ="-1" input="false">
+    <step  n="89" start="-1" duration ="-1" input="false">
       <element name="soldier_1" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
                                                                                    
- 
-
-    <step  n="84" start="-1" duration ="-1" input="false">
+    <step  n="90" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="1200" dest_y="0" speed="50"/>
+        <movement dest_x="240" dest_y="0" speed="50"/>
       </element>
     </step>
-    
+
+    <step  n="91" start="-1" duration ="-1" input="false">
+      <element name="destroyed" action="load"/>
+    </step>
+
+    <step  n="92" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="teleport">
+        <movement dest_x="205" dest_y="232" speed="0"/>
+      </element>
+    </step>
+
+    <step  n="93" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="create"/>
+    </step>
+
+    <step  n="94" start="-1" duration ="-1" input="false">
+      <element name="dumb" action="create"/>
+    </step>
+
+    <step  n="95" start="-1" duration ="-1" input="false">
+      <element name="Link" action="setage">
+        <age state="adult"/>
+      </element>
+    </step>
+
+
+    <step  n="96" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="move" dir="up">
+        <movement dest_x="0" dest_y="231" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="97" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="left">
+        <movement dest_x="205" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="98" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="?Â¿"/>
+      </element>
+    </step>
+
+    <step  n="99" start="-1" duration ="-1" input="false">
+      <element name="dumb" action="move" dir="right">
+        <movement dest_x="200" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="100" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="move" dir="right">
+        <movement dest_x="200" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="101" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Who are you?"/>
+      </element>
+    </step>
+
+    <step  n="102" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="So you don't want to talk, huh"/>
+      </element>
+    </step>
+
+    <step  n="103" start="-1" duration ="-1" input="false">
+      <element name="dumb" action="move" dir="down">
+        <movement dest_x="0" dest_y="231" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="104" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="move" dir="up">
+        <movement dest_x="0" dest_y="235" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="105" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="We should inform the boss that this foreigner has come, Let's Go"/>
+      </element>
+    </step>
+
+    <step  n="106" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="move" dir="up">
+        <movement dest_x="0" dest_y="233" speed="100"/>
+      </element>
+    </step>
+
+    <step  n="107" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="move" dir="left">
+        <movement dest_x="190" dest_y="0" speed="100"/>
+      </element>
+    </step>
+
+    <step  n="108" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="move" dir="up">
+        <movement dest_x="0" dest_y="220" speed="100"/>
+      </element>
+    </step>
+
+    <step  n="109" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="move" dir="left">
+        <movement dest_x="200" dest_y="0" speed="100"/>
+      </element>
+    </step>
+
+    <step  n="110" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Wait me!"/>
+      </element>
+    </step>
+
+    <step  n="111" start="-1" duration ="-1" input="false">
+      <element name="dumb" action="move" dir="down">
+        <movement dest_x="0" dest_y="233" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="112" start="-1" duration ="-1" input="false">
+      <element name="dumb" action="move" dir="left">
+        <movement dest_x="190" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="113" start="-1" duration ="-1" input="false">
+      <element name="dumb" action="move" dir="up">
+        <movement dest_x="0" dest_y="220" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="114" start="-1" duration ="-1" input="false">
+      <element name="dumb" action="move" dir="left">
+        <movement dest_x="200" dest_y="0" speed="200"/>
+      </element>
+    </step>
+
+    <step  n="115" start="-1" duration ="-1" input="false">
+      <element name="dumb" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="0"/>
+      </element>
+    </step>
+
+    <step  n="116" start="-1" duration ="-1" input="false">
+      <element name="dumber" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="0"/>
+      </element>
+    </step>
+
+
   </steps>
 </Cutscene>
