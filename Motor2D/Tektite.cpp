@@ -90,8 +90,8 @@ void Tektite::OnDeath()
 {
 	toDelete = true;
 	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-	int drop = rand() % 5;
-	if (drop == 3)
+	int drop = rand() % 2;
+	if (drop == 1)
 	{
 		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
 	}
