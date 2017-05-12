@@ -90,10 +90,10 @@ bool j1Render::PreUpdate()
 
 bool j1Render::PostUpdate()
 {
-	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+/*	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
 		freeCamera =! freeCamera;
-	}
+	}*/
 
 	if (freeCamera)
 	{
