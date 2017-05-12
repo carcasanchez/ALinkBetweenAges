@@ -58,11 +58,11 @@
 
         <special>
           <!--rocks, grass, etc-->
-          <chest object_type="9" x="82" y="90" item_inside="4"/>
+          <chest object_type="9" x="82" y="90" item_inside="4" id="1"/>
 
-          <chest object_type="0" x="72" y="91" item_inside="0"/>
+          <book object_type="0" x="72" y="91" item_inside="0"/>
 
-          <chest object_type="9" x="206" y="70" item_inside="12"/>
+          <chest object_type="9" x="206" y="70" item_inside="12" id="2"/>
 
 
         </special>

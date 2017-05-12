@@ -277,6 +277,13 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 	//Save current map
 	data.append_child("current_map").append_attribute("name") = App->sceneM->currentScene->name.c_str();
 	
+	pugi::xml_node chests = data.append_child("open_chests").append_child(App->sceneM->currentScene->name.c_str());
+
+	
+	for (int i = 0; i < openChests.size(); i++)
+		chests.append_child("chest").append_attribute("id") = openChests[i];
+
+	
 	
 	return true;
 }
@@ -284,6 +291,7 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 //Load game
 bool j1GameLayer::Load(pugi::xml_node& data)
 {
+
 	em->player->currentPos.x = data.child("player").child("position").attribute("x").as_int();
 	em->player->currentPos.y = data.child("player").child("position").attribute("y").as_int();
 	em->player->life = data.child("player").attribute("life").as_int();
@@ -304,12 +312,17 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 
 	string dest = data.child("current_map").attribute("name").as_string();
 
+	openChests.clear();
+	for (pugi::xml_node it = data.child("open_chests").child(dest.c_str()).first_child(); it; it = it.next_sibling("chest"))
+	{
+		openChests.push_back(it.attribute("id").as_int(-1));
+	}
+
 	App->sceneM->RequestSceneChange(em->player->currentPos, dest.c_str() , (DIRECTION)data.child("player").attribute("direction").as_int());
 
 
 	return true;
 }
-
 
 
 bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
@@ -480,6 +493,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 
 	if (c1->type == COLLIDER_CHEST && c2->type == COLLIDER_LINK_SWORD && c1->parent->actionState == CLOSE)
 	{
+		openChests.push_back(c1->parent->id);
 		c1->parent->actionState = OPEN;
 		App->audio->PlayFx(26);
 		iPoint objPos = App->map->WorldToMap(c1->parent->currentPos.x, c1->parent->currentPos.y);

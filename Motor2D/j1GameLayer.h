@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include <list>
 #include "j1Timer.h"
+#include <map>
 
 using namespace std;
 
@@ -52,6 +53,10 @@ public:
 	int playerY = 5;
 
 	j1Timer buy_timer; 
+
+	std::vector<int> openChests;
+
+
 
 };
 

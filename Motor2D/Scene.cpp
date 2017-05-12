@@ -138,6 +138,13 @@ bool Scene::Load(const char* path, const bool reloadMap)
 
 				if (obj->objectType == CHEST)
 				{
+					bool h = true;
+					for (int i = 0; i < App->game->openChests.size(); i++)
+					{
+						if (App->game->openChests[i] == obj->id)
+							obj->actionState = OPEN;
+					}
+
 					((Chest*)obj)->objectInside = (OBJECT_TYPE)special.attribute("item_inside").as_int();
 				}
 
