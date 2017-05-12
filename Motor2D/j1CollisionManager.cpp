@@ -4,6 +4,7 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1CollisionManager.h"
+#include "Enemy.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
 
@@ -87,8 +88,8 @@ bool j1CollisionManager::PreUpdate()
 
 bool j1CollisionManager::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		debug = !debug;
+	/*if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+		debug = !debug;*/
 
 
 	Collider* c1;
@@ -139,6 +140,13 @@ bool j1CollisionManager::ChangeScene()
 	{
 		if ((*it)->type == COLLIDER_PLAYER)
 			continue;
+
+		if ((*it)->parent != nullptr)
+		{
+			if ((*it)->parent->keepExisting == true)
+				continue;
+		}
+		
 
 		RELEASE(*it);
 		colliders.erase(it);
