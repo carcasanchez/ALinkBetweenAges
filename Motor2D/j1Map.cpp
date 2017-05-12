@@ -43,7 +43,7 @@ bool j1Map::Start()
 
 bool j1Map::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	/*if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		debug_collisions = !debug_collisions;
 	}
@@ -56,7 +56,7 @@ bool j1Map::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
 		debug_enemy_collisions = !debug_enemy_collisions;
-	}
+	}*/
 
 	return true;
 }
