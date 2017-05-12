@@ -122,13 +122,13 @@ bool j1CollisionManager::Update(float dt)
 
 bool j1CollisionManager::CleanUp()
 {
-	LOG("Freeing all colliders");
+	/*LOG("Freeing all colliders");
 	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
 	{
 		RELEASE (*it);
 	}
 
-	colliders.clear();
+	colliders.clear();*/
 	return true;
 }
 
@@ -154,6 +154,19 @@ bool j1CollisionManager::ChangeScene()
 
 
 	return true;
+}
+
+void j1CollisionManager::DeleteCollider(Collider * c)
+{
+	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
+	{		
+		if ((*it) == c)
+		{
+			RELEASE(*it);
+			colliders.erase(it);
+			break;
+		}		
+	}
 }
 
 

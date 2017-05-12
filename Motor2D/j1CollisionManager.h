@@ -68,6 +68,7 @@ public:
 	COLLISION_ZONE CheckEnemyMapCollision();
 	COLLISION_ZONE CheckPlayerMapJump();
 	COLLISION_ZONE CheckArrowCollision();
+
 };
 
 
@@ -84,6 +85,8 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 	bool ChangeScene();
+	
+	void DeleteCollider(Collider*);
 
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);

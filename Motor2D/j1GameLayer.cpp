@@ -92,13 +92,12 @@ bool j1GameLayer::Update(float dt)
 		//em->CreateNPC(1, NPC_DARK_ZELDA, mousePos.x, mousePos.y);
 		//App->sceneM->RequestSceneChange({0,0}, "bossRoom", D_DOWN);
 		//em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);
-
-/*	else if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+	 if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		em->player->currentPos = mousePos;
-	}*/
+	}
 		
 
 /*
@@ -215,16 +214,15 @@ void j1GameLayer::PickObject(Object * object)
 		return;
 	}
 
-		object->life = -1;
 	
-	/*if (em->player->pickedObject)
+	if (em->player->pickedObject)
 	{
 		em->player->pickedObject->life = -1;
 	}
 
 	em->player->pickedObject = object;
 	em->player->pickedObject->col->active = false;
-	em->player->showObjectTimer.Start();*/
+	em->player->showObjectTimer.Start();
 	
 	
 }
@@ -476,17 +474,6 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	if (c1->type == COLLIDER_BUSH && c2->type == COLLIDER_LINK_SWORD)
 	{
 		c1->parent->life = -1;
-		iPoint mapPos = App->map->WorldToMap(c1->parent->currentPos.x, c1->parent->currentPos.y);
-		int drop_rupee = rand() % 7;
-		int drop_lifeheart = rand() % 20;
-		if (drop_rupee == 1)
-		{
-			App->game->em->CreateObject(1, mapPos.x, mapPos.y, GREEN_RUPEE);
-		}
-		else if (drop_lifeheart == 2)
-		{
-			App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
-		}
 		return true;
 	}
 

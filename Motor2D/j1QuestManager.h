@@ -69,7 +69,7 @@ class CollisionEvent : public Event
 public:
 	CollisionEvent() :Event(COLLISION_EVENT) {};
 
-	~CollisionEvent() {};
+	~CollisionEvent();
 
 	Collider* col;
 

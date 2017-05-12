@@ -447,6 +447,7 @@ Quest::~Quest()
 
 }
 
-
-
-
+CollisionEvent::~CollisionEvent()
+{
+	App->collisions->DeleteCollider(col);
+}

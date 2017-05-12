@@ -52,6 +52,8 @@ Entity::Entity(ENTITY_TYPE type) :
 Entity::~Entity()
 {
 	RELEASE(sprite);
+
+	App->collisions->DeleteCollider(col);
 	anim.clear();
 }
 

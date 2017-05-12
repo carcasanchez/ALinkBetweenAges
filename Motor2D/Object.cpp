@@ -221,11 +221,20 @@ bool Pillar::Update(float dt)
 
 void Bush::OnDeath()
 {
-	toDelete = true;
-	if (col)
+
+	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
+	int drop_rupee = rand() % 7;
+	int drop_lifeheart = rand() % 20;
+	if (drop_rupee == 1)
 	{
-		col->to_delete = true;
-		col = nullptr;
+		App->game->em->CreateObject(1, mapPos.x, mapPos.y, GREEN_RUPEE);
 	}
+	else if (drop_lifeheart == 2)
+	{
+		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
+	}
+
+	toDelete = true;
+
 	App->audio->PlayFx(24);
 }

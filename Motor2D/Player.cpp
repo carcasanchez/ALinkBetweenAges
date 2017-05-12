@@ -143,7 +143,7 @@ bool Player::Update(float dt)
 
 	ManageStamina(dt);	
 
-	//ShowPickedObject();
+	ShowPickedObject();
 
 	
 	switch (playerState)
