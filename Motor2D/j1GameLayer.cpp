@@ -75,8 +75,10 @@ bool j1GameLayer::Update(float dt)
 	//	App->sceneM->RequestSceneChange({playerX, playerY}, "linkHouse", D_DOWN);
 
 	if (!App->sceneM->currentScene->inGame)
+	{
+		hud->Update(dt);
 		return ret;
-
+	}
 	if(!pause)
 		em->Update(dt);
 	

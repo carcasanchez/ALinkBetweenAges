@@ -409,6 +409,12 @@ bool Cutscene::Update(float dt)
 		if (step->isActive() == true)
 		{
 			step->DoAction(dt);
+
+			if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			{
+				step->GetInput();
+			}
+
 		}
 		temp++;
 	}

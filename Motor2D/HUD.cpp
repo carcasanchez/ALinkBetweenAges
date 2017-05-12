@@ -22,6 +22,7 @@ bool Hud::Awake(pugi::xml_node& conf)
 	pause_folder += hud_attributes.child("pause").attribute("file").as_string();
 
 	hud_screen = App->gui->CreateScreen(hud_screen);
+	hud_screen->Set_Active_state(false);
 
 	LoadPause(pause_folder);
 	LoadHud(hud_folder);
@@ -39,16 +40,161 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
-	if (pause_transition == PAUSE_UP)
-		PauseOut(dt);
+	if (start_menu_screen->active == false && App->cutsceneM->CutsceneReproducing() == false)
+	{
+		if (pause_transition == PAUSE_UP)
+			PauseOut(dt);
 
-	LookLife();
+		LookLife();
 
-	rupees_counter->LookNumber(App->game->em->player->rupees);
-	bombs_counter->LookNumber(App->game->em->player->bombs);
-	arrows_counter->LookNumber(App->game->em->player->arrows);
+		rupees_counter->LookNumber(App->game->em->player->rupees);
+		bombs_counter->LookNumber(App->game->em->player->bombs);
+		arrows_counter->LookNumber(App->game->em->player->arrows);
 
-	LookInventory();
+		LookInventory();
+	}
+
+	//Basura para que ricard deje de llorar
+
+	if (App->inputM->GetGameContext() == GAMECONTEXT::IN_MENU)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		{
+			if (App->game->pause && pause_transition == PAUSE_NO_MOVE)
+			{
+				pause_transition = PAUSE_UP;
+				main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+			}
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			if (!start_menu_screen->active)
+			{
+				for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
+				{
+
+					if ((*it)->active && (it + 1) != pause_selectables.rend())
+					{
+						(*it)->active = false;
+						(*(it + 1))->Set_Active_state(true);
+						break;
+					}
+
+				}
+			}
+			else
+			{
+				for (std::vector<UI_Image*>::reverse_iterator it = start_menu_selectables.rbegin(); it != start_menu_selectables.rend(); it++)
+				{
+
+					if ((*it)->active && (it + 1) != start_menu_selectables.rend())
+					{
+						(*it)->active = false;
+						(*(it + 1))->Set_Active_state(true);
+						break;
+					}
+
+				}
+			}
+
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+		{
+			if (!start_menu_screen->active)
+			{
+				for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
+				{
+					if ((*it)->active && (it + 1) != pause_selectables.end())
+					{
+						(*it)->active = false;
+						(*(it + 1))->Set_Active_state(true);
+						break;
+					}
+				}
+			}
+			else
+			{
+				for (std::vector<UI_Image*>::iterator it = start_menu_selectables.begin(); it != start_menu_selectables.end(); it++)
+				{
+					if ((*it)->active && (it + 1) != start_menu_selectables.end())
+					{
+						(*it)->active = false;
+						(*(it + 1))->Set_Active_state(true);
+						break;
+					}
+				}
+			}
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			if (!start_menu_screen->active)
+			{
+				if (resume->active)
+				{
+					if (pause_transition == PAUSE_NO_MOVE)
+					{
+						pause_transition = PAUSE_UP;
+						main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+					}
+				}
+
+				if (save->active)
+				{
+					App->SaveGame("saves.xml");
+					saved_game->Set_Active_state(true);
+				}
+
+				if (load->active)
+				{
+					App->LoadGame("saves.xml");
+					loaded_game->Set_Active_state(true);
+				}
+
+				if (controls->active)
+				{
+
+				}
+
+				if (quit->active)
+				{
+					App->game->quit_game = true;
+					App->game->pause = false;
+				}
+			}
+			else
+			{
+				if (start_continue->active)
+				{
+					//App->LoadGame("saves.xml");
+					//App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
+				}
+
+				if (start_new_game->active)
+				{
+					StartGame();
+					App->cutsceneM->StartCutscene(1);
+				}
+
+				if (start_quit->active)
+				{
+					App->game->quit_game = true;
+					App->game->pause = false;
+				}
+			}
+		}
+	}
+
+	if (App->inputM->GetGameContext() == GAMECONTEXT::IN_GAME)
+	{
+		if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+			IntoPause();
+	}
+
+	
+
 
 	return false;
 }
@@ -444,6 +590,7 @@ void Hud::StartGame()
 {
 	start_menu_screen->Set_Active_state(false);
 	start_menu_screen->QuitFromRender();
+	hud_screen->Set_Active_state(true);
 }
 
 bool Hud::LoadHud(string file)
