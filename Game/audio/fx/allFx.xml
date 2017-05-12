@@ -26,4 +26,7 @@
   <fx name="audio/fx/Objects/General/itemGet1.wav"  id="23"/>
   <fx name="audio/fx/Special/Grass/grassDestroyed.wav"  id="24"/>
   <fx name="audio/fx/Player/linkDodge.wav"  id="25"/>
+  <fx name="audio/fx/Special/Chest/chestOpen.wav"  id="26"/>
+  <fx name="audio/fx/Enemy/Wizzdrove/throwMagicAttack2.wav"  id="27"/>
+  <fx name="audio/fx/Enemy/Octorock/throwRock.wav"  id="28"/>
 </fx>

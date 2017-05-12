@@ -10,6 +10,7 @@
 #include "j1EntityManager.h"
 #include "Player.h"
 #include "Object.h"
+#include "j1Audio.h"
 
 
 bool Octorok::Spawn(std::string file, iPoint pos)
@@ -110,6 +111,7 @@ bool Octorok::ThrowingAttack(float dt)
 		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 		Object* rock = App->game->em->CreateObject(1, mapPos.x, mapPos.y, OCTO_STONE);
 		rock->currentDir = currentDir;
+		App->audio->PlayFx(28);
 	}
 
 	if (App->game->em->player->currentPos.DistanceTo(currentPos) > outFightRange)

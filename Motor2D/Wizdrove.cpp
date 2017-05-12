@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "Object.h"
 #include "j1CollisionManager.h"
+#include "j1Audio.h"
 
 
 bool Wizdrove::Spawn(std::string file, iPoint pos)
@@ -110,6 +111,8 @@ bool Wizdrove::ThrowingAttack(float dt)
 
 	if (currentAnim->isOver())
 	{
+		App->audio->PlayFx(27);
+
 		attackTimer.Start();
 		enemyState = PREPARING_ATTACK;
 		currentAnim->Reset();
@@ -140,6 +143,7 @@ bool Wizdrove::PreparingAttack(float dt)
 
 	if (attackTimer.ReadMs() > attackRatio)
 	{
+		
 		enemyState = THROWING_ATTACK;
 	}
 

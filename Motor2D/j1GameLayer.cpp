@@ -100,7 +100,7 @@ bool j1GameLayer::Update(float dt)
 	}
 		
 
-/*
+
 	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		em->CreateObject(1, mousePos.x, mousePos.y, LINK_ARROW);
 
@@ -138,7 +138,7 @@ bool j1GameLayer::Update(float dt)
 		App->SaveGame("saves.xml");
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame("saves.xml");
-	*/
+	
 	return ret;
 }
 
@@ -196,6 +196,7 @@ void j1GameLayer::PickObject(Object * object)
 
 	case BOOK:
 		em->player->ableToSpin = true;
+		App->audio->PlayFx(23);
 		break;
 
 	case BOSS_KEY:
@@ -480,6 +481,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	if (c1->type == COLLIDER_CHEST && c2->type == COLLIDER_LINK_SWORD && c1->parent->actionState == CLOSE)
 	{
 		c1->parent->actionState = OPEN;
+		App->audio->PlayFx(26);
 		iPoint objPos = App->map->WorldToMap(c1->parent->currentPos.x, c1->parent->currentPos.y);
 		Object* obj = em->CreateObject(1, objPos.x, objPos.y, ((Chest*)c1->parent)->objectInside);
 		PickObject(obj);
