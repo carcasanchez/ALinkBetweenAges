@@ -1,0 +1,42 @@
+<!-- LINK RETURNS CUTSCENE -->
+
+<Cutscene name="Final Boss entrance" id="3">
+
+  <!--CUTSCENE ELEMENTS-->
+  <elements>
+    <MAP>
+      <scene n="0" name="boss" active="true" scene_name="bossRoom" load="true"/>
+    </MAP>
+
+    <NPC>
+      <npc n="0" name="Link" active="true" type="0" x="205" y="232" entity_id="-1" empty="true"/>
+      <npc n="1" name="Zelda_npc" active="true" type="0" x="205" y="232" entity_id="99" empty="true"/>
+    </NPC>
+
+    <ENEMIES>
+      <enemy n="0" name="Zelda_enemy" active="true" type="3" x="205" y="232" entity_id="99" empty="true"/>
+    </ENEMIES>
+
+    <IMAGES>
+    </IMAGES>
+
+    <TEXTS>
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Texto soldado 1" />
+    </TEXTS>
+
+    <MUSIC>
+    </MUSIC>
+
+    <FX>
+    </FX>
+
+
+  </elements>
+
+  <!--EXECUTE ALL STEPS IN ORDER-->
+
+  <steps>
+   
+
+  </steps>
+</Cutscene>

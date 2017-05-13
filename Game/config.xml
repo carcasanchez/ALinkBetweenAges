@@ -142,7 +142,7 @@
 	<cutscene file="cutscenes/intro.xml"/>
 	<cutscene file="cutscenes/UncleBen_Tells_His_Life.xml"/>
 	<cutscene file="cutscenes/Link_and_zelda_get_outta_forest.xml"/>
-	<cutscene file="cutscenes/Link_returns_to_shit.xml"/>
+	<cutscene file="cutscenes/Final_Boss_Entrance.xml"/>
 </cutscenemanager>
 
 </config>
