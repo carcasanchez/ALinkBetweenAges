@@ -78,6 +78,14 @@ public:
 
 	UI_Stamina*		stamina_bar = nullptr;
 
+	//Zelda Life
+	UI_Image*		life_container = nullptr; //Image not in gui
+	UI_Image*		full_life = nullptr; //Image not in gui
+	UI_Image*		mid_life = nullptr; //Image not in gui
+	UI_Image*		low_life = nullptr; //Image not in gui
+
+	UI_Stamina*		zelda_life_bar = nullptr;
+
 	//Pause Elements
 	PAUSEMOVE		pause_transition = PAUSE_NO_MOVE;
 

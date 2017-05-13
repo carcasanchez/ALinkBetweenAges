@@ -171,6 +171,9 @@ UI_element* j1Gui::Add_element(UI_TYPE TYPE, j1Module* element_module)
 	case STAMINA_BAR:
 		ret = new UI_Stamina(TYPE, element_module);
 		break;
+	case ZELDA_LIFE:
+		ret = new UI_Stamina(TYPE, element_module);
+		break;
 	case COUNTER:
 		ret = new UI_Counter(TYPE, element_module);
 		break;

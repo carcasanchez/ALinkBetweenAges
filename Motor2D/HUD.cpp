@@ -212,8 +212,14 @@ bool Hud::CleanUp()
 	RELEASE(stamina_green);
 	RELEASE(stamina_yellow);
 	RELEASE(stamina_red);
+
 	RELEASE(items_frame_inactive);
 	RELEASE(items_frame_using);
+
+	RELEASE(life_container);
+	RELEASE(full_life);
+	RELEASE(mid_life);
+	RELEASE(low_life);
 
 	return true;
 }
@@ -533,8 +539,9 @@ UI_element* Hud::LoadUIElement(pugi::xml_node node, UI_element* screen, UI_TYPE 
 		{
 			UI_Stamina* tmp = (UI_Stamina*)ret;
 
+			tmp->Set_Active_state(node.attribute("active").as_bool());
 			tmp->Set_Interactive_Box({ node.attribute("pos_x").as_int(), node.attribute("pos_y").as_int(), 0, 0 });
-			tmp->SetDrawRect({ node.attribute("draw_x").as_int() ,  node.attribute("draw_x").as_int() ,0,0 });
+			tmp->SetDrawRect({ node.attribute("draw_x").as_int() ,  node.attribute("draw_y").as_int() ,0,0 });
 			tmp->SetBackground(stamina_container);
 			tmp->SetStamina(stamina_green);
 
@@ -543,6 +550,22 @@ UI_element* Hud::LoadUIElement(pugi::xml_node node, UI_element* screen, UI_TYPE 
 
 			return ret;
 
+		}
+
+		if (type == ZELDA_LIFE)
+		{
+			UI_Stamina* tmp = (UI_Stamina*)ret;
+
+			tmp->Set_Active_state(node.attribute("active").as_bool());
+			tmp->Set_Interactive_Box({ node.attribute("pos_x").as_int(), node.attribute("pos_y").as_int(), 0, 0 });
+			tmp->SetDrawRect({ node.attribute("draw_x").as_int() ,  node.attribute("draw_y").as_int() ,0,0 });
+			tmp->SetBackground(life_container);
+			tmp->SetStamina(full_life);
+
+			if (screen)
+				screen->AddChild(ret);
+
+			return ret;
 		}
 
 	}
@@ -649,6 +672,13 @@ bool Hud::LoadHud(string file)
 		stamina_yellow = (UI_Image*)LoadUIElement(hud_node.child("stamina").child("sta_y"), nullptr, IMAGE);
 		stamina_red = (UI_Image*)LoadUIElement(hud_node.child("stamina").child("sta_r"), nullptr, IMAGE);
 		stamina_bar = (UI_Stamina*)LoadUIElement(hud_node.child("stamina").child("bar"), hud_screen, STAMINA_BAR);
+
+		//Zeldu life
+		life_container = (UI_Image*)LoadUIElement(hud_node.child("zelda").child("container"), nullptr, IMAGE);
+		full_life = (UI_Image*)LoadUIElement(hud_node.child("zelda").child("full_health"), nullptr, IMAGE);
+		mid_life = (UI_Image*)LoadUIElement(hud_node.child("zelda").child("mid_health"), nullptr, IMAGE);
+		low_life = (UI_Image*)LoadUIElement(hud_node.child("zelda").child("low_health"), nullptr, IMAGE);
+		zelda_life_bar = (UI_Stamina*)LoadUIElement(hud_node.child("zelda").child("bar"), hud_screen, ZELDA_LIFE);
 
 		LoadHearts();
 		SetFrame();

@@ -6,6 +6,7 @@
 #include "j1Input.h"
 #include "j1Map.h"
 #include "j1Render.h"
+#include "HUD.h"
 #include "Animation.h"
 #include "j1EntityManager.h"
 #include "Object.h"
@@ -110,7 +111,7 @@ void DarkZelda::OnDeath()
 		life = phase2Life;	
 		enemyState = KEEP_DISTANCE;
 		attackTimer.Start();
-
+		App->game->hud->zelda_life_bar->Set_Active_state(true);
 	}
 
 	else if (phase == 2)

@@ -4,12 +4,11 @@
 #include "j1GameLayer.h"
 #include "j1EntityManager.h"
 #include "HUD.h"
+#include "DarkZelda.h"
 #include "Player.h"
 #include "j1App.h"
 
 UI_Stamina::UI_Stamina(UI_TYPE type, j1Module* callback) : UI_element(type, callback) {}
-
-
 
 bool UI_Stamina::Update()
 {
@@ -85,41 +84,85 @@ void UI_Stamina::WasteStamina(int tax)
 void UI_Stamina::RecoverStamina()
 {
 	
-	int percent_stamina = (App->game->em->player->stamina * 100) / App->game->em->player->maxStamina;
+	if (this->element_type == STAMINA_BAR)
+	{
+		int percent_stamina = (App->game->em->player->stamina * 100) / App->game->em->player->maxStamina;
+		ChangeColor(percent_stamina);
 
+		//magic numbers :c
+		int image_width = 160;
+		int move_to = image_width - ((percent_stamina * image_width) / 100);
+		move_rect.x = draw_rect.x - move_to;
+		return;
+	}
+
+	if (this->element_type == ZELDA_LIFE && active)
+	{
+		DarkZelda* tmp =(DarkZelda*)App->game->em->GetEntityFromId(99); //99 is Zelda
+		if (tmp)
+		{
+
+			int percent_life = (tmp->life * 100) / 10;
+			ChangeColor(percent_life);
+
+			//magic numbers :c
+			int image_width = 280;
+			int move_to = image_width - ((percent_life * image_width) / 100);
+			move_rect.x = draw_rect.x - move_to;
+			return;
+		}
+		
+	}
 	
-	ChangeColor(percent_stamina);
-	
-	//magic numbers :c
-	int image_width = 160;
-
-	int move_to = 160 - ((percent_stamina * image_width) / 100);
-
-	move_rect.x = draw_rect.x - move_to;
 }
 
 void UI_Stamina::ChangeColor(int percent)
 {
-	if (percent < 40)
+	if (element_type == STAMINA_BAR)
 	{
-		if (percent < 15)
+		if (percent < 40)
 		{
-			SetStamina(App->game->hud->stamina_red);
+			if (percent < 15)
+			{
+				SetStamina(App->game->hud->stamina_red);
+				return;
+			}
+			SetStamina(App->game->hud->stamina_yellow);
 			return;
-		}	
-		SetStamina(App->game->hud->stamina_yellow);
+		}
+
+		if (stamina != App->game->hud->stamina_green)
+			SetStamina(App->game->hud->stamina_green);
+
 		return;
 	}
 
-	if(stamina != App->game->hud->stamina_green)
-		SetStamina(App->game->hud->stamina_green);
+	if (element_type == ZELDA_LIFE)
+	{
+		if (percent < 50)
+		{
+			if (percent < 20)
+			{
+				SetStamina(App->game->hud->low_life);
+				return;
+			}
+			SetStamina(App->game->hud->mid_life);
+			return;
+		}
+
+		if (stamina != App->game->hud->full_life)
+			SetStamina(App->game->hud->full_life);
+
+		return;
+	}
 
 }
 
 void UI_Stamina::PrintBar()
 {
 	int difference_x = draw_rect.x - move_rect.x;
-	SDL_Rect tmp = { stamina->Image.x + difference_x, stamina->Image.y,stamina->Image.w, stamina->Image.h };
+	int difference_y = draw_rect.y - move_rect.y;
+	SDL_Rect tmp = { stamina->Image.x + difference_x, stamina->Image.y + difference_y,stamina->Image.w, stamina->Image.h };
 	App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + draw_rect.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + draw_rect.y) - App->render->camera.y) * App->gui->scale_factor, &tmp);
 }
 
