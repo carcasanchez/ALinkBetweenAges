@@ -231,15 +231,26 @@ void j1GameLayer::PickObject(Object * object)
 		break;
 
 	case LIFE_POTION:
-		if (em->player->lifePotions < em->player->maxLifePotions)
-			em->player->lifePotions++;
-	
-	case STAMINA_POTION:
-		if (em->player->staminaPotions < em->player->maxStaminaPotions)
-			em->player->staminaPotions++;
+		if (object->objectType == LIFE_POTION)
+		{
+			if (em->player->lifePotions < em->player->maxLifePotions)
+				em->player->lifePotions++;
+		}
 
+	case STAMINA_POTION:
+		if (object->objectType == STAMINA_POTION)
+		{
+			if (em->player->staminaPotions < em->player->maxStaminaPotions)
+				em->player->staminaPotions++;
+		}
+		
 	case BOMB_SAC:
-		em->player->bombs += 5;
+		if (object->objectType == BOMB_SAC)
+		{
+			if (object->objectType == BOMB_SAC)
+				em->player->bombs += 5;
+		}
+
 	default:
 		em->player->inventory.push_back(object->objectType);
 		App->audio->PlayFx(23);
