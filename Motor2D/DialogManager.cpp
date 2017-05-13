@@ -98,7 +98,12 @@ bool DialogManager::BlitDialog(int id, int state)
 
 uint DialogManager::NumDialog(int id)
 {
-	return dialog[id-1]->num_states;
+	if(dialog[id-1] != nullptr)
+		return dialog[id-1]->num_states;
+	else
+	{
+		return false;
+	}
 }
 
 DialogManager::~DialogManager()
