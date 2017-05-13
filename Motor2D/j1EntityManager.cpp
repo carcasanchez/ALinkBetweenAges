@@ -360,6 +360,8 @@ bool j1EntityManager::CleanEntities()
 	bool ret = true;	
 	std::vector<Entity*> keepAlive;
 
+	if(entities[1].size()>0)
+	{ 
 	
 		for (std::list<Entity*>::iterator item = entities[1].begin(); item != entities[1].end(); item++)
 		{
@@ -385,7 +387,7 @@ bool j1EntityManager::CleanEntities()
 	{
 		entities[1].push_back((*it));
 	}
-
+	}
 	return ret;
 }
 
