@@ -137,7 +137,8 @@ bool j1SceneManager::ChangeScene()
 				break;
 			}
 
-			
+			App->SaveGame("saves.xml");
+
 
 		}
 		else
@@ -157,7 +158,6 @@ bool j1SceneManager::ChangeScene()
 	//temporal
 	App->game->em->player->sceneOverride = false;
 
-	App->SaveGame("saves.xml");
 
 	return ret;
 }
