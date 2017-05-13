@@ -326,6 +326,9 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 		openChests.push_back(it.attribute("id").as_int(-1));
 	}
 
+	if (em->player->dead)
+		em->player->life = em->player->maxLife;
+
 	App->sceneM->RequestSceneChange(em->player->currentPos, dest.c_str() , (DIRECTION)data.child("player").attribute("direction").as_int());
 
 

@@ -108,6 +108,7 @@ void Player::OnDeath()
 	currentDir = D_DOWN;
 	sprite->tint = { 255, 255, 255, 255 };
 	actionState = IDLE;
+	dead = true;
 
 	UpdateCollider();
 

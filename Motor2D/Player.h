@@ -96,6 +96,7 @@ public:
 	vector <int> completedQuests;
 
 	bool bossKeyEquipped = false;
+	bool dead = false;
 
 private:
 	void Change_direction();
