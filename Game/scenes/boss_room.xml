@@ -8,7 +8,7 @@
       <entities>
 
         <npcs>
-          <ganon type = "9" x = "43" y = "190" id="98"/>
+          <ganon type = "9" x = "43" y = "190" id="16"/>
         </npcs>
 
         <enemies>

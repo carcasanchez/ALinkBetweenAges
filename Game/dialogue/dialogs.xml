@@ -113,17 +113,9 @@
 	<text value=" 10 rupees x1 bombs."/>
 	<text value=" 15 rupees x5 arrows."/>
      </dialogue>
-   </npc>
-
-
+   </npc>  
+  
 <npc id="16" states="1">
-    <dialogue state="0">
-    <text value=""/>
-    </dialogue>
-  </npc>
-  
-  
-<npc id="98" states="1">
      <dialogue state="0" states="1">
 	    <text value=" It seems to be dead."/>
      </dialogue>

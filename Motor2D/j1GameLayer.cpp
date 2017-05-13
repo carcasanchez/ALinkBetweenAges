@@ -90,9 +90,9 @@ bool j1GameLayer::Update(float dt)
 	App->input->GetMousePosition(mousePos.x, mousePos.y);
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
-//	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateNPC(1, NPC_DARK_ZELDA, mousePos.x, mousePos.y);
-		//App->sceneM->RequestSceneChange({0,0}, "bossRoom", D_DOWN);
+		App->sceneM->RequestSceneChange({0,0}, "bossRoom", D_DOWN);
 		//em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);
 	 if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
