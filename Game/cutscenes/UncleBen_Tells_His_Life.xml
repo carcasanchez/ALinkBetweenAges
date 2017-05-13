@@ -92,6 +92,13 @@
         <text text="Zelda was looking for you to play, She went to the forest, maybe you should look for her"/>
       </element>
     </step>
+    
+     <step  n="11" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Remember you can attack in four directions using ABXY, and dodge with RB"/>
+      </element>
+    </step>
+
 
   </steps>
 </Cutscene>
