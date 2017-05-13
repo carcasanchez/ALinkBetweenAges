@@ -103,9 +103,14 @@ bool j1GameLayer::Update(float dt)
 		
 
 
-	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-		em->CreateObject(1, mousePos.x, mousePos.y, LINK_ARROW);
-
+	 if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	 {
+		 em->CreateObject(1, mousePos.x, mousePos.y, LINK_ARROW, -1, em->player->currentDir);
+	 }
+	 if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	 {
+		 em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
+	 }
 
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
@@ -186,6 +191,7 @@ void j1GameLayer::PickObject(Object * object)
 		em->player->maxLife++;
 		em->player->life = em->player->maxLife;
 		em->player->bonusLife++;
+		App->audio->PlayFx(29);
 		break;
 	case BOMB_DROP:
 		if (em->player->bombs < em->player->maxBombs)

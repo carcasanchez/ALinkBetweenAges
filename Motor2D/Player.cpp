@@ -115,7 +115,6 @@ void Player::OnDeath()
 		swordCollider->to_delete = true;
 
 }
-
 bool Player::Update(float dt)
 {
 	BROFILER_CATEGORY("PlayerUpdate", Profiler::Color::Black);
@@ -187,6 +186,8 @@ bool Player::Update(float dt)
 		break;
 	case EVENT:
 		Talking(dt);
+		break;
+	case CUTSCENE:
 		break;
 	}
 

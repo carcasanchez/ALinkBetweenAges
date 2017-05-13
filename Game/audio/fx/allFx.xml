@@ -29,4 +29,5 @@
   <fx name="audio/fx/Special/Chest/chestOpen.wav"  id="26"/>
   <fx name="audio/fx/Enemy/Wizzdrove/throwMagicAttack2.wav"  id="27"/>
   <fx name="audio/fx/Enemy/Octorock/throwRock.wav"  id="28"/>
+  <fx name="audio/fx/Objects/heart_container/heartContainer1.wav"  id="29"/>
 </fx>

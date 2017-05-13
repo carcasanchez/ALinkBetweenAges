@@ -14,7 +14,8 @@
 enum PLAYER_STATE
 {
 	ACTIVE=0,
-	EVENT
+	EVENT,
+	CUTSCENE
 };
 
 enum LINK_AGE

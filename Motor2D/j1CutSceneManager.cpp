@@ -179,6 +179,8 @@ bool j1CutSceneManager::StartCutscene(uint id)
 		//App->scene->ChangeState(CUTSCENE);
 
 		App->inputM->SetGameContext(GAMECONTEXT::IN_CUTSCENE);
+		if(App->game->em->player)
+			App->game->em->player->playerState = CUTSCENE;
 
 		LOG("%s cutscene activated", active_cutscene->name.c_str());
 	}
@@ -211,6 +213,8 @@ bool j1CutSceneManager::FinishCutscene()
 
 			//Return to INGAME state
 			App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
+			if (App->game->em->player)
+				App->game->em->player->playerState = ACTIVE;
 
 			ret = true;
 		}

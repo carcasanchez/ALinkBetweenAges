@@ -93,7 +93,7 @@ bool j1Render::PostUpdate()
 /*	if (App->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
 	{
 		freeCamera =! freeCamera;
-	}*/
+	}
 
 	if (freeCamera)
 	{
@@ -113,7 +113,7 @@ bool j1Render::PostUpdate()
 		{
 			camera.x++;
 		}
-	}
+	}*/
 
 
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
