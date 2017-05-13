@@ -121,5 +121,13 @@
      </dialogue>
    </npc>
 
+<npc id="17" states="1">
+     <dialogue state="0" states="1">
+	    <text value=" It's nice to see you again Link!"/>
+	    <text value=" I have managed to infiltrate into the castle and I have borrowed some bombs."/>
+  	    <text value=" There are inside that chest. You can take them if you want, I will not use them."/>
+     </dialogue>
+</npc>
+
 
 </npcs>
