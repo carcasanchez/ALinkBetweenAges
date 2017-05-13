@@ -83,9 +83,11 @@ public:
 	int maxArrows;
 	int maxBombs;
 	int maxLifePotions;
+	int maxStaminaPotions;
 	int arrows = 0;
 	int bombs = 0;
 	int lifePotions = 0;
+	int staminaPotions = 0;
 
 	bool ableToSpin = false;
 

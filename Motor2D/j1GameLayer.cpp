@@ -195,7 +195,7 @@ void j1GameLayer::PickObject(Object * object)
 		break;
 	case BOMB_DROP:
 		if (em->player->bombs < em->player->maxBombs)
-			em->player->bombs++;
+			em->player->bombs+=5;
 		break;
 	case ARROW_DROP:
 		if (em->player->arrows < em->player->maxArrows)
@@ -214,6 +214,10 @@ void j1GameLayer::PickObject(Object * object)
 	case LIFE_POTION:
 		if (em->player->lifePotions < em->player->maxLifePotions)
 			em->player->lifePotions++;
+	
+	case STAMINA_POTION:
+		if (em->player->staminaPotions < em->player->maxStaminaPotions)
+			em->player->staminaPotions++;
 
 	default:
 		em->player->inventory.push_back(object->objectType);
@@ -246,7 +250,8 @@ void j1GameLayer::BuyObject(Object * object)
 	{
 		if ((object->objectType == LIFE_POTION && em->player->lifePotions != em->player->maxLifePotions) ||
 			(object->objectType == ARROW_DROP && em->player->arrows != em->player->maxArrows) ||
-			(object->objectType == BOMB_DROP && em->player->bombs != em->player->maxBombs))
+			(object->objectType == BOMB_DROP && em->player->bombs != em->player->maxBombs) ||
+			(object->objectType == STAMINA_POTION && em->player->staminaPotions != em->player->maxStaminaPotions))
 		{
 			PickObject(object);
 			em->player->rupees -= object->price;
