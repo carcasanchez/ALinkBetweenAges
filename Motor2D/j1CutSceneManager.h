@@ -9,7 +9,7 @@
 
 //TODO 1: Open config.xml and write a new path for the cutscene.
 
-enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_SCENE, CS_CAM, CS_NONE };
+enum CS_Type { CS_IMAGE, CS_TEXT, CS_NPC, CS_ENEMY, CS_DYNOBJECT, CS_ITEM, CS_MUSIC, CS_FX, CS_SCENE, CS_CAM, CS_NONE };
 enum Action_Type { ACT_ENABLE, ACT_DISABLE, ACT_LOAD, ACT_SET_STRING, ACT_MOVE, ACT_FADE, ACT_CREATE, ACT_PLAY, ACT_STOP, ACT_FREE_CAM, ACT_LOCK_CAM, ACT_CHANGE_AGE, ACT_NONE };
 enum Dir_Type { CS_UP, CS_DOWN, CS_LEFT, CS_RIGHT, CS_TELEPORT, NO_DIR };
 
@@ -243,6 +243,7 @@ public:
 	//LOAD ELEMENTS FUNCTIONS -------
 	bool LoadSceneName(pugi::xml_node&);
 	bool LoadNPC(pugi::xml_node&);
+	bool LoadEnemy(pugi::xml_node&);
 	bool LoadImg(pugi::xml_node&);
 	bool LoadCam(pugi::xml_node&);
 	bool LoadText(pugi::xml_node&);

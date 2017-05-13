@@ -101,6 +101,9 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 			for (temp = elements_node.child("NPC").child("npc"); temp != NULL; temp = temp.next_sibling("npc"))
 				temp_cutscene->LoadNPC(temp);
 			
+			//Load Enemies
+			for (temp = elements_node.child("ENEMIES").child("enemy"); temp != NULL; temp = temp.next_sibling("enemy"))
+				temp_cutscene->LoadEnemy(temp);
 
 			//Load Texts
 			for (temp = elements_node.child("TEXTS").child("string"); temp != NULL; temp = temp.next_sibling("text"))
@@ -510,6 +513,44 @@ bool Cutscene::LoadNPC(pugi::xml_node& node)
 		}
 		ret = true;
 	}
+	return ret;
+}
+
+bool Cutscene::LoadEnemy(pugi::xml_node& node)
+{
+	bool ret = false;
+	if (node != NULL)
+	{
+		CS_npc* tmp = new CS_npc(CS_ENEMY, node.attribute("n").as_int(-1), node.attribute("name").as_string(""), node.attribute("active").as_bool(false), nullptr);
+		this->elements.push_back(tmp);
+
+		Entity* tmp_ent = tmp->GetEntity(node.attribute("entity_id").as_int());
+		tmp->empty = node.attribute("empty").as_bool();
+
+		if (tmp->empty == false)
+		{
+			if (tmp_ent)
+			{
+				tmp->LinkEntity(tmp_ent);
+				iPoint new_pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
+				tmp_ent->MoveTo(new_pos.x, new_pos.y);
+			}
+			else
+			{
+				tmp->LinkEntity((Entity*)App->game->em->CreateEnemy(1, (ENEMY_TYPE)node.attribute("type").as_int(), node.attribute("x").as_int(), node.attribute("y").as_int(), std::vector<iPoint>(), node.attribute("entity_id").as_int()));
+			}
+		}
+		else
+		{
+			//If is empty later will load, and need those variablos
+			tmp->pos = { node.attribute("x").as_int(), node.attribute("y").as_int() };
+			tmp->entity_id = node.attribute("entity_id").as_int();
+			tmp->entity_type = node.attribute("type").as_int();
+		}
+		ret = true;
+	}
+	return ret;
+
 	return ret;
 }
 
@@ -955,7 +996,30 @@ void CS_Step::CreateCharacter()
 
 		tmp->empty = false;
 		FinishStep();
+		return;
 	}
+
+	if (GetElementType() == CS_ENEMY)
+	{
+		CS_npc* tmp = (CS_npc*)element;
+
+		if (tmp->entity_id != -1)
+		{
+			Entity* ent = App->game->em->GetEntityFromId(tmp->entity_id);
+
+			if (ent)
+			{
+				tmp->LinkEntity(ent);
+				tmp->GetMyEntity()->MoveToTile(tmp->pos.x, tmp->pos.y);
+			}
+			else tmp->LinkEntity((Entity*)App->game->em->CreateEnemy(1, (ENEMY_TYPE)tmp->entity_type, tmp->pos.x, tmp->pos.y,vector<iPoint>(), tmp->entity_id));
+
+		}
+		tmp->empty = false;
+		FinishStep();
+		return;
+	}
+
 	return;
 }
 
