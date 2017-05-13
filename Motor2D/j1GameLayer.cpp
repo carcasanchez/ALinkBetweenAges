@@ -195,11 +195,30 @@ void j1GameLayer::PickObject(Object * object)
 		break;
 	case BOMB_DROP:
 		if (em->player->bombs < em->player->maxBombs)
-			em->player->bombs+=5;
+		{
+			if ((em->player->bombs + 5) > em->player->maxBombs)
+			{
+				em->player->bombs = em->player->maxBombs;
+			}
+			else
+			{
+				em->player->bombs += 5;
+			}
+			
+		}
+			
 		break;
 	case ARROW_DROP:
 		if (em->player->arrows < em->player->maxArrows)
-			em->player->arrows+=5;
+			if ((em->player->arrows + 5) > em->player->maxArrows)
+			{
+				em->player->arrows = em->player->maxArrows;
+			}
+			else
+			{
+				em->player->arrows += 5;
+			}
+
 		break;
 
 	case BOOK:
@@ -248,10 +267,10 @@ void j1GameLayer::BuyObject(Object * object)
 {	
 	if (buy_timer.Read() > 700 && em->player->rupees >= object->price)
 	{
-		if ((object->objectType == LIFE_POTION && em->player->lifePotions != em->player->maxLifePotions) ||
-			(object->objectType == ARROW_DROP && em->player->arrows != em->player->maxArrows) ||
-			(object->objectType == BOMB_DROP && em->player->bombs != em->player->maxBombs) ||
-			(object->objectType == STAMINA_POTION && em->player->staminaPotions != em->player->maxStaminaPotions))
+		if ((object->objectType == LIFE_POTION && em->player->lifePotions < em->player->maxLifePotions) ||
+			(object->objectType == ARROW_DROP && em->player->arrows < em->player->maxArrows) ||
+			(object->objectType == BOMB_DROP && em->player->bombs < em->player->maxBombs) ||
+			(object->objectType == STAMINA_POTION && em->player->staminaPotions < em->player->maxStaminaPotions))
 		{
 			PickObject(object);
 			em->player->rupees -= object->price;
