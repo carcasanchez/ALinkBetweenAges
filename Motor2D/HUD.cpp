@@ -51,6 +51,13 @@ bool Hud::Update(float dt)
 		bombs_counter->LookNumber(App->game->em->player->bombs);
 		arrows_counter->LookNumber(App->game->em->player->arrows);
 
+		if (zelda_life_bar->active)
+		{
+			Entity* tmp = App->game->em->GetEntityFromId(99);
+			if (tmp == nullptr)
+				zelda_life_bar->Set_Active_state(false);
+		}
+
 		LookInventory();
 	}
 
