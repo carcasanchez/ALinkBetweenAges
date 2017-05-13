@@ -161,8 +161,7 @@ void UI_Stamina::ChangeColor(int percent)
 void UI_Stamina::PrintBar()
 {
 	int difference_x = draw_rect.x - move_rect.x;
-	int difference_y = draw_rect.y - move_rect.y;
-	SDL_Rect tmp = { stamina->Image.x + difference_x, stamina->Image.y + difference_y,stamina->Image.w, stamina->Image.h };
+	SDL_Rect tmp = { stamina->Image.x + difference_x, stamina->Image.y,stamina->Image.w, stamina->Image.h };
 	App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), ((Parent->Interactive_box.x + draw_rect.x) - App->render->camera.x) * App->gui->scale_factor, ((Parent->Interactive_box.y + draw_rect.y) - App->render->camera.y) * App->gui->scale_factor, &tmp);
 }
 
