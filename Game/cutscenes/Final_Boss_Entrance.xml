@@ -36,7 +36,7 @@
   <!--EXECUTE ALL STEPS IN ORDER-->
 
   <steps>
-    <step  n="0" start="-1" duration ="-1" input="false">
+    <step  n="0" start="0" duration ="-1" input="false">
       <element name="Link" action="create"/>
     </step>
 
