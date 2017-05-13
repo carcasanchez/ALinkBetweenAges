@@ -196,13 +196,13 @@ void j1GameLayer::PickObject(Object * object)
 	case BOMB_DROP:
 		if (em->player->bombs < em->player->maxBombs)
 		{
-			if ((em->player->bombs + 5) > em->player->maxBombs)
+			if ((em->player->bombs + 10) > em->player->maxBombs)
 			{
 				em->player->bombs = em->player->maxBombs;
 			}
 			else
 			{
-				em->player->bombs += 5;
+				em->player->bombs += 10;
 			}
 			
 		}
