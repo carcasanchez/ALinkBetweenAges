@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "p2Log.h"
 #include "j1Pathfinding.h"
+#include "j1CutSceneManager.h"
 #include "j1GameLayer.h"
 #include "j1Input.h"
 #include "j1Map.h"
@@ -133,6 +134,7 @@ void DarkZelda::OnDeath()
 		App->audio->PlayFx(11);
 		App->audio->StopMusic();
 		toDelete = true;
+		App->cutsceneM->StartCutscene(4);
 	}
 }
 
