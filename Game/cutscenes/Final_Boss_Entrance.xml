@@ -9,19 +9,19 @@
     </MAP>
 
     <NPC>
-      <npc n="0" name="Link" active="true" type="0" x="205" y="232" entity_id="-1" empty="true"/>
-      <npc n="1" name="Zelda_npc" active="true" type="0" x="205" y="232" entity_id="99" empty="true"/>
+      <npc n="0" name="Link" active="true" type="0" x="0" y="0" entity_id="-1" empty="true"/>
+      <npc n="1" name="Zelda_npc" active="true" type="11" x="49" y="176" entity_id="1" empty="true"/>
     </NPC>
 
     <ENEMIES>
-      <enemy n="0" name="Zelda_enemy" active="true" type="3" x="205" y="232" entity_id="99" empty="true"/>
+      <enemy n="2" name="Zelda_enemy" active="true" type="3" x="48" y="13" entity_id="99" empty="true"/>
     </ENEMIES>
 
     <IMAGES>
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="Texto soldado 1" />
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="" />
     </TEXTS>
 
     <MUSIC>
@@ -36,7 +36,42 @@
   <!--EXECUTE ALL STEPS IN ORDER-->
 
   <steps>
-   
+    <step  n="0" start="-1" duration ="-1" input="false">
+      <element name="Link" action="create"/>
+    </step>
+
+    <step  n="1" start="-1" duration ="-1" input="false">
+      <element name="Zelda_npc" action="create"/>
+    </step>
+
+    <step  n="2" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="teleport">
+        <movement dest_x="49" dest_y="178" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="3" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Zelda Explanation 1"/>
+      </element>
+    </step>
+
+    <step  n="4" start="-1" duration ="-1" input="false">
+      <element name="Zelda_npc" action="move" dir="up">
+        <movement dest_x="0" dest_y="170" speed="10"/>
+      </element>
+    </step>
+    
+    <step  n="5" start="-1" duration ="-1" input="false">
+      <element name="Zelda_npc" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="6" start="-1" duration ="-1" input="false">
+      <element name="Zelda_enemy" action="create"/>
+    </step>
 
   </steps>
+  
 </Cutscene>
