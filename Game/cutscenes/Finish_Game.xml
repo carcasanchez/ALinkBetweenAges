@@ -9,8 +9,8 @@
     </MAP>
 
     <NPC>
-      <npc n="0" name="tio_ben" active="true" type="0" x="0" y="0" entity_id="1" empty="true"/>
-      <npc n="1" name="Link" active="true" type="0" x="205" y="232" entity_id="-1" empty="true"/>
+      <npc n="0" name="tio_ben" active="true" type="0" x="79" y="60" entity_id="1" empty="true"/>
+      <npc n="1" name="Link" active="true" type="0" x="205" y="232" entity_id="-1" empty="false"/>
     </NPC>
 
     <ENEMIES>
@@ -29,6 +29,9 @@
     <FX>
     </FX>
 
+    <CAMERA>
+      <cam n="0" name="camera" active="true"/>
+    </CAMERA>
 
   </elements>
 
@@ -36,9 +39,9 @@
 
   <steps>
 
-    <step  n="0" start="-1" duration ="-1" input="false">
+    <step  n="0" start="0" duration ="-1" input="false">
       <element name="Link" action="move" dir="teleport">
-        <movement dest_x="0" dest_y="0" speed="0"/>
+        <movement dest_x="65" dest_y="32" speed="0"/>
       </element>
     </step>
     
@@ -48,7 +51,7 @@
 
     <step  n="2" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="up">
-        <movement dest_x="0" dest_y="0" speed="50"/>
+        <movement dest_x="79" dest_y="62" speed="50"/>
       </element>
     </step>
 
@@ -60,7 +63,7 @@
 
     <step  n="4" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="down">
-        <movement dest_x="0" dest_y="0" speed="50"/>
+        <movement dest_x="75" dest_y="50" speed="50"/>
       </element>
     </step>
 
@@ -84,7 +87,7 @@
 
     <step  n="8" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="down">
-        <movement dest_x="0" dest_y="100" speed="50"/>
+        <movement dest_x="79" dest_y="80" speed="50"/>
       </element>
     </step>
 
@@ -95,19 +98,19 @@
     
     <step  n="10" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="up">
-        <movement dest_x="0" dest_y="200" speed="50"/>
+        <movement dest_x="0" dest_y="40" speed="50"/>
       </element>
     </step>
 
     <step  n="11" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="down">
-        <movement dest_x="0" dest_y="200" speed="50"/>
+        <movement dest_x="0" dest_y="41" speed="50"/>
       </element>
     </step>
 
     <step  n="12" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="up">
-        <movement dest_x="0" dest_y="50" speed="50"/>
+        <movement dest_x="0" dest_y="30" speed="50"/>
       </element>
     </step>
 
