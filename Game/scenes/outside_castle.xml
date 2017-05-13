@@ -23,9 +23,9 @@
         <special>
           <!--rocks, grass, etc-->
 <chest object_type="9" x="102" y="50" item_inside="14"/>
-<bomb_sac object_type="16" x="94" y="59"/>
+          <chest object_type="9" x="94" y="59" item_inside="16"/>
 <stone object_type="24" x="102" y="58"/>
-<stone object_type="24" x="104" y="58/>
+<stone object_type="24" x="104" y="58"/>
         </special>
       </entities>
 
