@@ -211,6 +211,10 @@ void j1GameLayer::PickObject(Object * object)
 		em->player->bossKeyEquipped = true;
 		break;
 
+	case LIFE_POTION:
+		if (em->player->lifePotions < em->player->maxLifePotions)
+			em->player->lifePotions++;
+
 	default:
 		em->player->inventory.push_back(object->objectType);
 		App->audio->PlayFx(23);
@@ -240,9 +244,14 @@ void j1GameLayer::BuyObject(Object * object)
 {	
 	if (buy_timer.Read() > 700 && em->player->rupees >= object->price)
 	{
-		PickObject(object);
-		em->player->rupees -= object->price;
-		buy_timer.Start();
+		if ((object->objectType == LIFE_POTION && em->player->lifePotions != em->player->maxLifePotions) ||
+			(object->objectType == ARROW_DROP && em->player->arrows != em->player->maxArrows) ||
+			(object->objectType == BOMB_DROP && em->player->bombs != em->player->maxBombs))
+		{
+			PickObject(object);
+			em->player->rupees -= object->price;
+			buy_timer.Start();
+		}
 	}
 }
 

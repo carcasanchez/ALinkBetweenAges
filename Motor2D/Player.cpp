@@ -91,7 +91,7 @@ bool Player::Spawn(std::string file, iPoint pos)
 		//max items
 		maxArrows = 10;
 		maxBombs = 5;
-	
+		maxLifePotions = 1;
 
 		invulnerable = false;
 		swordCollider = nullptr;
@@ -1202,6 +1202,7 @@ void Player::UseObject(float dt)
 
 		inventory.erase(currentItem);
 		only_one_time = true;
+		lifePotions--;
 		break;
 
 	case STAMINA_POTION:
