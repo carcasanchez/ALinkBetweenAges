@@ -1,0 +1,121 @@
+<!-- LINK RETURNS CUTSCENE -->
+
+<Cutscene name="Finish" id="4">
+
+  <!--CUTSCENE ELEMENTS-->
+  <elements>
+    <MAP>
+      <scene n="0" name="kakarikoDestroyed" active="true" scene_name="kakarikoDestroyed" load="true"/>
+    </MAP>
+
+    <NPC>
+      <npc n="0" name="tio_ben" active="true" type="0" x="0" y="0" entity_id="1" empty="true"/>
+      <npc n="1" name="Link" active="true" type="0" x="205" y="232" entity_id="-1" empty="true"/>
+    </NPC>
+
+    <ENEMIES>
+    </ENEMIES>
+
+    <IMAGES>
+    </IMAGES>
+
+    <TEXTS>
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="" />
+    </TEXTS>
+
+    <MUSIC>
+    </MUSIC>
+
+    <FX>
+    </FX>
+
+
+  </elements>
+
+  <!--EXECUTE ALL STEPS IN ORDER-->
+
+  <steps>
+
+    <step  n="0" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="0"/>
+      </element>
+    </step>
+    
+  <step  n="1" start="-1" duration ="-1" input="false">
+    <element name="tio_ben" action="create"/>
+    </step>
+
+    <step  n="2" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="up">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="3" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Hey Link!!!"/>
+      </element>
+    </step>
+
+    <step  n="4" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="down">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="5" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="I'm happy to see you again. After what happened years ago I thought you have died"/>
+      </element>
+    </step>
+
+    <step  n="6" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Come with me, we have to celebrate your return and Ganon's dead"/>
+      </element>
+    </step>
+
+    <step  n="7" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text="Lets Go!"/>
+      </element>
+    </step>
+
+    <step  n="8" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="down">
+        <movement dest_x="0" dest_y="100" speed="50"/>
+      </element>
+    </step>
+
+
+    <step n="9" start ="-1" duration="-1" input="false">
+      <element name="camera" action="free"/>
+    </step>
+    
+    <step  n="10" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="up">
+        <movement dest_x="0" dest_y="200" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="11" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="down">
+        <movement dest_x="0" dest_y="200" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="12" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="up">
+        <movement dest_x="0" dest_y="50" speed="50"/>
+      </element>
+    </step>
+
+    <step  n="13" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="50"/>
+      </element>
+    </step>
+
+  </steps>
+</Cutscene>
