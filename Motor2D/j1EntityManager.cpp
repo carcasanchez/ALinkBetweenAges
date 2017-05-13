@@ -365,10 +365,12 @@ bool j1EntityManager::CleanEntities()
 		std::list<Entity*>::iterator item;
 		for (item = entities[1].begin(); item != entities[1].end();)
 		{
+
 			if ((*item)->keepExisting)
 			{
 				(*item)->keepExisting = false;
 				keepAlive.push_back((*item));
+				item = entities[1].erase(item);
 			}
 			else
 			{ 
