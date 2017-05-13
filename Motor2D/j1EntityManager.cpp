@@ -53,8 +53,8 @@ bool j1EntityManager::PreUpdate()
 		player->OnDeath();
 
 	// check for dead entities
-	std::list<Entity*>::iterator item = entities[*sector].begin();
-	while (item != entities[*sector].end())
+	std::list<Entity*>::iterator item = entities[1].begin();
+	while (item != entities[1].end())
 	{
 		if ((*item)->life < 0)
 		{
@@ -66,7 +66,7 @@ bool j1EntityManager::PreUpdate()
 					(*item)->col->to_delete = true;
 				}
 				RELEASE(*item);
-				item = entities[*sector].erase(item); //calls destroyer
+				item = entities[1].erase(item); //calls destroyer
 			}
 				
 		}
@@ -360,6 +360,8 @@ bool j1EntityManager::CleanEntities()
 	bool ret = true;	
 	std::vector<Entity*> keepAlive;
 
+	if(entities[1].size()>0)
+	{ 
 	
 		for (std::list<Entity*>::iterator item = entities[1].begin(); item != entities[1].end(); item++)
 		{
@@ -385,7 +387,7 @@ bool j1EntityManager::CleanEntities()
 	{
 		entities[1].push_back((*it));
 	}
-
+	}
 	return ret;
 }
 

@@ -89,10 +89,10 @@ bool Player::Spawn(std::string file, iPoint pos)
 		dodgeLimit = node.attribute("limit").as_int(50);
 
 		//max items
-		maxArrows = 10;
-		maxBombs = 5;
-	
-
+		maxArrows = 15;
+		maxBombs = 10;
+		maxLifePotions = 1;
+		maxStaminaPotions = 1;
 		invulnerable = false;
 		swordCollider = nullptr;
 	}
@@ -108,6 +108,7 @@ void Player::OnDeath()
 	currentDir = D_DOWN;
 	sprite->tint = { 255, 255, 255, 255 };
 	actionState = IDLE;
+	dead = true;
 
 	UpdateCollider();
 
@@ -1201,6 +1202,7 @@ void Player::UseObject(float dt)
 
 		inventory.erase(currentItem);
 		only_one_time = true;
+		lifePotions--;
 		break;
 
 	case STAMINA_POTION:
@@ -1211,6 +1213,7 @@ void Player::UseObject(float dt)
 	
 		inventory.erase(currentItem);
 		only_one_time = true;
+		staminaPotions--;
 		break;
 
 	case BOMB_SAC:
