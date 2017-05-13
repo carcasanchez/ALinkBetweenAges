@@ -99,19 +99,19 @@
 
 <npc id="14" states="1">
      <dialogue state="0" states="1">
-	<text value="Hello! I'm the shopman. The prices are:"/>
-	<text value="25 rupees x1 life potion."/>
-	<text value="10 rupees x1 stamina potion."/>
+	<text value=" Hello! I'm the shopman. The prices are:"/>
+	<text value=" 25 rupees x1 life potion."/>
+	<text value=" 10 rupees x1 stamina potion."/>
      </dialogue>
    </npc>
 
 <npc id="15" states="1">
      <dialogue state="0" states="1">
-	<text value="Hello! I'm the shopman. The prices are:"/>
-	<text value="25 rupees x1 life potion."/>
-	<text value="10 rupees x1 stamina potion."/>
-	<text value="10 rupees x1 bombs."/>
-	<text value="15 rupees x5 arrows."/>
+	<text value=" Hello! I'm the shopman. The prices are:"/>
+	<text value=" 25 rupees x1 life potion."/>
+	<text value=" 10 rupees x1 stamina potion."/>
+	<text value=" 10 rupees x1 bombs."/>
+	<text value=" 15 rupees x5 arrows."/>
      </dialogue>
    </npc>
 
@@ -121,6 +121,13 @@
     <text value=""/>
     </dialogue>
   </npc>
+  
+  
+<npc id="98" states="1">
+     <dialogue state="0" states="1">
+	    <text value=" It seems to be dead."/>
+     </dialogue>
+   </npc>
 
 
 </npcs>
