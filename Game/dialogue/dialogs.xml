@@ -129,5 +129,11 @@
      </dialogue>
 </npc>
 
+  <npc id="18" states="1">
+    <dialogue state="0" states="1">
+      <text value="It's nice to see you again Link!"/>
+    </dialogue>
+  </npc>
+
 
 </npcs>
