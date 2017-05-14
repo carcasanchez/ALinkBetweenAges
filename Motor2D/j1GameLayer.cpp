@@ -100,6 +100,14 @@ bool j1GameLayer::Update(float dt)
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		em->player->currentPos = mousePos;
 	}*/
+
+	if (App->input->GetKey(SDL_SCANCODE_F2))
+	{
+		App->sceneM->RequestSceneChange({ 47*8,220*8 }, "bossRoom", D_DOWN);
+		em->player->ChangeAge(ADULT);
+		App->SaveGame("saves.xml");
+		em->player->life = em->player->maxLife;
+	}
 		
 
 
