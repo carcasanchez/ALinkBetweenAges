@@ -20,7 +20,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="It's time to wake up Link, don't be lazy." />
+      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text=" It's time to wake up Link, don't be lazy." />
     </TEXTS>
 
     <MUSIC>
@@ -89,13 +89,13 @@
 
     <step  n="10" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Zelda was looking for you to play, She went to the forest, maybe you should look for her"/>
+        <text text=" Zelda was looking for you, she went to the forest, maybe you should look for her"/>
       </element>
     </step>
     
      <step  n="11" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Remember you can attack in four directions using ABXY, and dodge with RB"/>
+        <text text=" Remember you can attack in four directions using ABXY, and dodge with RB"/>
       </element>
     </step>
 
