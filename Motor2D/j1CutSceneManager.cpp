@@ -216,18 +216,20 @@ bool j1CutSceneManager::FinishCutscene()
 			//TODO 9.1: Load the destination map of the cutscene (if it has stored a map_id when accessed to the XML file (map_id > -1)).
 			//Do this by calling the appropiate function of the intro scene.
 
+			if (App->game->em->player && active_cutscene->id == 2)
+			{
+				App->SaveGame("saves.xml");
+				
+			}
 
 			//TODO 10: Clear the cutscene and set active_cutsene pointer to nullptr.
 			RELEASE(active_cutscene);
 
 			//Return to INGAME state
 			App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
-			if (App->game->em->player)
-			{
+			
+			if(App->game->em->player != nullptr)
 				App->game->em->player->playerState = ACTIVE;
-				App->SaveGame("saves.xml");
-			}
-
 		
 
 			ret = true;
