@@ -5,7 +5,7 @@
   <!--CUTSCENE ELEMENTS-->
   <elements>
     <MAP>
-      <scene n="0" name="kakarikoDestroyed" active="true" scene_name="kakarikoDestroyed" load="true"/>
+      <scene n="0" name="intro" active="true" scene_name="introScene" load="true"/>
     </MAP>
 
     <NPC>
@@ -118,6 +118,14 @@
       <element name="Link" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
+    </step>
+
+    <step  n="14" start="-1" duration ="-1" input="false">
+      <element name="intro" action="load"/>
+    </step>
+
+    <step n="15" start ="-1" duration="-1" input="false">
+      <element name="camera" action="lock"/>
     </step>
 
   </steps>
