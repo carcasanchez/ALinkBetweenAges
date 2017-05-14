@@ -53,20 +53,21 @@ bool j1EntityManager::PreUpdate()
 		player->OnDeath();
 
 	// check for dead entities
-	std::list<Entity*>::iterator item = entities[1].begin();
+	std::vector<Entity*>::iterator item = entities[1].begin();
 	while (item != entities[1].end())
 	{
-		if ((*item)->life < 0)
+		if ((*item)->life < 0 && (*item)->dead == false)
 		{
 			(*item)->OnDeath();
 			if ((*item)->toDelete)
 			{
 				if ((*item)->col)
 				{
-					(*item)->col->to_delete = true;
+					(*item)->col->active = false;
 				}
-				RELEASE(*item);
-				item = entities[1].erase(item); //calls destroyer
+				(*item)->currentPos = {-1000, -1000};
+				(*item)->UpdateCollider();
+				(*item)->dead = true;
 			}
 				
 		}
@@ -90,13 +91,13 @@ bool j1EntityManager::Update(float dt)
 	}
 	
 
-	for (std::list<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
+	for (std::vector<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
 	{		
-	//	if (App->render->InsideCameraZone((*item)->col->rect))
-	//	{
+		if (!(*item)->dead)
+		{
 			(*item)->Update(dt);
 			(*item)->UpdateCollider();
-	//	}
+		}
 		
 	}
 
@@ -112,7 +113,7 @@ bool j1EntityManager::PostUpdate()
 		player->Draw();
 	}
 
-	for (std::list<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
+	for (std::vector<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
 	{
 		(*item)->Draw();
 	}
@@ -344,7 +345,7 @@ Entity * j1EntityManager::GetEntityFromId(int id)
 {
 	for (int i = 1; i <= App->sceneM->currentScene->maxSectors; i++)
 	{
-		for (std::list<Entity*>::iterator item = entities[i].begin(); item != entities[i].end(); item++)
+		for (std::vector<Entity*>::iterator item = entities[i].begin(); item != entities[i].end(); item++)
 		{
 			if((*item)->id == id)
 				return (*item);			
@@ -362,7 +363,7 @@ bool j1EntityManager::CleanEntities()
 
 	
 
-		std::list<Entity*>::iterator item;
+		std::vector<Entity*>::iterator item;
 		for (item = entities[1].begin(); item != entities[1].end();)
 		{
 

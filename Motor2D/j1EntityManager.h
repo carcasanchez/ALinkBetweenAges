@@ -50,7 +50,7 @@ public:
 public:
 
 	Player* player;
-	std::map<int, std::list<Entity*>> entities;
+	std::map<int, std::vector<Entity*>> entities;
 	std::map<ENTITY_TYPE, std::string> dir;
 
 	

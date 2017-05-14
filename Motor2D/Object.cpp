@@ -169,11 +169,6 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir
 void Object::OnDeath()
 {
 	toDelete = true;
-	if (col)
-	{
-		col->to_delete = true;
-		col = nullptr;
-	}
 }
 
 bool Bomb::ExplodeBomb()
