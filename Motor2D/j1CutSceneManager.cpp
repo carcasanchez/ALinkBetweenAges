@@ -119,6 +119,9 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 				temp_cutscene->LoadCam(temp);
 
 			//Load Music
+			for (temp = elements_node.child("MUSIC").child("mus"); temp != NULL; temp = temp.next_sibling("mus"))
+				temp_cutscene->LoadMusic(temp);
+
 
 			//Load Sound Fx
 
