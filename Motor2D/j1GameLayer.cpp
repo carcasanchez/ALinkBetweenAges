@@ -90,7 +90,7 @@ bool j1GameLayer::Update(float dt)
 	App->input->GetMousePosition(mousePos.x, mousePos.y);
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	/*if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateNPC(1, NPC_DARK_ZELDA, mousePos.x, mousePos.y);
 		App->sceneM->RequestSceneChange({0,0}, "outsideCastle", D_DOWN);
 		//em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);
@@ -99,11 +99,11 @@ bool j1GameLayer::Update(float dt)
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		em->player->currentPos = mousePos;
-	}
+	}*/
 		
 
 
-	 if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	 if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 	 {
 		 Object* arrow = App->game->em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, LINK_ARROW, em->player->currentDir);
 		 if (arrow->currentDir == D_RIGHT || arrow->currentDir == D_LEFT)
@@ -112,10 +112,11 @@ bool j1GameLayer::Update(float dt)
 			 arrow->col->rect.w = 15;
 		 }
 	 }
-	
+	 else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
+		 em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, BOMB);
 
 
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	/*if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		em->player->changeAge = 0;
 	else if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 		em->player->changeAge = 1;
@@ -138,15 +139,15 @@ bool j1GameLayer::Update(float dt)
 	else if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
 		em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, STAMINA_POTION);
 	else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-		em->player->rupees += 5;
+		em->player->rupees += 5;*/
 
 		
 
 
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	/*if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		App->SaveGame("saves.xml");
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
-		App->LoadGame("saves.xml");
+		App->LoadGame("saves.xml");*/
 	
 	return ret;
 }
