@@ -139,9 +139,9 @@ void UI_Stamina::ChangeColor(int percent)
 
 	if (element_type == ZELDA_LIFE)
 	{
-		if (percent < 50)
+		if (percent < 60)
 		{
-			if (percent < 20)
+			if (percent < 30)
 			{
 				SetStamina(App->game->hud->low_life);
 				return;

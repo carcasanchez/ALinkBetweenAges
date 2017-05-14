@@ -40,7 +40,7 @@
   </stamina>
 
   <zelda>
-    <bar              pos_x="300" pos_y="600" draw_x="10" draw_y="38" active="false"/>
+    <bar              pos_x="350" pos_y="820" draw_x="10" draw_y="38" active="false"/>
     <container        x="16"   y="476" w="293" h="45" pos_x="0" pos_y="0" active="false"/>
     <full_health      x="16"   y="523" w="283" h="21" pos_x="0" pos_y="0" active="false"/>
     <mid_health       x="16"   y="545" w="283" h="21" pos_x="0" pos_y="0" active="false"/>
