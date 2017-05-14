@@ -268,7 +268,7 @@ void InputManager::CallListeners()
 	{
 		for (list<InputListener*>::iterator it = listeners.begin(); it != listeners.end(); it++)
 		{
-			if ((*it)->input_active)
+			if ((*it) != nullptr && (*it)->input_active)
 			{
 				std::multimap<INPUTEVENT, EVENTSTATE>::iterator frame_actions = current_action.begin();
 				while (frame_actions != current_action.end())
