@@ -25,6 +25,7 @@
     </TEXTS>
 
     <MUSIC>
+	<mus n="0" name="boss_music" active="false" path="Audio/music/finalBoss.ogg"/>
     </MUSIC>
 
     <FX>
@@ -71,6 +72,11 @@
     <step  n="6" start="-1" duration ="-1" input="false">
       <element name="Zelda_enemy" action="create"/>
     </step>
+
+    <step  n="7" start="-1" duration ="0" input="false">
+      <element name="boss_music" action="play"/>
+    </step>
+
 
   </steps>
   
