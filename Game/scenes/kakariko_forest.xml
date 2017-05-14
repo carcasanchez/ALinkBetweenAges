@@ -9,6 +9,7 @@
  
 	  <npcs>
 		<sample type = "7" x = "75" y = "70" id="8"/>
+	     <sample type = "8" x = "75" y = "89" id="20"/>
         </npcs>
 
         <enemies>

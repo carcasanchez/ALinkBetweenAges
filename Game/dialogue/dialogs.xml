@@ -142,6 +142,13 @@
 
 <npc id="20" states="1">
     <dialogue state="0" states="1">
+      <text value=" Bisente's book allows Link to spin his sword with RT button."/>
+    </dialogue>
+  </npc>
+
+
+<npc id="21" states="1">
+    <dialogue state="0" states="1">
       <text value=""/>
     </dialogue>
   </npc>
