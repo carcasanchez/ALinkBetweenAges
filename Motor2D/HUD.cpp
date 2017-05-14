@@ -744,7 +744,22 @@ void Hud::LookNumHearts()
 			(*it)->Set_Active_state(true);
 			active_hearts++;
 		}
+		return;
 	}
+
+	if (active_hearts > App->game->em->player->maxLife)
+	{
+		for (vector<UI_Heart*>::reverse_iterator it = hearts.rbegin(); it != hearts.rend() && active_hearts > App->game->em->player->maxLife; it++)
+		{
+			if ((*it)->active == false)
+				continue;
+
+			(*it)->Set_Active_state(false);
+			active_hearts--;
+		}
+		return;
+	}
+
 }
 
 void Hud::LookInventory()
