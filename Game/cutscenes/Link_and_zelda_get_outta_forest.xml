@@ -405,7 +405,7 @@
 
     <step  n="67" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="This village is mine now, go to the castle if you don�t wanna be executed!"/>
+        <text text="This village is mine now, go to the castle if you do not wanna be executed!"/>
       </element>
     </step>
 
@@ -656,7 +656,7 @@
 
     <step  n="110" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Wait me!"/>
+        <text text="Wait for me!"/>
       </element>
     </step>
 
