@@ -3,7 +3,6 @@
   
    <npc id="1" states="2">
      <dialogue state="0">
-       <text value=" "/>
 	<text value=" If you go to the forest remember you can attack in four directions using ABXY, and dodge with RB."/>
      </dialogue>
      <dialogue state="1">
@@ -112,6 +111,7 @@
 	<text value=" 10 rupees x1 stamina potion."/>
 	<text value=" 10 rupees x1 bombs."/>
 	<text value=" 15 rupees x5 arrows."/>
+	<text value=" There is a bow inside the chest. It's from an adventurer that didn't come again so, I guess you can keep it."/>
      </dialogue>
    </npc>  
   
