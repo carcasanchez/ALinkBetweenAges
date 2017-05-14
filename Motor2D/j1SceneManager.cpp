@@ -146,18 +146,23 @@ bool j1SceneManager::ChangeScene()
 			destPos = spawnPoint;
 		}
 		
-
-		App->game->em->player->currentPos = destPos;
-		App->game->em->player->currentDir = dir;
+		if (App->game->em->player)
+		{
+			App->game->em->player->currentPos = destPos;
+			App->game->em->player->currentDir = dir;
+		}
+		
 		changeRequest = false;
 		
 	}
 
-	App->render->CenterCamera(App->game->em->player->currentPos);
+	if (App->game->em->player)
+	{
+		App->render->CenterCamera(App->game->em->player->currentPos);
 
-	//temporal
-	App->game->em->player->sceneOverride = false;
-
+		//temporal
+		App->game->em->player->sceneOverride = false;
+	}
 
 	return ret;
 }
