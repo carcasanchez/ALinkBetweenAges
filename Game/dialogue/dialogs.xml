@@ -135,5 +135,18 @@
     </dialogue>
   </npc>
 
+<npc id="19" states="1">
+    <dialogue state="0" states="1">
+      <text value="Shop."/>
+    </dialogue>
+  </npc>
+
+<npc id="20" states="1">
+    <dialogue state="0" states="1">
+      <text value=""/>
+    </dialogue>
+  </npc>
+
+
 
 </npcs>
