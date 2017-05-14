@@ -924,9 +924,17 @@ void CS_Step::LoadMovement(iPoint destination, int speed, const std::string& dir
 	origin = element->GetPos();
 
 	//Set the destination that will reach the linked element
-	if (direction == CS_TELEPORT)
-		dest = App->map->GetTileCenter(destination);
-	else dest = destination;
+	if (bezier_time == 0)
+	{
+		if (direction == CS_TELEPORT)
+			dest = App->map->GetTileCenter(destination);
+		else dest = destination;
+	}
+	else
+	{
+		dest = origin + destination;
+	}
+	
 
 	//Set the movement speed
 	mov_speed = speed;
