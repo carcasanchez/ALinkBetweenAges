@@ -220,7 +220,12 @@ bool j1CutSceneManager::FinishCutscene()
 			//Return to INGAME state
 			App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
 			if (App->game->em->player)
+			{
 				App->game->em->player->playerState = ACTIVE;
+				App->SaveGame("saves.xml");
+			}
+
+		
 
 			ret = true;
 		}
