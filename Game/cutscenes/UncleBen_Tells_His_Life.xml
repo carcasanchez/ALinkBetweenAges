@@ -20,7 +20,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text=" It's time to wake up Link, don't be lazy." />
+      <string n="0" name="Text" active="false" pos_x="270" pos_y="750" text=" It's time to wake up Link, don't be lazy." />
     </TEXTS>
 
     <MUSIC>

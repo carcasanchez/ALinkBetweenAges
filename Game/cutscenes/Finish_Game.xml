@@ -20,7 +20,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="" />
+      <string n="0" name="Text" active="false" pos_x="270" pos_y="750" text="" />
     </TEXTS>
 
     <MUSIC>
@@ -87,7 +87,7 @@
 
     <step  n="8" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="down">
-        <movement dest_x="79" dest_y="80" speed="50"/>
+        <movement dest_x="79" dest_y="110" speed="50"/>
       </element>
     </step>
 

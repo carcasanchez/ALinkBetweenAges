@@ -21,7 +21,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text="" />
+      <string n="0" name="Text" active="false" pos_x="270" pos_y="750" text="" />
     </TEXTS>
 
     <MUSIC>
@@ -57,25 +57,35 @@
       </element>
     </step>
 
-    <step  n="4" start="-1" duration ="-1" input="false">
-      <element name="Zelda_npc" action="move" dir="up">
-        <movement dest_x="0" dest_y="170" speed="10"/>
-        <text text= " You abandoned me, Link. You disappeared, never to be seen again. I was thrown around and jailed, all these years. All these years without hearing a single word from you. Not. One. Word."/>
+    <step  n="4" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text=" You abandoned me, Link. You disappeared, never to be seen again. I was thrown around and jailed, all these years. All these years without hearing a single word from you. Not. One. Word."/>
       </element>
     </step>
-    
-    <step  n="5" start="-1" duration ="-1" input="false">
-      <element name="Zelda_npc" action="move" dir="teleport">
-        <movement dest_x="0" dest_y="0" speed="10"/>
-	<text text= " I grew tired, and I took matters into my own hands. And it was best this way, because I have learned to not rely on anyone anymore."/>
+
+    <step  n="5" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text=" I grew tired, and I took matters into my own hands. And it was best this way, because I have learned to not rely on anyone anymore."/>
       </element>
     </step>
 
     <step  n="6" start="-1" duration ="-1" input="false">
+      <element name="Zelda_npc" action="move" dir="up">
+        <movement dest_x="0" dest_y="170" speed="10"/>
+      </element>
+    </step>
+    
+    <step  n="7" start="-1" duration ="-1" input="false">
+      <element name="Zelda_npc" action="move" dir="teleport">
+        <movement dest_x="0" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="8" start="-1" duration ="-1" input="false">
       <element name="Zelda_enemy" action="create"/>
     </step>
 
-    <step  n="7" start="-1" duration ="0" input="false">
+    <step  n="9" start="-1" duration ="0" input="false">
       <element name="boss_music" action="play"/>
     </step>
 

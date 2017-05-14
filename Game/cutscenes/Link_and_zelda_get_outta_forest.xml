@@ -46,7 +46,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="150" pos_y="600" text=" Hi Link... I got lost while training with my sword to prepare for the trip we talked about yesterday, do you remember? The WildLands look so beautiful... but they're really dangerous." />
+      <string n="0" name="Text" active="false" pos_x="270" pos_y="750" text=" Hi Link... I got lost while training with my sword to prepare for the trip we talked about yesterday, do you remember? The WildLands look so beautiful... but they're really dangerous." />
     </TEXTS>
 
     <MUSIC>
@@ -155,7 +155,7 @@
 
     <step  n="18" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="teleport">
-        <movement dest_x="80" dest_y="228" speed="50"/>
+        <movement dest_x="100" dest_y="228" speed="50"/>
       </element>
     </step>
 
@@ -241,13 +241,13 @@
 
     <step  n="33" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="right">
-        <movement dest_x="90" dest_y="0" speed="100"/>
+        <movement dest_x="100" dest_y="0" speed="100"/>
       </element>
     </step>
 
     <step  n="34" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="right">
-        <movement dest_x="90" dest_y="0" speed="200"/>
+        <movement dest_x="100" dest_y="0" speed="200"/>
       </element>
     </step>
 
@@ -650,7 +650,7 @@
 
     <step  n="109" start="-1" duration ="-1" input="false">
       <element name="dumber" action="move" dir="left">
-        <movement dest_x="140" dest_y="0" speed="100"/>
+        <movement dest_x="130" dest_y="0" speed="100"/>
       </element>
     </step>
 
@@ -680,7 +680,7 @@
 
     <step  n="114" start="-1" duration ="-1" input="false">
       <element name="dumb" action="move" dir="left">
-        <movement dest_x="140" dest_y="0" speed="200"/>
+        <movement dest_x="130" dest_y="0" speed="200"/>
       </element>
     </step>
 
