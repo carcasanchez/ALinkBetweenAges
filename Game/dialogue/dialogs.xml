@@ -109,7 +109,6 @@
 	<text value=" Hello! I'm the shopman. The prices are:"/>
 	<text value=" 25 rupees x1 life potion."/>
 	<text value=" 10 rupees x1 stamina potion."/>
-	<text value=" 10 rupees x1 bombs."/>
 	<text value=" 15 rupees x5 arrows."/>
 	<text value=" There is a bow inside the chest. It's from an adventurer that didn't come again so, I guess you can keep it."/>
      </dialogue>
