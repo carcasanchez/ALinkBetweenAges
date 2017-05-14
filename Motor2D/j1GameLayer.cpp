@@ -395,7 +395,7 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 
 bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 {
-	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_WALL || c2->type == COLLIDER_NPC || c2->type == COLLIDER_BUSH || c2->type == COLLIDER_CHEST))
+	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_NPC || c2->type == COLLIDER_BUSH || c2->type == COLLIDER_CHEST))
 	{
 		if (!c1->parent)
 			return false;
@@ -435,6 +435,11 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 			c2->parent->life = -1;
 		}
 		else c1->parent->currentPos = c1->parent->lastPos;
+		return true;
+	}
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
+	{
+		c1->parent->currentPos = c1->parent->lastPos;
 		return true;
 	}
  	if (c1->type == COLLIDER_PLAYER && (c2->type == COLLIDER_ENEMY || c2->type == COLLIDER_OCTOSTONE || c2->type == COLLIDER_MAGIC_SLASH || c2->type == COLLIDER_BOLT|| c2->type == COLLIDER_BOMB_EXPLOSION || c2->type == COLLIDER_ZELDA_ARROW) )

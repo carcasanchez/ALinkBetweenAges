@@ -88,8 +88,8 @@ bool j1CollisionManager::PreUpdate()
 
 bool j1CollisionManager::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		debug = !debug;
+	//if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	//	debug = !debug;
 
 
 	Collider* c1;
