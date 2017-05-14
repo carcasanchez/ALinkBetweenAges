@@ -135,6 +135,7 @@ void DarkZelda::OnDeath()
 		App->audio->StopMusic();
 		toDelete = true;
 		App->cutsceneM->StartCutscene(4);
+		App->game->hud->zelda_life_bar->Set_Active_state(false);
 	}
 }
 
@@ -145,6 +146,7 @@ bool DarkZelda::Update(float dt)
 	{
 		if (bolt->currentAnim->isOver())
 		{
+			bolt->currentAnim->Reset();
 			bolt->life = -1;
 			bolt = nullptr;
 		}
@@ -835,8 +837,7 @@ void DarkZelda::SetAttack()
 
 			if (bolt)
 				bolt->life = -1;
-			iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-			bolt = App->game->em->ActiveObject(mapPos.x, mapPos.y, FALLING_BOLT);
+			bolt = App->game->em->ActiveObject(currentPos.x, currentPos.y, FALLING_BOLT);
 			boltTimer.Start();
 		}
 

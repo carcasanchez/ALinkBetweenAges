@@ -46,7 +46,7 @@
           </reward >
 
           <trigger type ="0">
-            <collider x="15" y="173" w="800" h="8"/>
+            <collider x="15" y="180" w="800" h="8"/>
           </trigger>
 
         </quest>
