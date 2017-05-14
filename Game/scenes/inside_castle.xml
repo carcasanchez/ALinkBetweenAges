@@ -116,9 +116,9 @@
           <door object_type="29" x="109" y="103"/>
           <chest object_type="9" x="250" y="29" item_inside="25" id="6"/>
 
-<chest object_type="9" x="37" y="129" item_inside="12" id = "3"/>
+<chest object_type="9" x="36" y="129" item_inside="12" id = "3"/>
 <chest object_type="9" x="31" y="129" item_inside="14" id = "4"/>
-<chest object_type="9" x="42" y="129" item_inside="13" id = "5"/>
+<chest object_type="9" x="41" y="129" item_inside="13" id = "5"/>
 
           <stone object_type="24" x="181" y="138"/>
           <stone object_type="24" x="183" y="138"/>
@@ -150,8 +150,8 @@
           </reward >
 
           <trigger type ="2">
-            <interruptor x = "30" y="149"/>
-            <interruptor x = "44" y="149"/>
+            <interruptor x = "30" y="151"/>
+            <interruptor x = "44" y="151"/>
           </trigger>
 
         </quest>
