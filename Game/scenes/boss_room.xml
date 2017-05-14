@@ -38,6 +38,21 @@
         <exit destinyScene = "insideCastle" destinyExit = "1" x = "47" y = "224" w="2" h="1" direction = "0"/>
       </exits>
 
+    <quests>
+        <quest id = "1" >
+
+          <reward type ="0">
+            <cinematic id="3"/>
+          </reward >
+
+          <trigger type ="0">
+            <collider x="15" y="173" w="800" h="8"/>
+          </trigger>
+
+        </quest>
+      </quests>
+    
+  
     </sector>
   </sectors>
 </scene>
