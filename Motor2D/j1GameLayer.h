@@ -41,6 +41,8 @@ public:
 
 	bool On_Collision_Callback(Collider*, Collider*, float dt);
 
+
+
 public:
 
 	j1EntityManager*	em = NULL;

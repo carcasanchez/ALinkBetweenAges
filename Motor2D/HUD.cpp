@@ -183,6 +183,7 @@ bool Hud::Update(float dt)
 				{
 					StartGame();
 					App->cutsceneM->StartCutscene(1);
+					App->game->openChests.clear();
 				}
 
 				if (start_quit->active)
