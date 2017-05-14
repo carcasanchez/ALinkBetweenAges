@@ -57,7 +57,7 @@
 
     <step  n="3" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Hey Link!!!"/>
+        <text text=" Hey Link!!!"/>
       </element>
     </step>
 
@@ -69,13 +69,13 @@
 
     <step  n="5" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="I'm happy to see you again. After what happened years ago I thought you had died."/>
+        <text text=" I'm happy to see you again. After what happened years ago I thought you had died."/>
       </element>
     </step>
 
     <step  n="6" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text="Come with me, we have to celebrate your return and Ganon's death."/>
+        <text text=" Come with me, we have to celebrate your return and Ganon's death."/>
       </element>
     </step>
 
