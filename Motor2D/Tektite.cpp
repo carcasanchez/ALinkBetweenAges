@@ -93,7 +93,7 @@ void Tektite::OnDeath()
 	int drop = rand() % 4;
 	if (drop == 1)
 	{
-		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
+		App->game->em->ActiveObject(currentPos.x, currentPos.y, LIFEHEART);
 	}
 
 	App->audio->PlayFx(11);

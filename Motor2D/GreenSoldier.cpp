@@ -91,12 +91,12 @@ void GreenSoldier::OnDeath()
 	if (drop == 1 || drop == 2)
 	{
 		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-		App->game->em->CreateObject(1, mapPos.x, mapPos.y, GREEN_RUPEE);
+		App->game->em->ActiveObject(mapPos.x, mapPos.y, GREEN_RUPEE);
 	}
 	else if (drop == 3)
 	{
 		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
+		App->game->em->ActiveObject(currentPos.x, currentPos.y, LIFEHEART);
 	}
 
 		App->audio->PlayFx(11);

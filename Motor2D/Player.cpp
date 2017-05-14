@@ -118,7 +118,6 @@ void Player::OnDeath()
 }
 bool Player::Update(float dt)
 {
-	BROFILER_CATEGORY("PlayerUpdate", Profiler::Color::Black);
 	bool ret = true;
 	lastPos = currentPos;
 
@@ -538,8 +537,12 @@ bool Player::ShootingBow(float dt)
 	{
 		currentAnim->Reset();
 		actionState = IDLE;
-		iPoint pos = App->map->WorldToMap(currentPos.x, currentPos.y);
-		App->game->em->CreateObject(1, pos.x, pos.y, LINK_ARROW, -1, currentDir);
+		Object* arrow = App->game->em->ActiveObject(currentPos.x, currentPos.y, LINK_ARROW, currentDir);
+		if (arrow->currentDir == D_RIGHT || arrow->currentDir == D_LEFT)
+		{
+			arrow->col->rect.h = 7;
+			arrow->col->rect.w = 15;
+		}
 	}
 	return true;
 }
@@ -768,9 +771,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			case BOMB_SAC:
 				if (bombs > 0)
 				{
-					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 					bombs--;
-					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
+					App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
 				}
 				break;
 
@@ -817,9 +819,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			case BOMB_SAC:
 				if (bombs > 0)
 				{
-					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 					bombs--;
-					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
+					App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
 				}
 				break;
 
@@ -867,9 +868,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			case BOMB_SAC:
 				if (bombs > 0)
 				{
-					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 					bombs--;
-					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
+					App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
 				}
 				break;
 
@@ -918,9 +918,8 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 			case BOMB_SAC:
 				if (bombs > 0)
 				{
-					iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 					bombs--;
-					App->game->em->CreateObject(1, mapPos.x, mapPos.y, BOMB);
+					App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
 				}
 				break;
 

@@ -39,6 +39,8 @@ public:
 	Enemy* CreateEnemy(int, ENEMY_TYPE, int, int, std::vector<iPoint>, int id = -1);
 	Npc*	CreateNPC(int, NPC_TYPE, int, int, int id = -1);
 	Object* CreateObject(int, int, int, OBJECT_TYPE, int id = -1, int dir = 1);
+	Object* ActiveObject(int , int, OBJECT_TYPE, int dir = 1);
+	Object* CreateDeadObject(int sector, int x, int y, OBJECT_TYPE type, int id =-1, int direction=1);
 
 	Entity* GetEntityFromId(int);
 

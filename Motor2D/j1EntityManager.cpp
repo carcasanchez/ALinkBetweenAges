@@ -341,6 +341,123 @@ Object * j1EntityManager::CreateObject(int sector, int x, int y, OBJECT_TYPE typ
 	return ret;
 }
 
+Object * j1EntityManager::CreateDeadObject(int sector, int x, int y, OBJECT_TYPE type, int id, int direction)
+{
+	Object* ret;
+	switch (type)
+	{
+	default:
+		ret = new Object;
+		break;
+
+	case LINK_ARROW:
+		ret = new Arrow;
+		break;
+
+	case OCTO_STONE:
+		ret = new Octostone;
+		break;
+
+	case GREEN_RUPEE:
+	case BLUE_RUPEE:
+	case RED_RUPEE:
+		ret = new Rupee;
+		break;
+
+	case CHEST:
+		ret = new Chest;
+		break;
+	case MAGIC_SLASH:
+		ret = new MagicSlash;
+		break;
+
+	case BOMB:
+		ret = new Bomb;
+		break;
+
+	case ZELDA_ARROW:
+		ret = new ZeldaArrow;
+		break;
+	case BOMB_EXPLOSION:
+		ret = new BombExplosion;
+		break;
+	case FALLING_BOLT:
+		ret = new FallingBolt;
+		break;
+	case BOW:
+		ret = new Bow;
+		break;
+	case STAMINA_POTION:
+		ret = new StaminaPotion;
+		break;
+	case PILLAR:
+		ret = new Pillar;
+		break;
+	case INTERRUPTOR:
+		ret = new Interruptor;
+		break;
+	case BUSH:
+		ret = new Bush;
+		break;
+	}
+
+
+	iPoint worldPos = App->map->MapToWorld(x, y);
+
+	if (ret->Spawn(dir[OBJECT], worldPos, type, (DIRECTION)direction))
+	{
+		ret->type = OBJECT;
+		entities[sector].push_back(ret);
+		ret->id = id;
+		ret->UpdateCollider();
+		ret->col->active = false;
+		ret->life = -1;
+		ret->dead = true;
+	}
+
+
+
+	else
+	{
+		RELEASE(ret);
+		ret = NULL;
+	}
+
+	return ret;
+}
+
+Object * j1EntityManager::ActiveObject(int x, int y, OBJECT_TYPE type, int dir)
+{
+	vector<Entity*>::iterator it;
+	for (it = entities[1].begin(); it != entities[1].end(); it++)
+	{
+		if ((*it)->type != OBJECT)
+			continue;
+		if(((Object*)(*it))->objectType==type && (*it)->dead)
+		{
+			(*it)->currentPos = {x, y};
+			(*it)->dead = false;
+			(*it)->life = 1;
+			(*it)->currentDir = (DIRECTION)dir;
+			if ((*it)->col)
+				(*it)->col->active = true;
+			(*it)->UpdateCollider();
+
+			if (type == BOMB)
+			{
+				((Bomb*)(*it))->explode_counter.Start();
+			}
+			if (type == BOMB_EXPLOSION)
+			{
+				((BombExplosion*)(*it))->dead_counter.Start();
+			}
+
+			return ((Object*)(*it));
+		}
+	}
+	return nullptr;
+}
+
 Entity * j1EntityManager::GetEntityFromId(int id)
 {
 	for (int i = 1; i <= App->sceneM->currentScene->maxSectors; i++)
@@ -361,28 +478,21 @@ bool j1EntityManager::CleanEntities()
 	bool ret = true;	
 	std::vector<Entity*> keepAlive;
 
-	
-
 		std::vector<Entity*>::iterator item;
-		for (item = entities[1].begin(); item != entities[1].end();)
+		for (item = entities[1].begin(); item != entities[1].end(); item++)
 		{
-
 			if ((*item)->keepExisting)
 			{
 				(*item)->keepExisting = false;
 				keepAlive.push_back((*item));
-				item = entities[1].erase(item);
 			}
 			else
 			{ 
 				RELEASE(*item);
-				item =  entities[1].erase(item);
 			}
 		}
 
-		entities[1].clear();
-	
-
+	entities[1].clear();
 	entities.clear();
 
 

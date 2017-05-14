@@ -151,6 +151,8 @@ bool Scene::Load(const char* path, const bool reloadMap)
 
 			}
 
+			//Load dead objects;
+			LoadMisc();
 
 			//Exits
 			pugi::xml_node exits = section.child("exits");
@@ -275,4 +277,25 @@ iPoint Scene::GetExitPlayerPos(int sector, int exitNum, DIRECTION &destDir)
 	destDir = (*it)->dir;
 
 	return ret;
+}
+
+bool Scene::LoadMisc()
+{
+	for (int i = 0; i < 20; i++)
+	{
+		App->game->em->CreateDeadObject(1, -100, -100, GREEN_RUPEE);
+		App->game->em->CreateDeadObject(1, -100, -100, RED_RUPEE);
+		App->game->em->CreateDeadObject(1, -100, -100, BLUE_RUPEE);
+		App->game->em->CreateDeadObject(1, -100, -100, LIFEHEART);
+		App->game->em->CreateDeadObject(1, -100, -100, OCTO_STONE);
+		App->game->em->CreateDeadObject(1, -100, -100, MAGIC_SLASH);
+		App->game->em->CreateDeadObject(1, -100, -100, LINK_ARROW);
+		App->game->em->CreateDeadObject(1, -100, -100, BOMB);
+		App->game->em->CreateDeadObject(1, -100, -100, BOMB_EXPLOSION);
+
+	}
+
+
+
+	return true;
 }

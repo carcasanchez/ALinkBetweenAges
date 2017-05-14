@@ -116,8 +116,7 @@ bool Wizdrove::ThrowingAttack(float dt)
 		attackTimer.Start();
 		enemyState = PREPARING_ATTACK;
 		currentAnim->Reset();
-		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-		Object* slash = App->game->em->CreateObject(1, mapPos.x, mapPos.y, MAGIC_SLASH);
+		Object* slash = App->game->em->ActiveObject(currentPos.x, currentPos.y, MAGIC_SLASH);
 		slash->currentDir = currentDir;
 	
 		if (currentDir == D_RIGHT || currentDir == D_LEFT)

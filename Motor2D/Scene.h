@@ -39,6 +39,8 @@ public:
 
 private:
 
+	bool LoadMisc();
+
 	std::map<int, std::list<Exit*>> exits;
 };
 

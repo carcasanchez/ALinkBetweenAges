@@ -105,12 +105,14 @@ bool j1GameLayer::Update(float dt)
 
 	 if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	 {
-		 em->CreateObject(1, mousePos.x, mousePos.y, LINK_ARROW, -1, em->player->currentDir);
+		 Object* arrow = App->game->em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, LINK_ARROW, em->player->currentDir);
+		 if (arrow->currentDir == D_RIGHT || arrow->currentDir == D_LEFT)
+		 {
+			 arrow->col->rect.h = 7;
+			 arrow->col->rect.w = 15;
+		 }
 	 }
-	 if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	 {
-		 em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
-	 }
+	
 
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
@@ -132,9 +134,9 @@ bool j1GameLayer::Update(float dt)
 	else if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
 		em->CreateEnemy(1, TEKTITE, mousePos.x, mousePos.y, vector<iPoint>());
 	else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-		em->CreateObject(1, mousePos.x, mousePos.y, BOMB);
+		em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, BOMB);
 	else if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
-		em->CreateObject(1, mousePos.x, mousePos.y, STAMINA_POTION);
+		em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, STAMINA_POTION);
 	else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
 		em->player->rupees += 5;
 

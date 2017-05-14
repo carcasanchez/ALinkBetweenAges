@@ -134,14 +134,6 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir
 
 		switch (type)
 		{
-		case LINK_ARROW:
-			if (currentDir == D_RIGHT || currentDir == D_LEFT)
-			{
-				col->rect.h = 7;
-				col->rect.w = 15;
-			}
-			break;
-
 		case ARROW_DROP:
 			currentDir = D_UP;
 			break;
@@ -177,7 +169,7 @@ bool Bomb::ExplodeBomb()
 	if (this == nullptr)
 		return true;
 
-		App->game->em->CreateObject(1, (this->currentPos.x / (App->map->data->tile_width)), (this->currentPos.y) / (App->map->data->tile_height), BOMB_EXPLOSION);
+		App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB_EXPLOSION);
 		this->life = -1;
 		this->col->active = false;
 
@@ -222,11 +214,11 @@ void Bush::OnDeath()
 	int drop_lifeheart = rand() % 20;
 	if (drop_rupee == 1)
 	{
-		App->game->em->CreateObject(1, mapPos.x, mapPos.y, GREEN_RUPEE);
+		App->game->em->ActiveObject(currentPos.x, currentPos.y, GREEN_RUPEE);
 	}
 	else if (drop_lifeheart == 2)
 	{
-		App->game->em->CreateObject(1, mapPos.x, mapPos.y, LIFEHEART);
+		App->game->em->ActiveObject(currentPos.x, currentPos.y, LIFEHEART);
 	}
 
 	toDelete = true;

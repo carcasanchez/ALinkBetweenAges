@@ -86,7 +86,6 @@ bool RedSoldier::Update(float dt)
 void RedSoldier::OnDeath()
 {
 	toDelete = true;
-	iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-	App->game->em->CreateObject(1, mapPos.x, mapPos.y, RED_RUPEE);
+	App->game->em->ActiveObject(currentPos.x, currentPos.y, RED_RUPEE);
 	App->audio->PlayFx(11);
 }
