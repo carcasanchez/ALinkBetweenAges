@@ -250,6 +250,13 @@ void InputManager::AddListener(InputListener* new_listener)
 	if (new_listener)
 	{
 		new_listener->input_active = true;
+
+		for (list<InputListener*>::iterator item = listeners.begin(); item != listeners.end(); item++)
+		{
+			if ((*item) == new_listener)
+				return;
+		}
+
 		listeners.push_back(new_listener);
 	}
 
