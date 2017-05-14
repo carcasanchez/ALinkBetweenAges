@@ -25,13 +25,13 @@
 	<text value="I love playing banjo in my free time, my grandpa Pete Seeger was a good teacher."/>
      </dialogue>
      <dialogue state="1">
-	<text value="I think everybody can be happy with a banjo in their lives. Isn't It?"/>
+	<text value="I think everybody can be happy with a banjo in their lives. Am I right?"/>
      </dialogue>
    </npc>
 
    <npc id="4" states="1">
      <dialogue state="0" states="1">
-	<text value="Hi Link! Did you see my grandma? She wasn't on the bed this morning."/>
+	<text value="Hi Link! Did you see my grandma? She wasn't in bed this morning."/>
      </dialogue>
    </npc>
 
@@ -90,7 +90,7 @@
 
   <npc id="13" states="1">
     <dialogue state="0">
-    <text value=" This is the way to the Wildlands. The entrance is forbidden, It's dangerous to go alone."/>
+    <text value=" This is the way to the Wildlands. The entrance is forbidden, it's dangerous to go alone."/>
       <text value=" Make a favour to yourself, and stay safe in the village. "/>
     </dialogue>
   </npc>
@@ -125,7 +125,7 @@
      <dialogue state="0" states="1">
 	    <text value=" It's nice to see you again Link!"/>
 	    <text value=" I have managed to infiltrate into the castle and I have borrowed some bombs."/>
-  	    <text value=" There are inside that chest. You can take them if you want, I will not use them."/>
+  	    <text value=" They are inside that chest. You can take them if you want, I won't use them."/>
      </dialogue>
 </npc>
 
