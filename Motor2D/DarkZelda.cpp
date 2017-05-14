@@ -22,7 +22,7 @@
 DarkZelda::~DarkZelda()
 {
 	if (spinCollider)
-	spinCollider->to_delete = true;
+		spinCollider->to_delete = true;
 }
 
 bool DarkZelda::Spawn(std::string file, iPoint pos)
@@ -281,8 +281,8 @@ bool DarkZelda::ChargeBow(float dt)
 	if (currentAnim->isOver())
 	{
 		App->audio->PlayFx(18);
-		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-		App->game->em->CreateObject(1, mapPos.x, mapPos.y, ZELDA_ARROW);
+		Object* arrow = App->game->em->ActiveObject(currentPos.x, currentPos.y, ZELDA_ARROW);
+		arrow->currentDir = D_DOWN;
 		currentAnim->Reset();
 		enemyState = LATERAL_WALK;
 		walkTimer.Start();
@@ -637,8 +637,7 @@ bool DarkZelda::Stab(float dt)
 
 			if (phase == 3)
 			{
-				iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-				bolt = App->game->em->CreateObject(1, mapPos.x, mapPos.y, SWORD_BOLT);
+				bolt = App->game->em->ActiveObject(currentPos.x, currentPos.y, SWORD_BOLT);
 				bolt->currentDir = currentDir;
 				bolt->currentPos = currentPos;
 				App->audio->PlayFx(15);
@@ -837,7 +836,7 @@ void DarkZelda::SetAttack()
 			if (bolt)
 				bolt->life = -1;
 			iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
-			bolt = App->game->em->CreateObject(1, mapPos.x, mapPos.y, FALLING_BOLT);
+			bolt = App->game->em->ActiveObject(mapPos.x, mapPos.y, FALLING_BOLT);
 			boltTimer.Start();
 		}
 

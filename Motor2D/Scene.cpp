@@ -281,7 +281,7 @@ iPoint Scene::GetExitPlayerPos(int sector, int exitNum, DIRECTION &destDir)
 
 bool Scene::LoadMisc()
 {
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 15; i++)
 	{
 		App->game->em->CreateDeadObject(1, -100, -100, GREEN_RUPEE);
 		App->game->em->CreateDeadObject(1, -100, -100, RED_RUPEE);
@@ -292,10 +292,14 @@ bool Scene::LoadMisc()
 		App->game->em->CreateDeadObject(1, -100, -100, LINK_ARROW);
 		App->game->em->CreateDeadObject(1, -100, -100, BOMB);
 		App->game->em->CreateDeadObject(1, -100, -100, BOMB_EXPLOSION);
+		App->game->em->CreateDeadObject(1, -100, -100, ZELDA_ARROW);
+		App->game->em->CreateDeadObject(1, -100, -100, ARROW_DROP);
+		App->game->em->CreateDeadObject(1, -100, -100, BOMB_DROP);
 
 	}
 
-
+	App->game->em->CreateDeadObject(1, -100, -100, FALLING_BOLT);
+	App->game->em->CreateDeadObject(1, -100, -100, SWORD_BOLT);
 
 	return true;
 }
