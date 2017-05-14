@@ -13,7 +13,7 @@
     <arrows pos_x="-30" pos_y="40" active="true"/>
   </counters>
 
-  <life x="407" y="323" w="88" h="14" pos_x="700" pos_y="20" active="true"/>
+  <life x="407" y="323" w="88" h="14" pos_x="900" pos_y="20" active="true"/>
 
   <little_items>
     <rupees x="356" y="107" w="16"  h="16" pos_x="175" pos_y="20" active="true"/>
@@ -32,7 +32,7 @@
   </items>
 
   <stamina>
-    <bar	        pos_x="700" pos_y="90" draw_x="10" draw_y="10" active="true"/>
+    <bar	        pos_x="900" pos_y="90" draw_x="10" draw_y="10" active="true"/>
     <container    x="541"  y="303" w="172" h="22" pos_x="0" pos_y="0" active="false"/>
     <sta_g        x="356"  y="338" w="162" h="12" pos_x="0" pos_y="0" active="false"/>
     <sta_y        x="356"  y="351" w="162" h="12" pos_x="0" pos_y="0" active="false"/>

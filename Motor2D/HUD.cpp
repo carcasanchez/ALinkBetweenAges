@@ -703,7 +703,7 @@ void Hud::LoadHearts()
 		UI_Heart* new_heart = (UI_Heart*)App->gui->Add_element(HEART, App->game);
 
 		new_heart->heart_img = full_heart;
-		new_heart->Set_Interactive_Box({ 700 + (i * ((full_heart->Image.w * 2) + space_between_hearts)), 55, 0,0 });
+		new_heart->Set_Interactive_Box({ 900 + (i * ((full_heart->Image.w * 2) + space_between_hearts)), 55, 0,0 });
 		new_heart->Set_Active_state(false);
 
 		hud_screen->AddChild(new_heart);
