@@ -12,16 +12,28 @@ that preserves the spirit of the original game, but with a new gameplay and plot
 Link has a quiet life in the Kakariko village. One day, the princess Zelda goes to the western forest, and Link follows her...
 
 
-The game is meant to be played with Game Controller
+The game is meant to be played with Game Controller. However, there are keyboard debug controls that you can use to explore the game.
+Be careful! These keyboard controls are not polished and there are missing features, since they are not intended to be in the final game. 
 
 Controls (gamepad):
 - Left joystick: move
-- ABXY: attack/talk with NPC
+- ABXY: attack/talk with NPC/open chests
 - Right bumper: dodge
 - Left bumper: change between inventory items
 - Left Trigger: use equipped item (hold it and press ABXY to use the bow and the bomb sac)
 - Right Trigger: use Spin Attack (you need a special book to learn this movement)
 - Start: Open pause menu
+
+Controls (keyboard):
+- WASD: move
+- Directional arrows: attack/talk with NPC/open chests
+- Spacebar: dodge
+- ESC: open menu
+- Intro: skip cutscene text
+- V: spawn arrow
+- B: spawn bomb
+
+DEBUG HACK: press F2 to skip to the final battle.
 
 
 
