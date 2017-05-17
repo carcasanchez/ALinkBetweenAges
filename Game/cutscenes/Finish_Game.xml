@@ -10,7 +10,7 @@
 
     <NPC>
       <npc n="0" name="tio_ben" active="true" type="0" x="79" y="60" entity_id="1" empty="true"/>
-      <npc n="1" name="Link" active="true" type="0" x="205" y="232" entity_id="-1" empty="false"/>
+      <npc n="1" name="Link" active="true" type="0" x="65" y="32" entity_id="-1" empty="true"/>
     </NPC>
 
     <ENEMIES>
@@ -40,93 +40,115 @@
   <steps>
 
     <step  n="0" start="0" duration ="-1" input="false">
-      <element name="Link" action="move" dir="teleport">
-        <movement dest_x="65" dest_y="32" speed="0"/>
+      <element name="camera" action="fade_cam">
+        <fading  bezier_time="500"/>
       </element>
     </step>
+
+    <step  n="1" start="-1" duration ="-1" input="false">
+      <element name="Link" action="create"/>
+    </step>
     
-  <step  n="1" start="-1" duration ="-1" input="false">
+  <step  n="2" start="-1" duration ="-1" input="false">
     <element name="tio_ben" action="create"/>
     </step>
 
-    <step  n="2" start="-1" duration ="-1" input="false">
+    <step  n="3" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="up">
         <movement dest_x="79" dest_y="62" speed="50"/>
       </element>
     </step>
 
-    <step  n="3" start="-1" duration ="-1" input="true">
-      <element name="Text" action="setstring">
-        <text text=" Hey Link!!!"/>
-      </element>
-    </step>
-
     <step  n="4" start="-1" duration ="-1" input="false">
-      <element name="Link" action="move" dir="down">
-        <movement dest_x="75" dest_y="50" speed="50"/>
+      <element name="camera" action="unfade_cam">
+        <fading  bezier_time="3000"/>
       </element>
     </step>
 
     <step  n="5" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" I'm happy to see you again. After what happened years ago I thought you had died."/>
+        <text text=" Hey Link!!!"/>
       </element>
     </step>
 
-    <step  n="6" start="-1" duration ="-1" input="true">
-      <element name="Text" action="setstring">
-        <text text=" Come with me, we have to celebrate your return and Ganon's death."/>
+    <step  n="6" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="down">
+        <movement dest_x="75" dest_y="50" speed="50"/>
       </element>
     </step>
 
     <step  n="7" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
+        <text text=" I'm happy to see you again. After what happened years ago I thought you had died."/>
+      </element>
+    </step>
+
+    <step  n="8" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text=" Come with me, we have to celebrate your return and Ganon's death."/>
+      </element>
+    </step>
+
+    <step  n="9" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
         <text text="Lets Go!"/>
       </element>
     </step>
 
-    <step  n="8" start="-1" duration ="-1" input="false">
+    <step  n="10" start="-1" duration ="-1" input="false">
       <element name="tio_ben" action="move" dir="down">
         <movement dest_x="79" dest_y="110" speed="50"/>
       </element>
     </step>
 
 
-    <step n="9" start ="-1" duration="-1" input="false">
+    <step n="11" start ="-1" duration="-1" input="false">
       <element name="camera" action="free"/>
     </step>
     
-    <step  n="10" start="-1" duration ="-1" input="false">
+    <step  n="12" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="up">
         <movement dest_x="0" dest_y="40" speed="50"/>
       </element>
     </step>
 
-    <step  n="11" start="-1" duration ="-1" input="false">
+    <step  n="13" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="down">
         <movement dest_x="0" dest_y="41" speed="50"/>
       </element>
     </step>
 
-    <step  n="12" start="-1" duration ="-1" input="false">
+    <step  n="14" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="up">
-        <movement dest_x="0" dest_y="30" speed="50"/>
+        <movement dest_x="0" dest_y="15" speed="50"/>
       </element>
     </step>
 
-    <step  n="13" start="-1" duration ="-1" input="false">
+    <step  n="15" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="50"/>
       </element>
     </step>
 
-    <step  n="14" start="-1" duration ="-1" input="false">
+    <step  n="16" start="-1" duration ="-1" input="false">
+      <element name="camera" action="fade_cam">
+        <fading  bezier_time="2000"/>
+      </element>
+    </step>
+    
+    <step  n="17" start="-1" duration ="-1" input="false">
       <element name="intro" action="load"/>
     </step>
 
-    <step n="15" start ="-1" duration="-1" input="false">
+    <step n="18" start ="-1" duration="-1" input="false">
       <element name="camera" action="lock"/>
     </step>
 
+    <step  n="19" start="-1" duration ="-1" input="false">
+      <element name="camera" action="unfade_cam">
+        <fading  bezier_time="1000"/>
+      </element>
+    </step>
+    
   </steps>
 </Cutscene>
