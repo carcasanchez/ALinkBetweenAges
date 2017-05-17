@@ -4,9 +4,11 @@
 #include "SDL/include/SDL.h"
 #include "j1Module.h"
 #include "p2Point.h"
+#include "j1Timer.h"
 #include <map>
 
 class UI_element;
+class CBeizier;
 
 enum spriteLayer
 {
@@ -101,12 +103,18 @@ public:
 	//UI
 	bool EraseUiElement(UI_element*);
 
+	//FADE
+	void IntoFade();
+	void StopFade();
+	void SetAlpha(int);
+
 private:
 
 	bool PrintUI();
 	
 
 public:
+
 
 	SDL_Renderer*	renderer;
 	SDL_Rect		camera;
@@ -116,6 +124,11 @@ public:
 
 	bool cameraLocked = false;
 	
+	//Utility for fadding
+	CBeizier* fade_bezier = nullptr;
+	j1Timer fade_timer;
+	bool in_fade = false;
+	int fade_alpha = 0;
 
 
 	std::map<spriteLayer, std::multimap<int, Sprite*>> spriteMap;

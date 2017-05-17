@@ -779,6 +779,16 @@ bool CS_Step::DoAction(float dt)
 		ChangeAge();
 		break;
 
+	case ACT_FADE_CAM:
+		action_name = "fading_to_black";
+		Fade();
+		break;
+
+	case ACT_UNFADE_CAM:
+		action_name = "fading_from_black";
+		Fade();
+		break;
+
 	default:
 		action_name = "none";
 		break;
@@ -890,6 +900,16 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	{
 		act_type = ACT_CHANGE_AGE;
 		LoadCharacter(node.child("element").child("age"));
+	}
+	else if (action_type == "fade_cam")
+	{
+		act_type = ACT_FADE_CAM;
+		bezier_time = node.child("element").child("fading").attribute("bezier_time").as_int();
+	}
+	else if (action_type == "unfade_cam")
+	{
+		act_type = ACT_UNFADE_CAM;
+		bezier_time = node.child("element").child("fading").attribute("bezier_time").as_int();
 	}
 	else
 	{
@@ -1314,20 +1334,78 @@ void CS_Step::LockCamera()
 
 void CS_Step::Fade()
 {
-	if (element->GetType() == CS_IMAGE)
+	if (act_type == ACT_FADE)
 	{
-		
-		CS_Image* tmp = (CS_Image*)element;
+		if (element->GetType() == CS_IMAGE)
+		{
 
+			CS_Image* tmp = (CS_Image*)element;
+
+			if (bezier_active == false)
+			{
+				if (tmp->img->active == false)
+					tmp->img->Set_Active_state(true);
+
+				tmp->img->SetAnimationTransition(T_FADE_TO, bezier_time, iPoint(0, 255));
+				bezier_active = true;
+			}
+			CheckFadeCompleted();
+			return;
+		}
+	}
+	
+	if (act_type == ACT_FADE_CAM)
+	{
 		if (bezier_active == false)
 		{
-			if (tmp->img->active == false)
-				tmp->img->Set_Active_state(true);
+			this->bezier_active = true;
+			App->render->IntoFade();
+			App->render->fade_timer.Start();
+			
+		}
+		else
+		{
+			int current_time = App->render->fade_timer.Read();
+			if (current_time <= bezier_time)
+			{
+				float value = App->render->fade_bezier->GetActualX(bezier_time, current_time, cbezier_type::CB_LINEAL);
+				value = 255 * CLAMP01(value);
+				App->render->SetAlpha((255 * value));
+			}
+			else
+			{
+				bezier_active = false;
+				FinishStep();
+			}
+		}
+		return;
+	}
 
-			tmp->img->SetAnimationTransition(T_FADE_TO , bezier_time, iPoint(0, 255));
+	if (act_type == ACT_UNFADE_CAM)
+	{
+		if (!bezier_active)
+		{
+			App->render->fade_timer.Start();
 			bezier_active = true;
 		}
-		CheckFadeCompleted();
+		else
+		{
+			int current_time = App->render->fade_timer.Read();
+			if (current_time <= bezier_time)
+			{
+				float value = App->render->fade_bezier->GetActualX(bezier_time, current_time, cbezier_type::CB_LINEAL);
+				value = CLAMP01(value);
+				int alpha = (255 * (1 - value));
+				App->render->SetAlpha(alpha);
+
+			}
+			else
+			{
+				bezier_active = false;
+				App->render->StopFade();
+				FinishStep();
+			}
+		}
 		return;
 	}
 

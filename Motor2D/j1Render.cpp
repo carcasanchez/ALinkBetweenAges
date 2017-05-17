@@ -10,6 +10,7 @@
 #include "j1CollisionManager.h"
 #include "j1Map.h"
 #include "j1Textures.h"
+#include "Bezier.h"
 
 #define VSYNC true
 
@@ -77,6 +78,8 @@ bool j1Render::Start()
 		std::multimap<int, Sprite*> map;
 		std::pair<spriteLayer, std::multimap<int, Sprite*>> pair = { spriteLayer(i), map };
 	}
+
+	fade_bezier = new CBeizier();
 
 	return true;
 }
@@ -150,6 +153,10 @@ bool j1Render::PostUpdate()
 	}
 
 	//hide culling
+
+	if (in_fade)
+		DrawQuad(viewport, 0, 0, 0, fade_alpha);
+	
 
 
 	SDL_RenderPresent(renderer);
@@ -582,6 +589,21 @@ bool j1Render::EraseUiElement(UI_element* erased_element)
 		}
 	}
 	return ret;
+}
+
+void j1Render::IntoFade()
+{
+	in_fade = true;
+}
+
+void j1Render::StopFade()
+{
+	in_fade = false;
+}
+
+void j1Render::SetAlpha(int value)
+{
+	fade_alpha = value;
 }
 
 bool j1Render::PrintUI()
