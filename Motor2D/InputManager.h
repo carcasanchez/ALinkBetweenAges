@@ -75,6 +75,8 @@ class InputListener
 {
 public:
 	InputListener() : input_active(false) {}
+	~InputListener();
+
 	bool input_active;
 	virtual void OnInputCallback(INPUTEVENT, EVENTSTATE) {};
 };
@@ -114,6 +116,7 @@ public:
 
 	//For Callback system
 	void AddListener(InputListener*);
+	void QuitListener(InputListener*);
 	void CallListeners();
 
 	//To change the game context

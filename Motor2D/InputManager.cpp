@@ -262,6 +262,18 @@ void InputManager::AddListener(InputListener* new_listener)
 
 }
 
+void InputManager::QuitListener(InputListener* erased_listener)
+{
+	if (listeners.empty() == false && erased_listener)
+	{
+		for (std::list<InputListener*>::iterator listen = listeners.begin(); listen != listeners.end(); listen++)
+		{
+			if ((*listen) == erased_listener)
+				listeners.erase(listen);
+		}
+	}
+}
+
 void InputManager::CallListeners()
 {
 	if (!current_action.empty())
@@ -292,4 +304,7 @@ void InputManager::SetGameContext(GAMECONTEXT context)
 	actions_filter = context;
 }
 
-
+InputListener::~InputListener()
+{
+	App->inputM->QuitListener(this);
+}
