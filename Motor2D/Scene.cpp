@@ -83,9 +83,18 @@ bool Scene::Load(const char* path, const bool reloadMap)
 		}
 
 		if (App->game->em->player == nullptr)
+		{
+			RELEASE(App->game->em->player);
 			App->game->em->player = App->game->em->CreatePlayer(App->game->playerX, App->game->playerY, YOUNG);
+		}
 
-		//Spawn Entities
+		
+		if (App->game->em->constantEntityIndex == 0)
+		{
+			App->game->em->CleanEntities();
+			LoadMisc();
+		}
+
 		for (pugi::xml_node section = node.first_child(); section != NULL; section = section.next_sibling())
 		{
 			pugi::xml_node entities = section.child("entities");
@@ -95,7 +104,7 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			pugi::xml_node entity = entities.child("npcs");
 			for (pugi::xml_node npc = entity.first_child(); npc != NULL; npc = npc.next_sibling())
 			{
-				/* load npc at maxSectors*/
+			
 				App->game->em->CreateNPC(
 					maxSectors,
 					NPC_TYPE(npc.attribute("type").as_int()),
@@ -151,9 +160,6 @@ bool Scene::Load(const char* path, const bool reloadMap)
 
 			}
 
-			//Load dead objects;
-			LoadMisc();
-
 			//Exits
 			pugi::xml_node exits = section.child("exits");
 			for (pugi::xml_node exit = exits.first_child(); exit != NULL; exit = exit.next_sibling())
@@ -196,16 +202,6 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			maxSectors++;
 		}
 
-		
-
-		
-
-		// TODO manage slot variations to scene
-		/*------------------------------------
-
-		- locked doors
-
-		*/
 
 		App->game->em->SetSectorRef(&currentSector);
 	}
@@ -281,25 +277,27 @@ iPoint Scene::GetExitPlayerPos(int sector, int exitNum, DIRECTION &destDir)
 
 bool Scene::LoadMisc()
 {
-	for (int i = 0; i < 15; i++)
+	App->game->em->constantEntityIndex = 0;
+	for (int i = 0; i < 10; i++)
 	{
 		App->game->em->CreateDeadObject(1, -100, -100, GREEN_RUPEE);
 		App->game->em->CreateDeadObject(1, -100, -100, RED_RUPEE);
 		App->game->em->CreateDeadObject(1, -100, -100, BLUE_RUPEE);
 		App->game->em->CreateDeadObject(1, -100, -100, LIFEHEART);
-		App->game->em->CreateDeadObject(1, -100, -100, OCTO_STONE);
 		App->game->em->CreateDeadObject(1, -100, -100, MAGIC_SLASH);
+		App->game->em->CreateDeadObject(1, -100, -100, OCTO_STONE);
 		App->game->em->CreateDeadObject(1, -100, -100, LINK_ARROW);
 		App->game->em->CreateDeadObject(1, -100, -100, BOMB);
 		App->game->em->CreateDeadObject(1, -100, -100, BOMB_EXPLOSION);
 		App->game->em->CreateDeadObject(1, -100, -100, ZELDA_ARROW);
 		App->game->em->CreateDeadObject(1, -100, -100, ARROW_DROP);
 		App->game->em->CreateDeadObject(1, -100, -100, BOMB_DROP);
-
+		App->game->em->constantEntityIndex += 12;
 	}
 
 	App->game->em->CreateDeadObject(1, -100, -100, FALLING_BOLT);
 	App->game->em->CreateDeadObject(1, -100, -100, SWORD_BOLT);
+	App->game->em->constantEntityIndex += 2;
 
 	return true;
 }

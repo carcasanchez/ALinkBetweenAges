@@ -45,18 +45,19 @@ public:
 	Entity* GetEntityFromId(int);
 
 	bool CleanEntities();
+	bool CleanTempEntities();
 	void SetSectorRef(int*);
 
 	
 
 public:
 
-	Player* player;
+	int constantEntityIndex = 0;
+	Player* player = nullptr;
 	std::map<int, std::vector<Entity*>> entities;
 	std::map<ENTITY_TYPE, std::string> dir;
 
 	
-
 private:
 
 	int* sector;

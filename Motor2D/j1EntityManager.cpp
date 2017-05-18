@@ -53,6 +53,7 @@ bool j1EntityManager::PreUpdate()
 		player->OnDeath();
 
 	// check for dead entities
+
 	std::vector<Entity*>::iterator item = entities[1].begin();
 	while (item != entities[1].end())
 	{
@@ -93,6 +94,9 @@ bool j1EntityManager::Update(float dt)
 
 	for (std::vector<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
 	{		
+
+		if (!(*item))
+			continue;
 		if (!(*item)->dead)
 		{
 			(*item)->Update(dt);
@@ -115,6 +119,8 @@ bool j1EntityManager::PostUpdate()
 
 	for (std::vector<Entity*>::iterator item = entities[*sector].begin(); item != entities[*sector].end(); item++)
 	{
+		if (!(*item))
+			continue;
 		(*item)->Draw();
 	}
 
@@ -464,6 +470,8 @@ Entity * j1EntityManager::GetEntityFromId(int id)
 	{
 		for (std::vector<Entity*>::iterator item = entities[i].begin(); item != entities[i].end(); item++)
 		{
+			if (!(*item))
+				continue;
 			if((*item)->id == id)
 				return (*item);			
 		}
@@ -475,32 +483,47 @@ Entity * j1EntityManager::GetEntityFromId(int id)
 
 bool j1EntityManager::CleanEntities()
 {
-	bool ret = true;	
-	std::vector<Entity*> keepAlive;
-
-		std::vector<Entity*>::iterator item;
-		for (item = entities[1].begin(); item != entities[1].end(); item++)
-		{
-			if ((*item)->keepExisting)
-			{
-				(*item)->keepExisting = false;
-				keepAlive.push_back((*item));
-			}
-			else
-			{ 
-				RELEASE(*item);
-			}
-		}
-
+	constantEntityIndex = 0;
+	std::vector<Entity*>::iterator item;
+	for (item = entities[1].begin(); item != entities[1].end(); item++)
+			RELEASE(*item);
 	entities[1].clear();
 	entities.clear();
+	return true;
+}
+
+bool j1EntityManager::CleanTempEntities()
+{
+	bool ret = true;
+	std::vector<Entity*> keepAlive;
+
+
+	std::vector<Entity*>::iterator item = entities[1].begin();
+
+	for (int i = 0; i < constantEntityIndex;i++, item++){}
+
+	for (; item != entities[1].end(); item++)
+	{
+		if ((*item)->keepExisting)
+		{
+			(*item)->keepExisting = false;
+			keepAlive.push_back((*item));
+		}
+		else
+		{
+			RELEASE(*item);
+		}
+	}
+
+	entities[1].resize(122);
 
 
 	for (std::vector<Entity*>::iterator it = keepAlive.begin(); it != keepAlive.end(); it++)
 	{
 		entities[1].push_back((*it));
 	}
-	
+
+
 	return ret;
 }
 

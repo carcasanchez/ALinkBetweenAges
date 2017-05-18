@@ -16,17 +16,7 @@
 #include "j1Audio.h"
 #include "p2Log.h"
 
-//TODO 5.1: open the IntroCutscene.xml (in data.zip, in cutscenes folder) and fill THESE ELEMENTS correctly with this info:
-//Image -> n = 0; name = BackgroundPokemon; x = -100; y = 0; tex_x = 0; tex_y = 0; tex_w = 1080; tex_h = 514; active = false; file = textures/PokemonBackground.png;
-//Music -> n = 7; name = MainMusic; path = audio/music/ZELDA/ZeldaMainTitle.ogg;
-//Fx -> n = 8; name = GoodSound; path = audio/fx/Rupee.wav; loops = 0;
 
-//TODO 6.1: open the IntroCutscene.xml and fill THESE STEPS correctly with this info:
-//Step 0 -> n = 0; start = 0; duration = -1; 
-//			element -> name = BackgroundZelda action = move; dir = right;
-//				movement -> dest_x = -100; dest_y = 0; speed = 3;
-//Step 9 -> n = 9; start = 9; duration = 0; 
-//			element -> name = GoodSound action = play; 
 
 // CUTSCEME MANAGER -----------------------------------
 j1CutSceneManager::j1CutSceneManager()
@@ -44,7 +34,7 @@ bool j1CutSceneManager::Awake(pugi::xml_node& config)
 	if (config != NULL)
 	{
 		ret = true;
-		//TODO 2: fill the paths list with the names of the config.xml file. 
+		
 		for (pugi::xml_node cutscene = config.child("cutscene"); cutscene != NULL; cutscene = cutscene.next_sibling())
 			paths.push_back(cutscene.attribute("file").as_string());
 	}
@@ -75,7 +65,7 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 	for (int i = 0; file != paths.end(); file++)
 	{
 
-		//TODO 4: stop iterating when the correct path is reached (take care of the passed id)
+		
 		if (i == id) //Check the load order of the paths to set the correct cutscene
 		{
 			//Load XML cutscene file
@@ -129,7 +119,6 @@ bool j1CutSceneManager::LoadCutscene(uint id)
 
 			// LOAD STEPS ---------------------------------
 			steps_node = cutscene_node.child("steps").child("step");
-			//TODO 6.2: Access the first step node and iterate it in order to load all of them by calling the correct function.
 			while (steps_node != NULL)
 			{
 				temp_cutscene->LoadStep(steps_node, temp_cutscene);
@@ -177,7 +166,6 @@ bool j1CutSceneManager::StartCutscene(uint id)
 
 	if (active_cutscene != nullptr)
 	{
-		//TODO 9.2: Uncomment this and enjoy :)
 		//Start the triggered cutscene
 		active_cutscene->Start();
 
@@ -213,16 +201,12 @@ bool j1CutSceneManager::FinishCutscene()
 		{
 			LOG("%s cutscene deactivated", active_cutscene->name.c_str());
 
-			//TODO 9.1: Load the destination map of the cutscene (if it has stored a map_id when accessed to the XML file (map_id > -1)).
-			//Do this by calling the appropiate function of the intro scene.
-
 			if (App->game->em->player && active_cutscene->id == 2)
 			{
 				App->SaveGame("saves.xml");
 				
 			}
 
-			//TODO 10: Clear the cutscene and set active_cutsene pointer to nullptr.
 			RELEASE(active_cutscene);
 
 			//Return to INGAME state
@@ -408,11 +392,7 @@ bool Cutscene::Update(float dt)
 	{
 		CS_Step* step = *temp;
 
-		//TODO 7: Start the step if its start time has been reached (Use the cutscene timer to check the current time)
-		//This function will be called only one time, so you will need 3 conditions: 
-		// 1) if the step isn't active
-		// 2) if the step isn't finished.
-		// 3) if the start time has been reached by the cutscene timer
+		
 		
 
 		if (temp != steps.begin() && temp._Ptr->_Prev->_Myval->isFinished() && temp._Ptr->_Prev->_Myval->isWait() && step->isActive() == false && step->isFinished() == false)
@@ -717,8 +697,6 @@ bool CS_Step::DoAction(float dt)
 {
 	std::string action_name;
 
-	//TODO 8: In each act_type case, add the correct function that will perform the desired action.
-	//Depending on the action type, a different function will be called
 	switch (act_type)
 	{
 	case ACT_DISABLE:
