@@ -155,7 +155,7 @@ bool j1Render::PostUpdate()
 	//hide culling
 
 	if (in_fade)
-		DrawQuad(viewport, 0, 0, 0, fade_alpha);
+		DrawQuad({(int)(-camera.x * App->gui->scale_factor) , (int)(-camera.y *  App->gui->scale_factor), camera.w, camera.h}, 0, 0, 0, fade_alpha);
 	
 
 
