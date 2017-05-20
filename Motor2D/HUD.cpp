@@ -40,7 +40,7 @@ bool Hud::Start()
 
 bool Hud::Update(float dt)
 {
-	if (start_menu_screen->active == false && App->cutsceneM->CutsceneReproducing() == false)
+	if (start_menu_screen->active == false && App->game->em->player != nullptr)
 	{
 		if (pause_transition == PAUSE_UP)
 			PauseOut(dt);
