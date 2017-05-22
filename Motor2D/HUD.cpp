@@ -1,6 +1,7 @@
 #include "HUD.h"
 #include "j1App.h"
 #include "j1Gui.h"
+#include "j1Audio.h"
 #include "j1FileSystem.h"
 #include "j1CutSceneManager.h"
 #include "j1GameLayer.h"
@@ -71,6 +72,7 @@ bool Hud::Update(float dt)
 			{
 				pause_transition = PAUSE_UP;
 				main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+				App->audio->PlayFx(32);
 			}
 		}
 
@@ -85,6 +87,7 @@ bool Hud::Update(float dt)
 					{
 						(*it)->active = false;
 						(*(it + 1))->Set_Active_state(true);
+						App->audio->PlayFx(31);
 						break;
 					}
 
@@ -99,6 +102,7 @@ bool Hud::Update(float dt)
 					{
 						(*it)->active = false;
 						(*(it + 1))->Set_Active_state(true);
+						App->audio->PlayFx(31);
 						break;
 					}
 
@@ -117,6 +121,7 @@ bool Hud::Update(float dt)
 					{
 						(*it)->active = false;
 						(*(it + 1))->Set_Active_state(true);
+						App->audio->PlayFx(31);
 						break;
 					}
 				}
@@ -129,6 +134,7 @@ bool Hud::Update(float dt)
 					{
 						(*it)->active = false;
 						(*(it + 1))->Set_Active_state(true);
+						App->audio->PlayFx(31);
 						break;
 					}
 				}
@@ -137,6 +143,7 @@ bool Hud::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
+			App->audio->PlayFx(34);
 			if (!start_menu_screen->active)
 			{
 				if (resume->active)
@@ -145,6 +152,7 @@ bool Hud::Update(float dt)
 					{
 						pause_transition = PAUSE_UP;
 						main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+						App->audio->PlayFx(32);
 					}
 				}
 
@@ -197,8 +205,11 @@ bool Hud::Update(float dt)
 
 	if (App->inputM->GetGameContext() == GAMECONTEXT::IN_GAME)
 	{
-		if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		{
 			IntoPause();
+			App->audio->PlayFx(33);
+		}
 	}
 
 	
@@ -248,11 +259,13 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 					{
 						pause_transition = PAUSE_UP;
 						main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+						App->audio->PlayFx(32);
 					}
 				}
 				else
 				{
 					IntoPause();
+					App->audio->PlayFx(33);
 				}
 			}
 			break;
@@ -261,6 +274,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 
 			if (state == E_DOWN)
 			{
+				App->audio->PlayFx(31);
 				for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
 				{
 
@@ -278,6 +292,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		case DOWN:
 			if (state == E_DOWN)
 			{
+				App->audio->PlayFx(31);
 				for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
 				{
 					if ((*it)->active && (it + 1) != pause_selectables.end())
@@ -291,40 +306,45 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			break;
 
 		case CONFIRM:
-
-			if (resume->active)
+			if (state == E_DOWN)
 			{
-				if (pause_transition == PAUSE_NO_MOVE)
+				if (resume->active)
 				{
-					pause_transition = PAUSE_UP;
-					main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+					if (pause_transition == PAUSE_NO_MOVE)
+					{
+						pause_transition = PAUSE_UP;
+						main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+						App->audio->PlayFx(32);
+					}
 				}
+
+				if (save->active)
+				{
+					App->SaveGame("saves.xml");
+					saved_game->Set_Active_state(true);
+					App->audio->PlayFx(34);
+				}
+
+				if (load->active)
+				{
+					App->LoadGame("saves.xml");
+					loaded_game->Set_Active_state(true);
+					App->audio->PlayFx(34);
+				}
+
+				if (controls->active)
+				{
+
+				}
+
+				if (quit->active)
+				{
+					App->game->quit_game = true;
+					App->game->pause = false;
+					App->audio->PlayFx(34);
+				}
+
 			}
-
-			if (save->active)
-			{
-				App->SaveGame("saves.xml");
-				saved_game->Set_Active_state(true);
-			}
-
-			if (load->active)
-			{
-				App->LoadGame("saves.xml");
-				loaded_game->Set_Active_state(true);
-			}
-
-			if (controls->active)
-			{
-
-			}
-
-			if (quit->active)
-			{
-				App->game->quit_game = true;
-				App->game->pause = false;
-			}
-
-
 
 			break;
 
@@ -333,6 +353,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			{
 				pause_transition = PAUSE_UP;
 				main_menu->SetAnimationTransition(T_FLY_UP, 1000, { main_menu->Interactive_box.x, -650 });
+				App->audio->PlayFx(32);
 			}
 			break;
 
@@ -368,6 +389,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 
 			if (state == E_DOWN)
 			{
+				App->audio->PlayFx(31);
 				for (std::vector<UI_Image*>::reverse_iterator it = start_menu_selectables.rbegin(); it != start_menu_selectables.rend(); it++)
 				{
 
@@ -385,6 +407,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		case DOWN:
 			if (state == E_DOWN)
 			{
+				App->audio->PlayFx(31);
 				for (std::vector<UI_Image*>::iterator it = start_menu_selectables.begin(); it != start_menu_selectables.end(); it++)
 				{
 					if ((*it)->active && (it + 1) != start_menu_selectables.end())
@@ -398,25 +421,29 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			break;
 
 		case CONFIRM:
-
-			if (start_continue->active)
+			if (state == E_DOWN)
 			{
-				//App->LoadGame("saves.xml");
-				//App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
-			}
+				if (start_continue->active)
+				{
+					//App->LoadGame("saves.xml");
+					//App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
+				}
 
-			if (start_new_game->active)
-			{
-				StartGame();
-				App->cutsceneM->StartCutscene(1);
-			}
+				if (start_new_game->active)
+				{
+					StartGame();
+					App->audio->PlayFx(34);
+					App->cutsceneM->StartCutscene(1);
 
-			if (start_quit->active)
-			{
-				App->game->quit_game = true;
-				App->game->pause = false;
-			}
+				}
 
+				if (start_quit->active)
+				{
+					App->audio->PlayFx(34);
+					App->game->quit_game = true;
+					App->game->pause = false;
+				}
+			}
 			break;	
 		}
 	}	

@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Gui.h"
 #include "j1Textures.h"
+#include "j1Audio.h"
 #include "j1Render.h"
 #include "j1Fonts.h"
 
@@ -144,6 +145,7 @@ void UI_String::BlitDialog()
 				App->tex->UnLoad(text_texture);
 
 			text_texture = App->font->Print(blit_text.c_str(), Interactive_box.w);
+			App->audio->PlayFx(30);
 			char_blit_time.Start();
 		}	
 	}

@@ -30,4 +30,11 @@
   <fx name="audio/fx/Enemy/Wizzdrove/throwMagicAttack2.wav"  id="27"/>
   <fx name="audio/fx/Enemy/Octorock/throwRock.wav"  id="28"/>
   <fx name="audio/fx/Objects/heart_container/heartContainer1.wav"  id="29"/>
+  
+  <fx name="audio/fx/HUD/Dialogue/message.wav"  id="30"/>
+  <fx name="audio/fx/HUD/General/cursor.wav"  id="31"/>
+  <fx name="audio/fx/HUD/Menu/menuClose.wav"  id="32"/>
+  <fx name="audio/fx/HUD/Menu/menuOpen.wav"  id="33"/>
+  <fx name="audio/fx/HUD/Dialogue/messageFinish.wav"  id="34"/>
+  
 </fx>
