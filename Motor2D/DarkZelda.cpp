@@ -21,8 +21,10 @@
 
 DarkZelda::~DarkZelda()
 {
+	if (bolt)
+		bolt->life = -1;
 	if (spinCollider)
-		spinCollider->to_delete = true;
+		App->collisions->DeleteCollider(col);
 }
 
 bool DarkZelda::Spawn(std::string file, iPoint pos)
@@ -125,6 +127,7 @@ void DarkZelda::OnDeath()
 		slashSpeed = newSlashSpeed;
 		attackRatio = attackRatio_2;
 		enemyState = KEEP_DISTANCE;
+		
 		attackTimer.Start();
 		boltTimer.Start();
 	}
@@ -284,7 +287,8 @@ bool DarkZelda::ChargeBow(float dt)
 	{
 		App->audio->PlayFx(18);
 		Object* arrow = App->game->em->ActiveObject(currentPos.x, currentPos.y, ZELDA_ARROW);
-		arrow->currentDir = D_DOWN;
+		if(arrow)
+			arrow->currentDir = D_DOWN;
 		currentAnim->Reset();
 		enemyState = LATERAL_WALK;
 		walkTimer.Start();

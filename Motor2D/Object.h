@@ -67,32 +67,8 @@ public:
 
 	Arrow() {};
 
-	bool Update(float dt)
-	{ 
-		bool ret;
-		switch (currentDir)
-		{
-		case D_UP:
-			ret = Move(0, -SDL_ceil(speed * dt));
-			break;
-		case D_DOWN:
-			ret = Move(0, SDL_ceil(speed * dt));
-			break;
-		case D_LEFT:
-			ret = Move(-SDL_ceil(speed * dt), 0);
-			break;
-		case D_RIGHT:
-			ret = Move(SDL_ceil(speed * dt), 0);
-			break;
-		}
-
-		if (!ret)
-		{
-			life = -1;
-		}
-
-		return ret;
-	};
+	bool Update(float dt);
+	
 
 public:
 
@@ -235,7 +211,7 @@ public:
 
 		if (!ret)
 		{
-			life = -1;
+  			life = -1;
 		}
 
 		return ret;
