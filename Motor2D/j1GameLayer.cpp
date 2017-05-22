@@ -357,6 +357,10 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 bool j1GameLayer::Load(pugi::xml_node& data)
 {
 
+	if (em->player == nullptr)
+		em->player = em->CreatePlayer(App->game->playerX, App->game->playerY, YOUNG);
+	
+
 	em->player->currentPos.x = data.child("player").child("position").attribute("x").as_int();
 	em->player->currentPos.y = data.child("player").child("position").attribute("y").as_int();
 	em->player->life = data.child("player").attribute("life").as_int();

@@ -83,11 +83,11 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			}
 		}
 
-		if (App->game->em->player == nullptr)
+		/*if (App->game->em->player == nullptr)
 		{
 			RELEASE(App->game->em->player);
 			App->game->em->player = App->game->em->CreatePlayer(App->game->playerX, App->game->playerY, YOUNG);
-		}
+		}*/
 
 		
 		if (App->game->em->constantEntityIndex == 0)
@@ -217,7 +217,7 @@ bool Scene::Update(float dt)
 	bool ret = true;
 
 	//Siento a visente en mi interior
-	if (this->name == "introScene" && App->cutsceneM->CutsceneReproducing() == false)
+	if (this->name == "introScene" && App->cutsceneM->CutsceneReproducing() == false && !App->game->hud->hud_screen->active)
 	{
 		App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
 		App->game->hud->start_menu_screen->Set_Active_state(true);

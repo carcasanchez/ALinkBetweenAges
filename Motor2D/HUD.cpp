@@ -183,7 +183,8 @@ bool Hud::Update(float dt)
 			{
 				if (start_continue->active)
 				{
-					//App->LoadGame("saves.xml");
+					StartGame();
+					App->LoadGame("saves.xml");
 					//App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
 				}
 
@@ -425,8 +426,8 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			{
 				if (start_continue->active)
 				{
-					//App->LoadGame("saves.xml");
-					//App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
+					StartGame();
+					App->LoadGame("saves.xml");
 				}
 
 				if (start_new_game->active)
@@ -646,6 +647,9 @@ void Hud::PauseOut(float dt)
 
 void Hud::StartGame()
 {
+	if(start_continue->active)
+		App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
+
 	start_menu_screen->Set_Active_state(false);
 	start_menu_screen->QuitFromRender();
 	hud_screen->Set_Active_state(true);
