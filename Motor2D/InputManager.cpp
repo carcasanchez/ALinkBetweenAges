@@ -266,10 +266,13 @@ void InputManager::QuitListener(InputListener* erased_listener)
 {
 	if (listeners.empty() == false && erased_listener)
 	{
-		for (std::list<InputListener*>::iterator listen = listeners.begin(); listen != listeners.end(); listen++)
+		for (std::list<InputListener*>::iterator listen = listeners.begin(); listen != listeners.end();)
 		{
+			std::list<InputListener*>::iterator tmp = listen;
+			tmp++;
 			if ((*listen) == erased_listener)
 				listeners.erase(listen);
+			listen = tmp;
 		}
 	}
 }

@@ -93,13 +93,13 @@ bool j1GameLayer::Update(float dt)
 	/*if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateNPC(1, NPC_DARK_ZELDA, mousePos.x, mousePos.y);
 		App->sceneM->RequestSceneChange({0,0}, "outsideCastle", D_DOWN);
-		//em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);
+		//em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);*/
 	 if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
 		em->player->currentPos = mousePos;
-	}*/
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F2))
 	{

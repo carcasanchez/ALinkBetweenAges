@@ -75,11 +75,14 @@ bool j1Textures::Start()
 // Called before quitting
 bool j1Textures::CleanUp()
 {
-	/*LOG("Freeing textures and Image library");
+	LOG("Freeing textures and Image library");
 
-	for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end(); item++)
+	/*for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end();)
 	{
-			SDL_DestroyTexture((*item));
+		list<SDL_Texture*>::iterator tmp= item;
+		tmp++;
+		SDL_DestroyTexture((*item));
+		item = tmp;
 	}
 
 	textures.clear();*/
@@ -109,14 +112,17 @@ SDL_Texture* const j1Textures::Load(const char* path)
 // Unload texture
 bool j1Textures::UnLoad(SDL_Texture* texture)
 {
-	for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end(); item++)
+	for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end();)
 	{
+		list<SDL_Texture*>::iterator tmp = item;
+		tmp++;
 		if (texture == *item)
 		{
 			SDL_DestroyTexture(*item);
 			textures.erase(item);
 			return true;
 		}
+		item = tmp;
 	}
 
 	return false;

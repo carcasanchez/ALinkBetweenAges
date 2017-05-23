@@ -73,13 +73,16 @@ bool j1CollisionManager::PreUpdate()
 {
 	//Destroy all to-delete colliders 	
 	
-	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
+	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end();)
 	{	
+		std::list <Collider*>::iterator tmp = it;
+		tmp++;
 		if ((*it)->to_delete)
 		{
 			RELEASE (*it);
 			colliders.erase(it);
 		}
+		it = tmp;
 	}
 
 
@@ -88,8 +91,8 @@ bool j1CollisionManager::PreUpdate()
 
 bool j1CollisionManager::Update(float dt)
 {
-	//if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-	//	debug = !debug;
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+		debug = !debug;
 
 
 	Collider* c1;
@@ -122,43 +125,21 @@ bool j1CollisionManager::Update(float dt)
 
 bool j1CollisionManager::CleanUp()
 {
-	/*LOG("Freeing all colliders");
+	LOG("Freeing all colliders");
 	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
 	{
 		RELEASE (*it);
 	}
 
-	colliders.clear();*/
+	colliders.clear();
 	return true;
 }
 
 
-bool j1CollisionManager::ChangeScene()
-{
-	LOG("Freeing all colliders");
-	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
-	{
-		if ((*it)->type == COLLIDER_PLAYER)
-			continue;
-
-		if ((*it)->parent != nullptr)
-		{
-			if ((*it)->parent->keepExisting == true)
-				continue;
-		}
-		
-
-		RELEASE(*it);
-		colliders.erase(it);
-	}
-
-
-	return true;
-}
 
 void j1CollisionManager::DeleteCollider(Collider * c)
 {
-	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
+	/*for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
 	{		
 		if ((*it) == c)
 		{
@@ -166,7 +147,11 @@ void j1CollisionManager::DeleteCollider(Collider * c)
 			colliders.erase(it);
 			break;
 		}		
-	}
+	}*/
+	c->to_delete = true;
+	c->active = false;
+	c->parent = nullptr;
+
 }
 
 

@@ -67,12 +67,6 @@ bool Scene::Load(const char* path, const bool reloadMap)
 		inGame = true;		
 		
 
-		if (App->game->em->constantEntityIndex == 0)
-		{
-			App->game->em->CleanEntities();
-			LoadMisc();
-		}
-
 		if (reloadMap)
 		{
 			//IMPORTANT: CREATE THE WALKABILITY MAP BEFORE SPAWN ENTITIES
@@ -95,6 +89,9 @@ bool Scene::Load(const char* path, const bool reloadMap)
 			RELEASE(App->game->em->player);
 			App->game->em->player = App->game->em->CreatePlayer(App->game->playerX, App->game->playerY, YOUNG);
 		}*/
+
+
+		LoadMisc();
 
 		for (pugi::xml_node section = node.first_child(); section != NULL; section = section.next_sibling())
 		{

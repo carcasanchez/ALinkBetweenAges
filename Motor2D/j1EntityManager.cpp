@@ -484,11 +484,29 @@ Entity * j1EntityManager::GetEntityFromId(int id)
 bool j1EntityManager::CleanEntities()
 {
 	constantEntityIndex = 0;
+
+	std::vector<Entity*> keepAlive;
+
 	std::vector<Entity*>::iterator item;
 	for (item = entities[1].begin(); item != entities[1].end(); item++)
+		if ((*item)->keepExisting)
+		{
+			(*item)->keepExisting = false;
+			keepAlive.push_back((*item));
+		}
+		else
+		{
 			RELEASE(*item);
+		}
+
 	entities[1].clear();
 	entities.clear();
+
+	for (std::vector<Entity*>::iterator it = keepAlive.begin(); it != keepAlive.end(); it++)
+	{
+		entities[1].push_back((*it));
+	}
+
 	return true;
 }
 
