@@ -392,6 +392,7 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 
 	App->sceneM->RequestSceneChange(em->player->currentPos, dest.c_str() , (DIRECTION)data.child("player").attribute("direction").as_int());
 
+	em->player->col->active = true;
 
 	return true;
 }

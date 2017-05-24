@@ -105,10 +105,10 @@ void Player::OnDeath()
 	App->LoadGame("saves.xml");
 	damaged = invulnerable = false;
 	linearMovement = { 0, 0 };
-	currentDir = D_DOWN;
 	sprite->tint = { 255, 255, 255, 255 };
 	actionState = IDLE;
 	dead = true;
+	col->active = false;
 
 	UpdateCollider();
 
@@ -122,10 +122,7 @@ bool Player::Update(float dt)
 	lastPos = currentPos;
 
 	if(dt > 0.1)
-	{
 		dt = 0;
-
-	}
 
 	if (changeAge > -1 && changeAge < 3)
 	{
@@ -133,7 +130,7 @@ bool Player::Update(float dt)
 		changeAge = -1;		
 	}
 	
-	if (damagedTimer.ReadMs() > damagedTime && invulnerable == true)
+	if (damagedTimer.ReadMs() > damagedTime)
 	{
 		invulnerable = false;
 		sprite->tint = { 255, 255, 255, 255 };

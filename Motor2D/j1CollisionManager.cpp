@@ -139,7 +139,7 @@ bool j1CollisionManager::CleanUp()
 
 void j1CollisionManager::DeleteCollider(Collider * c)
 {
-	/*for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
+	for (std::list <Collider*>::iterator it = colliders.begin(); it != colliders.end(); it++)
 	{		
 		if ((*it) == c)
 		{
@@ -147,10 +147,10 @@ void j1CollisionManager::DeleteCollider(Collider * c)
 			colliders.erase(it);
 			break;
 		}		
-	}*/
-	c->to_delete = true;
+	}
+	/*c->to_delete = true;
 	c->active = false;
-	c->parent = nullptr;
+	c->parent = nullptr;*/
 
 }
 

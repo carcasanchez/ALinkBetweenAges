@@ -496,6 +496,7 @@ bool j1EntityManager::CleanEntities()
 		}
 		else
 		{
+
 			RELEASE(*item);
 		}
 
