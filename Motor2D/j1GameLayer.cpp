@@ -437,6 +437,7 @@ bool j1GameLayer::On_Collision_Callback(Collider * c1, Collider * c2 , float dt)
 	{
 		if (em->player->bossKeyEquipped)
 		{
+			App->audio->PlayFx(35);
 			c2->parent->life = -1;
 		}
 		else c1->parent->currentPos = c1->parent->lastPos;
