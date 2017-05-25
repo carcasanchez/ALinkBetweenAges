@@ -141,6 +141,23 @@ bool Player::Update(float dt)
 
 	ShowPickedObject();
 
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
+		if (equippedObject >= inventory.size() - 1)
+			equippedObject = 0;
+
+		else equippedObject++;
+
+	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_DOWN)
+	{
+				UseObject();
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_UP)
+	{
+		holded_item = NO_OBJECT;
+	}
+
+	
+
 	
 	switch (playerState)
 	{
@@ -227,17 +244,23 @@ bool Player::Idle()
 	
 
 	//Attack
-	else if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN||
+	else if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
 		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
-		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN) && stamina - attackTax > 0)
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN))
 	{
-		if (toTalk != nullptr)
+
+		if (holded_item == BOW && arrows > 0)
 		{
-			playerState = EVENT;
+			App->audio->PlayFx(18);
+			arrows--;
+			actionState = SHOOTING_BOW;
+			Change_direction();
 		}
-		else
+		else if (stamina - attackTax > 0)
 		{
+			if (toTalk != nullptr)
+				playerState = EVENT;
 			stamina -= attackTax;
 			Change_direction();
 			actionState = ATTACKING;
@@ -247,7 +270,7 @@ bool Player::Idle()
 	}
 
 	//Dodge
-	switch (currentDir)
+	/*switch (currentDir)
 	{
 	case D_UP:
 		dodgeDir.y = -1;
@@ -262,7 +285,17 @@ bool Player::Idle()
 		dodgeDir.x = -1;
 		break;
 	}
-
+	*/
+	if(App->input->GetKey(SDL_SCANCODE_RCTRL) == KEY_DOWN)
+		if (actionState != SPINNING && actionState != ATTACKING &&
+			actionState != JUMPING && stamina > spinTax && 
+			App->game->em->player->ableToSpin == true)
+		{
+		App->audio->PlayFx(1);
+		stamina -= spinTax;
+		actionState = SPINNING;
+		createSwordCollider();
+		}
 	
 	return false;
 }
@@ -352,6 +385,7 @@ bool Player::Walking(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >= 0))
 	{
+		App->audio->PlayFx(25);
 		stamina -= dodgeTax;
 		App->game->hud->stamina_bar->WasteStamina(dodgeTax);
 		actionState = DODGING;
@@ -359,23 +393,9 @@ bool Player::Walking(float dt)
 		dodging = true;
 		dodgeTimer.Start();
 	}
-	 
-
-	//Attack
-	else if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
-		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
-		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
-		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN )&&  stamina - attackTax > 0)
-	{
-			stamina -= attackTax;
-			Change_direction();
-			actionState = ATTACKING;
-			createSwordCollider();
-			App->audio->PlayFx(1);
-	}
-
+	
 	//Jump
-	else if (!toJump.IsZero())
+	if (!toJump.IsZero())
 	{
 		actionState = JUMPING;
 		jumpOrigin = App->map->WorldToMap(currentPos.x, currentPos.y);
@@ -392,6 +412,43 @@ bool Player::Walking(float dt)
 
 		return true;
 	}
+	 
+
+	//Attack
+	if ((App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN ||
+		App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN ))
+	{
+
+		if (holded_item == BOW && arrows > 0)
+		{
+			App->audio->PlayFx(18);
+			arrows--;
+			actionState = SHOOTING_BOW;
+		}
+		else if(stamina - attackTax > 0)
+		{ 
+			stamina -= attackTax;
+			Change_direction();
+			actionState = ATTACKING;
+			createSwordCollider();
+			App->audio->PlayFx(1);
+		}
+	}
+
+	else if (App->input->GetKey(SDL_SCANCODE_RCTRL) == KEY_DOWN)
+		if (actionState != SPINNING && actionState != ATTACKING &&
+			actionState != JUMPING && stamina > spinTax &&
+			App->game->em->player->ableToSpin == true)
+		{
+			App->audio->PlayFx(1);
+			stamina -= spinTax;
+			actionState = SPINNING;
+			createSwordCollider();
+		}
+
+	
 
 	Change_direction();
 
@@ -765,14 +822,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 					}
 				}
 				break;
-			case BOMB_SAC:
-				if (bombs > 0)
-				{
-					bombs--;
-					App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
-				}
-				break;
-
+			
 			case BOW:
 				if (arrows > 0)
 				{
@@ -813,14 +863,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 					}
 				}
 				break;
-			case BOMB_SAC:
-				if (bombs > 0)
-				{
-					bombs--;
-					App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
-				}
-				break;
-
+		
 			case BOW:
 				if (arrows > 0)
 				{
@@ -911,15 +954,7 @@ void Player::OnInputCallback(INPUTEVENT action, EVENTSTATE state)
 						break;
 					}
 				}
-				break;
-			case BOMB_SAC:
-				if (bombs > 0)
-				{
-					bombs--;
-					App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
-				}
-				break;
-
+				break;		
 			case BOW:
 
 				if (arrows > 0)
@@ -1177,9 +1212,8 @@ void Player::ManageStamina(float dt)
 void Player::UseObject(float dt)
 {
 	if (inventory.size() <= 0)
-	{
 		return;
-	}
+
 
 	std::list<OBJECT_TYPE>::iterator currentItem;
 	int i = 0;
@@ -1199,6 +1233,7 @@ void Player::UseObject(float dt)
 		inventory.erase(currentItem);
 		only_one_time = true;
 		lifePotions--;
+		App->audio->PlayFx(2);
 		break;
 
 	case STAMINA_POTION:
@@ -1210,12 +1245,18 @@ void Player::UseObject(float dt)
 		inventory.erase(currentItem);
 		only_one_time = true;
 		staminaPotions--;
+		App->audio->PlayFx(2);
 		break;
 
 	case BOMB_SAC:
-		if(bombs > 0)
-			holded_item = BOMB_SAC;
+		if (bombs > 0)
+		{
+			bombs--;
+			App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
+		}
+		only_one_time = true;
 		break;
+
 
 	case BOW:
 		if (arrows > 0)

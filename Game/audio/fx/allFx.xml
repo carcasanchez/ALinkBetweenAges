@@ -38,5 +38,6 @@
   <fx name="audio/fx/HUD/Dialogue/messageFinish.wav"  id="34"/>
   
   <fx name="audio/fx/Special/door/openStoneDoor.wav"  id="35"/>
+   <fx name="audio/fx/Special/Shop/wallet.wav"  id="36"/>
   
 </fx>

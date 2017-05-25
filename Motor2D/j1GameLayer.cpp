@@ -299,6 +299,7 @@ void j1GameLayer::BuyObject(Object * object)
 			PickObject(object);
 			em->player->rupees -= object->price;
 			buy_timer.Start();
+			App->audio->PlayFx(36);
 		}
 	}
 }
@@ -332,6 +333,7 @@ bool j1GameLayer::Save(pugi::xml_node &data) const
 	player.append_attribute("bombs") = em->player->bombs;
 	player.append_attribute("spin") = em->player->ableToSpin;
 	player.append_attribute("bonus") = em->player->bonusLife;
+	player.append_attribute("key") = em->player->bossKeyEquipped;
 
 	pugi::xml_node inventory = player.append_child("inventory");
 	for (list<OBJECT_TYPE>::iterator it = em->player->inventory.begin(); it!= em->player->inventory.end(); it++)
@@ -365,12 +367,14 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 	em->player->currentPos.y = data.child("player").child("position").attribute("y").as_int();
 	em->player->life = data.child("player").attribute("life").as_int();
 	em->player->rupees = data.child("player").attribute("rupees").as_int();
+	em->player->arrows = data.child("player").attribute("arrows").as_int();
+	em->player->bombs = data.child("player").attribute("bombs").as_int();
 	em->player->maxLife = data.child("player").attribute("maxLife").as_int();
 
 	em->player->changeAge = data.child("player").attribute("age").as_int();
 	em->player->ableToSpin = data.child("player").attribute("spin").as_bool();
 	em->player->bonusLife = data.child("player").attribute("bonus").as_int();
-
+	em->player->bossKeyEquipped = data.child("player").attribute("key").as_bool();
 
 	em->player->inventory.clear();
 
