@@ -90,11 +90,14 @@ bool j1Gui::PostUpdate()
 
 	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
 	{
+		list<UI_element*>::iterator tmp = item_screen;
+		tmp++;
 		if ((*item_screen)->to_delete)
 		{
 			RELEASE((*item_screen));
 			Screen_elements.erase(item_screen);
 		}
+		item_screen = tmp;
 	}
 
 	return true;
