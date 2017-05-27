@@ -88,7 +88,7 @@ bool j1Gui::PostUpdate()
 			(*item_screen)->GoToRender();
 	}
 
-	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end(); item_screen++)
+	for (list<UI_element*>::iterator item_screen = Screen_elements.begin(); item_screen != Screen_elements.end();)
 	{
 		list<UI_element*>::iterator tmp = item_screen;
 		tmp++;
