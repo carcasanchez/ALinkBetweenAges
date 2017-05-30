@@ -112,17 +112,15 @@ SDL_Texture* const j1Textures::Load(const char* path)
 // Unload texture
 bool j1Textures::UnLoad(SDL_Texture* texture)
 {
-	for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end();)
+	for (list<SDL_Texture*>::iterator item = textures.begin(); item != textures.end(); item++)
 	{
-		list<SDL_Texture*>::iterator tmp = item;
-		tmp++;
 		if (texture == *item)
 		{
 			SDL_DestroyTexture(*item);
 			textures.erase(item);
 			return true;
 		}
-		item = tmp;
+
 	}
 
 	return false;

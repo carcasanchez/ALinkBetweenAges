@@ -25,6 +25,12 @@ DarkZelda::~DarkZelda()
 		bolt->life = -1;
 	if (spinCollider)
 		App->collisions->DeleteCollider(col);
+
+	if (sprite)
+		delete sprite;
+	sprite = nullptr;
+	App->collisions->DeleteCollider(col);
+	anim.clear();
 }
 
 bool DarkZelda::Spawn(std::string file, iPoint pos)
@@ -119,15 +125,15 @@ void DarkZelda::OnDeath()
 
 	else if (phase == 2)
 	{
-		currentPos = App->map->MapToWorld(75, 25);
+		App->audio->PlayFx(19);
+		enemyState = TELEPORT;
+		actionState = DISAPPEARING;
 		sprite->tint = { 255, 255, 255, 255 };
 		phase = 3;
 		life = phase3Life;
 		stabSpeed = newStabSpeed;
 		slashSpeed = newSlashSpeed;
-		attackRatio = attackRatio_2;
-		enemyState = KEEP_DISTANCE;
-		
+		attackRatio = attackRatio_2;	
 		attackTimer.Start();
 		boltTimer.Start();
 	}

@@ -143,7 +143,7 @@ void j1CollisionManager::DeleteCollider(Collider * c)
 	{		
 		if ((*it) == c)
 		{
-			RELEASE(*it);
+			delete (*it);
 			colliders.erase(it);
 			break;
 		}		

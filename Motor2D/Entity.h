@@ -96,8 +96,8 @@ public:
 	int id;
 
 	// Graphic Resources
-	Sprite* sprite;
-	Animation* currentAnim;
+	Sprite* sprite = nullptr;
+	Animation* currentAnim = nullptr;
 	std::map<std::pair<ACTION_STATE, DIRECTION>, Animation>	anim;
 	
 	// States
