@@ -591,7 +591,7 @@ bool Player::ShootingBow(float dt)
 	{
 		currentAnim->Reset();
 		actionState = IDLE;
-		Object* arrow = App->game->em->ActiveObject(currentPos.x, currentPos.y, LINK_ARROW, currentDir);
+		Object* arrow = App->game->em->ActiveObject(currentPos.x-5, currentPos.y-6, LINK_ARROW, currentDir);
 		if (arrow->currentDir == D_RIGHT || arrow->currentDir == D_LEFT)
 		{
 			arrow->col->rect.h = 7;

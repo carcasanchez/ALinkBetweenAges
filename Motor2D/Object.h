@@ -40,7 +40,8 @@ enum OBJECT_TYPE
 	INTERRUPTOR,
 	STONE_DOOR,
 	EXPLOSION,
-	WOOD_DOOR
+	WOOD_DOOR,
+	ARROW_BUY
 };
 
 class Object : public Entity

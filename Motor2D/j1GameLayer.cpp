@@ -90,10 +90,10 @@ bool j1GameLayer::Update(float dt)
 	App->input->GetMousePosition(mousePos.x, mousePos.y);
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
-	/*if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		//em->CreateNPC(1, NPC_DARK_ZELDA, mousePos.x, mousePos.y);
-		App->sceneM->RequestSceneChange({0,0}, "outsideCastle", D_DOWN);
-		//em->CreateObject(1, mousePos.x, mousePos.y, LIFEHEART);*/
+		//App->sceneM->RequestSceneChange({0,0}, "outsideCastle", D_DOWN);
+		em->CreateObject(1, mousePos.x, mousePos.y, ARROW_DROP);
 	 if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
@@ -219,6 +219,8 @@ void j1GameLayer::PickObject(Object * object)
 		}
 			
 		break;
+
+	case ARROW_BUY:
 	case ARROW_DROP:
 		if (em->player->arrows < em->player->maxArrows)
 			if ((em->player->arrows + 5) > em->player->maxArrows)
@@ -292,7 +294,7 @@ void j1GameLayer::BuyObject(Object * object)
 	if (buy_timer.Read() > 700 && em->player->rupees >= object->price)
 	{
 		if ((object->objectType == LIFE_POTION && em->player->lifePotions < em->player->maxLifePotions) ||
-			(object->objectType == ARROW_DROP && em->player->arrows < em->player->maxArrows) ||
+			(object->objectType == ARROW_BUY && em->player->arrows < em->player->maxArrows) ||
 			(object->objectType == BOMB_DROP && em->player->bombs < em->player->maxBombs) ||
 			(object->objectType == STAMINA_POTION && em->player->staminaPotions < em->player->maxStaminaPotions))
 		{

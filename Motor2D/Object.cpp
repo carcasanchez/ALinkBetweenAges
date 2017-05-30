@@ -125,6 +125,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir
 			case WOOD_DOOR:
 				attributes = attributes.child("wood_door");
 				break;
+			case ARROW_BUY:
+				attributes = attributes.child("arrow_buy");
+				break;
 		}		
 
 		LoadAttributes(attributes);
@@ -134,6 +137,7 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir
 
 		switch (type)
 		{
+		case ARROW_BUY:
 		case ARROW_DROP:
 			currentDir = D_UP;
 			break;

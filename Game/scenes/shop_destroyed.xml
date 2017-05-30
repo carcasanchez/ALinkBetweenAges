@@ -19,7 +19,7 @@
 
         <special>
           <!--rocks, grass, etc-->
-		<arrow_drop object_type = "13" x = "20" y = "15"/>
+		<arrow_buy object_type = "30" x = "20" y = "15"/>
 		<life_potion object_type = "15" x = "11" y = "16"/>
 		<stamina_potion object_type = "22" x = "16" y = "16"/>
 
