@@ -804,6 +804,7 @@ void CS_Step::FinishStep()
 		tmp->Changed_string = false;
 	}
 
+
 	cutscene->StepDone(); //Increment the "steps done" counter
 	LOG("Step %i finished at %.3fs", n, cutscene->timer.ReadSec());
 }
@@ -1090,18 +1091,22 @@ bool CS_Step::DoMovement(float dt)
 		case CS_UP:
 			tmp->Move(0, -ceil(mov_speed*dt));
 			tmp->GetMyEntity()->currentDir = DIRECTION::D_UP;
+			tmp->GetMyEntity()->actionState = ACTION_STATE::WALKING;
 			break;
 		case CS_DOWN:
 			tmp->Move(0, ceil(mov_speed*dt));
 			tmp->GetMyEntity()->currentDir = DIRECTION::D_DOWN;
+			tmp->GetMyEntity()->actionState = ACTION_STATE::WALKING;
 			break;
 		case CS_LEFT:
 			tmp->Move(-ceil(mov_speed*dt), 0);
 			tmp->GetMyEntity()->currentDir = DIRECTION::D_LEFT;
+			tmp->GetMyEntity()->actionState = ACTION_STATE::WALKING;
 			break;
 		case CS_RIGHT:
 			tmp->Move(ceil(mov_speed*dt), 0);
 			tmp->GetMyEntity()->currentDir = DIRECTION::D_RIGHT;
+			tmp->GetMyEntity()->actionState = ACTION_STATE::WALKING;
 			break;
 
 		case CS_TELEPORT:
@@ -1152,6 +1157,9 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 			{
 				ret = true;
 				FinishStep();
+
+				CS_npc* tmp = static_cast<CS_npc*>(element);
+				tmp->GetMyEntity()->actionState = ACTION_STATE::IDLE;
 			}
 			break;
 		case CS_DOWN:
@@ -1159,6 +1167,9 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 			{
 				ret = true;
 				FinishStep();
+
+				CS_npc* tmp = static_cast<CS_npc*>(element);
+				tmp->GetMyEntity()->actionState = ACTION_STATE::IDLE;
 			}
 			break;
 		case CS_LEFT:
@@ -1166,6 +1177,9 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 			{
 				ret = true;
 				FinishStep();
+
+				CS_npc* tmp = static_cast<CS_npc*>(element);
+				tmp->GetMyEntity()->actionState = ACTION_STATE::IDLE;
 			}
 			break;
 		case CS_RIGHT:
@@ -1173,6 +1187,9 @@ bool CS_Step::CheckMovementCompleted(iPoint curr_pos)
 			{
 				ret = true;
 				FinishStep();
+
+				CS_npc* tmp = static_cast<CS_npc*>(element);
+				tmp->GetMyEntity()->actionState = ACTION_STATE::IDLE;
 			}
 			break;
 		case CS_TELEPORT:
