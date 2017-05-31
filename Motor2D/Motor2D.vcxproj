@@ -84,6 +84,7 @@
     <ClCompile Include="Eyegore.cpp" />
     <ClCompile Include="j1CutSceneManager.cpp" />
     <ClCompile Include="j1QuestManager.cpp" />
+    <ClCompile Include="j1Video.cpp" />
     <ClCompile Include="Octorok.cpp" />
     <ClCompile Include="DarkZelda.cpp" />
     <ClCompile Include="DialogManager.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="j1Pathfinding.h" />
     <ClInclude Include="j1PerfTimer.h" />
     <ClInclude Include="j1QuestManager.h" />
+    <ClInclude Include="j1Video.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Object.h" />

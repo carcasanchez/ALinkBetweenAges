@@ -29,6 +29,7 @@ class j1Render;
 class DialogManager;
 class j1QuestManager;
 class j1CutSceneManager;
+class j1Video;
 
 class j1App : public j1Module
 {
@@ -117,7 +118,7 @@ public:
 	DialogManager*      dialog = NULL;
 	j1QuestManager*		quest = NULL;
 	j1CutSceneManager*	cutsceneM = NULL;
-
+	j1Video*			video = NULL;
 
 private:
 

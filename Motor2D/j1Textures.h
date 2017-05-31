@@ -33,6 +33,9 @@ public:
 	bool				UnLoad(SDL_Texture* texture);
 	SDL_Texture* const	LoadSurface(SDL_Surface* surface);
 	void				GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
+	bool				UnloadVideo(SDL_Texture* texture);
+	SDL_Texture* const  LoadSurfaceVideo(SDL_Surface* surface);
+
 
 	// Get Default Tecture
 	SDL_Texture* GetDefault(std::string) const;
@@ -40,6 +43,7 @@ public:
 public:
 
 	list<SDL_Texture*>	textures;
+	std::vector<SDL_Texture*> texturesVideo;
 
 private:
 

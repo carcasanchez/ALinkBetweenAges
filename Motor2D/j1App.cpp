@@ -26,6 +26,7 @@
 #include "j1QuestManager.h"
 #include "j1CutSceneManager.h"
 #include "Brofiler\Brofiler.h"
+#include "j1Video.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -52,6 +53,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	quest = new j1QuestManager();
 	cutsceneM = new j1CutSceneManager();
 	render = new j1Render();
+	video = new j1Video();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -73,6 +75,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(dialog);
 	AddModule(quest);
 	AddModule(cutsceneM);
+	AddModule(video);
 	// render last to swap buffer
 	AddModule(render);
 
