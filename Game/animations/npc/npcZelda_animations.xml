@@ -4,7 +4,6 @@
   <name value = "8" />
 
   <IDLE>
-    <!-- Idle -->
     <name value = "0"  />
 
     <UP>
@@ -28,4 +27,29 @@
     <speed value = "0.15" />
 
   </IDLE>
+
+<WALKING>
+    <name value = "1"  />
+
+    <UP>
+      <values name = "0" x ="22" y = "1" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="1" y = "1" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="43" y = "1" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="64" y = "1" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </WALKING>
 </animations>
