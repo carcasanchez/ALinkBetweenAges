@@ -3,6 +3,7 @@
 
 #include "PugiXml\src\pugixml.hpp"
 #include "p2Point.h"
+#include "j1PerfTimer.h"
 #include <string>
 #include <map>
 #include <list>
@@ -11,6 +12,7 @@
 //enum GUI_INPUT;
 
 class Exit;
+
 enum DIRECTION;
 
 class Scene
@@ -42,6 +44,8 @@ private:
 	bool LoadMisc();
 
 	std::map<int, std::list<Exit*>> exits;
+
+	int introFrames = 0;
 };
 
 #endif // __SCENE_H__

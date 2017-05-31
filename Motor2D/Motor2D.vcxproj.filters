@@ -300,9 +300,6 @@
     <ClInclude Include="Object.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="MemLeaks.h">
-      <Filter>Desenvolupament  ========\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="RedSoldier.h">
       <Filter>Desenvolupament  ========\Game Layer\Entities\Enemies</Filter>
     </ClInclude>
@@ -377,11 +374,6 @@
     <Filter Include="Desenvolupament  ========\Game Layer\Dialogs">
       <UniqueIdentifier>{c525055e-8e4b-410b-ae98-b0a6c51d84b9}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Game\maps\map_testing.tmx">
-      <Filter>Desenvolupament  ========\Tools</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="allFx.xml">

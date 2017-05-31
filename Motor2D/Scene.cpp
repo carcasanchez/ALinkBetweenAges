@@ -16,6 +16,8 @@
 #include "p2Log.h"
 #include "HUD.h"
 #include "j1SceneManager.h"
+#include "j1Video.h"
+
 
 Scene::Scene()
 {
@@ -60,6 +62,11 @@ bool Scene::Load(const char* path, const bool reloadMap)
 		 App->game->hud->hud_screen->active = false;
 		 App->game->hud->hud_screen->QuitFromRender();
 		 App->game->em->CleanUp();
+
+		 if (this->name == "logo")
+		 {
+			 App->video->Initialize("introLogo.avi");
+		 }
 		 return true;
 		}
 
@@ -223,7 +230,20 @@ bool Scene::Update(float dt)
 
 		App->game->hud->start_menu_screen->Set_Active_state(true);	
 	}
-	
+	if (this->name == "logo")
+	{
+		if (introFrames < 157)
+		{
+			App->video->GrabAVIFrame();
+			introFrames++;
+		}
+		else 
+		{
+			App->video->CloseAVI();
+			App->sceneM->RequestSceneChange({ 0, 0 }, "introScene", D_DOWN);
+			App->cutsceneM->StartCutscene(0);
+		}
+	}
 
 	std::list<Exit*>::iterator exit = exits[currentSector].begin();
 	for (; exit != exits[currentSector].cend() && ret; exit++)

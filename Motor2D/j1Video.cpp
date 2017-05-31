@@ -32,7 +32,7 @@ bool j1Video::CleanUp()
 void j1Video::Initialize(char* file_path)
 {
 	std::string path = SDL_GetBasePath();
-	path += "..\\Game\\";
+	path += "..\\..\\Game\\";
 	std::string file_name = file_path;
 
 	std::string temp = path + file_name;
@@ -88,7 +88,13 @@ bool j1Video::GrabAVIFrame()
 	SDL_Texture* image = App->tex->LoadSurfaceVideo(surface);
 	uint w, h;
 	App->win->GetWindowSize(w, h);
-	App->render->Blit(image, w / 4.4, h / 1.2, NULL, SDL_FLIP_VERTICAL);
+
+
+	int x = 0;
+	//if(App->win->isFullScreen())
+	//	x = (w - lpbi->biWidth) / 2;
+	
+	App->render->Blit(image, x , 0, 0, 255, 1, 0, INT_MAX, INT_MAX, SDL_FLIP_VERTICAL);
 
 
 	frame++;
