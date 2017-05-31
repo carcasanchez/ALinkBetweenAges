@@ -64,9 +64,11 @@ bool Scene::Load(const char* path, const bool reloadMap)
 		 App->game->em->CleanUp();
 
 		 if (this->name == "logo")
-		 {
 			 App->video->Initialize("introLogo.avi");
-		 }
+		 
+
+		 pugi::xml_node music = node.first_child().child("music");
+		 App->audio->PlayMusic(music.attribute("file").as_string());
 		 return true;
 		}
 
@@ -224,10 +226,6 @@ bool Scene::Update(float dt)
 	if (this->name == "introScene" && App->cutsceneM->CutsceneReproducing() == false && !App->game->hud->hud_screen->active)
 	{
 		App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
-
-		if (!App->game->hud->start_menu_screen->active)
-			App->audio->PlayMusic("Audio/music/menuInit.ogg", 0.5f);
-
 		App->game->hud->start_menu_screen->Set_Active_state(true);	
 	}
 	if (this->name == "logo")
