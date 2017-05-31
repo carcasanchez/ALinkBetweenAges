@@ -394,7 +394,7 @@ void UI_element::FadeTo()
 
 	if (current_trans_time < trans_duration)
 	{
-		float change_alpha = App->gui->bezier_curve->GetActualX(trans_duration, current_trans_time, CB_SLOW_MIDDLE);
+		float change_alpha = App->gui->bezier_curve->GetActualX(trans_duration, current_trans_time, CB_LINEAL);
 		change_alpha = CLAMP01(change_alpha);
 		alpha = 255 * change_alpha;
 	}
@@ -420,7 +420,7 @@ void UI_element::FadeFrom()
 
 	if (current_trans_time < trans_duration)
 	{
-		float change_alpha = App->gui->bezier_curve->GetActualX(trans_duration, current_trans_time, CB_SLOW_MIDDLE);
+		float change_alpha = App->gui->bezier_curve->GetActualX(trans_duration, current_trans_time, CB_LINEAL);
 		change_alpha = CLAMP01(change_alpha);
 		alpha = 255 * (1 - change_alpha);
 	}
