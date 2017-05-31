@@ -511,7 +511,5 @@ bool j1App::SavegameNow() const
 	data.reset();
 	want_to_save = false;
 	
-	game->StopSaving();
-
 	return ret;
 }

@@ -306,10 +306,6 @@ void j1GameLayer::BuyObject(Object * object)
 	}
 }
 
-void j1GameLayer::StopSaving()
-{
-	hud->saved_game->Set_Active_state(false);
-}
 
 void j1GameLayer::StopLoading()
 {

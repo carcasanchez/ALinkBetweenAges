@@ -156,12 +156,6 @@ bool Hud::Update(float dt)
 					}
 				}
 
-				if (save->active)
-				{
-					App->SaveGame("saves.xml");
-					saved_game->Set_Active_state(true);
-				}
-
 				if (load->active)
 				{
 					App->LoadGame("saves.xml");
@@ -319,13 +313,6 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 					}
 				}
 
-				if (save->active)
-				{
-					App->SaveGame("saves.xml");
-					saved_game->Set_Active_state(true);
-					App->audio->PlayFx(34);
-				}
-
 				if (load->active)
 				{
 					App->LoadGame("saves.xml");
@@ -475,12 +462,10 @@ bool Hud::LoadPause(string file)
 		item_menu = (UI_Image*)LoadUIElement(pause_node.child("item"), main_menu, IMAGE);
 
 		resume = (UI_Image*)LoadUIElement(pause_node.child("resume"), main_menu, IMAGE);
-		save = (UI_Image*)LoadUIElement(pause_node.child("save"), main_menu, IMAGE);
 		load = (UI_Image*)LoadUIElement(pause_node.child("load"), main_menu, IMAGE);
 		controls = (UI_Image*)LoadUIElement(pause_node.child("controls"), main_menu, IMAGE);
 		quit = (UI_Image*)LoadUIElement(pause_node.child("quit"), main_menu, IMAGE);
 
-		saved_game = (UI_Image*)LoadUIElement(pause_node.child("saved_game"), main_menu, IMAGE);
 		loaded_game = (UI_Image*)LoadUIElement(pause_node.child("loaded_game"), main_menu, IMAGE);
 
 		//Main menu
@@ -495,7 +480,6 @@ bool Hud::LoadPause(string file)
 
 		//selecable items go into vector
 		pause_selectables.push_back(resume);
-		pause_selectables.push_back(save);
 		pause_selectables.push_back(load);
 		pause_selectables.push_back(controls);
 		pause_selectables.push_back(quit);
@@ -617,7 +601,6 @@ bool Hud::IntoPause()
 
 	main_menu->Set_Active_state(true);
 	resume->Set_Active_state(true);
-	save->Set_Active_state(false);
 	load->Set_Active_state(false);
 	controls->Set_Active_state(false);
 	quit->Set_Active_state(false);

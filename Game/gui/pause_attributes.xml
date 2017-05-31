@@ -3,14 +3,12 @@
   <main       x="1"    y="76"  w="354" h="322" pos_x="200"  pos_y="-650" active="true"/>
   <item       x="407"  y="0"   w="133" h="322" pos_x="720" pos_y="0" active="true"/>
 
-  <saved_game  x="356"  y="399"   w="354" h="73" pos_x="0" pos_y="650" active="false"/>
   <loaded_game x="1"    y="399"   w="354" h="73" pos_x="0" pos_y="650" active="false"/>
 
-  <resume     x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="86" active="true"/>
-  <save       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="186" active="false"/>
-  <load       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="295" active="false"/>
-  <controls   x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="410" active="false"/>
-  <quit       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="528" active="false"/>
+  <resume     x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="108" active="true"/>
+  <load       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="232" active="false"/>
+  <controls   x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="356" active="false"/>
+  <quit       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="482" active="false"/>
 
  <start_menu  x="742"  y="0"   w="552" h="448" pos_x="100"  pos_y="50" active="false"/>
  <continue    x="357"  y="78"  w="20"  h="23"  pos_x="125"  pos_y="285" active="true"/>

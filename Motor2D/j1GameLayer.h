@@ -31,8 +31,6 @@ public:
 	void PickObject(Object* object);
 	void BuyObject(Object* object);
 
-	//Deactives hud saving
-	void StopSaving();
 	//Deactives hud loading
 	void StopLoading();
 
