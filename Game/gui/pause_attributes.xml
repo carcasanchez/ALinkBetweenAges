@@ -8,6 +8,7 @@
   <resume     x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="108" active="true"/>
   <load       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="232" active="false"/>
   <controls   x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="356" active="false"/>
+  <cont_img   x="743"  y="453" w="467" h="268" pos_x="-118" pos_y="56"  active="false"/>
   <quit       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="482" active="false"/>
 
  <start_menu  x="742"  y="0"   w="552" h="448" pos_x="100"  pos_y="50" active="false"/>

@@ -240,6 +240,13 @@ bool Hud::CleanUp()
 
 void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 {
+	if (controls_open && state == KEY_DOWN)
+	{
+		controls_image->Set_Active_state(false);
+		controls_image->QuitFromRender();
+		controls_open = false;
+		return;
+	}
 
 	if (!start_menu_screen->active)
 	{
@@ -322,7 +329,8 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 
 				if (controls->active)
 				{
-
+					controls_image->Set_Active_state(true);
+					controls_open = true;
 				}
 
 				if (quit->active)
@@ -464,6 +472,7 @@ bool Hud::LoadPause(string file)
 		resume = (UI_Image*)LoadUIElement(pause_node.child("resume"), main_menu, IMAGE);
 		load = (UI_Image*)LoadUIElement(pause_node.child("load"), main_menu, IMAGE);
 		controls = (UI_Image*)LoadUIElement(pause_node.child("controls"), main_menu, IMAGE);
+		controls_image = (UI_Image*)LoadUIElement(pause_node.child("cont_img"), main_menu, IMAGE);
 		quit = (UI_Image*)LoadUIElement(pause_node.child("quit"), main_menu, IMAGE);
 
 		loaded_game = (UI_Image*)LoadUIElement(pause_node.child("loaded_game"), main_menu, IMAGE);

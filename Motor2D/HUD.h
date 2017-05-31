@@ -96,11 +96,14 @@ public:
 	UI_Image*		resume = nullptr;
 	UI_Image*		load = nullptr;
 	UI_Image*		controls = nullptr;
+	UI_Image*		controls_image = nullptr;
 	UI_Image*		quit = nullptr;
 
 	UI_Image*		loaded_game = nullptr;
 
 	std::vector<UI_Image*> pause_selectables;
+
+	bool controls_open = false;
 
 	//Start Menu
 	UI_Image*		start_menu_screen = nullptr;
