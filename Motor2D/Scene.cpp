@@ -217,7 +217,11 @@ bool Scene::Update(float dt)
 	if (this->name == "introScene" && App->cutsceneM->CutsceneReproducing() == false && !App->game->hud->hud_screen->active)
 	{
 		App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
-		App->game->hud->start_menu_screen->Set_Active_state(true);
+
+		if (!App->game->hud->start_menu_screen->active)
+			App->audio->PlayMusic("Audio/music/menuInit.ogg", 0.5f);
+
+		App->game->hud->start_menu_screen->Set_Active_state(true);	
 	}
 	
 

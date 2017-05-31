@@ -396,12 +396,8 @@ bool Cutscene::Update(float dt)
 		
 
 		if (temp != steps.begin() && temp._Ptr->_Prev->_Myval->isFinished() && temp._Ptr->_Prev->_Myval->isWait() && step->isActive() == false && step->isFinished() == false)
-		{
-			if (step->n == 1)
-				int buenas_atrdes = 0;
-
 			step->StartStep();
-		}
+		
 		if (step->GetStartTime() != -1 && step->GetStartTime() <= timer.ReadSec() && step->isActive() == false && step->isFinished() == false)
 			step->StartStep();
 
@@ -1197,6 +1193,7 @@ void CS_Step::Play()
 	{
 		CS_Music* mus = static_cast<CS_Music*>(element);
 		mus->Play();
+		FinishStep();
 	}
 	if (element->GetType() == CS_FX)
 	{
@@ -1515,7 +1512,7 @@ CS_Music::~CS_Music()
 
 void CS_Music::Play()
 {
-	App->audio->PlayMusic(path.c_str());
+	App->audio->PlayMusic(path.c_str(), 0.5f);
 }
 //----------------------------------------
 

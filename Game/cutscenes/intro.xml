@@ -19,6 +19,8 @@
    	</TEXTS>
 
 		<MUSIC>
+      <mus n="0" name="intro_music" active="false" path="Audio/music/IntroDef.ogg"/>
+      <mus n="1" name="menu_music" active="false" path="Audio/music/menuInit.ogg"/>
 		</MUSIC>
 
 		<FX>
@@ -30,22 +32,28 @@
  <!--EXECUTE ALL STEPS IN ORDER-->
 
 	<steps>
-		<step  n="0" start="0" duration ="-1" input="false">
+
+    <step  n="0" start="0" duration ="-1" input="false">
+      <element name="intro_music" action="play"/>
+    </step>
+    
+		<step  n="1" start="-1" duration ="-1" input="false">
 			<element name="Z" action="fade">
-				<fading to_black="true" bezier_time="1500"/>	
+				<fading to_black="true" bezier_time="2500"/>	
       </element>		
 		</step>
 
-     <step  n="1" start="-1" duration ="-1" input="false">
+     <step  n="2" start="-1" duration ="-1" input="false">
 			<element name="Z" action="move" dir="left">
           <movement dest_x="250" dest_y="0" bezier_time="1000"/>
 			</element>			
 		</step>
 
-		<step  n="2" start="-1" duration ="-1" input="true">
+		<step  n="3" start="-1" duration ="-1" input="true">
 			<element name="legend" action="fade">
 				<fading to_black="true" bezier_time="1500"/>
 			</element>			
 		</step>
+    
 	</steps>
 </Cutscene>
