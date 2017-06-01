@@ -114,6 +114,17 @@
       </element>
     </step>
 
+    <step  n="14" start="-1" duration ="-1" input="false">
+      <element name="camera" action="fade_cam">
+        <fading  bezier_time="1000"/>
+      </element>
+    </step>
+
+     <step  n="15" start="-1" duration ="-1" input="false">
+      <element name="camera" action="unfade_cam">
+        <fading  bezier_time="1000"/>
+      </element>
+    </step>
 
   </steps>
 </Cutscene>
