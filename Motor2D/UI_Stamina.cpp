@@ -102,7 +102,7 @@ void UI_Stamina::RecoverStamina()
 		if (tmp)
 		{
 
-			int percent_life = (tmp->life * 100) / 10;
+			int percent_life = (tmp->life * 100) / 20;
 			ChangeColor(percent_life);
 
 			//magic numbers :c
