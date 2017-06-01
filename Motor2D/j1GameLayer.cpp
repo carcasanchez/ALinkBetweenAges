@@ -337,12 +337,16 @@ bool j1GameLayer::DebugFunc()
 	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
 		em->ActiveObject(mousePos.x, mousePos.y, BOMB);
+		LOG("%i, %i", mousePos.x, mousePos.y);
+	}
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
 		iPoint mousePos;
 		App->input->GetMousePosition(mousePos.x, mousePos.y);
+		
 		em->player->currentPos = mousePos;
 	}
 
@@ -352,6 +356,31 @@ bool j1GameLayer::DebugFunc()
 		em->player->ChangeAge(ADULT);
 		App->SaveGame("saves.xml");
 		em->player->life = em->player->maxLife;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F))
+	{
+		App->sceneM->RequestSceneChange({ 100,100 }, "kakarikoForest", D_DOWN);
+		App->SaveGame("saves.xml");
+		em->player->life = em->player->maxLife;
+	}
+
+	//active Cutscenes
+	if (App->input->GetKey(SDL_SCANCODE_LCTRL))
+	{
+		if (App->input->GetKey(SDL_SCANCODE_1))
+			App->cutsceneM->StartCutscene(1);
+
+		if(App->input->GetKey(SDL_SCANCODE_2))
+			App->cutsceneM->StartCutscene(2);
+
+		if (App->input->GetKey(SDL_SCANCODE_3))
+			App->cutsceneM->StartCutscene(3);
+
+		if (App->input->GetKey(SDL_SCANCODE_4))
+			App->cutsceneM->StartCutscene(4);
+
+		return true;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_L))
