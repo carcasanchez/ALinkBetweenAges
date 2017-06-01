@@ -21,8 +21,7 @@
 
 DarkZelda::~DarkZelda()
 {
-	if (bolt)
-		bolt->life = -1;
+	
 	if (spinCollider)
 		App->collisions->DeleteCollider(col);
 
@@ -68,7 +67,6 @@ bool DarkZelda::Spawn(std::string file, iPoint pos)
 		fightRange = attributes.child("ranges").attribute("fight").as_int();
 
 		phase2Life = attributes.child("base").attribute("life_2").as_int();
-		phase3Life = attributes.child("base").attribute("life_3").as_int();
 
 		walkTimelimit = attributes.child("limits").attribute("walk_time_limit").as_int();
 		dodgeLimit = attributes.child("limits").attribute("dodge_limit").as_int();
@@ -128,9 +126,9 @@ void DarkZelda::OnDeath()
 		App->audio->PlayFx(19);
 		enemyState = TELEPORT;
 		actionState = DISAPPEARING;
+		invulnerable = true;
 		sprite->tint = { 255, 255, 255, 255 };
 		phase = 3;
-		life = phase3Life;
 		stabSpeed = newStabSpeed;
 		slashSpeed = newSlashSpeed;
 		attackRatio = attackRatio_2;	
@@ -145,24 +143,20 @@ void DarkZelda::OnDeath()
 		toDelete = true;
 		App->cutsceneM->StartCutscene(4);
 		App->game->hud->zelda_life_bar->Set_Active_state(false);
+
+
+		if (bolt)
+		{
+				bolt->currentAnim->Reset();
+				bolt->col->active = false;
+				bolt->life = -1;
+				bolt = nullptr;
+		}
 	}
 }
 
 bool DarkZelda::Update(float dt)
 {	
-
-	if (bolt)
-	{
-		if (bolt->currentAnim->isOver())
-		{
-			bolt->currentAnim->Reset();
-			bolt->life = -1;
-			bolt = nullptr;
-		}
-		
-	}
-
-
 	iPoint playerTile = App->map->WorldToMap(App->game->em->player->currentPos.x, App->game->em->player->currentPos.y);
 
 	switch (phase)
@@ -647,6 +641,7 @@ bool DarkZelda::Stab(float dt)
 			holdStabTimer.Start();
 			invulnerable = false;
 
+			//Bolt
 			if (phase == 3)
 			{
 				bolt = App->game->em->ActiveObject(currentPos.x, currentPos.y, SWORD_BOLT);
@@ -684,6 +679,8 @@ bool DarkZelda::Stab(float dt)
 					bolt->col->rect.h = bolt->col->rect.w;
 					bolt->col->rect.w = tmp;
 				}
+
+				bolt->currentAnim->Reset();
 			}
 		}
 	}
@@ -900,7 +897,6 @@ void DarkZelda::GetHit(Entity* agressor)
 		break;
 
 	case 2:
-
 	case 3:
 		if(enemyState == KEEP_DISTANCE)
 		{ 
@@ -932,7 +928,9 @@ void DarkZelda::GetHit(Entity* agressor)
 			if (bolt)
 			{
 				bolt->life = -1;
+				bolt->col->active = false;
 				bolt = nullptr;
+				
 			}
 			if (spinCollider)
 			{
@@ -940,6 +938,9 @@ void DarkZelda::GetHit(Entity* agressor)
 				spinCollider = nullptr;
 			}
 		}
+
+		
+
 		break;
 
 	}
@@ -947,9 +948,13 @@ void DarkZelda::GetHit(Entity* agressor)
 }
 
 bool DarkZelda::StepBack(float dt)
-{
+{	
+	if (phase == 2 && life <= 10)
+	{
+		OnDeath();
+		return true;
+	}
 
-	
 		iPoint movement;
 
 		if (App->game->em->player->currentPos.x > currentPos.x)
@@ -971,7 +976,7 @@ bool DarkZelda::StepBack(float dt)
 			life--;
 		}
 	}
-
+	
 	if (phase == 3 && life <= rageLife)
 	{
 		rage = true;

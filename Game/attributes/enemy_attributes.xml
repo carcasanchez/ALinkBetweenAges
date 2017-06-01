@@ -20,7 +20,7 @@
 	</red_soldier>
 
 	<dark_zelda>
-		<base life = "1" life_2 = "10" life_3 = "10" speed = "50" damage ="1" rage_life="4"/>
+		<base life = "1" life_2 = "20" speed = "50" damage ="1" rage_life="4"/>
 		<collider x = "9" y = "17" w = "20" h = "20" type = "3"/>
 		<ranges hostile= "1000" fight = "80" teleport="180" stab="60"/>
 		<limits walk_time_limit="500" dodge_limit = "300" hold_pos="800" hold_stab="800" rage_limit="3000" spin_limit="3000"/>

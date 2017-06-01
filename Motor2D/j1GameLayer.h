@@ -37,6 +37,8 @@ public:
 	bool Save(pugi::xml_node&) const;
 	bool Load(pugi::xml_node&);
 
+	bool DebugFunc();
+
 	bool On_Collision_Callback(Collider*, Collider*, float dt);
 
 

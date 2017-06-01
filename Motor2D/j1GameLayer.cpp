@@ -71,8 +71,6 @@ bool j1GameLayer::Update(float dt)
 {
 	bool ret = true;
 	
-	//if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	//	App->sceneM->RequestSceneChange({playerX, playerY}, "linkHouse", D_DOWN);
 
 	if (!App->sceneM->currentScene->inGame)
 	{
@@ -86,77 +84,10 @@ bool j1GameLayer::Update(float dt)
 
 	App->render->CameraFollow(em->player->currentPos);
 
-	iPoint mousePos;
-	App->input->GetMousePosition(mousePos.x, mousePos.y);
-	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
-
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-		//em->CreateNPC(1, NPC_DARK_ZELDA, mousePos.x, mousePos.y);
-		//App->sceneM->RequestSceneChange({0,0}, "outsideCastle", D_DOWN);
-		em->CreateObject(1, mousePos.x, mousePos.y, ARROW_DROP);
-	 if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
-	{
-		iPoint mousePos;
-		App->input->GetMousePosition(mousePos.x, mousePos.y);
-		em->player->currentPos = mousePos;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_F2))
-	{
-		App->sceneM->RequestSceneChange({ 47*8,220*8 }, "bossRoom", D_DOWN);
-		em->player->ChangeAge(ADULT);
-		App->SaveGame("saves.xml");
-		em->player->life = em->player->maxLife;
-	}
-		
-
-
-	 if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
-	 {
-		 Object* arrow = App->game->em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, LINK_ARROW, em->player->currentDir);
-		 if (arrow->currentDir == D_RIGHT || arrow->currentDir == D_LEFT)
-		 {
-			 arrow->col->rect.h = 7;
-			 arrow->col->rect.w = 15;
-		 }
-	 }
-	 else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-		 em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, BOMB);
-
-
-	/*if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		em->player->changeAge = 0;
-	else if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-		em->player->changeAge = 1;
-	else if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-		em->player->changeAge = 2;
-	else if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
-		em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
-	else if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
-		em->CreateEnemy(1, RED_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
-	else if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
-		em->CreateEnemy(1, OCTOROK, mousePos.x, mousePos.y, vector<iPoint>());
-	else if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
-		em->CreateEnemy(1, WIZDROVE, mousePos.x, mousePos.y, vector<iPoint>());
-	else if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
-		em->CreateEnemy(1, EYEGORE, mousePos.x, mousePos.y, vector<iPoint>());
-	else if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
-		em->CreateEnemy(1, TEKTITE, mousePos.x, mousePos.y, vector<iPoint>());
-	else if (App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN)
-		em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, BOMB);
-	else if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
-		em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, STAMINA_POTION);
-	else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
-		em->player->rupees += 5;*/
-
-		
-
-
-	/*if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-		App->SaveGame("saves.xml");
-	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
-		App->LoadGame("saves.xml");*/
 	
+	DebugFunc();
+		
+
 	return ret;
 }
 
@@ -395,6 +326,57 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 	App->sceneM->RequestSceneChange(em->player->currentPos, dest.c_str() , (DIRECTION)data.child("player").attribute("direction").as_int());
 
 	em->player->col->active = true;
+
+	return true;
+}
+
+bool j1GameLayer::DebugFunc()
+{
+	iPoint mousePos;
+	App->input->GetMousePosition(mousePos.x, mousePos.y);
+	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
+
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		em->ActiveObject(mousePos.x, mousePos.y, BOMB);
+
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+	{
+		iPoint mousePos;
+		App->input->GetMousePosition(mousePos.x, mousePos.y);
+		em->player->currentPos = mousePos;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F2))
+	{
+		App->sceneM->RequestSceneChange({ 47 * 8,220 * 8 }, "bossRoom", D_DOWN);
+		em->player->ChangeAge(ADULT);
+		App->SaveGame("saves.xml");
+		em->player->life = em->player->maxLife;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_L))
+		em->player->life = em->player->maxLife;
+
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	em->player->changeAge = 0;
+	else if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	em->player->changeAge = 2;
+	else if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN)
+	em->CreateEnemy(1, GREEN_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_5) == KEY_DOWN)
+	em->CreateEnemy(1, RED_SOLDIER, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_6) == KEY_DOWN)
+	em->CreateEnemy(1, OCTOROK, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_7) == KEY_DOWN)
+	em->CreateEnemy(1, WIZDROVE, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_8) == KEY_DOWN)
+	em->CreateEnemy(1, EYEGORE, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_9) == KEY_DOWN)
+	em->CreateEnemy(1, TEKTITE, mousePos.x, mousePos.y, vector<iPoint>());
+	else if (App->input->GetKey(SDL_SCANCODE_N) == KEY_DOWN)
+	em->ActiveObject(em->player->currentPos.x, em->player->currentPos.y, STAMINA_POTION);
+	else if (App->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN)
+	em->player->rupees += 5;
 
 	return true;
 }

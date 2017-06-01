@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "j1Map.h"
 #include "j1Audio.h"
+#include "Animation.h"
 
 bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir)
 {
@@ -256,3 +257,17 @@ bool Arrow::Update(float dt)
 
 	return ret;
 };
+
+bool SwordBolt::Update(float dt)
+{
+	if (currentAnim->isOver())
+	{
+
+		life = -1;
+		col->rect.w = 36;
+		col->rect.h = 110;
+		colPivot = { 18,119 };
+		col->active = false;
+	}
+	return false;
+}

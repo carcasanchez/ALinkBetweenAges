@@ -310,6 +310,16 @@ public:
 
 };
 
+class SwordBolt : public Object
+{
+public:
+
+	SwordBolt() {};
+
+	bool Update(float dt);
+
+};
+
 
 
 #endif // !_OBJECT_H_
