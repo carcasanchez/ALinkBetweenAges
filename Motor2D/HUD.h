@@ -90,8 +90,7 @@ public:
 	PAUSEMOVE		pause_transition = PAUSE_NO_MOVE;
 
 	//main menu works as screen
-	UI_Image*		main_menu = nullptr;
-	UI_Image*		item_menu = nullptr;
+	UI_Image*		main_menu = nullptr;	
 
 	UI_Image*		resume = nullptr;
 	UI_Image*		load = nullptr;

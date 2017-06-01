@@ -510,7 +510,6 @@ bool Hud::LoadPause(string file)
 		pugi::xml_node pause_node = pause_file.child("images");
 
 		main_menu = (UI_Image*)LoadUIElement(pause_node.child("main"), nullptr, IMAGE);
-		item_menu = (UI_Image*)LoadUIElement(pause_node.child("item"), main_menu, IMAGE);
 
 		resume = (UI_Image*)LoadUIElement(pause_node.child("resume"), main_menu, IMAGE);
 		load = (UI_Image*)LoadUIElement(pause_node.child("load"), main_menu, IMAGE);
