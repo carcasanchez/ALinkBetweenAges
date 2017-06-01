@@ -68,6 +68,15 @@ bool Hud::Update(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
+			if (controls_open)
+			{
+				controls_image->Set_Active_state(false);
+				controls_image->QuitFromRender();
+				controls->Set_Active_state(true);
+				controls_open = false;
+				return true;
+			}
+
 			if (App->game->pause && pause_transition == PAUSE_NO_MOVE)
 			{
 				pause_transition = PAUSE_UP;
@@ -78,6 +87,15 @@ bool Hud::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
+			if (controls_open)
+			{
+				controls_image->Set_Active_state(false);
+				controls_image->QuitFromRender();
+				controls->Set_Active_state(true);
+				controls_open = false;
+				return true;
+			}
+
 			if (!start_menu_screen->active)
 			{
 				for (std::vector<UI_Image*>::reverse_iterator it = pause_selectables.rbegin(); it != pause_selectables.rend(); it++)
@@ -113,6 +131,15 @@ bool Hud::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 		{
+
+			if (controls_open)
+			{
+				controls_image->Set_Active_state(false);
+				controls_image->QuitFromRender();
+				controls->Set_Active_state(true);
+				controls_open = false;
+				return true;
+			}
 			if (!start_menu_screen->active)
 			{
 				for (std::vector<UI_Image*>::iterator it = pause_selectables.begin(); it != pause_selectables.end(); it++)
@@ -143,6 +170,16 @@ bool Hud::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
+
+			if (controls_open)
+			{
+				controls_image->Set_Active_state(false);
+				controls_image->QuitFromRender();
+				controls->Set_Active_state(true);
+				controls_open = false;
+				return true;
+			}
+
 			App->audio->PlayFx(34);
 			if (!start_menu_screen->active)
 			{
@@ -164,7 +201,10 @@ bool Hud::Update(float dt)
 
 				if (controls->active)
 				{
-
+					controls_image->Set_Active_state(true);
+					controls->Set_Active_state(false);
+					controls->QuitFromRender();
+					controls_open = true;
 				}
 
 				if (quit->active)
@@ -244,6 +284,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 	{
 		controls_image->Set_Active_state(false);
 		controls_image->QuitFromRender();
+		controls->Set_Active_state(true);
 		controls_open = false;
 		return;
 	}
@@ -310,6 +351,8 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 		case CONFIRM:
 			if (state == E_DOWN)
 			{
+
+				App->audio->PlayFx(34);
 				if (resume->active)
 				{
 					if (pause_transition == PAUSE_NO_MOVE)
@@ -324,12 +367,13 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 				{
 					App->LoadGame("saves.xml");
 					loaded_game->Set_Active_state(true);
-					App->audio->PlayFx(34);
 				}
 
 				if (controls->active)
 				{
 					controls_image->Set_Active_state(true);
+					controls->Set_Active_state(false);
+					controls->QuitFromRender();
 					controls_open = true;
 				}
 
@@ -337,7 +381,6 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 				{
 					App->game->quit_game = true;
 					App->game->pause = false;
-					App->audio->PlayFx(34);
 				}
 
 			}
