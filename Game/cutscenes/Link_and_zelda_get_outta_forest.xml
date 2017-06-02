@@ -55,7 +55,7 @@
     </TEXTS>
 
     <MUSIC>
-      <mus n="0" name="tension_infinita" active="false" path="Audio/music/tenseThemeLow.ogg"/>
+      <mus n="0" name="tension_infinita" active="false" path="Audio/music/tenseTheme.ogg"/>
     </MUSIC>
     
     <FX>
