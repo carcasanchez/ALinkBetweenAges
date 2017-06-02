@@ -108,7 +108,7 @@ bool Octorok::ThrowingAttack(float dt)
 	if (attackTimer.ReadMs() > attackRatio)
 	{
 		attackTimer.Start();
-		Object* rock = App->game->em->ActiveObject(currentPos.x, currentPos.y, OCTO_STONE);
+		Object* rock = App->game->em->ActiveObject(currentPos.x-3, currentPos.y-5, OCTO_STONE);
 		rock->currentDir = currentDir;
 		App->audio->PlayFx(28);
 	}
