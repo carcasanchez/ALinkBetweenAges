@@ -6,6 +6,13 @@
   Expect speed-up gameplay and an action-centered game.   
   Hope you enjoy it!  
   
+  # The Game
+ ![](https://fotos.subefotos.com/a771dbf63c2349ffa76e10ffff750b54o.png)   
+    As said, A Link Between Ages is a action-adventure, top-view game. Its gameplay its similar to the classic Zelda one, but with special enphasis on the battles.  
+    
+    ## Combat
+    The central piece of our game
+  
   # The Team
  ![](https://fotos.subefotos.com/a09ca9373f31b9b83f4d4ff095a4cb32o.png)
   
@@ -16,6 +23,14 @@
  
  
  ## Carlos Cabreira - Team Leader and gameplay programmer
+  
+   Hi. I'm the former leader of the DuckDev team and I have been working in everything related to gameplay programming, being that: 
+   * Player movement
+   * Collisions System
+   * Enemy IA
+   * Entity system and functionality (items and npc's)
+   
+   Also, I have created the Quest Manager System that we used to track events inside the game. You can check [its documentation page](https://carcasanchez.github.io/QuestManager/) to see how it works. It includes a step by step tutorial if you want to apply it to your project.
  
  ## Francisco Ruiz - Game designer
  
@@ -30,8 +45,8 @@
  ## Rubén Sardón - Programmer
  
  Check also our social media!   
- [Twitter](https://twitter.com/DuckDevv)
- Facebook
+ ## [Twitter](https://twitter.com/DuckDevv)   
+ ## Facebook
   
 
 
