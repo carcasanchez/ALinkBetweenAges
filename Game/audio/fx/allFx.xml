@@ -9,7 +9,7 @@
   <fx name="audio/fx/Player/masterSwordAttack.wav"  id="6"/>
   <fx name="audio/fx/Player/putBomb.wav"  id="7"/>
   <fx name="audio/fx/Player/spinAttack.wav"  id="8"/>
-  <fx name="audio/fx/Player/throwArrow.wav"  id="9"/>
+  <fx name="audio/fx/Player/shotArrow.wav"  id="9"/>
   <fx name="audio/fx/Player/walkingOnGrass.wav"  id="10"/>
   <fx name="audio/fx/Enemy/General/enemyDies.wav"  id="11"/>
   <fx name="audio/fx/Enemy/General/enemyHit.wav"  id="12"/>
@@ -39,5 +39,6 @@
   
   <fx name="audio/fx/Special/door/openStoneDoor.wav"  id="35"/>
    <fx name="audio/fx/Special/Shop/wallet.wav"  id="36"/>
+  <fx name="audio/fx/Objects/Key/key.wav"  id="37"/>
   
 </fx>

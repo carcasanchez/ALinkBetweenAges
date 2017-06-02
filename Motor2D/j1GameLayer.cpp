@@ -172,6 +172,7 @@ void j1GameLayer::PickObject(Object * object)
 
 	case BOSS_KEY:
 		em->player->bossKeyEquipped = true;
+		App->audio->PlayFx(37);
 		break;
 
 	case LIFE_POTION:
