@@ -14,8 +14,10 @@
     
   ## Combat
 
- The central piece of our game
  ![](https://fotos.subefotos.com/b043f1e01de16d1a3a53f2c0e3808236o.gif)
+ 
+ 
+ The central piece of our game is the sword based, agile combat.
   
   # The Team
  ![](https://fotos.subefotos.com/a09ca9373f31b9b83f4d4ff095a4cb32o.png)
