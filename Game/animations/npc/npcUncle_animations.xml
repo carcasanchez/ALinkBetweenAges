@@ -42,7 +42,7 @@
 	</RIGHT>
 
 	<LEFT>
-		<values name = "3" x ="46" y = "55" w = "13" h = "23" frameNumber = "2" margin = "1" pivot_x = "7" pivot_y = "21" flip= "0"/>
+		<values name = "3" x ="46" y = "55" w = "13" h = "23" frameNumber = "2" margin = "1" pivot_x = "7" pivot_y = "21" flip= "1"/>
 	</LEFT>
 
 	<loop value = "true"  />
