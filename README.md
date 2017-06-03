@@ -1,14 +1,13 @@
 
-![(https://fotos.subefotos.com/d1740900ec8419e126fe2dca89910b70o.png)](https://www.youtube.com/watch?v=1zKuvson0wY)   
-
-Click on the image to see the Launch Trailer
-
+![](https://fotos.subefotos.com/d1740900ec8419e126fe2dca89910b70o.png)
 
 
  A Link Between Ages is a 2D adventure-action game, developed by DuckDev, a student-based dev team hosted by the Polytecnical University of Cataluña (Spain), and built as a tribute to the well-known franchise The Legend Of Zelda and, more accurately, to the second game: A Link To the Past.   
   A Link Between Ages is a brand new game with brand new gameplay, taking inspiration of rogue-like games such as The Binding of Isaac.
   Expect speed-up gameplay and an action-centered game.   
+  
   Hope you enjoy it!  
+  [<h3>Watch the Lanch Trailer</h3>](https://www.youtube.com/watch?v=1zKuvson0wY&feature=youtu.be)
   
 <h1> The Game </h1>   
 
@@ -54,11 +53,11 @@ Click on the image to see the Launch Trailer
 <h2> Rubén Sardón - Programmer </h2>
  
  
-<h2> Social media</h1>
-<h2> Twitter </h2>    
-https://twitter.com/DuckDevv
-<h2> Facebook </h2>   
-https://es-es.facebook.com/DuckDevv/
+<h1> Social media</h1>  
+
+[<h2> Twitter </h2>](https://twitter.com/DuckDevv)
+
+[<h2> Facebook </h2>](https://es-es.facebook.com/DuckDevv/)
   
 
 
