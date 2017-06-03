@@ -293,8 +293,8 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 		em->player = em->CreatePlayer(App->game->playerX, App->game->playerY, YOUNG);
 	
 
-	em->player->currentPos.x = data.child("player").child("position").attribute("x").as_int();
-	em->player->currentPos.y = data.child("player").child("position").attribute("y").as_int();
+	em->player->currentPos.x = em->player->lastPos.x = data.child("player").child("position").attribute("x").as_int();
+	em->player->currentPos.y = em->player->lastPos.y = data.child("player").child("position").attribute("y").as_int();
 	em->player->life = data.child("player").attribute("life").as_int();
 	em->player->rupees = data.child("player").attribute("rupees").as_int();
 	em->player->arrows = data.child("player").attribute("arrows").as_int();
