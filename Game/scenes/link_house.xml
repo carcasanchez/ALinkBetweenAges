@@ -23,7 +23,7 @@
       </entities>
 
       <exits>
-        <exit destinyScene = "kakarikoVillage" destinyExit = "1" x = "15" y = "24" w="2" h="1" direction = "0"/>
+        <exit destinyScene = "kakarikoVillage" destinyExit = "1" x = "15" y = "25" w="2" h="1" direction = "0"/>
       </exits>
 
     </sector>
