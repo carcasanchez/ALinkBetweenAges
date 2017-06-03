@@ -168,6 +168,7 @@ bool j1Render::PostUpdate()
 bool j1Render::CleanUp()
 {
 	LOG("Destroying SDL render");
+	RELEASE(fade_bezier);
 	SDL_DestroyRenderer(renderer);
 	return true;
 }
