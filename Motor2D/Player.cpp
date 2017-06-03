@@ -89,7 +89,7 @@ bool Player::Spawn(std::string file, iPoint pos)
 		dodgeLimit = node.attribute("limit").as_int(50);
 
 		//max items
-		maxArrows = 15;
+		maxArrows = 30;
 		maxBombs = 10;
 		maxLifePotions = 1;
 		maxStaminaPotions = 1;
@@ -1027,16 +1027,16 @@ void Player::createSwordCollider()
 		switch (currentDir)
 	{
 	case(D_UP):
-		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 30, 20 }, COLLIDER_LINK_SWORD);
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 30, 22 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_DOWN):
-		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 30, 20 }, COLLIDER_LINK_SWORD);
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 30, 22 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_RIGHT):
-		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 20, 30 }, COLLIDER_LINK_SWORD);
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 22, 30 }, COLLIDER_LINK_SWORD);
 		break;
 	case(D_LEFT):
-		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 20, 30 }, COLLIDER_LINK_SWORD);
+		swordCollider = App->collisions->AddCollider({ currentPos.x, currentPos.y, 22, 30 }, COLLIDER_LINK_SWORD);
 		break;
 	}
 

@@ -42,7 +42,7 @@
 	</octorok>
 
 	<wizdrove>
-		<base life = "2" speed = "30" damage ="1"/>
+		<base life = "1" speed = "30" damage ="1"/>
 		<collider x = "9" y = "22" w = "15" h = "18" type = "3"/>
 		<ranges hostile= "280" out="280" />
 		<ratios attack = "1000"/>  <!-- In Miliseconds -->
@@ -51,7 +51,7 @@
 	</wizdrove>
 
 	<eyegore>
-		<base life = "9" speed = "1" rage_speed="50" rage_life ="3" damage ="1"/>
+		<base life = "9" speed = "1" rage_speed="35" rage_life ="3" damage ="1"/>
 		<collider x = "12" y = "22" w = "20" h = "20" type = "3"/>
   		<ranges hostile= "185" out="185" />
 		<ratios attack = "1000"/>  <!-- In Miliseconds -->

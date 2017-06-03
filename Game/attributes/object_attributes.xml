@@ -8,7 +8,7 @@
    </book>
 
    <arrow>
- 	 <base life = "1" damage = "1" speed ="500"/>
+ 	 <base life = "1" damage = "2" speed ="500"/>
  	 <collider x = "0" y = "0" w = "7" h = "15" type = "6"/>
  	 <animation file = "animations/objects/arrow_animations.xml"/>
  	 <texture file = "textures/Object_sprites/arrow.png"/>
