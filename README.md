@@ -1,5 +1,7 @@
 
-![](https://fotos.subefotos.com/d1740900ec8419e126fe2dca89910b70o.png)   
+![(https://fotos.subefotos.com/d1740900ec8419e126fe2dca89910b70o.png)](https://www.youtube.com/watch?v=1zKuvson0wY)   
+
+Click on the image to see the Launch Trailer
 
 
 
@@ -55,7 +57,8 @@
 <h2> Social media</h1>
 <h2> Twitter </h2>    
 https://twitter.com/DuckDevv
-<h2> Facebook </h2>
+<h2> Facebook </h2>   
+https://es-es.facebook.com/DuckDevv/
   
 
 
