@@ -9,14 +9,13 @@
   Hope you enjoy it!  
   
 <h1> The Game </h1>   
+
  ![](https://fotos.subefotos.com/a771dbf63c2349ffa76e10ffff750b54o.png)   
     As said, A Link Between Ages is a action-adventure, top-view game. Its gameplay its similar to the classic Zelda one, but with special enphasis on the battles.  
     
 <h2> The Combat </h2>   
 
- ![](https://fotos.subefotos.com/b043f1e01de16d1a3a53f2c0e3808236o.gif)
- 
- 
+ ![](https://fotos.subefotos.com/b043f1e01de16d1a3a53f2c0e3808236o.gif)    
  The central piece of our game is the sword based, agile combat.
   
   
