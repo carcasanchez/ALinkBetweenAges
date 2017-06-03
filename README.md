@@ -12,7 +12,7 @@
  ![](https://fotos.subefotos.com/a771dbf63c2349ffa76e10ffff750b54o.png)   
     As said, A Link Between Ages is a action-adventure, top-view game. Its gameplay its similar to the classic Zelda one, but with special enphasis on the battles.  
     
-<h2> The Combat </h2>
+<h2> The Combat </h2>   
 
  ![](https://fotos.subefotos.com/b043f1e01de16d1a3a53f2c0e3808236o.gif)
  
@@ -20,7 +20,8 @@
  The central piece of our game is the sword based, agile combat.
   
   
-<h1> The Team </h1>
+<h1> The Team </h1>   
+
  ![](https://fotos.subefotos.com/a09ca9373f31b9b83f4d4ff095a4cb32o.png)
   
  DuckDev team is formed by seven game development students from the Polytecnical University of Cataluña.
@@ -53,7 +54,8 @@
  
  
 <h2> Social media</h1>
-<h2> [Twitter](https://twitter.com/DuckDevv)  </h2> 
+<h2> Twitter </h2>    
+https://twitter.com/DuckDevv
 <h2> Facebook </h2>
   
 
