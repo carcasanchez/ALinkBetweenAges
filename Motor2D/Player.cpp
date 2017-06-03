@@ -270,7 +270,7 @@ bool Player::Idle()
 	}
 
 	//Dodge
-	/*switch (currentDir)
+	switch (currentDir)
 	{
 	case D_UP:
 		dodgeDir.y = -1;
@@ -285,7 +285,18 @@ bool Player::Idle()
 		dodgeDir.x = -1;
 		break;
 	}
-	*/
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (stamina - dodgeTax >= 0))
+	{
+		App->audio->PlayFx(25);
+		stamina -= dodgeTax;
+		App->game->hud->stamina_bar->WasteStamina(dodgeTax);
+		actionState = DODGING;
+		Change_direction();
+		dodging = true;
+		dodgeTimer.Start();
+	}
+	
 	if(App->input->GetKey(SDL_SCANCODE_RCTRL) == KEY_DOWN)
 		if (actionState != SPINNING && actionState != ATTACKING &&
 			actionState != JUMPING && stamina > spinTax && 
