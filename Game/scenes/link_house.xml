@@ -19,6 +19,8 @@
 
         <special>
           <!--rocks, grass, etc-->
+		<chest object_type="9" x="4" y="12" item_inside="4" id="18"/>
+
         </special>
       </entities>
 
