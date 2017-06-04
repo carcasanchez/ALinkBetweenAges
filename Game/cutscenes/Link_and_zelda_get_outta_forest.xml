@@ -251,7 +251,7 @@
 
     <step  n="35" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" I finlly found you guys! Where were you?"/>
+        <text text=" I finally found you guys! Where were you?"/>
       </element>
     </step>
 

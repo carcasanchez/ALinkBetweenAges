@@ -1255,8 +1255,10 @@ void Player::UseObject(float dt)
 		break;
 
 	case BOMB_SAC:
+		
 		if (bombs > 0)
 		{
+			App->audio->PlayFx(38);
 			bombs--;
 			App->game->em->ActiveObject(currentPos.x, currentPos.y, BOMB);
 		}

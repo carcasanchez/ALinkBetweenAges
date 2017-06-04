@@ -40,5 +40,7 @@
   <fx name="audio/fx/Special/door/openStoneDoor.wav"  id="35"/>
    <fx name="audio/fx/Special/Shop/wallet.wav"  id="36"/>
   <fx name="audio/fx/Objects/Key/key.wav"  id="37"/>
+<fx name="audio/fx/Objects/dropBomb.wav"  id="38"/>
+
   
 </fx>
