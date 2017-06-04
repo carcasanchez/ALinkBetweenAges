@@ -1529,7 +1529,7 @@ CS_Music::~CS_Music()
 
 void CS_Music::Play()
 {
-	App->audio->PlayMusic(path.c_str(), 0.5f);
+	App->audio->PlayMusic(path.c_str(), 0.0f);
 }
 //----------------------------------------
 
