@@ -14,11 +14,17 @@
  ![](https://fotos.subefotos.com/a771dbf63c2349ffa76e10ffff750b54o.png)   
     As said, A Link Between Ages is a action-adventure, top-view game. Its gameplay its similar to the classic Zelda one, but with special enphasis on the battles.  
     
-<h2> The Combat </h2>   
+<h2>Combat </h2>   
 
  ![](https://fotos.subefotos.com/b043f1e01de16d1a3a53f2c0e3808236o.gif)    
- The central piece of our game is the sword based, agile combat.
-  
+ The central piece of our game is the sword based, agile combat. The player has full control of the direction of his or her attacks, and the ability to make a quick dodge movement.   
+ But be careful! Dodging and attacking consumes stamina, and you can't do them if you are low! Stamina recharges automatically when you are not doing any of those actions.   
+ 
+ <h2>Exploration</h2>   
+ 
+ ![](https://fotos.subefotos.com/382385bb9c70a8a1c16f4cde353f2089o.png)   
+ 
+   The world of A Link Between Ages is vast an full of secrets. Explore the map, and you will encounter different items that will increase your arsenal.
   
 <h1> The Team </h1>   
 
