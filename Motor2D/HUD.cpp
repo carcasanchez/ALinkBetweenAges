@@ -217,8 +217,12 @@ bool Hud::Update(float dt)
 			{
 				if (start_continue->active)
 				{
-					StartGame();
-					App->LoadGame("saves.xml");
+					if (App->fs->Exists("saves.xml"))
+					{
+						App->LoadGame("saves.xml");
+						StartGame();
+					}
+					
 					//App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
 				}
 
@@ -365,8 +369,11 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 
 				if (load->active)
 				{
-					App->LoadGame("saves.xml");
-					loaded_game->Set_Active_state(true);
+					if (App->fs->Exists("saves.xml"))
+					{
+						App->LoadGame("saves.xml");
+						loaded_game->Set_Active_state(true);
+					}
 				}
 
 				if (controls->active)
@@ -464,16 +471,19 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 			{
 				if (start_continue->active)
 				{
-					StartGame();
-					App->LoadGame("saves.xml");
+					if (App->fs->Exists("saves.xml"))
+					{
+						App->LoadGame("saves.xml");
+						App->audio->PlayFx(34);
+						StartGame();
+					}
 				}
 
 				if (start_new_game->active)
-				{
-					StartGame();
+				{	
 					App->audio->PlayFx(34);
 					App->cutsceneM->StartCutscene(1);
-
+					StartGame();
 				}
 
 				if (start_quit->active)
