@@ -140,8 +140,8 @@
 <npc id="17" states="1">
      <dialogue state="0" states="1">
 	    <text value=" It's nice to see you again Link!"/>
-	    <text value=" I have managed to infiltrate into the castle and I have borrowed some bombs."/>
-  	    <text value=" They are inside that chest. You can take them if you want, I won't use them."/>
+	    <text value=" I have managed to escape from the castle and I have borrowed some bombs from there."/>
+  	    <text value=" They are inside that chest. You can take them if you want, I don't need them anymore."/>
      </dialogue>
 </npc>
 
