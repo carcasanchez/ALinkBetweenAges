@@ -195,8 +195,13 @@ bool Hud::Update(float dt)
 
 				if (load->active)
 				{
-					App->LoadGame("saves.xml");
-					loaded_game->Set_Active_state(true);
+					if (App->fs->Exists("saves.xml"))
+					{
+						App->LoadGame("saves.xml");
+						App->audio->PlayFx(34);
+						loaded_game->Set_Active_state(true);
+					}
+					
 				}
 
 				if (controls->active)
@@ -220,7 +225,7 @@ bool Hud::Update(float dt)
 					if (App->fs->Exists("saves.xml"))
 					{
 						App->LoadGame("saves.xml");
-						StartGame();
+				
 					}
 					
 					//App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
@@ -228,7 +233,6 @@ bool Hud::Update(float dt)
 
 				if (start_new_game->active)
 				{
-					StartGame();
 					App->cutsceneM->StartCutscene(1);
 					App->game->openChests.clear();
 				}
@@ -474,8 +478,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 					if (App->fs->Exists("saves.xml"))
 					{
 						App->LoadGame("saves.xml");
-						App->audio->PlayFx(34);
-						StartGame();
+						App->audio->PlayFx(34);			
 					}
 				}
 
@@ -483,7 +486,7 @@ void Hud::OnInputCallback(INPUTEVENT new_event, EVENTSTATE state)
 				{	
 					App->audio->PlayFx(34);
 					App->cutsceneM->StartCutscene(1);
-					StartGame();
+					App->game->openChests.clear();
 				}
 
 				if (start_quit->active)
@@ -687,16 +690,6 @@ void Hud::PauseOut(float dt)
 		GonePause();
 		pause_transition = PAUSE_NO_MOVE;
 	}
-}
-
-void Hud::StartGame()
-{
-	if(start_continue->active)
-		App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
-
-	start_menu_screen->Set_Active_state(false);
-	start_menu_screen->QuitFromRender();
-	hud_screen->Set_Active_state(true);
 }
 
 bool Hud::LoadHud(string file)

@@ -75,7 +75,14 @@ bool Scene::Load(const char* path, const bool reloadMap)
 		 return true;
 		}
 
+		App->game->hud->start_menu_screen->active = false;
+		App->game->hud->start_menu_screen->QuitFromRender();
 		App->game->hud->hud_screen->active = true;
+
+		if (App->cutsceneM->CutsceneReproducing())
+			App->inputM->SetGameContext(IN_CUTSCENE);
+		else App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
+
 		inGame = true;		
 		
 

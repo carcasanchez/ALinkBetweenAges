@@ -122,9 +122,6 @@ private:
 	void		GonePause();
 	void		PauseOut(float);
 
-	//Start game
-	void		StartGame();
-
 	//In game HUD methods
 	bool		LoadHud(string file);
 
