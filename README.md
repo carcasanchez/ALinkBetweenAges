@@ -7,7 +7,7 @@
   Expect speed-up gameplay and an action-centered game.   
   
   Hope you enjoy it!  
-  [<h3>Watch the Lanch Trailer</h3>](https://www.youtube.com/watch?v=1zKuvson0wY&feature=youtu.be)
+  [WATCH THE LAUNCH TRAILER](https://www.youtube.com/watch?v=1zKuvson0wY&feature=youtu.be)
   
 <h1> The Game </h1>   
 
