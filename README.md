@@ -25,10 +25,16 @@
  ![](https://fotos.subefotos.com/382385bb9c70a8a1c16f4cde353f2089o.png)   
  
    The world of A Link Between Ages is vast an full of secrets. Explore the map, and you will encounter different items that will increase your arsenal.
+   
+  <h2>Dialogue</h2>      
+  
+   ![](https://fotos.subefotos.com/db1d48117b69d6192454137309ad8de1o.png)   
+   
+   You are not alone! Talk to NPC to recollect info about the story and the world.  
   
 <h1> The Team </h1>   
 
- ![](https://fotos.subefotos.com/a09ca9373f31b9b83f4d4ff095a4cb32o.png)
+ ![](https://fotos.subefotos.com/a09ca9373f31b9b83f4d4ff095a4cb32o.png)   
   
  DuckDev team is formed by seven game development students from the Polytecnical University of Cataluña.
  
