@@ -332,6 +332,12 @@ bool j1GameLayer::Load(pugi::xml_node& data)
 
 	em->player->col->active = true;
 
+	em->player->UpdateCollider();
+
+	em->player->linearMovement = { 0, 0 };
+	em->player->sprite->tint = { 255, 255, 255, 255 };
+	em->player->actionState = IDLE;
+
 	return true;
 }
 
