@@ -58,6 +58,7 @@
 <h2> Francisco Ruiz - Game designer </h2>
  
 <h2> Eric Solá - UI Programmer </h2>
+
 [PERSONAL PAGE](http://heladodepistacho.github.io/Prueba1/)
  
 <h2> Alicia Díaz - Managment and character art </h2>
