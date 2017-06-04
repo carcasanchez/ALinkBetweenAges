@@ -3,10 +3,12 @@
   
    <npc id="1" states="2">
      <dialogue state="0">
-	<text value=" If you go to the forest remember you can attack in four directions using ABXY, and dodge with RB."/>
+<text value=" Zelda told me she will be on the forest, at south-west of the village."/>
+<text value=" Before you go, you should take something from the store. There are rupees on the chest, take them."/>
+	<text value=" Remember you can attack in four directions using ABXY, and dodge with RB."/>
      </dialogue>
      <dialogue state="1">
-   	<text value=" Forest is south-west of the village, Zelda told me she will be there."/>
+   	<text value=" Zelda is waiting for you on the forest."/>
      </dialogue>
    </npc>
   
@@ -31,7 +33,7 @@
 
    <npc id="4" states="1">
      <dialogue state="0" states="1">
-	<text value="Hi Link! Did you see my grandma? She wasn't in bed this morning."/>
+	<text value="Hi Link! Did you go to the shop? There is good stuff there."/>
      </dialogue>
    </npc>
 
@@ -51,12 +53,13 @@
 
    </npc>
 
-   <npc id="7">
-     <dialogue state="0" states="2">
-	<text value="Appearances can be deceptive Link, I will become a strong warrior."/>
+   <npc id="7" states="2">
+     <dialogue state="0">
+	<text value=" Someday I will become a strong warrior!."/>
      </dialogue>
      <dialogue state="1">
-	<text value="And remember, a bad writer blames his pen.  "/>
+	<text value=" My father told me once, a bad writer blames his pen."/>
+	<text value=" It's funny because pens doesn't understand him. Isn't It? Hahaha..."/>
      </dialogue>
    </npc>
 
@@ -84,35 +87,49 @@
 
   <npc id="12" states="1">
     <dialogue state="0">
-      <text value=" Sorry boy, but you are too small to go to the Castle alone. "/>
+      <text value=" Sorry boy, but you are too small to go to the Castle alone. Maybe another day."/>
     </dialogue>
   </npc>
 
   <npc id="13" states="1">
     <dialogue state="0">
-    <text value=" This is the way to the Wildlands. The entrance is forbidden, it's dangerous to go alone."/>
+    <text value=" This is the way to the Wildlands, the most dangeorus area on Hyrule."/>
+<text value=" The entrance is forbidden, it's dangerous to go alone, only the strongest warriors can leave the village and explore It."/>
       <text value=" Make a favour to yourself, and stay safe in the village. "/>
     </dialogue>
   </npc>
 
 
-<npc id="14" states="1">
-     <dialogue state="0" states="1">
+<npc id="14" states="2">
+     <dialogue state="0">
 	<text value=" Hello! I'm the shopman. The prices are:"/>
 	<text value=" 25 rupees x1 life potion."/>
 	<text value=" 10 rupees x1 stamina potion."/>
+	<text value=" You can use objects with LT and shift with LB."/>
      </dialogue>
-   </npc>
+<dialogue state="1">
+	<text value=" 25 rupees x1 life potion."/>
+	<text value=" 10 rupees x1 stamina potion."/>
+	<text value=" You can use objects with LT and shift with LB."/>
+     </dialogue>
 
-<npc id="15" states="1">
-     <dialogue state="0" states="1">
+</npc>
+
+<npc id="15" states="2">
+     <dialogue state="0">
 	<text value=" Hello! I'm the shopman. The prices are:"/>
 	<text value=" 25 rupees x1 life potion."/>
 	<text value=" 10 rupees x1 stamina potion."/>
 	<text value=" 15 rupees x5 arrows."/>
 	<text value=" There is a bow inside the chest. It's from an adventurer that didn't come again so, I guess you can keep it."/>
+	<text value=" Remember you can use objects with LT and shift with LB."/>
      </dialogue>
-   </npc>  
+<dialogue state="1">
+	<text value=" 25 rupees x1 life potion."/>
+	<text value=" 10 rupees x1 stamina potion."/>
+	<text value=" 15 rupees x5 arrows."/>
+</dialogue>
+</npc>  
   
 <npc id="16" states="1">
      <dialogue state="0" states="1">
