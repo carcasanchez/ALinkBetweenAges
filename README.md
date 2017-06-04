@@ -30,7 +30,9 @@
  Check every member contribution visiting their pages clicking on her names
  
  
-<h2> [Carlos Cabreira](https://carcasanchez.github.io/) - Team Leader and gameplay programmer </h2>
+<h2>Carlos Cabreira - Team Leader and gameplay programmer </h2>
+[twitter](https://twitter.com/carcasanchez)     
+[personal page](https://carcasanchez.github.io/)
   
  
 <h2> Francisco Ruiz - Game designer </h2>
