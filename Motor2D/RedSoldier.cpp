@@ -86,6 +86,7 @@ bool RedSoldier::Update(float dt)
 void RedSoldier::OnDeath()
 {
 	toDelete = true;
+
 	App->game->em->ActiveObject(currentPos.x, currentPos.y, RED_RUPEE);
 	App->audio->PlayFx(11);
 	App->game->em->ActiveObject(currentPos.x, currentPos.y, DEATH_CLOUD);

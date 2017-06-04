@@ -104,23 +104,30 @@
 
     <step  n="12" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" Zelda was looking for you, she went to the forest, maybe you should look for her"/>
+        <text text=" Zelda told me she will be on the forest, at south-west of the village. "/>
       </element>
     </step>
     
-     <step  n="13" start="-1" duration ="-1" input="true">
+<step  n="13" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" Remember you can attack in four directions using ABXY, and dodge with RB"/>
+        <text text=" Before you go, you should take something from the store. There are some rupees on the chest."/>
       </element>
     </step>
 
-    <step  n="14" start="-1" duration ="-1" input="false">
+
+     <step  n="14" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text=" Remember you can attack in four directions using ABXY, and dodge with RB."/>
+      </element>
+    </step>
+
+    <step  n="15" start="-1" duration ="-1" input="false">
       <element name="camera" action="fade_cam">
         <fading  bezier_time="1000"/>
       </element>
     </step>
 
-     <step  n="15" start="-1" duration ="-1" input="false">
+     <step  n="16" start="-1" duration ="-1" input="false">
       <element name="camera" action="unfade_cam">
         <fading  bezier_time="1000"/>
       </element>

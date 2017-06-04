@@ -87,8 +87,8 @@ bool GreenSoldier::Update(float dt)
 void GreenSoldier::OnDeath()
 {
 	toDelete = true;
-	int drop = rand() % 4;
-	if (drop == 1 || drop == 2)
+	int drop = rand() % 5;
+	if (drop == 2)
 	{
 		iPoint mapPos = App->map->WorldToMap(currentPos.x, currentPos.y);
 		App->game->em->ActiveObject(mapPos.x, mapPos.y, GREEN_RUPEE);
