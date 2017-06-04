@@ -43,20 +43,12 @@ bool j1Map::Start()
 
 bool j1Map::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (App->game->debug && App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		debug_collisions = !debug_collisions;
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		debug_path = !debug_path;
-	}
 
-	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
-	{
-		debug_enemy_collisions = !debug_enemy_collisions;
-	}
 
 	return true;
 }
@@ -81,7 +73,7 @@ void j1Map::Draw()
 		if(layer->properties.Get("Nodraw") != 0 && layer->properties.Get("Player")!=0 && debug_collisions == false)
 			continue;
 
-		if (layer->properties.Get("Nodraw") != 0 && layer->properties.Get("Enemy") != 0 && debug_enemy_collisions == false)
+		if (layer->properties.Get("Enemy") )
 			continue;
 
 		if (layer->properties.Get("Paintover") || layer->properties.Get("Bush") || layer->properties.Get("Jump") || layer->properties.Get("Projectile"))

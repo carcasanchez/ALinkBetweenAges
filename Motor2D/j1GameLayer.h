@@ -58,6 +58,7 @@ public:
 
 	std::vector<int> openChests;
 
+	bool debug = false;
 
 
 };

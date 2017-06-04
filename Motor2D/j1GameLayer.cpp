@@ -85,7 +85,11 @@ bool j1GameLayer::Update(float dt)
 	App->render->CameraFollow(em->player->currentPos);
 
 	
-	DebugFunc();
+	if (App->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN)
+		debug = !debug;
+
+	if(debug)
+		DebugFunc();
 		
 
 	return ret;

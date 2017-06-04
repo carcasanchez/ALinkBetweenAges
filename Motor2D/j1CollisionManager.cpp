@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "j1Map.h"
 #include "j1Pathfinding.h"
+#include "j1GameLayer.h"
 
 
 
@@ -91,7 +92,7 @@ bool j1CollisionManager::PreUpdate()
 
 bool j1CollisionManager::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (App->game->debug && App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		debug = !debug;
 
 
