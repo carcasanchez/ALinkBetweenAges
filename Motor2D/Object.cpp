@@ -129,6 +129,9 @@ bool Object::Spawn(std::string file, iPoint pos, OBJECT_TYPE type, DIRECTION dir
 			case ARROW_BUY:
 				attributes = attributes.child("arrow_buy");
 				break;
+			case DEATH_CLOUD:
+				attributes = attributes.child("death_cloud");
+				break;
 		}		
 
 		LoadAttributes(attributes);
@@ -271,3 +274,12 @@ bool SwordBolt::Update(float dt)
 	}
 	return false;
 }
+
+bool DeathCloud::Update(float dt)
+{
+	if (currentAnim->isOver())
+		life = -1;
+
+	return false;
+}
+

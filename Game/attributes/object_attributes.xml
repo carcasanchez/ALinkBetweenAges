@@ -204,5 +204,12 @@
     <texture file ="textures/Object_sprites/woodDoor.png"/>
   </wood_door>
 
+  <death_cloud>
+    <base life = "1"/>
+    <collider x = "23" y = "23" w = "46" h = "46" type = "21Add"/>
+    <animation file = "animations/objects/explosion_animations.xml"/>
+    <texture file = "textures/Object_sprites/explosion.png"/>
+  </death_cloud>
+
 
 </attributes>

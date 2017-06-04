@@ -11,9 +11,9 @@
       <values name = "1" x ="0" y = "0" w = "46" h = "46" frameNumber = "1" margin = "" pivot_x = "23" pivot_y = "23" flip= "0"/>
     </DOWN>
 
-    <loop value = "true" />
+    <loop value = "false" />
 
-    <speed value = "0.15" />
+    <speed value = "0.05" />
 
   </IDLE>
 </animations>

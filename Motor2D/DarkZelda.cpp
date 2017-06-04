@@ -143,6 +143,7 @@ void DarkZelda::OnDeath()
 		toDelete = true;
 		App->cutsceneM->StartCutscene(4);
 		App->game->hud->zelda_life_bar->Set_Active_state(false);
+		App->game->em->ActiveObject(currentPos.x, currentPos.y, DEATH_CLOUD);
 
 
 		if (bolt)

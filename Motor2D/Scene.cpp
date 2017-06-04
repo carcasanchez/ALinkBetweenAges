@@ -314,6 +314,7 @@ bool Scene::LoadMisc()
 		App->game->em->CreateDeadObject(1, -100, -100, ZELDA_ARROW);
 		App->game->em->CreateDeadObject(1, -100, -100, ARROW_DROP);
 		App->game->em->CreateDeadObject(1, -100, -100, BOMB_DROP);
+		App->game->em->CreateDeadObject(1, -100, -100, DEATH_CLOUD);
 		App->game->em->constantEntityIndex += 12;
 	}
 

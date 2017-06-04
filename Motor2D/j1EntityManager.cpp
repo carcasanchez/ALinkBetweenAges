@@ -408,6 +408,9 @@ Object * j1EntityManager::CreateDeadObject(int sector, int x, int y, OBJECT_TYPE
 	case SWORD_BOLT:
 		ret = new SwordBolt;
 		break;
+	case DEATH_CLOUD:
+		ret = new DeathCloud;
+		break;
 	}
 
 

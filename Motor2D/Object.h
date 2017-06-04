@@ -41,7 +41,8 @@ enum OBJECT_TYPE
 	STONE_DOOR,
 	EXPLOSION,
 	WOOD_DOOR,
-	ARROW_BUY
+	ARROW_BUY,
+	DEATH_CLOUD
 };
 
 class Object : public Entity
@@ -315,6 +316,16 @@ class SwordBolt : public Object
 public:
 
 	SwordBolt() {};
+
+	bool Update(float dt);
+
+};
+
+class DeathCloud : public Object
+{
+public:
+
+	DeathCloud() {};
 
 	bool Update(float dt);
 

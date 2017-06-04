@@ -96,6 +96,8 @@ void Tektite::OnDeath()
 		App->game->em->ActiveObject(currentPos.x, currentPos.y, LIFEHEART);
 	}
 
+	App->game->em->ActiveObject(currentPos.x, currentPos.y, DEATH_CLOUD);
+
 	App->audio->PlayFx(11);
 
 }

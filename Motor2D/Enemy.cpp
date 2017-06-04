@@ -12,6 +12,7 @@
 #include <time.h>
 #include "Player.h"
 #include "Animation.h"
+#include "j1EntityManager.h"
 #include "HUD.h"
 #include "j1Audio.h"
 
@@ -20,6 +21,7 @@
 void Enemy::OnDeath()
 {
 	toDelete = true;
+	App->game->em->ActiveObject(currentPos.x, currentPos.y, DEATH_CLOUD);
 }
 
 //Move between different points
