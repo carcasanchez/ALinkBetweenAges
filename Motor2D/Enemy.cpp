@@ -20,6 +20,7 @@
 
 void Enemy::OnDeath()
 {
+	App->audio->PlayFx(11);
 	toDelete = true;
 	App->game->em->ActiveObject(currentPos.x, currentPos.y, DEATH_CLOUD);
 }

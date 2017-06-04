@@ -12,6 +12,7 @@
 #include "j1SceneManager.h"
 #include "Scene.h"
 #include "j1Map.h"
+#include "Animation.h"
 #include "p2Defs.h"
 
 //=====Enemy Includes
@@ -455,6 +456,7 @@ Object * j1EntityManager::ActiveObject(int x, int y, OBJECT_TYPE type, int dir)
 				(*it)->col->active = true;
 			(*it)->UpdateCollider();
 
+			(*it)->currentAnim->Reset();
 			if (type == BOMB)
 			{
 				((Bomb*)(*it))->explode_counter.Start();

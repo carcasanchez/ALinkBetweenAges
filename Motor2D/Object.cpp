@@ -278,7 +278,9 @@ bool SwordBolt::Update(float dt)
 bool DeathCloud::Update(float dt)
 {
 	if (currentAnim->isOver())
+	{
 		life = -1;
+	}
 
 	return false;
 }
