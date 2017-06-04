@@ -70,9 +70,9 @@
  
 <h1> Social media</h1>  
 
-[<h2> Twitter </h2>](https://twitter.com/DuckDevv)
+[TWITTER](https://twitter.com/DuckDevv)
 
-[<h2> Facebook </h2>](https://es-es.facebook.com/DuckDevv/)
+[FACEBOOK](https://es-es.facebook.com/DuckDevv/)
   
 
 
