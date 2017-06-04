@@ -51,7 +51,7 @@
     </IMAGES>
 
     <TEXTS>
-      <string n="0" name="Text" active="false" pos_x="270" pos_y="750" text=" Hi Link... I got lost while training with my sword to prepare for the trip we talked about yesterday, do you remember? The WildLands look so beautiful... but they're really dangerous." />
+      <string n="0" name="Text" active="false" pos_x="270" pos_y="750" text=" Hi Link... I got lost while training with my sword to prepare for the trip we talked about yesterday. The WildLands look so beautiful... but they're really dangerous for me." />
     </TEXTS>
 
     <MUSIC>
@@ -109,7 +109,7 @@
 
     <step  n="8" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" I don't think I can do it, tomorrow's trip. I'm so upset... I try things so hard and I just keep failing and being useless, look at me, I went on my own for ten minutes and I got lost, I'm a mess."/>
+        <text text=" I try things so hard and I just keep failing and being useless."/>
       </element>
     </step>
 
@@ -233,7 +233,7 @@
 
     <step  n="32" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" Sorry for what happened in the forest Link, I'm so ashamed."/>
+        <text text=" Sorry for what happened in the forest, I'm so ashamed."/>
       </element>
     </step>
 
@@ -279,7 +279,7 @@
 
     <step  n="40" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" I need to be alone, see you tomorrow Link..."/>
+        <text text=" My father must be worried, see you Link."/>
       </element>
     </step>
 
@@ -710,7 +710,7 @@
 
     <step  n="120" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" So you don't want to talk, huh"/>
+        <text text=" So you don't want to talk, huh. There's been no one new arround here for over a decade."/>
       </element>
     </step>
 
@@ -728,7 +728,7 @@
 
     <step  n="123" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" We should inform the boss that this foreigner has come, let's go"/>
+        <text text=" We should inform the leader that this foreigner has come, let's go."/>
       </element>
     </step>
 

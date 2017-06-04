@@ -74,7 +74,7 @@
 
     <step  n="6" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" You abandoned me, Link. You disappeared, never to be seen again. I was thrown around and jailed, all these years. All these years without hearing a single word from you. Not. One. Word."/>
+        <text text=" You left me, Link. You disappeared, never to be seen again. I was thrown around and jailed, all these years. All these years without hearing a single word from you. Not. One. Word."/>
       </element>
     </step>
 

@@ -85,7 +85,7 @@
 
     <step  n="8" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
-        <text text=" Come with me, we have to celebrate your return and Ganon's death."/>
+        <text text=" Come with me, we have to celebrate the return to freedom."/>
       </element>
     </step>
 
