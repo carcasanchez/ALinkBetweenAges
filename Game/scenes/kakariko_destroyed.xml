@@ -73,7 +73,7 @@
         </enemies>
 
   	<special>	
-<chest object_type="9" x="166" y="198" item_inside="12"/>
+    <chest object_type="9" x="166" y="198" item_inside="12" id="7"/>
 
         </special>
 

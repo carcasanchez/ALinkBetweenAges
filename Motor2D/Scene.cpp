@@ -57,11 +57,14 @@ bool Scene::Load(const char* path, const bool reloadMap)
 
 
 		if (map.empty())
-		{			
+		{		
+			
 		 inGame = false;
 		 App->game->hud->hud_screen->active = false;
 		 App->game->hud->hud_screen->QuitFromRender();
 		 App->game->em->CleanUp();
+		 App->collisions->CleanUp();
+
 
 		 if (this->name == "logo")
 			 App->video->Initialize("introLogo.avi");

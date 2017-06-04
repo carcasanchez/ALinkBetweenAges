@@ -335,13 +335,14 @@ bool j1GameLayer::DebugFunc()
 {
 	iPoint mousePos;
 	App->input->GetMousePosition(mousePos.x, mousePos.y);
-	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
+	
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 	{
 		em->ActiveObject(mousePos.x, mousePos.y, BOMB);
-		LOG("%i, %i", mousePos.x, mousePos.y);
 	}
+
+	mousePos = App->map->WorldToMap(mousePos.x, mousePos.y);
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
