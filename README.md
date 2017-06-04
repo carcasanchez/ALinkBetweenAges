@@ -31,6 +31,13 @@
    ![](https://fotos.subefotos.com/db1d48117b69d6192454137309ad8de1o.png)   
    
    You are not alone! Talk to NPC to recollect info about the story and the world.  
+   
+   <h2> Story </h2>
+   
+   ![](https://fotos.subefotos.com/7f2acaa5a13c14920ac4fae1a4c1422co.png)
+   
+  Play in two stages of the life of Link! Follow him in a tale of revenge against the forces of Ganon.
+  
   
 <h1> The Team </h1>   
 
