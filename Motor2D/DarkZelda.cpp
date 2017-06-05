@@ -891,10 +891,10 @@ void DarkZelda::GetHit(Entity* agressor)
 	switch (phase)
 	{
 	case 1:
-		life -= App->game->em->player->damage;
-		sprite->tint = { 255, 150, 150, 255 };
 		enemyState = STEP_BACK;
 		damagedTimer.Start();
+		changingTeleport = true;
+		actionState = DISAPPEARING;
 		break;
 
 	case 2:
@@ -952,6 +952,14 @@ void DarkZelda::GetHit(Entity* agressor)
 
 bool DarkZelda::StepBack(float dt)
 {	
+	if (phase == 1)
+	{		
+		if (currentAnim->isOver())
+			life--;
+
+		return true;
+	}
+
 	if (phase == 2 && life <= 10)
 	{
 		OnDeath();
