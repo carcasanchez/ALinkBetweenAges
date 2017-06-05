@@ -10,13 +10,9 @@
     <UP>
       <values name = "0" x ="11" y = "121" w = "41" h = "40" frameNumber = "1" margin = "" pivot_x = "19" pivot_y = "31" flip= "0"/>
     </UP>
-    
-       <DOWN>
-      <values name = "1" x ="28" y = "9" w = "51" h = "39" frameNumber = "1" margin = "" pivot_x = "25" pivot_y = "30" flip= "0"/>
-    </DOWN>
 
     <LEFT>
-      <values name = "3" x ="11" y = "60" w = "41" h = "40" frameNumber = "1" margin = "" pivot_x = "15" pivot_y = "35" flip= "0"/>
+      <values name = "3" x ="52" y = "60" w = "41" h = "40" frameNumber = "1" margin = "" pivot_x = "15" pivot_y = "35" flip= "0"/>
     </LEFT>
 
     <loop value = "true" />
@@ -30,11 +26,11 @@
     <name value = "1"  />
 
     <UP>
-      <values name = "0" x ="11" y = "121" w = "41" h = "40" frameNumber = "2" margin = "1" pivot_x = "19" pivot_y = "31" flip= "0"/>
+      <values name = "0" x ="11" y = "121" w = "41" h = "40" frameNumber = "4" margin = "1" pivot_x = "19" pivot_y = "31" flip= "0"/>
     </UP>
 
     <LEFT>
-      <values name = "3" x ="11" y = "60" w = "41" h = "40" frameNumber = "2" margin = "1" pivot_x = "15" pivot_y = "35" flip= "0"/>
+      <values name = "3" x ="11" y = "60" w = "41" h = "40" frameNumber = "4" margin = "1" pivot_x = "15" pivot_y = "35" flip= "0"/>
     </LEFT>
     
  
