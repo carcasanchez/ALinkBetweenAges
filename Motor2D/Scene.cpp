@@ -81,7 +81,12 @@ bool Scene::Load(const char* path, const bool reloadMap)
 
 		if (App->cutsceneM->CutsceneReproducing())
 			App->inputM->SetGameContext(IN_CUTSCENE);
-		else App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
+		else
+		{
+			if(App->game->hud->load->active)
+				App->inputM->SetGameContext(GAMECONTEXT::IN_MENU);
+			else App->inputM->SetGameContext(GAMECONTEXT::IN_GAME);
+		}
 
 		inGame = true;		
 		
