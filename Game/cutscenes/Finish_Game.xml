@@ -21,6 +21,8 @@
     </ENEMIES>
 
     <IMAGES>
+      <image n="0" name="credits" active="false" x="12" y="200" w="700" h="494" pos_x="-20" pos_y="0" text="title_screen"/>
+      <image n="1" name="thank_you" active="false" x="724" y="200" w="700" h="495" pos_x="-20" pos_y="0" text="title_screen"/>
     </IMAGES>
 
     <TEXTS>
@@ -155,18 +157,66 @@
         <fading  bezier_time="2000"/>
       </element>
     </step>
-    
+
     <step  n="21" start="-1" duration ="-1" input="false">
+      <element name="credits" action="fade">
+        <fading to_black="true" bezier_time="500"/>
+      </element>
+    </step>
+
+    <step  n="22" start="-1" duration ="-1" input="false">
+      <element name="camera" action="unfade_cam">
+        <fading  bezier_time="3000"/>
+      </element>
+    </step>
+    
+     <step  n="23" start="-1" duration ="-1" input="false">
+      <element name="camera" action="fade_cam">
+        <fading  bezier_time="2000"/>
+      </element>
+    </step>
+
+    <step  n="24" start="-1" duration ="-1" input="false">
+      <element name="credits" action="fade">
+        <fading to_black="false" bezier_time="1000"/>
+      </element>
+    </step>
+    
+    <step  n="25" start="-1" duration ="-1" input="false">
+      <element name="thank_you" action="fade">
+        <fading to_black="true" bezier_time="1000"/>
+      </element>
+    </step>
+
+    <step  n="26" start="-1" duration ="-1" input="false">
+      <element name="camera" action="unfade_cam">
+        <fading  bezier_time="2500"/>
+      </element>
+    </step>
+
+    <step  n="27" start="-1" duration ="-1" input="false">
+      <element name="camera" action="fade_cam">
+        <fading  bezier_time="3000"/>
+      </element>
+    </step>
+
+    <step  n="28" start="-1" duration ="-1" input="false">
+      <element name="thank_you" action="fade">
+        <fading to_black="false" bezier_time="1500"/>
+      </element>
+    </step>
+
+    <step  n="29" start="-1" duration ="-1" input="false">
       <element name="intro" action="load"/>
     </step>
 
-    <step n="22" start ="-1" duration="-1" input="false">
+    <step n="30" start ="-1" duration="-1" input="false">
       <element name="camera" action="lock"/>
     </step>
 
-    <step  n="23" start="-1" duration ="-1" input="false">
+    <step  n="31" start="-1" duration ="-1" input="false">
       <element name="camera" action="unfade_cam">
-        <fading  bezier_time="1000"/>
+        <fading  bezier_time="1500"/>
       </element>
     </step>
     

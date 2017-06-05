@@ -1349,7 +1349,10 @@ void CS_Step::Fade()
 				if (tmp->img->active == false)
 					tmp->img->Set_Active_state(true);
 
-				tmp->img->SetAnimationTransition(T_FADE_TO, bezier_time, iPoint(0, 255));
+				if(fade_black)
+					tmp->img->SetAnimationTransition(T_FADE_TO, bezier_time, iPoint(0, 255));
+				else tmp->img->SetAnimationTransition(T_FADE_FROM, bezier_time, iPoint(0, 255));
+
 				bezier_active = true;
 			}
 			CheckFadeCompleted();

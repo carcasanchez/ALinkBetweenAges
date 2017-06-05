@@ -427,6 +427,7 @@ void UI_element::FadeFrom()
 	else
 	{
 		current_trans_time = 0;
+		alpha = 0;
 		current_transition = NO_AT;
 
 		return;

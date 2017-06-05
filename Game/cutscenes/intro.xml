@@ -11,7 +11,7 @@
 		</NPC>
 
 		<IMAGES>
-		   <image n="0" name="Z" active="false" x="258" y="691" w="86" h="128" pos_x="500" pos_y="350" text="title_screen"/>
+		   <image n="0" name="Z" active="false" x="406" y="29" w="86" h="128" pos_x="500" pos_y="350" text="title_screen"/>
 		   <image n="1" name="legend" active="false" x="78" y="0" w="302" h="164" pos_x="400" pos_y="322" text="title_screen"/>
 		</IMAGES>
 
