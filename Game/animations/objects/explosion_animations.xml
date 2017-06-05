@@ -13,7 +13,7 @@
 
     <loop value = "false" />
 
-    <speed value = "1" />
+    <speed value = "0.3" />
 
   </IDLE>
 </animations>

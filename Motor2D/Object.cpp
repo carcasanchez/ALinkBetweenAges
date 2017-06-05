@@ -188,9 +188,9 @@ bool Bomb::ExplodeBomb()
 
 bool BombExplosion::DeleteExplode()
 {
-	if (dead_counter.ReadMs() > dead_time)
+	if (currentAnim->isOver())
 	{
-		this->life = -1;
+		life = -1;
 		return true;
 	}
 	else
