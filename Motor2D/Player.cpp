@@ -475,7 +475,9 @@ bool Player::Attacking(float dt)
 		if (!App->quest->TriggerTalkToCallback(toTalk))
 			App->quest->StepTalkToCallback(toTalk);
 
-		toTalk->LookToPlayer();
+		if(toTalk->npcType != NPC_GANON)
+	    	toTalk->LookToPlayer();
+	
 		resetSwordCollider();
 		currentAnim->Reset();
 
