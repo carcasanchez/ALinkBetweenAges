@@ -919,7 +919,9 @@ void DarkZelda::GetHit(Entity* agressor)
 			holdStab = false;
 			currentAnim->Reset();
 			attackTimer.Start();
-			life -= agressor->damage;
+			if (agressor->type == OBJECT)
+				life -= 1;
+			else life -= agressor->damage;
 			sprite->tint = { 255, 0, 0, 255 };
 			enemyState = STEP_BACK;
 			actionState = IDLE;

@@ -158,6 +158,7 @@ void j1CollisionManager::DeleteCollider(Collider * c)
 
 //Utility
 Collider* j1CollisionManager::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module * callback)
+
 {
 	Collider* ret = new Collider(type, rect, callback);
 	colliders.push_back(ret);
