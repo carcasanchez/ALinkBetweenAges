@@ -55,7 +55,10 @@
 [PERSONAL PAGE](https://carcasanchez.github.io/)
   
  
-<h2> Francisco Ruiz - Game designer </h2>
+<h2> Francisco Ruiz - Game designer </h2>   
+
+[TWITTER](https://twitter.com/_dd_fran)  
+[PERSONAL PAGE](https://botttos.github.io/FranRuiz_DuckDevWeb/)   
  
 <h2> Eric Solá - UI Programmer </h2>
 
