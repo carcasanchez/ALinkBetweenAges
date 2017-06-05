@@ -15,6 +15,10 @@
       <values name = "3" x ="52" y = "60" w = "41" h = "40" frameNumber = "1" margin = "" pivot_x = "15" pivot_y = "35" flip= "0"/>
     </LEFT>
 
+    <DOWN>
+      <values name = "1" x ="28" y = "9" w = "51" h = "39" frameNumber = "1" margin = "" pivot_x = "25" pivot_y = "30" flip= "0"/>
+    </DOWN>
+
     <loop value = "true" />
 
     <speed value = "0.15" />
