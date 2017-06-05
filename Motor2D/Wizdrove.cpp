@@ -127,7 +127,7 @@ bool Wizdrove::ThrowingAttack(float dt)
 		}
 
 		slash->currentPos = currentPos;
-		slash->currentPos.y -= 5;
+		slash->currentPos.y -= 12;
 	
 	}
 
