@@ -43,7 +43,7 @@
   
 <h1> The Team </h1>   
 
- ![](https://fotos.subefotos.com/a09ca9373f31b9b83f4d4ff095a4cb32o.png)   
+ ![](https://fotos.subefotos.com/30828b68b34e52f156fd2e0e084d2f55o.png)   
   
  DuckDev team is formed by seven game development students from the Polytecnical University of Cataluña.
  
