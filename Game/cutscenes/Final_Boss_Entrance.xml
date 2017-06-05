@@ -61,115 +61,125 @@
     </step>
 
     <step  n="4" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="up">
+        <movement dest_x="49" dest_y="178" speed="0"/>
+      </element>
+    </step>
+
+    <step  n="5" start="-1" duration ="-1" input="false">
       <element name="camera" action="unfade_cam">
         <fading  bezier_time="2000"/>
       </element>
     </step>
 
-    <step  n="5" start="-1" duration ="-1" input="true">
+    <step  n="6" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text=" Hi Link. It's been some time, hasn't it? You've grown up."/>
       </element>
     </step>
 
-    <step  n="6" start="-1" duration ="-1" input="true">
+    <step  n="7" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text=" You left me, Link. You disappeared, never to be seen again. I was thrown around and jailed, all these years. All these years without hearing a single word from you. Not. One. Word."/>
       </element>
     </step>
 
-    <step  n="7" start="-1" duration ="-1" input="true">
+    <step  n="8" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text=" I grew tired, and I took matters into my own hands. And it was best this way, because I have learned to not rely on anyone anymore."/>
       </element>
     </step>
 
-    <step  n="8" start="-1" duration ="-1" input="false">
+    <step  n="9" start="-1" duration ="-1" input="false">
       <element name="Zelda_npc" action="move" dir="up">
         <movement dest_x="0" dest_y="170" speed="10"/>
       </element>
     </step>
+
+    <step  n="10" start="-1" duration ="-1" input="false">
+      <element name="Zelda_npc" action="animation_teleport"/>
+    </step>
     
-    <step  n="9" start="-1" duration ="-1" input="false">
+    <step  n="11" start="-1" duration ="-1" input="false">
       <element name="Zelda_npc" action="move" dir="teleport">
         <movement dest_x="48" dest_y="13" speed="10"/>
       </element>
     </step>
 
-    <step  n="10" start="-1" duration ="-1" input="false">
+    <step  n="12" start="-1" duration ="-1" input="false">
       <element name="camera" action="fade_cam">
         <fading  bezier_time="1000"/>
       </element>
     </step>
 
-    <step  n="11" start="-1" duration ="-1" input="false">
+    <step  n="13" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="teleport">
         <movement dest_x="49" dest_y="13" speed="10"/>
       </element>
     </step>
 
-    <step  n="12" start="-1" duration ="-1" input="false">
+    <step  n="14" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="up">
         <movement dest_x="49" dest_y="11" speed="10"/>
       </element>
     </step>
 
-    <step  n="13" start="-1" duration ="-1" input="false">
+    <step  n="15" start="-1" duration ="-1" input="false">
       <element name="Zelda_npc" action="move" dir="down">
         <movement dest_x="48" dest_y="13" speed="10"/>
       </element>
     </step>
 
-    <step n="14" start ="-1" duration="-1" input="false">
+    <step n="16" start ="-1" duration="-1" input="false">
       <element name="camera" action="free"/>
     </step>
 
-     <step  n="15" start="-1" duration ="-1" input="false">
+     <step  n="17" start="-1" duration ="-1" input="false">
       <element name="Link" action="move" dir="teleport">
         <movement dest_x="49" dest_y="178" speed="10"/>
       </element>
     </step>
 
-    <step  n="16" start="-1" duration ="-1" input="false">
+    <step  n="18" start="-1" duration ="-1" input="false">
       <element name="camera" action="unfade_cam">
         <fading  bezier_time="1000"/>
       </element>
     </step>
  
 
-     <step  n="17" start="-1" duration ="-1" input="true">
+     <step  n="19" start="-1" duration ="-1" input="true">
       <element name="Text" action="setstring">
         <text text=" Fight Me "/>
       </element>
     </step>
 
-    <step  n="18" start="-1" duration ="-1" input="false">
+    <step  n="20" start="-1" duration ="-1" input="false">
       <element name="camera" action="fade_cam">
         <fading  bezier_time="1000"/>
       </element>
     </step>
 
-    <step  n="19" start="-1" duration ="-1" input="false">
+    <step  n="21" start="-1" duration ="-1" input="false">
       <element name="Zelda_npc" action="move" dir="teleport">
         <movement dest_x="0" dest_y="0" speed="10"/>
       </element>
     </step>
 
-   <step n="20" start ="-1" duration="-1" input="false">
+   <step n="22" start ="-1" duration="-1" input="false">
       <element name="camera" action="lock"/>
     </step>
 
-    <step  n="21" start="-1" duration ="-1" input="false">
+    <step  n="23" start="-1" duration ="-1" input="false">
       <element name="camera" action="unfade_cam">
         <fading  bezier_time="1000"/>
       </element>
     </step>
 
-    <step  n="22" start="-1" duration ="-1" input="false">
+    <step  n="24" start="-1" duration ="-1" input="false">
       <element name="Zelda_enemy" action="create"/>
     </step>
 
-    <step  n="23" start="-1" duration ="0" input="false">
+    <step  n="25" start="-1" duration ="0" input="false">
       <element name="boss_music" action="play"/>
     </step>
     

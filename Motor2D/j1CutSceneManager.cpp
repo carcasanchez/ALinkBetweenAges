@@ -4,7 +4,9 @@
 #include "Entity.h"
 #include "Scene.h"
 #include "j1Gui.h"
+#include "DarkZelda.h"
 #include "UI_String.h"
+#include "Animation.h"
 #include "UI_element.h"
 #include "j1Map.h"
 #include "j1GameLayer.h"
@@ -763,6 +765,11 @@ bool CS_Step::DoAction(float dt)
 		Fade();
 		break;
 
+	case ACT_ZELDA_TELEPORT:
+		action_name = "teleprot_de_seldu";
+		ZeldaAnimation();
+		break;
+
 	default:
 		action_name = "none";
 		break;
@@ -885,6 +892,10 @@ void CS_Step::SetAction(pugi::xml_node& node)
 	{
 		act_type = ACT_UNFADE_CAM;
 		bezier_time = node.child("element").child("fading").attribute("bezier_time").as_int();
+	} 
+	else if (action_type == "animation_teleport")
+	{
+		act_type = ACT_ZELDA_TELEPORT;
 	}
 	else
 	{
@@ -1439,6 +1450,21 @@ bool CS_Step::ChangeAge()
 
 	}
 	return ret;
+}
+
+void CS_Step::ZeldaAnimation()
+{
+	
+	CS_npc* tmp = static_cast<CS_npc*>(this->element);
+	Entity* seldu = tmp->GetMyEntity();
+
+	if(!seldu->currentAnim->isOver())
+		seldu->actionState = ACTION_STATE::DISAPPEARING;
+	else
+	{
+		seldu->actionState = ACTION_STATE::IDLE;
+		FinishStep();
+	}
 }
 
 //Link the element of the cutscene with the step
