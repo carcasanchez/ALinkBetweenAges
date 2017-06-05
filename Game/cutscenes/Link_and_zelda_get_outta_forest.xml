@@ -131,7 +131,7 @@
 
     <step  n="12" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
-        <movement dest_x="100" dest_y="0" speed="200"/>
+        <movement dest_x="100" dest_y="0" speed="100"/>
       </element>
     </step>
 
@@ -255,7 +255,7 @@
 
     <step  n="36" start="-1" duration ="-1" input="false">
       <element name="Zelda" action="move" dir="right">
-        <movement dest_x="62" dest_y="0" speed="200"/>
+        <movement dest_x="62" dest_y="0" speed="100"/>
       </element>
     </step>
 
