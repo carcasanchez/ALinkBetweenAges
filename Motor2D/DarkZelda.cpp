@@ -893,7 +893,6 @@ void DarkZelda::GetHit(Entity* agressor)
 	case 1:
 		enemyState = STEP_BACK;
 		damagedTimer.Start();
-		changingTeleport = true;
 		actionState = DISAPPEARING;
 		break;
 
