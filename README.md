@@ -68,7 +68,7 @@
  
 <h3> Eric Solá - UI Programmer </h3>
 
-[PERSONAL PAGE](http://heladodepistacho.github.io/Prueba1/)
+[PERSONAL PAGE](http://heladodepistacho.github.io/UI-Programmer/)
  
 <h3> Alicia Díaz - Managment and character art </h3>
 
