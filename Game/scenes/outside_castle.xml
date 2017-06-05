@@ -14,9 +14,9 @@
         </npcs>
 
         <enemies>
-		<sample type = "1" x = "82" y = "82"/>
-		<sample type = "1" x = "69" y = "82"/>
-		<sample type = "2" x = "75" y = "81"/>
+		<sample type = "1" x = "82" y = "82" id="-5"/>
+		<sample type = "1" x = "69" y = "82" id="-6"/>
+		<sample type = "2" x = "75" y = "81" id="-7"/>
 		<sample type = "5" x = "87" y = "93"/>
         </enemies>
 
