@@ -12,7 +12,8 @@
 <h1> The Game </h1>   
 
  ![](https://fotos.subefotos.com/a771dbf63c2349ffa76e10ffff750b54o.png)   
-    As said, A Link Between Ages is a action-adventure, top-view game. Its gameplay its similar to the classic Zelda one, but with special enphasis on the battles.  
+    As said, A Link Between Ages is a action-adventure, top-view game. Gameplay its similar to the classic Zelda games, but with special emphasis on battles.  
+    *Gamepad recommended*
     
 <h2>Combat </h2>   
 
@@ -39,6 +40,7 @@
   Play in two stages of the life of Link! Follow him in a tale of revenge against the forces of Ganon.
   
   
+  
 <h1> The Team </h1>   
 
  ![](https://fotos.subefotos.com/a09ca9373f31b9b83f4d4ff095a4cb32o.png)   
@@ -49,30 +51,39 @@
  Check every member contribution visiting their pages clicking on her names
  
  
-<h2>Carlos Cabreira - Team Leader and gameplay programmer </h2>   
+ 
+<h3>Carlos Cabreira - Team Leader and gameplay programmer </h3>   
 
 [TWITTER](https://twitter.com/carcasanchez)     
 [PERSONAL PAGE](https://carcasanchez.github.io/)
   
  
-<h2> Francisco Ruiz - Game designer </h2>   
+ 
+<h3> Francisco Ruiz - Game designer </h3>   
 
 [TWITTER](https://twitter.com/_dd_fran)  
 [PERSONAL PAGE](https://botttos.github.io/FranRuiz_DuckDevWeb/)   
+
+
  
-<h2> Eric Solá - UI Programmer </h2>
+<h3> Eric Solá - UI Programmer </h3>
 
 [PERSONAL PAGE](http://heladodepistacho.github.io/Prueba1/)
  
-<h2> Alicia Díaz - Managment and character art </h2>
+<h3> Alicia Díaz - Managment and character art </h3>
+
+
 
 [PERSONAL PAGE](https://aliciadr.github.io/AliciaDiaz-Management/)
  
-<h2> Isabel Lammenns - QA and character art </h2>
+<h3> Isabel Lammenns - QA and character art </h3>
  
-<h2> Tere Miranda - Art director </h2>
+<h3> Tere Miranda - Art director </h3>
  
-<h2> Rubén Sardón - Programmer </h2>
+<h3> Rubén Sardón - Programmer </h3>
+ 
+ 
+ 
  
  
 <h1> Social media</h1>  
