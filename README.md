@@ -74,7 +74,7 @@
 
 
 
-[PERSONAL PAGE](https://aliciadr.github.io/AliciaDiaz-Management/)
+[PERSONAL PAGE](https://aliciadr.github.io/Alicia-Diaz-Riera/)
  
 <h3> Isabel Lammenns - QA and character art </h3>
  
