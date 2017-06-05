@@ -127,7 +127,7 @@
   </heart_container>
 
 <life_potion>
-    <base life = "1" price = "25"/>
+    <base life = "1" price = "20"/>
     <collider x = "7" y = "8" w = "14" h = "16" type = "12"/>
     <animation file = "animations/objects/life_potion_animations.xml"/>
     <texture file = "textures/Object_sprites/lifePotion.png"/>
