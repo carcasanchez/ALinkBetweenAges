@@ -29,9 +29,9 @@
 		<sample type = "7" x = "111" y = "80" id="-6"> </sample >
 		
 		
-		<sample type = "7" x = "171" y = "165"> </sample >
-		<sample type = "7" x = "132" y = "99"> </sample >
-		<sample type = "7" x = "142" y = "80"> </sample >
+		<sample type = "7" x = "171" y = "165" id="-9"> </sample >
+		<sample type = "7" x = "132" y = "99" id="-8"> </sample >
+		<sample type = "7" x = "142" y = "80" id="-7"> </sample >
 
 		<sample type = "7" x = "160" y = "325"> </sample >
 		<sample type = "7" x = "167" y = "274"> </sample >
