@@ -65,6 +65,8 @@
 [PERSONAL PAGE](http://heladodepistacho.github.io/Prueba1/)
  
 <h2> Alicia Díaz - Managment and character art </h2>
+
+[PERSONAL PAGE](https://aliciadr.github.io/AliciaDiaz-Management/)
  
 <h2> Isabel Lammenns - QA and character art </h2>
  
