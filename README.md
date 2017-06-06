@@ -1,7 +1,9 @@
-# A Link Between Ages (Alpha)
+# A Link Between Ages 
 
+https://carcasanchez.github.io/ALinkBetweenAges/
 https://github.com/carcasanchez/TheLinkedProject/releases
 https://twitter.com/DuckDevv
+https://es-es.facebook.com/DuckDevv/
 
 ### Developed by DuckDev
 
@@ -11,11 +13,15 @@ that preserves the spirit of the original game, but with a new gameplay and plot
 
 Link has a quiet life in the Kakariko village. One day, the princess Zelda goes to the western forest, and Link follows her...
 
+### How to play
+ 
+A Link Between Ages doesn't need installation. Execute the ALinkBetweenAges.exe and play it!
+Follow the story and explore the world to win the game.
 
-The game is meant to be played with Game Controller. However, there are keyboard debug controls that you can use to explore the game.
-Be careful! These keyboard controls are not polished and there are missing features, since they are not intended to be in the final game. 
+Playing with gamepad is advised.
 
-Controls (gamepad):
+
+## Controls (gamepad):
 - Left joystick: move
 - ABXY: attack/talk with NPC/open chests
 - Right bumper: dodge
@@ -24,20 +30,39 @@ Controls (gamepad):
 - Right Trigger: use Spin Attack (you need a special book to learn this movement)
 - Start: Open pause menu
 
-Controls (keyboard):
+## Controls (keyboard):
 - WASD: move
-- Directional arrows: attack/talk with NPC/open chests
+- Directional arrows: attack/talk with NPC/open chests/move cursor in menu
 - Spacebar: dodge
 - ESC: open menu
 - Intro: skip cutscene text
-- V: spawn arrow
-- B: spawn bomb
+- Left alt: use object (to use the bow, press any directional arrow at the same time)
+- Left Shift: change equipped object
+- Right Control: use spin attack
 
-DEBUG HACK: press F2 to skip to the final battle.
+## Debug features (allow them pressing first º)
+-Keynumber 2: make Link young
+-Keynumber 3: make Link adult
+-Keynumber 4 to 9: spawn enemies in the mouse position.
+-F1: active collisions visibility
+-F2: jump to the final battle (don't do this inside a cutscene!)
+-L: life refill
+-M: increase rupee counter by 5
+-N: put stamina potion in inventory
+-Left Click: spawn bomb on mouse position
+-Right Click: teleport Link to mouse position
+-Left Control + keynumbers 1, 2, 3 or 4: activate cutscenes
 
 
 
 ### Changelog:
+
+## Gold (v1.5)
+
+-All cinematics in its final version
+-All bugs fixed
+-Art polish
+-Implemented missing sprites and animations
 
 ## Alpha (v0.9)
 
