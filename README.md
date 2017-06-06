@@ -97,9 +97,9 @@
  
 <h3> Rubén Sardón - Programmer </h3>
  
+ [PERSONAL PAGE]( https://cumus.github.io/RubCode/)
  
- 
- 
+
  
 <h1> Social media</h1>  
 
