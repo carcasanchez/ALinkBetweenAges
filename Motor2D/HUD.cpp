@@ -5,6 +5,7 @@
 #include "j1FileSystem.h"
 #include "j1CutSceneManager.h"
 #include "j1GameLayer.h"
+#include "j1Window.h"
 #include "j1EntityManager.h"
 #include "p2Log.h"
 
@@ -550,6 +551,11 @@ bool Hud::LoadPause(string file)
 
 		App->gui->CreateScreen(main_menu);
 		App->gui->CreateScreen(start_menu_screen);
+
+		//Visente for gold
+		main_menu->Interactive_box.y = App->win->screen_surface->clip_rect.y + main_menu->Interactive_box.y;
+
+
 	
 		
 	}
