@@ -44,7 +44,7 @@ Playing with gamepad is advised.
 -Keynumber 2: make Link young
 -Keynumber 3: make Link adult
 -Keynumber 4 to 9: spawn enemies in the mouse position.
--F1: active collisions visibility
+-F1: show/hide collisions 
 -F2: jump to the final battle (don't do this inside a cutscene!)
 -L: life refill
 -M: increase rupee counter by 5
