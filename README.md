@@ -48,7 +48,7 @@
  DuckDev team is formed by seven game development students from the Polytecnical University of Cataluña.
  
  
- Check every member contribution visiting their pages clicking on her names   
+ Check every member contribution visiting their personal pages.
  
  ![](https://fotos.subefotos.com/644979c57a49ac25982f4a78c1956f9fo.jpg)
  
@@ -56,8 +56,8 @@
  
 <h3>Carlos Cabreira - Team Leader and gameplay programmer </h3>   
 
-[TWITTER](https://twitter.com/carcasanchez)     
 [PERSONAL PAGE](https://carcasanchez.github.io/CarlosCabreira/)
+[TWITTER](https://twitter.com/carcasanchez)     
   
  
  
