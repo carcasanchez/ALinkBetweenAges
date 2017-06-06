@@ -43,7 +43,7 @@
   
  <h1>Download and play the game</h1>
  
-![DOWNLOAD THE GAME FROM HERE]()
+![DOWNLOAD THE GAME FROM HERE](https://github.com/carcasanchez/ALinkBetweenAges/releases/tag/v1.5)
  
    A Link Between Ages doesn't require installation. Only download the latest release, uncompress it, and look for the executable inside the folder. You can see the controls inside the README file.   
    Also, you can open the config.xml to change between different resolutions and screen options.    
