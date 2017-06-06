@@ -41,6 +41,13 @@
   Play in two stages of the life of Link! Follow him in a tale of revenge against the forces of Ganon.
   
   
+ <h1>Download and play the game</h1>
+ 
+![DOWNLOAD THE GAME FROM HERE]()
+ 
+   A Link Between Ages doesn't require installation. Only download the latest release, uncompress it, and look for the executable inside the folder. You can see the controls inside the README file.   
+   Also, you can open the config.xml to change between different resolutions and screen options.    
+  *Do not alter nor delete any other file!* The game could not work if something is missing. If you are in this situation, try to download the release again. 
   
 <h1> The Team </h1>   
 
