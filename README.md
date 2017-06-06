@@ -93,7 +93,7 @@
  
 <h3> Tere Miranda - Art & Audio director </h3>
 
-[PERSONAL PAGE](https://sunleys.github.io/Sunleys_ArtAudio/)
+[PERSONAL PAGE](https://sunleys.github.io/TereMiranda/)
  
 <h3> Rubén Sardón - Programmer </h3>
  
