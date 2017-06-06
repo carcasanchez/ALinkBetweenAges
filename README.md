@@ -48,7 +48,9 @@
  DuckDev team is formed by seven game development students from the Polytecnical University of Cataluña.
  
  
- Check every member contribution visiting their pages clicking on her names
+ Check every member contribution visiting their pages clicking on her names   
+ 
+ ![](https://fotos.subefotos.com/644979c57a49ac25982f4a78c1956f9fo.jpg)
  
  
  
@@ -97,7 +99,7 @@
 <h1>Task spreadsheet</h1>
 
 Check the task tracking, containing every task done within the project, the estimated time and the real time.
-Click on the names below to see every developer tasks.
+Click on the names below to see every developer tasks.   
 [GO TO THE TASKS TABLE](https://drive.google.com/open?id=1wDSiRsOovnBoKADgMYLOYe8cL9ciBohrWiShAYju1xI)  
   
 
