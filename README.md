@@ -41,7 +41,7 @@
   Play in two stages of the life of Link! Follow him in a tale of revenge against the forces of Ganon.
   
   
- <h1>Download and play the game</h1>
+ <h1>Download and play the game</h1>   
  
 [DOWNLOAD THE GAME FROM HERE](https://github.com/carcasanchez/ALinkBetweenAges/releases/tag/v1.5)
  
