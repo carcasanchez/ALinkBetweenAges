@@ -61,8 +61,8 @@
  
 <h3> Francisco Ruiz - Game designer </h3>   
 
-[TWITTER](https://twitter.com/_dd_fran)  
 [PERSONAL PAGE](https://botttos.github.io/FranRuiz/)   
+[TWITTER](https://twitter.com/_dd_fran)  
 
 
  
