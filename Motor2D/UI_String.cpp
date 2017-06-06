@@ -23,7 +23,7 @@ bool UI_String::Update_Draw()
 	{
 		SDL_Rect tmp = {0, 0, 405,75 };
 		App->render->Blit((SDL_Texture*)App->gui->GetAtlas(), (Interactive_box.x - App->render->camera.x - 15) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y - 15) * App->gui->scale_factor, &tmp);
-		App->render->Blit(text_texture, (Interactive_box.x - App->render->camera.x) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor);
+		App->render->Blit(text_texture, (Interactive_box.x - App->render->camera.x + 10) * App->gui->scale_factor, (Interactive_box.y - App->render->camera.y) * App->gui->scale_factor);
 		
 	}
 		
