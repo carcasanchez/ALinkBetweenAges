@@ -97,7 +97,7 @@
 <h1>Task spreadsheet</h1>
 
 Check the task tracking, containing every task done within the project, the estimated time and the real time.
-Click on every name below to see every  
+Click on the names below to see every developer tasks.
 [GO TO THE TASKS TABLE](https://drive.google.com/open?id=1wDSiRsOovnBoKADgMYLOYe8cL9ciBohrWiShAYju1xI)  
   
 
