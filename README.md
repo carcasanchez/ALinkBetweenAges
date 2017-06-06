@@ -78,7 +78,9 @@
  
 <h3> Isabel Lammenns - QA and character art </h3>
  
-<h3> Tere Miranda - Art director </h3>
+<h3> Tere Miranda - Art & Audio director </h3>
+
+[PERSONAL PAGE](https://sunleys.github.io/Sunleys_ArtAudio/)
  
 <h3> Rubén Sardón - Programmer </h3>
  
