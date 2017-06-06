@@ -7,7 +7,8 @@
   Expect speedy gameplay and an action-centered game.   
   
   Hope you enjoy it!  
-  [WATCH THE LAUNCH TRAILER](https://www.youtube.com/watch?v=1zKuvson0wY&feature=youtu.be)
+  [WATCH THE LAUNCH TRAILER](https://www.youtube.com/watch?v=1zKuvson0wY&feature=youtu.be)   
+  [WATCH THE GAMEPLAY VIDEO](https://www.youtube.com/watch?v=R-CC0O0SMIA)   
   
 <h1> The Game </h1>   
 
