@@ -93,6 +93,12 @@
 [TWITTER](https://twitter.com/DuckDevv)
 
 [FACEBOOK](https://es-es.facebook.com/DuckDevv/)
+
+<h1>Task spreadsheet<h1/>
+
+Check the task tracking, containing every task done within the project, the estimated time and the real time.
+Click on every name below to see every  
+[GO TO THE TASKS TABLE](https://drive.google.com/open?id=1wDSiRsOovnBoKADgMYLOYe8cL9ciBohrWiShAYju1xI)  
   
 
 
