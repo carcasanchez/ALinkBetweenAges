@@ -87,6 +87,9 @@
 [PERSONAL PAGE](https://aliciadr.github.io/Alicia-Diaz-Riera/)
  
 <h3> Isabel Lammenns - QA and character art </h3>
+
+
+[PERSONAL PAGE](https://ilammens.github.io/IsabelLammens_DuckDev/)
  
 <h3> Tere Miranda - Art & Audio director </h3>
 
