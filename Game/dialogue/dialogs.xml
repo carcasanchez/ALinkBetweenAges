@@ -1,0 +1,175 @@
+<!-- Dialogues -->
+<npcs>
+  
+   <npc id="1" states="2">
+     <dialogue state="0">
+<text value=" Zelda told me she will be on the forest, at south-west of the village."/>
+<text value=" Before you go, you should take something from the store. There are rupees on the chest, take them."/>
+	<text value=" Remember you can attack in four directions using ABXY, and dodge with RB."/>
+     </dialogue>
+     <dialogue state="1">
+   	<text value=" Zelda is waiting for you on the forest."/>
+     </dialogue>
+   </npc>
+  
+   <npc id="2" states="2">
+     <dialogue state="0">
+	<text value=" A blink is enough to make a peaceful man a warrior."/>
+     </dialogue>
+     <dialogue state="1">
+	<text value=" In for a green rupee in for a red rupee."/>
+     </dialogue>
+
+   </npc>
+
+   <npc id="3" states="2">
+     <dialogue state="0">
+	<text value="I love playing banjo in my free time, my grandpa Pete Seeger was a good teacher."/>
+     </dialogue>
+     <dialogue state="1">
+	<text value="I think everybody can be happy with a banjo in their lives. Am I right?"/>
+     </dialogue>
+   </npc>
+
+   <npc id="4" states="1">
+     <dialogue state="0" states="1">
+	<text value="Hi Link! Did you go to the shop? There is good stuff there."/>
+     </dialogue>
+   </npc>
+
+   <npc id="5" states="1">
+     <dialogue state="0">
+	<text value="It is the early bird that catches the worm."/>
+</dialogue>
+   </npc>
+
+   <npc id="6" states="2">
+     <dialogue state="0">
+	<text value=" Hey! You don't talk much. I like you."/>
+     </dialogue>
+<dialogue state="1">
+	<text value=" Good boy."/>
+     </dialogue>
+
+   </npc>
+
+   <npc id="7" states="2">
+     <dialogue state="0">
+	<text value=" Someday I will become a strong warrior!."/>
+     </dialogue>
+     <dialogue state="1">
+	<text value=" My father told me once, a bad writer blames his pen."/>
+	<text value=" It's funny because pens doesn't understand him. Isn't It? Hahaha..."/>
+     </dialogue>
+   </npc>
+
+
+<npc id="9" states="1">
+     <dialogue state="0" states="1">
+	<text value=" <-- Castle"/>
+<text value=" --> Kakariko Village"/>
+     </dialogue>
+   </npc>
+
+<npc id="10" states="1">
+     <dialogue state="0" states="1">
+	<text value=" <-- Kakariko Village"/>
+<text value=" --> Wildlands"/>
+     </dialogue>
+   </npc>
+
+<npc id="11" states="1">
+     <dialogue state="0" states="1">
+	<text value=" <-- Forest"/>
+<text value=" --> Kakariko Village"/>
+     </dialogue>
+   </npc>
+
+  <npc id="12" states="1">
+    <dialogue state="0">
+      <text value=" Sorry boy, but you are too small to go to the Castle alone. Maybe another day."/>
+    </dialogue>
+  </npc>
+
+  <npc id="13" states="1">
+    <dialogue state="0">
+    <text value=" This is the way to the Wildlands, the most dangeorus area on Hyrule."/>
+<text value=" The entrance is forbidden, it's dangerous to go alone, only the strongest warriors can leave the village and explore It."/>
+      <text value=" Make a favour to yourself, and stay safe in the village. "/>
+    </dialogue>
+  </npc>
+
+
+<npc id="14" states="2">
+     <dialogue state="0">
+	<text value=" Hello! I'm the shopman. The prices are:"/>
+	<text value=" 25 rupees x1 life potion."/>
+	<text value=" 10 rupees x1 stamina potion."/>
+	<text value=" You can use objects with LT and shift with LB."/>
+     </dialogue>
+<dialogue state="1">
+	<text value=" 25 rupees x1 life potion."/>
+	<text value=" 10 rupees x1 stamina potion."/>
+	<text value=" You can use objects with LT and shift with LB."/>
+     </dialogue>
+
+</npc>
+
+<npc id="15" states="2">
+     <dialogue state="0">
+	<text value=" Hello! I'm the shopman. The prices are:"/>
+	<text value=" 25 rupees x1 life potion."/>
+	<text value=" 10 rupees x1 stamina potion."/>
+	<text value=" 15 rupees x5 arrows."/>
+	<text value=" There is a bow inside the chest. It's from an adventurer that didn't come again so, I guess you can keep it."/>
+	<text value=" Remember you can use objects with LT and shift with LB."/>
+     </dialogue>
+<dialogue state="1">
+	<text value=" 25 rupees x1 life potion."/>
+	<text value=" 10 rupees x1 stamina potion."/>
+	<text value=" 15 rupees x5 arrows."/>
+</dialogue>
+</npc>  
+  
+<npc id="16" states="1">
+     <dialogue state="0" states="1">
+	    <text value=" It seems to be dead."/>
+     </dialogue>
+   </npc>
+
+<npc id="17" states="1">
+     <dialogue state="0" states="1">
+	    <text value=" It's nice to see you again Link!"/>
+	    <text value=" I have managed to escape from the castle and I have borrowed some bombs from there."/>
+  	    <text value=" They are inside that chest. You can take them if you want, I don't need them anymore."/>
+     </dialogue>
+</npc>
+
+  <npc id="18" states="1">
+    <dialogue state="0" states="1">
+      <text value="It's nice to see you again Link!"/>
+    </dialogue>
+  </npc>
+
+<npc id="19" states="1">
+    <dialogue state="0" states="1">
+      <text value="Shop."/>
+    </dialogue>
+  </npc>
+
+<npc id="20" states="1">
+    <dialogue state="0" states="1">
+      <text value=" Bisente's book allows Link to spin his sword with RT button."/>
+    </dialogue>
+  </npc>
+
+
+<npc id="21" states="1">
+    <dialogue state="0" states="1">
+      <text value=""/>
+    </dialogue>
+  </npc>
+
+
+
+</npcs>

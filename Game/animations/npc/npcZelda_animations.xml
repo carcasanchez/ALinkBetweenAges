@@ -1,0 +1,51 @@
+﻿<!-- Zelda Animations -->
+<animations>
+
+  <name value = "8" />
+
+  <IDLE>
+    <name value = "0"  />
+
+    <UP>
+      <values name = "0" x ="22" y = "1" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="1" y = "1" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="43" y = "1" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="64" y = "1" w = "22" h = "27" frameNumber = "1" margin = "" pivot_x = "10" pivot_y = "21" flip= "0"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </IDLE>
+
+<WALKING>
+    <name value = "1"  />
+
+    <UP>
+      <values name = "0" x ="94" y = "1" w = "15" h = "25" frameNumber = "2" margin = "1" pivot_x = "7" pivot_y = "21" flip= "0"/>
+    </UP>
+
+    <RIGHT>
+      <values name = "2" x ="134" y = "1" w = "13" h = "24" frameNumber = "2" margin = "1" pivot_x = "8" pivot_y = "21" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="134" y = "1" w = "13" h = "24" frameNumber = "2" margin = "1" pivot_x = "8" pivot_y = "21" flip= "1"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </WALKING>
+</animations>

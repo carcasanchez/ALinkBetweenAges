@@ -1,0 +1,167 @@
+<!-- Castle Inside -->
+<scene name = "insideCastle" map= "insideCastle.tmx">
+  <sectors>
+    <sector>
+      <!--sector 1-->
+
+      <music file="audio/music/kakarikoDestroyed.ogg"/>
+
+      
+      <entities>
+
+        <npcs>
+        </npcs>
+
+        <enemies>
+          <sample type = "1" x = "107" y = "209">
+			<patrol x="107" y = "209"/>
+			<patrol x="107" y = "218"/>
+ 	 	</sample >
+
+ 		<sample type = "1" x = "97" y = "182">
+			<patrol x = "97" y = "182"/>
+			<patrol x = "97" y = "191"/>
+ 	 	</sample >
+		<sample type = "1" x = "120" y = "184">
+			<patrol x = "120" y = "184"/>
+			<patrol x = "120" y = "191"/>
+ 	 	</sample >
+
+		<sample type = "1" x = "140" y = "174">
+			<patrol x = "140" y = "174"/>
+			<patrol x = "130" y = "174"/>
+ 	  	</sample >
+		<sample type = "1" x = "123" y = "164">
+			<patrol x = "123" y = "164"/>
+			<patrol x="123" y="170"/>
+ 	  	</sample >
+		<sample type = "1" x = "81" y = "165">
+			<patrol x = "81" y = "165"/>
+			<patrol x="79" y = "174"/>
+ 	  	</sample >
+
+		<sample type = "1" x = "121" y = "125">
+			<patrol x = "121" y = "125"/>
+			<patrol x = "115" y = "125"/>
+ 	  	</sample >
+		<sample type = "1" x = "95" y = "126">
+			<patrol x = "95" y = "126"/>
+			<patrol x = "105" y = "126"/>
+ 	  	</sample >
+		<sample type = "1" x = "72" y = "121">
+			<patrol x = "72" y = "121"/>
+			<patrol x = "85" y = "112"/>
+ 	  	</sample >
+		<sample type = "1" x = "144" y = "121">
+			<patrol x = "144" y = "144"/>
+			<patrol x = "136" y = "112"/>
+ 	  	</sample >
+
+
+		<sample type = "1" x = "41" y = "158"/>
+		<sample type = "1" x = "31" y = "158"/>
+
+		<sample type = "1" x = "186" y = "178"/>
+
+		<sample type = "1" x = "246" y = "176"/>
+		<sample type = "1" x = "232" y = "145"/>
+		<sample type = "1" x = "250" y = "105"/>
+
+
+		<sample type = "1" x = "102" y = "117"/>
+		<sample type = "1" x = "115" y = "117"/>
+
+
+		<sample type = "1" x = "108" y = "144"/>
+
+		<sample type = "1" x = "249" y = "165"/>
+		<sample type = "1" x = "241" y = "164"/>
+
+		<sample type = "1" x = "240" y = "67"/>
+		<sample type = "1" x = "260" y = "67"/>
+
+		<sample type = "1" x = "251" y = "34"/>
+
+		<sample type = "1" x = "248" y = "137"/>
+		<sample type = "1" x = "248" y = "141"/>
+		<sample type = "1" x = "264" y = "103"/>
+		<sample type = "1" x = "236" y = "102"/>
+
+		<sample type = "1" x = "33" y = "167"/>
+
+		<sample type = "1" x = "184" y = "154"/>
+
+
+
+
+	<sample type = "2" x = "106" y = "191"/>
+	<sample type = "2" x = "108" y = "116"/>
+	<sample type = "2" x = "19" y = "165"/>
+	<sample type = "2" x = "246" y = "188"/>
+
+	<sample type = "5" x = "215" y = "159"/>
+	<sample type = "5" x = "216" y = "146"/>
+	<sample type = "5" x = "216" y = "118"/>
+
+	<sample type = "6" x = "250" y = "63"/>
+	<sample type = "6" x = "235" y = "36"/>
+	<sample type = "6" x = "265" y = "36"/>
+        </enemies>
+
+        <special>
+          <door object_type="27" x="37" y="147" direction="1" id="1"/>
+          <door object_type="27" x="225" y="102" direction="3" id="2"/>
+
+          <door object_type="29" x="109" y="103"/>
+          <chest object_type="9" x="250" y="29" item_inside="25" id="6"/>
+
+<chest object_type="9" x="36" y="129" item_inside="12" id = "3"/>
+<chest object_type="9" x="31" y="129" item_inside="14" id = "4"/>
+<chest object_type="9" x="41" y="129" item_inside="13" id = "5"/>
+
+          <stone object_type="24" x="181" y="138"/>
+          <stone object_type="24" x="183" y="138"/>
+          <stone object_type="24" x="185" y="138"/>
+          <stone object_type="24" x="187" y="138"/>
+          <stone object_type="24" x="189" y="138"/>
+        </special>
+
+       
+
+      </entities>
+
+      <exits>
+        <exit destinyScene = "outsideCastle" destinyExit = "0" x = "107" y = "237" w="2" h="1" direction = "0"/>
+	<exit destinyScene = "bossRoom" destinyExit = "0" x = "107" y = "101" w="4" h="1" direction = "1"/>
+      </exits>
+
+
+      <quests>
+        <quest id = "1" >
+
+          <reward type ="3">
+            <entity id="1"/>
+          </reward >
+
+          <trigger type ="2">
+            <interruptor x = "30" y="151"/>
+            <interruptor x = "44" y="151"/>
+          </trigger>
+
+        </quest>
+        <quest id = "2" >
+
+          <reward type ="3">
+            <entity id="2"/>
+          </reward >
+
+          <trigger type ="2">
+            <interruptor x = "211" y="167"/>
+          </trigger>
+
+        </quest>
+      </quests>
+
+    </sector>
+  </sectors>
+</scene>

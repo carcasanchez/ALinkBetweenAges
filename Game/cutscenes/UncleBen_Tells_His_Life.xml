@@ -1,0 +1,137 @@
+<!-- TEST CUTSCENE -->
+
+<Cutscene name="Test" id="1">
+
+  <!--CUTSCENE ELEMENTS-->
+  <elements>
+    <MAP>
+      <scene n="0" name="house" active="true" scene_name="linkHouse" load="true"/>
+    </MAP>
+
+    <NPC>
+      <npc n="0" name="tio_ben" active="true" type="0" x="22" y="11" entity_id="1" empty="true"/>
+      <npc n="1" name="Link" active="true" type="0" x="5" y="5" entity_id="-1" empty="true"/>
+    </NPC>
+
+    <ENEMIES>
+    </ENEMIES>
+
+    <IMAGES>
+    </IMAGES>
+
+    <TEXTS>
+      <string n="0" name="Text" active="false" pos_x="270" pos_y="750" text=" It's time to wake up Link, don't be lazy." />
+    </TEXTS>
+
+    <MUSIC>
+    </MUSIC>
+
+    <FX>
+    </FX>
+
+    <CAMERA>
+      <cam n="0" name="camera" active="true"/>
+    </CAMERA>
+
+  </elements>
+
+  <!--EXECUTE ALL STEPS IN ORDER-->
+
+  <steps>
+    <step  n="0" start="0" duration ="-1" input="false">
+      <element name="camera" action="fade_cam">
+        <fading  bezier_time="1000"/>
+      </element>
+    </step>
+
+    <step  n="1" start="-1" duration ="-1" input="false">
+      <element name="house" action="load"/>
+    </step>
+
+    <step  n="2" start="-1" duration ="-1" input="false">
+      <element name="Link" action="create"/>
+    </step>
+
+  <step  n="3" start="-1" duration ="-1" input="false">
+    <element name="tio_ben" action="create"/>
+    </step>
+
+    <step  n="4" start="-1" duration ="-1" input="false">
+      <element name="camera" action="unfade_cam">
+        <fading  bezier_time="3000"/>
+      </element>
+    </step>
+
+    <step  n="5" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="up">
+        <movement dest_x="0" dest_y="5" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="6" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="left">
+        <movement dest_x="9" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="7" start="-1" duration ="-1" input="true">
+      <element name="Text" action="enable"/>
+    </step>
+
+    <step  n="8" start="-1" duration ="-1" input="false">
+      <element name="Link" action="move" dir="right">
+        <movement dest_x="5" dest_y="5" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="9" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="down">
+        <movement dest_x="0" dest_y="7" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="10" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="right">
+        <movement dest_x="22" dest_y="0" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="11" start="-1" duration ="-1" input="false">
+      <element name="tio_ben" action="move" dir="down">
+        <movement dest_x="0" dest_y="11" speed="10"/>
+      </element>
+    </step>
+
+    <step  n="12" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text=" Zelda told me she will be on the forest, at south-west of the village. "/>
+      </element>
+    </step>
+    
+<step  n="13" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text=" Before you go, you should take something from the store. There are some rupees on the chest."/>
+      </element>
+    </step>
+
+
+     <step  n="14" start="-1" duration ="-1" input="true">
+      <element name="Text" action="setstring">
+        <text text=" Remember you can attack in four directions using ABXY, and dodge with RB."/>
+      </element>
+    </step>
+
+    <step  n="15" start="-1" duration ="-1" input="false">
+      <element name="camera" action="fade_cam">
+        <fading  bezier_time="1000"/>
+      </element>
+    </step>
+
+     <step  n="16" start="-1" duration ="-1" input="false">
+      <element name="camera" action="unfade_cam">
+        <fading  bezier_time="1000"/>
+      </element>
+    </step>
+
+  </steps>
+</Cutscene>

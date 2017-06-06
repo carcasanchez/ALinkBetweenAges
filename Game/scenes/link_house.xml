@@ -1,0 +1,33 @@
+<!-- Link House -->
+<scene name = "linkHouse" map= "linkHouse.tmx">
+  <sectors>
+    <sector>
+      <!--sector 1-->
+      <camera locked="true"/>
+      <music file="audio/music/kakarikoVillage.ogg"/>
+
+      <entities>
+
+        <npcs>
+ 		<sample type = "0" x = "6" y = "16" id="1"/>
+        </npcs>
+
+        <enemies>
+		
+
+        </enemies>
+
+        <special>
+          <!--rocks, grass, etc-->
+		<chest object_type="9" x="4" y="12" item_inside="4" id="18"/>
+
+        </special>
+      </entities>
+
+      <exits>
+        <exit destinyScene = "kakarikoVillage" destinyExit = "1" x = "15" y = "25" w="2" h="1" direction = "0"/>
+      </exits>
+
+    </sector>
+  </sectors>
+</scene>

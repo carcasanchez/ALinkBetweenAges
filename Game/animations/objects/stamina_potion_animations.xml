@@ -1,0 +1,18 @@
+<!--Stamina Potion Animations -->
+<animations>
+
+  <name value = "1" />
+
+  <IDLE>
+    <!-- Idle -->
+    <name value = "0"  />
+   
+    <DOWN>
+      <values name = "1" x ="0" y = "0" w = "14" h = "16" frameNumber = "1" margin = "" pivot_x = "7" pivot_y = "8" flip= "0"/>
+    </DOWN>
+   
+    <loop value = "true" />
+    <speed value = "0.15" />
+
+  </IDLE>
+</animations>

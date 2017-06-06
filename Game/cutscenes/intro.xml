@@ -1,0 +1,56 @@
+<!-- INTRO CUTSCENE -->
+
+<Cutscene name="Intro" id="0">
+
+ <!--CUTSCENE ELEMENTS-->
+	<elements>
+		<MAP>       
+		</MAP>
+
+		<NPC>
+		</NPC>
+
+		<IMAGES>
+		   <image n="0" name="Z" active="false" x="406" y="29" w="86" h="128" pos_x="500" pos_y="350" text="title_screen"/>
+		   <image n="1" name="legend" active="false" x="78" y="0" w="302" h="164" pos_x="400" pos_y="322" text="title_screen"/>
+		</IMAGES>
+
+		<TEXTS>
+   	</TEXTS>
+
+		<MUSIC>
+      <mus n="0" name="intro_music" active="false" path="Audio/music/IntroDef.ogg"/>
+      <mus n="1" name="menu_music" active="false" path="Audio/music/menuInit.ogg"/>
+		</MUSIC>
+
+		<FX>
+		</FX>
+
+
+	</elements>
+
+ <!--EXECUTE ALL STEPS IN ORDER-->
+
+	<steps>
+
+  
+		<step  n="0" start="0" duration ="-1" input="false">
+			<element name="Z" action="fade">
+				<fading to_black="true" bezier_time="2500"/>	
+      </element>		
+		</step>
+
+     <step  n="1" start="-1" duration ="-1" input="false">
+			<element name="Z" action="move" dir="left">
+          <movement dest_x="250" dest_y="0" bezier_time="1000"/>
+			</element>			
+		</step>
+
+		<step  n="2" start="-1" duration ="-1" input="true">
+			<element name="legend" action="fade">
+				<fading to_black="true" bezier_time="1500"/>
+			</element>			
+		</step>
+    
+	</steps>
+</Cutscene>

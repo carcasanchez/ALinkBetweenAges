@@ -1,0 +1,31 @@
+<!-- Npc1 Animations -->
+<animations>
+
+  <name value = "2" />
+
+  <IDLE>
+    <!-- Idle -->
+    <name value = "0"  />
+
+    <UP>
+      <values name = "0" x ="3" y = "212" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "12" flip= "0"/>
+    </UP>
+
+    <DOWN>
+      <values name = "1" x ="3" y = "212" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "12" flip= "0"/>
+    </DOWN>
+
+    <RIGHT>
+      <values name = "2" x ="3" y = "212" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "12" flip= "0"/>
+    </RIGHT>
+
+    <LEFT>
+      <values name = "3" x ="3" y = "212" w = "16" h = "16" frameNumber = "1" margin = "" pivot_x = "9" pivot_y = "12" flip= "0"/>
+    </LEFT>
+
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </IDLE>
+</animations>

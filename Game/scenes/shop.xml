@@ -1,0 +1,37 @@
+<!-- shop -->
+<scene name = "shop" map= "shop.tmx">
+  <sectors>
+    <sector>
+      <!--sector 1-->
+      <camera locked="true"/>
+      <music file="audio/music/kakarikoVillage.ogg"/>
+
+      <entities>
+
+        <npcs>
+		 <sample type = "1" x = "15" y = "21" id="14"/>
+        </npcs>
+
+        <enemies>
+		
+
+        </enemies>
+
+        <special>
+          <!--rocks, grass, etc-->
+		<life_potion object_type = "15" x = "12" y = "16"/>
+
+		<stamina_potion object_type = "22" x = "20" y = "16"/>
+
+
+
+        </special>
+      </entities>
+
+      <exits>
+        <exit destinyScene = "kakarikoVillage" destinyExit = "2" x = "15" y = "30" w="2" h="1" direction = "0"/>
+      </exits>
+
+    </sector>
+  </sectors>
+</scene>

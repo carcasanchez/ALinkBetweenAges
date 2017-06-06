@@ -1,0 +1,30 @@
+﻿<!--MagicSlash Animations -->
+<animations>
+
+  <name value = "1" />
+
+  <IDLE>
+    <!-- Idle -->
+	<name value = "0"  />
+   			 <UP>
+				<values name = "0" x = "193" y = "292" w = "16" h = "8" frameNumber = "1" margin = "1" pivot_x = "8" pivot_y = "6" flip = "2"/>
+			</UP>
+			
+			<DOWN>
+				<values name = "1" x = "193" y = "292" w = "16" h = "8" frameNumber = "1" margin = "1" pivot_x = "8" pivot_y = "6" flip = "0"/>
+			</DOWN>
+
+			<RIGHT>
+				<values name = "2" x = "209" y = "292" w = "8" h = "16" frameNumber = "1" margin = "1" pivot_x = "3" pivot_y = "8" flip = "1"/>
+			</RIGHT>
+
+			<LEFT>
+				<values name = "3" x = "209" y = "292" w = "8" h = "16" frameNumber = "1" margin = "1" pivot_x = "3" pivot_y = "8" flip = "0"/>
+			</LEFT>
+
+			<loop value = "false" />
+
+			<speed value = "1.2" />
+ 
+  </IDLE>
+</animations>

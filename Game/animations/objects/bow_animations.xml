@@ -1,0 +1,26 @@
+<!--Bow Animations -->
+<animations>
+
+  <name value = "1" />
+
+  <IDLE>
+    <!-- Idle -->
+    <name value = "0"  />
+    <UP>
+      <values name = "0" x ="0" y = "0" w = "7" h = "16" frameNumber = "1" margin = "2" pivot_x = "0" pivot_y = "0" flip= "0"/>
+    </UP>
+    <DOWN>
+      <values name = "1" x ="0" y = "0" w = "7" h = "16" frameNumber = "1" margin = "2" pivot_x = "0" pivot_y = "0" flip= "2"/>
+    </DOWN>
+    <RIGHT>
+      <values name = "2" x ="0" y = "0" w = "7" h = "16" frameNumber = "1" margin = "2" pivot_x = "0" pivot_y = "0" flip= "0"/>
+    </RIGHT>
+    <LEFT>
+      <values name = "3" x ="0" y = "0" w = "7" h = "16" frameNumber = "1" margin = "2" pivot_x = "0" pivot_y = "0" flip= "1"/>
+    </LEFT>
+    <loop value = "true" />
+
+    <speed value = "0.15" />
+
+  </IDLE>
+</animations>

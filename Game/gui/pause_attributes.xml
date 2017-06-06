@@ -1,0 +1,18 @@
+<!-- Pause HUD -->
+<images>
+  <main       x="1"    y="76"  w="354" h="322" pos_x="300"  pos_y="-650" active="true"/>
+
+  <loaded_game x="1"    y="399"   w="354" h="73" pos_x="0" pos_y="650" active="false"/>
+
+  <resume     x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="108" active="true"/>
+  <load       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="232" active="false"/>
+  <controls   x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="356" active="false"/>
+  <cont_img   x="743"  y="453" w="467" h="268" pos_x="-118" pos_y="56"  active="false"/>
+  <quit       x="357"  y="78"  w="20"  h="23"  pos_x="72"  pos_y="482" active="false"/>
+
+ <start_menu  x="742"  y="0"   w="552" h="448" pos_x="100"  pos_y="50" active="false"/>
+ <continue    x="357"  y="78"  w="20"  h="23"  pos_x="125"  pos_y="285" active="true"/>
+ <new         x="357"  y="78"  w="20"  h="23"  pos_x="125"  pos_y="425" active="false"/>
+ <start_quit  x="357"  y="78"  w="20"  h="23"  pos_x="125"  pos_y="570" active="false"/>
+
+</images>

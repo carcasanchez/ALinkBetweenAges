@@ -1,0 +1,81 @@
+<!-- Npc Attributes -->
+<attributes>
+	<zelda>
+		<base life = "1" speed = "30" dialog_state="-1"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcZelda_animations.xml"/>
+  	<texture file = "textures/Npc_sprites/Npc.png"/>
+	</zelda>
+  <dark_zelda>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/enemies/dark_zelda_animations.xml"/>
+  		<texture file = "textures/Enemy_sprites/DarkZelda.png"/>
+	</dark_zelda>
+	<uncle>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcUncle_animations.xml"/>
+  		<texture file = "textures/Npc_sprites/Npc.png"/>
+	</uncle>
+	<grandma>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcGrandma_animations.xml"/>
+  		<texture file = "textures/Npc_sprites/Npc.png"/>
+	</grandma>
+	<hippie>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcHippie_animations.xml"/>
+  		<texture file = "textures/Npc_sprites/Npc.png"/>
+	</hippie>
+	<little_kid>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcLittleKid_animations.xml"/>
+  		<texture file = "textures/Npc_sprites/Npc.png"/>
+	</little_kid>
+	<tavern_old_man>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcTavernOldMan_animations.xml"/>
+  		<texture file = "textures/Npc_sprites/Npc.png"/>
+	</tavern_old_man>
+
+	<woman>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcWoman_animations.xml"/>
+  		<texture file = "textures/Npc_sprites/Npc.png"/>
+	</woman>
+
+	<farm_kid>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcFarmKid_animations.xml"/>
+  		<texture file = "textures/Npc_sprites/Npc.png"/>
+	</farm_kid>
+
+	<sign>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/npc/npcSign.xml"/>
+  		<texture file = "textures/Npc_sprites/Npc.png"/>
+	</sign>
+
+	<soldier>
+		<base life = "1" speed = "30"/>
+		<collider x = "9" y = "13" w = "16" h = "15" type = "2"/>
+		<animation file = "animations/enemies/green_soldier_animations.xml"/>
+  		<texture file = "textures/Enemy_sprites/Enemy.png"/>
+	</soldier>
+
+  <ganon>
+    <base life = "1" speed = "30"/>
+    <collider x = "20" y = "30" w = "50" h = "40" type = "2"/>
+    <animation file = "animations/npc/npcGanon_animations.xml"/>
+    <texture file = "textures/Npc_sprites/Ganon.png"/>
+  </ganon>
+
+</attributes>

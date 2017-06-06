@@ -1,0 +1,8 @@
+<!-- intro scene -->
+<scene name = "introScene" map= "">
+  <sectors>
+    <sector>
+      <music file="audio/music/introDef.ogg"/>
+    </sector>
+  </sectors>
+</scene>

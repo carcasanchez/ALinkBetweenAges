@@ -1,0 +1,28 @@
+﻿<!--Stone Animations -->
+<animations>
+	<STONE>
+
+		<name value = "0" />
+		
+		<DOWN>
+			 <values name = "1" x ="0" y = "0" w = "16" h = "15" frameNumber = "1" margin = "1" pivot_x = "8" pivot_y = "8" flip= "0"/>
+		</DOWN>	
+	
+		<UP>
+			 <values name = "0" x ="0" y = "0" w = "16" h = "15" frameNumber = "1" margin = "1" pivot_x = "8" pivot_y = "8" flip= "0"/>
+		</UP>
+
+		<RIGHT>
+			 <values name = "2" x ="0" y = "0" w = "16" h = "15" frameNumber = "1" margin = "1" pivot_x = "8" pivot_y = "8" flip= "0"/>
+		</RIGHT>
+
+		<LEFT>
+			 <values name = "3" x ="0" y = "0" w = "16" h = "15" frameNumber = "1" margin = "1" pivot_x = "8" pivot_y = "8" flip= "1"/>
+		</LEFT>
+		
+		<loop value = "false" />
+
+		<speed value = "0.6" />
+
+	</STONE>
+</animations>

@@ -1,0 +1,19 @@
+<!--Death cloud -->
+<animations>
+
+  <name value = "1" />
+
+  <IDLE>
+    <!-- Idle -->
+    <name value = "0"  />
+   
+    <DOWN>
+      <values name = "1" x ="0" y = "0" w = "26" h = "32" frameNumber = "4" margin = "1" pivot_x = "13" pivot_y = "16" flip= "0"/>
+    </DOWN>
+
+    <loop value = "false" />
+
+    <speed value = "0.3" />
+
+  </IDLE>
+</animations>

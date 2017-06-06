@@ -1,0 +1,21 @@
+﻿<!--Pillar Animations -->
+<animations>
+	<PILLAR>
+
+		<name value = "0" />
+		
+		<DOWN>
+			 <values name = "1" x ="0" y = "0" w = "14" h = "30" frameNumber = "1" margin = "" pivot_x = "7" pivot_y = "25" flip= "0"/>
+		</DOWN>	
+	
+		<UP>
+			 <values name = "0" x ="0" y = "0" w = "14" h = "30" frameNumber = "1" margin = "" pivot_x = "7" pivot_y = "25" flip= "0"/>
+		</UP>
+
+		
+		<loop value = "false" />
+
+		<speed value = "0.6" />
+
+	</PILLAR>
+</animations>
