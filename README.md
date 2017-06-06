@@ -55,7 +55,7 @@
 <h3>Carlos Cabreira - Team Leader and gameplay programmer </h3>   
 
 [TWITTER](https://twitter.com/carcasanchez)     
-[PERSONAL PAGE](https://carcasanchez.github.io/)
+[PERSONAL PAGE](https://carcasanchez.github.io/CarlosCabreira/)
   
  
  
