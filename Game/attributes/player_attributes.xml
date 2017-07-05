@@ -25,7 +25,7 @@
 
 <adult>
    <attributes>
-  	<base life = "6" stamina = "250"  damage ="2" staminaRec = "100" speed = "90"/>
+  	<base life = "6" stamina = "250"  damage ="2" staminaRec = "100" speed = "75"/>
   	<attack speed = "110" staminaTax = "70" spinTax = "100"/>
   	<damaged hitTime = "200" damagedTime = "2000" damagedSpeed = "180"/>
   	<dodge speed = "320" staminaTax = "50" limit = "50"/>
